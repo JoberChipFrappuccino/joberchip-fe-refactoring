@@ -1,9 +1,11 @@
-import type { Space, BlockType } from '@/models/space'
 import { SwithViewerBlock } from '@/components/Space/SwithViewerBlock'
-import { Layout, Responsive, WidthProvider } from 'react-grid-layout'
-import { useEffect, useState } from 'react'
-import { useSpaceModeStore } from '@/store/spaceMode'
+import type { BlockType, Space } from '@/models/space'
 import { useSpaceStore } from '@/store/space'
+import { useSpaceModeStore } from '@/store/spaceMode'
+import { useEffect, useState } from 'react'
+import { Layout, Responsive, WidthProvider } from 'react-grid-layout'
+
+import styles from './SpaceViewer.module.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
@@ -23,9 +25,9 @@ export function SpaceViewer() {
 
   return (
     <>
-      <h1 className="text-3xl">{space.title}</h1>
-      <p className="text-xl text-slate-500">{space.description}</p>
-      <div className="max-w-[750px] mx-auto">
+      <h1 className={styles.title}>{space.title}</h1>
+      <p className={styles.description}>{space.description}</p>
+      <div className={styles.layout}>
         <ResponsiveGridLayout
           layouts={state.layouts}
           breakpoints={{
@@ -53,7 +55,7 @@ export function SpaceViewer() {
         >
           {space.blocks.map((block) => {
             return (
-              <div className="bg-gray-300" key={block.blockId}>
+              <div className={styles.item} key={block.blockId}>
                 <SwithViewerBlock mode={mode} type={block.type} block={block} />
               </div>
             )

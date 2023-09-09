@@ -1,6 +1,6 @@
+import { FormType, useDrawerFormType } from '@/store/formMode'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import styles from './SpaceActionBar.module.scss'
-import { FormType, useDrawerFormType } from '@/store/formMode'
 
 export function SpaceActionBar() {
   const { mode } = useSpaceModeStore()

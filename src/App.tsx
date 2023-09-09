@@ -1,9 +1,9 @@
 import loadable from '@loadable/component'
-import './App.css'
+import './App.scss'
 import { Route, Routes } from 'react-router-dom'
 const NotFound = loadable(() => import('./pages/NotFound'))
 const Layout = loadable(() => import('./components/Layouts/Layout'))
-const SharePage = loadable(() => import('./pages/SharePage'))
+const SharePage = loadable(() => import('./pages/Space'))
 const Detail = loadable(() => import('./pages/Detail'))
 const SignUp = loadable(() => import('./pages/SignUp'))
 const SignIn = loadable(() => import('./pages/SignIn'))
