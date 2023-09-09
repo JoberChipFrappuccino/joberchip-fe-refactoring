@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "prepare": "husky install",
     "build:dev:server": "cross-env NODE_ENV=development webpack --config webpack.server.config.js --mode development --progress --profile",
     "build:dev:client": "cross-env NODE_ENV=development webpack --config webpack.client.config.js --mode development --progress --profile",
     "build:dev": "node ./scripts/rm.js && npm run build:dev:client && npm run build:dev:server",
@@ -60,6 +61,8 @@
     "babel-plugin-module-resolver": "^5.0.0",
     "babel-preset-react-app": "^10.0.1",
     "css-loader": "^6.8.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "mini-css-extract-plugin": "^2.7.6",
     "sass": "^1.66.1",
     "sass-loader": "^13.3.2",
@@ -69,5 +72,11 @@
     "webpack-dev-middleware": "^6.1.1",
     "webpack-hot-middleware": "^2.25.4",
     "webpack-node-externals": "^3.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }
