@@ -1,0 +1,61 @@
+.container {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  left: 0;
+  right: 0;
+  bottom: 1rem;
+  width: 50%;
+  height: 50px;
+  border: 1px solde block;
+  border-radius: 1rem;
+  margin: auto;
+  z-index: 10;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  overflow: hidden;
+  transition: opacity 500ms ease-in-out;
+  .item {
+    min-width: 50px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: palegoldenrod;
+    text-align: center;
+    padding: 0.1rem;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+
+// * Animation
+.hidden {
+  animation: hiddenAnimation 500ms ease-in-out;
+  animation-fill-mode: forwards;
+}
+.visible {
+  animation: visibleAnimation 500ms ease-in-out;
+  animation-fill-mode: forwards;
+}
+@keyframes hiddenAnimation {
+  0% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 0;
+    height: 50px;
+  }
+  100% {
+    opacity: 0;
+    height: 0px;
+  }
+}
+@keyframes visibleAnimation {
+  0% {
+    opacity: 0;
+    height: 50px;
+  }
+  100% {
+    opacity: 1;
+  }
+}

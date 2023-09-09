@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "~/*": ["server/*"]
+    },
+    "jsx": "react-jsx",
+    "module": "commonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true // 이 옵션이 false일 경우 SignIn.tsx는 Signin.tsx로 import됩니다, default : false
+  },
+  "include": ["./src", "./server"],
+  "exclude": ["./legacy", "./scripts", "*.md"]
+}

@@ -1,0 +1,16 @@
+{
+  "test1@google.com": {
+    "user_id": "user1",
+    "email": "test1@google.com",
+    "username": "foo",
+    "profile_img": "http://ec2-34-228-10-85.compute-1.amazonaws.com/profile_1.png",
+    "access_token": "token-example:test1@google.com"
+  },
+  "test2@google.com": {
+    "user_id": "user2",
+    "email": "test2@google.com",
+    "username": "waldo",
+    "profile_img": "http://ec2-34-228-10-85.compute-1.amazonaws.com/profile_2.png",
+    "access_token": "token-example:test2@google.com"
+  }
+}

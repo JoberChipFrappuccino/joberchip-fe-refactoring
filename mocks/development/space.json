@@ -1,0 +1,86 @@
+{
+  "user1": {
+    "title": "foo",
+    "description": "bar",
+    "blocks": [
+      {
+        "blockId": "block_1_1",
+        "y": 0,
+        "x": 0,
+        "h": 1,
+        "w": 2,
+        "type": "link",
+        "url": "http://www.naver.com",
+        "text": "네이버로 이동!"
+      },
+      {
+        "blockId": "block_1_2",
+        "y": 1,
+        "x": 0,
+        "h": 1,
+        "w": 2,
+        "type": "image",
+        "src": "http://localhost:7282/dance.gif",
+        "alt": "춤추는 인간"
+      },
+      {
+        "blockId": "block_1_3",
+        "y": 0,
+        "x": 2,
+        "h": 2,
+        "w": 2,
+        "type": "image",
+        "src": "http://localhost:7282/dance.gif",
+        "alt": "춤추는 인간2"
+      },
+      {
+        "blockId": "block_1_4",
+        "y": 2,
+        "x": 0,
+        "h": 1,
+        "w": 4,
+        "type": "space",
+        "text": "하위 공유 페이지로 이동하기",
+        "url": "http://www.naver.com"
+      },
+      {
+        "blockId": "block_1_5",
+        "y": 3,
+        "x": 0,
+        "h": 1,
+        "w": 4,
+        "type": "text",
+        "text": "텍스트는 텍스트 블럭 테스트라고 적힌 텍스트"
+      },
+      {
+        "blockId": "block_1_6",
+        "y": 4,
+        "x": 0,
+        "h": 2,
+        "w": 2,
+        "type": "embed",
+        "src": "https://www.youtube.com/embed/75kySTFaBQQ??si=w_qvmC6yYxwunlu0&wmode=opaque",
+        "caption": "yotube playlist 이거 필요없을 거 같인한데, bento처럼 사용자가 캡션을 원할 경우 추가"
+      },
+      {
+        "blockId": "block_1_7",
+        "y": 4,
+        "x": 2,
+        "h": 2,
+        "w": 2,
+        "type": "video",
+        "src": "http://localhost:7282/test.mp4",
+        "caption": "쓸모없는 비디오"
+      },
+      {
+        "blockId": "block_1_8",
+        "y": 6,
+        "x": 0,
+        "h": 2,
+        "w": 2,
+        "type": "googleMap",
+        "src": "https://www.google.com/maps/embed/v1/place?key=AIzaSyCnJyiI_VgJmszJ9ceC-AKCVN7ebJe8ovo&q=Eiffel+Tower,Paris+France"
+      }
+    ]
+  }
+}
