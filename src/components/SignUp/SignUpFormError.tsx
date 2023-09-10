@@ -1,6 +1,6 @@
-import type { FieldErrors } from 'react-hook-form'
-import { SignUpInputs } from '../../pages/SignUp'
+import { type SignUpInputs } from '@/pages/SignUp'
 import { useMemo } from 'react'
+import type { FieldErrors } from 'react-hook-form'
 
 type InputTypes = 'email' | 'password' | 'username' | 'checkPassword'
 type ErrorTypes = 'minLength' | 'maxLength' | 'required' | 'pattern' | 'validate' | string
@@ -15,11 +15,11 @@ type ErrorMessages = {
 export const SignUpFormErrorWarn = ({ inputType, errors }: Props) => {
   const errorMessages = useMemo(() => getErrorOptions(), [])
 
-  if (!errors[inputType] || !errors[inputType]?.type) return <div className="h-6"></div>
+  if (!errors[inputType] || !errors[inputType]?.type) return <div>foo</div>
 
   const errorType = errors[inputType]?.type
   return (
-    <div className="text-rose-500 h-6">
+    <div>
       {typeof errorType === 'undefined' || typeof errorMessages[inputType][errorType] === 'undefined'
         ? '유효 하지 않은 입력입니다.'
         : errorMessages[inputType][errorType]}

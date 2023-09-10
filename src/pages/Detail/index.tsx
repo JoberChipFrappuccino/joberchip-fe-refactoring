@@ -4,10 +4,8 @@ import useServerSideProps from '@/hooks/serverSideProps'
 import { useState } from 'react'
 import { Helmet } from 'react-helmet'
 
-type PageSource = {
-  title: {
-    [key: string]: string
-  }
+interface PageSource {
+  title: Record<string, string>
 }
 export default function Detail() {
   const [count, setCount] = useState(0)
@@ -16,16 +14,26 @@ export default function Detail() {
   return (
     <>
       <Helmet>
-        <title>{pageSource['title']['/detail']}</title>
+        <title>{pageSource.title['/detail']}</title>
       </Helmet>
       <div className="flex">
         <h1 className="detail-title">Detail Page</h1>
         <h1 className="text-sky-900">Count : {count}</h1>
         <div>
-          <button className="mr-4" onClick={() => setCount((prev) => ++prev)}>
+          <button
+            className="mr-4"
+            onClick={() => {
+              setCount((prev) => ++prev)
+            }}
+          >
             Increment
           </button>
-          <button className="mr-4" onClick={() => setCount((prev) => --prev)}>
+          <button
+            className="mr-4"
+            onClick={() => {
+              setCount((prev) => --prev)
+            }}
+          >
             Decrement
           </button>
         </div>

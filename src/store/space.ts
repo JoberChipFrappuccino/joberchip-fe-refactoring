@@ -1,6 +1,6 @@
-import { create } from 'zustand'
 import { getSpaceAPI } from '@/api/space'
-import { Space } from '@/models/space'
+import { type Space } from '@/models/space'
+import { create } from 'zustand'
 
 interface SpaceState {
   space: Space // ? Partial<Space> | Space  할까요? Space 할까요?
@@ -39,13 +39,13 @@ export const useSpaceStore = create<SpaceState>((set) => {
       return false
     },
     // ! 미구현 ㅎㅅㅎ
-    addBlock: async (section_id: string, options: object) => {
+    addBlock: async (sectionId: string, options: object) => {
       return true
     },
-    removeBlock: async (section_id: string, block_id: string) => {
+    removeBlock: async (sectionId: string, blockId: string) => {
       return true
     },
-    updateBlock: async (section_id: string, block_id: string, options: object) => {
+    updateBlock: async (sectionId: string, blockId: string, options: object) => {
       return true
     }
   }

@@ -3,7 +3,7 @@ import type { BlockType, Space } from '@/models/space'
 import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { useEffect, useState } from 'react'
-import { Layout, Responsive, WidthProvider } from 'react-grid-layout'
+import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
 
 import styles from './SpaceViewer.module.scss'
 
@@ -66,7 +66,7 @@ export function SpaceViewer() {
   )
 }
 
-type BlockItem = {
+interface BlockItem {
   i: string
   x: number
   y: number
@@ -90,13 +90,13 @@ function sortLayout(layout: BlockItem[]): Layout[] {
 
 function getBlockLayout(blocks: Space['blocks'], mode: SpaceMode): Layout[] {
   return blocks.map((block) => {
-    const { blockId: block_id, ...rest } = block
+    const { blockId, ...rest } = block
     return {
-      block_id,
-      i: block_id,
-      isDraggable: mode === 'view' ? false : true,
-      isResizable: mode === 'view' ? false : true,
-      static: mode === 'view' ? true : false,
+      blockId,
+      i: blockId,
+      isDraggable: mode !== 'view',
+      isResizable: mode !== 'view',
+      static: mode === 'view',
       minW: 1,
       maxW: 4,
       minH: 1,

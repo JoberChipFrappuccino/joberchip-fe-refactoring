@@ -7,5 +7,7 @@ interface SpaceModeState {
 
 export const useSpaceModeStore = create<SpaceModeState>((set) => ({
   mode: 'view',
-  setSpaceMode: (spaceMode: SpaceMode) => set({ mode: spaceMode })
+  setSpaceMode: (spaceMode: SpaceMode) => {
+    set({ mode: spaceMode })
+  }
 }))

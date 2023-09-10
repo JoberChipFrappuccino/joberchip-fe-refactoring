@@ -7,10 +7,15 @@ export function Drawer() {
   const { formType, openDrawer, setOpenDrawer } = useDrawerFormType()
 
   return (
-    <>
-      <AntdDrawer title="Basic AntdDrawer" placement="right" onClose={() => setOpenDrawer(false)} open={openDrawer}>
-        {formType === 'block' ? <SwtichActionBlock /> : <SwtichActionForm />}
-      </AntdDrawer>
-    </>
+    <AntdDrawer
+      title="Basic AntdDrawer"
+      placement="right"
+      onClose={() => {
+        setOpenDrawer(false)
+      }}
+      open={openDrawer}
+    >
+      {formType === 'block' ? <SwtichActionBlock /> : <SwtichActionForm />}
+    </AntdDrawer>
   )
 }

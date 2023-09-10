@@ -1,9 +1,8 @@
-import { BlockType } from '@/models/space'
 import { useDrawerFormType } from '@/store/formMode'
 import type { ReactNode } from 'react'
 
 // todo block type을 알아야하는지 논의가 필요합니당.
-type Props = {
+interface Props {
   children: ReactNode
 }
 

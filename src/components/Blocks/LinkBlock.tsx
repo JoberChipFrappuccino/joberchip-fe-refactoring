@@ -1,4 +1,4 @@
-import { BlockWith, Space } from '@/models/space'
+import { type BlockWith } from '@/models/space'
 import styles from './LinkBlock.module.scss'
 
 type Props = {

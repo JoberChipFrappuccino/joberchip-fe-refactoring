@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 const x = 3
 const y = 2
-const z = 1
+// const z = 1
 const defaultData: DataNode[] = [
   {
     key: '1',
@@ -44,9 +44,10 @@ const defaultData: DataNode[] = [
   }
 ]
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const generateData = (_level: number, _preKey?: React.Key, _tns?: DataNode[]) => {
-  const preKey = _preKey || '0'
-  const tns = _tns || defaultData
+  const preKey = _preKey ?? '0'
+  const tns = _tns ?? defaultData
 
   const children: React.Key[] = []
   for (let i = 0; i < x; i++) {
@@ -76,9 +77,9 @@ export default function TreeTest() {
   }
 
   const onDrop: TreeProps['onDrop'] = (info) => {
-    console.log(info)
-    const { title, key, children } = info.node
-    const newNode = { title, key, children }
+    // console.log(info)
+    //  const { title, key, children } = info.node
+    //  const newNode = { title, key, children }
     const dropKey = info.node.key
     const dragKey = info.dragNode.key
     const dropPos = info.node.pos.split('-')
@@ -91,7 +92,8 @@ export default function TreeTest() {
     ) => {
       for (let i = 0; i < data.length; i++) {
         if (data[i].key === key) {
-          return callback(data[i], i, data)
+          callback(data[i], i, data)
+          return
         }
         if (data[i].children) {
           loop(data[i].children!, key, callback)
@@ -110,17 +112,17 @@ export default function TreeTest() {
     if (!info.dropToGap) {
       // Drop on the content
       loop(data, dropKey, (item) => {
-        item.children = item.children || []
+        item.children = item.children ?? []
         // where to insert. New item was inserted to the start of the array in this example, but can be anywhere
         item.children.unshift(dragObj)
       })
     } else if (
-      ((info.node as any).props.children || []).length > 0 && // Has children
+      ((info.node as any).props.children ?? []).length > 0 && // Has children
       (info.node as any).props.expanded && // Is expanded
       dropPosition === 1 // On the bottom gap
     ) {
       loop(data, dropKey, (item) => {
-        item.children = item.children || []
+        item.children = item.children ?? []
         // where to insert. New item was inserted to the start of the array in this example, but can be anywhere
         item.children.unshift(dragObj)
         // in previous version, we use item.children.push(dragObj) to insert the
@@ -143,7 +145,7 @@ export default function TreeTest() {
   }
 
   useEffect(() => {
-    console.log(gData)
+    alert(gData)
   }, [gData])
 
   return (

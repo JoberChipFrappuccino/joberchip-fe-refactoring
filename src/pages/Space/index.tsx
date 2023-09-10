@@ -10,14 +10,12 @@ import loadable from '@loadable/component'
 import { Button } from 'antd'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-// ! API가 연동 되지 않아 text dose not matched 에러가 서버에서 발생합니다!
-const TreeTest = loadable(() => import('../../components/TreeTest'), { ssr: false })
 
 import styles from './Space.module.scss'
-type PageSource = {
-  title: {
-    [key: string]: string
-  }
+// ! API가 연동 되지 않아 text dose not matched 에러가 서버에서 발생합니다!
+const TreeTest = loadable(async () => await import('../../components/TreeTest'), { ssr: false })
+interface PageSource {
+  title: Record<string, string>
 }
 
 export default function SharePage() {
@@ -34,12 +32,16 @@ export default function SharePage() {
   return (
     <nav>
       <Helmet>
-        <title>{pageSource['title']['/']}</title>
+        <title>{pageSource.title['/']}</title>
       </Helmet>
       <div className={styles.container}>
         <h1 className={styles.title}>Home Page</h1>
       </div>
-      <Button onClick={() => setSpaceMode(mode === 'view' ? 'edit' : 'view')}>
+      <Button
+        onClick={() => {
+          setSpaceMode(mode === 'view' ? 'edit' : 'view')
+        }}
+      >
         {mode === 'view' ? '수정 하기' : '공유 화면 보기'}
       </Button>
       <aside>{isLoaded && isSignedIn && <Drawer />}</aside>
@@ -50,10 +52,10 @@ export default function SharePage() {
       </p>
       <p>768px이상일 경우 mouse가 hover 되면 resize 버튼 활성화</p>
       <div className={styles.viewer}>
-        {/* 
+        {/*
         하림님 여기 왼쪽 GNB 영역이예요.
         여기다가 더미 데이터를 넣어서 만들어주시면 됩니당.
-        <div>Navigation Position</div> 
+        <div>Navigation Position</div>
         */}
         <div className={styles.spaceViewer}>
           <section>{isLoaded && isSignedIn && <SpaceViewer />}</section>

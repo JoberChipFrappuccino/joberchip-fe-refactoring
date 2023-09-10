@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { persist, devtools } from 'zustand/middleware'
 
 export type Post = {
   id: number
@@ -13,9 +12,8 @@ interface PostState {
   removeAllPosts: VoidFunction
 }
 
-// @ts-ignore ㅎ ㅏ 최선인가..
 export const usePostStore = create<PostState>((set) => {
-  const store = {
+  return {
     posts: [
       {
         id: 1,
@@ -35,9 +33,4 @@ export const usePostStore = create<PostState>((set) => {
       set({ posts: [] })
     }
   }
-
-  // @ts-ignore
-  return devtools(store, {
-    enabled: process.env.NODE_ENV === 'development'
-  })
 })

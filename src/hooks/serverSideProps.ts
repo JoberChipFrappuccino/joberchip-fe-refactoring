@@ -1,6 +1,6 @@
-import { useContext } from 'react'
 import { ServerSideContext } from '@/context/ssr'
 import htmlEntitiesDecoder from 'html-entities-decoder'
+import { useContext } from 'react'
 
 export default function useServerSideProps(key: string) {
   const ctx = useContext(ServerSideContext)
@@ -8,7 +8,7 @@ export default function useServerSideProps(key: string) {
   if (typeof window === 'undefined') {
     return JSON.parse((ctx[key] as string) || '{}')
   }
-  const serverSideData = document.getElementById('__SERVER_DATA__')?.textContent || '{}'
+  const serverSideData = document.getElementById('__SERVER_DATA__')?.textContent ?? '{}'
 
   const data = JSON.parse(htmlEntitiesDecoder(serverSideData))
   return JSON.parse(data[key]) || ''

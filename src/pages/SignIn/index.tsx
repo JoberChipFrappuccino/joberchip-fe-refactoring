@@ -27,7 +27,8 @@ export default function SignIn() {
     const res = await signIn(userData)
     if (res.status === 'success') {
       alert(res.message)
-      return navigate('/')
+      navigate('/')
+      return
     }
     alert(res.message)
   }
@@ -36,13 +37,31 @@ export default function SignIn() {
     <div>
       <h1>SignIn</h1>
       <div>
-        <button onClick={() => loginById('1')}>1번 유저로 로그인</button>
+        <button
+          onClick={async () => {
+            await loginById('1')
+          }}
+        >
+          1번 유저로 로그인
+        </button>
       </div>
       <div>
-        <button onClick={() => loginById('2')}>2번 유저로 로그인</button>
+        <button
+          onClick={async () => {
+            await loginById('2')
+          }}
+        >
+          2번 유저로 로그인
+        </button>
       </div>
       <div>
-        <button onClick={() => loginById('3')}>3번 유저로 로그인</button>
+        <button
+          onClick={async () => {
+            await loginById('3')
+          }}
+        >
+          3번 유저로 로그인
+        </button>
       </div>
     </div>
   )
