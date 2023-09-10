@@ -1,10 +1,9 @@
 import App from '@/App'
+import { loadableReady } from '@loadable/component'
 import { hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 
-import { loadableReady } from '@loadable/component'
-
-loadableReady(() => {
+void loadableReady(() => {
   hydrateRoot(
     document.getElementById('root') as HTMLDivElement,
     <BrowserRouter>

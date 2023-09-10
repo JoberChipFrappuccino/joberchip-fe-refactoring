@@ -1,8 +1,8 @@
-import { SubmitHandler, useForm } from 'react-hook-form'
-import styles from './SignUp.module.scss'
 import { SignUpFormErrorWarn } from '@/components/SignUp/SignUpFormError'
+import { useForm, type SubmitHandler } from 'react-hook-form'
+import styles from './SignUp.module.scss'
 
-export type SignUpInputs = {
+export interface SignUpInputs {
   email: string
   username: string
   password: string
@@ -18,7 +18,7 @@ export default function SignUp() {
   } = useForm<SignUpInputs>({ mode: 'onBlur' })
 
   const onSubmit: SubmitHandler<SignUpInputs> = (data) => {
-    alert('회원가입을 시도합니다.' + data)
+    alert(`'회원가입을 시도합니다.' ${JSON.stringify(data)}`)
   }
   return (
     <div className={styles.container}>
@@ -53,7 +53,7 @@ export default function SignUp() {
             required: true,
             maxLength: 20,
             minLength: 8,
-            validate: (v) => (v.match(/[a-zA-Z]/g) && v.match(/[0-9]/g) ? true : false)
+            validate: (v) => !!(v.match(/[a-zA-Z]/g) && v.match(/[0-9]/g))
           })}
         />
         <SignUpFormErrorWarn inputType="password" errors={errors} />

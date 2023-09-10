@@ -1,0 +1,17 @@
+.title {
+  font-size: 2rem;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: grey;
+}
+
+.layout {
+  max-width: 750px;
+  margin: auto;
+
+  .item {
+    background-color: rgb(222, 219, 219);
+  }
+}

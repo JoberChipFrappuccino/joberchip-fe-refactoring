@@ -1,7 +1,7 @@
-import { ACCESS_TOKEN } from '@/constants'
-import { User } from '@/models/user'
-import { create } from 'zustand'
 import { getUserInfoAPI, signInAPI } from '@/api/user'
+import { ACCESS_TOKEN } from '@/constants'
+import { type User } from '@/models/user'
+import { create } from 'zustand'
 
 type LoginForm = {
   email: string
@@ -21,7 +21,7 @@ interface UserState {
   getUserInfo: () => Promise<boolean>
   signOut: VoidFunction
 }
-// @ts-ignore ㅎ ㅏ 최선인가..
+// @ts-expect-error ㅎ ㅏ 최선인가..
 export const useUserStore = create<UserState>((set) => {
   const store = {
     user: {},

@@ -1,5 +1,5 @@
+import { type User } from '@/models/user'
 import axios from 'axios'
-import { User } from '@/models/user'
 import { authAPI } from './api'
 
 type LoginResponse = {

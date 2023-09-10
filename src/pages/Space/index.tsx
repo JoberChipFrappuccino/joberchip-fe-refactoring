@@ -1,22 +1,21 @@
+import { Drawer } from '@/components/Space/Drawer'
+import { SpaceActionBar } from '@/components/Space/SpaceActionBar'
+import { SpaceViewer } from '@/components/Space/SpaceViewer'
+import { SEO } from '@/constants'
+import useServerSideProps from '@/hooks/serverSideProps'
+import { useSpaceStore } from '@/store/space'
+import { useSpaceModeStore } from '@/store/spaceMode'
+import { useUserStore } from '@/store/user'
+import loadable from '@loadable/component'
+import { Button } from 'antd'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-import useServerSideProps from '@/hooks/serverSideProps'
-import { SEO } from '@/constants'
-import { useUserStore } from '@/store/user'
-import { useSpaceStore } from '@/store/space'
-import loadable from '@loadable/component'
-import { SpaceViewer } from '@/components/Space/SpaceViewer'
-import { Drawer } from '@/components/Space/Drawer'
-import { Button } from 'antd'
-import { useSpaceModeStore } from '@/store/spaceMode'
-import { SpaceActionBar } from '@/components/Space/SpaceActionBar'
-// ! API가 연동 되지 않아 text dose not matched 에러가 서버에서 발생합니다!
-const TreeTest = loadable(() => import('../components/TreeTest'), { ssr: false })
 
-type PageSource = {
-  title: {
-    [key: string]: string
-  }
+import styles from './Space.module.scss'
+// ! API가 연동 되지 않아 text dose not matched 에러가 서버에서 발생합니다!
+const TreeTest = loadable(async () => await import('../../components/TreeTest'), { ssr: false })
+interface PageSource {
+  title: Record<string, string>
 }
 
 export default function SharePage() {
@@ -33,12 +32,16 @@ export default function SharePage() {
   return (
     <nav>
       <Helmet>
-        <title>{pageSource['title']['/']}</title>
+        <title>{pageSource.title['/']}</title>
       </Helmet>
-      <div className="flex">
-        <h1 className="title">Home Page</h1>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Home Page</h1>
       </div>
-      <Button className="prose" onClick={() => setSpaceMode(mode === 'view' ? 'edit' : 'view')}>
+      <Button
+        onClick={() => {
+          setSpaceMode(mode === 'view' ? 'edit' : 'view')
+        }}
+      >
         {mode === 'view' ? '수정 하기' : '공유 화면 보기'}
       </Button>
       <aside>{isLoaded && isSignedIn && <Drawer />}</aside>
@@ -48,13 +51,13 @@ export default function SharePage() {
         구분해야함)
       </p>
       <p>768px이상일 경우 mouse가 hover 되면 resize 버튼 활성화</p>
-      <div className="flex w-full h-full">
-        {/* 
+      <div className={styles.viewer}>
+        {/*
         하림님 여기 왼쪽 GNB 영역이예요.
         여기다가 더미 데이터를 넣어서 만들어주시면 됩니당.
-        <div>Navigation Position</div> 
+        <div>Navigation Position</div>
         */}
-        <div className="relative flex-1 w-full">
+        <div className={styles.spaceViewer}>
           <section>{isLoaded && isSignedIn && <SpaceViewer />}</section>
         </div>
         <TreeTest />

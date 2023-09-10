@@ -1,9 +1,11 @@
-import type { Space, BlockType } from '@/models/space'
 import { SwithViewerBlock } from '@/components/Space/SwithViewerBlock'
-import { Layout, Responsive, WidthProvider } from 'react-grid-layout'
-import { useEffect, useState } from 'react'
-import { useSpaceModeStore } from '@/store/spaceMode'
+import type { BlockType, Space } from '@/models/space'
 import { useSpaceStore } from '@/store/space'
+import { useSpaceModeStore } from '@/store/spaceMode'
+import { useEffect, useState } from 'react'
+import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
+
+import styles from './SpaceViewer.module.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
@@ -23,9 +25,9 @@ export function SpaceViewer() {
 
   return (
     <>
-      <h1 className="text-3xl">{space.title}</h1>
-      <p className="text-xl text-slate-500">{space.description}</p>
-      <div className="max-w-[750px] mx-auto">
+      <h1 className={styles.title}>{space.title}</h1>
+      <p className={styles.description}>{space.description}</p>
+      <div className={styles.layout}>
         <ResponsiveGridLayout
           layouts={state.layouts}
           breakpoints={{
@@ -53,7 +55,7 @@ export function SpaceViewer() {
         >
           {space.blocks.map((block) => {
             return (
-              <div className="bg-gray-300" key={block.blockId}>
+              <div className={styles.item} key={block.blockId}>
                 <SwithViewerBlock mode={mode} type={block.type} block={block} />
               </div>
             )
@@ -64,7 +66,7 @@ export function SpaceViewer() {
   )
 }
 
-type BlockItem = {
+interface BlockItem {
   i: string
   x: number
   y: number
@@ -88,13 +90,13 @@ function sortLayout(layout: BlockItem[]): Layout[] {
 
 function getBlockLayout(blocks: Space['blocks'], mode: SpaceMode): Layout[] {
   return blocks.map((block) => {
-    const { blockId: block_id, ...rest } = block
+    const { blockId, ...rest } = block
     return {
-      block_id,
-      i: block_id,
-      isDraggable: mode === 'view' ? false : true,
-      isResizable: mode === 'view' ? false : true,
-      static: mode === 'view' ? true : false,
+      blockId,
+      i: blockId,
+      isDraggable: mode !== 'view',
+      isResizable: mode !== 'view',
+      static: mode === 'view',
       minW: 1,
       maxW: 4,
       minH: 1,

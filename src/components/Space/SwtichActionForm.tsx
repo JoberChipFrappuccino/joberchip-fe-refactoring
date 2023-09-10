@@ -14,5 +14,5 @@ export default function SwtichActionForm() {
       break
   }
 
-  return <>{blockComponent}</>
+  return blockComponent
 }

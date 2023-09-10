@@ -1,8 +1,6 @@
 import React, { createContext } from 'react'
 
-export type Suspender = {
-  [key: string]: unknown
-}
+export type Suspender = Record<string, unknown>
 
 export const ServerSideContext = createContext<Suspender>({})
 

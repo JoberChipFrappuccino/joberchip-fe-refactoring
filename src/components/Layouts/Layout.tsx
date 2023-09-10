@@ -1,6 +1,6 @@
 import { useUserStore } from '@/store/user'
-import { useEffect, useState } from 'react'
-import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 export default function Layout() {
   const navigate = useNavigate()

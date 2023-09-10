@@ -1,17 +1,18 @@
 {
-  "eslint.validate": [
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "javascriptreact"
-  ],
+  "eslint.validate": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
   "editor.codeActionsOnSave": {
-    // "source.fixAll.eslint": true, // 저장할 때마다 eslint가 자동으로 코드를 고쳐줍니다.
-    // "source.organizeImports": true // 저장할 때 Import 같이 정렬
+    "source.fixAll.eslint": true, // 저장할 때마다 eslint가 자동으로 코드를 고쳐줍니다.
+    "source.organizeImports": true // 저장할 때 Import 같이 정렬
   },
   "javascript.autoClosingTags": true, // 닫히는 태그가 자동으로 생성됩니다.
   "typescript.autoClosingTags": true,
+
+  // 타입스크립트 버전을 명시적으로 지정
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
   "files.exclude": {
+    // 기록을 위해 남겨 둘만한 파일들은 제외합니다.
     "/legacy/**": true
   }
 }

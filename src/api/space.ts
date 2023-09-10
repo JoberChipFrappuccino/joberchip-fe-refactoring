@@ -1,6 +1,6 @@
+import { type Space } from '@/models/space'
 import axios from 'axios'
 import { authAPI } from './api'
-import { Space } from '@/models/space'
 
 type SpaceAPIResponse = {
   status: 'success' | 'failure'
@@ -17,7 +17,7 @@ export const getSpaceAPI = async (userId: string): Promise<SpaceAPIResponse> => 
       }
     })
     return {
-      data: data,
+      data,
       status: 'success',
       message: '공간을 불러왔습니다.'
     }
