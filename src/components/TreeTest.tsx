@@ -145,7 +145,7 @@ export default function TreeTest() {
   }
 
   useEffect(() => {
-    alert(gData)
+    // alert(gData)
   }, [gData])
 
   return (

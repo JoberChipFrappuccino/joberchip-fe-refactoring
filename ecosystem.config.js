@@ -10,8 +10,8 @@ module.exports = {
       env: {
         // 개발 환경설정
         PORT: 3030,
-        NODE_ENV: 'development',
-      },
+        NODE_ENV: 'development'
+      }
     },
     {
       name: 'prod-server',
@@ -23,11 +23,11 @@ module.exports = {
       env: {
         // 환경 변수 설정
         PORT: 4040,
-        NODE_ENV: 'production',
+        NODE_ENV: 'production'
       },
       output: './logs/pm2/console.log', // 로그 출력 경로 재설정
-      error: './logs/pm2/onsoleError.log', // 에러 로그 출력 경로 재설정
-    },
+      error: './logs/pm2/onsoleError.log' // 에러 로그 출력 경로 재설정
+    }
   ],
   /* deploy는 원격 서버와 git을 연동해서 배포하는 방식 */
   deploy: {
@@ -38,9 +38,8 @@ module.exports = {
       repo: 'GIT_REPOSITORY',
       path: 'DESTINATION_PATH',
       'pre-deploy-local': '',
-      'post-deploy':
-        'npm install && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': '',
-    },
-  },
+      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production',
+      'pre-setup': ''
+    }
+  }
 }

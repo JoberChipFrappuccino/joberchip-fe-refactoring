@@ -1,4 +1,4 @@
-import { BlockWith } from '@/models/space'
+import { type BlockWith } from '@/models/space'
 import styles from './GoogleMapBlock.module.scss'
 
 type Props = {

@@ -23,6 +23,7 @@ export default function SharePage() {
   const { user, isSignedIn } = useUserStore()
   const { loadSpace, isLoaded } = useSpaceStore()
   const { mode, setSpaceMode } = useSpaceModeStore()
+  const { space } = useSpaceStore()
 
   useEffect(() => {
     if (!user.user_id) return
@@ -37,13 +38,15 @@ export default function SharePage() {
       <div className={styles.container}>
         <h1 className={styles.title}>Home Page</h1>
       </div>
-      <Button
-        onClick={() => {
-          setSpaceMode(mode === 'view' ? 'edit' : 'view')
-        }}
-      >
-        {mode === 'view' ? '수정 하기' : '공유 화면 보기'}
-      </Button>
+      {space.previlige.edit && (
+        <Button
+          onClick={() => {
+            setSpaceMode(mode === 'view' ? 'edit' : 'view')
+          }}
+        >
+          {mode === 'view' ? '수정 하기' : '공유 화면 보기'}
+        </Button>
+      )}
       <aside>{isLoaded && isSignedIn && <Drawer />}</aside>
       <p>위 버튼들 눌러서 테스트해주세요.</p>
       <p>
