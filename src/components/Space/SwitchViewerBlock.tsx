@@ -1,11 +1,11 @@
-import type { BlockBase, BlockType, BlockWith } from '@/models/space'
-import { TextBlock } from '@/components/Blocks/TextBlock'
+import { EmbedBlock } from '@/components/Blocks/EmbedBlock'
+import { GoogleMapBlock } from '@/components/Blocks/GoogleMapBlock'
+import { ImageBlock } from '@/components/Blocks/ImageBlock'
 import { LinkBlock } from '@/components/Blocks/LinkBlock'
 import { PageBlock } from '@/components/Blocks/PageBlock'
-import { ImageBlock } from '@/components/Blocks/ImageBlock'
-import { EmbedBlock } from '@/components/Blocks/EmbedBlock'
+import { TextBlock } from '@/components/Blocks/TextBlock'
 import { VideoBlock } from '@/components/Blocks/VideoBlock'
-import { GoogleMapBlock } from '@/components/Blocks/GoogleMapBlock'
+import type { BlockBase, BlockType, BlockWith } from '@/models/space'
 
 type Props = {
   type: BlockType
@@ -13,8 +13,8 @@ type Props = {
   mode: SpaceMode
 }
 
-export function SwithViewerBlock({ type, block, mode }: Props) {
-  let blockComponent = <></>
+export function SwitchViewerBlock({ type, block, mode }: Props) {
+  let blockComponent = null
   switch (type) {
     case 'text':
       blockComponent = <TextBlock mode={mode} block={block as BlockWith<'text'>} />
@@ -38,5 +38,5 @@ export function SwithViewerBlock({ type, block, mode }: Props) {
       blockComponent = <GoogleMapBlock mode={mode} block={block as BlockWith<'googleMap'>} />
   }
 
-  return <>{blockComponent}</>
+  return blockComponent
 }
