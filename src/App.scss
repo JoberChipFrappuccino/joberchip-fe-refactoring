@@ -3,6 +3,7 @@
 body {
   width: 100%;
   margin: 0;
+  font-size: 16px;
 }
 
 .react-grid-layout {
@@ -174,4 +175,18 @@ body {
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  html,
+  body {
+    font-size: 12px;
+  }
 }
