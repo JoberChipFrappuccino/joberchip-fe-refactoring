@@ -39,7 +39,7 @@
         "x": 0,
         "h": 1,
         "w": 4,
-        "type": "space",
+        "type": "page",
         "text": "하위 공유 페이지로 이동하기",
         "url": "http://www.naver.com"
       },
@@ -50,7 +50,7 @@
         "h": 1,
         "w": 4,
         "type": "text",
-        "text": "텍스트는 텍스트 블럭 테스트라고 적힌 텍스트"
+        "text": "the quick brown fox jumps over the lazy dog"
       },
       {
         "blockId": "block_1_6",
