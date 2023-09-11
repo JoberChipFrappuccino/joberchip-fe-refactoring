@@ -49,12 +49,6 @@ export default function SharePage() {
         </Button>
       )}
       <aside>{isLoaded && isSignedIn && <Drawer />}</aside>
-      <p>위 버튼들 눌러서 테스트해주세요.</p>
-      <p>
-        768px 이하에서는 resize 버튼 모두 활성화 (모바일이라고 가정, 원래는 서버에서 접속 로그로 모바일 | 데스크탑
-        구분해야함)
-      </p>
-      <p>768px이상일 경우 mouse가 hover 되면 resize 버튼 활성화</p>
       <div className={styles.viewer}>
         {/*
         여기는 왼쪽 GNB 영역이입니다

@@ -55,9 +55,14 @@ export function SpaceViewer() {
         >
           {space.blocks.map((block) => {
             return (
-              <div className={styles.item} key={block.blockId}>
+              <button
+                type="button"
+                className={[styles.item, 'activeBlockInMoblie'].join(' ')}
+                key={block.blockId}
+                id={block.blockId}
+              >
                 <SwitchViewerBlock mode={mode} type={block.type} block={block} />
-              </div>
+              </button>
             )
           })}
         </ResponsiveGridLayout>

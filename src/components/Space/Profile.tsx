@@ -3,6 +3,8 @@ import { useSpaceModeStore } from '@/store/spaceMode'
 import { useUserStore } from '@/store/user'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+
 import styles from './Profile.module.scss'
 
 export function Profile() {
@@ -56,7 +58,9 @@ export function Profile() {
       </div>
       <div>
         <DropDownMenu statefulKeys={['1', '3']} items={items}>
-          <button>kebob btn</button>
+          <div className={styles.iconCover}>
+            <BsThreeDotsVertical className={styles.icon} />
+          </div>
         </DropDownMenu>
       </div>
     </div>

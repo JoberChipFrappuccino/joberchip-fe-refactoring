@@ -1,3 +1,4 @@
+@import '/src/variables.scss';
 .container {
   display: flex;
   border: 1px solid black;
@@ -19,5 +20,18 @@
   .profile {
     flex: 1;
     padding-left: 1rem;
+  }
+  .iconCover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background-color: $base-black;
+    cursor: pointer;
+    .icon {
+      fill: $base-white;
+    }
   }
 }

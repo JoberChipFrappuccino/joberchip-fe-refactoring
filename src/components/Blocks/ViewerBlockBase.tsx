@@ -38,11 +38,13 @@ export default function ViewerBlockBase({ children }: Props) {
 
   return (
     <div className={styles.container}>
-      <aside className={styles.menu}>
-        <DropDownMenu items={items}>
-          <BsThreeDotsVertical className={styles.icon} />
-        </DropDownMenu>
-      </aside>
+      {mode === 'edit' && (
+        <aside className={[styles.menu, 'kebobMenu'].join(' ')}>
+          <DropDownMenu items={items}>
+            <BsThreeDotsVertical className={styles.icon} />
+          </DropDownMenu>
+        </aside>
+      )}
       {children}
     </div>
   )
