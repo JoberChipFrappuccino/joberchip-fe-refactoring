@@ -5,6 +5,8 @@ import { LinkBlock } from '@/components/Blocks/LinkBlock'
 import { PageBlock } from '@/components/Blocks/PageBlock'
 import { TextBlock } from '@/components/Blocks/TextBlock'
 import { VideoBlock } from '@/components/Blocks/VideoBlock'
+import ViewerBlockBase from '@/components/Blocks/ViewerBlockBase'
+
 import type { BlockBase, BlockType, BlockWith } from '@/models/space'
 
 type Props = {
@@ -38,5 +40,5 @@ export function SwitchViewerBlock({ type, block, mode }: Props) {
       blockComponent = <GoogleMapBlock mode={mode} block={block as BlockWith<'googleMap'>} />
   }
 
-  return blockComponent
+  return <ViewerBlockBase>{blockComponent}</ViewerBlockBase>
 }
