@@ -1,4 +1,5 @@
 import { Drawer } from '@/components/Space/Drawer'
+import { Profile } from '@/components/Space/Profile'
 import { SpaceActionBar } from '@/components/Space/SpaceActionBar'
 import { SpaceViewer } from '@/components/Space/SpaceViewer'
 import { SEO } from '@/constants'
@@ -26,8 +27,8 @@ export default function SharePage() {
   const { space } = useSpaceStore()
 
   useEffect(() => {
-    if (!user.user_id) return
-    loadSpace(user.user_id)
+    if (!user.userId) return
+    loadSpace(user.userId)
   }, [isSignedIn])
 
   return (
@@ -36,7 +37,7 @@ export default function SharePage() {
         <title>{pageSource.title['/']}</title>
       </Helmet>
       <div className={styles.container}>
-        <h1 className={styles.title}>Home Page</h1>
+        <Profile />
       </div>
       {space.previlige.edit && (
         <Button
@@ -44,7 +45,7 @@ export default function SharePage() {
             setSpaceMode(mode === 'view' ? 'edit' : 'view')
           }}
         >
-          {mode === 'view' ? '수정 하기' : '공유 화면 보기'}
+          {mode === 'view' ? '공유 화면 보기' : '수정 하기'}
         </Button>
       )}
       <aside>{isLoaded && isSignedIn && <Drawer />}</aside>

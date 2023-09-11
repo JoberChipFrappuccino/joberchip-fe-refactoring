@@ -19,7 +19,9 @@
     "@typescript-eslint/no-misused-promises": "off", // onSubmit(handleSubmit("foo"))을 할 때 에러를 발생시키는 것을 꺼줌
     "@typescript-eslint/indent": "off", // indent는 prettier가 알아서 하도록 둡니다.
     "@typescript-eslint/consistent-type-definitions": "off", // 개인적으로 interface는 스토어, 클레스의 명세서 정도로 사용하는 것을 선호해서 끕니다.
-    "@typescript-eslint/no-non-null-assertion": "off" // assertion을 허용합니다.
+    "@typescript-eslint/no-non-null-assertion": "off", // assertion을 허용합니다.
+    "@typescript-eslint/no-var-requires": "off", // require를 허용합니다.
+    "@typescript-eslint/explicit-function-return-type": "off" // 함수의 반환값을 명시하지 않아도 됩니다.
   },
   "ignorePatterns": ["node_modules", "*.config.js"]
 }
