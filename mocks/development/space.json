@@ -20,7 +20,7 @@
         "h": 1,
         "w": 2,
         "type": "image",
-        "src": "http://localhost:5173/dance.gif",
+        "src": "http://localhost:5173/img1.jpg",
         "alt": "춤추는 인간"
       },
       {
@@ -30,7 +30,7 @@
         "h": 2,
         "w": 2,
         "type": "image",
-        "src": "http://localhost:5173/dance.gif",
+        "src": "http://localhost:5173/img2.jpg",
         "alt": "춤추는 인간2"
       },
       {

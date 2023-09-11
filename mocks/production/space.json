@@ -20,7 +20,7 @@
         "h": 1,
         "w": 2,
         "type": "image",
-        "src": "http://ec2-34-228-10-85.compute-1.amazonaws.com/dance.gif",
+        "src": "http://ec2-34-228-10-85.compute-1.amazonaws.com/img1.jpg",
         "alt": "춤추는 인간"
       },
       {
@@ -30,7 +30,7 @@
         "h": 2,
         "w": 2,
         "type": "image",
-        "src": "http://ec2-34-228-10-85.compute-1.amazonaws.com/dance.gif",
+        "src": "http://ec2-34-228-10-85.compute-1.amazonaws.com/img2.jpg",
         "alt": "춤추는 인간2"
       },
       {

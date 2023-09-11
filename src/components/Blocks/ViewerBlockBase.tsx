@@ -14,21 +14,21 @@ export default function ViewerBlockBase({ children }: Props) {
   const items = useMemo(
     () => [
       {
-        key: '1',
+        key: 'view-block-1',
         label: <Switch onChange={() => {}} />,
         icon: <p>공개 설정</p>
       },
       {
-        key: '2',
+        key: 'view-block-2',
         icon: <button>페이지 정보 수정</button>
       },
       {
-        key: '3',
+        key: 'view-block-3',
         danger: true,
-        label: '배치 (배치 버튼은 onFocus로 대체하겠습니다.\n (feat. 미구현))'
+        label: '배치 (onFocus로 변경)'
       },
       {
-        key: '3',
+        key: 'view-block-3',
         danger: true,
         label: '삭제하기'
       }
@@ -38,7 +38,7 @@ export default function ViewerBlockBase({ children }: Props) {
 
   return (
     <div className={styles.container}>
-      <aside>
+      <aside className={styles.menu}>
         <DropDownMenu items={items}>
           <BsThreeDotsVertical className={styles.icon} />
         </DropDownMenu>
