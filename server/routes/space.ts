@@ -36,7 +36,6 @@ spaceRouter.get('/', (req, res) => {
     }
   }
 
-  console.log(data)
   return res.status(200).json(data[userId])
 })
 

@@ -20,7 +20,7 @@
         "h": 1,
         "w": 2,
         "type": "image",
-        "src": "http://localhost:7282/dance.gif",
+        "src": "http://localhost:5173/dance.gif",
         "alt": "춤추는 인간"
       },
       {
@@ -30,7 +30,7 @@
         "h": 2,
         "w": 2,
         "type": "image",
-        "src": "http://localhost:7282/dance.gif",
+        "src": "http://localhost:5173/dance.gif",
         "alt": "춤추는 인간2"
       },
       {
@@ -69,7 +69,7 @@
         "h": 2,
         "w": 2,
         "type": "video",
-        "src": "http://localhost:7282/test.mp4",
+        "src": "http://localhost:5173/test.mp4",
         "caption": "쓸모없는 비디오"
       },
       {

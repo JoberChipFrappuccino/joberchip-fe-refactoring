@@ -56,7 +56,7 @@ export default function SharePage() {
       <p>768px이상일 경우 mouse가 hover 되면 resize 버튼 활성화</p>
       <div className={styles.viewer}>
         {/*
-        하림님 여기 왼쪽 GNB 영역이예요.
+        여기는 왼쪽 GNB 영역이입니다
         여기다가 더미 데이터를 넣어서 만들어주시면 됩니당.
         <div>Navigation Position</div>
         */}
