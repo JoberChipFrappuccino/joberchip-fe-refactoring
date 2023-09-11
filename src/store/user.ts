@@ -32,8 +32,7 @@ export const useUserStore = create<UserState>((set) => {
       const { data, ...res } = await signInAPI(user)
       if (data) {
         set((state) => ({ ...state, user: data, isFetching: false, isSignedIn: true }))
-
-        localStorage.setItem(ACCESS_TOKEN, data.access_token)
+        localStorage.setItem(ACCESS_TOKEN, data.accessToken)
       } else {
         set((state) => ({ ...state, isFetching: false, isSignedIn: false }))
         localStorage.removeItem(ACCESS_TOKEN)

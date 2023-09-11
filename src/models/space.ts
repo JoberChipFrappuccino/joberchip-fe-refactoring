@@ -5,6 +5,10 @@
 export type Space = {
   title: string
   description: string
+  previlige: {
+    edit: boolean
+    delete: boolean
+  }
   blocks: BlockBase[]
 }
 

@@ -1,4 +1,4 @@
-import { SwithViewerBlock } from '@/components/Space/SwithViewerBlock'
+import { SwitchViewerBlock } from '@/components/Space/SwitchViewerBlock'
 import type { BlockType, Space } from '@/models/space'
 import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
@@ -56,7 +56,7 @@ export function SpaceViewer() {
           {space.blocks.map((block) => {
             return (
               <div className={styles.item} key={block.blockId}>
-                <SwithViewerBlock mode={mode} type={block.type} block={block} />
+                <SwitchViewerBlock mode={mode} type={block.type} block={block} />
               </div>
             )
           })}

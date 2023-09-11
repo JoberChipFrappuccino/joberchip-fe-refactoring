@@ -1,7 +1,7 @@
 import { useDrawerFormType } from '@/store/formMode'
 import { Drawer as AntdDrawer } from 'antd'
-import SwtichActionBlock from './SwtichActionBlock'
-import SwtichActionForm from './SwtichActionForm'
+import SwtichActionBlock from './SwitchActionBlock'
+import SwtichActionForm from './SwitchActionForm'
 
 export function Drawer() {
   const { formType, openDrawer, setOpenDrawer } = useDrawerFormType()

@@ -1,10 +1,6 @@
 module.exports = {
   targets: '>= 0.5%, not dead',
-  presets: [
-    '@babel/preset-env',
-    ['@babel/preset-react', { runtime: 'automatic' }],
-    '@babel/typescript',
-  ],
+  presets: ['@babel/preset-env', ['@babel/preset-react', { runtime: 'automatic' }], '@babel/typescript'],
   plugins: [
     '@loadable/babel-plugin',
     [
@@ -13,11 +9,11 @@ module.exports = {
         root: ['.'],
         alias: {
           '@': './src',
-          '~': './server',
-        },
-      },
-    ],
-  ],
+          '~': './server'
+        }
+      }
+    ]
+  ]
 }
 
 /**

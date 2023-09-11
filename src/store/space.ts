@@ -23,6 +23,10 @@ export const useSpaceStore = create<SpaceState>((set) => {
       },
       title: '',
       description: '',
+      previlige: {
+        edit: false,
+        delete: false
+      },
       blocks: []
     },
     isFetching: false,

@@ -1,4 +1,5 @@
 import { Drawer } from '@/components/Space/Drawer'
+import { Profile } from '@/components/Space/Profile'
 import { SpaceActionBar } from '@/components/Space/SpaceActionBar'
 import { SpaceViewer } from '@/components/Space/SpaceViewer'
 import { SEO } from '@/constants'
@@ -23,10 +24,11 @@ export default function SharePage() {
   const { user, isSignedIn } = useUserStore()
   const { loadSpace, isLoaded } = useSpaceStore()
   const { mode, setSpaceMode } = useSpaceModeStore()
+  const { space } = useSpaceStore()
 
   useEffect(() => {
-    if (!user.user_id) return
-    loadSpace(user.user_id)
+    if (!user.userId) return
+    loadSpace(user.userId)
   }, [isSignedIn])
 
   return (
@@ -35,15 +37,17 @@ export default function SharePage() {
         <title>{pageSource.title['/']}</title>
       </Helmet>
       <div className={styles.container}>
-        <h1 className={styles.title}>Home Page</h1>
+        <Profile />
       </div>
-      <Button
-        onClick={() => {
-          setSpaceMode(mode === 'view' ? 'edit' : 'view')
-        }}
-      >
-        {mode === 'view' ? '수정 하기' : '공유 화면 보기'}
-      </Button>
+      {space.previlige.edit && (
+        <Button
+          onClick={() => {
+            setSpaceMode(mode === 'view' ? 'edit' : 'view')
+          }}
+        >
+          {mode === 'view' ? '공유 화면 보기' : '수정 하기'}
+        </Button>
+      )}
       <aside>{isLoaded && isSignedIn && <Drawer />}</aside>
       <p>위 버튼들 눌러서 테스트해주세요.</p>
       <p>
@@ -53,7 +57,7 @@ export default function SharePage() {
       <p>768px이상일 경우 mouse가 hover 되면 resize 버튼 활성화</p>
       <div className={styles.viewer}>
         {/*
-        하림님 여기 왼쪽 GNB 영역이예요.
+        여기는 왼쪽 GNB 영역이입니다
         여기다가 더미 데이터를 넣어서 만들어주시면 됩니당.
         <div>Navigation Position</div>
         */}
