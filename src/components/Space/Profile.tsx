@@ -1,9 +1,9 @@
+import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { useUserStore } from '@/store/user'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
 import styles from './Profile.module.scss'
-import { DropDownMenu } from './ProfileDropDownMenu'
 
 export function Profile() {
   const { user } = useUserStore()
