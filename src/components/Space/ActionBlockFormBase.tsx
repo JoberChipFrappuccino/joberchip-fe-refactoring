@@ -28,6 +28,11 @@ export function ActionBlockFormBase({ children }: Props) {
       icon: 'icon'
     },
     {
+      type: 'video',
+      title: '동영상',
+      icon: 'icon'
+    },
+    {
       type: 'googleMap',
       title: '지도',
       icon: 'icon'
