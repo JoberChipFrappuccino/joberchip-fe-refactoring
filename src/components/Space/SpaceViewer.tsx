@@ -54,7 +54,7 @@ export function SpaceViewer() {
             }
           }}
           onDragStart={(_layout, _oldItem, _newItem, _placeholder, _event, element) => {
-            setActiveBlockId(element.id)
+            setActiveBlockId(() => element.id)
           }}
         >
           {space.blocks.map((block) => {

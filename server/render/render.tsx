@@ -64,7 +64,6 @@ export default async function renderHome(url: string, req: Request, res: Respons
       </head>
       <body>
         <div id="root">${html}
-        <div id="portal"></div>
         </div>
         <script id="__SERVER_DATA__" type="application/json">${JSON.stringify(serverSideData)}</script>
         ${webExtractor.getScriptTags()}

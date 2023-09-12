@@ -3,7 +3,7 @@ import reactDom from 'react-dom'
 type Props = {
   children: ReactNode
 }
-export default function ModalPortal({ children }: Props) {
+export default function BlockPortal({ children }: Props) {
   if (typeof window === 'undefined') {
     return null
   }

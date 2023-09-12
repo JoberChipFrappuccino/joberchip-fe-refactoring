@@ -1,10 +1,11 @@
+import BlockCover from '@/components/Space/BlockCover'
+import BlockPortal from '@/components/Space/BlockPortal'
 import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { type BlockBase } from '@/models/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { Switch } from 'antd'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import ModalPortal from '../Space/BlockPortal'
 import styles from './ViewerBlockBase.module.scss'
 
 type Props = {
@@ -55,9 +56,13 @@ export default function ViewerBlockBase({ block, children, isActive }: Props) {
         </aside>
       )}
       {focus && (
-        <ModalPortal>
-          <div className={styles.portalCover}>foo</div>
-        </ModalPortal>
+        <BlockPortal>
+          <BlockCover
+            onClick={() => {
+              setFocus(() => false)
+            }}
+          />
+        </BlockPortal>
       )}
       {children}
     </div>
