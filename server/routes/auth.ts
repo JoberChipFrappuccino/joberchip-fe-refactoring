@@ -4,9 +4,7 @@ import path from 'path'
 
 const authRouter = express.Router()
 
-export type UserMockData = {
-  [key: string]: MockProfile
-}
+export type UserMockData = Record<string, MockProfile>
 
 type MockProfile = {
   user_id: string
@@ -37,7 +35,11 @@ authRouter.get('/', (req, res) => {
 
 // * auth/signin?email=xxx
 authRouter.post('/signin', (req, res) => {
-  const body = req.body as unknown as { email: string; password: string }
+  interface Body {
+    email: string
+    password: string
+  }
+  const body = req.body as unknown as Body
   const data: UserMockData = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, `../mocks/${process.env.NODE_ENV}/user.json`), 'utf8')
   )

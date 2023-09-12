@@ -27,6 +27,7 @@ export default function Layout() {
 
   return (
     <div>
+      <div id="portal" />
       <div className="m-4">
         <Link className="m-2" to="/">
           Home
@@ -34,6 +35,7 @@ export default function Layout() {
         <Link className="m-2" to="/detail">
           Detail
         </Link>
+        d
       </div>
       {isFetching && <div> loading... </div>}
       <Outlet />

@@ -3,6 +3,7 @@
 body {
   width: 100%;
   margin: 0;
+  font-size: 16px;
 }
 
 .react-grid-layout {
@@ -51,7 +52,9 @@ body {
 
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ important @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 /* * 모바일에서 따로 제공해야함! 하지만 데모니까 768px 이하일 경우만 동작으로 수정! * */
+/* *                                onFocuse로 변경 예정!                           * */
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ important @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
 @media screen and (max-width: 768px) {
   .react-grid-item > .react-resizable-handle {
     position: absolute;
@@ -60,6 +63,14 @@ body {
     background-color: black;
     border-radius: 0.5rem;
     transform: translate(5px, 5px);
+    transition: all 200ms ease;
+  }
+  .react-grid-item .kebobMenu {
+    width: 2.5rem;
+    height: 2rem;
+    background-color: black;
+    border-radius: 0.5rem;
+    transform: translate(10px, -10px);
     transition: all 200ms ease;
   }
 }
@@ -81,6 +92,14 @@ body {
   background-color: black;
   border-radius: 0.5rem;
   transform: translate(5px, 5px);
+  transition: all 200ms ease;
+}
+.react-grid-item:hover .kebobMenu {
+  width: 2.5rem;
+  height: 2rem;
+  background-color: black;
+  border-radius: 0.5rem;
+  transform: translate(10px, -10px);
   transition: all 200ms ease;
 }
 .react-grid-item > .react-resizable-handle:hover {
@@ -175,3 +194,50 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+  // * 모바일에서 블록을 클릭했을 때, 블록의 매뉴가 나오는 클레스
+}
+
+// .react-resizable-handle {
+//     position: absolute;
+//     width: 2.5rem;
+//     height: 2rem;
+//     background-color: black;
+//     border-radius: 0.5rem;
+//     transform: translate(5px, 5px);
+//     transition: all 200ms ease;
+//   }
+.kebobMenu {
+  width: 2.5rem;
+  height: 2rem;
+  background-color: black;
+  border-radius: 0.5rem;
+  transform: translate(10px, -10px);
+  transition: all 200ms ease;
+}
+
+// .activeBlockInMoblie:focus {
+//   background-color: black;
+//   font-size: 5rem;
+// }
+
+@media screen and (max-width: 390px) {
+  html,
+  body {
+    font-size: 12px;
+  }
+}
+
+// * 블럭 전체를 커버하기 위한 속성 (onClose 이벤트를 위해)
+// .blockCover {
+//   position: fixed;
+//   width: 100%;
+//   height: 100vh;
+//   z-index: 100;
+//   background-color: rgba(0, 0, 0, 0.5);
+// }

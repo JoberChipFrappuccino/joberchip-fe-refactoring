@@ -1,42 +1,47 @@
+import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { useUserStore } from '@/store/user'
 import { Switch } from 'antd'
+import { useMemo } from 'react'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+
 import styles from './Profile.module.scss'
-import { DropDownMenu } from './ProfileDropDownMenu'
 
 export function Profile() {
   const { user } = useUserStore()
   const { mode, setSpaceMode } = useSpaceModeStore()
 
-  const items = [
-    {
-      key: '1',
-      label: <Switch onChange={() => {}} />,
-      icon: <p>공개설정</p>
-    },
-    {
-      key: '2',
-      // label: <Switch onChange={() => {}} />,
-      icon: <button>링크 복사</button>
-    },
-    {
-      key: '3',
-      label: (
-        <Switch
-          checkedChildren="공유 화면 미리보기"
-          unCheckedChildren="편집 하기"
-          onChange={() => {
-            setSpaceMode(mode === 'view' ? 'edit' : 'view')
-          }}
-        />
-      )
-    },
-    {
-      key: '4',
-      danger: true,
-      label: '삭제하기'
-    }
-  ]
+  const items = useMemo(
+    () => [
+      {
+        key: '1',
+        label: <Switch onChange={() => {}} />,
+        icon: <p>공개설정</p>
+      },
+      {
+        key: '2',
+        icon: <button>링크 복사</button>
+      },
+      {
+        key: '3',
+        label: (
+          <Switch
+            checkedChildren="공유 화면 미리보기"
+            unCheckedChildren="편집 하기"
+            onChange={() => {
+              setSpaceMode(mode === 'view' ? 'edit' : 'view')
+            }}
+          />
+        )
+      },
+      {
+        key: '4',
+        danger: true,
+        label: '삭제하기'
+      }
+    ],
+    [mode]
+  )
 
   return (
     <div className={styles.container}>
@@ -53,7 +58,9 @@ export function Profile() {
       </div>
       <div>
         <DropDownMenu statefulKeys={['1', '3']} items={items}>
-          <button>kebob btn</button>
+          <div className={styles.iconCover}>
+            <BsThreeDotsVertical className={styles.icon} />
+          </div>
         </DropDownMenu>
       </div>
     </div>

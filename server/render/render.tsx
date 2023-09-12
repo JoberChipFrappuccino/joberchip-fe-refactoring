@@ -7,19 +7,21 @@ import path from 'path'
 import { renderToString } from 'react-dom/server'
 import { Helmet } from 'react-helmet'
 import { StaticRouter } from 'react-router-dom/server'
-1
-export default async function renderHome(url: string, req: Request, res: Response) {
-  let serverSideData: {
-    [key: string]: unknown
-  } = {}
 
-  const data: { title: string; description: string } = await new Promise((res) => {
+export default async function renderHome(url: string, req: Request, res: Response) {
+  const serverSideData: Record<string, unknown> = {}
+
+  interface SEOData {
+    title: string
+    description: string
+  }
+  const data: SEOData = await new Promise((resolve) => {
     setTimeout(() => {
       const response = {
         title: '브라우저에서 페이지 소스를 확인해주세요!',
         description: 'this code show you how to use react server side rendering'
       }
-      return res(response)
+      resolve(response)
     }, 100)
   })
 
@@ -61,7 +63,8 @@ export default async function renderHome(url: string, req: Request, res: Respons
         ${webExtractor.getStyleTags()}
       </head>
       <body>
-        <div id="root">${html}</div>
+        <div id="root">${html}
+        </div>
         <script id="__SERVER_DATA__" type="application/json">${JSON.stringify(serverSideData)}</script>
         ${webExtractor.getScriptTags()}
       </body>
