@@ -1,11 +1,23 @@
+import { Header } from '@/components/Menus/Header'
+import { SideNavBar } from '@/components/Menus/SideNavBar'
+import { SpaceListBar } from '@/components/Menus/SpaceListBar'
 import { useUserStore } from '@/store/user'
-import { useEffect } from 'react'
+import { Layout as AntdLayout } from 'antd'
+import { useEffect, useState } from 'react'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
+
+const { Content } = AntdLayout
 
 export default function Layout() {
   const navigate = useNavigate()
   const location = useLocation()
   const { isSignedIn, isFetching, getUserInfo } = useUserStore()
+
+  const [collapsed, setCollapsed] = useState(false)
+
+  const collapsedChange = (e: boolean) => {
+    setCollapsed(e)
+  }
 
   useEffect(() => {
     if (isSignedIn) {
@@ -38,7 +50,24 @@ export default function Layout() {
         d
       </div>
       {isFetching && <div> loading... </div>}
-      <Outlet />
+      <AntdLayout>
+        <SpaceListBar />
+        <AntdLayout>
+          <Header collapsedChange={collapsedChange} collapsed={collapsed} />
+          <AntdLayout>
+            <SideNavBar collapsed={collapsed} />
+            <Content
+              style={{
+                margin: '24px 16px',
+                padding: 24,
+                minHeight: 280
+              }}
+            >
+              <Outlet />
+            </Content>
+          </AntdLayout>
+        </AntdLayout>
+      </AntdLayout>
     </div>
   )
 }
