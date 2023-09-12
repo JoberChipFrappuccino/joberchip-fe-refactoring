@@ -17,6 +17,7 @@ export function SpaceViewer() {
     breakpoints: 'lg',
     layouts: { lg: getBlockLayout(space.blocks, mode) } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
+  const [activeBlockId, setActiveBlockId] = useState('')
 
   useEffect(() => {
     const nextLayout = getBlockLayout(space.blocks, mode)
@@ -52,6 +53,9 @@ export function SpaceViewer() {
               setState(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
             }
           }}
+          onDragStart={(_layout, _oldItem, _newItem, _placeholder, _event, element) => {
+            setActiveBlockId(element.id)
+          }}
         >
           {space.blocks.map((block) => {
             return (
@@ -61,7 +65,12 @@ export function SpaceViewer() {
                 key={block.blockId}
                 id={block.blockId}
               >
-                <SwitchViewerBlock mode={mode} type={block.type} block={block} />
+                <SwitchViewerBlock
+                  isActive={activeBlockId === block.blockId}
+                  mode={mode}
+                  type={block.type}
+                  block={block}
+                />
               </button>
             )
           })}

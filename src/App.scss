@@ -202,26 +202,26 @@ body {
   // * 모바일에서 블록을 클릭했을 때, 블록의 매뉴가 나오는 클레스
 }
 
-.activeBlockInMoblie:focus {
-  border: 2px solid black !important;
-  & .react-resizable-handle {
-    position: absolute;
-    width: 2.5rem;
-    height: 2rem;
-    background-color: black;
-    border-radius: 0.5rem;
-    transform: translate(5px, 5px);
-    transition: all 200ms ease;
-  }
-  & .kebobMenu {
-    width: 2.5rem;
-    height: 2rem;
-    background-color: black;
-    border-radius: 0.5rem;
-    transform: translate(10px, -10px);
-    transition: all 200ms ease;
-  }
-}
+// .activeBlockInMoblie:focus {
+//   border: 2px solid black !important;
+//   & .react-resizable-handle {
+//     position: absolute;
+//     width: 2.5rem;
+//     height: 2rem;
+//     background-color: black;
+//     border-radius: 0.5rem;
+//     transform: translate(5px, 5px);
+//     transition: all 200ms ease;
+//   }
+//   & .kebobMenu {
+//     width: 2.5rem;
+//     height: 2rem;
+//     background-color: black;
+//     border-radius: 0.5rem;
+//     transform: translate(10px, -10px);
+//     transition: all 200ms ease;
+//   }
+// }
 
 // .activeBlockInMoblie:focus {
 //   background-color: black;
@@ -234,3 +234,12 @@ body {
     font-size: 12px;
   }
 }
+
+// * 블럭 전체를 커버하기 위한 속성 (onClose 이벤트를 위해)
+// .blockCover {
+//   position: fixed;
+//   width: 100%;
+//   height: 100vh;
+//   z-index: 100;
+//   background-color: rgba(0, 0, 0, 0.5);
+// }

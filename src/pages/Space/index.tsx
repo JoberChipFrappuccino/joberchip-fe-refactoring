@@ -7,14 +7,13 @@ import useServerSideProps from '@/hooks/serverSideProps'
 import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { useUserStore } from '@/store/user'
-import loadable from '@loadable/component'
 import { Button } from 'antd'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 
 import styles from './Space.module.scss'
 // ! API가 연동 되지 않아 text dose not matched 에러가 서버에서 발생합니다!
-const TreeTest = loadable(async () => await import('../../components/TreeTest'), { ssr: false })
+// const TreeTest = loadable(async () => await import('../../components/TreeTest'), { ssr: false })
 interface PageSource {
   title: Record<string, string>
 }
@@ -58,7 +57,7 @@ export default function SharePage() {
         <div className={styles.spaceViewer}>
           <section>{isLoaded && isSignedIn && <SpaceViewer />}</section>
         </div>
-        <TreeTest />
+        {/* <TreeTest /> */}
       </div>
       <SpaceActionBar />
     </nav>

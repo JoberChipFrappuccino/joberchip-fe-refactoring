@@ -13,9 +13,10 @@ type Props = {
   type: BlockType
   block: BlockBase
   mode: SpaceMode
+  isActive: boolean
 }
 
-export function SwitchViewerBlock({ type, block, mode }: Props) {
+export function SwitchViewerBlock({ type, block, mode, isActive }: Props) {
   let blockComponent = null
   switch (type) {
     case 'text':
@@ -40,5 +41,9 @@ export function SwitchViewerBlock({ type, block, mode }: Props) {
       blockComponent = <GoogleMapBlock mode={mode} block={block as BlockWith<'googleMap'>} />
   }
 
-  return <ViewerBlockBase>{blockComponent}</ViewerBlockBase>
+  return (
+    <ViewerBlockBase isActive={isActive} block={block}>
+      {blockComponent}
+    </ViewerBlockBase>
+  )
 }

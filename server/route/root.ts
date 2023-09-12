@@ -7,8 +7,8 @@ const router = express.Router()
 router.use('/auth', authRouter)
 
 // * Render React Application with SSR
-router.get('/', (req, res) => {
-  return render(req.url, req, res)
+router.get('/', async (req, res) => {
+  await render(req.url, req, res)
 })
 
 export default router
