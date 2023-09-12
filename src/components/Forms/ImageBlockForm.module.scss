@@ -1,0 +1,64 @@
+.container {
+  background-color: white;
+}
+
+.addImgButton {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 100;
+  height: 5.3125rem;
+  align-items: center;
+  border-radius: .375rem;
+  justify-content: center;
+  border: solid .0625rem #000000;
+}
+
+.thumbnailImg {
+  display: flex;
+  cursor: pointer;
+  overflow: hidden;
+  width: 5.3125rem;
+  height: 5.3125rem;
+  position: relative;
+  border-radius: .25rem;
+  img {
+    width: auto;
+    height: auto;
+  }
+  .minus {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.thumbnailImg:hover {
+  .minus {
+    display: flex;
+    color: #ff0606;
+  }
+}
+
+.button {
+  border: 0;
+  outline: 0;
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  cursor: pointer;
+  font-size: 1.25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover {
+  color: white;
+  background-color: black;
+}
