@@ -2,6 +2,7 @@ import BlockCover from '@/components/Space/BlockCover'
 import BlockPortal from '@/components/Space/BlockPortal'
 import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { type BlockBase } from '@/models/space'
+import { useActiveBlock } from '@/store/activeBlock'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { Switch } from 'antd'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
@@ -10,12 +11,12 @@ import styles from './ViewerBlockBase.module.scss'
 
 type Props = {
   children: ReactNode
-  isActive: boolean
   block: BlockBase
 }
-export default function ViewerBlockBase({ block, children, isActive }: Props) {
+export default function ViewerBlockBase({ block, children }: Props) {
   const { mode } = useSpaceModeStore()
   const [focus, setFocus] = useState(false)
+  const { activeBlockId, setActiveBlockId } = useActiveBlock()
 
   const items = useMemo(
     () => [
@@ -43,13 +44,13 @@ export default function ViewerBlockBase({ block, children, isActive }: Props) {
   )
 
   useEffect(() => {
-    setFocus(!!isActive)
-  }, [isActive])
+    setFocus(activeBlockId === block.blockId)
+  }, [activeBlockId])
 
   return (
     <div className={styles.container}>
       {mode === 'edit' && (
-        <aside className={[styles.menu, 'kebobMenu'].join(' ')}>
+        <aside className={[styles.menu, activeBlockId === block.blockId ? 'kebobMenu' : ''].join(' ')}>
           <DropDownMenu items={items}>
             <BsThreeDotsVertical className={styles.icon} />
           </DropDownMenu>
@@ -60,6 +61,7 @@ export default function ViewerBlockBase({ block, children, isActive }: Props) {
           <BlockCover
             onClick={() => {
               setFocus(() => false)
+              setActiveBlockId('')
             }}
           />
         </BlockPortal>

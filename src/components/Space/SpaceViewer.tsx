@@ -5,6 +5,7 @@ import { useSpaceModeStore } from '@/store/spaceMode'
 import { useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
 
+import { useActiveBlock } from '@/store/activeBlock'
 import styles from './SpaceViewer.module.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
@@ -17,7 +18,7 @@ export function SpaceViewer() {
     breakpoints: 'lg',
     layouts: { lg: getBlockLayout(space.blocks, mode) } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
-  const [activeBlockId, setActiveBlockId] = useState('')
+  const { setActiveBlockId } = useActiveBlock()
 
   useEffect(() => {
     const nextLayout = getBlockLayout(space.blocks, mode)
@@ -54,7 +55,7 @@ export function SpaceViewer() {
             }
           }}
           onDragStart={(_layout, _oldItem, _newItem, _placeholder, _event, element) => {
-            setActiveBlockId(() => element.id)
+            setActiveBlockId(element.id)
           }}
         >
           {space.blocks.map((block) => {
@@ -65,12 +66,7 @@ export function SpaceViewer() {
                 key={block.blockId}
                 id={block.blockId}
               >
-                <SwitchViewerBlock
-                  isActive={activeBlockId === block.blockId}
-                  mode={mode}
-                  type={block.type}
-                  block={block}
-                />
+                <SwitchViewerBlock mode={mode} type={block.type} block={block} />
               </button>
             )
           })}

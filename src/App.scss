@@ -203,9 +203,7 @@ body {
   // * 모바일에서 블록을 클릭했을 때, 블록의 매뉴가 나오는 클레스
 }
 
-// .activeBlockInMoblie:focus {
-//   border: 2px solid black !important;
-//   & .react-resizable-handle {
+// .react-resizable-handle {
 //     position: absolute;
 //     width: 2.5rem;
 //     height: 2rem;
@@ -214,15 +212,14 @@ body {
 //     transform: translate(5px, 5px);
 //     transition: all 200ms ease;
 //   }
-//   & .kebobMenu {
-//     width: 2.5rem;
-//     height: 2rem;
-//     background-color: black;
-//     border-radius: 0.5rem;
-//     transform: translate(10px, -10px);
-//     transition: all 200ms ease;
-//   }
-// }
+.kebobMenu {
+  width: 2.5rem;
+  height: 2rem;
+  background-color: black;
+  border-radius: 0.5rem;
+  transform: translate(10px, -10px);
+  transition: all 200ms ease;
+}
 
 // .activeBlockInMoblie:focus {
 //   background-color: black;
