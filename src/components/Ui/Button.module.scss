@@ -1,0 +1,33 @@
+.container {
+    background-color: #E2E6EF;
+}
+
+.disabledButton {
+    border: 0;
+    outline: 0;
+    width: 100%;
+    display: flex;
+    transition: 0.3s;
+    height: 2.5rem;
+    color: #AEB9D1;
+    font-size: 1rem;
+    cursor: not-allowed;
+    align-items: center;
+    justify-content: center;
+    background-color: #E2E6EF;
+  }
+
+.activeButton {
+    border: 0;
+    outline: 0;
+    width: 100%;
+    display: flex;
+    transition: 0.3s;
+    height: 2.5rem;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+  }

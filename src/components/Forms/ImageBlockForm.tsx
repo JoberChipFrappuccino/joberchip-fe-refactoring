@@ -1,11 +1,14 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/quotes */
 import { useState, type ChangeEvent, type FormEvent } from 'react'
+import FormButton from '../Ui/Button'
 import styles from './ImageBlockForm.module.scss'
 
 export default function ImageBlockForm() {
+  const [key, setKey] = useState(0)
   const [thumbnail, setThumbnail] = useState<string>('')
   const [title, setTitle] = useState<string>('')
+  const isButtonDisabled = !title || !thumbnail
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -24,12 +27,14 @@ export default function ImageBlockForm() {
       reader.readAsDataURL(file)
       reader.addEventListener('load', (e) => {
         setThumbnail((e.target as FileReader).result as string)
+        setKey((e) => e + 1)
       })
     }
   }
   /** 썸네일 이미지 삭제 기능 */
   function changeImgRemove() {
     setThumbnail('')
+    setKey((e) => e + 1)
   }
   // 이미지
   const onChangetitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +59,7 @@ export default function ImageBlockForm() {
             changeImg(e)
           }}
           style={{ display: 'none' }}
+          key={key}
         />
         {thumbnail ? (
           <div
@@ -68,10 +74,7 @@ export default function ImageBlockForm() {
         ) : (
           <div style={{ display: 'none' }} />
         )}
-
-        <button className={styles.button} type="submit">
-          사진 추가하기
-        </button>
+        <FormButton title={'사진 추가하기'} event={isButtonDisabled} />
       </form>
     </div>
   )
