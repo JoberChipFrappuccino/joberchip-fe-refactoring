@@ -27,9 +27,9 @@
     font-weight: bold;
   }
 }
-
 // * Animation
 .hidden {
+  bottom: -100px;
   animation: hiddenAnimation 500ms ease-in-out;
   animation-fill-mode: forwards;
 }

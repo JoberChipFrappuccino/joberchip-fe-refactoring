@@ -50,11 +50,6 @@ export default function SharePage() {
       )}
       <aside>{isLoaded && isSignedIn && <Drawer />}</aside>
       <div className={styles.viewer}>
-        {/*
-        여기는 왼쪽 GNB 영역이입니다
-        여기다가 더미 데이터를 넣어서 만들어주시면 됩니당.
-        <div>Navigation Position</div>
-        */}
         <div className={styles.spaceViewer}>
           <section>{isLoaded && isSignedIn && <SpaceViewer />}</section>
         </div>

@@ -52,7 +52,11 @@ export default function ViewerBlockBase({ block, children }: Props) {
       {mode === 'edit' && (
         <aside className={[styles.menu, activeBlockId === block.blockId ? 'kebobMenu' : ''].join(' ')}>
           <DropDownMenu items={items}>
-            <BsThreeDotsVertical className={styles.icon} />
+            <div className={styles.iconCover}>
+              <BsThreeDotsVertical
+                className={activeBlockId === block.blockId ? styles.activeIcon : styles.inactiveIcon}
+              />
+            </div>
           </DropDownMenu>
         </aside>
       )}
@@ -60,8 +64,8 @@ export default function ViewerBlockBase({ block, children }: Props) {
         <BlockPortal>
           <BlockCover
             onClick={() => {
-              setFocus(() => false)
               setActiveBlockId('')
+              setFocus(() => false)
             }}
           />
         </BlockPortal>

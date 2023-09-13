@@ -18,7 +18,7 @@ export function SpaceViewer() {
     breakpoints: 'lg',
     layouts: { lg: getBlockLayout(space.blocks, mode) } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
-  const { setActiveBlockId } = useActiveBlock()
+  const { activeBlockId, setActiveBlockId } = useActiveBlock()
 
   useEffect(() => {
     const nextLayout = getBlockLayout(space.blocks, mode)
@@ -62,7 +62,7 @@ export function SpaceViewer() {
             return (
               <button
                 type="button"
-                className={[styles.item, 'activeBlockInMoblie'].join(' ')}
+                className={[styles.item, block.blockId === activeBlockId ? 'activeBlock' : 'inactiveBlock'].join(' ')}
                 key={block.blockId}
                 id={block.blockId}
               >
