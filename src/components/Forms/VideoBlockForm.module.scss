@@ -46,19 +46,9 @@
   }
 }
 
-.button {
-  border: 0;
-  outline: 0;
-  width: 100%;
-  height: 2.5rem;
+.checkbox {
   display: flex;
-  cursor: pointer;
-  font-size: 1.25rem;
-  align-items: center;
-  justify-content: center;
-}
-
-.button:hover {
-  color: white;
-  background-color: black;
+  input {
+    margin-right: 4px;
+  }
 }
