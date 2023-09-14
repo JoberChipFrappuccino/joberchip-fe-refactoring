@@ -10,8 +10,6 @@ export default function BlockCover({ onClick }: Props) {
       onClick={(e) => {
         onClick && onClick(e.target)
       }}
-    >
-      Block Cover
-    </section>
+    />
   )
 }

@@ -7,11 +7,12 @@
   right: 0;
   bottom: 1rem;
   width: 50%;
+  max-width: 500px;
   height: 50px;
   border: 1px solde block;
   border-radius: 1rem;
   margin: auto;
-  z-index: 10;
+  z-index: 25;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   overflow: hidden;
@@ -27,9 +28,9 @@
     font-weight: bold;
   }
 }
-
 // * Animation
 .hidden {
+  // bottom: -100px;
   animation: hiddenAnimation 500ms ease-in-out;
   animation-fill-mode: forwards;
 }
@@ -41,7 +42,7 @@
   0% {
     opacity: 1;
   }
-  99% {
+  70% {
     opacity: 0;
     height: 50px;
   }
@@ -52,8 +53,12 @@
 }
 @keyframes visibleAnimation {
   0% {
+    bottom: -10rem;
     opacity: 0;
     height: 50px;
+  }
+  70% {
+    bottom: 1rem;
   }
   100% {
     opacity: 1;

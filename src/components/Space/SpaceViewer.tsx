@@ -1,11 +1,10 @@
-import { SwitchViewerBlock } from '@/components/Space/SwitchViewerBlock'
+import { SwitchViewerBlock } from '@/components/SwitchCase/SwitchViewerBlock'
 import type { BlockType, Space } from '@/models/space'
+import { useActiveBlock } from '@/store/activeBlock'
 import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
-
-import { useActiveBlock } from '@/store/activeBlock'
 import styles from './SpaceViewer.module.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
@@ -13,12 +12,12 @@ const ResponsiveGridLayout = WidthProvider(Responsive)
 export function SpaceViewer() {
   const [rowHeight, setRowHeight] = useState(100)
   const { mode } = useSpaceModeStore()
-  const { space } = useSpaceStore()
+  const { space, updateBlockLayout } = useSpaceStore()
   const [state, setState] = useState({
     breakpoints: 'lg',
     layouts: { lg: getBlockLayout(space.blocks, mode) } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
-  const { setActiveBlockId } = useActiveBlock()
+  const { activeBlockId, setActiveBlockId } = useActiveBlock()
 
   useEffect(() => {
     const nextLayout = getBlockLayout(space.blocks, mode)
@@ -51,7 +50,19 @@ export function SpaceViewer() {
           onLayoutChange={(layout, _layouts) => {
             const changedLayout = sortLayout(layout)
             if (JSON.stringify(sortLayout(changedLayout)) !== JSON.stringify(state.layouts.lg)) {
+              // * layout 상태를 변경 합니다.
               setState(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
+              space.blocks.forEach((block) => {
+                const item = changedLayout.find((item) => item.i === block.blockId)
+                if (!item) return
+                const { x, y, w, h } = item
+                block.x = x
+                block.y = y
+                block.w = w
+                block.h = h
+              })
+              // * 변경된 layout을 block에 반영 합니다.
+              updateBlockLayout([...space.blocks])
             }
           }}
           onDragStart={(_layout, _oldItem, _newItem, _placeholder, _event, element) => {
@@ -62,7 +73,7 @@ export function SpaceViewer() {
             return (
               <button
                 type="button"
-                className={[styles.item, 'activeBlockInMoblie'].join(' ')}
+                className={[styles.item, block.blockId === activeBlockId ? 'activeBlock' : 'inactiveBlock'].join(' ')}
                 key={block.blockId}
                 id={block.blockId}
               >

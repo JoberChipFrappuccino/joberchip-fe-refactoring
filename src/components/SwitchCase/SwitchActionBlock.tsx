@@ -1,10 +1,10 @@
+import ImageBlockForm from '@/components/Forms/ImageBlockForm'
+import LinkBlockForm from '@/components/Forms/LinkBlockForm'
+import TextBlockForm from '@/components/Forms/TextBlockForm'
+import VideoBlockForm from '@/components/Forms/VideoBlockForm'
+import { ActionBlockFormBase } from '@/components/Space/ActionBlockFormBase'
 import { useDrawerFormType } from '@/store/formMode'
 import type { ReactNode } from 'react'
-import ImageBlockForm from '../Forms/ImageBlockForm'
-import LinkBlockForm from '../Forms/LinkBlockForm'
-import TextBlockForm from '../Forms/TextBlockForm'
-import VideoBlockForm from '../Forms/VideoBlockForm'
-import { ActionBlockFormBase } from './ActionBlockFormBase'
 
 export default function SwtichActionBlock() {
   const { blockType } = useDrawerFormType()

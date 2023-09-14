@@ -6,7 +6,6 @@ import { PageBlock } from '@/components/Blocks/PageBlock'
 import { TextBlock } from '@/components/Blocks/TextBlock'
 import { VideoBlock } from '@/components/Blocks/VideoBlock'
 import ViewerBlockBase from '@/components/Blocks/ViewerBlockBase'
-
 import type { BlockBase, BlockType, BlockWith } from '@/models/space'
 
 type Props = {
