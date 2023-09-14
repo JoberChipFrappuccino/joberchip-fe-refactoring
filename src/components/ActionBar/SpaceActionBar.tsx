@@ -1,18 +1,25 @@
 import { useDrawerFormType, type FormType } from '@/store/formMode'
 import { useSpaceModeStore } from '@/store/spaceMode'
+import { useCallback } from 'react'
 import styles from './SpaceActionBar.module.scss'
 
-export function SpaceActionBar() {
+type Props = {
+  isActive: boolean
+}
+export function SpaceActionBar({ isActive }: Props) {
   const { mode } = useSpaceModeStore()
   const { setOpenDrawer, setFormType } = useDrawerFormType()
 
-  const changeFormType = (type: FormType) => {
+  const changeFormType = useCallback((type: FormType) => {
     setFormType(type)
     setOpenDrawer(true)
-  }
+  }, [])
+
+  let additionalClassName = isActive ? styles.visible : styles.hidden
+  if (mode === 'view') additionalClassName = styles.hidden
 
   return (
-    <div className={[styles.container, `${mode === 'view' ? styles.hidden : styles.visible}`].join(' ')}>
+    <div className={[styles.container, additionalClassName].join(' ')}>
       <button
         className={styles.item}
         onClick={() => {

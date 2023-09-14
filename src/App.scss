@@ -178,6 +178,7 @@ body {
 }
 .activeBlock {
   border: 2px solid black !important;
+  z-index: 24 !important;
   .react-resizable-handle {
     position: absolute;
     width: 2.5rem;

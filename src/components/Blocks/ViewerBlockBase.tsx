@@ -32,11 +32,6 @@ export default function ViewerBlockBase({ block, children }: Props) {
       {
         key: `${block.blockId}-view-block-3`,
         danger: true,
-        label: '배치 (onFocus로 변경)'
-      },
-      {
-        key: `${block.blockId}-view-block-3`,
-        danger: true,
         label: '삭제하기'
       }
     ],

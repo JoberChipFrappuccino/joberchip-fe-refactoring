@@ -1,16 +1,17 @@
+import { BlockActionBar } from '@/components/ActionBar/BlockActionBar'
+import { SpaceActionBar } from '@/components/ActionBar/SpaceActionBar'
 import { Drawer } from '@/components/Space/Drawer'
 import { Profile } from '@/components/Space/Profile'
-import { SpaceActionBar } from '@/components/Space/SpaceActionBar'
 import { SpaceViewer } from '@/components/Space/SpaceViewer'
 import { SEO } from '@/constants'
 import useServerSideProps from '@/hooks/serverSideProps'
+import { useActiveBlock } from '@/store/activeBlock'
 import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { useUserStore } from '@/store/user'
 import { Button } from 'antd'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-
 import styles from './Space.module.scss'
 
 // ! API가 연동 되지 않아 text dose not matched 에러가 서버에서 발생합니다!
@@ -25,6 +26,7 @@ export default function SharePage() {
   const { loadSpace, isLoaded } = useSpaceStore()
   const { mode, setSpaceMode } = useSpaceModeStore()
   const { space } = useSpaceStore()
+  const { activeBlockId } = useActiveBlock()
 
   useEffect(() => {
     if (!user.userId) return
@@ -55,7 +57,7 @@ export default function SharePage() {
         </div>
         {/* <TreeTest /> */}
       </div>
-      <SpaceActionBar />
+      <BlockActionBar isActive={activeBlockId !== ''} /> : <SpaceActionBar isActive={activeBlockId === ''} />
     </nav>
   )
 }

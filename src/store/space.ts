@@ -10,7 +10,7 @@ interface SpaceState {
   loadSpace: (id: string) => Promise<boolean>
   addBlock: (section_id: string, options: object) => Promise<boolean>
   removeBlock: (section_id: string, block_id: string) => Promise<boolean>
-  updateBlock: (section_id: string, block_id: string, options: object) => Promise<boolean>
+  updateBlockLayout: (blocks: Space['blocks']) => void
 }
 
 export const useSpaceStore = create<SpaceState>((set) => {
@@ -42,14 +42,14 @@ export const useSpaceStore = create<SpaceState>((set) => {
       set((state) => ({ ...state, isFetching: false, isLoaded: false, isFalture: true }))
       return false
     },
+    updateBlockLayout: async (blocks: Space['blocks']) => {
+      set((state) => ({ ...state, space: { ...state.space, blocks } }))
+    },
     // ! 미구현 ㅎㅅㅎ
     addBlock: async (sectionId: string, options: object) => {
       return true
     },
     removeBlock: async (sectionId: string, blockId: string) => {
-      return true
-    },
-    updateBlock: async (sectionId: string, blockId: string, options: object) => {
       return true
     }
   }
