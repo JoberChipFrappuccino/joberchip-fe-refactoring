@@ -47,7 +47,6 @@ export default function Layout() {
         <Link className="m-2" to="/detail">
           Detail
         </Link>
-        d
       </div>
       {isFetching && <div> loading... </div>}
       <AntdLayout>

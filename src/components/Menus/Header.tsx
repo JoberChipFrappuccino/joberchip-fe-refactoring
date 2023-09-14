@@ -1,9 +1,10 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import { Button, Layout } from 'antd'
+import { Breadcrumb, Button, Layout } from 'antd'
 
 export function Header(props: any) {
   return (
-    <Layout style={{ padding: 0 }}>
+    <Layout style={{ padding: 0, display: 'flex' }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
       <Button
         type="text"
         icon={props.collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -16,6 +17,27 @@ export function Header(props: any) {
           height: 64
         }}
       />
+      <Breadcrumb
+        separator=">"
+        items={[
+          {
+            title: 'Home'
+          },
+          {
+            title: 'Application Center',
+            href: ''
+          },
+          {
+            title: 'Application List',
+            href: ''
+          },
+          {
+            title: 'An Application'
+          }
+        ]}
+      />
+      </div>
+
     </Layout>
   )
 }

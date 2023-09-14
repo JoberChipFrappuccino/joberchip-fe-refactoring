@@ -9,7 +9,7 @@ const siderStyle: React.CSSProperties = {
 
 export function SpaceListBar() {
   return (
-    <Sider width={80} style={siderStyle} collapsible>
+    <Sider width={100} style={siderStyle} collapsible>
       <Tabs
         tabPosition={'left'}
         items={new Array(3).fill(null).map((_, i) => {
