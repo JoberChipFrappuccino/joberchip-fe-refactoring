@@ -1,9 +1,9 @@
 @import '/src/variables.scss';
 .container {
   display: flex;
-  border: 1px solid black;
-  border-radius: 1rem;
   width: 90%;
+  margin: 0 auto;
+
   .profileImageCover {
     width: 150px;
     height: 150px;

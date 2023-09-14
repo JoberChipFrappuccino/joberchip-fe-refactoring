@@ -6,6 +6,7 @@ import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
+import { SpaceActionBar } from '../ActionBar/SpaceActionBar'
 import styles from './SpaceViewer.module.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
@@ -85,6 +86,9 @@ export function SpaceViewer() {
           )
         })}
       </ResponsiveGridLayout>
+      {/* * Deprecated * */}
+      {/* <BlockActionBar isActive={activeBlockId !== ''} /> */}
+      <SpaceActionBar isActive={activeBlockId === ''} />
     </div>
   )
 }

@@ -1,10 +1,8 @@
-import { SpaceActionBar } from '@/components/ActionBar/SpaceActionBar'
 import { Drawer } from '@/components/Space/Drawer'
 import { Profile } from '@/components/Space/Profile'
 import { SpaceViewer } from '@/components/Space/SpaceViewer'
 import { SEO } from '@/constants'
 import useServerSideProps from '@/hooks/serverSideProps'
-import { useActiveBlock } from '@/store/activeBlock'
 import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { useUserStore } from '@/store/user'
@@ -25,7 +23,6 @@ export default function SharePage() {
   const { loadSpace, isLoaded } = useSpaceStore()
   const { mode, setSpaceMode } = useSpaceModeStore()
   const { space } = useSpaceStore()
-  const { activeBlockId } = useActiveBlock()
 
   useEffect(() => {
     if (!user.userId) return
@@ -37,9 +34,7 @@ export default function SharePage() {
       <Helmet>
         <title>{pageSource.title['/']}</title>
       </Helmet>
-      <div className={styles.container}>
-        <Profile />
-      </div>
+      <Profile />
       {space.previlige.edit && (
         <Button
           onClick={() => {
@@ -56,9 +51,6 @@ export default function SharePage() {
         </div>
         {/* <TreeTest /> */}
       </div>
-      {/* * Deprecated * */}
-      {/* <BlockActionBar isActive={activeBlockId !== ''} /> */}
-      <SpaceActionBar isActive={activeBlockId === ''} />
     </>
   )
 }
