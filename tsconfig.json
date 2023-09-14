@@ -11,7 +11,6 @@
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true, // 이 옵션이 false일 경우 SignIn.tsx는 Signin.tsx로 import됩니다, default : false
