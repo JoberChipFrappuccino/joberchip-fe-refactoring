@@ -18,6 +18,8 @@ export function SpaceActionBar({ isActive }: Props) {
   let additionalClassName = isActive ? styles.visible : styles.hidden
   if (mode === 'view') additionalClassName = styles.hidden
 
+  const baseURL =
+    process.env.NODE_ENV === 'production' ? 'http://ec2-34-228-10-85.compute-1.amazonaws.com' : 'http://localhost:5173/'
   return (
     <div className={[styles.container, additionalClassName].join(' ')}>
       <button
@@ -26,7 +28,7 @@ export function SpaceActionBar({ isActive }: Props) {
           changeFormType('page')
         }}
       >
-        Page
+        <img src={`${baseURL}/page_action_bar_icon.png`} alt="page action bar icon" />
       </button>
       <button
         className={styles.item}
@@ -34,7 +36,7 @@ export function SpaceActionBar({ isActive }: Props) {
           changeFormType('template')
         }}
       >
-        Template
+        <img src={`${baseURL}/template_action_bar_icon.png`} alt="page action bar icon" />
       </button>
       <button
         className={styles.item}
@@ -42,7 +44,7 @@ export function SpaceActionBar({ isActive }: Props) {
           changeFormType('block')
         }}
       >
-        Block
+        <img src={`${baseURL}/block_action_bar_icon.png`} alt="page action bar icon" />
       </button>
     </div>
   )
