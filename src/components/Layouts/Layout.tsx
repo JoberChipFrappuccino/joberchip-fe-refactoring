@@ -4,14 +4,14 @@ import { SpaceListBar } from '@/components/Menus/SpaceListBar'
 import { useUserStore } from '@/store/user'
 import { Layout as AntdLayout } from 'antd'
 import { useEffect, useState } from 'react'
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 const { Content } = AntdLayout
 
 export default function Layout() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { isSignedIn, isFetching, getUserInfo } = useUserStore()
+  const { isSignedIn, getUserInfo } = useUserStore()
 
   const [collapsed, setCollapsed] = useState(false)
 
@@ -38,30 +38,16 @@ export default function Layout() {
   }, [location.pathname])
 
   return (
+    // * HMR을 위해 div로 감싸줍니다.
     <div>
       <div id="portal" />
-      <div className="m-4">
-        <Link className="m-2" to="/">
-          Home
-        </Link>
-        <Link className="m-2" to="/detail">
-          Detail
-        </Link>
-      </div>
-      {isFetching && <div> loading... </div>}
       <AntdLayout>
         <SpaceListBar />
         <AntdLayout>
           <Header collapsedChange={collapsedChange} collapsed={collapsed} />
-          <AntdLayout>
+          <AntdLayout style={{ background: '#fff' }}>
             <SideNavBar collapsed={collapsed} />
-            <Content
-              style={{
-                margin: '24px 16px',
-                padding: 24,
-                minHeight: 280
-              }}
-            >
+            <Content>
               <Outlet />
             </Content>
           </AntdLayout>

@@ -1,4 +1,3 @@
-import { BlockActionBar } from '@/components/ActionBar/BlockActionBar'
 import { SpaceActionBar } from '@/components/ActionBar/SpaceActionBar'
 import { Drawer } from '@/components/Space/Drawer'
 import { Profile } from '@/components/Space/Profile'
@@ -34,7 +33,7 @@ export default function SharePage() {
   }, [isSignedIn])
 
   return (
-    <nav>
+    <>
       <Helmet>
         <title>{pageSource.title['/']}</title>
       </Helmet>
@@ -57,7 +56,9 @@ export default function SharePage() {
         </div>
         {/* <TreeTest /> */}
       </div>
-      <BlockActionBar isActive={activeBlockId !== ''} /> : <SpaceActionBar isActive={activeBlockId === ''} />
-    </nav>
+      {/* * Deprecated * */}
+      {/* <BlockActionBar isActive={activeBlockId !== ''} /> */}
+      <SpaceActionBar isActive={activeBlockId === ''} />
+    </>
   )
 }

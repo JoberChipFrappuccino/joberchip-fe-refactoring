@@ -5,6 +5,9 @@ body {
   margin: 0;
   font-size: 16px;
 }
+* {
+  box-sizing: border-box;
+}
 
 .react-grid-layout {
   position: relative;
@@ -16,7 +19,6 @@ body {
   transition-property: left, top;
 }
 .react-grid-item img {
-  // border-radius: 1rem;
   pointer-events: none;
   user-select: none;
 }
@@ -75,58 +77,6 @@ body {
   display: none;
 }
 
-.react-grid-item > .react-resizable-handle.react-resizable-handle-sw {
-  bottom: 0;
-  left: 0;
-  cursor: sw-resize;
-  transform: rotate(90deg);
-}
-.react-grid-item > .react-resizable-handle.react-resizable-handle-se {
-  bottom: 0;
-  right: 0;
-  cursor: se-resize;
-}
-.react-grid-item > .react-resizable-handle.react-resizable-handle-nw {
-  top: 0;
-  left: 0;
-  cursor: nw-resize;
-  transform: rotate(180deg);
-}
-.react-grid-item > .react-resizable-handle.react-resizable-handle-ne {
-  top: 0;
-  right: 0;
-  cursor: ne-resize;
-  transform: rotate(270deg);
-}
-.react-grid-item > .react-resizable-handle.react-resizable-handle-w,
-.react-grid-item > .react-resizable-handle.react-resizable-handle-e {
-  top: 50%;
-  margin-top: -10px;
-  cursor: ew-resize;
-}
-.react-grid-item > .react-resizable-handle.react-resizable-handle-w {
-  left: 0;
-  transform: rotate(135deg);
-}
-.react-grid-item > .react-resizable-handle.react-resizable-handle-e {
-  right: 0;
-  transform: rotate(315deg);
-}
-.react-grid-item > .react-resizable-handle.react-resizable-handle-n,
-.react-grid-item > .react-resizable-handle.react-resizable-handle-s {
-  left: 50%;
-  margin-left: -10px;
-  cursor: ns-resize;
-}
-.react-grid-item > .react-resizable-handle.react-resizable-handle-n {
-  top: 0;
-  transform: rotate(225deg);
-}
-.react-grid-item > .react-resizable-handle.react-resizable-handle-s {
-  bottom: 0;
-  transform: rotate(45deg);
-}
-
 /* * SpaceMode 타입에 따라서 Blocks에서 사용되는 클레스 * */
 .view {
   width: 100%;
@@ -149,8 +99,42 @@ body {
   width: 80%;
   height: 80%;
   border-radius: 1rem;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.03);
   cursor: pointer;
+}
+
+.inactiveBlock {
+}
+
+.kebobMenu {
+  width: 2.5rem;
+  height: 2rem;
+  background-color: white;
+  // border: 1px solid black;
+  border-radius: 1rem;
+  // transform: translate(5px, -5px);
+  transition: all 200ms ease;
+}
+.activeBlock {
+  z-index: 24 !important;
+  border-top: 2px solid $cool-grey3 !important;
+  border-left: 2px solid $cool-grey3 !important;
+  border-right: 2px solid $cool-grey3 !important;
+  .react-resizable-handle {
+    position: absolute;
+    width: 2.5rem;
+    height: 2rem;
+    background-color: $cool-grey3;
+    border-bottom-right-radius: 1rem;
+    z-index: 5;
+  }
+  .react-resizable-handle::after {
+    width: 10px;
+    height: 10px;
+    background-color: $cool-grey3;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -158,48 +142,7 @@ body {
   body {
     font-size: 14px;
   }
-  // * 모바일에서 블록을 클릭했을 때, 블록의 매뉴가 나오는 클레스
 }
-
-// .react-resizable-handle {
-//     position: absolute;
-//     width: 2.5rem;
-//     height: 2rem;
-//     background-color: black;
-//     border-radius: 0.5rem;
-//     transform: translate(5px, 5px);
-//     transition: all 200ms ease;
-//   }
-
-.inactiveBlock {
-}
-.kebobMenu {
-  width: 2.5rem;
-  height: 2rem;
-  background-color: black;
-  border-radius: 0.5rem;
-  transform: translate(5px, -5px);
-  transition: all 200ms ease;
-}
-.activeBlock {
-  border: 2px solid black !important;
-  z-index: 24 !important;
-  .react-resizable-handle {
-    position: absolute;
-    width: 2.5rem;
-    height: 2rem;
-    background-color: black;
-    border-radius: 0.5rem;
-    transform: translate(5px, 5px);
-    transition: all 200ms ease;
-    z-index: 5;
-  }
-  .react-resizable-handle::after {
-    border-right: 3px solid white;
-    border-bottom: 3px solid white;
-  }
-}
-
 @media screen and (max-width: 390px) {
   html,
   body {
@@ -214,4 +157,57 @@ body {
 //   height: 100vh;
 //   z-index: 100;
 //   background-color: rgba(0, 0, 0, 0.5);
+// }
+
+// * react-grid-item에서 제공하는 리사이즈 핸들러 스타일
+// .react-grid-item > .react-resizable-handle.react-resizable-handle-sw {
+//   bottom: 0;
+//   left: 0;
+//   cursor: sw-resize;
+//   transform: rotate(90deg);
+// }
+.react-grid-item > .react-resizable-handle.react-resizable-handle-se {
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+}
+// .react-grid-item > .react-resizable-handle.react-resizable-handle-nw {
+//   top: 0;
+//   left: 0;
+//   cursor: nw-resize;
+//   transform: rotate(180deg);
+// }
+// .react-grid-item > .react-resizable-handle.react-resizable-handle-ne {
+//   top: 0;
+//   right: 0;
+//   cursor: ne-resize;
+//   transform: rotate(270deg);
+// }
+// .react-grid-item > .react-resizable-handle.react-resizable-handle-w,
+// .react-grid-item > .react-resizable-handle.react-resizable-handle-e {
+//   top: 50%;
+//   margin-top: -10px;
+//   cursor: ew-resize;
+// }
+// .react-grid-item > .react-resizable-handle.react-resizable-handle-w {
+//   left: 0;
+//   transform: rotate(135deg);
+// }
+// .react-grid-item > .react-resizable-handle.react-resizable-handle-e {
+//   right: 0;
+//   transform: rotate(315deg);
+// }
+// .react-grid-item > .react-resizable-handle.react-resizable-handle-n,
+// .react-grid-item > .react-resizable-handle.react-resizable-handle-s {
+//   left: 50%;
+//   margin-left: -10px;
+//   cursor: ns-resize;
+// }
+// .react-grid-item > .react-resizable-handle.react-resizable-handle-n {
+//   top: 0;
+//   transform: rotate(225deg);
+// }
+// .react-grid-item > .react-resizable-handle.react-resizable-handle-s {
+//   bottom: 0;
+//   transform: rotate(45deg);
 // }

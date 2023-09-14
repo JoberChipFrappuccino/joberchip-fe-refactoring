@@ -5,3 +5,5 @@ export const SEO = 'SEO'
 export const HOME_RPOMISE_API_KEY = 'HOME_RPOMISE_API_KEY'
 
 export const ACCESS_TOKEN = 'token'
+
+export const DROPDOWN_TRIGGER_ICON_ID = 'DROPDOWN_TRIGGER_ICON_ID'

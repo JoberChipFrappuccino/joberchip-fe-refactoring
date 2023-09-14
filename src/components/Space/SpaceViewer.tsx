@@ -1,4 +1,5 @@
 import { SwitchViewerBlock } from '@/components/SwitchCase/SwitchViewerBlock'
+import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import type { BlockType, Space } from '@/models/space'
 import { useActiveBlock } from '@/store/activeBlock'
 import { useSpaceStore } from '@/store/space'
@@ -25,65 +26,66 @@ export function SpaceViewer() {
   }, [mode])
 
   return (
-    <>
-      <h1 className={styles.title}>{space.title}</h1>
-      <p className={styles.description}>{space.description}</p>
-      <div className={styles.layout}>
-        <ResponsiveGridLayout
-          layouts={state.layouts}
-          breakpoints={{
-            lg: 1200
-          }}
-          cols={{ lg: 4 }}
-          rowHeight={rowHeight}
-          width={1000}
-          margin={[30, 30]}
-          onWidthChange={(width, _margin, cols) => {
-            setRowHeight((width * 0.7) / cols)
-          }}
-          onResizeStart={(_layout, _oldItem, _newItem, _placeholder, _event, element) => {
-            element.classList.add('react-gird-resizable-keep')
-          }}
-          onResizeStop={(_layout, _oldItem, _newItem, _placeholder, _event, element) => {
-            element.classList.remove('react-gird-resizable-keep')
-          }}
-          onLayoutChange={(layout, _layouts) => {
-            const changedLayout = sortLayout(layout)
-            if (JSON.stringify(sortLayout(changedLayout)) !== JSON.stringify(state.layouts.lg)) {
-              // * layout 상태를 변경 합니다.
-              setState(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
-              space.blocks.forEach((block) => {
-                const item = changedLayout.find((item) => item.i === block.blockId)
-                if (!item) return
-                const { x, y, w, h } = item
-                block.x = x
-                block.y = y
-                block.w = w
-                block.h = h
-              })
-              // * 변경된 layout을 block에 반영 합니다.
-              updateBlockLayout([...space.blocks])
-            }
-          }}
-          onDragStart={(_layout, _oldItem, _newItem, _placeholder, _event, element) => {
-            setActiveBlockId(element.id)
-          }}
-        >
-          {space.blocks.map((block) => {
-            return (
-              <button
-                type="button"
-                className={[styles.item, block.blockId === activeBlockId ? 'activeBlock' : 'inactiveBlock'].join(' ')}
-                key={block.blockId}
-                id={block.blockId}
-              >
-                <SwitchViewerBlock mode={mode} type={block.type} block={block} />
-              </button>
-            )
-          })}
-        </ResponsiveGridLayout>
-      </div>
-    </>
+    <div className={styles.layout}>
+      <ResponsiveGridLayout
+        layouts={state.layouts}
+        breakpoints={{
+          lg: 1200
+        }}
+        cols={{ lg: 4 }}
+        rowHeight={rowHeight}
+        width={1000}
+        margin={[18, 18]}
+        onWidthChange={(width, _margin, cols) => {
+          setRowHeight((width * 0.7) / cols)
+        }}
+        onResizeStart={(_layout, _oldItem, _newItem, _placeholder, _event, element) => {
+          element.classList.add('react-gird-resizable-keep')
+        }}
+        onResizeStop={(_layout, _oldItem, _newItem, _placeholder, _event, element) => {
+          element.classList.remove('react-gird-resizable-keep')
+        }}
+        onLayoutChange={(layout, _layouts) => {
+          const changedLayout = sortLayout(layout)
+          if (JSON.stringify(sortLayout(changedLayout)) !== JSON.stringify(state.layouts.lg)) {
+            // * layout 상태를 변경 합니다.
+            setState(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
+            space.blocks.forEach((block) => {
+              const item = changedLayout.find((item) => item.i === block.blockId)
+              if (!item) return
+              const { x, y, w, h } = item
+              block.x = x
+              block.y = y
+              block.w = w
+              block.h = h
+            })
+            // * 변경된 layout을 block에 반영 합니다.
+            updateBlockLayout([...space.blocks])
+          }
+        }}
+        onDragStart={(_layout, _oldItem, _newItem, _placeholder, event, element) => {
+          setActiveBlockId(element.id)
+          if (event.type === 'mousedown') return
+          const targetElement = event.target as HTMLElement
+          if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) {
+            targetElement.closest('button')?.click()
+          }
+        }}
+      >
+        {space.blocks.map((block) => {
+          return (
+            <button
+              type="button"
+              className={[styles.item, block.blockId === activeBlockId ? 'activeBlock' : 'inactiveBlock'].join(' ')}
+              key={block.blockId}
+              id={block.blockId}
+            >
+              <SwitchViewerBlock mode={mode} type={block.type} block={block} />
+            </button>
+          )
+        })}
+      </ResponsiveGridLayout>
+    </div>
   )
 }
 
