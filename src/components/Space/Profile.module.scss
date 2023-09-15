@@ -1,37 +1,60 @@
 @import '/src/variables.scss';
 .container {
   display: flex;
-  border: 1px solid black;
-  border-radius: 1rem;
+  flex-direction: column;
   width: 90%;
-  .profileImageCover {
-    width: 150px;
-    height: 150px;
-    border-radius: 75px;
-    overflow: hidden;
-    border: 1px solid black;
-    margin-left: 1rem;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+  margin: 40px auto;
+  background-color: white;
+  height: 360px;
+  padding: 30px;
+  ul {
+    padding: 0;
   }
-  .profile {
-    flex: 1;
-    padding-left: 1rem;
+  li {
+    list-style: none;
   }
-  .iconCover {
+  .profileCover {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 0.5rem;
-    background-color: $base-black;
-    cursor: pointer;
-    .icon {
-      fill: $base-white;
+    .profileImageCover {
+      width: 150px;
+      height: 150px;
+      border-radius: 75px;
+      overflow: hidden;
+      border: 1px solid black;
+      margin-left: 1rem;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
+    .profile {
+      flex: 1;
+      padding-left: 1rem;
+    }
+    .iconCover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      background-color: $base-white;
+      border-radius: 1rem;
+      cursor: pointer;
+      .icon {
+        fill: $base-black;
+      }
+    }
+    .followCover {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .messageCover {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex: 1;
   }
 }

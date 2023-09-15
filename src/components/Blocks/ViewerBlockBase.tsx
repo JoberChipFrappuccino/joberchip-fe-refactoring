@@ -1,6 +1,7 @@
 import BlockCover from '@/components/Space/BlockCover'
 import BlockPortal from '@/components/Space/BlockPortal'
 import { DropDownMenu } from '@/components/Space/DropDownMenu'
+import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { type BlockBase } from '@/models/space'
 import { useActiveBlock } from '@/store/activeBlock'
 import { useSpaceModeStore } from '@/store/spaceMode'
@@ -46,12 +47,13 @@ export default function ViewerBlockBase({ block, children }: Props) {
     <div className={styles.container}>
       {mode === 'edit' && (
         <aside className={[styles.menu, activeBlockId === block.blockId ? 'kebobMenu' : ''].join(' ')}>
-          <DropDownMenu items={items}>
-            <div className={styles.iconCover}>
+          <DropDownMenu trigger="click" items={items} statefulKeys={[`${block.blockId}-view-block-1`]}>
+            <button id={DROPDOWN_TRIGGER_ICON_ID} className={styles.iconCover}>
               <BsThreeDotsVertical
+                id={DROPDOWN_TRIGGER_ICON_ID}
                 className={activeBlockId === block.blockId ? styles.activeIcon : styles.inactiveIcon}
               />
-            </div>
+            </button>
           </DropDownMenu>
         </aside>
       )}
@@ -66,6 +68,7 @@ export default function ViewerBlockBase({ block, children }: Props) {
         </BlockPortal>
       )}
       {children}
+      {focus && <div className={styles.link}>바로가기</div>}
     </div>
   )
 }
