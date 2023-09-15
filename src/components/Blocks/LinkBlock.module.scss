@@ -1,26 +1,60 @@
 .container {
-  position: relative;
-  display: flex;
   width: 100%;
   height: 100%;
+  display: flex;
+  overflow: hidden;
+  border-radius: 0.625rem;
+  flex-direction: column;
+  background-color: white;
   justify-content: center;
   align-items: center;
-  .view {
+
+  .itemBox {
     width: 100%;
     height: 100%;
-    z-index: 1;
+    display: flex;
+    padding-top: 1.25rem;
+    padding-left: 1.25rem;
+    .titleUrl {
+      display: flex;
+      flex-direction: column;
+      margin-left: 1.25rem;
+      span {
+        display: flex;
+        font-weight: 700;
+        font-size: 0.875rem;
+      }
+      a {
+        font-size: 0.75rem;
+      }
+    }
   }
-  .edit {
-    width: 80%;
-    height: 80%;
-    z-index: 1;
+  .footer {
+    display: flex;
+    width: 100%;
+    color: white;
+    height: 2.1875rem;
+    background-color: black;
+    justify-content: space-between;
+    .footerLeft {
+      display: flex;
+      padding-left: 1.25rem;
+      align-items: center;
+    }
+    .footerright {
+      display: flex;
+      width: 2.1875rem;
+      background-color: #3b4753;
+    }
   }
-  .cover {
-    position: absolute;
-    z-index: 2;
-    width: 80%;
-    height: 80%;
-    border-radius: 1rem;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+}
+
+.edit {
+  width: 100%;
+  height: 100%;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
 }
