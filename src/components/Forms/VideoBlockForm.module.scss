@@ -1,5 +1,7 @@
 .container {
-  background-color: white;
+  width: 100%;
+  height: auto;
+  display: flex;
 }
 
 .addVideoButton {
@@ -42,7 +44,7 @@
 .thumbnailVideo:hover {
   .minus {
     display: flex;
-    color: #ff0606;
+    background-color: white;
   }
 }
 
@@ -50,5 +52,15 @@
   display: flex;
   input {
     margin-right: 4px;
+  }
+}
+
+.formBox {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  .forms {
+    padding: 0 20px 0 20px;
   }
 }

@@ -28,7 +28,7 @@ export default function LinkBlockForm() {
   return (
     <div className={styles.container}>
       <form className={styles.formBox} onSubmit={submitHandler}>
-        <div>
+        <div className={styles.forms}>
           <h3>URL 링크 주소 제목</h3>
           <input type="text" value={title} onChange={onChangeTitle} placeholder="링크 제목을 입력해주세요." />
           <h3>URL 링크 주소 삽입</h3>
