@@ -1,5 +1,7 @@
 .container {
-  background-color: white;
+  width: 100%;
+  height: auto;
+  display: flex;
 }
 
 .addImgButton {
@@ -13,6 +15,16 @@
   border-radius: .375rem;
   justify-content: center;
   border: solid .0625rem #000000;
+}
+
+.formBox {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  .forms {
+    padding: 0 20px 0 20px;
+  }
 }
 
 .thumbnailImg {

@@ -8,13 +8,22 @@ type Props = {
 }
 
 export function LinkBlock({ block, mode }: Props) {
+  // eslint-disable-next-line no-console
+  console.log('a', block)
   return (
     <div className={styles.container}>
-      <BlockLogo logo={block.url} />
       <div className={mode === 'edit' ? 'cover' : ''} />
-      <div className={mode}>
-        <a href={block.url}>{block.text}</a>
+      <div className={styles.itemBox}>
+        <BlockLogo logo={block.url} />
+        <div className={styles.titleUrl}>
+          <span>{block.text}</span>
+          <a href={block.url}>{block.url}</a>
+        </div>
       </div>
+      {/* <div className={styles.footer}>
+        <div className={styles.footerLeft}>바로가기</div>
+        <div className={styles.footerright} />
+      </div> */}
     </div>
   )
 }

@@ -11,7 +11,7 @@
         "w": 2,
         "type": "link",
         "url": "http://www.naver.com",
-        "text": "네이버로 이동!"
+        "text": "네이버"
       },
       {
         "blockId": "block_1_2",
@@ -19,9 +19,9 @@
         "x": 0,
         "h": 1,
         "w": 2,
-        "type": "image",
-        "src": "http://localhost:5173/img1.jpg",
-        "alt": "춤추는 인간"
+        "type": "link",
+        "url": "http://www.youtube.com",
+        "text": "유튜브"
       },
       {
         "blockId": "block_1_3",
@@ -58,8 +58,8 @@
         "x": 0,
         "h": 2,
         "w": 2,
-        "type": "embed",
-        "src": "https://www.youtube.com/embed/75kySTFaBQQ??si=w_qvmC6yYxwunlu0&wmode=opaque",
+        "type": "video",
+        "src": "https://www.youtube.com/embed/75kySTFaBQQ",
         "caption": "yotube playlist 이거 필요없을 거 같인한데, bento처럼 사용자가 캡션을 원할 경우 추가"
       },
       {

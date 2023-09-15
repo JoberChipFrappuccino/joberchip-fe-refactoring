@@ -44,26 +44,28 @@ export function ActionBlockFormBase({ children }: Props) {
     }
   ]
   return (
-    <div>
-      <h1>{blockType} 추가하기</h1>
-      <div className={styles.navigation}>
-        {formTypes.map((form) => {
-          return (
-            <div key={form.type}>
-              <button
-                className={form.type === blockType ? styles.active : styles.inactive}
-                onClick={() => {
-                  setBlockType(form.type)
-                }}
-              >
-                <div>{form.icon}</div>
-                <div>{form.title}</div>
-              </button>
-            </div>
-          )
-        })}
+    <div style={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
+      <div className={styles.container}>
+        <h1>{formTypes.find((form) => form.type === blockType)?.title} 추가하기</h1>
+        <div className={styles.navigation}>
+          {formTypes.map((form) => {
+            return (
+              <div key={form.type}>
+                <button
+                  className={form.type === blockType ? styles.active : styles.inactive}
+                  onClick={() => {
+                    setBlockType(form.type)
+                  }}
+                >
+                  <div>{form.icon}</div>
+                  <div>{form.title}</div>
+                </button>
+              </div>
+            )
+          })}
+        </div>
       </div>
-      <div>{children}</div>
+      <div style={{ display: 'flex', height: '100%', width: '100%' }}>{children}</div>
     </div>
   )
 }
