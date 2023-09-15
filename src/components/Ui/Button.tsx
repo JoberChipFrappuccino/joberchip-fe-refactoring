@@ -1,12 +1,11 @@
 import styles from './Button.module.scss'
 
-type FormButton = {
+export type FormButtonProps = {
   title: string
   event: boolean
 }
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export default function FormButton({ title, event }: FormButton) {
+export default function FormButton({ title, event }: FormButtonProps) {
   return (
     <button className={event ? styles.disabledButton : styles.activeButton} disabled={event}>
       {title}
