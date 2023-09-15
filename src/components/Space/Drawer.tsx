@@ -10,6 +10,7 @@ export function Drawer() {
     <AntdDrawer
       title="Basic AntdDrawer"
       placement="right"
+      bodyStyle={{ padding: '0' }}
       onClose={() => {
         setOpenDrawer(false)
       }}
