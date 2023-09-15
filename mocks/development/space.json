@@ -11,7 +11,8 @@
         "w": 2,
         "type": "link",
         "url": "http://www.naver.com",
-        "text": "네이버"
+        "text": "네이버",
+        "visible": false
       },
       {
         "blockId": "block_1_2",
@@ -21,7 +22,8 @@
         "w": 2,
         "type": "link",
         "url": "http://www.youtube.com",
-        "text": "유튜브"
+        "text": "유튜브",
+        "visible": false
       },
       {
         "blockId": "block_1_3",
@@ -31,7 +33,8 @@
         "w": 2,
         "type": "image",
         "src": "http://localhost:5173/img2.jpg",
-        "alt": "춤추는 인간2"
+        "alt": "춤추는 인간2",
+        "visible": false
       },
       {
         "blockId": "block_1_4",
@@ -41,7 +44,8 @@
         "w": 4,
         "type": "page",
         "text": "하위 공유 페이지로 이동하기",
-        "url": "http://www.naver.com"
+        "url": "http://www.naver.com",
+        "visible": false
       },
       {
         "blockId": "block_1_5",
@@ -50,7 +54,8 @@
         "h": 1,
         "w": 4,
         "type": "text",
-        "text": "the quick brown fox jumps over the lazy dog"
+        "text": "the quick brown fox jumps over the lazy dog",
+        "visible": false
       },
       {
         "blockId": "block_1_6",
@@ -60,7 +65,8 @@
         "w": 2,
         "type": "video",
         "src": "https://www.youtube.com/embed/75kySTFaBQQ",
-        "caption": "yotube playlist 이거 필요없을 거 같인한데, bento처럼 사용자가 캡션을 원할 경우 추가"
+        "caption": "yotube playlist 이거 필요없을 거 같인한데, bento처럼 사용자가 캡션을 원할 경우 추가",
+        "visible": false
       },
       {
         "blockId": "block_1_7",
@@ -70,7 +76,8 @@
         "w": 2,
         "type": "video",
         "src": "http://localhost:5173/test.mp4",
-        "caption": "쓸모없는 비디오"
+        "caption": "쓸모없는 비디오",
+        "visible": false
       },
       {
         "blockId": "block_1_8",
@@ -79,7 +86,8 @@
         "h": 2,
         "w": 2,
         "type": "googleMap",
-        "src": "https://www.google.com/maps/embed/v1/place?key=AIzaSyCnJyiI_VgJmszJ9ceC-AKCVN7ebJe8ovo&q=Eiffel+Tower,Paris+France"
+        "src": "https://www.google.com/maps/embed/v1/place?key=AIzaSyCnJyiI_VgJmszJ9ceC-AKCVN7ebJe8ovo&q=Eiffel+Tower,Paris+France",
+        "visible": false
       }
     ]
   }

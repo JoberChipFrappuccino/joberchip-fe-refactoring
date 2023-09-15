@@ -4,6 +4,7 @@ import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { type BlockBase } from '@/models/space'
 import { useActiveBlock } from '@/store/activeBlock'
+import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { Switch } from 'antd'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
@@ -18,12 +19,26 @@ export default function ViewerBlockBase({ block, children }: Props) {
   const { mode } = useSpaceModeStore()
   const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useActiveBlock()
+  const { space } = useSpaceStore()
 
   const items = useMemo(
     () => [
       {
         key: `${block.blockId}-view-block-1`,
-        label: <Switch onChange={() => {}} />,
+        label: (
+          <Switch
+            defaultChecked={!block.visible}
+            onChange={() => {
+              for (let i = 0; i < space.blocks.length; i++) {
+                if (space.blocks[i].blockId === block.blockId) {
+                  space.blocks[i].visible = !space.blocks[i].visible
+                  // todo : block visibe상태를 변경하는 API를 호출해야 합니다.
+                  break
+                }
+              }
+            }}
+          />
+        ),
         icon: <p>공개 설정</p>
       },
       {
@@ -33,7 +48,23 @@ export default function ViewerBlockBase({ block, children }: Props) {
       {
         key: `${block.blockId}-view-block-3`,
         danger: true,
-        label: '삭제하기'
+        icon: (
+          <button
+            onClick={() => {
+              const confirmed = window.confirm('진짜 블록 삭제합니다?')
+              if (!confirmed) return
+              for (let i = 0; i < space.blocks.length; i++) {
+                if (space.blocks[i].blockId === block.blockId) {
+                  space.blocks.splice(i, 1)
+                  // todo : block 삭제 API를 호출해야 합니다.
+                  break
+                }
+              }
+            }}
+          >
+            삭제하기
+          </button>
+        )
       }
     ],
     [mode]

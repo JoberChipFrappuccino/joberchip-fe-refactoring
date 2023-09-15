@@ -14,22 +14,33 @@ const ResponsiveGridLayout = WidthProvider(Responsive)
 export function SpaceViewer() {
   const [rowHeight, setRowHeight] = useState(100)
   const { mode } = useSpaceModeStore()
-  const { space, updateBlockLayout } = useSpaceStore()
-  const [state, setState] = useState({
+  const { space } = useSpaceStore()
+  const [grid, setGridLayout] = useState({
     breakpoints: 'lg',
     layouts: { lg: getBlockLayout(space.blocks, mode) } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
+
+  const [viewModeGrid, setViewModeGrid] = useState({
+    breakpoints: 'lg',
+    layouts: { lg: getBlockLayout(space.blocks, 'view') } // , md: layout, sm: layout, xs: layout, xxs: layout
+  })
+
   const { activeBlockId, setActiveBlockId } = useActiveBlock()
 
   useEffect(() => {
     const nextLayout = getBlockLayout(space.blocks, mode)
-    setState(() => ({ breakpoints: 'lg', layouts: { lg: nextLayout } }))
+    setGridLayout(() => ({ breakpoints: 'lg', layouts: { lg: nextLayout } }))
+    const nextViewLayout = getBlockLayout(
+      space.blocks.filter((item) => !item.visible),
+      mode
+    )
+    setViewModeGrid(() => ({ breakpoints: 'lg', layouts: { lg: nextViewLayout } }))
   }, [mode])
 
   return (
     <div className={styles.layout}>
       <ResponsiveGridLayout
-        layouts={state.layouts}
+        layouts={mode === 'edit' ? grid.layouts : viewModeGrid.layouts}
         breakpoints={{
           lg: 1200
         }}
@@ -47,22 +58,22 @@ export function SpaceViewer() {
           element.classList.remove('react-gird-resizable-keep')
         }}
         onLayoutChange={(layout, _layouts) => {
+          if (mode === 'view') return
           const changedLayout = sortLayout(layout)
-          if (JSON.stringify(sortLayout(changedLayout)) !== JSON.stringify(state.layouts.lg)) {
-            // * layout 상태를 변경 합니다.
-            setState(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
-            space.blocks.forEach((block) => {
-              const item = changedLayout.find((item) => item.i === block.blockId)
-              if (!item) return
-              const { x, y, w, h } = item
-              block.x = x
-              block.y = y
-              block.w = w
-              block.h = h
-            })
-            // * 변경된 layout을 block에 반영 합니다.
-            updateBlockLayout([...space.blocks])
-          }
+          if (JSON.stringify(sortLayout(changedLayout)) === JSON.stringify(grid.layouts.lg)) return
+          // * layout 상태를 변경 합니다.
+          setGridLayout(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
+          space.blocks.forEach((block) => {
+            const item = changedLayout.find((item) => item.i === block.blockId)
+            if (!item) return
+            const { x, y, w, h } = item
+            block.x = x
+            block.y = y
+            block.w = w
+            block.h = h
+          })
+          // todo : 변경된 layout을 백엔드에 알려줘야합니다.
+          // todo : throttling을 적용해서 n초 마다 1번 요청하도록 합니다. (계속 해서 변경할 경우 중간에 한 번씩 요청을 보내는게 좋을 듯)
         }}
         onDragStart={(_layout, _oldItem, _newItem, _placeholder, event, element) => {
           setActiveBlockId(element.id)
@@ -74,6 +85,7 @@ export function SpaceViewer() {
         }}
       >
         {space.blocks.map((block) => {
+          if (mode === 'view' && block.visible) return null
           return (
             <button
               type="button"
@@ -123,7 +135,7 @@ function getBlockLayout(blocks: Space['blocks'], mode: SpaceMode): Layout[] {
       i: blockId,
       isDraggable: mode !== 'view',
       isResizable: mode !== 'view',
-      static: mode === 'view',
+      static: false, // todo : view 모드 고정 여부가 정해지지 않았습니다.
       minW: 1,
       maxW: 4,
       minH: 1,

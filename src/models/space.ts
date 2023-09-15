@@ -21,6 +21,7 @@ export type BlockBase = {
   x: number
   h: number
   w: number
+  visible: boolean
   i?: string
   maxH?: number
   maxW?: number
