@@ -8,8 +8,6 @@ type Props = {
 }
 
 export function LinkBlock({ block, mode }: Props) {
-  // eslint-disable-next-line no-console
-  console.log('a', block)
   return (
     <div className={styles.container}>
       <div className={mode === 'edit' ? 'cover' : ''} />

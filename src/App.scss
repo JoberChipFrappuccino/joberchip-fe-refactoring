@@ -8,6 +8,9 @@ body {
 * {
   box-sizing: border-box;
 }
+iframe {
+  border: 0;
+}
 
 .react-grid-layout {
   position: relative;
@@ -17,6 +20,7 @@ body {
   border-radius: 1rem;
   transition: all 200ms ease;
   transition-property: left, top;
+  padding: 1px !important;
 }
 .react-grid-item img {
   pointer-events: none;
@@ -52,15 +56,15 @@ body {
   user-select: none;
 }
 
-.react-gird-resizable-keep {
-  position: absolute;
-  width: 2.5rem;
-  height: 2rem;
-  background-color: black;
-  border-radius: 0.5rem;
-  transform: translate(5px, 5px);
-  transition: all 200ms ease;
-}
+// .react-gird-resizable-keep {
+//   position: absolute;
+//   width: 2.5rem;
+//   height: 2rem;
+//   background-color: black;
+//   border-radius: 0.5rem;
+//   transform: translate(5px, 5px);
+//   transition: all 200ms ease;
+// }
 
 .react-grid-item > .react-resizable-handle::after {
   content: '';
@@ -111,16 +115,13 @@ body {
   height: 2rem;
   background-color: white;
   // border: 1px solid black;
-  border-top-right-radius: 1rem;
-  border-bottom-left-radius: 1rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   // transform: translate(5px, -5px);
   transition: all 200ms ease;
 }
 .activeBlock {
   z-index: 24 !important;
-  border-top: 2px solid $cool-grey3 !important;
-  border-left: 2px solid $cool-grey3 !important;
-  border-right: 2px solid $cool-grey3 !important;
   .react-resizable-handle {
     position: absolute;
     width: 2.5rem;
@@ -168,8 +169,8 @@ body {
 //   transform: rotate(90deg);
 // }
 .react-grid-item > .react-resizable-handle.react-resizable-handle-se {
-  bottom: 0;
-  right: 0;
+  bottom: -1px;
+  right: 0px;
   cursor: se-resize;
 }
 // .react-grid-item > .react-resizable-handle.react-resizable-handle-nw {

@@ -10,6 +10,7 @@ export function Drawer() {
       title={drawerMode === 'create' ? '블록 추가' : '블록 수정'}
       placement="right"
       bodyStyle={{ padding: '0' }}
+      width={500}
       onClose={() => {
         setOpenDrawer(false)
       }}

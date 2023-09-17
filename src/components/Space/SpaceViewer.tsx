@@ -52,12 +52,6 @@ export function SpaceViewer() {
         onWidthChange={(width, _margin, cols) => {
           setRowHeight((width * 0.7) / cols)
         }}
-        onResizeStart={(_layout, _oldItem, _newItem, _placeholder, _event, element) => {
-          element.classList.add('react-gird-resizable-keep')
-        }}
-        onResizeStop={(_layout, _oldItem, _newItem, _placeholder, _event, element) => {
-          element.classList.remove('react-gird-resizable-keep')
-        }}
         onLayoutChange={(layout, _layouts) => {
           if (mode === 'view') return
           const changedLayout = sortLayout(layout)
