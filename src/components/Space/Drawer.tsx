@@ -1,10 +1,9 @@
 import SwtichActionBlock from '@/components/SwitchCase/SwitchActionBlock'
-import SwtichActionForm from '@/components/SwitchCase/SwitchActionForm'
 import { useDrawerFormType } from '@/store/formMode'
 import { Drawer as AntdDrawer } from 'antd'
 
 export function Drawer() {
-  const { formType, openDrawer, setOpenDrawer, mode } = useDrawerFormType()
+  const { openDrawer, setOpenDrawer, mode } = useDrawerFormType()
 
   return (
     <AntdDrawer
@@ -16,7 +15,7 @@ export function Drawer() {
       }}
       open={openDrawer}
     >
-      {formType === 'block' ? <SwtichActionBlock /> : <SwtichActionForm />}
+      <SwtichActionBlock />
     </AntdDrawer>
   )
 }
