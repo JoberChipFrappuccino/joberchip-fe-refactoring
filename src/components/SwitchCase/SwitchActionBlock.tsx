@@ -5,7 +5,7 @@ import VideoBlockForm from '@/components/Forms/VideoBlockForm'
 import { ActionBlockFormBase } from '@/components/Space/ActionBlockFormBase'
 import { useDrawerFormType } from '@/store/formMode'
 
-export default function SwtichActionBlock() {
+export default function SwtichCreateActionBlock() {
   const { blockType } = useDrawerFormType()
   switch (blockType) {
     case 'text':

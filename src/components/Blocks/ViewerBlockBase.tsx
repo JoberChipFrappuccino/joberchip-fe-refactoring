@@ -21,7 +21,7 @@ export default function ViewerBlockBase({ block, children }: Props) {
   const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useActiveBlock()
   const { space, removeBlockById } = useSpaceStore()
-  const { setOpenDrawer, setFormType, setMode, setBlockType } = useDrawerFormType()
+  const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useDrawerFormType()
 
   const items = useMemo(
     () => [
@@ -48,7 +48,7 @@ export default function ViewerBlockBase({ block, children }: Props) {
         icon: (
           <button
             onClick={() => {
-              setMode('edit')
+              setDrawerMode('edit')
               setBlockType(block.type)
               if (block.type === 'template') {
                 setFormType('template')

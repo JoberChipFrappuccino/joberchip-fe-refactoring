@@ -8,11 +8,11 @@ type Props = {
 }
 export function SpaceActionBar({ isActive }: Props) {
   const { mode } = useSpaceModeStore()
-  const { formType, setOpenDrawer, setFormType, setMode } = useDrawerFormType()
+  const { formType, setOpenDrawer, setFormType, setDrawerMode } = useDrawerFormType()
 
   const changeFormType = useCallback(
     (type: FormType) => {
-      setMode('create')
+      setDrawerMode('create')
       setFormType(type)
       setOpenDrawer(true)
     },
