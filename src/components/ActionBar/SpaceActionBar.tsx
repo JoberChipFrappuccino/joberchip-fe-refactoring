@@ -8,12 +8,16 @@ type Props = {
 }
 export function SpaceActionBar({ isActive }: Props) {
   const { mode } = useSpaceModeStore()
-  const { setOpenDrawer, setFormType } = useDrawerFormType()
+  const { formType, setOpenDrawer, setFormType, setMode } = useDrawerFormType()
 
-  const changeFormType = useCallback((type: FormType) => {
-    setFormType(type)
-    setOpenDrawer(true)
-  }, [])
+  const changeFormType = useCallback(
+    (type: FormType) => {
+      setMode('create')
+      setFormType(type)
+      setOpenDrawer(true)
+    },
+    [formType]
+  )
 
   let additionalClassName = isActive ? styles.visible : styles.hidden
   if (mode === 'view') additionalClassName = styles.hidden

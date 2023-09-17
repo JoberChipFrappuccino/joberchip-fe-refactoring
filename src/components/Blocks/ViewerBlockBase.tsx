@@ -4,6 +4,7 @@ import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { type BlockBase } from '@/models/space'
 import { useActiveBlock } from '@/store/activeBlock'
+import { useDrawerFormType } from '@/store/formMode'
 import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { Switch } from 'antd'
@@ -19,7 +20,8 @@ export default function ViewerBlockBase({ block, children }: Props) {
   const { mode } = useSpaceModeStore()
   const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useActiveBlock()
-  const { space } = useSpaceStore()
+  const { space, removeBlockById } = useSpaceStore()
+  const { setOpenDrawer, setFormType, setMode, setBlockType } = useDrawerFormType()
 
   const items = useMemo(
     () => [
@@ -43,7 +45,24 @@ export default function ViewerBlockBase({ block, children }: Props) {
       },
       {
         key: `${block.blockId}-view-block-2`,
-        icon: <button>페이지 정보 수정</button>
+        icon: (
+          <button
+            onClick={() => {
+              setMode('edit')
+              setBlockType(block.type)
+              if (block.type === 'template') {
+                setFormType('template')
+              } else if (block.type === 'page') {
+                setFormType('page')
+              } else {
+                setFormType('block')
+              }
+              setOpenDrawer(true)
+            }}
+          >
+            페이지 정보 수정
+          </button>
+        )
       },
       {
         key: `${block.blockId}-view-block-3`,
@@ -53,13 +72,7 @@ export default function ViewerBlockBase({ block, children }: Props) {
             onClick={() => {
               const confirmed = window.confirm('진짜 블록 삭제합니다?')
               if (!confirmed) return
-              for (let i = 0; i < space.blocks.length; i++) {
-                if (space.blocks[i].blockId === block.blockId) {
-                  space.blocks.splice(i, 1)
-                  // todo : block 삭제 API를 호출해야 합니다.
-                  break
-                }
-              }
+              removeBlockById(block.blockId)
             }}
           >
             삭제하기

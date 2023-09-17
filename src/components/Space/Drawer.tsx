@@ -4,11 +4,11 @@ import { useDrawerFormType } from '@/store/formMode'
 import { Drawer as AntdDrawer } from 'antd'
 
 export function Drawer() {
-  const { formType, openDrawer, setOpenDrawer } = useDrawerFormType()
+  const { formType, openDrawer, setOpenDrawer, mode } = useDrawerFormType()
 
   return (
     <AntdDrawer
-      title="Basic AntdDrawer"
+      title={mode === 'create' ? '블록 추가' : '블록 수정'}
       placement="right"
       bodyStyle={{ padding: '0' }}
       onClose={() => {
