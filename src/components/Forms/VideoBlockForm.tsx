@@ -1,9 +1,14 @@
+import { type BlockWith } from '@/models/space'
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import FormButton from '../Ui/Button'
 import Thumbnail from '../Ui/Thumbnail'
 import styles from './VideoBlockForm.module.scss'
 
-export default function VideoBlockForm() {
+interface Props {
+  block?: BlockWith<'video'>
+}
+
+export default function VideoBlockForm({ block }: Props) {
   const [selectedRadio, setSelectedRadio] = useState('radio1')
   const [thumbnail, setThumbnail] = useState<string>('')
   const [title, setTitle] = useState<string>('')

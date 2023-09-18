@@ -2,11 +2,12 @@ import { type BlockType } from '@/models/space'
 import { create } from 'zustand'
 
 export type FormType = 'template' | 'page' | 'block' | undefined
+export type DrawerMode = 'create' | 'edit'
 interface FormTypeState {
   formType: FormType
   blockType: BlockType
   openDrawer: boolean
-  drawerMode: 'create' | 'edit'
+  drawerMode: DrawerMode
   setFormType: (type: FormType) => void
   setBlockType: (type: BlockType) => void
   setOpenDrawer: (open: boolean) => void

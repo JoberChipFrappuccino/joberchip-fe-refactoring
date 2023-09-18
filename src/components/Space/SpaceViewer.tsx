@@ -1,4 +1,4 @@
-import { SwitchViewerBlock } from '@/components/SwitchCase/SwitchViewerBlock'
+import { ViewerBox } from '@/components/SwitchCase/ViewerBox'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import type { BlockType, Space } from '@/models/space'
 import { useActiveBlock } from '@/store/activeBlock'
@@ -89,7 +89,7 @@ export function SpaceViewer() {
               id={block.blockId}
             >
               <ViewerBlockBase block={block}>
-                <SwitchViewerBlock mode={mode} type={block.type} block={block} />
+                <ViewerBox mode={mode} block={block} />
               </ViewerBlockBase>
             </button>
           )
