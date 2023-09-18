@@ -7,6 +7,7 @@ import styles from './TextBlockForm.module.scss'
 
 export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   const [editorIsOpen, setEditorIsOpen] = useState(false)
+  const [editableBlock, setEditableBlock] = useState(undefined)
   const isButtonDisabled = true
 
   const handleEditorFocus = () => {
@@ -26,10 +27,10 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
           onFocus={handleEditorFocus}
           onBlur={handleEditorBlur}
         >
-          <TextEditor editorIsOpen={editorIsOpen} />
+          <TextEditor editorIsOpen={editorIsOpen} editableBlock={editableBlock} setEditableBlock={setEditableBlock} />
         </div>
       </div>
-      <FormButton title={'텍스트 추가하기'} event={isButtonDisabled} />
+      <FormButton title={editableBlock ? '텍스트 수정하기' : '텍스트 추가하기'} event={isButtonDisabled} />
     </div>
   )
 }
