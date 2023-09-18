@@ -2,7 +2,7 @@ import BlockCover from '@/components/Space/BlockCover'
 import BlockPortal from '@/components/Space/BlockPortal'
 import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
-import { type BlockBase } from '@/models/space'
+import { type BlockBase, type BlockType } from '@/models/space'
 import { useActiveBlock } from '@/store/activeBlock'
 import { useDrawerFormType } from '@/store/formMode'
 import { useSpaceStore } from '@/store/space'
@@ -14,7 +14,7 @@ import styles from './ViewerBlockBase.module.scss'
 
 type Props = {
   children: ReactNode
-  block: BlockBase
+  block: BlockBase<BlockType>
 }
 export default function ViewerBlockBase({ block, children }: Props) {
   const { mode } = useSpaceModeStore()
