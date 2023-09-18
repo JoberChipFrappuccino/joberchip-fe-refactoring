@@ -1,9 +1,13 @@
+import { type BlockWith } from '@/models/space'
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import FormButton from '../Ui/Button'
 import Thumbnail from '../Ui/Thumbnail'
 import styles from './ImageBlockForm.module.scss'
 
-export default function ImageBlockForm() {
+interface Props {
+  block?: BlockWith<'image'>
+}
+export default function ImageBlockForm({ block }: Props) {
   const [thumbnail, setThumbnail] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !title || !thumbnail

@@ -1,8 +1,11 @@
+import { type BlockWith } from '@/models/space'
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import FormButton from '../Ui/Button'
 import styles from './LinkBlockForm.module.scss'
-
-export default function LinkBlockForm() {
+interface Props {
+  block?: BlockWith<'link'>
+}
+export default function LinkBlockForm({ block }: Props) {
   const [link, setLink] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !link || !title

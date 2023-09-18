@@ -1,22 +1,23 @@
+// import { type BlockBase } from './space'
 // export type Spaces = {
 //   [key: string]: Space
 // }
 
-export type Space = {
+export interface Space {
   title: string
   description: string
   previlige: {
     edit: boolean
     delete: boolean
   }
-  blocks: BlockBase[]
+  blocks: Array<BlockWith<BlockType>>
 }
 
-export type BlockType = 'text' | 'image' | 'link' | 'page' | 'embed' | 'video' | 'googleMap' | 'template'
+export type BlockType = 'text' | 'image' | 'link' | 'page' | 'embed' | 'video' | 'googleMap' | 'template' | 'base'
 
-export type BlockBase = {
+export type BlockBase<T extends BlockType> = {
   blockId: string
-  type: BlockType
+  type: T
   y: number
   x: number
   h: number
@@ -33,60 +34,59 @@ export type BlockBase = {
   static?: boolean
 }
 
-export type TextBlock = {
+export interface TextBlock extends BlockBase<'text'> {
   text: string
 }
-export type ImageBlock = {
+
+export interface ImageBlock extends BlockBase<'image'> {
   src: string
   alt: string
 }
-export type LinkBlock = {
+
+export interface LinkBlock extends BlockBase<'link'> {
   url: string
   text: string
 }
-export type PageBlock = {
+export interface PageBlock extends BlockBase<'page'> {
   text: string
   url: string
 }
-export type EmbedGoogleMapBlock = {
+export interface EmbedGoogleMapBlock extends BlockBase<'googleMap'> {
   src: string
   caption: string
 }
 
-export type EmbedBlock = {
+export interface EmbedBlock extends BlockBase<'embed'> {
   src: string
   caption: string
 }
-export type VideoBlock = {
+export interface VideoBlock extends BlockBase<'video'> {
   src: string
   caption: string
 }
 
-export type TemplateBlock = {
+export interface TemplateBlock extends BlockBase<'template'> {
   templateId: string
   title: string
   description: string
   previewURL: string
 }
 
-/**
- * @description conponents/Blocks/* 에 있는 컴포넌트들의 props 타입을 정의합니다.
- * @description components/Space/SwithBlock.tsx에서 BlockWith<type>을 swith해서 사용합니다.
- */
-export type BlockWith<T> = T extends 'text'
-  ? TextBlock & BlockBase
-  : T extends 'image'
-  ? ImageBlock & BlockBase
-  : T extends 'link'
-  ? LinkBlock & BlockBase
-  : T extends 'page'
-  ? PageBlock & BlockBase
-  : T extends 'embed'
-  ? EmbedBlock & BlockBase
-  : T extends 'video'
-  ? VideoBlock & BlockBase
-  : T extends 'googleMap'
-  ? EmbedGoogleMapBlock & BlockBase
-  : T extends 'template'
-  ? TemplateBlock & BlockBase
-  : never
+export type BlockWith<T> = //
+  T extends 'text'
+    ? TextBlock
+    : T extends 'image'
+    ? ImageBlock
+    : T extends 'link'
+    ? LinkBlock
+    : T extends 'page'
+    ? PageBlock
+    : T extends 'embed'
+    ? EmbedBlock
+    : T extends 'video'
+    ? VideoBlock
+    : T extends 'googleMap'
+    ? EmbedGoogleMapBlock
+    : T extends 'template'
+    ? TemplateBlock
+    : never
