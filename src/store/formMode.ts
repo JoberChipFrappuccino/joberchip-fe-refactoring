@@ -6,22 +6,28 @@ interface FormTypeState {
   formType: FormType
   blockType: BlockType
   openDrawer: boolean
-  setFormType: (mode: FormType) => void
+  drawerMode: 'create' | 'edit'
+  setFormType: (type: FormType) => void
   setBlockType: (type: BlockType) => void
   setOpenDrawer: (open: boolean) => void
+  setDrawerMode: (mode: 'create' | 'edit') => void
 }
 
 export const useDrawerFormType = create<FormTypeState>((set) => ({
   formType: undefined,
   blockType: 'text',
   openDrawer: false,
-  setFormType: (mode) => {
-    set({ formType: mode })
+  drawerMode: 'create',
+  setFormType: (formType) => {
+    set({ formType })
   },
-  setBlockType: (type) => {
-    set({ blockType: type })
+  setBlockType: (blockType) => {
+    set({ blockType })
   },
   setOpenDrawer: (open: boolean) => {
     set({ openDrawer: open })
+  },
+  setDrawerMode: (mode) => {
+    set({ drawerMode: mode })
   }
 }))

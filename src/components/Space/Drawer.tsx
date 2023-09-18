@@ -1,22 +1,22 @@
-import SwtichActionBlock from '@/components/SwitchCase/SwitchActionBlock'
-import SwtichActionForm from '@/components/SwitchCase/SwitchActionForm'
+import SwtichCreateActionBlock from '@/components/SwitchCase/SwitchActionBlock'
 import { useDrawerFormType } from '@/store/formMode'
 import { Drawer as AntdDrawer } from 'antd'
 
 export function Drawer() {
-  const { formType, openDrawer, setOpenDrawer } = useDrawerFormType()
+  const { openDrawer, setOpenDrawer, drawerMode } = useDrawerFormType()
 
   return (
     <AntdDrawer
-      title="Basic AntdDrawer"
+      title={drawerMode === 'create' ? '블록 추가' : '블록 수정'}
       placement="right"
       bodyStyle={{ padding: '0' }}
+      width={500}
       onClose={() => {
         setOpenDrawer(false)
       }}
       open={openDrawer}
     >
-      {formType === 'block' ? <SwtichActionBlock /> : <SwtichActionForm />}
+      <SwtichCreateActionBlock />
     </AntdDrawer>
   )
 }

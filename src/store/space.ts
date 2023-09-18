@@ -10,7 +10,7 @@ interface SpaceState {
   loadSpace: (id: string) => Promise<boolean>
   addBlock: (section_id: string, options: object) => Promise<boolean>
   removeBlock: (section_id: string, block_id: string) => Promise<boolean>
-  updateBlockLayout: (blocks: Space['blocks']) => void
+  removeBlockById: (blockId: string) => void
 }
 
 export const useSpaceStore = create<SpaceState>((set) => {
@@ -42,8 +42,17 @@ export const useSpaceStore = create<SpaceState>((set) => {
       set((state) => ({ ...state, isFetching: false, isLoaded: false, isFalture: true }))
       return false
     },
-    updateBlockLayout: async (blocks: Space['blocks']) => {
-      set((state) => ({ ...state, space: { ...state.space, blocks } }))
+    removeBlockById: async (blockId: string) => {
+      set((state) => {
+        for (let i = 0; i < state.space.blocks.length; i++) {
+          if (state.space.blocks[i].blockId === blockId) {
+            state.space.blocks.splice(i, 1)
+            // todo : block 삭제 API를 호출해야 합니다.
+            break
+          }
+        }
+        return { ...state }
+      })
     },
     // ! 미구현 ㅎㅅㅎ
     addBlock: async (sectionId: string, options: object) => {

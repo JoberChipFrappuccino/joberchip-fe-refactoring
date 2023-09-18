@@ -5,7 +5,6 @@ import { LinkBlock } from '@/components/Blocks/LinkBlock'
 import { PageBlock } from '@/components/Blocks/PageBlock'
 import { TextBlock } from '@/components/Blocks/TextBlock'
 import { VideoBlock } from '@/components/Blocks/VideoBlock'
-import ViewerBlockBase from '@/components/Blocks/ViewerBlockBase'
 import type { BlockBase, BlockType, BlockWith } from '@/models/space'
 
 type Props = {
@@ -15,29 +14,21 @@ type Props = {
 }
 
 export function SwitchViewerBlock({ type, block, mode }: Props) {
-  let blockComponent = null
   switch (type) {
     case 'text':
-      blockComponent = <TextBlock mode={mode} block={block as BlockWith<'text'>} />
-      break
+      return <TextBlock mode={mode} block={block as BlockWith<'text'>} />
     case 'image':
-      blockComponent = <ImageBlock mode={mode} block={block as BlockWith<'image'>} />
-      break
+      return <ImageBlock mode={mode} block={block as BlockWith<'image'>} />
     case 'link':
-      blockComponent = <LinkBlock mode={mode} block={block as BlockWith<'link'>} />
-      break
+      return <LinkBlock mode={mode} block={block as BlockWith<'link'>} />
     case 'page':
-      blockComponent = <PageBlock mode={mode} block={block as BlockWith<'page'>} />
-      break
+      return <PageBlock mode={mode} block={block as BlockWith<'page'>} />
     case 'embed':
-      blockComponent = <EmbedBlock mode={mode} block={block as BlockWith<'embed'>} />
-      break
+      return <EmbedBlock mode={mode} block={block as BlockWith<'embed'>} />
     case 'video':
-      blockComponent = <VideoBlock mode={mode} block={block as BlockWith<'video'>} />
-      break
+      return <VideoBlock mode={mode} block={block as BlockWith<'video'>} />
     case 'googleMap':
-      blockComponent = <GoogleMapBlock mode={mode} block={block as BlockWith<'googleMap'>} />
+      return <GoogleMapBlock mode={mode} block={block as BlockWith<'googleMap'>} />
   }
-
-  return <ViewerBlockBase block={block}>{blockComponent}</ViewerBlockBase>
+  return null
 }

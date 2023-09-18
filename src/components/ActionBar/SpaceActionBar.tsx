@@ -1,4 +1,5 @@
-import { useDrawerFormType, type FormType } from '@/store/formMode'
+import { type BlockType } from '@/models/space'
+import { useDrawerFormType } from '@/store/formMode'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { useCallback } from 'react'
 import styles from './SpaceActionBar.module.scss'
@@ -8,12 +9,16 @@ type Props = {
 }
 export function SpaceActionBar({ isActive }: Props) {
   const { mode } = useSpaceModeStore()
-  const { setOpenDrawer, setFormType } = useDrawerFormType()
+  const { formType, setOpenDrawer, setBlockType, setDrawerMode } = useDrawerFormType()
 
-  const changeFormType = useCallback((type: FormType) => {
-    setFormType(type)
-    setOpenDrawer(true)
-  }, [])
+  const changeBlockType = useCallback(
+    (type: BlockType) => {
+      setDrawerMode('create')
+      setBlockType(type)
+      setOpenDrawer(true)
+    },
+    [formType]
+  )
 
   let additionalClassName = isActive ? styles.visible : styles.hidden
   if (mode === 'view') additionalClassName = styles.hidden
@@ -25,7 +30,7 @@ export function SpaceActionBar({ isActive }: Props) {
       <button
         className={styles.item}
         onClick={() => {
-          changeFormType('page')
+          changeBlockType('page')
         }}
       >
         <img src={`${baseURL}/page_action_bar_icon.png`} alt="page action bar icon" />
@@ -33,7 +38,7 @@ export function SpaceActionBar({ isActive }: Props) {
       <button
         className={styles.item}
         onClick={() => {
-          changeFormType('template')
+          changeBlockType('template')
         }}
       >
         <img src={`${baseURL}/template_action_bar_icon.png`} alt="page action bar icon" />
@@ -41,7 +46,7 @@ export function SpaceActionBar({ isActive }: Props) {
       <button
         className={styles.item}
         onClick={() => {
-          changeFormType('block')
+          changeBlockType('text')
         }}
       >
         <img src={`${baseURL}/block_action_bar_icon.png`} alt="page action bar icon" />

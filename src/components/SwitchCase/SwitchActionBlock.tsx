@@ -4,34 +4,25 @@ import TextBlockForm from '@/components/Forms/TextBlockForm'
 import VideoBlockForm from '@/components/Forms/VideoBlockForm'
 import { ActionBlockFormBase } from '@/components/Space/ActionBlockFormBase'
 import { useDrawerFormType } from '@/store/formMode'
-import type { ReactNode } from 'react'
 
-export default function SwtichActionBlock() {
+export default function SwtichCreateActionBlock() {
   const { blockType } = useDrawerFormType()
-  let blockComponent: ReactNode | null = null
   switch (blockType) {
     case 'text':
-      blockComponent = <TextBlockForm />
-      break
+      return <ActionBlockFormBase>{<TextBlockForm />}</ActionBlockFormBase>
     case 'image':
-      blockComponent = <ImageBlockForm />
-      break
+      return <ActionBlockFormBase>{<ImageBlockForm />}</ActionBlockFormBase>
     case 'link':
-      blockComponent = <LinkBlockForm />
-      break
-    case 'page':
-      blockComponent = <h1>Page block form example</h1>
-      break
+      return <ActionBlockFormBase>{<LinkBlockForm />}</ActionBlockFormBase>
     case 'embed':
-      blockComponent = <h1>Embed block form example</h1>
-      break
+      return <ActionBlockFormBase>{<h1>Embed block form example</h1>}</ActionBlockFormBase>
     case 'video':
-      blockComponent = <VideoBlockForm />
-      break
+      return <ActionBlockFormBase>{<VideoBlockForm />}</ActionBlockFormBase>
     case 'googleMap':
-      blockComponent = <h1>GoogleMap block form example</h1>
-      break
+      return <ActionBlockFormBase>{<h1>GoogleMap block form example</h1>}</ActionBlockFormBase>
+    case 'page':
+      return <h1>Page block form example</h1>
+    case 'template':
+      return <h1>Template block form example</h1>
   }
-
-  return <ActionBlockFormBase>{blockComponent}</ActionBlockFormBase>
 }
