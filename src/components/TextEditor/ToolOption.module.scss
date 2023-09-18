@@ -1,0 +1,111 @@
+.container {
+  width: 100%;
+  height: 127px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  .optionContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .option {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.label {
+  color: #aeb9d1;
+}
+.textOptions {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  &.black {
+    color: #111111;
+  }
+  &.gray {
+    color: #e2e2e2;
+  }
+  &.white {
+    color: #ffffff;
+    -webkit-text-stroke: 1px #000;
+  }
+  &.red {
+    color: #ff0000;
+  }
+  &.orange {
+    color: #ff9300;
+  }
+  &.yellow {
+    color: #ffdb30;
+  }
+  &.green {
+    color: #1fa99e;
+  }
+  &.blue {
+    color: #00b3f2;
+  }
+  &.purple {
+    color: #aa1f91;
+  }
+}
+.bgOptions {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  .innerrect {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.blackBg {
+      background-color: #111111;
+      color: #fff;
+    }
+    &.grayBg {
+      background-color: #e2e2e2;
+      color: #000;
+    }
+    &.whiteBg {
+      background-color: #ffffff;
+      color: #000;
+      border: 1px solid #000;
+      box-sizing: border-box;
+    }
+    &.redBg {
+      background-color: #ff0000;
+      color: #fff;
+    }
+    &.orangeBg {
+      background-color: #ff9300;
+      color: #fff;
+    }
+    &.yellowBg {
+      background-color: #ffdb30;
+      color: #fff;
+    }
+    &.greenBg {
+      background-color: #1fa99e;
+      color: #fff;
+    }
+    &.blueBg {
+      background-color: #00b3f2;
+      color: #fff;
+    }
+    &.purpleBg {
+      background-color: #aa1f91;
+      color: #fff;
+    }
+  }
+}
