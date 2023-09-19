@@ -17,7 +17,7 @@ export function SpaceListBar() {
           }
         }}
       >
-      <Tabs
+        <Tabs
           tabPosition={'left'}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
           items={new Array(3).fill(null).map((_, i) => {

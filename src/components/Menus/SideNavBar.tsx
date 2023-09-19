@@ -7,12 +7,7 @@ const { Sider } = Layout
 
 type MenuItem = Required<MenuProps>['items'][number]
 
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  children?: MenuItem[],
-  type?: 'group'
-): MenuItem {
+function getItem(label: React.ReactNode, key: React.Key, children?: MenuItem[], type?: 'group'): MenuItem {
   return {
     key,
     children,
@@ -32,10 +27,7 @@ const items: MenuProps['items'] = [
     getItem('수신함', '수신함'),
     getItem('보관 문서함', '보관 문서함')
   ]),
-  getItem('관리및문의', '관리및문의', [
-    getItem('어쩌구', '어쩌구'),
-    getItem('저쩌구', '수신함')
-  ])
+  getItem('관리및문의', '관리및문의', [getItem('어쩌구', '어쩌구'), getItem('저쩌구', '수신함')])
 ]
 
 export function SideNavBar(props: any) {
@@ -50,7 +42,16 @@ export function SideNavBar(props: any) {
       <div style={{ display: 'flex' }}>
         <SpaceListBar />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '80%', margin: '0 auto' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '80%',
+              margin: '0 auto'
+            }}
+          >
             <Space direction="vertical" style={{ marginTop: '20px' }}>
               <Avatar
                 size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
@@ -59,9 +60,15 @@ export function SideNavBar(props: any) {
               />
             </Space>
             <h2 style={{ margin: 'none' }}>주하림</h2>
-            <Button style={{ backgroundColor: '#4C61FF', color: '#FFFFFF', border: 'none' }} block>공유페이지</Button>
-            <Button style={{ backgroundColor: '#ECECFB', color: '#4C61FF', border: 'none' }} block>문서보내기</Button>
-            <Button style={{ backgroundColor: '#ECECFB', color: '#4C61FF', border: 'none' }} block>연락처추가</Button>
+            <Button style={{ backgroundColor: '#4C61FF', color: '#FFFFFF', border: 'none' }} block>
+              공유페이지
+            </Button>
+            <Button style={{ backgroundColor: '#ECECFB', color: '#4C61FF', border: 'none' }} block>
+              문서보내기
+            </Button>
+            <Button style={{ backgroundColor: '#ECECFB', color: '#4C61FF', border: 'none' }} block>
+              연락처추가
+            </Button>
           </div>
           <Menu mode="inline" defaultSelectedKeys={['1']} items={items} />
         </div>
