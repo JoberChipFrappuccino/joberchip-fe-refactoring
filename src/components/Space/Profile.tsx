@@ -52,9 +52,18 @@ export function Profile() {
           <h2>{user.username}</h2>
           <p>이 설명란은 아직 추가되지 않음</p>
           <ul className={styles.followCover}>
-            <li>팔로워 0</li>
-            <li>팔로잉 0</li>
+            <li>
+              <span>팔로워</span>
+              <span>0</span>
+            </li>
+            <li>
+              <span>팔로잉</span>
+              <span>0</span>
+            </li>
           </ul>
+          <nav className={styles.navCover}>
+            <a href="">{'스페이스 홈 바로가기 >'}</a>
+          </nav>
         </div>
         <div>
           <DropDownMenu statefulKeys={['1', '3']} items={items}>
@@ -64,10 +73,20 @@ export function Profile() {
           </DropDownMenu>
         </div>
       </div>
+      {/* 이 부분은 Space Home일 경우 && Admin일 경우만 나와야합니다  */}
       <ul className={styles.messageCover}>
-        <li>발송전</li>
-        <li>발송후</li>
-        <li>미확인</li>
+        <li>
+          <p>3</p>
+          <p>발송전</p>
+        </li>
+        <li>
+          <p>5</p>
+          <p>발송후</p>
+        </li>
+        <li>
+          <p>1</p>
+          <p>미확인</p>
+        </li>
       </ul>
     </div>
   )
