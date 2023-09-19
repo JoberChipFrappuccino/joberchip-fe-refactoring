@@ -16,9 +16,6 @@ export default function LinkBlockForm(block: Props) {
   const isButtonDisabled = !link || !title
   const { drawerMode } = useDrawerFormType()
 
-  // eslint-disable-next-line no-console
-  console.log('aa', block)
-
   const titleValue = block.block.text
   const linkValue = block.block.url
 

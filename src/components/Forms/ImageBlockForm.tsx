@@ -20,16 +20,10 @@ export default function ImageBlockForm(block: Props) {
   const titleValue = block.block.alt
   const thumbnailValue = block.block.src
 
-  // eslint-disable-next-line no-console
-  console.log('1234', block)
-
   useEffect(() => {
     setTitle(titleValue ?? '')
     setThumbnail(thumbnailValue ?? '')
   }, [titleValue, thumbnailValue])
-
-  // eslint-disable-next-line no-console
-  console.log(thumbnailValue)
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
