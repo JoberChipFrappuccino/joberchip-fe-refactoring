@@ -7,7 +7,7 @@ import { useSpaceModeStore } from '@/store/spaceMode'
 import { useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
 import { SpaceActionBar } from '../ActionBar/SpaceActionBar'
-import ViewerBlockBase from '../Blocks/ViewerBlockBase'
+import { ViewerBlockBase } from '../Blocks/ViewerBlockBase'
 import styles from './SpaceViewer.module.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
@@ -82,8 +82,7 @@ export function SpaceViewer() {
         {space.blocks.map((block) => {
           if (mode === 'view' && block.visible) return null
           return (
-            <button
-              type="button"
+            <div
               className={[styles.item, block.blockId === activeBlockId ? 'activeBlock' : 'inactiveBlock'].join(' ')}
               key={block.blockId}
               id={block.blockId}
@@ -91,7 +90,7 @@ export function SpaceViewer() {
               <ViewerBlockBase block={block}>
                 <ViewerBox mode={mode} block={block} />
               </ViewerBlockBase>
-            </button>
+            </div>
           )
         })}
       </ResponsiveGridLayout>
