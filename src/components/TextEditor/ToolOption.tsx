@@ -1,5 +1,12 @@
-import { SIZE_OPTIONS, TEXT_BGCOLORS_OPTIONS, TEXT_COLORS_OPTIONS } from '@/constants/textEditorOptions'
+import {
+  ALIGN_OPTIONS,
+  FONT_OPTIONS,
+  SIZE_OPTIONS,
+  TEXT_BGCOLORS_OPTIONS,
+  TEXT_COLORS_OPTIONS
+} from '@/constants/textEditorOptions'
 import styles from './ToolOption.module.scss'
+
 export default function ToolOption({
   type,
   handle
@@ -58,6 +65,34 @@ export default function ToolOption({
             ))}
           </div>
         </>
+      )}
+      {type === 'font-options' && (
+        <div className={`${styles.optionContainer} ${styles.fontContainer}`}>
+          {FONT_OPTIONS.map((font, index) => (
+            <div
+              key={index}
+              onMouseDown={(e) => {
+                handle(e, font.text)
+              }}
+            >
+              {font.label}
+            </div>
+          ))}
+        </div>
+      )}
+      {type === 'align-options' && (
+        <div className={styles.optionContainer}>
+          {ALIGN_OPTIONS.map((align, index) => (
+            <div
+              key={index}
+              onMouseDown={(e) => {
+                handle(e, align.style)
+              }}
+            >
+              {align.style}
+            </div>
+          ))}
+        </div>
       )}
     </div>
   )

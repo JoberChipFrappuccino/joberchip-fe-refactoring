@@ -51,7 +51,6 @@ export default function TextEditor({
 
   const nextToolbar = (e: React.MouseEvent) => {
     e.preventDefault()
-
     if (currentToolbar < TOOL_TYPES.length - 1) {
       setCurrentToolbar(currentToolbar + 1)
     }
@@ -59,13 +58,26 @@ export default function TextEditor({
 
   const prevToolbar = (e: React.MouseEvent) => {
     e.preventDefault()
-
     if (currentToolbar > 0) {
       setCurrentToolbar(currentToolbar - 1)
     }
   }
+
   const isPrevButtonVisible = currentToolbar > 0
   const isNextButtonVisible = currentToolbar < TOOL_TYPES.length - 1
+
+  const getBlockStyle = (block: any): string => {
+    switch (block.getType()) {
+      case 'left':
+        return styles.alignLeft
+      case 'center':
+        return styles.alignCenter
+      case 'right':
+        return styles.alignRight
+      default:
+        return 'unstyled'
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -96,7 +108,9 @@ export default function TextEditor({
           <div>{isNextButtonVisible && <button className={styles.nextButton} onMouseDown={nextToolbar} />}</div>
         </div>
       )}
-      {optionType && <ToolOption type={optionType} handle={handleTogggleClick} />}
+      {optionType && (
+        <ToolOption type={optionType} handle={optionType === 'align-options' ? handleBlockClick : handleTogggleClick} />
+      )}
 
       <div className={`${styles.editorContainer}  ${editorIsOpen ? styles.focused : ''}`}>
         <Editor
@@ -104,6 +118,7 @@ export default function TextEditor({
           onChange={onChange}
           placeholder="텍스트를 입력해주세요"
           customStyleMap={StyleMap}
+          blockStyleFn={getBlockStyle}
         />
       </div>
       {editorIsOpen && <FormButton title={'텍스트 입력완료'} event={isButtonDisabled} />}

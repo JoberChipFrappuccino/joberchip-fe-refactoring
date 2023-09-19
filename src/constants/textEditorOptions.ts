@@ -48,11 +48,7 @@ export const TOOL_TYPES = [
         action: 'STRIKETHROUGH',
         type: 'inline',
         text: ''
-      }
-    ]
-  },
-  {
-    tools: [
+      },
       {
         label: 'color',
         icon: 'color.svg',
@@ -64,10 +60,15 @@ export const TOOL_TYPES = [
       {
         label: 'align',
         icon: 'align.svg',
-        action: 'align-options',
-        type: 'block',
+        action: 'align',
+        option: 'align-options',
+        type: 'options',
         text: ''
-      },
+      }
+    ]
+  },
+  {
+    tools: [
       {
         label: 'ordered',
         icon: 'ordered.svg',
@@ -104,13 +105,19 @@ for (let i = 14; i <= 36; i += 2) {
 
 export const FONT_OPTIONS = [
   {
-    font: 'nanum'
+    font: 'Pretendard-Regular',
+    label: '프리텐다드(Pretendard)',
+    text: 'font1'
   },
   {
-    font: 'monospace'
+    font: 'Noto Sans KR',
+    label: '본고딕(Noto Sans KR)',
+    text: 'font2'
   },
   {
-    font: 'pretandard'
+    font: 'TheJamsil5Bold',
+    label: '더잠실체(TheJamsil5Bold)',
+    text: 'font3'
   }
 ]
 
@@ -136,6 +143,12 @@ export const TEXT_BGCOLORS_OPTIONS = [
   { style: 'greenBg', className: styles.greenBg },
   { style: 'blueBg', className: styles.blueBg },
   { style: 'purpleBg', className: styles.purpleBg }
+]
+
+export const ALIGN_OPTIONS = [
+  { style: 'left', icon: '' },
+  { style: 'center', icon: '' },
+  { style: 'right', icon: '' }
 ]
 
 export const StyleMap = {
@@ -194,13 +207,13 @@ export const StyleMap = {
     backgroundColor: '#AA1F91'
   },
   font1: {
-    fontFamily: 'monospace'
+    fontFamily: 'Pretendard-Regular'
   },
   font2: {
-    fontFamily: 'sans-serif'
+    fontFamily: 'Noto Sans KR'
   },
   font3: {
-    fontFamily: 'serif'
+    fontFamily: 'TheJamsil5Bold'
   },
   ...sizes
 }
