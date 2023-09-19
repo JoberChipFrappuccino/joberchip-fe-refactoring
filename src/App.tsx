@@ -14,12 +14,15 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />} />
-        {/* todo : edit 페이지 변경 */}
-        <Route path="/space" element={<SharePage />} />
-        {/* todo : /root 페이지 변경, 외부 로그인, 공개 페이지 처리시 이쪽 라우터로 이동 */}
-        <Route path="/detail" element={<Detail />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+      </Route>
+
+      <Route path="/" element={<Layout />}>
+        {/* todo : edit 페이지 변경 */}
+        <Route path="/space/:spaceId" element={<SharePage />} />
+        {/* todo : /root 페이지 변경, 외부 로그인, 공개 페이지 처리시 이쪽 라우터로 이동 */}
+        <Route path="/detail" element={<Detail />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

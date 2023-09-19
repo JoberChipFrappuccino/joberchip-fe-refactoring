@@ -4,11 +4,10 @@ import { SpaceViewer } from '@/components/Space/SpaceViewer'
 import { SEO } from '@/constants'
 import useServerSideProps from '@/hooks/serverSideProps'
 import { useSpaceStore } from '@/store/space'
-import { useSpaceModeStore } from '@/store/spaceMode'
 import { useUserStore } from '@/store/user'
-import { Button } from 'antd'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
+import { useParams } from 'react-router-dom'
 import styles from './Space.module.scss'
 
 // ! API가 연동 되지 않아 text dose not matched 에러가 서버에서 발생합니다!
@@ -17,16 +16,22 @@ interface PageSource {
   title: Record<string, string>
 }
 
+type Params = {
+  spaceId: string
+}
+
 export default function SharePage() {
   const pageSource: PageSource = useServerSideProps(SEO)
   const { user, isSignedIn } = useUserStore()
   const { loadSpace, isLoaded } = useSpaceStore()
-  const { mode, setSpaceMode } = useSpaceModeStore()
-  const { space } = useSpaceStore()
+
+  const { spaceId } = useParams<Params>()
+  // const { mode, setSpaceMode } = useSpaceModeStore()
+  // const { space } = useSpaceStore()
 
   useEffect(() => {
     if (!user.userId) return
-    loadSpace(user.userId)
+    loadSpace(spaceId ?? '')
   }, [isSignedIn])
 
   return (
@@ -35,7 +40,7 @@ export default function SharePage() {
         <title>{pageSource.title['/']}</title>
       </Helmet>
       <Profile />
-      {space.previlige.edit && (
+      {/* {space.previlige.edit && (
         <Button
           onClick={() => {
             setSpaceMode(mode === 'view' ? 'edit' : 'view')
@@ -43,7 +48,7 @@ export default function SharePage() {
         >
           {mode === 'view' ? '공유 화면 보기' : '수정 하기'}
         </Button>
-      )}
+      )} */}
       <aside>{isLoaded && isSignedIn && <Drawer />}</aside>
       <div className={styles.viewer}>
         <div className={styles.spaceViewer}>
