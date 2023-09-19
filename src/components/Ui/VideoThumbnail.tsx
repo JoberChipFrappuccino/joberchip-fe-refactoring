@@ -1,23 +1,25 @@
 /* eslint-disable multiline-ternary */
 import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
 import { HiOutlineMinusCircle } from 'react-icons/hi'
-import styles from './Thumbnail.module.scss'
+import styles from './VideoThumbnail.module.scss'
 
 type Props = {
   radio?: string
   imgData?: Dispatch<SetStateAction<string>>
   buttonActive?: Dispatch<SetStateAction<boolean>>
-  img?: string
+  img: string
 }
 
-export default function Thumbnail({ radio, imgData, buttonActive, img }: Props) {
+export default function VideoThumbnail({ radio, imgData, buttonActive, img }: Props) {
   const [selectedRadio, setSelectedRadio] = useState<string>('radio1')
   const [thumbnail, setThumbnail] = useState<string>('')
   const [key, setKey] = useState(0)
+  const editImg = img
 
   useEffect(() => {
+    setThumbnail(editImg)
     setSelectedRadio(radio ?? 'radio1')
-  }, [radio])
+  }, [radio, img])
 
   /** 제품 썸네일 이미지 Base64 포멧 변환 */
   function changeMedia(e: React.ChangeEvent<HTMLInputElement>) {
@@ -45,13 +47,17 @@ export default function Thumbnail({ radio, imgData, buttonActive, img }: Props) 
 
   return (
     <>
-      <label
-        htmlFor="file"
-        className={styles.addVideoButton}
-        style={selectedRadio && img !== 'radio2' && img ? { cursor: 'not-allowed' } : { cursor: 'pointer' }}
-      >
-        +
-      </label>
+      {thumbnail ? (
+        ''
+      ) : (
+        <label
+          htmlFor="file"
+          className={styles.addButton}
+          style={selectedRadio !== 'radio2' ? { cursor: 'not-allowed' } : { cursor: 'pointer' }}
+        >
+          <p>+</p>
+        </label>
+      )}
       <input
         type="file"
         id="file"
@@ -60,7 +66,7 @@ export default function Thumbnail({ radio, imgData, buttonActive, img }: Props) 
         onChange={(e) => {
           changeMedia(e)
         }}
-        disabled={!!(selectedRadio && img !== 'radio2' && img)}
+        disabled={selectedRadio !== 'radio2'}
         key={key}
       />
       {thumbnail ? (
@@ -70,7 +76,8 @@ export default function Thumbnail({ radio, imgData, buttonActive, img }: Props) 
             changeMediaRemove()
           }}
         >
-          {thumbnail.includes('image') ? <img src={thumbnail} /> : <video src={thumbnail} />}
+          {/* API 작업 이후 image만 포함할 예정 */}
+          {thumbnail.includes('image' && 'jpg') ? <img src={thumbnail} /> : <video src={thumbnail} />}
           <div className={styles.minus}>
             <HiOutlineMinusCircle />
           </div>

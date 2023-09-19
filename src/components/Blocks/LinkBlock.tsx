@@ -18,10 +18,10 @@ export function LinkBlock({ block, mode }: Props) {
           <a href={block.url}>{block.url}</a>
         </div>
       </div>
-      {/* <div className={styles.footer}>
+      <div className={styles.footer}>
         <div className={styles.footerLeft}>바로가기</div>
         <div className={styles.footerright} />
-      </div> */}
+      </div>
     </div>
   )
 }

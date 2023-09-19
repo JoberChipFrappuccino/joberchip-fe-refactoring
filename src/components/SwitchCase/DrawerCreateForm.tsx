@@ -12,13 +12,13 @@ function getCreateFormComponent({ blockType }: Props) {
     case 'text':
       return <TextBlockForm />
     case 'image':
-      return <ImageBlockForm />
+      return <ImageBlockForm block={''} />
     case 'link':
-      return <LinkBlockForm />
+      return <LinkBlockForm block={''} />
     case 'embed':
       return <h1>Embed block form example</h1>
     case 'video':
-      return <VideoBlockForm />
+      return <VideoBlockForm block={''} />
     case 'googleMap':
       return <h1>GoogleMap block form example</h1>
     case 'page':

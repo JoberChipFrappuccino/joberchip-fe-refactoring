@@ -11,7 +11,6 @@ export default function BlockLogo({ logo }: Props) {
   function findLogoString(logo: string) {
     const urlData = JSON.stringify(logo)
     const logoString = logoList.logo.map((item) => item.logo_id)
-
     for (const keyword of logoString) {
       if (urlData.includes(keyword) && urlData.includes('blog')) {
         return keyword + '_blog'
@@ -33,9 +32,9 @@ export default function BlockLogo({ logo }: Props) {
 
   // 키워드가 동일하면 해당 아이콘 반환 없으면 기본값 반환
   if (findData) {
-    selectLogo = <img src={`BlockLogo/${findData}.png`} className={styles.logoStyle} />
+    selectLogo = <img src={`/BlockLogo/${findData}.png`} className={styles.logoStyle} />
   } else {
-    selectLogo = <img src={'BlockLogo/default.png'} className={styles.logoStyle} />
+    selectLogo = <img src={'/BlockLogo/default.png'} className={styles.logoStyle} />
   }
 
   return <div className={styles.container}>{selectLogo}</div>

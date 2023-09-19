@@ -12,12 +12,16 @@ input {
   display: flex;
 }
 
+.formTexts {
+  padding-top: 14px;
+}
+
 .formBox {
   display: flex;
   width: 100%;
   flex-direction: column;
   justify-content: space-between;
   .forms {
-    padding: 0 20px 0 20px;
+    padding: 0 1.25rem 0 1.25rem;
   }
 }
