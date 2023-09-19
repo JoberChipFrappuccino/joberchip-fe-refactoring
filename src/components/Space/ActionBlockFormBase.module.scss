@@ -1,10 +1,71 @@
-.navigation {
+.actionNavigation {
+  height: 5.9375rem;
   display: flex;
-  padding: 0 20px 0 20px;
+  padding: 0 1.25rem 0 1.25rem;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
 }
 
+h2 {
+  padding-left: 1.25rem;
+}
+
+.actionNavigation button {
+  width: 4.625rem;
+  height: 4.625rem;
+  border: none;
+  outline: none;
+  display: flex;
+  cursor: pointer;
+  transition: 0.3s;
+  align-items: center;
+  border-radius: .625rem;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  border: solid .0625rem #eeeeee;
+  box-shadow: 0rem 0rem .5rem .1rem rgba(0, 0, 0, 0.089);
+}
+
+.icon {
+  width: 3.75rem;
+  height: 3.75rem;
+  display: flex;
+  font-size: 2.25rem;
+  color: #e2e6ef;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  display: flex;
+  margin-top: .625rem;
+  align-items: center;
+  justify-content: center;
+}
+
+
+// active 스타일이 적용되지 않아 !important 사용
 .active {
-  border: 2px solid black;
-  font-weight: 700;
-  font-size: 1.1rem;
+  font-weight: 500;
+  color: white !important;;
+  border: solid .0625rem #3b51fe !important;
+  background-color: #4c61ff !important;
+  box-shadow: 0rem 0rem .5rem .25rem rgba(0, 0, 0, 0.173)!important;
+}
+
+#btnTitle {
+  display: flex;
+  color: #aeaeae;
+  margin-top: .625rem;
+  align-items: center;
+  justify-content: center;
+}
+
+// activeText 스타일이 적용되지 않아 !important 사용
+.activeText {
+  display: flex;
+  font-weight: 500;
+  justify-content: center;
+  color: rgb(0, 0, 0) !important;;
 }
