@@ -1,4 +1,4 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
+import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { Breadcrumb, Button, Layout } from 'antd'
 
 export function Header(props: any) {
@@ -7,7 +7,7 @@ export function Header(props: any) {
       <div style={{ display: 'flex', alignItems: 'center' }}>
       <Button
         type="text"
-        icon={props.collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        icon={props.collapsed ? <RightOutlined /> : < LeftOutlined />}
         onClick={() => {
           props.collapsedChange(!props.collapsed)
         }}

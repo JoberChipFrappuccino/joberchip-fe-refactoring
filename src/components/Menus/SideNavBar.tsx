@@ -1,5 +1,7 @@
+import { SpaceListBar } from '@/components/Menus/SpaceListBar'
+import { UserOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
-import { Button, Layout, Menu, Space } from 'antd'
+import { Avatar, Button, Layout, Menu, Space } from 'antd'
 
 const { Sider } = Layout
 
@@ -8,13 +10,11 @@ type MenuItem = Required<MenuProps>['items'][number]
 function getItem(
   label: React.ReactNode,
   key: React.Key,
-  icon?: React.ReactNode,
   children?: MenuItem[],
   type?: 'group'
 ): MenuItem {
   return {
     key,
-    icon,
     children,
     label,
     type
@@ -22,21 +22,20 @@ function getItem(
 }
 
 const items: MenuProps['items'] = [
-  getItem(
-    '연락처 그룹',
-    '연락처 그룹',
-    null,
-    [getItem('전체보기', '전체보기'), getItem('임직원', '임직원'), getItem('관계자', '관계자')],
-    'group'
-  ),
-  getItem(
-    '문서보관함',
-    '문서보관함',
-    null,
-    [getItem('발신함', '발신함'), getItem('수신함', '수신함'), getItem('보관 문서함', '보관 문서함')],
-    'group'
-  ),
-  getItem('관리및문의', '관리및문의', null, [], 'group')
+  getItem('연락처 그룹', '연락처 그룹', [
+    getItem('전체보기', '전체보기'),
+    getItem('임직원', '임직원'),
+    getItem('관계자', '관계자')
+  ]),
+  getItem('문서보관함', '문서보관함', [
+    getItem('발신함', '발신함'),
+    getItem('수신함', '수신함'),
+    getItem('보관 문서함', '보관 문서함')
+  ]),
+  getItem('관리및문의', '관리및문의', [
+    getItem('어쩌구', '어쩌구'),
+    getItem('저쩌구', '수신함')
+  ])
 ]
 
 export function SideNavBar(props: any) {
@@ -46,14 +45,27 @@ export function SideNavBar(props: any) {
       collapsible
       collapsed={props.collapsed}
       collapsedWidth="0"
-      style={{ backgroundColor: 'white' }}
+      style={{ backgroundColor: '#fff', display: 'flex', flexDirection: 'column' }}
     >
-      <Space className="site-button-ghost-wrapper" wrap direction="horizontal">
-        <Button>문서보내기</Button>
-        <Button>연락처추가</Button>
-      </Space>
-      <Button block>공유페이지</Button>
-      <Menu mode="inline" defaultSelectedKeys={['1']} items={items} />
+      <div style={{ display: 'flex' }}>
+        <SpaceListBar />
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '80%', margin: '0 auto' }}>
+            <Space direction="vertical" style={{ marginTop: '20px' }}>
+              <Avatar
+                size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+                icon={<UserOutlined />}
+                style={{ backgroundColor: '#4C61FF' }}
+              />
+            </Space>
+            <h2 style={{ margin: 'none' }}>주하림</h2>
+            <Button style={{ backgroundColor: '#4C61FF', color: '#FFFFFF', border: 'none' }} block>공유페이지</Button>
+            <Button style={{ backgroundColor: '#ECECFB', color: '#4C61FF', border: 'none' }} block>문서보내기</Button>
+            <Button style={{ backgroundColor: '#ECECFB', color: '#4C61FF', border: 'none' }} block>연락처추가</Button>
+          </div>
+          <Menu mode="inline" defaultSelectedKeys={['1']} items={items} />
+        </div>
+      </div>
     </Sider>
   )
 }

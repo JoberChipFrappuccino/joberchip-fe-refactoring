@@ -1,6 +1,5 @@
 import { Header } from '@/components/Menus/Header'
 import { SideNavBar } from '@/components/Menus/SideNavBar'
-import { SpaceListBar } from '@/components/Menus/SpaceListBar'
 import { useUserStore } from '@/store/user'
 import { Layout as AntdLayout } from 'antd'
 import { useEffect, useState } from 'react'
@@ -43,12 +42,11 @@ export default function Layout() {
     <div>
       <div id="portal" />
       <AntdLayout style={{ background: '#fff' }}>
-        <SpaceListBar />
         <AntdLayout>
-          <Header collapsedChange={collapsedChange} collapsed={collapsed} />
           <AntdLayout className={styles.layout}>
             <SideNavBar collapsed={collapsed} />
             <Content>
+              <Header collapsedChange={collapsedChange} collapsed={collapsed} />
               <Outlet />
             </Content>
           </AntdLayout>
