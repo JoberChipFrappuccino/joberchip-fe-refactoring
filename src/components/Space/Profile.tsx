@@ -4,6 +4,7 @@ import { useUserStore } from '@/store/user'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { TreeDrawer } from '../Tree/TreeDrawer'
 import styles from './Profile.module.scss'
 
 export function Profile() {
@@ -19,10 +20,14 @@ export function Profile() {
       },
       {
         key: '2',
-        icon: <button>링크 복사</button>
+        icon: <TreeDrawer />
       },
       {
         key: '3',
+        icon: <button>링크 복사</button>
+      },
+      {
+        key: '4',
         label: (
           <Switch
             checkedChildren="공유 화면 미리보기"
@@ -34,7 +39,7 @@ export function Profile() {
         )
       },
       {
-        key: '4',
+        key: '5',
         danger: true,
         label: '삭제하기'
       }
