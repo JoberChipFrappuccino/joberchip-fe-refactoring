@@ -7,7 +7,7 @@ import { useSpaceModeStore } from '@/store/spaceMode'
 import { useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
 import { SpaceActionBar } from '../ActionBar/SpaceActionBar'
-import ViewerBlockBase from '../Blocks/ViewerBlockBase'
+import { ViewerBlockBase } from '../Blocks/ViewerBlockBase'
 import styles from './SpaceViewer.module.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)

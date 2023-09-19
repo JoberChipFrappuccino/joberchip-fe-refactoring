@@ -12,11 +12,12 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import styles from './ViewerBlockBase.module.scss'
 
-type Props = {
+interface Props {
   children: ReactNode
   block: BlockBase<BlockType>
 }
-export default function ViewerBlockBase({ block, children }: Props) {
+
+export function ViewerBlockBase({ block, children }: Props) {
   const { mode } = useSpaceModeStore()
   const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useActiveBlock()
@@ -112,7 +113,6 @@ export default function ViewerBlockBase({ block, children }: Props) {
         </BlockPortal>
       )}
       {children}
-      {focus && <div className={styles.link}>바로가기</div>}
     </div>
   )
 }
