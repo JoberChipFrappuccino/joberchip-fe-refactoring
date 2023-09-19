@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { type BlockType } from '@/models/space'
 import { useDrawerFormType } from '@/store/formMode'
 import type { ReactNode } from 'react'
+import * as icons from 'react-icons/bi'
 import styles from './ActionBlockFormBase.module.scss'
 
 // todo block type을 알아야하는지 논의가 필요합니당.
@@ -9,45 +11,47 @@ interface Props {
 }
 
 export function ActionBlockFormBase({ children }: Props) {
-  const { blockType, setBlockType } = useDrawerFormType()
+  const { blockType, setBlockType, drawerMode } = useDrawerFormType()
 
   type FormType = {
     title: string
     type: BlockType
-    icon: string | ReactNode
+    icon: ReactNode
   }
   const formTypes: FormType[] = [
     {
       type: 'link',
       title: '링크',
-      icon: 'icon'
+      icon: <icons.BiLink />
     },
     {
       type: 'image',
       title: '사진',
-      icon: 'icon'
+      icon: <icons.BiImageAlt />
     },
     {
       type: 'video',
       title: '동영상',
-      icon: 'icon'
+      icon: <icons.BiCaretRightSquare />
     },
     {
       type: 'googleMap',
       title: '지도',
-      icon: 'icon'
+      icon: <icons.BiMapAlt />
     },
     {
       type: 'text',
       title: '텍스트',
-      icon: 'icon'
+      icon: <icons.BiPencil />
     }
   ]
   return (
     <div style={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
       <div>
-        <h1>{formTypes.find((form) => form.type === blockType)?.title} 추가하기</h1>
-        <div className={styles.navigation}>
+        <h2>
+          {formTypes.find((form) => form.type === blockType)?.title} {drawerMode === 'create' ? '추가' : '수정'}하기
+        </h2>
+        <div className={styles.actionNavigation}>
           {formTypes.map((form) => {
             return (
               <div key={form.type}>
@@ -57,9 +61,11 @@ export function ActionBlockFormBase({ children }: Props) {
                     setBlockType(form.type)
                   }}
                 >
-                  <div>{form.icon}</div>
-                  <div>{form.title}</div>
+                  <div className={styles.icon}>{form.icon}</div>
                 </button>
+                <div id={styles.btnTitle} className={form.type === blockType ? styles.activeText : ''}>
+                  {form.title}
+                </div>
               </div>
             )
           })}
