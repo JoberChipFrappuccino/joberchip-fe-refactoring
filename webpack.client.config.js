@@ -24,7 +24,11 @@ const getConfig = (target) => {
       path: path.resolve(__dirname, `dist/${target}`),
       filename: '[name].js',
       publicPath: '/web/',
-      libraryTarget: target === 'node' ? 'commonjs2' : undefined
+      libraryTarget: target === 'node' ? 'commonjs2' : undefined,
+      clean: true
+    },
+    devServer: {
+      writeToDisk: true
     },
     module: {
       rules: [
