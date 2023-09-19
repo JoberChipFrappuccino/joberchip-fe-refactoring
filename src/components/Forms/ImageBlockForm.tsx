@@ -1,16 +1,35 @@
-import { type BlockWith } from '@/models/space'
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useDrawerFormType } from '@/store/formMode'
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import FormButton from '../Ui/Button'
-import Thumbnail from '../Ui/Thumbnail'
+import ImgThumbnail from '../Ui/ImgThumbnail'
 import styles from './ImageBlockForm.module.scss'
 
-interface Props {
-  block?: BlockWith<'image'>
+type Props = {
+  block: {
+    alt: string
+    src: string
+  }
 }
-export default function ImageBlockForm({ block }: Props) {
+
+export default function ImageBlockForm(block: Props) {
   const [thumbnail, setThumbnail] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !title || !thumbnail
+  const { drawerMode } = useDrawerFormType()
+
+  const titleValue = block.block.alt
+  const thumbnailValue = block.block.src
+
+  // eslint-disable-next-line no-console
+  console.log('1234', block)
+
+  useEffect(() => {
+    setTitle(titleValue ?? '')
+    setThumbnail(thumbnailValue ?? '')
+  }, [titleValue, thumbnailValue])
+
+  // eslint-disable-next-line no-console
+  console.log(thumbnailValue)
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -33,10 +52,10 @@ export default function ImageBlockForm({ block }: Props) {
         <div className={styles.forms}>
           <h3>사진 제목*</h3>
           <input type="text" value={title} onChange={onChangetitle} placeholder="사진 제목을 입력해주세요." />
-          <h3>사진 첨부</h3>
-          <Thumbnail img={thumbnail} imgData={setThumbnail} />
+          <h3 className={styles.formText}>사진 첨부</h3>
+          <ImgThumbnail img={thumbnail} imgData={setThumbnail} />
         </div>
-        <FormButton title={'사진 추가하기'} event={isButtonDisabled} />
+        <FormButton title={drawerMode === 'create' ? '사진 추가하기' : '사진 수정하기'} event={isButtonDisabled} />
       </form>
     </div>
   )
