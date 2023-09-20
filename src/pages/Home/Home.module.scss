@@ -1,5 +1,6 @@
 @import '/src/variables.scss';
 
 .container {
-  background-color: $base-white;
+  background-color: $ppt-grey;
+  min-height: 100vh;
 }
