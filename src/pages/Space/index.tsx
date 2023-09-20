@@ -5,7 +5,6 @@ import { SEO, SPACE } from '@/constants'
 import useServerSideProps from '@/hooks/serverSideProps'
 import { type Space } from '@/models/space'
 import { useSpaceStore } from '@/store/space'
-import { useUserStore } from '@/store/user'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useParams } from 'react-router-dom'
@@ -26,7 +25,6 @@ export default function SharePage() {
   const pageSource: PageSource = useServerSideProps(SEO)
   const SSRSpace: Space = useServerSideProps(SPACE)
   const { space, loadSpace, setSpace, isLoaded, isFetching } = useSpaceStore()
-  const { isSignedIn } = useUserStore()
   const { spaceId } = useParams<Params>()
 
   useEffect(() => {
@@ -53,7 +51,7 @@ export default function SharePage() {
       }
     }
     setSpace(nextSpace)
-  }, [spaceId, isSignedIn])
+  }, [spaceId])
 
   useEffect(() => {
     // * fetching이 완료되면 페이지 권한을 체크 후 업데트합니다. (임시)
@@ -65,6 +63,8 @@ export default function SharePage() {
           delete: space.spaceId === 'space1'
         }
       }
+      // console.log('nextSpace :', nextSpace)
+
       setSpace(nextSpace)
     }
   }, [isFetching])
@@ -75,11 +75,11 @@ export default function SharePage() {
         {/* todo : default pageSource + SSR일 경우 두 가지로 분기해야함 */}
         <title>{pageSource.title['/']}</title>
       </Helmet>
-      {isLoaded && <Profile space={space} />}
+      {isLoaded && <Profile />}
       <aside>{<Drawer />}</aside>
       <div className={styles.viewer}>
         <div className={styles.spaceViewer}>
-          <section>{isLoaded && <SpaceViewer space={space} />}</section>
+          <section>{isLoaded && <SpaceViewer />}</section>
         </div>
       </div>
     </>
