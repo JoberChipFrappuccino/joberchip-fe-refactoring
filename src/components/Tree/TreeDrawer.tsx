@@ -129,8 +129,8 @@ export const TreeDrawer: React.FC = () => {
         item.children.unshift(dragObj)
       })
     } else if (
-      ((info.node).props.children ?? []).length > 0 && // Has children
-      (info.node).props.expanded && // Is expanded
+      (info.node.props.children ?? []).length > 0 && // Has children
+      info.node.props.expanded && // Is expanded
       dropPosition === 1 // On the bottom gap
     ) {
       loop(data, dropKey, (item) => {
@@ -164,26 +164,27 @@ export const TreeDrawer: React.FC = () => {
     <>
       <button onClick={onOpen}>저장위치 변경</button>
       <Drawer title="저장위치 변경" placement="right" onClose={onClose} open={open}>
-      <div className="mr-4 prose">
-
-      <h3><BiHomeAlt/> 어쩌구의 공유페이지</h3>
-      <Tree
-        className="draggable-tree"
-        defaultExpandedKeys={expandedKeys}
-        draggable
-        blockNode
-        switcherIcon={<IoChevronDownOutline/>}
-        onDragEnter={onDragEnter}
-        onDrop={onDrop}
-        treeData={gData}
-        defaultExpandAll
-        titleRender={(nodeData: DataNode) => (
-          <>
-            <GrDocument /> {nodeData.title}
-          </>
-        )}
-      />
-    </div>
+        <div className="mr-4 prose">
+          <h3>
+            <BiHomeAlt /> 어쩌구의 공유페이지
+          </h3>
+          <Tree
+            className="draggable-tree"
+            defaultExpandedKeys={expandedKeys}
+            draggable
+            blockNode
+            switcherIcon={<IoChevronDownOutline />}
+            onDragEnter={onDragEnter}
+            onDrop={onDrop}
+            treeData={gData}
+            defaultExpandAll
+            titleRender={(nodeData: DataNode) => (
+              <>
+                <GrDocument /> {nodeData.title}
+              </>
+            )}
+          />
+        </div>
       </Drawer>
     </>
   )
