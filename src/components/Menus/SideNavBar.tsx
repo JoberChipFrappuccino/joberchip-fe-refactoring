@@ -27,7 +27,7 @@ const items: MenuProps['items'] = [
     getItem('수신함', '수신함'),
     getItem('보관 문서함', '보관 문서함')
   ]),
-  getItem('관리및문의', '관리및문의', [getItem('어쩌구', '어쩌구'), getItem('저쩌구', '수신함')])
+  getItem('관리및문의', '관리및문의', [getItem('어쩌구', '어쩌구'), getItem('저쩌구', '저쩌구')])
 ]
 
 export function SideNavBar(props: any) {

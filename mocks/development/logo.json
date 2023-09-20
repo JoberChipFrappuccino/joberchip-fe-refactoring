@@ -1,166 +1,166 @@
 {
-    "deaflut_logo" : [
-        {
-            "logo_id": "textlogo",
-            "src" : "",
-            "alt" : "텍스트블록"
-        }
-    ],
-    "logo" : [
-        {
-            "logo_id": "band",
-            "src" : "public/BlockLogo/band.png",
-            "alt" : "네이버밴드"
-        },
-        {
-            "logo_id": "brunch",
-            "src" : "public/BlockLogo/brunch.png",
-            "alt" : "브런치"
-        },
-        {
-            "logo_id": "bunjang",
-            "src" : "public/BlockLogo/bunjang.png",
-            "alt" : "번개장터"
-        },
-        {
-            "logo_id": "chatgpt",
-            "src" : "public/BlockLogo/chatgpt.png",
-            "alt" : "챗GPT"
-        },
-        {
-            "logo_id": "coupang",
-            "src" : "public/BlockLogo/coupang.png",
-            "alt" : "쿠팡"
-        },
-        {
-            "logo_id": "daangn",
-            "src" : "public/BlockLogo/daangn.png",
-            "alt" : "당근마켓"
-        },
-        {
-            "logo_id": "daum",
-            "src" : "public/BlockLogo/daum.png",
-            "alt" : "다음"
-        },
-        {
-            "logo_id": "default",
-            "src" : "public/BlockLogo/default.png",
-            "alt" : "기본값"
-        },
-        {
-            "logo_id": "discord",
-            "src" : "public/BlockLogo/discord.png",
-            "alt" : "디스코드"
-        },
-        {
-            "logo_id": "facebook_messenger",
-            "src" : "public/BlockLogo/facebook_messenger.png",
-            "alt" : "페이스북메신저"
-        },
-        {
-            "logo_id": "facebook",
-            "src" : "public/BlockLogo/facebook.png",
-            "alt" : "페이스북"
-        },
-        {
-            "logo_id": "gmarket",
-            "src" : "public/BlockLogo/gmarket.png",
-            "alt" : "지마켓"
-        },
-        {
-            "logo_id": "google_maps",
-            "src" : "public/BlockLogo/google_maps.png",
-            "alt" : "구글맵스"
-        },
-        {
-            "logo_id": "google",
-            "src" : "public/BlockLogo/google.png",
-            "alt" : "구글"
-        },
-        {
-            "logo_id": "jober",
-            "src" : "public/BlockLogo/jober.png",
-            "alt" : "자버"
-        },
-        {
-            "logo_id": "band",
-            "src" : "public/BlockLogo/band.png",
-            "alt" : "네이버밴드"
-        },
-        {
-            "logo_id": "kakao",
-            "src" : "public/BlockLogo/kakao.png",
-            "alt" : "카카오톡"
-        },
-        {
-            "logo_id": "line",
-            "src" : "public/BlockLogo/line.png",
-            "alt" : "라인"
-        },
-        {
-            "logo_id": "modoo",
-            "src" : "public/BlockLogo/modoo.png",
-            "alt" : "모두"
-        },
-        {
-            "logo_id": "naver_blog",
-            "src" : "public/BlockLogo/naver_blog.png",
-            "alt" : "네이버블로그"
-        },
-        {
-            "logo_id": "naver",
-            "src" : "public/BlockLogo/naver.png",
-            "alt" : "네이버"
-        },
-        {
-            "logo_id": "notion",
-            "src" : "public/BlockLogo/notion.png",
-            "alt" : "노션"
-        },
-        {
-            "logo_id": "slack",
-            "src" : "public/BlockLogo/slack.png",
-            "alt" : "슬랙"
-        },
-        {
-            "logo_id": "smartstore",
-            "src" : "public/BlockLogo/smartstore.png",
-            "alt" : "스마트스토어"
-        },
-        {
-            "logo_id": "tiktok",
-            "src" : "public/BlockLogo/tiktok.png",
-            "alt" : "틱톡"
-        },
-        {
-            "logo_id": "tistory",
-            "src" : "public/BlockLogo/tistory_blog.png",
-            "alt" : "티스토리"
-        },
-        {
-            "logo_id": "twitter",
-            "src" : "public/BlockLogo/twitter.png",
-            "alt" : "트위터"
-        },
-        {
-            "logo_id": "vlog",
-            "src" : "public/BlockLogo/vlog.png",
-            "alt" : "벨로그"
-        },
-        {
-            "logo_id": "wordpress",
-            "src" : "public/BlockLogo/wordpress.png",
-            "alt" : "워드프레스"
-        },
-        {
-            "logo_id": "youtube",
-            "src" : "public/BlockLogo/youtube.png",
-            "alt" : "유튜브"
-        },
-        {
-            "logo_id": "zoom",
-            "src" : "public/BlockLogo/zoom.png",
-            "alt" : "줌"
-        }
-    ]
+  "deaflut_logo": [
+    {
+      "logo_id": "textlogo",
+      "src": "",
+      "alt": "텍스트블록"
+    }
+  ],
+  "logo": [
+    {
+      "logo_id": "band",
+      "src": "/BlockLogo/band.png",
+      "alt": "네이버밴드"
+    },
+    {
+      "logo_id": "brunch",
+      "src": "/BlockLogo/brunch.png",
+      "alt": "브런치"
+    },
+    {
+      "logo_id": "bunjang",
+      "src": "/BlockLogo/bunjang.png",
+      "alt": "번개장터"
+    },
+    {
+      "logo_id": "chatgpt",
+      "src": "/BlockLogo/chatgpt.png",
+      "alt": "챗GPT"
+    },
+    {
+      "logo_id": "coupang",
+      "src": "/BlockLogo/coupang.png",
+      "alt": "쿠팡"
+    },
+    {
+      "logo_id": "daangn",
+      "src": "/BlockLogo/daangn.png",
+      "alt": "당근마켓"
+    },
+    {
+      "logo_id": "daum",
+      "src": "/BlockLogo/daum.png",
+      "alt": "다음"
+    },
+    {
+      "logo_id": "default",
+      "src": "/BlockLogo/default.png",
+      "alt": "기본값"
+    },
+    {
+      "logo_id": "discord",
+      "src": "/BlockLogo/discord.png",
+      "alt": "디스코드"
+    },
+    {
+      "logo_id": "facebook_messenger",
+      "src": "/BlockLogo/facebook_messenger.png",
+      "alt": "페이스북메신저"
+    },
+    {
+      "logo_id": "facebook",
+      "src": "/BlockLogo/facebook.png",
+      "alt": "페이스북"
+    },
+    {
+      "logo_id": "gmarket",
+      "src": "/BlockLogo/gmarket.png",
+      "alt": "지마켓"
+    },
+    {
+      "logo_id": "google_maps",
+      "src": "/BlockLogo/google_maps.png",
+      "alt": "구글맵스"
+    },
+    {
+      "logo_id": "google",
+      "src": "/BlockLogo/google.png",
+      "alt": "구글"
+    },
+    {
+      "logo_id": "jober",
+      "src": "/BlockLogo/jober.png",
+      "alt": "자버"
+    },
+    {
+      "logo_id": "band",
+      "src": "/BlockLogo/band.png",
+      "alt": "네이버밴드"
+    },
+    {
+      "logo_id": "kakao",
+      "src": "/BlockLogo/kakao.png",
+      "alt": "카카오톡"
+    },
+    {
+      "logo_id": "line",
+      "src": "/BlockLogo/line.png",
+      "alt": "라인"
+    },
+    {
+      "logo_id": "modoo",
+      "src": "/BlockLogo/modoo.png",
+      "alt": "모두"
+    },
+    {
+      "logo_id": "naver_blog",
+      "src": "/BlockLogo/naver_blog.png",
+      "alt": "네이버블로그"
+    },
+    {
+      "logo_id": "naver",
+      "src": "/BlockLogo/naver.png",
+      "alt": "네이버"
+    },
+    {
+      "logo_id": "notion",
+      "src": "/BlockLogo/notion.png",
+      "alt": "노션"
+    },
+    {
+      "logo_id": "slack",
+      "src": "/BlockLogo/slack.png",
+      "alt": "슬랙"
+    },
+    {
+      "logo_id": "smartstore",
+      "src": "/BlockLogo/smartstore.png",
+      "alt": "스마트스토어"
+    },
+    {
+      "logo_id": "tiktok",
+      "src": "/BlockLogo/tiktok.png",
+      "alt": "틱톡"
+    },
+    {
+      "logo_id": "tistory",
+      "src": "/BlockLogo/tistory_blog.png",
+      "alt": "티스토리"
+    },
+    {
+      "logo_id": "twitter",
+      "src": "/BlockLogo/twitter.png",
+      "alt": "트위터"
+    },
+    {
+      "logo_id": "vlog",
+      "src": "/BlockLogo/vlog.png",
+      "alt": "벨로그"
+    },
+    {
+      "logo_id": "wordpress",
+      "src": "/BlockLogo/wordpress.png",
+      "alt": "워드프레스"
+    },
+    {
+      "logo_id": "youtube",
+      "src": "/BlockLogo/youtube.png",
+      "alt": "유튜브"
+    },
+    {
+      "logo_id": "zoom",
+      "src": "/BlockLogo/zoom.png",
+      "alt": "줌"
+    }
+  ]
 }

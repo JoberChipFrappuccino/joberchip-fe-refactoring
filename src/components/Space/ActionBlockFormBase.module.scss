@@ -6,10 +6,6 @@
   margin-bottom: 2.5rem;
 }
 
-h2 {
-  padding-left: 1.25rem;
-}
-
 .actionNavigation button {
   width: 4.625rem;
   height: 4.625rem;
@@ -19,12 +15,12 @@ h2 {
   cursor: pointer;
   transition: 0.3s;
   align-items: center;
-  border-radius: .625rem;
+  border-radius: 0.625rem;
   flex-direction: column;
   justify-content: center;
   background-color: white;
-  border: solid .0625rem #eeeeee;
-  box-shadow: 0rem 0rem .5rem .1rem rgba(0, 0, 0, 0.089);
+  border: solid 0.0625rem #eeeeee;
+  box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.089);
 }
 
 .icon {
@@ -39,25 +35,24 @@ h2 {
 
 .title {
   display: flex;
-  margin-top: .625rem;
+  margin-top: 0.625rem;
   align-items: center;
   justify-content: center;
 }
 
-
 // active 스타일이 적용되지 않아 !important 사용
 .active {
   font-weight: 500;
-  color: white !important;;
-  border: solid .0625rem #3b51fe !important;
+  color: white !important;
+  border: solid 0.0625rem #3b51fe !important;
   background-color: #4c61ff !important;
-  box-shadow: 0rem 0rem .5rem .25rem rgba(0, 0, 0, 0.173)!important;
+  box-shadow: 0rem 0rem 0.5rem 0.25rem rgba(0, 0, 0, 0.173) !important;
 }
 
 #btnTitle {
   display: flex;
   color: #aeaeae;
-  margin-top: .625rem;
+  margin-top: 0.625rem;
   align-items: center;
   justify-content: center;
 }
@@ -67,5 +62,5 @@ h2 {
   display: flex;
   font-weight: 500;
   justify-content: center;
-  color: rgb(0, 0, 0) !important;;
+  color: rgb(0, 0, 0) !important;
 }

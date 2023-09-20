@@ -2,7 +2,6 @@ import { ViewerBox } from '@/components/SwitchCase/ViewerBox'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import type { BlockType, Space } from '@/models/space'
 import { useActiveBlock } from '@/store/activeBlock'
-import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
@@ -12,10 +11,13 @@ import styles from './SpaceViewer.module.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
-export function SpaceViewer() {
+type Props = {
+  space: Space
+}
+export function SpaceViewer({ space }: Props) {
   const [rowHeight, setRowHeight] = useState(100)
   const { mode } = useSpaceModeStore()
-  const { space } = useSpaceStore()
+
   const [grid, setGridLayout] = useState({
     breakpoints: 'lg',
     layouts: { lg: getBlockLayout(space.blocks, mode) } // , md: layout, sm: layout, xs: layout, xxs: layout

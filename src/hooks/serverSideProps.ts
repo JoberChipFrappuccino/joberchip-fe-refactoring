@@ -9,7 +9,6 @@ export default function useServerSideProps(key: string) {
     return JSON.parse((ctx[key] as string) || '{}')
   }
   const serverSideData = document.getElementById('__SERVER_DATA__')?.textContent ?? '{}'
-
   const data = JSON.parse(htmlEntitiesDecoder(serverSideData))
   return JSON.parse(data[key]) || ''
 }

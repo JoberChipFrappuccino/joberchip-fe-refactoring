@@ -51,4 +51,8 @@ authRouter.post('/signin', (req, res) => {
   return res.json(data[body.email])
 })
 
+authRouter.get('/space', (req, res) => {
+  res.send('')
+})
+
 export default authRouter

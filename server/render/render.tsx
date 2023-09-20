@@ -1,5 +1,5 @@
 import App from '@/App'
-import { POST_API_KEY, SEO } from '@/constants'
+import { POST_API_KEY, SEO, SPACE } from '@/constants'
 import { SSRProvider } from '@/context/ssr'
 import { ChunkExtractor } from '@loadable/server'
 import type { Request, Response } from 'express'
@@ -7,6 +7,7 @@ import path from 'path'
 import { renderToString } from 'react-dom/server'
 import { Helmet } from 'react-helmet'
 import { StaticRouter } from 'react-router-dom/server'
+import { getSpaceBySpaceId } from '~/utils/getSpaceById'
 
 export default async function renderHome(url: string, req: Request, res: Response) {
   const serverSideData: Record<string, unknown> = {}
@@ -32,6 +33,11 @@ export default async function renderHome(url: string, req: Request, res: Respons
       '/detail': 'jober chip | 누군가의 디테일 페이지'
     }
   })
+  serverSideData[SPACE] = JSON.stringify({}) // CSR시 빈 객체로 초기화
+  if (url.includes('/space/')) {
+    const spaceId = url.split('/space/')[1]
+    serverSideData[SPACE] = JSON.stringify(getSpaceBySpaceId(spaceId))
+  }
 
   const webStats = path.resolve(__dirname, './web/loadable-stats.json')
   const nodeStats = path.resolve(__dirname, './node/loadable-stats.json')
