@@ -30,19 +30,21 @@ export default function SharePage() {
   const { spaceId } = useParams<Params>()
 
   useEffect(() => {
-    // * CSR일 경우 space를 로드합니다.
+    // * react 내부적으로 주소를 이동할 경우 space를 다시 로드합니다.
     if (!SSRSpace?.spaceId) {
       loadSpace(spaceId ?? '')
       return
     }
 
-    // * CSR일 경우 스페이스가 변경되었다면 space를 다시 로드합니다.
+    // * react 내부적으로 주소를 이동할 경우
+    // * SSR로 로드한 spaceId와 이동할 space가 다르다면 space를 다시 로드합니다.
     if (SSRSpace?.spaceId !== spaceId) {
       loadSpace(spaceId ?? '')
       return
     }
 
     // * SSR일 경우 SSRSpace를 사용합니다.
+    // * 권한은 임시로 업데이트하는 척 합니다. (임시)
     const nextSpace: Space = {
       ...SSRSpace,
       previlige: {
@@ -51,11 +53,10 @@ export default function SharePage() {
       }
     }
     setSpace(nextSpace)
-
-    // * 페이지 권한을 확인합니다. (임시)
   }, [spaceId, isSignedIn])
 
   useEffect(() => {
+    // * fetching이 완료되면 페이지 권한을 체크 후 업데트합니다. (임시)
     if (!isFetching) {
       const nextSpace: Space = {
         ...space,
