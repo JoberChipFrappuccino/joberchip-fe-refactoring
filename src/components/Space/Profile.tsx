@@ -1,6 +1,6 @@
 import { DropDownMenu } from '@/components/Space/DropDownMenu'
+import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
-import { useUserStore } from '@/store/user'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -8,9 +8,8 @@ import { TreeDrawer } from '../Tree/TreeDrawer'
 import styles from './Profile.module.scss'
 
 export function Profile() {
-  const { user } = useUserStore()
   const { mode, setSpaceMode } = useSpaceModeStore()
-
+  const { space } = useSpaceStore()
   const items = useMemo(
     () => [
       {
@@ -51,11 +50,11 @@ export function Profile() {
     <div className={styles.container}>
       <div className={styles.profileCover}>
         <div className={styles.profileImageCover}>
-          <img src={user.profileImg} alt={`${user.username} profile`} />
+          <img src={space.profileImage} alt={`${space.title} thumbnail`} />
         </div>
         <div className={styles.profile}>
-          <h2>{user.username}</h2>
-          <p>이 설명란은 아직 추가되지 않음</p>
+          <h2>{space.title}</h2>
+          <p>{space.description}</p>
           <ul className={styles.followCover}>
             <li>
               <span>팔로워</span>
@@ -67,15 +66,18 @@ export function Profile() {
             </li>
           </ul>
           <nav className={styles.navCover}>
-            <a href="">{'스페이스 홈 바로가기 >'}</a>
+            {/* 이거 하드코딩한 장식용임 이 녀석의 처우는 나중에 생각하자 */}
+            <a href="/">{'스페이스 홈 바로가기 >'}</a>
           </nav>
         </div>
         <div>
-          <DropDownMenu statefulKeys={['1', '3']} items={items}>
-            <div className={styles.iconCover}>
-              <BsThreeDotsVertical className={styles.icon} />
-            </div>
-          </DropDownMenu>
+          {space.previlige.edit && (
+            <DropDownMenu statefulKeys={['1', '3']} items={items}>
+              <div className={styles.iconCover}>
+                <BsThreeDotsVertical className={styles.icon} />
+              </div>
+            </DropDownMenu>
+          )}
         </div>
       </div>
       {/* 이 부분은 Space Home일 경우 && Admin일 경우만 나와야합니다  */}

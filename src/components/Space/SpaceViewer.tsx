@@ -14,8 +14,9 @@ const ResponsiveGridLayout = WidthProvider(Responsive)
 
 export function SpaceViewer() {
   const [rowHeight, setRowHeight] = useState(100)
-  const { mode } = useSpaceModeStore()
   const { space } = useSpaceStore()
+  const { mode } = useSpaceModeStore()
+
   const [grid, setGridLayout] = useState({
     breakpoints: 'lg',
     layouts: { lg: getBlockLayout(space.blocks, mode) } // , md: layout, sm: layout, xs: layout, xxs: layout

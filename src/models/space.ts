@@ -4,6 +4,8 @@
 // }
 
 export interface Space {
+  spaceId: string
+  profileImage: string
   title: string
   description: string
   previlige: {

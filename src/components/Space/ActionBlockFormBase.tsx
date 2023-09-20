@@ -56,10 +56,14 @@ export function ActionBlockFormBase({ children }: Props) {
             return (
               <div key={form.type}>
                 <button
-                  className={form.type === blockType ? styles.active : ''}
+                  className={[
+                    form.type === blockType ? styles.active : '',
+                    drawerMode === 'edit' ? styles.disable : ''
+                  ].join(' ')}
                   onClick={() => {
                     setBlockType(form.type)
                   }}
+                  disabled={drawerMode === 'edit'}
                 >
                   <div className={styles.icon}>{form.icon}</div>
                 </button>

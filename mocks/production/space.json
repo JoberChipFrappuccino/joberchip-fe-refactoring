@@ -1,5 +1,7 @@
 {
-  "user1": {
+  "space1": {
+    "spaceId": "space1",
+    "profileImage": "http://ec2-34-228-10-85.compute-1.amazonaws.com/profile_1.png",
     "title": "foo",
     "description": "bar",
     "blocks": [
@@ -11,7 +13,7 @@
         "w": 2,
         "type": "link",
         "url": "http://www.naver.com",
-        "text": "네이버로 이동!",
+        "text": "네이버",
         "visible": false
       },
       {
@@ -20,9 +22,9 @@
         "x": 0,
         "h": 1,
         "w": 2,
-        "type": "image",
-        "src": "http://ec2-34-228-10-85.compute-1.amazonaws.com/img1.jpg",
-        "alt": "춤추는 인간",
+        "type": "link",
+        "url": "http://www.youtube.com",
+        "text": "유튜브",
         "visible": false
       },
       {
@@ -57,15 +59,108 @@
         "text": "the quick brown fox jumps over the lazy dog",
         "visible": false
       },
-
       {
         "blockId": "block_1_6",
         "y": 4,
         "x": 0,
         "h": 2,
         "w": 2,
-        "type": "embed",
-        "src": "https://www.youtube.com/embed/75kySTFaBQQ??si=w_qvmC6yYxwunlu0&wmode=opaque",
+        "type": "video",
+        "src": "https://www.youtube.com/embed/75kySTFaBQQ",
+        "caption": "yotube playlist 이거 필요없을 거 같인한데, bento처럼 사용자가 캡션을 원할 경우 추가",
+        "visible": false
+      },
+      {
+        "blockId": "block_1_7",
+        "y": 4,
+        "x": 2,
+        "h": 2,
+        "w": 2,
+        "type": "video",
+        "src": "http://ec2-34-228-10-85.compute-1.amazonaws.com/test.mp4",
+        "caption": "쓸모없는 비디오",
+        "visible": false
+      },
+      {
+        "blockId": "block_1_8",
+        "y": 6,
+        "x": 0,
+        "h": 2,
+        "w": 2,
+        "type": "googleMap",
+        "src": "https://www.google.com/maps/embed/v1/place?key=AIzaSyCnJyiI_VgJmszJ9ceC-AKCVN7ebJe8ovo&q=Eiffel+Tower,Paris+France",
+        "visible": false
+      }
+    ]
+  },
+  "space2": {
+    "spaceId": "space2",
+    "profileImage": "http://ec2-34-228-10-85.compute-1.amazonaws.com/profile_2.jpg",
+    "title": "user2의 최상위 페이지",
+    "description": "어쩌고 저쩌고 ㅎㅎ",
+    "blocks": [
+      {
+        "blockId": "block_1_1",
+        "y": 0,
+        "x": 0,
+        "h": 1,
+        "w": 2,
+        "type": "link",
+        "url": "http://www.naver.com",
+        "text": "네이버",
+        "visible": false
+      },
+      {
+        "blockId": "block_1_2",
+        "y": 1,
+        "x": 0,
+        "h": 1,
+        "w": 2,
+        "type": "link",
+        "url": "http://www.youtube.com",
+        "text": "유튜브",
+        "visible": false
+      },
+      {
+        "blockId": "block_1_3",
+        "y": 0,
+        "x": 2,
+        "h": 2,
+        "w": 2,
+        "type": "image",
+        "src": "http://ec2-34-228-10-85.compute-1.amazonaws.com/img2.jpg",
+        "alt": "춤추는 인간2",
+        "visible": false
+      },
+      {
+        "blockId": "block_1_4",
+        "y": 2,
+        "x": 0,
+        "h": 1,
+        "w": 4,
+        "type": "page",
+        "text": "하위 공유 페이지로 이동하기",
+        "url": "http://www.naver.com",
+        "visible": false
+      },
+      {
+        "blockId": "block_1_5",
+        "y": 3,
+        "x": 0,
+        "h": 1,
+        "w": 4,
+        "type": "text",
+        "text": "the quick brown fox jumps over the lazy dog",
+        "visible": false
+      },
+      {
+        "blockId": "block_1_6",
+        "y": 4,
+        "x": 0,
+        "h": 2,
+        "w": 2,
+        "type": "video",
+        "src": "https://www.youtube.com/embed/75kySTFaBQQ",
         "caption": "yotube playlist 이거 필요없을 거 같인한데, bento처럼 사용자가 캡션을 원할 경우 추가",
         "visible": false
       },

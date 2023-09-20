@@ -23,17 +23,10 @@ spaceRouter.get('/', (req, res) => {
     return res.status(400).json({ message: 'Invalid user id' })
   }
   // * Privilege check
-  // 원래는 access token을 통해 privilege를 체크해야 하지만, mock data이므로 특정 아이디에 대해서만 제한
-  if (userId === 'user2') {
-    data[userId].previlige = {
-      edit: false,
-      delete: false
-    }
-  } else {
-    data[userId].previlige = {
-      edit: true,
-      delete: true
-    }
+  // previlige는 항상 false이고, 사용자 정보를 기반으로 previlige를 변경합니다.
+  data[userId].previlige = {
+    edit: false,
+    delete: false
   }
 
   return res.status(200).json(data[userId])

@@ -2,22 +2,30 @@ import { getSpaceAPI } from '@/api/space'
 import { type Space } from '@/models/space'
 import { create } from 'zustand'
 
+interface Privilege {
+  edit: boolean
+  delete: boolean
+}
 interface SpaceState {
   space: Space // ? Partial<Space> | Space  할까요? Space 할까요?
   isFetching: boolean
   isLoaded: boolean
   isFalture: boolean
   loadSpace: (id: string) => Promise<boolean>
+  // loadSpacePrivligeByUserId: (userId: string) => Promise<Privilege>
   addBlock: (section_id: string, options: object) => Promise<boolean>
   removeBlock: (section_id: string, block_id: string) => Promise<boolean>
+  setPrivilege: (previlige: Privilege) => void
   removeBlockById: (blockId: string) => void
+  setSpace: (space: Space) => void
 }
 
 export const useSpaceStore = create<SpaceState>((set) => {
   return {
     // ? 이거 속성 다 뺄 수 없나..? Partial<Space> | Space 이렇게 되면 좋게싸..
     space: {
-      space_id: '',
+      spaceId: '',
+      profileImage: '/profile_3.png', // * default image 넣어야함
       layout: {
         styles: {}
       },
@@ -29,18 +37,26 @@ export const useSpaceStore = create<SpaceState>((set) => {
       },
       blocks: []
     },
-    isFetching: false,
+    isFetching: true,
     isLoaded: false,
     isFalture: false,
     loadSpace: async (id: string) => {
-      set((state) => ({ ...state, isFetching: true, isLoaded: false, isFalture: false }))
+      set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
+
       const { data } = await getSpaceAPI(id)
+
       if (data) {
-        set((state) => ({ ...state, space: data, isFetching: false, isLoaded: true, isFalture: false }))
+        set(() => ({ space: data, isFetching: false, isLoaded: true, isFalture: false }))
         return true
       }
-      set((state) => ({ ...state, isFetching: false, isLoaded: false, isFalture: true }))
+      set(() => ({ isFetching: false, isLoaded: false, isFalture: true }))
       return false
+    },
+    setSpace: (space: Space) => {
+      set(() => ({ space, isLoaded: true, isFalture: false }))
+    },
+    setPrivilege: (privilege: Privilege) => {
+      set((state) => ({ ...state, space: { ...state.space, previlige: privilege } }))
     },
     removeBlockById: async (blockId: string) => {
       set((state) => {
@@ -54,6 +70,9 @@ export const useSpaceStore = create<SpaceState>((set) => {
         return { ...state }
       })
     },
+    // loadSpacePrivligeById: async (userId: string, spaceId: string) => {
+    //   return { edit: true, delete: true }
+    // },
     // ! 미구현 ㅎㅅㅎ
     addBlock: async (sectionId: string, options: object) => {
       return true
