@@ -67,7 +67,7 @@ export function Profile() {
           </ul>
           <nav className={styles.navCover}>
             {/* 이거 하드코딩한 장식용임 이 녀석의 처우는 나중에 생각하자 */}
-            <a href="">{'스페이스 홈 바로가기 >'}</a>
+            <a href="/">{'스페이스 홈 바로가기 >'}</a>
           </nav>
         </div>
         <div>

@@ -21,6 +21,9 @@
   background-color: white;
   border: solid 0.0625rem #eeeeee;
   box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.089);
+  &.disable {
+    cursor: default;
+  }
 }
 
 .icon {
