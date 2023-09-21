@@ -82,16 +82,13 @@ export const TreeDrawer: React.FC = () => {
 
   const [gData, setGData] = useState(defaultData)
   const [expandedKeys] = useState(['0-0', '0-0-0', '0-0-0-0'])
-  const onDragEnter: TreeProps['onDragEnter'] = (info) => {
-    // console.log(info)
-    // expandedKeys, set it when controlled is needed
-    // setExpandedKeys(info.expandedKeys)
-  }
 
   const onDrop: TreeProps['onDrop'] = (info) => {
-    // console.log(info)
-    //  const { title, key, children } = info.node
-    //  const newNode = { title, key, children }
+    const droppedPosition = info.dropPosition
+    if (droppedPosition === -1) {
+      alert('안됨')
+      return
+    }
     const dropKey = info.node.key
     const dragKey = info.dragNode.key
     const dropPos = info.node.pos.split('-')
