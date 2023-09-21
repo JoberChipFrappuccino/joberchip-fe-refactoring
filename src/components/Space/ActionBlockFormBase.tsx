@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { type BlockType } from '@/models/space'
 import { useDrawerFormType } from '@/store/formMode'
 import type { ReactNode } from 'react'
-import * as icons from 'react-icons/bi'
+import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from 'react-icons/bi'
 import styles from './ActionBlockFormBase.module.scss'
 
 // todo block type을 알아야하는지 논의가 필요합니당.
@@ -22,32 +21,32 @@ export function ActionBlockFormBase({ children }: Props) {
     {
       type: 'link',
       title: '링크',
-      icon: <icons.BiLink />
+      icon: <BiLink />
     },
     {
       type: 'image',
       title: '사진',
-      icon: <icons.BiImageAlt />
+      icon: <BiImageAlt />
     },
     {
       type: 'video',
       title: '동영상',
-      icon: <icons.BiCaretRightSquare />
+      icon: <BiCaretRightSquare />
     },
     {
       type: 'googleMap',
       title: '지도',
-      icon: <icons.BiMapAlt />
+      icon: <BiMapAlt />
     },
     {
       type: 'text',
       title: '텍스트',
-      icon: <icons.BiPencil />
+      icon: <BiPencil />
     }
   ]
   return (
     <div style={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
-      <div>
+      <div className={styles.ActionBlockFormBaseContainer}>
         <h2>
           {formTypes.find((form) => form.type === blockType)?.title} {drawerMode === 'create' ? '추가' : '수정'}하기
         </h2>
