@@ -91,9 +91,9 @@ const start = 14
 const end = 36
 const step = 2
 
-export const SIZE_OPTIONS: number[] = []
+export const SIZE_OPTIONS: string[] = []
 for (let i = start; i <= end; i += step) {
-  SIZE_OPTIONS.push(i)
+  SIZE_OPTIONS.push('size' + i)
 }
 
 const sizes: Record<string, { fontSize: string }> = {}
@@ -107,17 +107,17 @@ export const FONT_OPTIONS = [
   {
     font: 'Pretendard-Regular',
     label: '프리텐다드(Pretendard)',
-    text: 'font1'
+    style: 'font1'
   },
   {
     font: 'Noto Sans KR',
     label: '본고딕(Noto Sans KR)',
-    text: 'font2'
+    style: 'font2'
   },
   {
     font: 'TheJamsil5Bold',
     label: '더잠실체(TheJamsil5Bold)',
-    text: 'font3'
+    style: 'font3'
   }
 ]
 

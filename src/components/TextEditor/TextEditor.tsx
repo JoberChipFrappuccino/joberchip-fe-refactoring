@@ -1,10 +1,24 @@
-import { StyleMap, TOOL_TYPES } from '@/constants/textEditorOptions'
-import { Editor, EditorState, RichUtils } from 'draft-js'
+import {
+  FONT_OPTIONS,
+  SIZE_OPTIONS,
+  StyleMap,
+  TEXT_BGCOLORS_OPTIONS,
+  TEXT_COLORS_OPTIONS,
+  TOOL_TYPES
+} from '@/constants/textEditorOptions'
+import { Editor, EditorState, RichUtils, type DraftInlineStyle } from 'draft-js'
 import 'draft-js/dist/Draft.css'
 import { useEffect, useState } from 'react'
 import FormButton from '../Ui/Button'
 import styles from './TextEditor.module.scss'
 import ToolOption from './ToolOption'
+
+export type Toggles = {
+  [BOLD: string]: boolean
+  ITALIC: boolean
+  UNDERLINE: boolean
+  STRIKETHROUGH: boolean
+}
 
 export default function TextEditor({
   editorIsOpen,
@@ -31,6 +45,9 @@ export default function TextEditor({
   const handleTogggleClick = (e: React.MouseEvent, inlineStyle: string) => {
     e.preventDefault()
     if (inlineStyle === null) return
+    if (inlineStyle.includes('size')) {
+      setActiveSize(inlineStyle)
+    }
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle))
   }
 
@@ -79,6 +96,54 @@ export default function TextEditor({
     }
   }
 
+  const [blockButton, setBlockButton] = useState('')
+  const [toggleButton, setToggleButton] = useState<Record<string, boolean>>({})
+  /// /////////////////////////
+  const [activeSize, setActiveSize] = useState('')
+  /// ///////////////////////
+
+  const createInlineStyleToggle = (inlineStyles: DraftInlineStyle, options: any[]) => {
+    const toggleState: Record<string, boolean> = {}
+    options.forEach((option) => {
+      if (options === SIZE_OPTIONS) {
+        toggleState[option] = inlineStyles.has(option)
+      } else {
+        toggleState[option.style] = inlineStyles.has(option.style)
+      }
+    })
+
+    return toggleState
+  }
+  useEffect(() => {
+    const inlineStyle = editorState.getCurrentInlineStyle()
+
+    const BOLD = inlineStyle.has('BOLD')
+    const ITALIC = inlineStyle.has('ITALIC')
+    const UNDERLINE = inlineStyle.has('UNDERLINE')
+    const STRIKETHROUGH = inlineStyle.has('STRIKETHROUGH')
+    const fontToggleState = createInlineStyleToggle(inlineStyle, FONT_OPTIONS)
+    const sizeToggleState = createInlineStyleToggle(inlineStyle, SIZE_OPTIONS)
+    const textColorToggleState = createInlineStyleToggle(inlineStyle, TEXT_COLORS_OPTIONS)
+    const textBgColorToggleState = createInlineStyleToggle(inlineStyle, TEXT_BGCOLORS_OPTIONS)
+
+    setToggleButton({
+      BOLD,
+      ITALIC,
+      UNDERLINE,
+      STRIKETHROUGH,
+      ...fontToggleState,
+      ...sizeToggleState,
+      ...textColorToggleState,
+      ...textBgColorToggleState
+    })
+
+    const currentSelection = editorState.getSelection()
+    const currentKey = currentSelection.getStartKey()
+    const currentBlock = editorState.getCurrentContent().getBlockForKey(currentKey)
+
+    setBlockButton(currentBlock.getType())
+  }, [editorState])
+
   return (
     <div className={styles.container}>
       {editorIsOpen && (
@@ -88,7 +153,9 @@ export default function TextEditor({
             {TOOL_TYPES[currentToolbar].tools.map((tool, index) => (
               <div
                 key={index}
-                className={styles.toolButton}
+                className={`${styles.toolButton} ${
+                  tool.action === blockButton || toggleButton[tool.action] ? styles.toolActive : ''
+                } ${tool.option === optionType && styles.toolOptionActive} `}
                 onMouseDown={(e) => {
                   if (tool.type === 'block') {
                     handleBlockClick(e, tool.action)
@@ -109,7 +176,16 @@ export default function TextEditor({
         </div>
       )}
       {optionType && (
-        <ToolOption type={optionType} handle={optionType === 'align-options' ? handleBlockClick : handleTogggleClick} />
+        <ToolOption
+          type={optionType}
+          editorState={editorState}
+          toggleButton={toggleButton}
+          setToggleButton={setToggleButton}
+          blockButton={blockButton}
+          activeSize={activeSize}
+          setActiveSize={setActiveSize}
+          handle={optionType === 'align-options' ? handleBlockClick : handleTogggleClick}
+        />
       )}
 
       <div className={`${styles.editorContainer}  ${editorIsOpen ? styles.focused : ''}`}>

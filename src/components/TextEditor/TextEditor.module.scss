@@ -88,3 +88,12 @@
     text-align: right;
   }
 }
+
+.toolActive,
+.toolOptionActive {
+  background-color: $jober-blue;
+}
+
+.optionActive {
+  color: $jober-blue;
+}

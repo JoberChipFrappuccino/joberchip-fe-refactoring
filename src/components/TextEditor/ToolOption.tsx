@@ -5,15 +5,53 @@ import {
   TEXT_BGCOLORS_OPTIONS,
   TEXT_COLORS_OPTIONS
 } from '@/constants/textEditorOptions'
+import { type EditorState } from 'draft-js'
 import styles from './ToolOption.module.scss'
+
+export type Toggles = {
+  [font1: string]: boolean
+  font2: boolean
+  font3: boolean
+  red: boolean
+}
 
 export default function ToolOption({
   type,
-  handle
+  handle,
+  editorState,
+  blockButton,
+  toggleButton,
+  setToggleButton,
+  activeSize,
+  setActiveSize
 }: {
   type: string
   handle: (e: React.MouseEvent, value: string) => void
+  editorState: EditorState
+  blockButton: string
+  toggleButton: Record<string, boolean>
+  setToggleButton: Record<string, boolean>
+  activeSize: stirng
+  setActiveSize: string
 }) {
+  const handleSizeClick = (e, selectedSize) => {
+    e.preventDefault()
+
+    const newSizeToggleState = { ...toggleButton }
+    SIZE_OPTIONS.forEach((size) => {
+      newSizeToggleState[size] = size === selectedSize
+    })
+
+    setToggleButton({
+      ...toggleButton,
+      [selectedSize]: true,
+      [activeSize]: false
+    })
+
+    setActiveSize(selectedSize)
+    handle(e, selectedSize)
+  }
+
   return (
     <div className={styles.container}>
       {type === 'size-options' && (
@@ -23,12 +61,13 @@ export default function ToolOption({
             {SIZE_OPTIONS.map((size, index) => (
               <div
                 key={index}
-                className={styles.option}
+                className={`${styles.option} ${toggleButton[size] ? styles.optionActive : styles.optionnonActive}`}
                 onMouseDown={(e) => {
-                  handle(e, `size${size}`)
+                  // handle(e, `${size}`)
+                  handleSizeClick(e, size)
                 }}
               >
-                {size}
+                {size.slice(4)}
               </div>
             ))}
           </div>
@@ -41,7 +80,9 @@ export default function ToolOption({
             {TEXT_COLORS_OPTIONS.map((colors, index) => (
               <div
                 key={index}
-                className={`${styles.textOptions} ${colors.className}`}
+                className={`${styles.textOptions} ${colors.className} ${
+                  toggleButton[colors.style] ? styles.colorOptionActive : ''
+                }`}
                 onMouseDown={(e) => {
                   handle(e, colors.style)
                 }}
@@ -55,7 +96,7 @@ export default function ToolOption({
             {TEXT_BGCOLORS_OPTIONS.map((bg, index) => (
               <div
                 key={index}
-                className={styles.bgOptions}
+                className={`${styles.bgOptions} ${toggleButton[bg.style] ? styles.colorOptionActive : ''}`}
                 onMouseDown={(e) => {
                   handle(e, bg.style)
                 }}
@@ -67,13 +108,14 @@ export default function ToolOption({
         </>
       )}
       {type === 'font-options' && (
-        <div className={`${styles.optionContainer} ${styles.fontContainer}`}>
+        <div className={`${styles.optionContainer} ${styles.fontContainer} `}>
           {FONT_OPTIONS.map((font, index) => (
             <div
               key={index}
               onMouseDown={(e) => {
-                handle(e, font.text)
+                handle(e, font.style)
               }}
+              className={`${toggleButton[font.style] ? styles.optionActive : ''}`}
             >
               {font.label}
             </div>
@@ -88,6 +130,7 @@ export default function ToolOption({
               onMouseDown={(e) => {
                 handle(e, align.style)
               }}
+              className={blockButton && align.style === blockButton ? styles.optionActive : ''}
             >
               {align.style}
             </div>
