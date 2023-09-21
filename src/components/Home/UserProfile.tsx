@@ -9,7 +9,9 @@ export function UserProfile() {
         <p>자버칩 소속</p>
       </div>
       <div className={styles.buttonCover}>
-        <button className={styles.mySpaceBtn}>내 스페이스 바로가기</button>
+        <a href="/space/space1" className={styles.mySpaceBtn}>
+          내 스페이스 바로가기
+        </a>
         <button className={styles.addSpaceBtn}>내 스페이스 추가하기</button>
       </div>
     </div>

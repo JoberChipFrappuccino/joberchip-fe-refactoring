@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  img {
+    padding-right: 1rem;
+  }
+  a {
+    display: inline-block;
+    width: 100%;
+  }
+}

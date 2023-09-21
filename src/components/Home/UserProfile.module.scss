@@ -13,22 +13,24 @@
     flex-direction: column;
     align-items: center;
     padding: 0 18px 18px 18px;
-    button {
+    button,
+    a {
       width: 100%;
       max-width: 322px;
       height: 60px;
       border-radius: 0.5rem;
+      cursor: pointer;
     }
     .mySpaceBtn {
+      display: block;
+      text-align: center;
+      line-height: 60px;
       border: none;
       background-color: $highlight-blue;
       color: $jober-blue;
       margin-bottom: 1rem;
-      cursor: pointer;
     }
-    .mySpaceBtn:focus {
-      border: 1px solid $jober-blue;
-    }
+
     .addSpaceBtn {
       border: 1px solid $cool-grey2;
       background-color: $base-white;
