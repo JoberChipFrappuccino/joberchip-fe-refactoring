@@ -1,0 +1,40 @@
+@import '/src/variables.scss';
+
+.container {
+  min-height: 199px;
+  margin: 20px 0;
+  background-color: $base-white;
+  border-radius: 0.5rem;
+  .profile {
+    padding: 18px 16px;
+  }
+  .buttonCover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 18px 18px 18px;
+    button,
+    a {
+      width: 100%;
+      max-width: 322px;
+      height: 60px;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    .mySpaceBtn {
+      display: block;
+      text-align: center;
+      line-height: 60px;
+      border: none;
+      background-color: $highlight-blue;
+      color: $jober-blue;
+      margin-bottom: 1rem;
+    }
+
+    .addSpaceBtn {
+      border: 1px solid $cool-grey2;
+      background-color: $base-white;
+      height: 32px;
+    }
+  }
+}

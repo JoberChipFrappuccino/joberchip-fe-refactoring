@@ -43,7 +43,7 @@ export default function Layout() {
       <AntdLayout style={{ background: '#fff' }}>
         <AntdLayout>
           <AntdLayout className={styles.layout}>
-            <SideNavBar collapsed={collapsed} />
+            {location.pathname !== '/' && <SideNavBar collapsed={collapsed} />}
             <Content>
               <Header collapsedChange={collapsedChange} collapsed={collapsed} />
               <Outlet />

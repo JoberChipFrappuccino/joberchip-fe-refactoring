@@ -1,5 +1,14 @@
 @import '/src/variables.scss';
 
 .container {
-  background-color: $base-white;
+  width: 100%;
+  background-color: $ppt-grey;
+  min-height: 100vh;
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
 }
