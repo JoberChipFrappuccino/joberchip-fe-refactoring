@@ -38,9 +38,9 @@ npm run start:pm2
 
 ## 공유 페이지 접근 시퀀스 
 
-![Alt text](image.png)
+![image](https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/52756ef7-9749-45c8-a908-17df8939667c)
 
-![Alt text](image-1.png)
+![image](https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/f34c19fc-96e8-4232-a27d-73d14efec550)
 
 
 ## Mock API
