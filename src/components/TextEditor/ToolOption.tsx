@@ -5,50 +5,42 @@ import {
   TEXT_BGCOLORS_OPTIONS,
   TEXT_COLORS_OPTIONS
 } from '@/constants/textEditorOptions'
-import { type EditorState } from 'draft-js'
 import styles from './ToolOption.module.scss'
 
-export type Toggles = {
-  [font1: string]: boolean
-  font2: boolean
-  font3: boolean
-  red: boolean
-}
-
 export default function ToolOption({
+  // editorState,
+  // setToggleButton,
+  // activeSize,
+  // setActiveSize
   type,
   handle,
-  editorState,
   blockButton,
-  toggleButton,
-  setToggleButton,
-  activeSize,
-  setActiveSize
+  toggleButton
 }: {
+  // editorState: EditorState
+  // setToggleButton: Record<string, boolean>
+  // activeSize: string
+  // setActiveSize: string
   type: string
   handle: (e: React.MouseEvent, value: string) => void
-  editorState: EditorState
   blockButton: string
   toggleButton: Record<string, boolean>
-  setToggleButton: Record<string, boolean>
-  activeSize: stirng
-  setActiveSize: string
 }) {
-  const handleSizeClick = (e, selectedSize) => {
+  const handleSizeClick = (e: React.MouseEvent, selectedSize: string) => {
     e.preventDefault()
 
-    const newSizeToggleState = { ...toggleButton }
-    SIZE_OPTIONS.forEach((size) => {
-      newSizeToggleState[size] = size === selectedSize
-    })
+    // 토글 중복 활성화 수정중
+    // const newSizeToggleState = { ...toggleButton }
+    // SIZE_OPTIONS.forEach((size) => {
+    //   newSizeToggleState[size] = size === selectedSize
+    // })
+    // setToggleButton({
+    //  ...toggleButton,
+    //  [selectedSize]: true,
+    //  [activeSize]: false
+    // })
 
-    setToggleButton({
-      ...toggleButton,
-      [selectedSize]: true,
-      [activeSize]: false
-    })
-
-    setActiveSize(selectedSize)
+    // setActiveSize(selectedSize)
     handle(e, selectedSize)
   }
 

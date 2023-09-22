@@ -1,5 +1,5 @@
-import 'draft-js/dist/Draft.css'
-import { useState } from 'react'
+import { useDrawerFormType } from '@/store/formMode'
+import { useEffect, useState } from 'react'
 import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import TextEditor from '../TextEditor/TextEditor'
 import FormButton from '../Ui/Button'
@@ -7,8 +7,21 @@ import styles from './TextBlockForm.module.scss'
 
 export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   const [editorIsOpen, setEditorIsOpen] = useState(false)
-  const [editableBlock, setEditableBlock] = useState(undefined)
-  const isButtonDisabled = true
+  const [editableBlock, setEditableBlock] = useState('')
+  const { drawerMode } = useDrawerFormType()
+  const [isButtonDisabled, setisButtonDisabled] = useState(true)
+
+  useEffect(() => {
+    if (editableBlock.length > 0) {
+      setisButtonDisabled(false)
+    }
+  })
+
+  // 데이터 확인
+  /* const handleClickSubmit = () => {
+     console.log(editableBlock)
+  }
+  */
 
   const handleEditorFocus = () => {
     setEditorIsOpen(true)
@@ -30,7 +43,8 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
           <TextEditor editorIsOpen={editorIsOpen} editableBlock={editableBlock} setEditableBlock={setEditableBlock} />
         </div>
       </div>
-      <FormButton title={editableBlock ? '텍스트 수정하기' : '텍스트 추가하기'} event={isButtonDisabled} />
+      <FormButton title={drawerMode === 'create' ? '텍스트 추가하기' : '텍스트 수정하기'} event={isButtonDisabled} />
+      {/* <button onClick={handleClickSubmit}>추가</button> */}
     </div>
   )
 }

@@ -6,19 +6,12 @@ import {
   TEXT_COLORS_OPTIONS,
   TOOL_TYPES
 } from '@/constants/textEditorOptions'
-import { Editor, EditorState, RichUtils, type DraftInlineStyle } from 'draft-js'
-import 'draft-js/dist/Draft.css'
+import { Editor, EditorState, RichUtils, convertToRaw, type DraftInlineStyle } from 'draft-js'
 import { useEffect, useState } from 'react'
 import FormButton from '../Ui/Button'
 import styles from './TextEditor.module.scss'
 import ToolOption from './ToolOption'
-
-export type Toggles = {
-  [BOLD: string]: boolean
-  ITALIC: boolean
-  UNDERLINE: boolean
-  STRIKETHROUGH: boolean
-}
+import './draft.css'
 
 export default function TextEditor({
   editorIsOpen,
@@ -32,10 +25,24 @@ export default function TextEditor({
   const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty())
   const [currentToolbar, setCurrentToolbar] = useState(0)
   const [optionType, setOptionType] = useState('')
-  const isButtonDisabled = true
+  const [isButtonDisabled, setisButtonDisabled] = useState(true)
+  const [blockButton, setBlockButton] = useState('')
+  const [toggleButton, setToggleButton] = useState<Record<string, boolean>>({})
+  // const [activeSize, setActiveSize] = useState('')
 
   const onChange = (editorState: EditorState) => {
     setEditorState(editorState)
+    const content = editorState.getCurrentContent()
+
+    const data = JSON.stringify(convertToRaw(content))
+
+    const plainText = content.getPlainText()
+    if (plainText.length > 0) {
+      setisButtonDisabled(false)
+      setEditableBlock(data)
+    } else {
+      setisButtonDisabled(true)
+    }
   }
 
   useEffect(() => {
@@ -45,9 +52,10 @@ export default function TextEditor({
   const handleTogggleClick = (e: React.MouseEvent, inlineStyle: string) => {
     e.preventDefault()
     if (inlineStyle === null) return
-    if (inlineStyle.includes('size')) {
-      setActiveSize(inlineStyle)
-    }
+    // 토글 중복 활성화 수정중
+    // if (inlineStyle.includes('size')) {
+    //   setActiveSize(inlineStyle)
+    // }
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle))
   }
 
@@ -95,12 +103,6 @@ export default function TextEditor({
         return 'unstyled'
     }
   }
-
-  const [blockButton, setBlockButton] = useState('')
-  const [toggleButton, setToggleButton] = useState<Record<string, boolean>>({})
-  /// /////////////////////////
-  const [activeSize, setActiveSize] = useState('')
-  /// ///////////////////////
 
   const createInlineStyleToggle = (inlineStyles: DraftInlineStyle, options: any[]) => {
     const toggleState: Record<string, boolean> = {}
@@ -178,12 +180,12 @@ export default function TextEditor({
       {optionType && (
         <ToolOption
           type={optionType}
-          editorState={editorState}
           toggleButton={toggleButton}
-          setToggleButton={setToggleButton}
           blockButton={blockButton}
-          activeSize={activeSize}
-          setActiveSize={setActiveSize}
+          // editorState={editorState}
+          // setToggleButton={setToggleButton}
+          // activeSize={activeSize}
+          // setActiveSize={setActiveSize}
           handle={optionType === 'align-options' ? handleBlockClick : handleTogggleClick}
         />
       )}
