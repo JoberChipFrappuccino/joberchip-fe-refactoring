@@ -8,6 +8,8 @@
   background-color: white;
   height: 360px;
   padding: 30px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 1rem;
   ul {
     padding: 0;
   }
@@ -111,5 +113,12 @@
         border-right: 1px solid #e6e6e6;
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    box-shadow: none;
+    border-radius: 0;
   }
 }
