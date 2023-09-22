@@ -1,5 +1,4 @@
-import { useActiveBlock } from '@/store/activeBlock'
-import { useDrawerFormType } from '@/store/formMode'
+import { useBlockAction } from '@/store/blockAction'
 import { useSpaceStore } from '@/store/space'
 import { Drawer as AntdDrawer } from 'antd'
 import { type ReactNode } from 'react'
@@ -8,9 +7,9 @@ import { DrawerEditForm } from '../SwitchCase/DrawerEditForm'
 import { ActionBlockFormBase } from './ActionBlockFormBase'
 
 export function Drawer() {
-  const { openDrawer, setOpenDrawer, drawerMode, blockType } = useDrawerFormType()
+  const { openDrawer, setOpenDrawer, drawerMode, blockType } = useBlockAction()
   const { space } = useSpaceStore()
-  const { activeBlockId } = useActiveBlock()
+  const { activeBlockId } = useBlockAction()
 
   const block = space.blocks.find((item) => item.blockId === activeBlockId)
 

@@ -1,4 +1,4 @@
-import { useDrawerFormType } from '@/store/formMode'
+import { useBlockAction } from '@/store/blockAction'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import FormButton from '../Ui/Button'
 import styles from './LinkBlockForm.module.scss'
@@ -14,7 +14,7 @@ export default function LinkBlockForm(block: Props) {
   const [link, setLink] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !link || !title
-  const { drawerMode } = useDrawerFormType()
+  const { drawerMode } = useBlockAction()
 
   const titleValue = block.block.text
   const linkValue = block.block.url

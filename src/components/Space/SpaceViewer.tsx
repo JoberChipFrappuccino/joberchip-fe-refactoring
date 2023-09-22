@@ -1,7 +1,7 @@
 import { ViewerBox } from '@/components/SwitchCase/ViewerBox'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import type { BlockType, Space } from '@/models/space'
-import { useActiveBlock } from '@/store/activeBlock'
+import { useBlockAction } from '@/store/blockAction'
 import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { useEffect, useState } from 'react'
@@ -27,7 +27,7 @@ export function SpaceViewer() {
     layouts: { lg: getBlockLayout(space.blocks, 'view') } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
 
-  const { activeBlockId, setActiveBlockId } = useActiveBlock()
+  const { activeBlockId, setActiveBlockId } = useBlockAction()
 
   useEffect(() => {
     const nextLayout = getBlockLayout(space.blocks, mode)

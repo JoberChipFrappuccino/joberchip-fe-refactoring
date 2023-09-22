@@ -1,5 +1,5 @@
 import { DropDownMenu } from '@/components/Space/DropDownMenu'
-import { useActiveBlock } from '@/store/activeBlock'
+import { useBlockAction } from '@/store/blockAction'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -9,7 +9,7 @@ type Props = {
   isActive: boolean
 }
 export function BlockActionBar({ isActive }: Props) {
-  const { activeBlockId } = useActiveBlock()
+  const { activeBlockId } = useBlockAction()
   const additionalClassName = isActive ? styles.visible : styles.hidden
 
   const items = useMemo(

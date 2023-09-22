@@ -3,8 +3,7 @@ import BlockPortal from '@/components/Space/BlockPortal'
 import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { type BlockBase, type BlockType } from '@/models/space'
-import { useActiveBlock } from '@/store/activeBlock'
-import { useDrawerFormType } from '@/store/formMode'
+import { useBlockAction } from '@/store/blockAction'
 import { useSpaceStore } from '@/store/space'
 import { useSpaceModeStore } from '@/store/spaceMode'
 import { Switch } from 'antd'
@@ -20,9 +19,9 @@ interface Props {
 export function ViewerBlockBase({ block, children }: Props) {
   const { mode } = useSpaceModeStore()
   const [focus, setFocus] = useState(false)
-  const { activeBlockId, setActiveBlockId } = useActiveBlock()
+  const { activeBlockId, setActiveBlockId } = useBlockAction()
   const { space, removeBlockById } = useSpaceStore()
-  const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useDrawerFormType()
+  const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockAction()
 
   const items = useMemo(
     () => [

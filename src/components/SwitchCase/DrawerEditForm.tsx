@@ -3,7 +3,7 @@ import LinkBlockForm from '@/components/Forms/LinkBlockForm'
 import TextBlockForm from '@/components/Forms/TextBlockForm'
 import VideoBlockForm from '@/components/Forms/VideoBlockForm'
 import { type BlockType, type BlockWith } from '@/models/space'
-import { type DrawerMode } from '@/store/formMode'
+import { type DrawerMode } from '@/store/blockAction'
 
 interface Props<T extends BlockType> {
   block: BlockWith<T>
