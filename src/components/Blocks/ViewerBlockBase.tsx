@@ -5,7 +5,6 @@ import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { type BlockBase, type BlockType } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSpaceStore } from '@/store/space'
-import { useSpaceModeStore } from '@/store/spaceMode'
 import { Switch } from 'antd'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -17,10 +16,9 @@ interface Props {
 }
 
 export function ViewerBlockBase({ block, children }: Props) {
-  const { mode } = useSpaceModeStore()
   const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useBlockAction()
-  const { space, removeBlockById } = useSpaceStore()
+  const { space, removeBlockById, mode } = useSpaceStore()
   const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockAction()
 
   const items = useMemo(

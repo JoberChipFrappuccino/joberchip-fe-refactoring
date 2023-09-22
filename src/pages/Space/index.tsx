@@ -11,7 +11,6 @@ import { useParams } from 'react-router-dom'
 import styles from './Space.module.scss'
 
 // ! API가 연동 되지 않아 text dose not matched 에러가 서버에서 발생합니다!
-// const TreeTest = loadable(async () => await import('../../components/TreeTest'), { ssr: false })
 interface PageSource {
   title: Record<string, string>
   description: Record<string, string>
@@ -24,7 +23,7 @@ type Params = {
 export default function SharePage() {
   const pageSource: PageSource = useServerSideProps(SEO)
   const SSRSpace: Space = useServerSideProps(SPACE)
-  const { space, loadSpace, setSpace, isLoaded, isFetching } = useSpaceStore()
+  const { space, loadSpace, setSpace, isLoaded, isFetching, setSpaceMode } = useSpaceStore()
   const { spaceId } = useParams<Params>()
 
   useEffect(() => {
@@ -50,6 +49,7 @@ export default function SharePage() {
         delete: SSRSpace.spaceId === 'space1'
       }
     }
+    if (nextSpace.previlige.edit) setSpaceMode('edit')
     setSpace(nextSpace)
   }, [spaceId])
 
@@ -64,7 +64,7 @@ export default function SharePage() {
         }
       }
       // console.log('nextSpace :', nextSpace)
-
+      if (nextSpace.previlige.edit) setSpaceMode('edit')
       setSpace(nextSpace)
     }
   }, [isFetching])

@@ -1,9 +1,15 @@
-# Joberchip frappuccino demo app
+# Joberchip frappuccino
+
+# 데모
+
+http://ec2-34-228-10-85.compute-1.amazonaws.com/
+
+(임시 배포 주소입니다. 다른 프로젝트가 나오거나, 서버가 죽어 있을 수도 있습니다.)
 
 ## Skills 
 
 Front Server: Node.js, Express, TypeScript
-Front Application : react, zustand, sass (css module), tailwind, Typescript
+Front Application : react, zustand, sass (css module), Typescript, react-query(미정)
 build tool : webpack
 ## 실행 방법
 
@@ -25,9 +31,19 @@ npm run build:prod
 
 # 서버 실행
 npm run start
+# 또는
+npm run start:pm2
 ```
 
-## Demo API
+
+## 공유 페이지 접근 시퀀스 
+
+![Alt text](image.png)
+
+![Alt text](image-1.png)
+
+
+## Mock API
 
 ### GET api/auth
 
@@ -39,11 +55,11 @@ type reqeust = {
 }
 
 type resposne = {
-  user_id: string
+  userId: string
   email: string
   name: string
-  profile_image: string
-  access_token: string
+  profileImage: string
+  accessToken: string
 }
 ```
 
@@ -58,11 +74,11 @@ type request = {
 }
 
 type resposne = {
-  user_id: string
+  userId: string
   email: string
   name: string
-  profile_image: string
-  access_token: string
+  profileImage: string
+  accessToken: string
 }
 ```
 
@@ -82,17 +98,17 @@ type response = {
       }
     }
     blocks: {
-      block_id: string
+      blockId: string
       type: BlockType
-      start_row: number
-      start_col: number
-      end_row: number
-      end_col: number
+      x: number
+      y: number
+      w: number
+      h: number
     }[]
   }
 }
 
-// response.blocks는 확장 가능
+// response.blocks는 확장 가능한 타입으로 정의
 export type BlockWith<T> = T extends 'text'
   ? TextBlock & BlockBase
   : T extends 'image'

@@ -3,7 +3,6 @@ import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import type { BlockType, Space } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSpaceStore } from '@/store/space'
-import { useSpaceModeStore } from '@/store/spaceMode'
 import { useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
 import { SpaceActionBar } from '../ActionBar/SpaceActionBar'
@@ -14,8 +13,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive)
 
 export function SpaceViewer() {
   const [rowHeight, setRowHeight] = useState(100)
-  const { space } = useSpaceStore()
-  const { mode } = useSpaceModeStore()
+  const { space, mode } = useSpaceStore()
 
   const [grid, setGridLayout] = useState({
     breakpoints: 'lg',
