@@ -1,6 +1,5 @@
 import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { useSpaceStore } from '@/store/space'
-import { useSpaceModeStore } from '@/store/spaceMode'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -8,8 +7,7 @@ import { TreeDrawer } from '../Tree/TreeDrawer'
 import styles from './Profile.module.scss'
 
 export function Profile() {
-  const { mode, setSpaceMode } = useSpaceModeStore()
-  const { space } = useSpaceStore()
+  const { mode, setSpaceMode, space } = useSpaceStore()
   const items = useMemo(
     () => [
       {

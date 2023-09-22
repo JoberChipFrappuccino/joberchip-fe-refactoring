@@ -1,5 +1,5 @@
 import { type BlockType } from '@/models/space'
-import { useDrawerFormType } from '@/store/formMode'
+import { useBlockAction } from '@/store/blockAction'
 import type { ReactNode } from 'react'
 import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from 'react-icons/bi'
 import styles from './ActionBlockFormBase.module.scss'
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export function ActionBlockFormBase({ children }: Props) {
-  const { blockType, setBlockType, drawerMode } = useDrawerFormType()
+  const { blockType, setBlockType, drawerMode } = useBlockAction()
 
   type FormType = {
     title: string

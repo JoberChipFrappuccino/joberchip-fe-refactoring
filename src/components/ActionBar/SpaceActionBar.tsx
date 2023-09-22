@@ -1,6 +1,6 @@
 import { type BlockType } from '@/models/space'
-import { useDrawerFormType } from '@/store/formMode'
-import { useSpaceModeStore } from '@/store/spaceMode'
+import { useBlockAction } from '@/store/blockAction'
+import { useSpaceStore } from '@/store/space'
 import { useCallback } from 'react'
 import styles from './SpaceActionBar.module.scss'
 
@@ -8,8 +8,8 @@ type Props = {
   isActive: boolean
 }
 export function SpaceActionBar({ isActive }: Props) {
-  const { mode } = useSpaceModeStore()
-  const { formType, setOpenDrawer, setBlockType, setDrawerMode } = useDrawerFormType()
+  const { mode } = useSpaceStore()
+  const { formType, setOpenDrawer, setBlockType, setDrawerMode } = useBlockAction()
 
   const changeBlockType = useCallback(
     (type: BlockType) => {

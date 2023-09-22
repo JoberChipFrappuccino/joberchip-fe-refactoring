@@ -11,7 +11,7 @@ export default function Home() {
         <Search />
         <UserProfile />
         <GroupSpace>
-          <GroupSpaceItem text="user 2의 개인 스페이스" link="/sapce/space2" />
+          <GroupSpaceItem text="user 2의 개인 스페이스" link="/space/space2" />
           <GroupSpaceItem
             style={{ borderBottom: '1px solid grey', borderTop: '1px solid grey' }}
             text="user 3의 개인 스페이스"

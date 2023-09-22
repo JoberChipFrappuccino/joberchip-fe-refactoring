@@ -29,16 +29,12 @@ export default function SpaceLayout() {
     // * HMR을 위해 div로 감싸줍니다.
     <div>
       <div id="portal" />
-      <AntdLayout style={{ background: '#fff' }}>
-        <AntdLayout>
-          <AntdLayout className={styles.layout}>
-            <SideNavBar collapsed={collapsed} />
-            <Content>
-              <Header collapsedChange={collapsedChange} collapsed={collapsed} />
-              <Outlet />
-            </Content>
-          </AntdLayout>
-        </AntdLayout>
+      <AntdLayout className={styles.layout} style={{ background: '#fff', height: '100%' }}>
+        <SideNavBar collapsed={collapsed} />
+        <Content>
+          <Header collapsedChange={collapsedChange} collapsed={collapsed} />
+          <Outlet />
+        </Content>
       </AntdLayout>
     </div>
   )

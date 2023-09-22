@@ -40,16 +40,12 @@ export default function Layout() {
     // * HMR을 위해 div로 감싸줍니다.
     <div>
       <div id="portal" />
-      <AntdLayout style={{ background: '#fff' }}>
-        <AntdLayout>
-          <AntdLayout className={styles.layout}>
-            {location.pathname !== '/' && <SideNavBar collapsed={collapsed} />}
-            <Content>
-              <Header collapsedChange={collapsedChange} collapsed={collapsed} />
-              <Outlet />
-            </Content>
-          </AntdLayout>
-        </AntdLayout>
+      <AntdLayout className={styles.layout} style={{ background: '#fff', height: '100%' }}>
+        {location.pathname !== '/' && <SideNavBar collapsed={collapsed} />}
+        <Content>
+          <Header collapsedChange={collapsedChange} collapsed={collapsed} />
+          <Outlet />
+        </Content>
       </AntdLayout>
     </div>
   )

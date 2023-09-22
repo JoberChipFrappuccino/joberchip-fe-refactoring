@@ -1,4 +1,4 @@
-import { useDrawerFormType } from '@/store/formMode'
+import { useBlockAction } from '@/store/blockAction'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import FormButton from '../Ui/Button'
 import ImgThumbnail from '../Ui/ImgThumbnail'
@@ -15,7 +15,7 @@ export default function ImageBlockForm(block: Props) {
   const [thumbnail, setThumbnail] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !title || !thumbnail
-  const { drawerMode } = useDrawerFormType()
+  const { drawerMode } = useBlockAction()
 
   const titleValue = block.block.alt
   const thumbnailValue = block.block.src

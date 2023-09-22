@@ -1,4 +1,4 @@
-import { useDrawerFormType } from '@/store/formMode'
+import { useBlockAction } from '@/store/blockAction'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import FormButton from '../Ui/Button'
 import VideoThumbnail from '../Ui/VideoThumbnail'
@@ -14,7 +14,7 @@ export default function VideoBlockForm(block: Props) {
   const [selectedRadio, setSelectedRadio] = useState('radio1')
   const [thumbnail, setThumbnail] = useState<string>('')
   const [videoUrl, setVideoUrl] = useState<string>('')
-  const { drawerMode } = useDrawerFormType()
+  const { drawerMode } = useBlockAction()
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const thumbnailValue = block.block.src

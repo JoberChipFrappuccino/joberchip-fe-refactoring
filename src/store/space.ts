@@ -11,6 +11,8 @@ interface SpaceState {
   isFetching: boolean
   isLoaded: boolean
   isFalture: boolean
+  mode: SpaceMode
+  setSpaceMode: (spaceMode: SpaceMode) => void
   loadSpace: (id: string) => Promise<boolean>
   // loadSpacePrivligeByUserId: (userId: string) => Promise<Privilege>
   addBlock: (section_id: string, options: object) => Promise<boolean>
@@ -37,9 +39,13 @@ export const useSpaceStore = create<SpaceState>((set) => {
       },
       blocks: []
     },
+    mode: 'view',
     isFetching: true,
     isLoaded: false,
     isFalture: false,
+    setSpaceMode: (spaceMode: SpaceMode) => {
+      set({ mode: spaceMode })
+    },
     loadSpace: async (id: string) => {
       set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
 

@@ -111,7 +111,7 @@ iframe {
 }
 
 .kebobMenu {
-  width: 2.5rem;
+  width: 2.532rem;
   height: 2rem;
   background-color: white;
   // border: 1px solid black;
@@ -124,10 +124,11 @@ iframe {
   z-index: 24 !important;
   .react-resizable-handle {
     position: absolute;
-    width: 2.5rem;
+    width: 2rem;
     height: 2rem;
     background-color: $cool-grey3;
     border-bottom-right-radius: 1rem;
+    border-top-left-radius: 0.5rem;
     z-index: 5;
   }
   .react-resizable-handle::after {
@@ -169,8 +170,8 @@ iframe {
 //   transform: rotate(90deg);
 // }
 .react-grid-item > .react-resizable-handle.react-resizable-handle-se {
-  bottom: -1px;
-  right: 0px;
+  bottom: 1px;
+  right: 1px;
   cursor: se-resize;
 }
 // .react-grid-item > .react-resizable-handle.react-resizable-handle-nw {

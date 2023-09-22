@@ -39,7 +39,7 @@ export function SideNavBar(props: any) {
       collapsedWidth="0"
       style={{ backgroundColor: '#fff', display: 'flex', flexDirection: 'column' }}
     >
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', height: '100%' }}>
         <SpaceListBar />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div
