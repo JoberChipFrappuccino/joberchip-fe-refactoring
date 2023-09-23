@@ -8,7 +8,12 @@ router.use('/auth', authRouter)
 
 // * Render React Application with SSR
 router.get('/', async (req, res) => {
-  await render(req.url, req, res)
+  try {
+    await render(req.url, req, res)
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Server Error')
+  }
 })
 
 export default router

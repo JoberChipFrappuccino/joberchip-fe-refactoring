@@ -12,7 +12,8 @@ export function getSpaceBySpaceId(spaceId: string) {
     fs.readFileSync(path.resolve(__dirname, `../mocks/${process.env.NODE_ENV}/space.json`), 'utf8')
   )
   if (!data[spaceId]) {
-    throw new Error('Invalid space id')
+    console.error(`[ERROR] Space not found: ${spaceId}`)
+    return {}
   }
   // * Privilege check
   // 사용자 아이디가 없으면 권한 없음
