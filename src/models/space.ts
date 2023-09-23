@@ -73,6 +73,7 @@ export interface TemplateBlock extends BlockBase<'template'> {
   description: string
   previewURL: string
   iconUrl: string
+  url: string
 }
 
 export type BlockWith<T> = //

@@ -4,27 +4,31 @@
     "title": "재직 증명서",
     "description": "자버 재직 증명서",
     "previewURL": "http://localhost:5173/newbie_profile_form.png",
-    "iconUrl": "http://localhost:5173/template_icon_1.png"
+    "iconUrl": "http://localhost:5173/template_icon_1.png",
+    "url": "http://localhost:5173/template_1_1.html"
   },
   {
     "templateId": "template_1_2",
     "title": "사직서",
     "description": "안녕히 계세요 여러분 저는",
     "previewURL": "http://localhost:5173/newbie_profile_form.png",
-    "iconUrl": "http://localhost:5173/template_icon_1.png"
+    "iconUrl": "http://localhost:5173/template_icon_1.png",
+    "url": "http://localhost:5173/template_1_2.html"
   },
   {
     "templateId": "template_1_3",
     "title": "재직자-비밀유지 · 겸업금지서약서",
     "description": "근로자가 퇴사할 때 기업의 보안사항을 누설하지 않겠다는 내용을 작성하는 서약서입니다.",
     "previewURL": "http://localhost:5173/newbie_profile_form.png",
-    "iconUrl": "http://localhost:5173/template_icon_1.png"
+    "iconUrl": "http://localhost:5173/template_icon_1.png",
+    "url": "http://localhost:5173/template_1_3.html"
   },
   {
     "templateId": "template_1_4",
     "title": "재직자 - 비밀유지 · 경업금지서약서",
     "description": "재직 중인 임직원들을 대상으로 한 비밀유지서약서입니다.",
     "previewURL": "http://localhost:5173/newbie_profile_form.png",
-    "iconUrl": "http://localhost:5173/template_icon_1.png"
+    "iconUrl": "http://localhost:5173/template_icon_1.png",
+    "url": "http://localhost:5173/template_1_4.html"
   }
 ]

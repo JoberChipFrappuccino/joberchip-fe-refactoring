@@ -14,7 +14,7 @@
         "type": "link",
         "url": "http://www.naver.com",
         "text": "네이버",
-        "visible": false
+        "visible": true
       },
       {
         "blockId": "block_1_2",
@@ -47,7 +47,7 @@
         "type": "page",
         "text": "하위 공유 페이지로 이동하기",
         "url": "http://www.naver.com",
-        "visible": false
+        "visible": true
       },
       {
         "blockId": "block_1_5",
@@ -68,7 +68,7 @@
         "type": "video",
         "src": "https://www.youtube.com/embed/PrqwxkBB0DA",
         "caption": "yotube playlist 이거 필요없을 거 같인한데, bento처럼 사용자가 캡션을 원할 경우 추가",
-        "visible": false
+        "visible": true
       },
       {
         "blockId": "block_1_7",
@@ -102,7 +102,9 @@
         "title": "재직 증명서",
         "description": "자버 재직 증명서",
         "previewURL": "http://localhost:5173/preview_1.png",
-        "iconUrl": "http://localhost:5173/template_icon_1.png"
+        "iconUrl": "http://localhost:5173/template_icon_1.png",
+        "url": "http://localhost:5173/template_1.html",
+        "visible": false
       }
     ]
   },
@@ -121,7 +123,7 @@
         "type": "link",
         "url": "http://www.naver.com",
         "text": "네이버",
-        "visible": false
+        "visible": true
       },
       {
         "blockId": "block_1_2",
@@ -175,7 +177,7 @@
         "type": "video",
         "src": "https://www.youtube.com/embed/PrqwxkBB0DA",
         "caption": "yotube playlist 이거 필요없을 거 같인한데, bento처럼 사용자가 캡션을 원할 경우 추가",
-        "visible": false
+        "visible": true
       },
       {
         "blockId": "block_1_7",
