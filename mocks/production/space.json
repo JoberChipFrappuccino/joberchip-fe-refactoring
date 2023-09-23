@@ -90,6 +90,19 @@
         "type": "googleMap",
         "src": "https://www.google.com/maps/embed/v1/place?key=AIzaSyCnJyiI_VgJmszJ9ceC-AKCVN7ebJe8ovo&q=Eiffel+Tower,Paris+France",
         "visible": false
+      },
+      {
+        "blockId": "block_1_9",
+        "y": 7,
+        "x": 0,
+        "h": 1,
+        "w": 2,
+        "type": "template",
+        "templateId": "template_1_1",
+        "title": "재직 증명서",
+        "description": "자버 재직 증명서",
+        "previewURL": "http://ec2-34-228-10-85.compute-1.amazonaws.com/preview_1.png",
+        "iconUrl": "/http://ec2-34-228-10-85.compute-1.amazonaws.com/img2.jpg"
       }
     ]
   },

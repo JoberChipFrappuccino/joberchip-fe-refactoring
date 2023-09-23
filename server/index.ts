@@ -4,6 +4,7 @@ import express from 'express'
 import render from '~/render/render'
 import authRouter from '~/routes/auth'
 import spaceRouter from './routes/space'
+import templateRouter from './routes/templates'
 
 const PORT = 5173
 const app = express()
@@ -35,6 +36,7 @@ app.use(express.static('dist'))
 
 app.use('/api/auth', authRouter)
 app.use('/api/space', spaceRouter)
+app.use('/api/template', templateRouter)
 
 app.use('/', (req, res) => {
   render(req.url, req, res)

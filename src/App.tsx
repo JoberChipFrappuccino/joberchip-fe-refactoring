@@ -1,14 +1,14 @@
 import loadable from '@loadable/component'
 import { Route, Routes } from 'react-router-dom'
 import './App.scss'
-const NotFound = loadable(async () => await import('./pages/NotFound'))
-const Layout = loadable(async () => await import('./components/Layouts/Layout'))
-const SpaceLayout = loadable(async () => await import('./components/Layouts/SpaceLayout'))
-const Home = loadable(async () => await import('./pages/Home'))
-const SharePage = loadable(async () => await import('./pages/Space'))
-const Detail = loadable(async () => await import('./pages/Detail'))
-const SignUp = loadable(async () => await import('./pages/SignUp'))
-const SignIn = loadable(async () => await import('./pages/SignIn'))
+const NotFound = loadable(() => import('./pages/NotFound'))
+const Layout = loadable(() => import('./components/Layouts/Layout'))
+const SpaceLayout = loadable(() => import('./components/Layouts/SpaceLayout'))
+const Home = loadable(() => import('./pages/Home'))
+const SharePage = loadable(() => import('./pages/Space'))
+const Detail = loadable(() => import('./pages/Detail'))
+const SignUp = loadable(() => import('./pages/SignUp'))
+const SignIn = loadable(() => import('./pages/SignIn'))
 
 export default function App() {
   return (
