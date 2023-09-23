@@ -1,5 +1,6 @@
 import { getTemplates } from '@/api/template'
 import { type BlockWith } from '@/models/space'
+import { useBlockAction } from '@/store/blockAction'
 import { useUserStore } from '@/store/user'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -10,6 +11,7 @@ import styles from './TemplateBlockCreateForm.module.scss'
 
 export function TemplateBlockCreateForm() {
   const { user } = useUserStore()
+  const { setOpenDrawer } = useBlockAction()
   const { data: templates } = useQuery(['template', user.userId], () => getTemplates(user.userId), {
     staleTime: 1000 * 60 * 5
   })
@@ -19,8 +21,13 @@ export function TemplateBlockCreateForm() {
     setTemplateId(block.templateId)
   }
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    alert('추가되었습니다. (템플릿 미구현)')
+    setOpenDrawer(false)
+  }
   return (
-    <div className={styles.container}>
+    <form className={styles.container} onSubmit={handleSubmit}>
       <TemplateSearchBox />
       <div className={styles.blockViewer}>
         {templates?.map((template) => {
@@ -38,6 +45,6 @@ export function TemplateBlockCreateForm() {
         })}
       </div>
       <FormButton title="템플릿 추가하기" event={!templateId} />
-    </div>
+    </form>
   )
 }
