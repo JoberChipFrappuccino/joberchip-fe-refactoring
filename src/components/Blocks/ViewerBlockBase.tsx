@@ -5,6 +5,7 @@ import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSpaceStore } from '@/store/space'
+import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -13,16 +14,6 @@ import styles from './ViewerBlockBase.module.scss'
 interface Props {
   children: ReactNode
   block: BlockBase<BlockType>
-}
-
-function clip(url: string) {
-  const textarea = document.createElement('textarea')
-  document.body.appendChild(textarea)
-  textarea.value = url
-  textarea.select()
-  document.execCommand('copy')
-  document.body.removeChild(textarea)
-  alert('링크가 복사되었습니다. 필요하신 곳에 붙여넣기 하세요!')
 }
 
 export function ViewerBlockBase({ block, children }: Props) {

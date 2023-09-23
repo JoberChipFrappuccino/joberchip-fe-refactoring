@@ -1,5 +1,6 @@
 import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { useSpaceStore } from '@/store/space'
+import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -11,20 +12,41 @@ export function Profile() {
   const items = useMemo(
     () => [
       {
-        key: '1',
+        key: `${space.spaceId}-profile-1`,
         label: <Switch onChange={() => {}} />,
         icon: <p>공개설정</p>
       },
       {
-        key: '2',
+        key: 'divider',
+        type: 'divider'
+      },
+      {
+        key: `${space.spaceId}-profile-2`,
         icon: <TreeDrawer />
       },
       {
-        key: '3',
-        icon: <button>링크 복사</button>
+        key: 'divider',
+        type: 'divider'
       },
       {
-        key: '4',
+        key: `${space.spaceId}-profile-3`,
+        icon: (
+          <button
+            className={styles.kebobBtn}
+            onClick={() => {
+              clip(`http://localhost:5173/space/${space.spaceId}`)
+            }}
+          >
+            링크 복사
+          </button>
+        )
+      },
+      {
+        key: 'divider',
+        type: 'divider'
+      },
+      {
+        key: `${space.spaceId}-profile-4`,
         label: (
           <Switch
             checkedChildren="공유 화면 미리보기"
@@ -34,6 +56,10 @@ export function Profile() {
             }}
           />
         )
+      },
+      {
+        key: 'divider',
+        type: 'divider'
       },
       {
         key: '5',
@@ -70,7 +96,7 @@ export function Profile() {
         </div>
         <div>
           {space.previlige.edit && (
-            <DropDownMenu statefulKeys={['1', '3']} items={items}>
+            <DropDownMenu statefulKeys={[`${space.spaceId}-profile-1`, `${space.spaceId}-profile-4`]} items={items}>
               <div className={styles.iconCover}>
                 <BsThreeDotsVertical className={styles.icon} />
               </div>

@@ -162,7 +162,16 @@ export const TreeDrawer: React.FC = () => {
 
   return (
     <>
-      <button onClick={onOpen}>저장위치 변경</button>
+      <button
+        style={{
+          backgroundColor: 'transparent',
+          border: 'none',
+          cursor: 'pointer'
+        }}
+        onClick={onOpen}
+      >
+        저장위치 변경
+      </button>
       <Drawer title="저장위치 변경" placement="right" onClose={onClose} open={open}>
         <div className="mr-4 prose">
           <h3>
