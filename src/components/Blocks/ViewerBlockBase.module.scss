@@ -4,7 +4,7 @@
   width: 100%;
   height: 100%;
   border-radius: 1rem;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   .menu {
     // * .App.scss에서 block hover시 .kebob을 다루고 있습니다!
     position: absolute;
@@ -50,9 +50,8 @@
   }
 }
 
-.portalCover {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
+.kebobBtn {
+  border: none;
   background-color: transparent;
+  cursor: pointer;
 }

@@ -22,7 +22,7 @@ authAPI.interceptors.request.use(
 )
 
 authAPI.interceptors.response.use(
-  (res) => res, // todo res.data 하니까 type에러가 남 으잉?
+  (res) => res,
   async (error) => await errorController(error)
 )
 

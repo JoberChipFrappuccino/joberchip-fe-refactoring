@@ -2,9 +2,10 @@ import BlockCover from '@/components/Space/BlockCover'
 import BlockPortal from '@/components/Space/BlockPortal'
 import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
-import { type BlockBase, type BlockType } from '@/models/space'
+import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSpaceStore } from '@/store/space'
+import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -21,65 +22,113 @@ export function ViewerBlockBase({ block, children }: Props) {
   const { space, removeBlockById, mode } = useSpaceStore()
   const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockAction()
 
-  const items = useMemo(
-    () => [
-      {
-        key: `${block.blockId}-view-block-1`,
-        label: (
-          <Switch
-            defaultChecked={!block.visible}
-            onChange={() => {
-              for (let i = 0; i < space.blocks.length; i++) {
-                if (space.blocks[i].blockId === block.blockId) {
-                  space.blocks[i].visible = !space.blocks[i].visible
-                  // todo : block visibe상태를 변경하는 API를 호출해야 합니다.
-                  break
-                }
+  const items = useMemo(() => {
+    const switchItems = []
+    let blockName = '블록'
+    if (block.type === 'page') {
+      blockName = '페이지'
+    } else if (block.type === 'template') {
+      blockName = '템플릿'
+    }
+
+    const divider = {
+      key: 'divider',
+      type: 'divider'
+    }
+
+    const publickSwitchItem = {
+      key: `${block.blockId}-view-block-1`,
+      label: (
+        <Switch
+          defaultChecked={!block.visible}
+          onChange={() => {
+            for (let i = 0; i < space.blocks.length; i++) {
+              if (space.blocks[i].blockId === block.blockId) {
+                space.blocks[i].visible = !space.blocks[i].visible
+                // todo : block visibe상태를 변경하는 API를 호출해야 합니다.
+                break
               }
-            }}
-          />
-        ),
-        icon: <p>공개 설정</p>
-      },
-      {
-        key: `${block.blockId}-view-block-2`,
-        icon: (
-          <button
-            onClick={() => {
-              setDrawerMode('edit')
-              setBlockType(block.type)
-              if (block.type === 'template') {
-                setFormType('template')
-              } else if (block.type === 'page') {
-                setFormType('page')
-              } else {
-                setFormType('block')
-              }
-              setOpenDrawer(true)
-            }}
-          >
-            페이지 정보 수정
-          </button>
-        )
-      },
-      {
-        key: `${block.blockId}-view-block-3`,
-        danger: true,
-        icon: (
-          <button
-            onClick={() => {
-              const confirmed = window.confirm('진짜 블록 삭제합니다?')
-              if (!confirmed) return
-              removeBlockById(block.blockId)
-            }}
-          >
-            삭제하기
-          </button>
-        )
-      }
-    ],
-    [mode]
-  )
+            }
+          }}
+        />
+      ),
+      icon: <p>공개 설정</p>
+    }
+
+    const pageInformationEditItem = {
+      key: `${block.blockId}-view-block-2`,
+      icon: (
+        <button
+          className={styles.kebobBtn}
+          onClick={() => {
+            setDrawerMode('edit')
+            setBlockType(block.type)
+            if (block.type === 'template') {
+              setFormType('template')
+            } else if (block.type === 'page') {
+              setFormType('page')
+            } else {
+              setFormType('block')
+            }
+            setOpenDrawer(true)
+          }}
+        >
+          {`${blockName} 정보 수정`}
+        </button>
+      )
+    }
+
+    const copyLinkItem = {
+      key: `${block.blockId}-view-block-3`,
+      icon: (
+        <button
+          className={styles.kebobBtn}
+          onClick={() => {
+            clip((block as BlockWith<'template'>).url)
+          }}
+        >
+          링크 복사
+        </button>
+      )
+    }
+
+    const templateDetailSettingItem = {
+      key: `${block.blockId}-view-block-4`,
+      icon: <button className={styles.kebobBtn}>템플릿 상세 설정</button>
+    }
+
+    const deleteItem = {
+      key: `${block.blockId}-view-block-5`,
+      danger: true,
+      icon: (
+        <button
+          className={styles.kebobBtn}
+          onClick={() => {
+            const confirmed = window.confirm('진짜 블록 삭제합니다?')
+            if (!confirmed) return
+            removeBlockById(block.blockId)
+          }}
+        >
+          삭제하기
+        </button>
+      )
+    }
+
+    switchItems.push(publickSwitchItem)
+    switchItems.push(divider)
+    switchItems.push(pageInformationEditItem)
+    switchItems.push(divider)
+
+    if (block.type === 'template') {
+      switchItems.push(copyLinkItem)
+      switchItems.push(divider)
+      switchItems.push(templateDetailSettingItem)
+      switchItems.push(divider)
+    }
+    switchItems.push(deleteItem)
+
+    return switchItems
+  }, [])
 
   useEffect(() => {
     setFocus(activeBlockId === block.blockId)

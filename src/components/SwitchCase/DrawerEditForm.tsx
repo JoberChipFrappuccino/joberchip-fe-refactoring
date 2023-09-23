@@ -4,6 +4,7 @@ import TextBlockForm from '@/components/Forms/TextBlockForm'
 import VideoBlockForm from '@/components/Forms/VideoBlockForm'
 import { type BlockType, type BlockWith } from '@/models/space'
 import { type DrawerMode } from '@/store/blockAction'
+import { TemplateBlockEditForm } from '../Forms/TemplateBlockEditForm'
 
 interface Props<T extends BlockType> {
   block: BlockWith<T>
@@ -26,7 +27,7 @@ function getEditFormComponent<T extends BlockType>({ block, mode }: Props<T>) {
     case 'page':
       return <h1>Page block form example</h1>
     case 'template':
-      return <h1>Template block form example</h1>
+      return <TemplateBlockEditForm block={block} />
     default: {
       if (process.env.NODE_ENV === 'development') {
         throw new Error('Please add a component')

@@ -6,6 +6,7 @@ import { PageBlock } from '@/components/Blocks/PageBlock'
 import { TextBlock } from '@/components/Blocks/TextBlock'
 import { VideoBlock } from '@/components/Blocks/VideoBlock'
 import type { BlockType, BlockWith } from '@/models/space'
+import { TemplateBlock } from '../Blocks/TemplateBlock'
 
 interface Props<T extends BlockType> {
   block: BlockWith<T>
@@ -27,6 +28,8 @@ function getViewerComponent<T extends BlockType>({ block, mode }: Props<T>) {
       return <VideoBlock mode={mode} block={block} />
     case 'googleMap':
       return <GoogleMapBlock mode={mode} block={block} />
+    case 'template':
+      return <TemplateBlock mode={mode} block={block} />
     default: {
       if (process.env.NODE_ENV === 'development') {
         throw new Error('Please add a component')

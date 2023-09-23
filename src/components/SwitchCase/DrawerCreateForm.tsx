@@ -3,6 +3,7 @@ import LinkBlockForm from '@/components/Forms/LinkBlockForm'
 import TextBlockForm from '@/components/Forms/TextBlockForm'
 import VideoBlockForm from '@/components/Forms/VideoBlockForm'
 import { type BlockType } from '@/models/space'
+import { TemplateBlockCreateForm } from '../Forms/TemplateBlockCreateForm'
 
 interface Props {
   blockType: BlockType
@@ -32,7 +33,7 @@ function getCreateFormComponent({ blockType }: Props) {
     case 'page':
       return <h1>Page block form example</h1>
     case 'template':
-      return <h1>Template block form example</h1>
+      return <TemplateBlockCreateForm />
     default: {
       if (process.env.NODE_ENV === 'development') {
         throw new Error('Please add a component')
