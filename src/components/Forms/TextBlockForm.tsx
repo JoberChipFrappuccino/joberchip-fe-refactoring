@@ -19,9 +19,8 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
 
   // 데이터 확인
   /* const handleClickSubmit = () => {
-     console.log(editableBlock)
-  }
-  */
+    console.log(JSON.stringify(editableBlock))
+  } */
 
   const handleEditorFocus = () => {
     setEditorIsOpen(true)
