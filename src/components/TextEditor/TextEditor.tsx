@@ -6,7 +6,7 @@ import {
   TEXT_COLORS_OPTIONS,
   TOOL_TYPES
 } from '@/constants/textEditorOptions'
-import { Editor, EditorState, RichUtils, convertToRaw, type DraftInlineStyle } from 'draft-js'
+import { Editor, EditorState, RichUtils, type DraftInlineStyle } from 'draft-js'
 import { useEffect, useState } from 'react'
 import FormButton from '../Ui/Button'
 import styles from './TextEditor.module.scss'
@@ -33,20 +33,18 @@ export default function TextEditor({
   const onChange = (editorState: EditorState) => {
     setEditorState(editorState)
     const content = editorState.getCurrentContent()
-
-    const data = JSON.stringify(convertToRaw(content))
-
     const plainText = content.getPlainText()
+
     if (plainText.length > 0) {
       setisButtonDisabled(false)
-      setEditableBlock(data)
+      setEditableBlock(editorState)
     } else {
       setisButtonDisabled(true)
     }
   }
 
   useEffect(() => {
-    // editableBlock ? setEditorState('수정') : setEditorState(EditorState.createEmpty())
+    editableBlock ? setEditorState(editableBlock) : setEditorState(EditorState.createEmpty())
   }, [editableBlock])
 
   const handleTogggleClick = (e: React.MouseEvent, inlineStyle: string) => {
