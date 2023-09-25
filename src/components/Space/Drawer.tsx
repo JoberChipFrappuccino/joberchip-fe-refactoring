@@ -1,7 +1,7 @@
 import { useBlockAction } from '@/store/blockAction'
 import { useSpaceStore } from '@/store/space'
 import { Drawer as AntdDrawer } from 'antd'
-import { type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { DrawerCreateForm } from '../SwitchCase/DrawerCreateForm'
 import { DrawerEditForm } from '../SwitchCase/DrawerEditForm'
 import { ActionBlockFormBase } from './ActionBlockFormBase'
@@ -10,6 +10,7 @@ export function Drawer() {
   const { openDrawer, setOpenDrawer, drawerMode, blockType } = useBlockAction()
   const { space } = useSpaceStore()
   const { activeBlockId } = useBlockAction()
+  const [title, setTitle] = useState('')
 
   const block = space.blocks.find((item) => item.blockId === activeBlockId)
 
@@ -21,9 +22,25 @@ export function Drawer() {
     BaseComponent = ({ children }: { children: ReactNode }) => <>{children}</>
   }
 
+  useEffect(() => {
+    let nextTitle = drawerMode === 'edit' ? ' 수정' : ' 추가'
+    switch (blockType) {
+      case 'page':
+        nextTitle = '페이지' + nextTitle
+        break
+      case 'template':
+        nextTitle = '템플릿' + nextTitle
+        break
+      default:
+        nextTitle = '블록' + nextTitle
+        break
+    }
+    setTitle(nextTitle)
+  }, [drawerMode, blockType])
+
   return (
     <AntdDrawer
-      title={drawerMode === 'create' ? '블록 추가' : '블록 수정'}
+      title={title}
       placement="right"
       bodyStyle={{ padding: '0' }}
       width={500}
