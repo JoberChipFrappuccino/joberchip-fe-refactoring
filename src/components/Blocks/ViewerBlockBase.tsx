@@ -32,7 +32,7 @@ export function ViewerBlockBase({ block, children }: Props) {
     }
 
     const divider = {
-      key: 'divider',
+      key: 'ViewBlockBase-divider',
       type: 'divider'
     }
 

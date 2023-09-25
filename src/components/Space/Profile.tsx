@@ -17,7 +17,7 @@ export function Profile() {
         icon: <p>공개설정</p>
       },
       {
-        key: 'divider',
+        key: 'Profile-divider-1',
         type: 'divider'
       },
       {
@@ -25,7 +25,7 @@ export function Profile() {
         icon: <TreeDrawer />
       },
       {
-        key: 'divider',
+        key: 'Profile-divider-2',
         type: 'divider'
       },
       {
@@ -42,7 +42,7 @@ export function Profile() {
         )
       },
       {
-        key: 'divider',
+        key: 'Profile-divider-3',
         type: 'divider'
       },
       {
@@ -58,7 +58,7 @@ export function Profile() {
         )
       },
       {
-        key: 'divider',
+        key: 'Profile-divider-4',
         type: 'divider'
       },
       {

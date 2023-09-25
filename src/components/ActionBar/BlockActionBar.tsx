@@ -38,7 +38,7 @@ export function BlockActionBar({ isActive }: Props) {
       <button className={styles.item}>1X1</button>
       <button className={styles.item}>1X2</button>
       <button className={styles.item}>2X2</button>
-      <aside className={styles.menu}>
+      <aside>
         <DropDownMenu items={items}>
           <div className={styles.iconCover}>
             <BsThreeDotsVertical className={styles.icon} />
