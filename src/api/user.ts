@@ -8,9 +8,14 @@ type LoginResponse = {
   data?: User
 }
 
-export const signInAPI = async (user: User): Promise<LoginResponse> => {
+type ReqeustUserData = {
+  username: string
+  password: string
+}
+
+export const signInAPI = async (user: ReqeustUserData): Promise<LoginResponse> => {
   try {
-    const { data } = await authAPI<User>('/api/auth/signin', {
+    const { data } = await authAPI<User>('/v1/login', {
       method: 'POST',
       data: JSON.stringify(user)
     })
@@ -20,6 +25,7 @@ export const signInAPI = async (user: User): Promise<LoginResponse> => {
       message: '로그인에 성공했습니다.'
     }
   } catch (error) {
+    console.error(error)
     if (axios.isAxiosError(error)) {
       return {
         status: 'failure',

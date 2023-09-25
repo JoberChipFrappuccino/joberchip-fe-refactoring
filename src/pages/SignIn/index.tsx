@@ -12,16 +12,16 @@ export default function SignIn() {
       password: ''
     }
     if (id === '1') {
-      userData.email = 'test1@google.com'
+      userData.email = 'mock1'
       userData.password = '1234'
     }
     if (id === '2') {
-      userData.email = 'test2@google.com'
+      userData.email = '정태욱'
       userData.password = '1234'
     }
     // ! 3번 ID 유저는 없습니다. 에러 확인용 입니다.
     if (id === '3') {
-      userData.email = 'test3@google.com'
+      userData.email = 'test1@google.com'
       userData.password = '1234'
     }
     const res = await signIn(userData)
@@ -42,7 +42,7 @@ export default function SignIn() {
             await loginById('1')
           }}
         >
-          1번 유저로 로그인
+          mock1 유저로 로그인
         </button>
       </div>
       <div>
@@ -51,7 +51,7 @@ export default function SignIn() {
             await loginById('2')
           }}
         >
-          2번 유저로 로그인
+          정태욱 유저로 로그인
         </button>
       </div>
       <div>
@@ -60,7 +60,7 @@ export default function SignIn() {
             await loginById('3')
           }}
         >
-          3번 유저로 로그인
+          front mock user로 로그인
         </button>
       </div>
     </div>

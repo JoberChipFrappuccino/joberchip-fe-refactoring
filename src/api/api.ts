@@ -26,4 +26,22 @@ authAPI.interceptors.response.use(
   async (error) => await errorController(error)
 )
 
-export { authAPI }
+const backAuthAPI = axios.create({
+  baseURL: 'http://13.125.76.45:8080',
+  timeout: 10000
+})
+
+authAPI.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem(ACCESS_TOKEN) ? localStorage.getItem(ACCESS_TOKEN) : ''
+    config.headers['Content-Type'] = 'application/json; charset=utf-8'
+    config.headers.Authorization = token
+    return config
+  },
+  async (error) => {
+    console.error(error)
+    return await Promise.reject(error)
+  }
+)
+
+export { authAPI, backAuthAPI }
