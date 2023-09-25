@@ -102,7 +102,7 @@
         "title": "재직 증명서",
         "description": "자버 재직 증명서",
         "previewURL": "http://ec2-34-228-10-85.compute-1.amazonaws.com/preview_1.png",
-        "iconUrl": "/http://ec2-34-228-10-85.compute-1.amazonaws.com/img2.jpg",
+        "iconUrl": "http://ec2-34-228-10-85.compute-1.amazonaws.com/img2.jpg",
         "url": "http://ec2-34-228-10-85.compute-1.amazonaws.com/template_1_1.html",
         "visible": false
       }

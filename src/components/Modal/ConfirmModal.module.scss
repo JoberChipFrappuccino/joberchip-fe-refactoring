@@ -1,0 +1,56 @@
+@import '/src/variables.scss';
+
+.container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  z-index: 2001;
+  background-color: rgba(0, 0, 0, 0.3);
+  .cover {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 350px;
+    height: 160px;
+    background-color: $base-white;
+    border-radius: 1rem;
+    .contentCover {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      flex: 1;
+    }
+    .btnCover {
+      display: flex;
+      button {
+        width: 50%;
+        border: none;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        cursor: pointer;
+        transition: all 200ms ease;
+      }
+      .cancelBtn {
+        background-color: $cool-grey1;
+        border-bottom-left-radius: 1rem;
+      }
+      .cancelBtn:hover {
+        background-color: #cfcdcd;
+      }
+      .confirmBtn {
+        background-color: $jober-blue;
+        color: $base-white;
+        border-bottom-right-radius: 1rem;
+      }
+      .confirmBtn:hover {
+        background-color: #3950fc;
+      }
+    }
+  }
+}

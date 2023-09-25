@@ -5,10 +5,12 @@ import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSpaceStore } from '@/store/space'
+import ModalPortal from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { ConfirmModal } from '../Modal/ConfirmModal'
 import styles from './ViewerBlockBase.module.scss'
 
 interface Props {
@@ -21,6 +23,7 @@ export function ViewerBlockBase({ block, children }: Props) {
   const { activeBlockId, setActiveBlockId } = useBlockAction()
   const { space, removeBlockById, mode } = useSpaceStore()
   const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockAction()
+  const [confirmModal, setConfirmModal] = useState(false)
 
   const items = useMemo(() => {
     const switchItems = []
@@ -32,7 +35,7 @@ export function ViewerBlockBase({ block, children }: Props) {
     }
 
     const divider = {
-      key: 'divider',
+      key: 'ViewBlockBase-divider-1',
       type: 'divider'
     }
 
@@ -100,18 +103,8 @@ export function ViewerBlockBase({ block, children }: Props) {
     const deleteItem = {
       key: `${block.blockId}-view-block-5`,
       danger: true,
-      icon: (
-        <button
-          className={styles.kebobBtn}
-          onClick={() => {
-            const confirmed = window.confirm('진짜 블록 삭제합니다?')
-            if (!confirmed) return
-            removeBlockById(block.blockId)
-          }}
-        >
-          삭제하기
-        </button>
-      )
+      label: '삭제하기',
+      onClick: () => setConfirmModal(true)
     }
 
     switchItems.push(publickSwitchItem)
@@ -138,7 +131,11 @@ export function ViewerBlockBase({ block, children }: Props) {
     <div className={styles.container}>
       {mode === 'edit' && (
         <aside className={[styles.menu, activeBlockId === block.blockId ? 'kebobMenu' : ''].join(' ')}>
-          <DropDownMenu trigger="click" items={items} statefulKeys={[`${block.blockId}-view-block-1`]}>
+          <DropDownMenu
+            trigger="click"
+            items={items}
+            statefulKeys={[`${block.blockId}-view-block-1`, `${block.blockId}-view-block-5`]}
+          >
             <button id={DROPDOWN_TRIGGER_ICON_ID} className={styles.iconCover}>
               <BsThreeDotsVertical
                 id={DROPDOWN_TRIGGER_ICON_ID}
@@ -157,6 +154,33 @@ export function ViewerBlockBase({ block, children }: Props) {
             }}
           />
         </BlockPortal>
+      )}
+      {confirmModal && (
+        <ModalPortal>
+          <ConfirmModal
+            cancelBtnText="취소"
+            confirmBtnText="삭제하기"
+            onConfirm={(isConfirm) => {
+              if (isConfirm) removeBlockById(block.blockId)
+              setConfirmModal(false)
+            }}
+          >
+            <p
+              style={{
+                margin: 0
+              }}
+            >
+              진짜 지웁니다?
+            </p>
+            <p
+              style={{
+                margin: 0
+              }}
+            >
+              복구 못해요?
+            </p>
+          </ConfirmModal>
+        </ModalPortal>
       )}
       {children}
     </div>

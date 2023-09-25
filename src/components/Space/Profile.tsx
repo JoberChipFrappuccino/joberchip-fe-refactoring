@@ -1,13 +1,16 @@
 import { DropDownMenu } from '@/components/Space/DropDownMenu'
 import { useSpaceStore } from '@/store/space'
+import ModalPortal from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { ConfirmModal } from '../Modal/ConfirmModal'
 import { TreeDrawer } from '../Tree/TreeDrawer'
 import styles from './Profile.module.scss'
 
 export function Profile() {
+  const [openConfirmModal, setConfirmModal] = useState(false)
   const { mode, setSpaceMode, space } = useSpaceStore()
   const items = useMemo(
     () => [
@@ -17,7 +20,7 @@ export function Profile() {
         icon: <p>공개설정</p>
       },
       {
-        key: 'divider',
+        key: 'Profile-divider-1',
         type: 'divider'
       },
       {
@@ -25,24 +28,18 @@ export function Profile() {
         icon: <TreeDrawer />
       },
       {
-        key: 'divider',
+        key: 'Profile-divider-2',
         type: 'divider'
       },
       {
         key: `${space.spaceId}-profile-3`,
-        icon: (
-          <button
-            className={styles.kebobBtn}
-            onClick={() => {
-              clip(`http://localhost:5173/space/${space.spaceId}`)
-            }}
-          >
-            링크 복사
-          </button>
-        )
+        label: '링크 복사',
+        onClick: () => {
+          clip(`http://localhost:5173/space/${space.spaceId}`)
+        }
       },
       {
-        key: 'divider',
+        key: 'Profile-divider-3',
         type: 'divider'
       },
       {
@@ -58,13 +55,16 @@ export function Profile() {
         )
       },
       {
-        key: 'divider',
+        key: 'Profile-divider-4',
         type: 'divider'
       },
       {
-        key: '5',
+        key: `${space.spaceId}-profile-5`,
         danger: true,
-        label: '삭제하기'
+        label: '삭제하기',
+        onClick: () => {
+          setConfirmModal(true)
+        }
       }
     ],
     [mode]
@@ -96,7 +96,10 @@ export function Profile() {
         </div>
         <div>
           {space.previlige.edit && (
-            <DropDownMenu statefulKeys={[`${space.spaceId}-profile-1`, `${space.spaceId}-profile-4`]} items={items}>
+            <DropDownMenu
+              statefulKeys={[`${space.spaceId}-profile-1`, `${space.spaceId}-profile-4`, `${space.spaceId}-profile-5`]}
+              items={items}
+            >
               <div className={styles.iconCover}>
                 <BsThreeDotsVertical className={styles.icon} />
               </div>
@@ -119,6 +122,34 @@ export function Profile() {
           <p>미확인</p>
         </li>
       </ul>
+      {openConfirmModal && (
+        <ModalPortal>
+          <ConfirmModal
+            onConfirm={(isConfirm) => {
+              alert(isConfirm ? '삭제 되었어요 (미구현)' : '취소 되었어요 (미구현)')
+              setConfirmModal(false)
+            }}
+            cancelBtnText="취소"
+            confirmBtnText="삭제하기"
+          >
+            <p
+              style={{
+                margin: 0,
+                marginBottom: '10px'
+              }}
+            >
+              진짜 지웁니다?
+            </p>
+            <p
+              style={{
+                margin: 0
+              }}
+            >
+              복구 못해요?
+            </p>
+          </ConfirmModal>
+        </ModalPortal>
+      )}
     </div>
   )
 }

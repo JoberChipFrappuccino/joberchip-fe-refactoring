@@ -166,7 +166,8 @@ export const TreeDrawer: React.FC = () => {
         style={{
           backgroundColor: 'transparent',
           border: 'none',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          padding: 0
         }}
         onClick={onOpen}
       >
