@@ -1,5 +1,6 @@
 import { ViewerBox } from '@/components/SwitchCase/ViewerBox'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
+import { useDebounce } from '@/hooks/debounce'
 import type { BlockType, Space } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSpaceStore } from '@/store/space'
@@ -26,6 +27,10 @@ export function SpaceViewer() {
   })
 
   const { activeBlockId, setActiveBlockId } = useBlockAction()
+
+  useDebounce(grid.layouts.lg, 2000, (nextLayout) => {
+    // console.log('layout changed', nextLayout)
+  })
 
   useEffect(() => {
     const nextLayout = getBlockLayout(space.blocks, mode)
@@ -67,7 +72,7 @@ export function SpaceViewer() {
             block.h = h
           })
           // todo : 변경된 layout을 백엔드에 알려줘야합니다.
-          // todo : throttling을 적용해서 n초 마다 1번 요청하도록 합니다. (계속 해서 변경할 경우 중간에 한 번씩 요청을 보내는게 좋을 듯)
+          // todo : Debouncing을 적용해서 n초 마다 1번 요청하도록 합니다. (계속 해서 변경할 경우 중간에 한 번씩 요청을 보내는게 좋을 듯)
         }}
         onDragStart={(_layout, _oldItem, _newItem, _placeholder, event, element) => {
           setActiveBlockId(element.id)
