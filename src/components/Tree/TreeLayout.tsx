@@ -120,8 +120,7 @@ export default function TreeLayout({ onSelectTreeNode }: Props) {
     setGData(data)
   }
 
-  useEffect(() => {
-  }, [gData])
+  useEffect(() => {}, [gData])
 
   return (
     <Tree

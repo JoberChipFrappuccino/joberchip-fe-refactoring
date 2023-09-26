@@ -10,7 +10,7 @@ export function PageBlock({ block, mode }: Props) {
     <div className={styles.container}>
       <div className={mode === 'edit' ? 'cover' : ''} />
       <div className={mode}>
-        <a href={block.url}>{block.text}</a>
+        <a href={block.url}>{block.title}</a>
       </div>
     </div>
   )

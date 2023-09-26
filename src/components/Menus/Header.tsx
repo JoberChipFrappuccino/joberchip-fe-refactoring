@@ -61,12 +61,11 @@ export function Header(props: any) {
               }}
             />
             <Drawer placement="left" bodyStyle={{ padding: 0 }} closable={false} onClose={onClose} open={open}>
-
               <div style={{ position: 'relative', display: 'flex', height: '100%' }}>
                 <Button
                   onClick={onClose}
                   icon={<CloseOutlined />}
-                  type='text'
+                  type="text"
                   style={{ position: 'absolute', top: 0, right: 0 }}
                 />
                 <SpaceListBar />

@@ -1,5 +1,6 @@
 import ImageBlockForm from '@/components/Forms/ImageBlockForm'
 import LinkBlockForm from '@/components/Forms/LinkBlockForm'
+import PageBlockForm from '@/components/Forms/PageBlockForm'
 import TextBlockForm from '@/components/Forms/TextBlockForm'
 import VideoBlockForm from '@/components/Forms/VideoBlockForm'
 import { type BlockType, type BlockWith } from '@/models/space'
@@ -25,7 +26,7 @@ function getEditFormComponent<T extends BlockType>({ block, mode }: Props<T>) {
     case 'googleMap':
       return <h1>GoogleMap block form example</h1>
     case 'page':
-      return <h1>Page block form example</h1>
+      return <h1><PageBlockForm block={block}/></h1>
     case 'template':
       return <TemplateBlockEditForm block={block} />
     default: {
