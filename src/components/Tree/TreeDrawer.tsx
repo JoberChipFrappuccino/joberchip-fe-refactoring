@@ -31,7 +31,7 @@ export const TreeDrawer: React.FC = () => {
           <h3>
             <BiHomeAlt /> 어쩌구의 공유페이지
           </h3>
-          <TreeLayout/>
+          <TreeLayout />
         </div>
       </Drawer>
     </>
