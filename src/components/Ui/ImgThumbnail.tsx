@@ -61,6 +61,7 @@ export default function ImgThumbnail({ radio, imgData, buttonActive, img }: Prop
         type="file"
         id="file"
         name="file"
+        accept=".jpeg, .jpg, .png"
         style={{ display: 'none' }}
         onChange={(e) => {
           changeMedia(e)
@@ -76,7 +77,7 @@ export default function ImgThumbnail({ radio, imgData, buttonActive, img }: Prop
           }}
         >
           {/* API 작업 이후 image만 포함할 예정 */}
-          {thumbnail.includes('image' && 'jpg') ? <img src={thumbnail} /> : <video src={thumbnail} />}
+          <img src={thumbnail} />
           <div className={styles.minus}>
             <HiOutlineMinusCircle />
           </div>
