@@ -2,6 +2,7 @@ import App from '@/App'
 import { POST_API_KEY, SEO, SPACE } from '@/constants'
 import { SSRProvider } from '@/context/ssr'
 import { ChunkExtractor } from '@loadable/server'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { Request, Response } from 'express'
 import path from 'path'
 import { renderToString } from 'react-dom/server'
@@ -46,10 +47,22 @@ export default async function renderHome(url: string, req: Request, res: Respons
   const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats })
 
   const extractor = process.env.NODE_ENV === 'production' ? webExtractor : nodeExtractor
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        cacheTime: 1000 * 60 * 5, // 5분
+        retry: 0
+      }
+    }
+  })
+
   const jsx = extractor.collectChunks(
     <SSRProvider data={serverSideData}>
       <StaticRouter location={url}>
-        <App />
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
       </StaticRouter>
     </SSRProvider>
   )

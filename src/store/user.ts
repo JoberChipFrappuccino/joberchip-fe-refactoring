@@ -4,7 +4,7 @@ import { type User } from '@/models/user'
 import { create } from 'zustand'
 
 type LoginForm = {
-  email: string
+  username: string
   password: string
 }
 
@@ -27,7 +27,7 @@ export const useUserStore = create<UserState>((set) => {
     user: {},
     isFetching: false,
     isSignedIn: false,
-    signIn: async (username: string, password: string) => {
+    signIn: async ({ username, password }: LoginForm) => {
       set((state) => ({ ...state, isFetching: true, isSignedIn: false }))
       const { data, ...res } = await signInAPI({
         username,

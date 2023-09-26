@@ -9,20 +9,20 @@ export default function SignIn() {
   const loginById = async (id: '1' | '2' | '3') => {
     if (isFetching) return
     const userData = {
-      email: '',
+      username: '',
       password: ''
     }
     if (id === '1') {
-      userData.email = 'test1@google.com'
+      userData.username = 'test1@google.com'
       userData.password = '1234'
     }
     if (id === '2') {
-      userData.email = 'test2@google.com'
+      userData.username = 'test2@google.com'
       userData.password = '1234'
     }
     // ! 3번 ID 유저는 없습니다. 에러 확인용 입니다.
     if (id === '3') {
-      userData.email = 'test3@google.com'
+      userData.username = 'test3@google.com'
       userData.password = '1234'
     }
     const res = await signIn(userData)

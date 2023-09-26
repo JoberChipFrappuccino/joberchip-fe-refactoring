@@ -16,7 +16,7 @@ type ReqeustUserData = {
 // https://www.notion.so/c70dfd1d2d56400b9f937386c0927639
 export const signInAPI = async (user: ReqeustUserData): Promise<LoginResponse> => {
   try {
-    const { data } = await authAPI<User>('/v1/login', {
+    const { data } = await authAPI<User>('/api/auth/signin', {
       method: 'POST',
       data: JSON.stringify(user)
     })
