@@ -72,3 +72,21 @@
     color: #ff0606;
   }
 }
+
+.inputbox {
+  position: relative;
+  .delTitle {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    width: 30px;
+    position: absolute;
+    align-items: center;
+    cursor: pointer;
+    svg {
+      font-size: 1.25rem;
+      color: #aeb9d1;
+    }
+  }
+}
