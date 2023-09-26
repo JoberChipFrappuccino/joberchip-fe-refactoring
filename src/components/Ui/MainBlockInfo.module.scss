@@ -1,0 +1,53 @@
+.mainbg {
+  display: flex;
+}
+.blockcontainer {
+  display: flex;
+  max-width: 700px;
+  padding: 50px 0 80px 0;
+  margin: 0 auto 100px auto;
+  border-radius: 20px;
+  justify-content: center;
+  border: dashed 2px #aeb9d1;
+}
+.blockinfobox {
+  width: 320px;
+  display: flex;
+  border-radius: 20px;
+  flex-direction: column;
+}
+.plus {
+  display: flex;
+  font-size: 50px;
+  color: #aeb9d1;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+.footertitle {
+  display: flex;
+  font-size: 24px;
+  margin-top: 30px;
+  color: #aeb9d1;
+  justify-content: center;
+}
+.iconbox {
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.iconsvg {
+  width: 70px;
+  height: 70px;
+  padding: 10px;
+  display: flex;
+  border-radius: 10px;
+  border: solid 2px #aeb9d1;
+  background-color: #e2e6ef;
+}
+.itemtitle {
+  margin-top: 10px;
+  display: flex;
+  color: #aeb9d1;
+  font-size: 24px;
+  justify-content: center;
+}
