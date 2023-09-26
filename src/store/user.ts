@@ -55,10 +55,19 @@ export const useUserStore = create<UserState>((set) => {
     },
     signOut: () => {
       // todo : logout API있다면 호출합니다.
-      set((state) => ({ ...state, isFetching: false, isSignedIn: false }))
       localStorage.removeItem(ACCESS_TOKEN)
-    },
-    auth: async () => {}
+
+      set((state) => {
+        const user: User = {
+          userId: '',
+          username: '',
+          email: '',
+          profileImg: '',
+          accessToken: ''
+        }
+        return { ...state, user, isSignedIn: false }
+      })
+    }
   }
   return store
 })

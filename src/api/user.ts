@@ -13,6 +13,7 @@ type ReqeustUserData = {
   password: string
 }
 
+// https://www.notion.so/c70dfd1d2d56400b9f937386c0927639
 export const signInAPI = async (user: ReqeustUserData): Promise<LoginResponse> => {
   try {
     const { data } = await authAPI<User>('/v1/login', {
@@ -25,7 +26,6 @@ export const signInAPI = async (user: ReqeustUserData): Promise<LoginResponse> =
       message: '로그인에 성공했습니다.'
     }
   } catch (error) {
-    console.error(error)
     if (axios.isAxiosError(error)) {
       return {
         status: 'failure',
@@ -39,6 +39,7 @@ export const signInAPI = async (user: ReqeustUserData): Promise<LoginResponse> =
   }
 }
 
+// https://www.notion.so/Back-End-987b88625bae4cae90cf32fee45534b4
 export const getUserInfoAPI = async (): Promise<User | null> => {
   try {
     const { data } = await authAPI<User>('/api/auth', {

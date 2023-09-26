@@ -97,3 +97,9 @@ export type BlockWith<T> = //
     : T extends 'template'
     ? TemplateBlock
     : never
+
+export interface SpaceList {
+  spaceId: string
+  mainPageId: string
+  participationType: ParticipationType
+}
