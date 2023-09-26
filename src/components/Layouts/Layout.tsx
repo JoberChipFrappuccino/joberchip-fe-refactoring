@@ -2,7 +2,7 @@ import { Header } from '@/components/Menus/Header'
 import { SideNavBar } from '@/components/Menus/SideNavBar'
 import { useUserStore } from '@/store/user'
 import { Layout as AntdLayout } from 'antd'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import styles from './Layout.module.scss'
 
@@ -12,12 +12,6 @@ export default function Layout() {
   const navigate = useNavigate()
   const location = useLocation()
   const { isSignedIn, getUserInfo } = useUserStore()
-
-  const [collapsed, setCollapsed] = useState(false)
-
-  const collapsedChange = (e: boolean) => {
-    setCollapsed(e)
-  }
 
   useEffect(() => {
     if (isSignedIn) {
@@ -41,9 +35,9 @@ export default function Layout() {
     <div>
       <div id="portal" />
       <AntdLayout className={styles.layout} style={{ background: '#fff', height: '100%' }}>
-        {location.pathname !== '/' && <SideNavBar collapsed={collapsed} />}
+        {location.pathname !== '/' && <SideNavBar />}
         <Content>
-          <Header collapsedChange={collapsedChange} collapsed={collapsed} />
+          <Header />
           <Outlet />
         </Content>
       </AntdLayout>
