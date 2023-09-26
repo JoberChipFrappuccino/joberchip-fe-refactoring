@@ -37,7 +37,8 @@ export type BlockBase<T extends BlockType> = {
 }
 
 export interface TextBlock extends BlockBase<'text'> {
-  text: string
+  alt: string
+  src: string
 }
 
 export interface ImageBlock extends BlockBase<'image'> {
