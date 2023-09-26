@@ -35,7 +35,9 @@ export function SpaceActionBar({ isActive }: Props) {
             changeBlockType('page')
           }}
         >
-          <img src={`${baseURL}/page_action_bar_icon.png`} alt="page action bar icon" />
+          <div className={styles.actionicon}>
+            <img src={`${baseURL}/page_icon.svg`} alt="page action bar icon" />
+          </div>
         </button>
       </Tooltip>
       <Tooltip title="템플릿 생성하기">
@@ -45,7 +47,9 @@ export function SpaceActionBar({ isActive }: Props) {
             changeBlockType('template')
           }}
         >
-          <img src={`${baseURL}/template_action_bar_icon.png`} alt="page action bar icon" />
+          <div className={styles.actionicon}>
+            <img src={`${baseURL}/templat_icon.svg`} alt="page action bar icon" />
+          </div>
         </button>
       </Tooltip>
       <Tooltip title="블럭 생성하기">
@@ -55,7 +59,9 @@ export function SpaceActionBar({ isActive }: Props) {
             changeBlockType('text')
           }}
         >
-          <img src={`${baseURL}/block_action_bar_icon.png`} alt="page action bar icon" />
+          <div className={styles.actionicon}>
+            <img src={`${baseURL}/block_icon.svg`} alt="page action bar icon" />
+          </div>
         </button>
       </Tooltip>
     </div>
