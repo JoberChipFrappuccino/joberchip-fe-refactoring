@@ -12,22 +12,19 @@ const mock =
 export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   const [editorIsOpen, setEditorIsOpen] = useState(false)
   const [editableBlock, setEditableBlock] = useState<EditorState>(EditorState.createEmpty())
-  const { drawerMode } = useBlockAction()
+  const { drawerMode, setOpenDrawer } = useBlockAction()
   const [isButtonDisabled, setisButtonDisabled] = useState(true)
 
   useEffect(() => {
-    drawerMode === 'create'
-      ? setEditableBlock(EditorState.createEmpty())
-      : setEditableBlock(EditorState.createWithContent(convertFromRaw(JSON.parse(mock))))
-
-    if (editableBlock.getCurrentContent().hasText()) {
-      setisButtonDisabled(false)
+    if (drawerMode === 'create') {
+      setEditableBlock(EditorState.createEmpty())
+    } else {
+      setEditableBlock(EditorState.createWithContent(convertFromRaw(JSON.parse(block.text))))
     }
   }, [])
 
-  // 데이터 확인
-  const handleClickSubmit = () => {
-    // console.log(drawerMode, '추가', convertToRaw(editableBlock.getCurrentContent()))
+  const handleSubmit = () => {
+    setOpenDrawer(false)
   }
 
   const handleEditorFocus = () => {
@@ -39,7 +36,7 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   }
 
   return (
-    <div className={styles.container}>
+    <form className={styles.container} onSubmit={handleSubmit}>
       <div className={styles.formContainer}>
         <span className={styles.label}>텍스트 첨부</span>
         <div
@@ -47,11 +44,16 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
           onFocus={handleEditorFocus}
           onBlur={handleEditorBlur}
         >
-          <TextEditor editorIsOpen={editorIsOpen} editableBlock={editableBlock} setEditableBlock={setEditableBlock} />
+          <TextEditor
+            editorIsOpen={editorIsOpen}
+            editableBlock={editableBlock}
+            setEditableBlock={setEditableBlock}
+            setisButtonDisabled={setisButtonDisabled}
+            isButtonDisabled={isButtonDisabled}
+          />
         </div>
       </div>
       <FormButton title={drawerMode === 'create' ? '텍스트 추가하기' : '텍스트 수정하기'} event={isButtonDisabled} />
-      <button onClick={handleClickSubmit}>추가</button>
-    </div>
+    </form>
   )
 }

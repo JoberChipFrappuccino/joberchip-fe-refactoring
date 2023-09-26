@@ -16,28 +16,28 @@ import './draft.css'
 export default function TextEditor({
   editorIsOpen,
   editableBlock,
-  setEditableBlock
+  setEditableBlock,
+  setisButtonDisabled,
+  isButtonDisabled
 }: {
   editorIsOpen: boolean
   editableBlock: any
   setEditableBlock: any
+  setisButtonDisabled: React.Dispatch<React.SetStateAction<boolean>>
+  isButtonDisabled: boolean
 }) {
   const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty())
   const [currentToolbar, setCurrentToolbar] = useState(0)
   const [optionType, setOptionType] = useState('')
-  const [isButtonDisabled, setisButtonDisabled] = useState(true)
   const [blockButton, setBlockButton] = useState('')
   const [toggleButton, setToggleButton] = useState<Record<string, boolean>>({})
   // const [activeSize, setActiveSize] = useState('')
 
   const onChange = (editorState: EditorState) => {
     setEditorState(editorState)
-    const content = editorState.getCurrentContent()
-    const plainText = content.getPlainText()
-
-    if (plainText.length > 0) {
-      setisButtonDisabled(false)
+    if (editorState.getCurrentContent().hasText()) {
       setEditableBlock(editorState)
+      setisButtonDisabled(false)
     } else {
       setisButtonDisabled(true)
     }
