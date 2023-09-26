@@ -8,18 +8,25 @@ type Props = {
   imgData?: Dispatch<SetStateAction<string>>
   buttonActive?: Dispatch<SetStateAction<boolean>>
   img: string
+  videoUrl: string
 }
 
-export default function VideoThumbnail({ radio, imgData, buttonActive, img }: Props) {
+export default function VideoThumbnail({ radio, imgData, buttonActive, img, videoUrl }: Props) {
   const [selectedRadio, setSelectedRadio] = useState<string>('radio1')
   const [thumbnail, setThumbnail] = useState<string>('')
+  const [youtubeThumb, setYoutubeThumb] = useState<string>('')
   const [key, setKey] = useState(0)
   const editImg = img
 
   useEffect(() => {
     setThumbnail(editImg)
     setSelectedRadio(radio ?? 'radio1')
-  }, [radio, img])
+    if (videoUrl.includes('be/')) {
+      setYoutubeThumb(videoUrl.split('be/')[1])
+    } else if (videoUrl.includes('v=')) {
+      setYoutubeThumb(videoUrl.split('v=')[1])
+    }
+  }, [radio, img, videoUrl])
 
   /** 제품 썸네일 이미지 Base64 포멧 변환 */
   function changeMedia(e: React.ChangeEvent<HTMLInputElement>) {
@@ -62,6 +69,7 @@ export default function VideoThumbnail({ radio, imgData, buttonActive, img }: Pr
         type="file"
         id="file"
         name="file"
+        accept=".mp4, .webm, .ogg, .quicktime"
         style={{ display: 'none' }}
         onChange={(e) => {
           changeMedia(e)
@@ -76,8 +84,13 @@ export default function VideoThumbnail({ radio, imgData, buttonActive, img }: Pr
             changeMediaRemove()
           }}
         >
-          {/* API 작업 이후 image만 포함할 예정 */}
-          {thumbnail.includes('image' && 'jpg') ? <img src={thumbnail} /> : <video src={thumbnail} />}
+          {thumbnail.includes('youtu') ? (
+            <img src={`https://img.youtube.com/vi/${youtubeThumb}/maxresdefault.jpg`} />
+          ) : (
+            <div className={styles.default}>
+              <video src={thumbnail} />
+            </div>
+          )}
           <div className={styles.minus}>
             <HiOutlineMinusCircle />
           </div>
