@@ -1,24 +1,23 @@
+import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
+import { TiDeleteOutline } from 'react-icons/ti'
 import FormButton from '../Ui/Button'
 import ImgThumbnail from '../Ui/ImgThumbnail'
 import styles from './ImageBlockForm.module.scss'
 
 type Props = {
-  block: {
-    alt?: string
-    src?: string
-  }
+  block?: BlockWith<'image'>
 }
 
-export default function ImageBlockForm(block: Props) {
+export default function ImageBlockForm({ block }: Props) {
   const [thumbnail, setThumbnail] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !title || !thumbnail
   const { drawerMode } = useBlockAction()
 
-  const titleValue = block.block.alt
-  const thumbnailValue = block.block.src
+  const titleValue = block?.alt ?? ''
+  const thumbnailValue = block?.src ?? ''
 
   useEffect(() => {
     setTitle(titleValue ?? '')
@@ -40,12 +39,23 @@ export default function ImageBlockForm(block: Props) {
     setTitle(e.target.value)
   }
 
+  const deleteTitle = () => {
+    setTitle('')
+  }
+
   return (
     <div className={styles.container}>
       <form className={styles.formBox} onSubmit={submitHandler}>
         <div className={styles.forms}>
           <h3>사진 제목*</h3>
-          <input type="text" value={title} onChange={onChangetitle} placeholder="사진 제목을 입력해주세요." />
+          <div className={styles.inputbox}>
+            <input type="text" value={title} onChange={onChangetitle} placeholder="사진 제목을 입력해주세요." />
+            {title && (
+              <div className={styles.delTitle} onClick={deleteTitle}>
+                <TiDeleteOutline />
+              </div>
+            )}
+          </div>
           <h3 className={styles.formText}>사진 첨부</h3>
           <ImgThumbnail img={thumbnail} imgData={setThumbnail} />
         </div>

@@ -19,19 +19,18 @@ const PropsData = {
   description: undefined,
   location: undefined
 }
-
 function getCreateFormComponent({ blockType }: Props) {
   switch (blockType) {
     case 'text':
       return <TextBlockForm />
     case 'image':
-      return <ImageBlockForm block={PropsData} />
+      return <ImageBlockForm />
     case 'link':
-      return <LinkBlockForm block={PropsData} />
+      return <LinkBlockForm />
     case 'embed':
       return <h1>Embed block form example</h1>
     case 'video':
-      return <VideoBlockForm block={PropsData} />
+      return <VideoBlockForm />
     case 'googleMap':
       return <h1>GoogleMap block form example</h1>
     case 'page':

@@ -36,6 +36,14 @@
   animation: visibleAnimation 500ms ease-in-out;
   animation-fill-mode: forwards;
 }
+.actionicon {
+  display: flex;
+  width: 30px;
+  width: 30px;
+  padding: 6px;
+  border-radius: 5px;
+  background-color: #4C61FF;
+}
 @keyframes hiddenAnimation {
   0% {
     opacity: 1;

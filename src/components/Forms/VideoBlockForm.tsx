@@ -1,23 +1,23 @@
+import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
+import { TiDeleteOutline } from 'react-icons/ti'
 import FormButton from '../Ui/Button'
 import VideoThumbnail from '../Ui/VideoThumbnail'
 import styles from './VideoBlockForm.module.scss'
 
 type Props = {
-  block: {
-    src?: string
-  }
+  block?: BlockWith<'video'>
 }
 
-export default function VideoBlockForm(block: Props) {
+export default function VideoBlockForm({ block }: Props) {
   const [selectedRadio, setSelectedRadio] = useState('radio1')
   const [thumbnail, setThumbnail] = useState<string>('')
   const [videoUrl, setVideoUrl] = useState<string>('')
   const { drawerMode } = useBlockAction()
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
-  const thumbnailValue = block.block.src
+  const thumbnailValue = block?.src ?? ''
 
   useEffect(() => {
     setThumbnail(thumbnailValue ?? '')
@@ -48,10 +48,10 @@ export default function VideoBlockForm(block: Props) {
   }
 
   const onChangetitle = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setThumbnail(videoUrl)
-    setVideoUrl(e.target.value)
-    setIsButtonDisabled(e.target.value === '')
+    const newValue = e.target.value
+    setVideoUrl(newValue) // 먼저 videoUrl을 업데이트합니다.
+    setThumbnail(newValue) // 그리고 thumbnail을 업데이트합니다.
+    setIsButtonDisabled(newValue === '')
   }
 
   const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +59,11 @@ export default function VideoBlockForm(block: Props) {
     setVideoUrl('')
     setThumbnail('')
     setIsButtonDisabled(true)
+  }
+
+  const deleteHandler = () => {
+    setVideoUrl('')
+    setThumbnail('')
   }
 
   return (
@@ -76,13 +81,20 @@ export default function VideoBlockForm(block: Props) {
               />
               <h3>동영상 URL 첨부*</h3>
             </div>
-            <input
-              type="text"
-              value={videoUrl}
-              onChange={onChangetitle}
-              placeholder="동영상 주소를 입력해주세요."
-              disabled={selectedRadio !== 'radio1'}
-            />
+            <div className={styles.inputbox}>
+              <input
+                type="text"
+                value={videoUrl}
+                onChange={onChangetitle}
+                placeholder="유튜브 주소를 입력해주세요.(https://youtu.be/동영상링크)"
+                disabled={selectedRadio !== 'radio1'}
+              />
+              {videoUrl && (
+                <div className={styles.delete} onClick={deleteHandler}>
+                  <TiDeleteOutline />
+                </div>
+              )}
+            </div>
           </label>
           <label>
             <div className={styles.checkbox}>
@@ -101,6 +113,7 @@ export default function VideoBlockForm(block: Props) {
             radio={selectedRadio}
             imgData={setThumbnail}
             buttonActive={setIsButtonDisabled}
+            videoUrl={videoUrl}
           />
         </div>
         <FormButton title={drawerMode === 'create' ? '동영상 추가하기' : '동영상 수정하기'} event={isButtonDisabled} />
