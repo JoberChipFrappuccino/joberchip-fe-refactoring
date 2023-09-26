@@ -50,7 +50,9 @@ export interface LinkBlock extends BlockBase<'link'> {
   text: string
 }
 export interface PageBlock extends BlockBase<'page'> {
-  text: string
+  title: string
+  description: string
+  location: string
   url: string
 }
 export interface EmbedGoogleMapBlock extends BlockBase<'googleMap'> {

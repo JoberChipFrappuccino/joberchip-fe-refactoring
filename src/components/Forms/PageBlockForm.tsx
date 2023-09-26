@@ -1,15 +1,35 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useBlockAction } from '@/store/blockAction'
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import TreeLayout from '../Tree/TreeLayout'
 import FormButton from '../Ui/Button'
 import styles from './PageBlockForm.module.scss'
 
-export default function PageBlockForm() {
+type Props = {
+  block?: {
+    title?: string
+    description?: string
+    location?: string
+  }
+}
+
+export default function PageBlockForm(block: Props) {
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [location, setLocation] = useState<string>('')
   const [isLocationVisible, setLocationVisible] = useState(false)
+  const { drawerMode } = useBlockAction()
   // const [selectedFile, setSelectedFile] = useState<string>('')
   const isButtonDisabled = !title || !description || !location
+
+  const titleValue = block.block.title
+  const descriptionValue = block.block.description
+  const locationValue = block.block.location
+
+  useEffect(() => {
+    setTitle(titleValue ?? '')
+    setDescription(descriptionValue ?? '')
+    setLocation(locationValue ?? '')
+  }, [titleValue, descriptionValue, locationValue])
 
   const toggleLocation = () => {
     setLocationVisible(!isLocationVisible)
@@ -72,7 +92,7 @@ export default function PageBlockForm() {
             )}
           </div>
         </div>
-        <FormButton title={'페이지 수정하기'} event={isButtonDisabled} />
+        <FormButton title={drawerMode === 'create' ? '페이지 추가하기' : '페이지 수정하기' } event={isButtonDisabled} />
       </form>
     </div>
   )

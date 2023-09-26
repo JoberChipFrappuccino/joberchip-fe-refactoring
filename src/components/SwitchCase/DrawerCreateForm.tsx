@@ -14,7 +14,10 @@ const PropsData = {
   alt: undefined,
   src: undefined,
   text: undefined,
-  url: undefined
+  url: undefined,
+  title: undefined,
+  description: undefined,
+  location: undefined
 }
 
 function getCreateFormComponent({ blockType }: Props) {
@@ -32,9 +35,7 @@ function getCreateFormComponent({ blockType }: Props) {
     case 'googleMap':
       return <h1>GoogleMap block form example</h1>
     case 'page':
-      return (
-          <PageBlockForm />
-      )
+      return <PageBlockForm block={PropsData}/>
     case 'template':
       return <TemplateBlockCreateForm />
     default: {
