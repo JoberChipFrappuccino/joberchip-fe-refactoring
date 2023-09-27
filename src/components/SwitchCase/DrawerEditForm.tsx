@@ -26,7 +26,9 @@ function getEditFormComponent<T extends BlockType>({ block, mode }: Props<T>) {
     case 'googleMap':
       return <h1>GoogleMap block form example</h1>
     case 'page':
-      return <h1><PageBlockForm block={block}/></h1>
+      return (
+          <PageBlockForm block={block} />
+      )
     case 'template':
       return <TemplateBlockEditForm block={block} />
     default: {

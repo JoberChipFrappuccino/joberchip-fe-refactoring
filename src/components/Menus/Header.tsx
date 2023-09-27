@@ -87,7 +87,7 @@ export function Header(props: any) {
                         style={{ backgroundColor: '#4C61FF' }}
                       />
                     </Space>
-                    <h2 style={{ margin: 'none' }}>주하림</h2>
+                    <h2 style={{ margin: 'none' }}>김자버</h2>
                     <Button style={{ backgroundColor: '#4C61FF', color: '#FFFFFF', border: 'none' }} block>
                       공유페이지
                     </Button>

@@ -16,14 +16,15 @@ export default function PageBlockForm(block: Props) {
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [location, setLocation] = useState<string>('')
-  const [isLocationVisible, setLocationVisible] = useState(false)
+  const [isLocationVisible, setLocationVisible] = useState<boolean>(false)
+  const [treeLayoutToggle, setTreeLayoutToggle] = useState<boolean>(false)
   const { drawerMode } = useBlockAction()
   // const [selectedFile, setSelectedFile] = useState<string>('')
   const isButtonDisabled = !title || !description || !location
 
-  const titleValue = block.block.title
-  const descriptionValue = block.block.description
-  const locationValue = block.block.location
+  const titleValue = block.block?.title
+  const descriptionValue = block.block?.description
+  const locationValue = block.block?.location
 
   useEffect(() => {
     setTitle(titleValue ?? '')
@@ -33,6 +34,7 @@ export default function PageBlockForm(block: Props) {
 
   const toggleLocation = () => {
     setLocationVisible(!isLocationVisible)
+    setTreeLayoutToggle(!treeLayoutToggle)
   }
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -54,7 +56,7 @@ export default function PageBlockForm(block: Props) {
     setDescription(e.target.value)
   }
 
-  const onSelectTreeNode = (selectedKeys: React.Key[], info: any) => {
+  const onSelectTreeNode = (selectedKeys?: React.Key[], info?: any) => {
     const selectedNode = info.selectedNodes[0]
     if (selectedNode?.key) {
       // const nodePath = selectedNode.keyPath.map((key: string) => key.toString()).join(' > ')
@@ -87,12 +89,12 @@ export default function PageBlockForm(block: Props) {
             />
             {isLocationVisible && (
               <div>
-                <TreeLayout onSelectTreeNode={onSelectTreeNode} />
+                <TreeLayout onSelectTreeNode={onSelectTreeNode} drawerMode={drawerMode === 'edit'}/>
               </div>
             )}
           </div>
         </div>
-        <FormButton title={drawerMode === 'create' ? '페이지 추가하기' : '페이지 수정하기' } event={isButtonDisabled} />
+        <FormButton title={drawerMode === 'create' ? '페이지 추가하기' : '페이지 수정하기'} event={isButtonDisabled} />
       </form>
     </div>
   )
