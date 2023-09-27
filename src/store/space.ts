@@ -1,4 +1,4 @@
-import { getSpaceAPI } from '@/api/space'
+import { getSpaceAPI, getSpaceFromBackAPI } from '@/api/space'
 import { type Space } from '@/models/space'
 import { create } from 'zustand'
 
@@ -13,7 +13,8 @@ interface SpaceState {
   isFalture: boolean
   mode: SpaceMode
   setSpaceMode: (spaceMode: SpaceMode) => void
-  loadSpace: (id: string) => Promise<boolean>
+  loadSpace: (pageId: string) => Promise<boolean>
+  loadSpaceFromBack: (pageId: string) => Promise<boolean>
   // loadSpacePrivligeByUserId: (userId: string) => Promise<Privilege>
   addBlock: (section_id: string, options: object) => Promise<boolean>
   removeBlock: (section_id: string, block_id: string) => Promise<boolean>
@@ -46,11 +47,19 @@ export const useSpaceStore = create<SpaceState>((set) => {
     setSpaceMode: (spaceMode: SpaceMode) => {
       set({ mode: spaceMode })
     },
-    loadSpace: async (id: string) => {
+    loadSpace: async (pageId: string) => {
       set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
-
-      const { data } = await getSpaceAPI(id)
-
+      const { data } = await getSpaceAPI(pageId)
+      if (data) {
+        set(() => ({ space: data, isFetching: false, isLoaded: true, isFalture: false }))
+        return true
+      }
+      set(() => ({ isFetching: false, isLoaded: false, isFalture: true }))
+      return false
+    },
+    loadSpaceFromBack: async (pageId: string) => {
+      set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
+      const { data } = await getSpaceFromBackAPI(pageId)
       if (data) {
         set(() => ({ space: data, isFetching: false, isLoaded: true, isFalture: false }))
         return true

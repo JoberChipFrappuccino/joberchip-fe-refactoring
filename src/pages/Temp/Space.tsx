@@ -20,23 +20,23 @@ type Params = {
   spaceId: string
 }
 
-export default function ShareableSpace() {
+export default function TempShareableSpace() {
   const pageSource: PageSource = useServerSideProps(SEO)
   const SSRSpace: Space = useServerSideProps(SPACE)
-  const { space, loadSpace, setSpace, isLoaded, isFetching, setSpaceMode } = useSpaceStore()
+  const { space, loadSpaceFromBack, setSpace, isLoaded, isFetching, setSpaceMode } = useSpaceStore()
   const { spaceId } = useParams<Params>()
 
   useEffect(() => {
     // * react 내부적으로 주소를 이동할 경우 space를 다시 로드합니다.
     if (!SSRSpace?.spaceId) {
-      loadSpace(spaceId ?? '')
+      loadSpaceFromBack(spaceId ?? '')
       return
     }
 
     // * react 내부적으로 주소를 이동할 경우
     // * SSR로 로드한 spaceId와 이동할 space가 다르다면 space를 다시 로드합니다.
     if (SSRSpace?.spaceId !== spaceId) {
-      loadSpace(spaceId ?? '')
+      loadSpaceFromBack(spaceId ?? '')
       return
     }
 

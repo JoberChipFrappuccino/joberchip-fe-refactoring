@@ -7,6 +7,33 @@ interface SpaceAPIResponse {
   message: string
   data?: Space
 }
+
+// https:// www.notion.so/72d474ef1cfd45cf81feaade1ce4b9fc
+export const getSpaceFromBackAPI = async (pageId: string): Promise<SpaceAPIResponse> => {
+  try {
+    const { data } = await backAuthAPI<Space>(`/v1/page/${pageId}`, {
+      method: 'GET'
+    })
+    return {
+      data,
+      status: 'success',
+      message: '스페이스를 불러왔습니다.'
+    }
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        status: 'failure',
+        message: error.response?.data.message
+      }
+    }
+    return {
+      status: 'failure',
+      message: '네트워크 오류가 발생했습니다. 다시 시도해주세요.'
+    }
+  }
+}
+
+// https:// www.notion.so/72d474ef1cfd45cf81feaade1ce4b9fc
 export const getSpaceAPI = async (spaceId: string): Promise<SpaceAPIResponse> => {
   try {
     const { data } = await authAPI<Space>('/api/space', {

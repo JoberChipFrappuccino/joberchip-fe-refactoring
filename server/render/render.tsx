@@ -35,6 +35,17 @@ export default async function renderHome(url: string, req: Request, res: Respons
     }
   })
   serverSideData[SPACE] = JSON.stringify({}) // CSR시 빈 객체로 초기화
+
+  if (url.includes('/temp/space/')) {
+    console.info('BACK_END에서 SPACE DETAIL을 조회합니다.')
+    console.info('(미구현, BACK API 수정 중..)')
+
+    // const spaceId = url.split('/temp/space/')[1]
+    // serverSideData[SPACE] = JSON.stringify(getSpaceBySpaceId(spaceId))
+    // const backResponse = await api(`/v1/page/${spaceId}`)
+    // console.log('backResponse : ', backResponse)
+  }
+
   if (url.includes('/space/')) {
     const spaceId = url.split('/space/')[1]
     serverSideData[SPACE] = JSON.stringify(getSpaceBySpaceId(spaceId))
