@@ -36,19 +36,19 @@ authRouter.get('/', (req, res) => {
 // * auth/signin?email=xxx
 authRouter.post('/signin', (req, res) => {
   interface Body {
-    email: string
+    username: string
     password: string
   }
   const body = req.body as unknown as Body
   const data: UserMockData = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, `../mocks/${process.env.NODE_ENV}/user.json`), 'utf8')
   )
-  if (!data[body.email]) {
+  if (!data[body.username]) {
     return res.status(400).json({
       message: '존재하지 않는 이메일입니다.\n 아이디 또는 패스워드를 확인해주세요.'
     })
   }
-  return res.json(data[body.email])
+  return res.json(data[body.username])
 })
 
 authRouter.get('/space', (req, res) => {

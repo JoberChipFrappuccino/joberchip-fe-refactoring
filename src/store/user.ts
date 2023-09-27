@@ -4,7 +4,7 @@ import { type User } from '@/models/user'
 import { create } from 'zustand'
 
 type LoginForm = {
-  email: string
+  username: string
   password: string
 }
 
@@ -27,9 +27,12 @@ export const useUserStore = create<UserState>((set) => {
     user: {},
     isFetching: false,
     isSignedIn: false,
-    signIn: async (user: User) => {
+    signIn: async ({ username, password }: LoginForm) => {
       set((state) => ({ ...state, isFetching: true, isSignedIn: false }))
-      const { data, ...res } = await signInAPI(user)
+      const { data, ...res } = await signInAPI({
+        username,
+        password
+      })
       if (data) {
         set((state) => ({ ...state, user: data, isFetching: false, isSignedIn: true }))
         localStorage.setItem(ACCESS_TOKEN, data.accessToken)
@@ -52,10 +55,19 @@ export const useUserStore = create<UserState>((set) => {
     },
     signOut: () => {
       // todo : logout API있다면 호출합니다.
-      set((state) => ({ ...state, isFetching: false, isSignedIn: false }))
       localStorage.removeItem(ACCESS_TOKEN)
-    },
-    auth: async () => {}
+
+      set((state) => {
+        const user: User = {
+          userId: '',
+          username: '',
+          email: '',
+          profileImg: '',
+          accessToken: ''
+        }
+        return { ...state, user, isSignedIn: false }
+      })
+    }
   }
   return store
 })

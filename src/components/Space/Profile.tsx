@@ -5,6 +5,7 @@ import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
 import { useMemo, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 import { ConfirmModal } from '../Modal/ConfirmModal'
 import { TreeDrawer } from '../Tree/TreeDrawer'
 import styles from './Profile.module.scss'
@@ -91,7 +92,7 @@ export function Profile() {
           </ul>
           <nav className={styles.navCover}>
             {/* 이거 하드코딩한 장식용임 이 녀석의 처우는 나중에 생각하자 */}
-            <a href="/">{'스페이스 홈 바로가기 >'}</a>
+            <Link to="/">{'스페이스 홈 바로가기 >'}</Link>
           </nav>
         </div>
         <div>

@@ -8,7 +8,13 @@ type LoginResponse = {
   data?: User
 }
 
-export const signInAPI = async (user: User): Promise<LoginResponse> => {
+type ReqeustUserData = {
+  username: string
+  password: string
+}
+
+// https://www.notion.so/c70dfd1d2d56400b9f937386c0927639
+export const signInAPI = async (user: ReqeustUserData): Promise<LoginResponse> => {
   try {
     const { data } = await authAPI<User>('/api/auth/signin', {
       method: 'POST',
@@ -33,6 +39,7 @@ export const signInAPI = async (user: User): Promise<LoginResponse> => {
   }
 }
 
+// https://www.notion.so/Back-End-987b88625bae4cae90cf32fee45534b4
 export const getUserInfoAPI = async (): Promise<User | null> => {
   try {
     const { data } = await authAPI<User>('/api/auth', {

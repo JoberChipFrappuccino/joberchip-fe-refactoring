@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN } from '@/constants'
+import { ACCESS_TOKEN, BACK_MOCK_ACCESS_TOKEN } from '@/constants'
 import axios from 'axios'
 import { errorController } from './controller/error'
 
@@ -16,14 +16,35 @@ authAPI.interceptors.request.use(
     return config
   },
   async (error) => {
-    console.error(error)
+    if (process.env.NODE_ENV === 'development') console.error(error)
     return await Promise.reject(error)
   }
 )
 
 authAPI.interceptors.response.use(
   (res) => res,
-  async (error) => await errorController(error)
+  async (error) => {
+    if (process.env.NODE_ENV === 'development') console.error(error)
+    await errorController(error)
+  }
 )
 
-export { authAPI }
+const backAuthAPI = axios.create({
+  baseURL: 'http://13.125.76.45:8080',
+  timeout: 10000
+})
+
+backAuthAPI.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) ? localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) : ''
+    config.headers['Content-Type'] = 'application/json; charset=utf-8'
+    config.headers.Authorization = token
+    return config
+  },
+  async (error) => {
+    if (process.env.NODE_ENV === 'development') console.error(error)
+    return await Promise.reject(error)
+  }
+)
+
+export { authAPI, backAuthAPI }
