@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const LoadablePlugin = require('@loadable/webpack-plugin')
+require('dotenv').config()
 
 const devMode = process.env.NODE_ENV !== 'production'
 const hotMiddlewareScript = `webpack-hot-middleware/client?name=web&log=false&reload=true`
@@ -61,8 +62,17 @@ const getConfig = (target) => {
     },
     plugins:
       target === 'web'
-        ? [new webpack.HotModuleReplacementPlugin(), new LoadablePlugin(), new MiniCssExtractPlugin()]
-        : [new LoadablePlugin(), new MiniCssExtractPlugin()]
+        ? [
+            new webpack.HotModuleReplacementPlugin(),
+            new LoadablePlugin(),
+            new MiniCssExtractPlugin(),
+            new webpack.DefinePlugin({ 'process.env': JSON.stringify(process.env) })
+          ]
+        : [
+            new LoadablePlugin(),
+            new MiniCssExtractPlugin(),
+            new webpack.DefinePlugin({ 'process.env': JSON.stringify(process.env) })
+          ]
   }
 }
 
