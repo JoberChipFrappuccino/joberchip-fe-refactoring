@@ -3,13 +3,14 @@ import { GroupSpace } from '@/components/Home/GroupSpace'
 import { GroupSpaceItem } from '@/components/Home/GroupSpaceItem'
 import { Search } from '@/components/Home/Search'
 import { UserProfile } from '@/components/Home/UserProfile'
+import { SPACE_LIST } from '@/constants/queryKey'
 import { useUserStore } from '@/store/user'
 import { useQuery } from '@tanstack/react-query'
 import styles from './Home.module.scss'
 
 export default function Home() {
   const { signOut, user } = useUserStore()
-  const { data } = useQuery(['spaceList'], () => getSpaceListAPI(), {
+  const { data } = useQuery([SPACE_LIST], () => getSpaceListAPI(), {
     staleTime: 1000 * 60 * 60
   })
 
