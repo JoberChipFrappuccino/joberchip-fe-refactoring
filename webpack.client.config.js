@@ -70,8 +70,8 @@ const getConfig = (target) => {
           ]
         : [
             new LoadablePlugin(),
-            new MiniCssExtractPlugin(),
-            new webpack.DefinePlugin({ 'process.env': JSON.stringify(process.env) })
+            new MiniCssExtractPlugin()
+            // new webpack.DefinePlugin({ 'process.env': JSON.stringify(process.env) })
           ]
   }
 }
