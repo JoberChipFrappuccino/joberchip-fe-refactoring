@@ -24,6 +24,7 @@ export default function ShareableSpace() {
   useEffect(() => {
     // CASE : CSR
     // react 내부적으로 주소를 이동할 경우 space를 다시 로드합니다.
+    // SSR시 데이터가 없을 경우도 여기에서 처리합니다.
     if (!SSRSpace?.pageId) {
       loadSpaceFromBack(spaceId ?? '')
       return
