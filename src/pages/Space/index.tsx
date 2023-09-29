@@ -20,7 +20,7 @@ export default function Space() {
         <Search />
         <UserProfile />
         <GroupSpace title="개인 스페이스 (링크 클릭하면 에러납니다)">
-          {data?.data.map((space) => {
+          {data?.spaceList.map((space) => {
             return (
               <GroupSpaceItem
                 key={space.spaceId}

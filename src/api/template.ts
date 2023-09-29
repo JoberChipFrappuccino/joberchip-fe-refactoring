@@ -1,8 +1,8 @@
 import { type BlockWith } from '@/models/space'
 import { authAPI } from './api'
 
-export const getTemplates = async (userId: string): Promise<Array<BlockWith<'template'>>> => {
-  const { data } = await authAPI<Array<BlockWith<'template'>>>('/api/template', {
+export const getTemplates = async (userId: string): Promise<Array<BlockWith<TTemplate>>> => {
+  const { data } = await authAPI<Array<BlockWith<TTemplate>>>('/api/template', {
     method: 'GET',
     params: {
       id: userId

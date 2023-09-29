@@ -1,4 +1,6 @@
+import { ConfirmModal } from '@/components/Modal/ConfirmModal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
+import { TreeDrawer } from '@/components/Tree/TreeDrawer'
 import { useSharePageStore } from '@/store/sharePage'
 import ModalPortal from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
@@ -6,8 +8,6 @@ import { Switch } from 'antd'
 import { useMemo, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
-import { ConfirmModal } from '../Modal/ConfirmModal'
-import { TreeDrawer } from '../Tree/TreeDrawer'
 import styles from './Profile.module.scss'
 
 export function Profile() {

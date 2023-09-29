@@ -10,7 +10,7 @@ export interface SharePage {
   children: Array<BlockWith<BlockType>>
 }
 
-export type BlockType = 'TEXT' | 'IMAGE' | 'LINK' | 'PAGE' | 'EMBED' | 'VIDEO' | 'MAP' | 'TEMPLATE' | 'BASE'
+export type BlockType = TText | TImage | TLink | TPage | TEmbed | TVideo | TMap | TTemplate | 'BASE' // HACK : "BASE"는 임시 코드
 
 export type BlockBase<T extends BlockType> = {
   objectId: string

@@ -17,7 +17,7 @@ export function TemplateBlockCreateForm() {
   })
   const [templateId, setTemplateId] = useState('')
 
-  const handleOnClick = (block: BlockWith<'template'>) => {
+  const handleOnClick = (block: BlockWith<TTemplate>) => {
     setTemplateId(block.templateId)
   }
 

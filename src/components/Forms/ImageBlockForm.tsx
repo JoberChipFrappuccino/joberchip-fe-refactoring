@@ -7,7 +7,7 @@ import ImgThumbnail from '../Ui/ImgThumbnail'
 import styles from './ImageBlockForm.module.scss'
 
 type Props = {
-  block?: BlockWith<'IMAGE'>
+  block?: BlockWith<TImage>
 }
 
 export default function ImageBlockForm({ block }: Props) {

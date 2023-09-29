@@ -112,7 +112,7 @@ export const createSpaceAPI = async (): Promise<SpaceCreateAPIResponse> => {
 }
 
 interface SpaceListAPIResponse {
-  data: SpaceList[]
+  spaceList: SpaceList[]
   message: string
   success: boolean
 }
@@ -134,7 +134,7 @@ export const getSpaceListAPI = async (): Promise<SpaceListAPIResponse> => {
     return {
       success: true,
       message: '스페이스 리스트를 불러왔습니다.',
-      data: data.response
+      spaceList: data.response
     }
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -142,13 +142,13 @@ export const getSpaceListAPI = async (): Promise<SpaceListAPIResponse> => {
       return {
         success: false,
         message: error.response?.data.error.message,
-        data: []
+        spaceList: []
       }
     }
     return {
       success: false,
       message: '네트워크 오류가 발생했습니다. 다시 시도해주세요.',
-      data: []
+      spaceList: []
     }
   }
 }

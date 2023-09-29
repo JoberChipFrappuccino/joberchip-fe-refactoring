@@ -1,3 +1,4 @@
+import { PAGE, TEMPLATE } from '@/constants/BlockType'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
 import { Drawer as AntdDrawer } from 'antd'
@@ -16,7 +17,7 @@ export function Drawer() {
 
   let BaseComponent = ActionBlockFormBase
 
-  if (blockType === 'PAGE' || blockType === 'template') {
+  if (blockType === PAGE || blockType === TEMPLATE) {
     // * 페이지, 템플릿의 BaseComponent를 바꿔야합니다요.
     // eslint-disable-next-line react/display-name, react/jsx-no-useless-fragment
     BaseComponent = ({ children }: { children: ReactNode }) => <>{children}</>
@@ -25,10 +26,10 @@ export function Drawer() {
   useEffect(() => {
     let nextTitle = drawerMode === 'edit' ? ' 수정' : ' 추가'
     switch (blockType) {
-      case 'PAGE':
+      case PAGE:
         nextTitle = '페이지' + nextTitle
         break
-      case 'template':
+      case TEMPLATE:
         nextTitle = '템플릿' + nextTitle
         break
       default:

@@ -3,7 +3,7 @@ import BlockLogo from './BlockLogo'
 import styles from './LinkBlock.module.scss'
 
 type Props = {
-  block: BlockWith<'LINK'>
+  block: BlockWith<TLink>
   mode: SpaceMode
 }
 

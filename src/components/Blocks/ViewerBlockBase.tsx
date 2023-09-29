@@ -2,6 +2,7 @@ import BlockCover from '@/components/SharePage/BlockCover'
 import BlockPortal from '@/components/SharePage/BlockPortal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
+import { BLOCK, PAGE, TEMPLATE } from '@/constants/BlockType'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
@@ -28,14 +29,14 @@ export function ViewerBlockBase({ block, children }: Props) {
   const items = useMemo(() => {
     const switchItems = []
     let blockName = '블록'
-    if (block.type === 'PAGE') {
+    if (block.type === PAGE) {
       blockName = '페이지'
-    } else if (block.type === 'template') {
+    } else if (block.type === TEMPLATE) {
       blockName = '템플릿'
     }
 
     const divider = {
-      key: 'ViewBlockBase-divider-1',
+      key: `${block.objectId}-ViewBlockBase-divider-1`,
       type: 'divider'
     }
 
@@ -66,12 +67,10 @@ export function ViewerBlockBase({ block, children }: Props) {
           onClick={() => {
             setDrawerMode('edit')
             setBlockType(block.type)
-            if (block.type === 'template') {
-              setFormType('template')
-            } else if (block.type === 'page') {
-              setFormType('page')
+            if (block.type === TEMPLATE || block.type === PAGE) {
+              setFormType(block.type)
             } else {
-              setFormType('block')
+              setFormType(BLOCK)
             }
             setOpenDrawer(true)
           }}
@@ -87,7 +86,7 @@ export function ViewerBlockBase({ block, children }: Props) {
         <button
           className={styles.kebobBtn}
           onClick={() => {
-            clip((block as BlockWith<'template'>).url)
+            clip((block as BlockWith<TTemplate>).url)
           }}
         >
           링크 복사
@@ -112,7 +111,7 @@ export function ViewerBlockBase({ block, children }: Props) {
     switchItems.push(pageInformationEditItem)
     switchItems.push(divider)
 
-    if (block.type === 'template') {
+    if (block.type === TEMPLATE) {
       switchItems.push(copyLinkItem)
       switchItems.push(divider)
       switchItems.push(templateDetailSettingItem)

@@ -2,7 +2,7 @@ import { type BlockWith } from '@/models/space'
 import styles from './TextBlockForm.module.scss'
 
 interface Props {
-  block?: BlockWith<'TEXT'>
+  block?: BlockWith<TText>
 }
 export default function TextBlockForm({ block }: Props) {
   return (

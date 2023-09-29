@@ -3,6 +3,7 @@ import LinkBlockForm from '@/components/Forms/LinkBlockForm'
 import PageBlockForm from '@/components/Forms/PageBlockForm'
 import TextBlockForm from '@/components/Forms/TextBlockForm'
 import VideoBlockForm from '@/components/Forms/VideoBlockForm'
+import { EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/BlockType'
 import { type BlockType } from '@/models/space'
 import { TemplateBlockCreateForm } from '../Forms/TemplateBlockCreateForm'
 
@@ -10,32 +11,23 @@ interface Props {
   blockType: BlockType
 }
 
-const PropsData = {
-  alt: undefined,
-  src: undefined,
-  text: undefined,
-  url: undefined,
-  title: undefined,
-  description: undefined,
-  location: undefined
-}
 function getCreateFormComponent({ blockType }: Props) {
   switch (blockType) {
-    case 'TEXT':
+    case TEXT:
       return <TextBlockForm />
-    case 'IMAGE':
+    case IMAGE:
       return <ImageBlockForm />
-    case 'LINK':
+    case LINK:
       return <LinkBlockForm />
-    case 'EMBED':
+    case EMBED:
       return <h1>Embed block form example</h1>
-    case 'VIDEO':
+    case VIDEO:
       return <VideoBlockForm />
-    case 'MAP':
+    case MAP:
       return <h1>GoogleMap block form example</h1>
-    case 'PAGE':
-      return <PageBlockForm block={PropsData} />
-    case 'TEMPLATE':
+    case PAGE:
+      return <PageBlockForm />
+    case TEMPLATE:
       return <TemplateBlockCreateForm />
     default: {
       if (process.env.NODE_ENV === 'development') {

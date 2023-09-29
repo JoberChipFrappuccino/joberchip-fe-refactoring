@@ -5,7 +5,7 @@ import FormButton from '../Ui/Button'
 import styles from './TemplateBlockEditForm.module.scss'
 
 type Props = {
-  block: BlockWith<'TEMPLATE'>
+  block: BlockWith<TTemplate>
 }
 
 export function TemplateBlockEditForm({ block }: Props) {

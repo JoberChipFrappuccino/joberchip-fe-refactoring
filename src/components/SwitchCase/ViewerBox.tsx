@@ -5,6 +5,7 @@ import { LinkBlock } from '@/components/Blocks/LinkBlock'
 import { PageBlock } from '@/components/Blocks/PageBlock'
 import { TextBlock } from '@/components/Blocks/TextBlock'
 import { VideoBlock } from '@/components/Blocks/VideoBlock'
+import { EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/BlockType'
 import type { BlockType, BlockWith } from '@/models/space'
 import { TemplateBlock } from '../Blocks/TemplateBlock'
 
@@ -14,21 +15,21 @@ interface Props<T extends BlockType> {
 }
 function getViewerComponent<T extends BlockType>({ block, mode }: Props<T>) {
   switch (block.type) {
-    case 'TEXT':
+    case TEXT:
       return <TextBlock mode={mode} block={block} />
-    case 'IMAGE':
+    case IMAGE:
       return <ImageBlock mode={mode} block={block} />
-    case 'LINK':
+    case LINK:
       return <LinkBlock mode={mode} block={block} />
-    case 'PAGE':
+    case PAGE:
       return <PageBlock mode={mode} block={block} />
-    case 'EMBED':
+    case EMBED:
       return <EmbedBlock mode={mode} block={block} />
-    case 'VIDEO':
+    case VIDEO:
       return <VideoBlock mode={mode} block={block} />
-    case 'MAP':
+    case MAP:
       return <GoogleMapBlock mode={mode} block={block} />
-    case 'TEMPLATE':
+    case TEMPLATE:
       return <TemplateBlock mode={mode} block={block} />
     default: {
       if (process.env.NODE_ENV === 'development') {

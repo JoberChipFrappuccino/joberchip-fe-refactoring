@@ -2,7 +2,7 @@ import { type BlockWith } from '@/models/space'
 import styles from './ImageBlock.module.scss'
 
 type Props = {
-  block: BlockWith<'IMAGE'>
+  block: BlockWith<TImage>
   mode: SpaceMode
 }
 export function ImageBlock({ block, mode }: Props) {

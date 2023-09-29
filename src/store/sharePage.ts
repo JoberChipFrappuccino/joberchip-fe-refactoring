@@ -51,12 +51,12 @@ export const useSharePageStore = create<SharePageState>((set) => {
       set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
       const { data } = await getSpaceAPI(pageId)
       if (data) {
+        // HACK : width -> w로 변경 예정입니다. 이 코드는 10/6 이전에 삭제됩니다.
         data.children.forEach((block) => {
-          if (typeof block.width === 'number' && typeof block.height === 'number') {
-            block.w = block.width
-            block.h = block.height
-          }
+          block.w = Number(block.width)
+          block.h = Number(block.height)
         })
+
         set(() => ({ sharePage: data, isFetching: false, isLoaded: true, isFalture: false }))
         return true
       }
@@ -67,12 +67,12 @@ export const useSharePageStore = create<SharePageState>((set) => {
       set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
       const { data } = await getSpaceFromBackAPI(pageId)
       if (data) {
+        // HACK : width -> w로 변경 예정입니다. 이 코드는 10/6 이전에 삭제됩니다.
         data.children.forEach((block) => {
-          if (typeof block.width === 'number' && typeof block.height === 'number') {
-            block.w = block.width
-            block.h = block.height
-          }
+          block.w = Number(block.width)
+          block.h = Number(block.height)
         })
+
         set(() => ({ sharePage: data, isFetching: false, isLoaded: true, isFalture: false }))
         return true
       }

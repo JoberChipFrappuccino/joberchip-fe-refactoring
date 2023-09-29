@@ -1,7 +1,7 @@
 import { type BlockWith } from '@/models/space'
 import styles from './EmbedBlock.module.scss'
 type Props = {
-  block: BlockWith<'EMBED'>
+  block: BlockWith<TEmbed>
   mode: SpaceMode
 }
 export function EmbedBlock({ block, mode }: Props) {
