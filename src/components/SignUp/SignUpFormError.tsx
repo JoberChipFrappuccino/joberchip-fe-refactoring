@@ -2,6 +2,9 @@ import { type SignUpInputs } from '@/pages/SignUp'
 import { useMemo } from 'react'
 import type { FieldErrors } from 'react-hook-form'
 
+// HACK : 임시 회원기입 페이지입니다. 개발을 담당하시는 분이 참고해서 작업하시면 됩니다.
+// * 타입이랑 상수 잘 분리해주세영!
+
 type InputTypes = 'email' | 'password' | 'username' | 'checkPassword'
 type ErrorTypes = 'minLength' | 'maxLength' | 'required' | 'pattern' | 'validate' | string
 type Props = {

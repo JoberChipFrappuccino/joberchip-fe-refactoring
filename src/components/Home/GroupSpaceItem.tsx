@@ -1,4 +1,5 @@
 import { type CSSProperties } from 'react'
+import { Link } from 'react-router-dom'
 import styles from './GroupSpaceItem.module.scss'
 
 interface Props {
@@ -12,7 +13,7 @@ export function GroupSpaceItem({ icon = 'user', text, link, style }: Props) {
   return (
     <div className={styles.container} style={style}>
       <img src={`/${icon}_space_icon.png`} alt={`/${icon} space icon`} />
-      <a href={link}>{text}</a>
+      <Link to={link}>{text}</Link>
       <span>{'>'}</span>
     </div>
   )

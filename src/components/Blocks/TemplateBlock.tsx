@@ -5,7 +5,7 @@ import TemplatePreviewModal from '../Modal/TemplatePreviewModal'
 import styles from './TemplateBlock.module.scss'
 
 type Props = {
-  block: BlockWith<'template'>
+  block: BlockWith<TTemplate>
   mode: SpaceMode
   preview?: boolean
 }

@@ -7,7 +7,7 @@ import VideoThumbnail from '../Ui/VideoThumbnail'
 import styles from './VideoBlockForm.module.scss'
 
 type Props = {
-  block?: BlockWith<'video'>
+  block?: BlockWith<TVideo>
 }
 
 export default function VideoBlockForm({ block }: Props) {

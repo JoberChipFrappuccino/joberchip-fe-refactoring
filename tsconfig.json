@@ -17,5 +17,5 @@
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": ["./src", "./server"],
-  "exclude": ["./legacy", "./scripts", "*.md", "*.config.js"]
+  "exclude": ["./legacy", "./scripts", "*.md", "*.config.js", "node_modules"]
 }

@@ -6,7 +6,7 @@ import FormButton from '../Ui/Button'
 import styles from './LinkBlockForm.module.scss'
 
 type Props = {
-  block?: BlockWith<'link'>
+  block?: BlockWith<TLink>
 }
 
 export default function LinkBlockForm({ block }: Props) {
@@ -15,8 +15,8 @@ export default function LinkBlockForm({ block }: Props) {
   const isButtonDisabled = !link || !title
   const { drawerMode } = useBlockAction()
 
-  const titleValue = block?.text ?? ''
-  const linkValue = block?.url ?? ''
+  const titleValue = block?.title ?? ''
+  const linkValue = block?.src ?? ''
 
   useEffect(() => {
     setTitle(titleValue ?? '')

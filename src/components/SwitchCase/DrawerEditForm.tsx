@@ -3,6 +3,7 @@ import LinkBlockForm from '@/components/Forms/LinkBlockForm'
 import PageBlockForm from '@/components/Forms/PageBlockForm'
 import TextBlockForm from '@/components/Forms/TextBlockForm'
 import VideoBlockForm from '@/components/Forms/VideoBlockForm'
+import { EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockType, type BlockWith } from '@/models/space'
 import { type DrawerMode } from '@/store/blockAction'
 import { TemplateBlockEditForm } from '../Forms/TemplateBlockEditForm'
@@ -13,23 +14,21 @@ interface Props<T extends BlockType> {
 }
 function getEditFormComponent<T extends BlockType>({ block, mode }: Props<T>) {
   switch (block.type) {
-    case 'text':
+    case TEXT:
       return <TextBlockForm block={block} />
-    case 'image':
+    case IMAGE:
       return <ImageBlockForm block={block} />
-    case 'link':
+    case LINK:
       return <LinkBlockForm block={block} />
-    case 'embed':
+    case EMBED:
       return <h1>Embed block form example</h1>
-    case 'video':
+    case VIDEO:
       return <VideoBlockForm block={block} />
-    case 'googleMap':
+    case MAP:
       return <h1>GoogleMap block form example</h1>
-    case 'page':
-      return (
-          <PageBlockForm block={block} />
-      )
-    case 'template':
+    case PAGE:
+      return <PageBlockForm block={block} />
+    case TEMPLATE:
       return <TemplateBlockEditForm block={block} />
     default: {
       if (process.env.NODE_ENV === 'development') {

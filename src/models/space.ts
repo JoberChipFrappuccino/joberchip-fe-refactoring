@@ -1,27 +1,24 @@
-// import { type BlockBase } from './space'
-// export type Spaces = {
-//   [key: string]: Space
-// }
-
-export interface Space {
-  spaceId: string
-  profileImage: string
+export interface SharePage {
+  pageId: string
+  pageProfileImage: string
   title: string
   description: string
   previlige: {
     edit: boolean
     delete: boolean
   }
-  blocks: Array<BlockWith<BlockType>>
+  children: Array<BlockWith<BlockType>>
 }
 
-export type BlockType = 'text' | 'image' | 'link' | 'page' | 'embed' | 'video' | 'googleMap' | 'template' | 'base'
+export type BlockType = TText | TImage | TLink | TPage | TEmbed | TVideo | TMap | TTemplate | 'BASE' // HACK : "BASE"는 임시 코드
 
 export type BlockBase<T extends BlockType> = {
-  blockId: string
+  objectId: string
   type: T
   y: number
   x: number
+  height: number
+  width: number
   h: number
   w: number
   visible: boolean
@@ -36,41 +33,41 @@ export type BlockBase<T extends BlockType> = {
   static?: boolean
 }
 
-export interface TextBlock extends BlockBase<'text'> {
-  alt: string
-  src: string
+export interface TextBlock extends BlockBase<TText> {
+  description: string
 }
 
-export interface ImageBlock extends BlockBase<'image'> {
+export interface ImageBlock extends BlockBase<TImage> {
   src: string
   alt: string
 }
 
-export interface LinkBlock extends BlockBase<'link'> {
-  url: string
-  text: string
+export interface LinkBlock extends BlockBase<TLink> {
+  src: string
+  title: string
+  description: string
 }
-export interface PageBlock extends BlockBase<'page'> {
+export interface PageBlock extends BlockBase<TPage> {
   title: string
   description: string
   location: string
   url: string
 }
-export interface EmbedGoogleMapBlock extends BlockBase<'googleMap'> {
+export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
   src: string
   caption: string
 }
 
-export interface EmbedBlock extends BlockBase<'embed'> {
+export interface EmbedBlock extends BlockBase<TEmbed> {
   src: string
   caption: string
 }
-export interface VideoBlock extends BlockBase<'video'> {
+export interface VideoBlock extends BlockBase<TVideo> {
   src: string
   caption: string
 }
 
-export interface TemplateBlock extends BlockBase<'template'> {
+export interface TemplateBlock extends BlockBase<TTemplate> {
   templateId: string
   title: string
   description: string
@@ -80,21 +77,21 @@ export interface TemplateBlock extends BlockBase<'template'> {
 }
 
 export type BlockWith<T> = //
-  T extends 'text'
+  T extends TText
     ? TextBlock
-    : T extends 'image'
+    : T extends TImage
     ? ImageBlock
-    : T extends 'link'
+    : T extends TLink
     ? LinkBlock
-    : T extends 'page'
+    : T extends TPage
     ? PageBlock
-    : T extends 'embed'
+    : T extends TEmbed
     ? EmbedBlock
-    : T extends 'video'
+    : T extends TVideo
     ? VideoBlock
-    : T extends 'googleMap'
+    : T extends TMap
     ? EmbedGoogleMapBlock
-    : T extends 'template'
+    : T extends TTemplate
     ? TemplateBlock
     : never
 

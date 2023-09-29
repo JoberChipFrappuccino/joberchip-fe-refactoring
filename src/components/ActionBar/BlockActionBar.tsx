@@ -1,4 +1,4 @@
-import { DropDownMenu } from '@/components/Space/DropDownMenu'
+import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { useBlockAction } from '@/store/blockAction'
 import { Switch } from 'antd'
 import { useMemo } from 'react'

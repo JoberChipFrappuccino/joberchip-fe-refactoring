@@ -3,7 +3,7 @@ import { type BlockWith } from '@/models/space'
 import styles from './VideoBlock.module.scss'
 
 type Props = {
-  block: BlockWith<'video'>
+  block: BlockWith<TVideo>
   mode: SpaceMode
 }
 export function VideoBlock({ block, mode }: Props) {

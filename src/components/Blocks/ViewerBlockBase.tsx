@@ -1,10 +1,11 @@
-import BlockCover from '@/components/Space/BlockCover'
-import BlockPortal from '@/components/Space/BlockPortal'
-import { DropDownMenu } from '@/components/Space/DropDownMenu'
+import BlockCover from '@/components/SharePage/BlockCover'
+import BlockPortal from '@/components/SharePage/BlockPortal'
+import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
+import { BLOCK, PAGE, TEMPLATE } from '@/constants/blockTypeConstant'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
-import { useSpaceStore } from '@/store/space'
+import { useSharePageStore } from '@/store/sharePage'
 import ModalPortal from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
@@ -21,33 +22,28 @@ interface Props {
 export function ViewerBlockBase({ block, children }: Props) {
   const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useBlockAction()
-  const { space, removeBlockById, mode } = useSpaceStore()
+  const { sharePage: space, removeBlockById, mode } = useSharePageStore()
   const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockAction()
   const [confirmModal, setConfirmModal] = useState(false)
 
   const items = useMemo(() => {
     const switchItems = []
     let blockName = '블록'
-    if (block.type === 'page') {
+    if (block.type === PAGE) {
       blockName = '페이지'
-    } else if (block.type === 'template') {
+    } else if (block.type === TEMPLATE) {
       blockName = '템플릿'
     }
 
-    const divider = {
-      key: 'ViewBlockBase-divider-1',
-      type: 'divider'
-    }
-
     const publickSwitchItem = {
-      key: `${block.blockId}-view-block-1`,
+      key: `${block.objectId}-view-block-1`,
       label: (
         <Switch
           defaultChecked={!block.visible}
           onChange={() => {
-            for (let i = 0; i < space.blocks.length; i++) {
-              if (space.blocks[i].blockId === block.blockId) {
-                space.blocks[i].visible = !space.blocks[i].visible
+            for (let i = 0; i < space.children.length; i++) {
+              if (space.children[i].objectId === block.objectId) {
+                space.children[i].visible = !space.children[i].visible
                 // todo : block visibe상태를 변경하는 API를 호출해야 합니다.
                 break
               }
@@ -59,19 +55,17 @@ export function ViewerBlockBase({ block, children }: Props) {
     }
 
     const pageInformationEditItem = {
-      key: `${block.blockId}-view-block-2`,
+      key: `${block.objectId}-view-block-2`,
       icon: (
         <button
           className={styles.kebobBtn}
           onClick={() => {
             setDrawerMode('edit')
             setBlockType(block.type)
-            if (block.type === 'template') {
-              setFormType('template')
-            } else if (block.type === 'page') {
-              setFormType('page')
+            if (block.type === TEMPLATE || block.type === PAGE) {
+              setFormType(block.type)
             } else {
-              setFormType('block')
+              setFormType(BLOCK)
             }
             setOpenDrawer(true)
           }}
@@ -82,12 +76,12 @@ export function ViewerBlockBase({ block, children }: Props) {
     }
 
     const copyLinkItem = {
-      key: `${block.blockId}-view-block-3`,
+      key: `${block.objectId}-view-block-3`,
       icon: (
         <button
           className={styles.kebobBtn}
           onClick={() => {
-            clip((block as BlockWith<'template'>).url)
+            clip((block as BlockWith<TTemplate>).url)
           }}
         >
           링크 복사
@@ -96,27 +90,27 @@ export function ViewerBlockBase({ block, children }: Props) {
     }
 
     const templateDetailSettingItem = {
-      key: `${block.blockId}-view-block-4`,
+      key: `${block.objectId}-view-block-4`,
       icon: <button className={styles.kebobBtn}>템플릿 상세 설정</button>
     }
 
     const deleteItem = {
-      key: `${block.blockId}-view-block-5`,
+      key: `${block.objectId}-view-block-5`,
       danger: true,
       label: '삭제하기',
       onClick: () => setConfirmModal(true)
     }
 
     switchItems.push(publickSwitchItem)
-    switchItems.push(divider)
+    switchItems.push(getUniqueDivierItem(`${block.objectId}-ViewerBlockBase-divier-1`))
     switchItems.push(pageInformationEditItem)
-    switchItems.push(divider)
+    switchItems.push(getUniqueDivierItem(`${block.objectId}-ViewerBlockBase-divier-2`))
 
-    if (block.type === 'template') {
+    if (block.type === TEMPLATE) {
       switchItems.push(copyLinkItem)
-      switchItems.push(divider)
+      switchItems.push(getUniqueDivierItem(`${block.objectId}-ViewerBlockBase-divier-3`))
       switchItems.push(templateDetailSettingItem)
-      switchItems.push(divider)
+      switchItems.push(getUniqueDivierItem(`${block.objectId}-ViewerBlockBase-divier-4`))
     }
     switchItems.push(deleteItem)
 
@@ -124,22 +118,22 @@ export function ViewerBlockBase({ block, children }: Props) {
   }, [])
 
   useEffect(() => {
-    setFocus(activeBlockId === block.blockId)
+    setFocus(activeBlockId === block.objectId)
   }, [activeBlockId])
 
   return (
     <div className={styles.container}>
       {mode === 'edit' && (
-        <aside className={[styles.menu, activeBlockId === block.blockId ? 'kebobMenu' : ''].join(' ')}>
+        <aside className={[styles.menu, activeBlockId === block.objectId ? 'kebobMenu' : ''].join(' ')}>
           <DropDownMenu
             trigger="click"
             items={items}
-            statefulKeys={[`${block.blockId}-view-block-1`, `${block.blockId}-view-block-5`]}
+            statefulKeys={[`${block.objectId}-view-block-1`, `${block.objectId}-view-block-5`]}
           >
             <button id={DROPDOWN_TRIGGER_ICON_ID} className={styles.iconCover}>
               <BsThreeDotsVertical
                 id={DROPDOWN_TRIGGER_ICON_ID}
-                className={activeBlockId === block.blockId ? styles.activeIcon : styles.inactiveIcon}
+                className={activeBlockId === block.objectId ? styles.activeIcon : styles.inactiveIcon}
               />
             </button>
           </DropDownMenu>
@@ -161,7 +155,7 @@ export function ViewerBlockBase({ block, children }: Props) {
             cancelBtnText="취소"
             confirmBtnText="삭제하기"
             onConfirm={(isConfirm) => {
-              if (isConfirm) removeBlockById(block.blockId)
+              if (isConfirm) removeBlockById(block.objectId)
               setConfirmModal(false)
             }}
           >
@@ -185,4 +179,11 @@ export function ViewerBlockBase({ block, children }: Props) {
       {children}
     </div>
   )
+}
+
+function getUniqueDivierItem(key: string) {
+  return {
+    key,
+    type: 'divider'
+  }
 }

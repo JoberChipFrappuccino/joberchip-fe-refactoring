@@ -2,7 +2,7 @@ import { type BlockWith } from '@/models/space'
 import styles from './PageBlock.module.scss'
 
 type Props = {
-  block: BlockWith<'page'>
+  block: BlockWith<TPage>
   mode: SpaceMode
 }
 export function PageBlock({ block, mode }: Props) {

@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+}
+.viewer {
+  display: flex;
+  width: 100%;
+  .spaceViewer {
+    position: relative;
+    width: 100%;
+    flex: 1;
+  }
+}
