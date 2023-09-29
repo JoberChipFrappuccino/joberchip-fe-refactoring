@@ -75,7 +75,7 @@ export function Profile() {
     <div className={styles.container}>
       <div className={styles.profileCover}>
         <div className={styles.profileImageCover}>
-          <img src={sharePage.pageProfileImage} alt={`${sharePage.title} thumbnail`} />
+          <img src={sharePage.pageProfileImage ?? '/default_profile.png'} alt={`${sharePage.title} thumbnail`} />
         </div>
         <div className={styles.profile}>
           <h2>{sharePage.title}</h2>
@@ -96,7 +96,7 @@ export function Profile() {
           </nav>
         </div>
         <div>
-          {sharePage.previlige.edit && (
+          {sharePage.previlige?.edit && (
             <DropDownMenu
               statefulKeys={[
                 `${sharePage.pageId}-profile-1`,

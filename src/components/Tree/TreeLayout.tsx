@@ -94,7 +94,9 @@ export default function TreeLayout({ onSelectTreeNode, drawerMode = true }: Prop
         item.children.unshift(dragObj)
       })
     } else if (
+      // @ts-expect-error
       (info.node.props.children ?? []).length > 0 && // Has children
+      // @ts-expect-error
       info.node.props.expanded && // Is expanded
       dropPosition === 1 // On the bottom gap
     ) {

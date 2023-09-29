@@ -3,7 +3,7 @@ import LinkBlockForm from '@/components/Forms/LinkBlockForm'
 import PageBlockForm from '@/components/Forms/PageBlockForm'
 import TextBlockForm from '@/components/Forms/TextBlockForm'
 import VideoBlockForm from '@/components/Forms/VideoBlockForm'
-import { EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/BlockType'
+import { EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
 import { TemplateBlockCreateForm } from '../Forms/TemplateBlockCreateForm'
 

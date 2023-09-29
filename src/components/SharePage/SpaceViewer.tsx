@@ -1,6 +1,6 @@
 import { ViewerBox } from '@/components/SwitchCase/ViewerBox'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
-import { LAYOUT_DEBOUNCE_TIME } from '@/constants/sharePage'
+import { LAYOUT_DEBOUNCE_TIME } from '@/constants/sharePageConstant'
 import { useDebounce } from '@/hooks/debounce'
 import type { BlockType, SharePage } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'

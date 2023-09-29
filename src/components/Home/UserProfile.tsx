@@ -1,5 +1,5 @@
 import { createSpaceAPI } from '@/api/space'
-import { SPACE_LIST } from '@/constants/queryKey'
+import { SPACE_LIST } from '@/constants/queryKeyConstant'
 import { useUserStore } from '@/store/user'
 import { useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'

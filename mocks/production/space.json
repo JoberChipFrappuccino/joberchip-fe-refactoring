@@ -12,8 +12,9 @@
         "height": 1,
         "width": 2,
         "type": "LINK",
-        "url": "http://www.naver.com",
-        "text": "네이버",
+        "src": "http://www.naver.com",
+        "title": "네이버 입니다.",
+        "description": "네이버로 이동해봅시다.",
         "visible": true
       },
       {
@@ -23,8 +24,9 @@
         "height": 1,
         "width": 2,
         "type": "LINK",
-        "url": "http://www.youtube.com",
-        "text": "유튜브",
+        "src": "http://www.youtube.com",
+        "title": "내가만든 유튜브 영상",
+        "description": "유튜브로 이동해봅시다.",
         "visible": false
       },
       {
@@ -123,8 +125,9 @@
         "height": 1,
         "width": 2,
         "type": "LINK",
-        "url": "http://www.naver.com",
-        "text": "네이버",
+        "src": "http://www.naver.com",
+        "title": "네이버 입니다.",
+        "description": "네이버로 이동해봅시다.",
         "visible": true
       },
       {
@@ -134,8 +137,9 @@
         "height": 1,
         "width": 2,
         "type": "LINK",
-        "url": "http://www.youtube.com",
-        "text": "유튜브",
+        "src": "http://www.youtube.com",
+        "title": "내가만든 유튜브 영상",
+        "description": "유튜브로 이동해봅시다.",
         "visible": false
       },
       {

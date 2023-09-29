@@ -2,7 +2,7 @@ import BlockCover from '@/components/SharePage/BlockCover'
 import BlockPortal from '@/components/SharePage/BlockPortal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
-import { BLOCK, PAGE, TEMPLATE } from '@/constants/BlockType'
+import { BLOCK, PAGE, TEMPLATE } from '@/constants/blockTypeConstant'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
@@ -33,11 +33,6 @@ export function ViewerBlockBase({ block, children }: Props) {
       blockName = '페이지'
     } else if (block.type === TEMPLATE) {
       blockName = '템플릿'
-    }
-
-    const divider = {
-      key: `${block.objectId}-ViewBlockBase-divider-1`,
-      type: 'divider'
     }
 
     const publickSwitchItem = {
@@ -107,15 +102,15 @@ export function ViewerBlockBase({ block, children }: Props) {
     }
 
     switchItems.push(publickSwitchItem)
-    switchItems.push(divider)
+    switchItems.push(getUniqueDivierItem(`${block.objectId}-ViewerBlockBase-divier-1`))
     switchItems.push(pageInformationEditItem)
-    switchItems.push(divider)
+    switchItems.push(getUniqueDivierItem(`${block.objectId}-ViewerBlockBase-divier-2`))
 
     if (block.type === TEMPLATE) {
       switchItems.push(copyLinkItem)
-      switchItems.push(divider)
+      switchItems.push(getUniqueDivierItem(`${block.objectId}-ViewerBlockBase-divier-3`))
       switchItems.push(templateDetailSettingItem)
-      switchItems.push(divider)
+      switchItems.push(getUniqueDivierItem(`${block.objectId}-ViewerBlockBase-divier-4`))
     }
     switchItems.push(deleteItem)
 
@@ -184,4 +179,11 @@ export function ViewerBlockBase({ block, children }: Props) {
       {children}
     </div>
   )
+}
+
+function getUniqueDivierItem(key: string) {
+  return {
+    key,
+    type: 'divider'
+  }
 }

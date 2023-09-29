@@ -64,7 +64,7 @@ export const useSharePageStore = create<SharePageState>((set) => {
       return false
     },
     loadSpaceFromBack: async (pageId: string) => {
-      set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
+      set(() => ({ isFetching: true, isLoaded: true, isFalture: false }))
       const { data } = await getSpaceFromBackAPI(pageId)
       if (data) {
         // HACK : width -> w로 변경 예정입니다. 이 코드는 10/6 이전에 삭제됩니다.

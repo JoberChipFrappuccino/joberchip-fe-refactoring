@@ -33,42 +33,41 @@ export type BlockBase<T extends BlockType> = {
   static?: boolean
 }
 
-export interface TextBlock extends BlockBase<'TEXT'> {
-  alt: string
-  src: string
-  text: string
+export interface TextBlock extends BlockBase<TText> {
+  description: string
 }
 
-export interface ImageBlock extends BlockBase<'IMAGE'> {
+export interface ImageBlock extends BlockBase<TImage> {
   src: string
   alt: string
 }
 
-export interface LinkBlock extends BlockBase<'LINK'> {
-  url: string
-  text: string
+export interface LinkBlock extends BlockBase<TLink> {
+  src: string
+  title: string
+  description: string
 }
-export interface PageBlock extends BlockBase<'PAGE'> {
+export interface PageBlock extends BlockBase<TPage> {
   title: string
   description: string
   location: string
   url: string
 }
-export interface EmbedGoogleMapBlock extends BlockBase<'MAP'> {
+export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
   src: string
   caption: string
 }
 
-export interface EmbedBlock extends BlockBase<'EMBED'> {
+export interface EmbedBlock extends BlockBase<TEmbed> {
   src: string
   caption: string
 }
-export interface VideoBlock extends BlockBase<'VIDEO'> {
+export interface VideoBlock extends BlockBase<TVideo> {
   src: string
   caption: string
 }
 
-export interface TemplateBlock extends BlockBase<'TEMPLATE'> {
+export interface TemplateBlock extends BlockBase<TTemplate> {
   templateId: string
   title: string
   description: string
@@ -78,21 +77,21 @@ export interface TemplateBlock extends BlockBase<'TEMPLATE'> {
 }
 
 export type BlockWith<T> = //
-  T extends 'TEXT'
+  T extends TText
     ? TextBlock
-    : T extends 'IMAGE'
+    : T extends TImage
     ? ImageBlock
-    : T extends 'LINK'
+    : T extends TLink
     ? LinkBlock
-    : T extends 'PAGE'
+    : T extends TPage
     ? PageBlock
-    : T extends 'EMBED'
+    : T extends TEmbed
     ? EmbedBlock
-    : T extends 'VIDEO'
+    : T extends TVideo
     ? VideoBlock
-    : T extends 'MAP'
+    : T extends TMap
     ? EmbedGoogleMapBlock
-    : T extends 'TEMPLATE'
+    : T extends TTemplate
     ? TemplateBlock
     : never
 

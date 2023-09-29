@@ -41,25 +41,31 @@ export default function ShareableSpace() {
     const nextSpace: SharePage = {
       ...SSRSpace,
       previlige: {
-        edit: SSRSpace.pageId === 'space1',
-        delete: SSRSpace.pageId === 'space1'
+        edit: true,
+        delete: true
       }
     }
-    if (nextSpace.previlige.edit) setSpaceMode('edit')
+    if (nextSpace.previlige?.edit) setSpaceMode('edit')
     setSpace(nextSpace)
   }, [spaceId])
 
   useEffect(() => {
+    // CASE : CSR
     // HACK : fetch가 완료되면 페이지 권한을 체크 후 업데트합니다.
     if (!isFetching) {
       const nextSpace: SharePage = {
         ...sharePage,
         previlige: {
-          edit: sharePage.pageId === 'space1',
-          delete: sharePage.pageId === 'space1'
+          edit: true,
+          delete: true
         }
       }
-      if (nextSpace.previlige.edit) setSpaceMode('edit')
+      if (nextSpace.previlige?.edit) setSpaceMode('edit')
+      // HACK : width, height를 number로 변환합니다. 10/6 이전까지 backend API연동 후 삭제합니다.
+      nextSpace.children.forEach((block) => {
+        block.w = Number(block.width)
+        block.h = Number(block.height)
+      })
       setSpace(nextSpace)
     }
   }, [isFetching])

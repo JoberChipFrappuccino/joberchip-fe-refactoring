@@ -12,22 +12,22 @@ export function LinkBlock({ block, mode }: Props) {
     <div className={styles.container}>
       <div className={mode === 'edit' ? 'cover' : ''} />
       <div className={styles.itemBox}>
-        <BlockLogo logo={block.url} />
+        <BlockLogo logo={block.src} />
         <div className={styles.titleUrl}>
-          <span>{block.text}</span>
+          <span>{block.title}</span>
           {block.w === 1 ? (
-            <a style={{ display: 'none' }} href={block.url}>
-              {block.url}
+            <a style={{ display: 'none' }} href={block.src}>
+              {block.src}
             </a>
           ) : (
-            <a href={block.url}>{block.url}</a>
+            <a href={block.src}>{block.src}</a>
           )}
         </div>
       </div>
       <div
         className={styles.footer}
         onClick={() => {
-          window.location.href = block.url
+          window.location.href = block.src
         }}
       >
         <div className={styles.footerLeft}>바로가기</div>

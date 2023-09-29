@@ -1,4 +1,4 @@
-import { IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/BlockType'
+import { IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import type { ReactNode } from 'react'

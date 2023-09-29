@@ -15,8 +15,8 @@ export default function LinkBlockForm({ block }: Props) {
   const isButtonDisabled = !link || !title
   const { drawerMode } = useBlockAction()
 
-  const titleValue = block?.text ?? ''
-  const linkValue = block?.url ?? ''
+  const titleValue = block?.title ?? ''
+  const linkValue = block?.src ?? ''
 
   useEffect(() => {
     setTitle(titleValue ?? '')
