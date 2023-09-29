@@ -4,7 +4,7 @@
     "profileImage": "http://localhost:5173/profile_1.png",
     "title": "user1의 스페이스",
     "description": "안녕하세요",
-    "blocks": [
+    "children": [
       {
         "blockId": "block_1_1",
         "y": 0,

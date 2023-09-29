@@ -6,14 +6,13 @@ import { UserProfile } from '@/components/Home/UserProfile'
 import { SPACE_LIST } from '@/constants/queryKey'
 import { useUserStore } from '@/store/user'
 import { useQuery } from '@tanstack/react-query'
-import styles from './Home.module.scss'
+import styles from './Space.module.scss'
 
-export default function Home() {
+export default function Space() {
   const { signOut, user } = useUserStore()
   const { data } = useQuery([SPACE_LIST], () => getSpaceListAPI(), {
     staleTime: 1000 * 60 * 60
   })
-
   return (
     <div className={styles.container}>
       <div className={styles.cover}>

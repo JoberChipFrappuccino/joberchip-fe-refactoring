@@ -4,7 +4,7 @@
     "profileImage": "http://ec2-34-228-10-85.compute-1.amazonaws.com/profile_1.png",
     "title": "foo",
     "description": "bar",
-    "blocks": [
+    "children": [
       {
         "blockId": "block_1_1",
         "y": 0,

@@ -8,7 +8,7 @@ import { useSharePageStore } from '@/store/sharePage'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useParams } from 'react-router-dom'
-import styles from './Space.module.scss'
+import styles from './SharePage.module.scss'
 
 // ! API가 연동 되지 않아 text dose not matched 에러가 서버에서 발생합니다!
 interface PageSource {
@@ -27,21 +27,22 @@ export default function ShareableSpace() {
   const { spaceId } = useParams<Params>()
 
   useEffect(() => {
-    // * react 내부적으로 주소를 이동할 경우 space를 다시 로드합니다.
+    // CASE : CSR
+    // react 내부적으로 주소를 이동할 경우 space를 다시 로드합니다.
     if (!SSRSpace?.pageId) {
       loadSpace(spaceId ?? '')
       return
     }
 
-    // * react 내부적으로 주소를 이동할 경우
-    // * SSR로 로드한 spaceId와 이동할 space가 다르다면 space를 다시 로드합니다.
+    // CASE : CSR
+    // SSR로 로드한 spaceId와 이동할 space가 다르다면 space를 다시 로드합니다.
     if (SSRSpace?.pageId !== spaceId) {
       loadSpace(spaceId ?? '')
       return
     }
 
-    // * SSR일 경우 SSRSpace를 사용합니다.
-    // * 권한은 임시로 업데이트하는 척 합니다. (임시)
+    // CASE : SSR
+    // HACK : 권한은 임시로 업데이트하는 척 합니다.
     const nextSpace: SharePage = {
       ...SSRSpace,
       previlige: {
@@ -63,7 +64,6 @@ export default function ShareableSpace() {
           delete: space.pageId === 'space1'
         }
       }
-      // console.log('nextSpace :', nextSpace)
       if (nextSpace.previlige.edit) setSpaceMode('edit')
       setSpace(nextSpace)
     }

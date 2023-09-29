@@ -1,12 +1,10 @@
 import loadable from '@loadable/component'
 import { Route, Routes } from 'react-router-dom'
 import './App.scss'
-// import TempSharePageLayout from './components/Layouts/TempSharePageLayout'
-// import TempSharePage from './pages/Temp/Space'
 const NotFound = loadable(() => import('./pages/NotFound'))
 const Layout = loadable(() => import('./components/Layouts/Layout'))
 const SharePageLayout = loadable(() => import('./components/Layouts/SpaceLayout'))
-const Home = loadable(() => import('./pages/Home'))
+const Space = loadable(() => import('./pages/Space'))
 const SharePage = loadable(() => import('./pages/SharePage'))
 const Detail = loadable(() => import('./pages/Detail'))
 const SignUp = loadable(() => import('./pages/SignUp'))
@@ -21,7 +19,7 @@ export default function App() {
         <Route path="/temp/space/:spaceId" element={<TempSharePage />} />
       </Route>
       <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Space />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/detail" element={<Detail />} />
