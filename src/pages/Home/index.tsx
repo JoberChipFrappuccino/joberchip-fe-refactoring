@@ -25,8 +25,8 @@ export default function Home() {
             return (
               <GroupSpaceItem
                 key={space.spaceId}
-                link={`/temp/space/${space.spaceId}`}
-                text={`${user.username}님의 스페이스, id : ${space.spaceId}`}
+                link={`/temp/space/${space.mainPageId}`}
+                text={`${user.username}님의 스페이스, id : ${space.mainPageId}`}
               />
             )
           })}

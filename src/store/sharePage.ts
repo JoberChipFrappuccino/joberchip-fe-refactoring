@@ -1,13 +1,13 @@
 import { getSpaceAPI, getSpaceFromBackAPI } from '@/api/space'
-import { type Space } from '@/models/space'
+import { type SharePage } from '@/models/space'
 import { create } from 'zustand'
 
 interface Privilege {
   edit: boolean
   delete: boolean
 }
-interface SpaceState {
-  space: Space // ? Partial<Space> | Space  할까요? Space 할까요?
+interface SharePageState {
+  sharePage: SharePage // ? Partial<Space> | Space  할까요? Space 할까요?
   isFetching: boolean
   isLoaded: boolean
   isFalture: boolean
@@ -20,15 +20,15 @@ interface SpaceState {
   removeBlock: (section_id: string, block_id: string) => Promise<boolean>
   setPrivilege: (previlige: Privilege) => void
   removeBlockById: (blockId: string) => void
-  setSpace: (space: Space) => void
+  setSpace: (space: SharePage) => void
 }
 
-export const useSpaceStore = create<SpaceState>((set) => {
+export const useSharePageStore = create<SharePageState>((set) => {
   return {
     // ? 이거 속성 다 뺄 수 없나..? Partial<Space> | Space 이렇게 되면 좋게싸..
-    space: {
-      spaceId: '',
-      profileImage: '/profile_3.png', // * default image 넣어야함
+    sharePage: {
+      pageId: '',
+      pageProfileImage: '/profile_3.png', // * default image 넣어야함
       layout: {
         styles: {}
       },
@@ -38,7 +38,7 @@ export const useSpaceStore = create<SpaceState>((set) => {
         edit: false,
         delete: false
       },
-      blocks: []
+      children: []
     },
     mode: 'view',
     isFetching: true,
@@ -51,7 +51,7 @@ export const useSpaceStore = create<SpaceState>((set) => {
       set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
       const { data } = await getSpaceAPI(pageId)
       if (data) {
-        set(() => ({ space: data, isFetching: false, isLoaded: true, isFalture: false }))
+        set(() => ({ sharePage: data, isFetching: false, isLoaded: true, isFalture: false }))
         return true
       }
       set(() => ({ isFetching: false, isLoaded: false, isFalture: true }))
@@ -61,23 +61,23 @@ export const useSpaceStore = create<SpaceState>((set) => {
       set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
       const { data } = await getSpaceFromBackAPI(pageId)
       if (data) {
-        set(() => ({ space: data, isFetching: false, isLoaded: true, isFalture: false }))
+        set(() => ({ sharePage: data, isFetching: false, isLoaded: true, isFalture: false }))
         return true
       }
       set(() => ({ isFetching: false, isLoaded: false, isFalture: true }))
       return false
     },
-    setSpace: (space: Space) => {
-      set(() => ({ space, isLoaded: true, isFalture: false }))
+    setSpace: (space: SharePage) => {
+      set(() => ({ sharePage: space, isLoaded: true, isFalture: false }))
     },
     setPrivilege: (privilege: Privilege) => {
-      set((state) => ({ ...state, space: { ...state.space, previlige: privilege } }))
+      set((state) => ({ ...state, sharePage: { ...state.sharePage, previlige: privilege } }))
     },
     removeBlockById: async (blockId: string) => {
       set((state) => {
-        for (let i = 0; i < state.space.blocks.length; i++) {
-          if (state.space.blocks[i].blockId === blockId) {
-            state.space.blocks.splice(i, 1)
+        for (let i = 0; i < state.sharePage.children.length; i++) {
+          if (state.sharePage.children[i].blockId === blockId) {
+            state.sharePage.children.splice(i, 1)
             // todo : block 삭제 API를 호출해야 합니다.
             break
           }

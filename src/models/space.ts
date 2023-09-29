@@ -1,18 +1,13 @@
-// import { type BlockBase } from './space'
-// export type Spaces = {
-//   [key: string]: Space
-// }
-
-export interface Space {
-  spaceId: string
-  profileImage: string
+export interface SharePage {
+  pageId: string
+  pageProfileImage: string
   title: string
   description: string
   previlige: {
     edit: boolean
     delete: boolean
   }
-  blocks: Array<BlockWith<BlockType>>
+  children: Array<BlockWith<BlockType>>
 }
 
 export type BlockType = 'text' | 'image' | 'link' | 'page' | 'embed' | 'video' | 'googleMap' | 'template' | 'base'

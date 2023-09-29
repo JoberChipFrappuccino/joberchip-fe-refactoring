@@ -1,5 +1,5 @@
-import { DropDownMenu } from '@/components/Space/DropDownMenu'
-import { useSpaceStore } from '@/store/space'
+import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
+import { useSharePageStore } from '@/store/sharePage'
 import ModalPortal from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
@@ -12,11 +12,11 @@ import styles from './Profile.module.scss'
 
 export function Profile() {
   const [openConfirmModal, setConfirmModal] = useState(false)
-  const { mode, setSpaceMode, space } = useSpaceStore()
+  const { mode, setSpaceMode, sharePage: space } = useSharePageStore()
   const items = useMemo(
     () => [
       {
-        key: `${space.spaceId}-profile-1`,
+        key: `${space.pageId}-profile-1`,
         label: <Switch onChange={() => {}} />,
         icon: <p>공개설정</p>
       },
@@ -25,7 +25,7 @@ export function Profile() {
         type: 'divider'
       },
       {
-        key: `${space.spaceId}-profile-2`,
+        key: `${space.pageId}-profile-2`,
         icon: <TreeDrawer />
       },
       {
@@ -33,10 +33,10 @@ export function Profile() {
         type: 'divider'
       },
       {
-        key: `${space.spaceId}-profile-3`,
+        key: `${space.pageId}-profile-3`,
         label: '링크 복사',
         onClick: () => {
-          clip(`http://localhost:5173/space/${space.spaceId}`)
+          clip(`http://localhost:5173/space/${space.pageId}`)
         }
       },
       {
@@ -44,7 +44,7 @@ export function Profile() {
         type: 'divider'
       },
       {
-        key: `${space.spaceId}-profile-4`,
+        key: `${space.pageId}-profile-4`,
         label: (
           <Switch
             checkedChildren="공유 화면 미리보기"
@@ -60,7 +60,7 @@ export function Profile() {
         type: 'divider'
       },
       {
-        key: `${space.spaceId}-profile-5`,
+        key: `${space.pageId}-profile-5`,
         danger: true,
         label: '삭제하기',
         onClick: () => {
@@ -98,7 +98,7 @@ export function Profile() {
         <div>
           {space.previlige.edit && (
             <DropDownMenu
-              statefulKeys={[`${space.spaceId}-profile-1`, `${space.spaceId}-profile-4`, `${space.spaceId}-profile-5`]}
+              statefulKeys={[`${space.pageId}-profile-1`, `${space.pageId}-profile-4`, `${space.pageId}-profile-5`]}
               items={items}
             >
               <div className={styles.iconCover}>

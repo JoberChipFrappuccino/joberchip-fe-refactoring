@@ -5,7 +5,7 @@ import { useUserStore } from '@/store/user'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { TemplateBlock } from '../Blocks/TemplateBlock'
-import { TemplateSearchBox } from '../Space/TemplateSearchBox'
+import { TemplateSearchBox } from '../SharePage/TemplateSearchBox'
 import FormButton from '../Ui/Button'
 import styles from './TemplateBlockCreateForm.module.scss'
 

@@ -1,10 +1,10 @@
-import BlockCover from '@/components/Space/BlockCover'
-import BlockPortal from '@/components/Space/BlockPortal'
-import { DropDownMenu } from '@/components/Space/DropDownMenu'
+import BlockCover from '@/components/SharePage/BlockCover'
+import BlockPortal from '@/components/SharePage/BlockPortal'
+import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
-import { useSpaceStore } from '@/store/space'
+import { useSharePageStore } from '@/store/sharePage'
 import ModalPortal from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
@@ -21,7 +21,7 @@ interface Props {
 export function ViewerBlockBase({ block, children }: Props) {
   const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useBlockAction()
-  const { space, removeBlockById, mode } = useSpaceStore()
+  const { sharePage: space, removeBlockById, mode } = useSharePageStore()
   const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockAction()
   const [confirmModal, setConfirmModal] = useState(false)
 
@@ -45,9 +45,9 @@ export function ViewerBlockBase({ block, children }: Props) {
         <Switch
           defaultChecked={!block.visible}
           onChange={() => {
-            for (let i = 0; i < space.blocks.length; i++) {
-              if (space.blocks[i].blockId === block.blockId) {
-                space.blocks[i].visible = !space.blocks[i].visible
+            for (let i = 0; i < space.children.length; i++) {
+              if (space.children[i].blockId === block.blockId) {
+                space.children[i].visible = !space.children[i].visible
                 // todo : block visibe상태를 변경하는 API를 호출해야 합니다.
                 break
               }

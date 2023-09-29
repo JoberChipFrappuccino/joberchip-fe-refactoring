@@ -1,9 +1,10 @@
 import { ViewerBox } from '@/components/SwitchCase/ViewerBox'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
+import { LAYOUT_DEBOUNCE_TIME } from '@/constants/sharePage'
 import { useDebounce } from '@/hooks/debounce'
-import type { BlockType, Space } from '@/models/space'
+import type { BlockType, SharePage } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
-import { useSpaceStore } from '@/store/space'
+import { useSharePageStore } from '@/store/sharePage'
 import { useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
 import { SpaceActionBar } from '../ActionBar/SpaceActionBar'
@@ -14,29 +15,30 @@ const ResponsiveGridLayout = WidthProvider(Responsive)
 
 export function SpaceViewer() {
   const [rowHeight, setRowHeight] = useState(100)
-  const { space, mode } = useSpaceStore()
+  const { sharePage, mode } = useSharePageStore()
 
   const [grid, setGridLayout] = useState({
     breakpoints: 'lg',
-    layouts: { lg: getBlockLayout(space.blocks, mode) } // , md: layout, sm: layout, xs: layout, xxs: layout
+    layouts: { lg: getBlockLayout(sharePage.children, mode) } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
 
   const [viewModeGrid, setViewModeGrid] = useState({
     breakpoints: 'lg',
-    layouts: { lg: getBlockLayout(space.blocks, 'view') } // , md: layout, sm: layout, xs: layout, xxs: layout
+    layouts: { lg: getBlockLayout(sharePage.children, 'view') } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
 
   const { activeBlockId, setActiveBlockId } = useBlockAction()
 
-  useDebounce(grid.layouts.lg, 2000, (nextLayout) => {
+  useDebounce(grid.layouts.lg, LAYOUT_DEBOUNCE_TIME, (nextLayout) => {
+    // TODO : 백엔드에 변경된 nextLayout을 줍니당.
     // console.log('layout changed', nextLayout)
   })
 
   useEffect(() => {
-    const nextLayout = getBlockLayout(space.blocks, mode)
+    const nextLayout = getBlockLayout(sharePage.children, mode)
     setGridLayout(() => ({ breakpoints: 'lg', layouts: { lg: nextLayout } }))
     const nextViewLayout = getBlockLayout(
-      space.blocks.filter((item) => !item.visible),
+      sharePage.children.filter((item) => !item.visible),
       mode
     )
     setViewModeGrid(() => ({ breakpoints: 'lg', layouts: { lg: nextViewLayout } }))
@@ -62,7 +64,7 @@ export function SpaceViewer() {
           if (JSON.stringify(sortLayout(changedLayout)) === JSON.stringify(grid.layouts.lg)) return
           // * layout 상태를 변경 합니다.
           setGridLayout(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
-          space.blocks.forEach((block) => {
+          sharePage.children.forEach((block) => {
             const item = changedLayout.find((item) => item.i === block.blockId)
             if (!item) return
             const { x, y, w, h } = item
@@ -83,7 +85,7 @@ export function SpaceViewer() {
           }
         }}
       >
-        {space.blocks.map((block) => {
+        {sharePage.children.map((block) => {
           if (mode === 'view' && block.visible) return null
           return (
             <div
@@ -127,7 +129,7 @@ function sortLayout(layout: BlockItem[]): Layout[] {
   })
 }
 
-function getBlockLayout(blocks: Space['blocks'], mode: SpaceMode): Layout[] {
+function getBlockLayout(blocks: SharePage['children'], mode: SpaceMode): Layout[] {
   return blocks.map((block) => {
     const { blockId, ...rest } = block
     return {

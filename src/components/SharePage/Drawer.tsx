@@ -1,5 +1,5 @@
 import { useBlockAction } from '@/store/blockAction'
-import { useSpaceStore } from '@/store/space'
+import { useSharePageStore } from '@/store/sharePage'
 import { Drawer as AntdDrawer } from 'antd'
 import { useEffect, useState, type ReactNode } from 'react'
 import { DrawerCreateForm } from '../SwitchCase/DrawerCreateForm'
@@ -8,7 +8,7 @@ import { ActionBlockFormBase } from './ActionBlockFormBase'
 
 export function Drawer() {
   const { openDrawer, setOpenDrawer, drawerMode, blockType } = useBlockAction()
-  const { space } = useSpaceStore()
+  const { sharePage: space } = useSharePageStore()
   const { activeBlockId } = useBlockAction()
   const [title, setTitle] = useState('')
 

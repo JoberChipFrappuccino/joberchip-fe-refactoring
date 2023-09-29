@@ -1,6 +1,6 @@
 import { type BlockType } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
-import { useSpaceStore } from '@/store/space'
+import { useSharePageStore } from '@/store/sharePage'
 import { Tooltip } from 'antd'
 import { useCallback } from 'react'
 import styles from './SpaceActionBar.module.scss'
@@ -9,7 +9,7 @@ type Props = {
   isActive: boolean
 }
 export function SpaceActionBar({ isActive }: Props) {
-  const { mode } = useSpaceStore()
+  const { mode } = useSharePageStore()
   const { formType, setOpenDrawer, setBlockType, setDrawerMode } = useBlockAction()
 
   const changeBlockType = useCallback(
