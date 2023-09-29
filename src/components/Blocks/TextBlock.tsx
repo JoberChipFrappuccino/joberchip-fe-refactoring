@@ -2,7 +2,7 @@ import { type BlockWith } from '@/models/space'
 import styles from './TextBlock.module.scss'
 
 type Props = {
-  block: BlockWith<'text'>
+  block: BlockWith<'TEXT'>
   mode: SpaceMode
 }
 export function TextBlock({ block, mode }: Props) {

@@ -21,21 +21,21 @@ const PropsData = {
 }
 function getCreateFormComponent({ blockType }: Props) {
   switch (blockType) {
-    case 'text':
+    case 'TEXT':
       return <TextBlockForm />
-    case 'image':
+    case 'IMAGE':
       return <ImageBlockForm />
-    case 'link':
+    case 'LINK':
       return <LinkBlockForm />
-    case 'embed':
+    case 'EMBED':
       return <h1>Embed block form example</h1>
-    case 'video':
+    case 'VIDEO':
       return <VideoBlockForm />
-    case 'googleMap':
+    case 'MAP':
       return <h1>GoogleMap block form example</h1>
-    case 'page':
+    case 'PAGE':
       return <PageBlockForm block={PropsData} />
-    case 'template':
+    case 'TEMPLATE':
       return <TemplateBlockCreateForm />
     default: {
       if (process.env.NODE_ENV === 'development') {

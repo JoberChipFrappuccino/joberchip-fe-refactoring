@@ -32,7 +32,7 @@ export function SpaceActionBar({ isActive }: Props) {
         <button
           className={styles.item}
           onClick={() => {
-            changeBlockType('page')
+            changeBlockType('PAGE')
           }}
         >
           <div className={styles.actionicon}>
@@ -44,7 +44,7 @@ export function SpaceActionBar({ isActive }: Props) {
         <button
           className={styles.item}
           onClick={() => {
-            changeBlockType('template')
+            changeBlockType('TEMPLATE')
           }}
         >
           <div className={styles.actionicon}>
@@ -56,7 +56,7 @@ export function SpaceActionBar({ isActive }: Props) {
         <button
           className={styles.item}
           onClick={() => {
-            changeBlockType('text')
+            changeBlockType('TEXT')
           }}
         >
           <div className={styles.actionicon}>

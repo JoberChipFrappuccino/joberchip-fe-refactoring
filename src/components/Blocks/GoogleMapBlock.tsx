@@ -2,7 +2,7 @@ import { type BlockWith } from '@/models/space'
 import styles from './GoogleMapBlock.module.scss'
 
 type Props = {
-  block: BlockWith<'googleMap'>
+  block: BlockWith<'MAP'>
   mode?: SpaceMode
 }
 

@@ -6,7 +6,7 @@ import FormButton from '../Ui/Button'
 import styles from './LinkBlockForm.module.scss'
 
 type Props = {
-  block?: BlockWith<'link'>
+  block?: BlockWith<'LINK'>
 }
 
 export default function LinkBlockForm({ block }: Props) {

@@ -10,34 +10,29 @@ import { Helmet } from 'react-helmet'
 import { useParams } from 'react-router-dom'
 import styles from './SharePage.module.scss'
 
-// ! API가 연동 되지 않아 text dose not matched 에러가 서버에서 발생합니다!
 interface PageSource {
   title: Record<string, string>
   description: Record<string, string>
 }
 
-type Params = {
-  spaceId: string
-}
-
 export default function ShareableSpace() {
   const pageSource: PageSource = useServerSideProps(SEO)
   const SSRSpace: SharePage = useServerSideProps(SPACE)
-  const { sharePage: space, loadSpace, setSpace, isLoaded, isFetching, setSpaceMode } = useSharePageStore()
-  const { spaceId } = useParams<Params>()
+  const { sharePage, loadSpaceFromBack, setSpace, isLoaded, isFetching, setSpaceMode } = useSharePageStore()
+  const { spaceId } = useParams<Record<string, string>>()
 
   useEffect(() => {
     // CASE : CSR
     // react 내부적으로 주소를 이동할 경우 space를 다시 로드합니다.
     if (!SSRSpace?.pageId) {
-      loadSpace(spaceId ?? '')
+      loadSpaceFromBack(spaceId ?? '')
       return
     }
 
     // CASE : CSR
     // SSR로 로드한 spaceId와 이동할 space가 다르다면 space를 다시 로드합니다.
     if (SSRSpace?.pageId !== spaceId) {
-      loadSpace(spaceId ?? '')
+      loadSpaceFromBack(spaceId ?? '')
       return
     }
 
@@ -55,13 +50,13 @@ export default function ShareableSpace() {
   }, [spaceId])
 
   useEffect(() => {
-    // HACK : fetching이 완료되면 페이지 권한을 체크 후 업데트합니다.
+    // HACK : fetch가 완료되면 페이지 권한을 체크 후 업데트합니다.
     if (!isFetching) {
       const nextSpace: SharePage = {
-        ...space,
+        ...sharePage,
         previlige: {
-          edit: space.pageId === 'space1',
-          delete: space.pageId === 'space1'
+          edit: sharePage.pageId === 'space1',
+          delete: sharePage.pageId === 'space1'
         }
       }
       if (nextSpace.previlige.edit) setSpaceMode('edit')
@@ -72,7 +67,7 @@ export default function ShareableSpace() {
   return (
     <>
       <Helmet>
-        {/* todo : default pageSource + SSR일 경우 두 가지로 분기해야함 */}
+        {/* // TODO : default pageSource + SSR일 경우 두 가지로 분기해야함 */}
         <title>{pageSource.title['/']}</title>
       </Helmet>
       {isLoaded && <Profile />}

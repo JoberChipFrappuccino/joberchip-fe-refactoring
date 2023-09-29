@@ -10,13 +10,15 @@ export interface SharePage {
   children: Array<BlockWith<BlockType>>
 }
 
-export type BlockType = 'text' | 'image' | 'link' | 'page' | 'embed' | 'video' | 'googleMap' | 'template' | 'base'
+export type BlockType = 'TEXT' | 'IMAGE' | 'LINK' | 'PAGE' | 'EMBED' | 'VIDEO' | 'MAP' | 'TEMPLATE' | 'BASE'
 
 export type BlockBase<T extends BlockType> = {
-  blockId: string
+  objectId: string
   type: T
   y: number
   x: number
+  height: number
+  width: number
   h: number
   w: number
   visible: boolean
@@ -31,41 +33,42 @@ export type BlockBase<T extends BlockType> = {
   static?: boolean
 }
 
-export interface TextBlock extends BlockBase<'text'> {
+export interface TextBlock extends BlockBase<'TEXT'> {
   alt: string
   src: string
+  text: string
 }
 
-export interface ImageBlock extends BlockBase<'image'> {
+export interface ImageBlock extends BlockBase<'IMAGE'> {
   src: string
   alt: string
 }
 
-export interface LinkBlock extends BlockBase<'link'> {
+export interface LinkBlock extends BlockBase<'LINK'> {
   url: string
   text: string
 }
-export interface PageBlock extends BlockBase<'page'> {
+export interface PageBlock extends BlockBase<'PAGE'> {
   title: string
   description: string
   location: string
   url: string
 }
-export interface EmbedGoogleMapBlock extends BlockBase<'googleMap'> {
+export interface EmbedGoogleMapBlock extends BlockBase<'MAP'> {
   src: string
   caption: string
 }
 
-export interface EmbedBlock extends BlockBase<'embed'> {
+export interface EmbedBlock extends BlockBase<'EMBED'> {
   src: string
   caption: string
 }
-export interface VideoBlock extends BlockBase<'video'> {
+export interface VideoBlock extends BlockBase<'VIDEO'> {
   src: string
   caption: string
 }
 
-export interface TemplateBlock extends BlockBase<'template'> {
+export interface TemplateBlock extends BlockBase<'TEMPLATE'> {
   templateId: string
   title: string
   description: string
@@ -75,21 +78,21 @@ export interface TemplateBlock extends BlockBase<'template'> {
 }
 
 export type BlockWith<T> = //
-  T extends 'text'
+  T extends 'TEXT'
     ? TextBlock
-    : T extends 'image'
+    : T extends 'IMAGE'
     ? ImageBlock
-    : T extends 'link'
+    : T extends 'LINK'
     ? LinkBlock
-    : T extends 'page'
+    : T extends 'PAGE'
     ? PageBlock
-    : T extends 'embed'
+    : T extends 'EMBED'
     ? EmbedBlock
-    : T extends 'video'
+    : T extends 'VIDEO'
     ? VideoBlock
-    : T extends 'googleMap'
+    : T extends 'MAP'
     ? EmbedGoogleMapBlock
-    : T extends 'template'
+    : T extends 'TEMPLATE'
     ? TemplateBlock
     : never
 

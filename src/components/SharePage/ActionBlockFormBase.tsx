@@ -19,27 +19,27 @@ export function ActionBlockFormBase({ children }: Props) {
   }
   const formTypes: FormType[] = [
     {
-      type: 'link',
+      type: 'LINK',
       title: '링크',
       icon: <BiLink />
     },
     {
-      type: 'image',
+      type: 'IMAGE',
       title: '사진',
       icon: <BiImageAlt />
     },
     {
-      type: 'video',
+      type: 'VIDEO',
       title: '동영상',
       icon: <BiCaretRightSquare />
     },
     {
-      type: 'googleMap',
+      type: 'MAP',
       title: '지도',
       icon: <BiMapAlt />
     },
     {
-      type: 'text',
+      type: 'TEXT',
       title: '텍스트',
       icon: <BiPencil />
     }

@@ -14,21 +14,21 @@ interface Props<T extends BlockType> {
 }
 function getViewerComponent<T extends BlockType>({ block, mode }: Props<T>) {
   switch (block.type) {
-    case 'text':
+    case 'TEXT':
       return <TextBlock mode={mode} block={block} />
-    case 'image':
+    case 'IMAGE':
       return <ImageBlock mode={mode} block={block} />
-    case 'link':
+    case 'LINK':
       return <LinkBlock mode={mode} block={block} />
-    case 'page':
+    case 'PAGE':
       return <PageBlock mode={mode} block={block} />
-    case 'embed':
+    case 'EMBED':
       return <EmbedBlock mode={mode} block={block} />
-    case 'video':
+    case 'VIDEO':
       return <VideoBlock mode={mode} block={block} />
-    case 'googleMap':
+    case 'MAP':
       return <GoogleMapBlock mode={mode} block={block} />
-    case 'template':
+    case 'TEMPLATE':
       return <TemplateBlock mode={mode} block={block} />
     default: {
       if (process.env.NODE_ENV === 'development') {

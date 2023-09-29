@@ -65,7 +65,7 @@ export function SpaceViewer() {
           // * layout 상태를 변경 합니다.
           setGridLayout(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
           sharePage.children.forEach((block) => {
-            const item = changedLayout.find((item) => item.i === block.blockId)
+            const item = changedLayout.find((item) => item.i === block.objectId)
             if (!item) return
             const { x, y, w, h } = item
             block.x = x
@@ -89,9 +89,9 @@ export function SpaceViewer() {
           if (mode === 'view' && block.visible) return null
           return (
             <div
-              className={[styles.item, block.blockId === activeBlockId ? 'activeBlock' : 'inactiveBlock'].join(' ')}
-              key={block.blockId}
-              id={block.blockId}
+              className={[styles.item, block.objectId === activeBlockId ? 'activeBlock' : 'inactiveBlock'].join(' ')}
+              key={block.objectId}
+              id={block.objectId}
             >
               <ViewerBlockBase block={block}>
                 <ViewerBox mode={mode} block={block} />
@@ -131,7 +131,7 @@ function sortLayout(layout: BlockItem[]): Layout[] {
 
 function getBlockLayout(blocks: SharePage['children'], mode: SpaceMode): Layout[] {
   return blocks.map((block) => {
-    const { blockId, ...rest } = block
+    const { objectId: blockId, ...rest } = block
     return {
       blockId,
       i: blockId,

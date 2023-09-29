@@ -10,7 +10,6 @@ import { Helmet } from 'react-helmet'
 import { useParams } from 'react-router-dom'
 import styles from './SharePage.module.scss'
 
-// ! API가 연동 되지 않아 text dose not matched 에러가 서버에서 발생합니다!
 interface PageSource {
   title: Record<string, string>
   description: Record<string, string>
@@ -55,7 +54,7 @@ export default function ShareableSpace() {
   }, [spaceId])
 
   useEffect(() => {
-    // * fetching이 완료되면 페이지 권한을 체크 후 업데트합니다. (임시)
+    // HACK : fetch가 완료되면 페이지 권한을 체크 후 업데트합니다.
     if (!isFetching) {
       const nextSpace: SharePage = {
         ...space,
@@ -72,7 +71,7 @@ export default function ShareableSpace() {
   return (
     <>
       <Helmet>
-        {/* todo : default pageSource + SSR일 경우 두 가지로 분기해야함 */}
+        {/* // TODO : default pageSource + SSR일 경우 두 가지로 분기해야함 */}
         <title>{pageSource.title['/']}</title>
       </Helmet>
       {isLoaded && <Profile />}

@@ -18,7 +18,7 @@ interface FormTypeState {
 
 export const useBlockAction = create<FormTypeState>((set) => ({
   formType: undefined,
-  blockType: 'text',
+  blockType: 'TEXT',
   openDrawer: false,
   drawerMode: 'create',
   activeBlockId: '',

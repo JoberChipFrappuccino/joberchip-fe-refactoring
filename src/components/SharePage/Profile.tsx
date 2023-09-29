@@ -12,11 +12,11 @@ import styles from './Profile.module.scss'
 
 export function Profile() {
   const [openConfirmModal, setConfirmModal] = useState(false)
-  const { mode, setSpaceMode, sharePage: space } = useSharePageStore()
+  const { mode, setSpaceMode, sharePage } = useSharePageStore()
   const items = useMemo(
     () => [
       {
-        key: `${space.pageId}-profile-1`,
+        key: `${sharePage.pageId}-profile-1`,
         label: <Switch onChange={() => {}} />,
         icon: <p>공개설정</p>
       },
@@ -25,7 +25,7 @@ export function Profile() {
         type: 'divider'
       },
       {
-        key: `${space.pageId}-profile-2`,
+        key: `${sharePage.pageId}-profile-2`,
         icon: <TreeDrawer />
       },
       {
@@ -33,10 +33,10 @@ export function Profile() {
         type: 'divider'
       },
       {
-        key: `${space.pageId}-profile-3`,
+        key: `${sharePage.pageId}-profile-3`,
         label: '링크 복사',
         onClick: () => {
-          clip(`http://localhost:5173/space/${space.pageId}`)
+          clip(`http://localhost:5173/space/${sharePage.pageId}`)
         }
       },
       {
@@ -44,7 +44,7 @@ export function Profile() {
         type: 'divider'
       },
       {
-        key: `${space.pageId}-profile-4`,
+        key: `${sharePage.pageId}-profile-4`,
         label: (
           <Switch
             checkedChildren="공유 화면 미리보기"
@@ -60,7 +60,7 @@ export function Profile() {
         type: 'divider'
       },
       {
-        key: `${space.pageId}-profile-5`,
+        key: `${sharePage.pageId}-profile-5`,
         danger: true,
         label: '삭제하기',
         onClick: () => {
@@ -75,11 +75,11 @@ export function Profile() {
     <div className={styles.container}>
       <div className={styles.profileCover}>
         <div className={styles.profileImageCover}>
-          <img src={space.profileImage} alt={`${space.title} thumbnail`} />
+          <img src={sharePage.pageProfileImage} alt={`${sharePage.title} thumbnail`} />
         </div>
         <div className={styles.profile}>
-          <h2>{space.title}</h2>
-          <p>{space.description}</p>
+          <h2>{sharePage.title}</h2>
+          <p>{sharePage.description}</p>
           <ul className={styles.followCover}>
             <li>
               <span>팔로워</span>
@@ -96,9 +96,13 @@ export function Profile() {
           </nav>
         </div>
         <div>
-          {space.previlige.edit && (
+          {sharePage.previlige.edit && (
             <DropDownMenu
-              statefulKeys={[`${space.pageId}-profile-1`, `${space.pageId}-profile-4`, `${space.pageId}-profile-5`]}
+              statefulKeys={[
+                `${sharePage.pageId}-profile-1`,
+                `${sharePage.pageId}-profile-4`,
+                `${sharePage.pageId}-profile-5`
+              ]}
               items={items}
             >
               <div className={styles.iconCover}>

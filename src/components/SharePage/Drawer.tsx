@@ -8,15 +8,15 @@ import { ActionBlockFormBase } from './ActionBlockFormBase'
 
 export function Drawer() {
   const { openDrawer, setOpenDrawer, drawerMode, blockType } = useBlockAction()
-  const { sharePage: space } = useSharePageStore()
+  const { sharePage } = useSharePageStore()
   const { activeBlockId } = useBlockAction()
   const [title, setTitle] = useState('')
 
-  const block = space.blocks.find((item) => item.blockId === activeBlockId)
+  const block = sharePage.children.find((item) => item.objectId === activeBlockId)
 
   let BaseComponent = ActionBlockFormBase
 
-  if (blockType === 'page' || blockType === 'template') {
+  if (blockType === 'PAGE' || blockType === 'template') {
     // * 페이지, 템플릿의 BaseComponent를 바꿔야합니다요.
     // eslint-disable-next-line react/display-name, react/jsx-no-useless-fragment
     BaseComponent = ({ children }: { children: ReactNode }) => <>{children}</>
@@ -25,7 +25,7 @@ export function Drawer() {
   useEffect(() => {
     let nextTitle = drawerMode === 'edit' ? ' 수정' : ' 추가'
     switch (blockType) {
-      case 'page':
+      case 'PAGE':
         nextTitle = '페이지' + nextTitle
         break
       case 'template':

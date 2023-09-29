@@ -51,6 +51,12 @@ export const useSharePageStore = create<SharePageState>((set) => {
       set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
       const { data } = await getSpaceAPI(pageId)
       if (data) {
+        data.children.forEach((block) => {
+          if (typeof block.width === 'number' && typeof block.height === 'number') {
+            block.w = block.width
+            block.h = block.height
+          }
+        })
         set(() => ({ sharePage: data, isFetching: false, isLoaded: true, isFalture: false }))
         return true
       }
@@ -61,6 +67,12 @@ export const useSharePageStore = create<SharePageState>((set) => {
       set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
       const { data } = await getSpaceFromBackAPI(pageId)
       if (data) {
+        data.children.forEach((block) => {
+          if (typeof block.width === 'number' && typeof block.height === 'number') {
+            block.w = block.width
+            block.h = block.height
+          }
+        })
         set(() => ({ sharePage: data, isFetching: false, isLoaded: true, isFalture: false }))
         return true
       }
@@ -76,7 +88,7 @@ export const useSharePageStore = create<SharePageState>((set) => {
     removeBlockById: async (blockId: string) => {
       set((state) => {
         for (let i = 0; i < state.sharePage.children.length; i++) {
-          if (state.sharePage.children[i].blockId === blockId) {
+          if (state.sharePage.children[i].objectId === blockId) {
             state.sharePage.children.splice(i, 1)
             // todo : block 삭제 API를 호출해야 합니다.
             break
