@@ -34,7 +34,7 @@ function getCreateFormComponent({ blockType }: Props) {
     case 'googleMap':
       return <h1>GoogleMap block form example</h1>
     case 'page':
-      return <PageBlockForm block={PropsData}/>
+      return <PageBlockForm block={PropsData} />
     case 'template':
       return <TemplateBlockCreateForm />
     default: {

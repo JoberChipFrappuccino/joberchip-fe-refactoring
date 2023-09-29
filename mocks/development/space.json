@@ -156,9 +156,11 @@
         "h": 1,
         "w": 4,
         "type": "page",
-        "text": "하위 공유 페이지로 이동하기",
+        "title": "하위 공유 페이지로 이동하기",
+        "description": "네이버",
+        "location": "1-2",
         "url": "http://www.naver.com",
-        "visible": false
+        "visible": true
       },
       {
         "blockId": "block_1_5",

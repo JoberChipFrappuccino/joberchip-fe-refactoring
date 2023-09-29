@@ -1,6 +1,6 @@
 import { Tree } from 'antd'
 import type { DataNode, TreeProps } from 'antd/es/tree'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { GrDocument } from 'react-icons/gr'
 import { IoChevronDownOutline } from 'react-icons/io5'
 
@@ -45,9 +45,10 @@ const defaultData: DataNode[] = [
 
 interface Props {
   onSelectTreeNode?: () => void
+  drawerMode?: boolean
 }
 
-export default function TreeLayout({ onSelectTreeNode }: Props) {
+export default function TreeLayout({ onSelectTreeNode, drawerMode = true }: Props) {
   const [gData, setGData] = useState(defaultData)
   const [expandedKeys] = useState(['0-0', '0-0-0', '0-0-0-0'])
   const onDrop: TreeProps['onDrop'] = (info) => {
@@ -120,16 +121,13 @@ export default function TreeLayout({ onSelectTreeNode }: Props) {
     setGData(data)
   }
 
-  useEffect(() => {}, [gData])
-
   return (
     <Tree
       className="draggable-tree"
       defaultExpandedKeys={expandedKeys}
-      draggable
+      draggable={drawerMode}
       blockNode
       switcherIcon={<IoChevronDownOutline />}
-      // onDragEnter={onDragEnter}
       onDrop={onDrop}
       treeData={gData}
       defaultExpandAll
