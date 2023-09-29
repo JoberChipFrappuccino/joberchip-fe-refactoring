@@ -44,9 +44,7 @@ export default async function renderHome(url: string, req: Request, res: Respons
     // serverSideData[SPACE] = JSON.stringify(getSpaceBySpaceId(spaceId))
     // const backResponse = await api(`/v1/page/${spaceId}`)
     // console.log('backResponse : ', backResponse)
-  }
-
-  if (url.includes('/space/')) {
+  } else if (url.includes('/space/')) {
     const spaceId = url.split('/space/')[1]
     serverSideData[SPACE] = JSON.stringify(getSpaceBySpaceId(spaceId))
   }
