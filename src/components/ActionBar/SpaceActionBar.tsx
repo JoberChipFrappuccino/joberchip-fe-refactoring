@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { useCallback } from 'react'
 import styles from './SpaceActionBar.module.scss'
 
-type Props = {
+interface Props {
   isActive: boolean
 }
 export function SpaceActionBar({ isActive }: Props) {
@@ -35,7 +35,7 @@ export function SpaceActionBar({ isActive }: Props) {
         }
       ])}
     >
-      <Tooltip title="페이지 생성하기">
+      <Tooltip title="페이지 추가하기">
         <button
           className={styles.item}
           onClick={() => {
@@ -47,7 +47,7 @@ export function SpaceActionBar({ isActive }: Props) {
           </div>
         </button>
       </Tooltip>
-      <Tooltip title="템플릿 생성하기">
+      <Tooltip title="템플릿 추가하기">
         <button
           className={styles.item}
           onClick={() => {
@@ -59,7 +59,7 @@ export function SpaceActionBar({ isActive }: Props) {
           </div>
         </button>
       </Tooltip>
-      <Tooltip title="블럭 생성하기">
+      <Tooltip title="블럭 추가하기">
         <button
           className={styles.item}
           onClick={() => {

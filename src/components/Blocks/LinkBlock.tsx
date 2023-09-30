@@ -1,13 +1,8 @@
-import { type BlockWith } from '@/models/space'
+import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import BlockLogo from './BlockLogo'
 import styles from './LinkBlock.module.scss'
 
-type Props = {
-  block: BlockWith<TLink>
-  mode: SpaceMode
-}
-
-export function LinkBlock({ block, mode }: Props) {
+export function LinkBlock({ block, mode }: BlockBaseWithBlockProps<TLink>) {
   return (
     <div className={styles.container}>
       <div className={mode === 'edit' ? 'cover' : ''} />

@@ -1,11 +1,7 @@
-import { type BlockWith } from '@/models/space'
+import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import styles from './ImageBlock.module.scss'
 
-type Props = {
-  block: BlockWith<TImage>
-  mode: SpaceMode
-}
-export function ImageBlock({ block, mode }: Props) {
+export function ImageBlock({ block, mode }: BlockBaseWithBlockProps<TImage>) {
   return (
     <div className={styles.container}>
       <div className={mode === 'edit' ? 'cover' : ''} />

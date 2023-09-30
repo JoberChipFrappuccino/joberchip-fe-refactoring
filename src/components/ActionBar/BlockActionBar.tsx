@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import styles from './BlockActionBar.module.scss'
 
-type Props = {
+interface Props {
   isActive: boolean
 }
 export function BlockActionBar({ isActive }: Props) {

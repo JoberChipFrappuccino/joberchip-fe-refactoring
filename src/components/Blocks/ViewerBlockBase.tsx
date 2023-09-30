@@ -14,12 +14,12 @@ import { BsThreeDotsVertical } from 'react-icons/bs'
 import { ConfirmModal } from '../Modal/ConfirmModal'
 import styles from './ViewerBlockBase.module.scss'
 
-interface Props {
+export interface BlockBaseProps {
   children: ReactNode
   block: BlockBase<BlockType>
 }
 
-export function ViewerBlockBase({ block, children }: Props) {
+export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useBlockAction()
   const { sharePage: space, removeBlockById, mode } = useSharePageStore()

@@ -1,12 +1,7 @@
-/* eslint-disable multiline-ternary */
-import { type BlockWith } from '@/models/space'
+import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import styles from './VideoBlock.module.scss'
 
-type Props = {
-  block: BlockWith<TVideo>
-  mode: SpaceMode
-}
-export function VideoBlock({ block, mode }: Props) {
+export function VideoBlock({ block, mode }: BlockBaseWithBlockProps<TVideo>) {
   return (
     <div className={styles.container}>
       <div className={mode === 'edit' ? 'cover' : ''} />

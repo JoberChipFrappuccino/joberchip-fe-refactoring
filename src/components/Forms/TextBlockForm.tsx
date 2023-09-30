@@ -1,10 +1,7 @@
-import { type BlockWith } from '@/models/space'
+import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import styles from './TextBlockForm.module.scss'
 
-interface Props {
-  block?: BlockWith<TText>
-}
-export default function TextBlockForm({ block }: Props) {
+export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   return (
     <div className={styles.container}>
       <h1>TEXT BLOCK FORM EXMAPLE</h1>

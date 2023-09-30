@@ -1,15 +1,11 @@
-import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { TiDeleteOutline } from 'react-icons/ti'
+import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import FormButton from '../Ui/Button'
 import styles from './LinkBlockForm.module.scss'
 
-type Props = {
-  block?: BlockWith<TLink>
-}
-
-export default function LinkBlockForm({ block }: Props) {
+export function LinkBlockForm({ block }: BlockBaseWithBlockFormProps<TLink>) {
   const [link, setLink] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !link || !title

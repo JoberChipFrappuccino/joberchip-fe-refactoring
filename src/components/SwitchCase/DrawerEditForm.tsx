@@ -1,19 +1,17 @@
-import ImageBlockForm from '@/components/Forms/ImageBlockForm'
-import LinkBlockForm from '@/components/Forms/LinkBlockForm'
-import PageBlockForm from '@/components/Forms/PageBlockForm'
-import TextBlockForm from '@/components/Forms/TextBlockForm'
-import VideoBlockForm from '@/components/Forms/VideoBlockForm'
+import { ImageBlockForm } from '@/components/Forms/ImageBlockForm'
+import { LinkBlockForm } from '@/components/Forms/LinkBlockForm'
+import { PageBlockForm } from '@/components/Forms/PageBlockForm'
+import { TemplateBlockEditForm } from '@/components/Forms/TemplateBlockEditForm'
+import { TextBlockForm } from '@/components/Forms/TextBlockForm'
+import { VideoBlockForm } from '@/components/Forms/VideoBlockForm'
 import { EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
-import { type BlockType, type BlockWith } from '@/models/space'
-import { type DrawerMode } from '@/store/blockAction'
-import { TemplateBlockEditForm } from '../Forms/TemplateBlockEditForm'
+import { type BlockType } from '@/models/space'
+import { type BlockBaseWithBlockProps } from './ViewerBox'
 
-interface Props<T extends BlockType> {
-  block: BlockWith<T>
-  mode: DrawerMode
-}
-function getEditFormComponent<T extends BlockType>({ block }: Props<T>) {
-  switch (block.type) {
+export interface BlockBaseWithBlockFormProps<T extends BlockType> extends Partial<BlockBaseWithBlockProps<T>> {}
+
+function getEditFormComponent<T extends BlockType>({ block }: BlockBaseWithBlockFormProps<T>) {
+  switch (block?.type) {
     case TEXT:
       return <TextBlockForm block={block} />
     case IMAGE:
@@ -39,6 +37,6 @@ function getEditFormComponent<T extends BlockType>({ block }: Props<T>) {
   }
 }
 
-export function DrawerEditForm<T extends BlockType>({ block, mode }: Props<T>) {
+export function DrawerEditForm<T extends BlockType>({ block, mode }: BlockBaseWithBlockFormProps<T>) {
   return getEditFormComponent({ block, mode })
 }

@@ -1,7 +1,7 @@
 import logoList from 'mocks/development/logo.json'
 import styles from './BlockLogo.module.scss'
 
-type Props = {
+interface Props {
   logo: string
 }
 

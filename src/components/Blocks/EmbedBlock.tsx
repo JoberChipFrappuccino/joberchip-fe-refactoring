@@ -1,10 +1,7 @@
-import { type BlockWith } from '@/models/space'
+import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import styles from './EmbedBlock.module.scss'
-type Props = {
-  block: BlockWith<TEmbed>
-  mode: SpaceMode
-}
-export function EmbedBlock({ block, mode }: Props) {
+
+export function EmbedBlock({ block, mode }: BlockBaseWithBlockProps<TEmbed>) {
   return (
     <div className={styles.container}>
       <div className={mode === 'edit' ? 'cover' : ''} />

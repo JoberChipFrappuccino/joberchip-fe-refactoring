@@ -1,15 +1,13 @@
-import { type BlockWith } from '@/models/space'
 import ModalPortal from '@/templates/ModalPortal'
 import { useState } from 'react'
 import TemplatePreviewModal from '../Modal/TemplatePreviewModal'
+import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import styles from './TemplateBlock.module.scss'
 
-type Props = {
-  block: BlockWith<TTemplate>
-  mode: SpaceMode
+interface TemplateBlockProps extends BlockBaseWithBlockProps<TTemplate> {
   preview?: boolean
 }
-export function TemplateBlock({ block, mode, preview = false }: Props) {
+export function TemplateBlock({ block, mode, preview = false }: TemplateBlockProps) {
   const [open, setOpen] = useState(false)
 
   return (

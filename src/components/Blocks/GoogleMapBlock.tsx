@@ -1,12 +1,7 @@
-import { type BlockWith } from '@/models/space'
+import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import styles from './GoogleMapBlock.module.scss'
 
-type Props = {
-  block: BlockWith<TMap>
-  mode?: SpaceMode
-}
-
-export function GoogleMapBlock({ block, mode = 'view' }: Props) {
+export function GoogleMapBlock({ block, mode }: BlockBaseWithBlockProps<TMap>) {
   return (
     <div className={styles.container}>
       <div className={mode === 'edit' ? 'cover' : ''} />

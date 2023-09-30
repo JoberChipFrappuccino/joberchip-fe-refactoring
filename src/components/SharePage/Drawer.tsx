@@ -47,5 +47,6 @@ export function Drawer() {
 
 function getDrawerTitle(drawerMode: DrawerMode, blockType: BlockType) {
   const postfix = drawerMode === 'edit' ? '정보 수정' : '추가하기'
-  return `${DRAWER_TITLE[blockType]} ${postfix}`
+  if (blockType === PAGE || blockType === TEMPLATE) return `${DRAWER_TITLE[blockType]} ${postfix}`
+  return `블럭 ${postfix}`
 }

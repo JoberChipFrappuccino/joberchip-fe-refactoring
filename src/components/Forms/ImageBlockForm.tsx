@@ -1,16 +1,12 @@
-import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { TiDeleteOutline } from 'react-icons/ti'
+import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import FormButton from '../Ui/Button'
 import ImgThumbnail from '../Ui/ImgThumbnail'
 import styles from './ImageBlockForm.module.scss'
 
-type Props = {
-  block?: BlockWith<TImage>
-}
-
-export default function ImageBlockForm({ block }: Props) {
+export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
   const [thumbnail, setThumbnail] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !title || !thumbnail

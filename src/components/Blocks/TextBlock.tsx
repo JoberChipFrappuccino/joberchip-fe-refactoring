@@ -1,11 +1,7 @@
-import { type BlockWith } from '@/models/space'
+import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import styles from './TextBlock.module.scss'
 
-type Props = {
-  block: BlockWith<TText>
-  mode: SpaceMode
-}
-export function TextBlock({ block, mode }: Props) {
+export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
   return (
     <div className={styles.container}>
       <div className={mode === 'edit' ? 'cover' : ''} />
