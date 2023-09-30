@@ -11,7 +11,7 @@ import styles from './Profile.module.scss'
 
 export function Profile() {
   const [openConfirmModal, setConfirmModal] = useState(false)
-  const { mode, setSpaceMode, sharePage } = useSharePageStore()
+  const { mode, setSharePageMode: setSpaceMode, sharePage } = useSharePageStore()
   const items = useMemo(
     () => [
       {

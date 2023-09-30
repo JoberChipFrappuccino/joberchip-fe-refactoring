@@ -1,5 +1,5 @@
 // space
-declare type SpaceMode = 'view' | 'edit'
+declare type SharePageMode = 'view' | 'edit'
 declare type ParticipationType = 'DEFAULT' | 'OWNER' | 'PARTICIPANT'
 
 // drawer

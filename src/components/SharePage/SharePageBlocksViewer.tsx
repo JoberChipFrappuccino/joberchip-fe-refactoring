@@ -16,7 +16,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive)
 
 export function BlocksViewer() {
   const [rowHeight, setRowHeight] = useState(100)
-  const { sharePage, mode } = useSharePageStore()
+  const { sharePage, setSharePage, mode } = useSharePageStore()
   const [grid, setGridLayout] = useState({
     breakpoints: 'lg',
     layouts: { lg: getBlockLayout(sharePage.children, mode) } // , md: layout, sm: layout, xs: layout, xxs: layout
@@ -55,8 +55,8 @@ export function BlocksViewer() {
           if (mode === 'view') return
           const changedLayout = sortLayout(layout)
           if (JSON.stringify(sortLayout(changedLayout)) === JSON.stringify(grid.layouts.lg)) return
+          setSharePage({ ...sharePage, children: updateBlockPosition(changedLayout, sharePage.children) })
           setGridLayout(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
-          updateBlockPosition(changedLayout, sharePage.children)
         }}
         onDragStart={(_layout, _oldItem, _newItem, _placeholder, event, element) => {
           setActiveBlockId(element.id)
@@ -111,7 +111,7 @@ function sortLayout(layout: BlockItem[]): Layout[] {
   })
 }
 
-function getBlockLayout(blocks: SharePage['children'], mode: SpaceMode): Layout[] {
+function getBlockLayout(blocks: SharePage['children'], mode: SharePageMode): Layout[] {
   return blocks.map((block) => {
     const { objectId: blockId, ...rest } = block
     return {
@@ -140,10 +140,12 @@ function getBlockHeightRatio(width: number, cols: number) {
 function updateBlockPosition(changedLayout: Layout[], blocks: SharePage['children']) {
   changedLayout.forEach((item) => {
     const block = blocks.find((block) => block.objectId === item.i)
-    if (!block) return
+    if (!block) return block
     block.x = item.x
     block.y = item.y
     block.w = item.w
     block.h = item.h
+    return block
   })
+  return blocks
 }

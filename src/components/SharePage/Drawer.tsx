@@ -1,6 +1,6 @@
 import { BLOCK_TYPE_TO_KOR } from '@/constants/drawer'
 import { type BlockType } from '@/models/space'
-import { useBlockAction, type DrawerMode } from '@/store/blockAction'
+import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
 import { Drawer as AntdDrawer } from 'antd'
 import { useEffect, useState, type ReactNode } from 'react'

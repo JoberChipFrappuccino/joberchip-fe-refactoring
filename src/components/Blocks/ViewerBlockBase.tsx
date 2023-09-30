@@ -23,7 +23,7 @@ export interface BlockBaseProps {
 export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useBlockAction()
-  const { sharePage: space, removeBlockById, mode } = useSharePageStore()
+  const { sharePage, removeBlockById, mode } = useSharePageStore()
   const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockAction()
   const [confirmModal, setConfirmModal] = useState(false)
 
@@ -42,9 +42,9 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
         <Switch
           defaultChecked={!block.visible}
           onChange={() => {
-            for (let i = 0; i < space.children.length; i++) {
-              if (space.children[i].objectId === block.objectId) {
-                space.children[i].visible = !space.children[i].visible
+            for (let i = 0; i < sharePage.children.length; i++) {
+              if (sharePage.children[i].objectId === block.objectId) {
+                sharePage.children[i].visible = !sharePage.children[i].visible
                 // todo : block visibe상태를 변경하는 API를 호출해야 합니다.
                 break
               }

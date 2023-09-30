@@ -11,7 +11,7 @@ import type { BlockType, BlockWith } from '@/models/space'
 
 export interface BlockBaseWithBlockProps<T extends BlockType> {
   block: BlockWith<T>
-  mode: SpaceMode
+  mode: SharePageMode
 }
 
 function getViewerComponent<T extends BlockType>({ block, mode }: BlockBaseWithBlockProps<T>) {
