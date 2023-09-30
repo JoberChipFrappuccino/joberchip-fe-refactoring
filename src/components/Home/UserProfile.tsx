@@ -4,6 +4,7 @@ import { useUserStore } from '@/store/user'
 import { useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import styles from './UserProfile.module.scss'
+
 export function UserProfile() {
   const queryClient = useQueryClient()
 

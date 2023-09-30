@@ -2,7 +2,7 @@ import { ConfirmModal } from '@/components/Modal/ConfirmModal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { TreeDrawer } from '@/components/Tree/TreeDrawer'
 import { useSharePageStore } from '@/store/sharePage'
-import ModalPortal from '@/templates/ModalPortal'
+import { ModalPortal } from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
 import { useMemo, useState } from 'react'
@@ -35,9 +35,7 @@ export function Profile() {
       {
         key: `${sharePage.pageId}-profile-3`,
         label: '링크 복사',
-        onClick: () => {
-          clip(`http://localhost:5173/space/${sharePage.pageId}`)
-        }
+        onClick: () => clip(`http://localhost:5173/space/${sharePage.pageId}`)
       },
       {
         key: 'Profile-divider-3',
@@ -49,9 +47,7 @@ export function Profile() {
           <Switch
             checkedChildren="공유 화면 미리보기"
             unCheckedChildren="편집 하기"
-            onChange={() => {
-              setSpaceMode(mode === 'view' ? 'edit' : 'view')
-            }}
+            onChange={() => setSpaceMode(mode === 'view' ? 'edit' : 'view')}
           />
         )
       },
@@ -63,9 +59,7 @@ export function Profile() {
         key: `${sharePage.pageId}-profile-5`,
         danger: true,
         label: '삭제하기',
-        onClick: () => {
-          setConfirmModal(true)
-        }
+        onClick: () => setConfirmModal(true)
       }
     ],
     [mode]
@@ -91,7 +85,6 @@ export function Profile() {
             </li>
           </ul>
           <nav className={styles.navCover}>
-            {/* 이거 하드코딩한 장식용임 이 녀석의 처우는 나중에 생각하자 */}
             <Link to="/">{'스페이스 홈 바로가기 >'}</Link>
           </nav>
         </div>
@@ -112,7 +105,7 @@ export function Profile() {
           )}
         </div>
       </div>
-      {/* 이 부분은 Space Home일 경우 && Admin일 경우만 나와야합니다  */}
+      {/* // CASE : 이 부분은 Root Page일 경우 또는 편집 권한이 있는 경우만 나와야합니다  */}
       <ul className={styles.messageCover}>
         <li>
           <p>3</p>

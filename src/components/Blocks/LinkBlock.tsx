@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import BlockLogo from './BlockLogo'
 import styles from './LinkBlock.module.scss'
@@ -5,7 +6,7 @@ import styles from './LinkBlock.module.scss'
 export function LinkBlock({ block, mode }: BlockBaseWithBlockProps<TLink>) {
   return (
     <div className={styles.container}>
-      <div className={mode === 'edit' ? 'cover' : ''} />
+      <div className={classNames(mode === 'edit' && 'cover')} />
       <div className={styles.itemBox}>
         <BlockLogo logo={block.src} />
         <div className={styles.titleUrl}>

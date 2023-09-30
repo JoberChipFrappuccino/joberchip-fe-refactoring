@@ -1,15 +1,12 @@
 import styles from './BlockCover.module.scss'
 
-type Props = {
-  onClick?: (e: EventTarget | null) => void
+interface BlockCoverProps {
+  onClick?: VoidFunction
 }
-export default function BlockCover({ onClick }: Props) {
+export function BlockCover({ onClick }: BlockCoverProps) {
   return (
-    <section
-      className={styles.cover}
-      onClick={(e) => {
-        onClick && onClick(e.target)
-      }}
-    />
+    <div className={styles.cover}>
+      <button className={styles.btn} type="button" onClick={() => onClick && onClick()} />
+    </div>
   )
 }

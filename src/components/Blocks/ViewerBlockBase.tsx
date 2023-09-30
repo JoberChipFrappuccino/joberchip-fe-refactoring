@@ -1,4 +1,4 @@
-import BlockCover from '@/components/SharePage/BlockCover'
+import { BlockCover } from '@/components/SharePage/BlockCover'
 import BlockPortal from '@/components/SharePage/BlockPortal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
@@ -6,9 +6,10 @@ import { BLOCK, PAGE, TEMPLATE } from '@/constants/blockTypeConstant'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
-import ModalPortal from '@/templates/ModalPortal'
+import { ModalPortal } from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
+import classNames from 'classnames'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { ConfirmModal } from '../Modal/ConfirmModal'
@@ -120,11 +121,16 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   useEffect(() => {
     setFocus(activeBlockId === block.objectId)
   }, [activeBlockId])
-
   return (
     <div className={styles.container}>
       {mode === 'edit' && (
-        <aside className={[styles.menu, activeBlockId === block.objectId ? 'kebobMenu' : ''].join(' ')}>
+        <aside
+          className={classNames(styles.menu, [
+            {
+              kebobMenu: activeBlockId === block.objectId
+            }
+          ])}
+        >
           <DropDownMenu
             trigger="click"
             items={items}

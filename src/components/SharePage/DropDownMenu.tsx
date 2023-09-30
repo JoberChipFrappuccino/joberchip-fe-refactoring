@@ -2,14 +2,14 @@ import type { MenuProps } from 'antd'
 import { Dropdown } from 'antd'
 import { useState, type ReactNode } from 'react'
 
-type Props = {
+export interface DropDownMenuProps {
   items: MenuProps['items']
   trigger?: 'click' | 'hover' | 'contextMenu'
   children?: ReactNode
   statefulKeys?: string[]
 }
 
-export function DropDownMenu({ items, children, trigger = 'click', statefulKeys }: Props) {
+export function DropDownMenu({ items, children, trigger = 'click', statefulKeys }: DropDownMenuProps) {
   const [open, setOpen] = useState(false)
 
   const handleOnClick: MenuProps['onClick'] = (e) => {

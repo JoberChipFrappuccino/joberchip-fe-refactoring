@@ -3,6 +3,7 @@ import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useUserStore } from '@/store/user'
 import { useQuery } from '@tanstack/react-query'
+import classNames from 'classnames'
 import { useState } from 'react'
 import { TemplateBlock } from '../Blocks/TemplateBlock'
 import { TemplateSearchBox } from '../SharePage/TemplateSearchBox'
@@ -34,7 +35,11 @@ export function TemplateBlockCreateForm() {
           return (
             <div
               key={`create-form-${template.templateId}`}
-              className={[styles.blockCover, templateId === template.templateId ? styles.selected : ''].join(' ')}
+              className={classNames(styles.blockCover, [
+                {
+                  [styles.selected]: templateId === template.templateId
+                }
+              ])}
               onClick={() => {
                 handleOnClick(template)
               }}

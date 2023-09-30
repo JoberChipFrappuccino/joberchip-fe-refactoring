@@ -1,7 +1,8 @@
-import ModalPortal from '@/templates/ModalPortal'
+import { TemplatePreviewModal } from '@/components/Modal/TemplatePreviewModal'
+import { type BlockBaseWithBlockProps } from '@/components/SwitchCase/ViewerBox'
+import { ModalPortal } from '@/templates/ModalPortal'
+import classNames from 'classnames'
 import { useState } from 'react'
-import TemplatePreviewModal from '../Modal/TemplatePreviewModal'
-import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import styles from './TemplateBlock.module.scss'
 
 interface TemplateBlockProps extends BlockBaseWithBlockProps<TTemplate> {
@@ -12,7 +13,7 @@ export function TemplateBlock({ block, mode, preview = false }: TemplateBlockPro
 
   return (
     <div className={styles.container}>
-      <aside className={mode === 'edit' ? 'cover' : ''} />
+      <aside className={classNames(mode === 'edit' && 'cover')} />
       <div className={styles.contentCover}>
         <div className={styles.cover}>
           <img className={styles.img} src={block.iconUrl} alt="template icon" />

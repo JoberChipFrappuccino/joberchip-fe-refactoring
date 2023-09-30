@@ -1,4 +1,5 @@
 import styles from './Search.module.scss'
+
 export function Search() {
   return (
     <div className={styles.conatiner}>

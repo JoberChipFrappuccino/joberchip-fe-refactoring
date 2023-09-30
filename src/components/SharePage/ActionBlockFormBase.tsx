@@ -1,6 +1,8 @@
 import { IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/blockTypeConstant'
+import { BLOCK_TYPE_TO_KOR } from '@/constants/drawer'
 import { type BlockType } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
+import classNames from 'classnames'
 import type { ReactNode } from 'react'
 import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from 'react-icons/bi'
 import styles from './ActionBlockFormBase.module.scss'
@@ -21,27 +23,27 @@ export function ActionBlockFormBase({ children }: Props) {
   const formTypes: FormType[] = [
     {
       type: LINK,
-      title: '링크',
+      title: BLOCK_TYPE_TO_KOR[LINK],
       icon: <BiLink />
     },
     {
       type: IMAGE,
-      title: '사진',
+      title: BLOCK_TYPE_TO_KOR[IMAGE],
       icon: <BiImageAlt />
     },
     {
       type: VIDEO,
-      title: '동영상',
+      title: BLOCK_TYPE_TO_KOR[VIDEO],
       icon: <BiCaretRightSquare />
     },
     {
       type: MAP,
-      title: '지도',
+      title: BLOCK_TYPE_TO_KOR[MAP],
       icon: <BiMapAlt />
     },
     {
       type: TEXT,
-      title: '텍스트',
+      title: BLOCK_TYPE_TO_KOR[TEXT],
       icon: <BiPencil />
     }
   ]
@@ -56,18 +58,25 @@ export function ActionBlockFormBase({ children }: Props) {
             return (
               <div key={form.type}>
                 <button
-                  className={[
-                    form.type === blockType ? styles.active : '',
-                    drawerMode === 'edit' ? styles.disable : ''
-                  ].join(' ')}
-                  onClick={() => {
-                    setBlockType(form.type)
-                  }}
+                  className={classNames([
+                    {
+                      [styles.active]: form.type === blockType,
+                      [styles.disable]: drawerMode === 'edit'
+                    }
+                  ])}
+                  onClick={() => setBlockType(form.type)}
                   disabled={drawerMode === 'edit'}
                 >
                   <div className={styles.icon}>{form.icon}</div>
                 </button>
-                <div id={styles.btnTitle} className={form.type === blockType ? styles.activeText : ''}>
+                <div
+                  id={styles.btnTitle}
+                  className={classNames([
+                    {
+                      [styles.activeText]: form.type === blockType
+                    }
+                  ])}
+                >
                   {form.title}
                 </div>
               </div>

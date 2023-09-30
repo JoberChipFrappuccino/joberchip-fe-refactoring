@@ -1,6 +1,6 @@
 import { type BlockType } from '@/models/space'
 
-export const DRAWER_TITLE: Record<BlockType, string> = {
+export const BLOCK_TYPE_TO_KOR: Record<BlockType, string> = {
   TEMPLATE: '템플릿',
   PAGE: '페이지',
   TEXT: '텍스트',

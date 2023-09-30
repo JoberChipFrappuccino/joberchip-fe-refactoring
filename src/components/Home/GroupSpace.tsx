@@ -1,11 +1,11 @@
 import { type ReactNode } from 'react'
 import styles from './GroupSpace.module.scss'
 
-interface Props {
+interface GroupSpaceProps {
   title: string
   children: ReactNode
 }
-export function GroupSpace({ children, title }: Props) {
+export function GroupSpace({ children, title }: GroupSpaceProps) {
   return (
     <div className={styles.container}>
       <div className={styles.descriptionBox}>

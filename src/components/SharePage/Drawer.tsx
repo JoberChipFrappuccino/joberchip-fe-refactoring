@@ -1,4 +1,4 @@
-import { DRAWER_TITLE } from '@/constants/Drawer'
+import { BLOCK_TYPE_TO_KOR } from '@/constants/drawer'
 import { type BlockType } from '@/models/space'
 import { useBlockAction, type DrawerMode } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
@@ -47,6 +47,6 @@ export function Drawer() {
 
 function getDrawerTitle(drawerMode: DrawerMode, blockType: BlockType) {
   const postfix = drawerMode === 'edit' ? '정보 수정' : '추가하기'
-  if (blockType === PAGE || blockType === TEMPLATE) return `${DRAWER_TITLE[blockType]} ${postfix}`
+  if (blockType === PAGE || blockType === TEMPLATE) return `${BLOCK_TYPE_TO_KOR[blockType]} ${postfix}`
   return `블럭 ${postfix}`
 }

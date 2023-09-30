@@ -1,16 +1,14 @@
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { useBlockAction } from '@/store/blockAction'
 import { Switch } from 'antd'
+import classNames from 'classnames'
 import { useMemo } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import styles from './BlockActionBar.module.scss'
+import { type ActionBarProps } from './SpaceActionBar'
 
-interface Props {
-  isActive: boolean
-}
-export function BlockActionBar({ isActive }: Props) {
+export function BlockActionBar({ isActive }: ActionBarProps) {
   const { activeBlockId } = useBlockAction()
-  const additionalClassName = isActive ? styles.visible : styles.hidden
 
   const items = useMemo(
     () => [
@@ -34,7 +32,14 @@ export function BlockActionBar({ isActive }: Props) {
   )
 
   return (
-    <div className={[styles.container, additionalClassName].join(' ')}>
+    <div
+      className={classNames(styles.container, [
+        {
+          [styles.visible]: isActive,
+          [styles.hidden]: !isActive
+        }
+      ])}
+    >
       <button className={styles.item}>1X1</button>
       <button className={styles.item}>1X2</button>
       <button className={styles.item}>2X2</button>
