@@ -1,5 +1,5 @@
 import { IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/blockTypeConstant'
-import { BLOCK_TYPE_TO_KOR } from '@/constants/drawer'
+import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import classNames from 'classnames'

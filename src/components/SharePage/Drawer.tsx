@@ -1,4 +1,4 @@
-import { BLOCK_TYPE_TO_KOR } from '@/constants/drawer'
+import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
