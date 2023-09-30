@@ -27,6 +27,7 @@ export function TemplateBlockCreateForm() {
     alert('추가되었습니다. (템플릿 미구현)')
     setOpenDrawer(false)
   }
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <TemplateSearchBox />

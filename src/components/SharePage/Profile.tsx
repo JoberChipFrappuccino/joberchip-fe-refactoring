@@ -3,7 +3,6 @@ import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { TreeDrawer } from '@/components/Tree/TreeDrawer'
 import { useSharePageStore } from '@/store/sharePage'
 import { ModalPortal } from '@/templates/ModalPortal'
-import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
 import { useMemo, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -32,15 +31,7 @@ export function Profile() {
         key: 'Profile-divider-2',
         type: 'divider'
       },
-      {
-        key: `${sharePage.pageId}-profile-3`,
-        label: '링크 복사',
-        onClick: () => clip(`${process.env.FRONT_SERVER_BASE_URL}/space/${sharePage.pageId}`)
-      },
-      {
-        key: 'Profile-divider-3',
-        type: 'divider'
-      },
+
       {
         key: `${sharePage.pageId}-profile-4`,
         label: (

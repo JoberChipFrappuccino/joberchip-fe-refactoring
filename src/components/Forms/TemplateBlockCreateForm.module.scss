@@ -8,12 +8,15 @@
     padding: 0 1.25rem;
     flex: 1;
     .blockCover {
+      display: block;
+      width: 100%;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       border-radius: 1.1rem;
       margin-bottom: 1.25rem;
       box-sizing: border-box;
       background-color: transparent;
-      border-color: transparent;
+      border: none;
+      padding: 0;
       cursor: pointer;
     }
   }
