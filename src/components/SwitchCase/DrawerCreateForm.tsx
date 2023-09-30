@@ -1,17 +1,17 @@
-import ImageBlockForm from '@/components/Forms/ImageBlockForm'
-import LinkBlockForm from '@/components/Forms/LinkBlockForm'
-import PageBlockForm from '@/components/Forms/PageBlockForm'
-import TextBlockForm from '@/components/Forms/TextBlockForm'
-import VideoBlockForm from '@/components/Forms/VideoBlockForm'
+import { ImageBlockForm } from '@/components/Forms/ImageBlockForm'
+import { LinkBlockForm } from '@/components/Forms/LinkBlockForm'
+import { PageBlockForm } from '@/components/Forms/PageBlockForm'
+import { TemplateBlockCreateForm } from '@/components/Forms/TemplateBlockCreateForm'
+import { TextBlockForm } from '@/components/Forms/TextBlockForm'
+import { VideoBlockForm } from '@/components/Forms/VideoBlockForm'
 import { EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
-import { TemplateBlockCreateForm } from '../Forms/TemplateBlockCreateForm'
 
-interface Props {
+interface DrawerCreateFormProps {
   blockType: BlockType
 }
 
-function getCreateFormComponent({ blockType }: Props) {
+function getCreateFormComponent({ blockType }: DrawerCreateFormProps) {
   switch (blockType) {
     case TEXT:
       return <TextBlockForm />
@@ -38,6 +38,6 @@ function getCreateFormComponent({ blockType }: Props) {
   }
 }
 
-export function DrawerCreateForm({ blockType }: Props) {
+export function DrawerCreateForm({ blockType }: DrawerCreateFormProps) {
   return getCreateFormComponent({ blockType })
 }

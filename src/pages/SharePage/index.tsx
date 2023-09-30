@@ -1,6 +1,6 @@
 import { Drawer } from '@/components/SharePage/Drawer'
 import { Profile } from '@/components/SharePage/Profile'
-import { SpaceViewer } from '@/components/SharePage/SpaceViewer'
+import { BlocksViewer } from '@/components/SharePage/SharePageBlocksViewer'
 import { SEO, SPACE } from '@/constants'
 import useServerSideProps from '@/hooks/serverSideProps'
 import { type SharePage } from '@/models/space'
@@ -22,21 +22,20 @@ type Params = {
 export default function ShareableSpace() {
   const pageSource: PageSource = useServerSideProps(SEO)
   const SSRSpace: SharePage = useServerSideProps(SPACE)
-  const { sharePage: space, loadSpace, setSpace, isLoaded, isFetching, setSpaceMode } = useSharePageStore()
+  const { sharePage, loadSharePage, setSharePage, isLoaded, isFetching, setSharePageMode } = useSharePageStore()
   const { spaceId } = useParams<Params>()
-
   useEffect(() => {
     // CASE : CSR
     // react 내부적으로 주소를 이동할 경우 space를 다시 로드합니다.
     if (!SSRSpace?.pageId) {
-      loadSpace(spaceId ?? '')
+      loadSharePage(spaceId ?? '')
       return
     }
 
     // CASE : CSR
     // SSR로 로드한 spaceId와 이동할 space가 다르다면 space를 다시 로드합니다.
     if (SSRSpace?.pageId !== spaceId) {
-      loadSpace(spaceId ?? '')
+      loadSharePage(spaceId ?? '')
       return
     }
 
@@ -49,13 +48,13 @@ export default function ShareableSpace() {
         delete: SSRSpace.pageId === 'space1'
       }
     }
-    if (nextSpace.previlige.edit) setSpaceMode('edit')
+    if (nextSpace.previlige.edit) setSharePageMode('edit')
     // HACK : width, height를 number로 변환합니다. 10/6 이전까지 backend API연동 후 삭제합니다.
     nextSpace.children.forEach((block) => {
       block.w = Number(block.width)
       block.h = Number(block.height)
     })
-    setSpace(nextSpace)
+    setSharePage(nextSpace)
   }, [spaceId])
 
   useEffect(() => {
@@ -63,16 +62,18 @@ export default function ShareableSpace() {
     // HACK : fetch가 완료되면 페이지 권한을 체크 후 업데트합니다.
     if (!isFetching) {
       const nextSpace: SharePage = {
-        ...space,
+        ...sharePage,
         previlige: {
-          edit: space.pageId === 'space1',
-          delete: space.pageId === 'space1'
+          edit: sharePage.pageId === 'space1',
+          delete: sharePage.pageId === 'space1'
         }
       }
-      if (nextSpace.previlige.edit) setSpaceMode('edit')
-      setSpace(nextSpace)
+      if (nextSpace.previlige.edit) setSharePageMode('edit')
+      setSharePage(nextSpace)
     }
   }, [isFetching])
+
+  if (sharePage?.pageId !== spaceId) return <div>...loading</div>
 
   return (
     <>
@@ -84,7 +85,7 @@ export default function ShareableSpace() {
       <aside>{<Drawer />}</aside>
       <div className={styles.viewer}>
         <div className={styles.spaceViewer}>
-          <section>{isLoaded && <SpaceViewer />}</section>
+          <section>{isLoaded && <BlocksViewer />}</section>
         </div>
       </div>
     </>

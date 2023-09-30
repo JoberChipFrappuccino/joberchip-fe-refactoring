@@ -1,16 +1,12 @@
-import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { TiDeleteOutline } from 'react-icons/ti'
+import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import FormButton from '../Ui/Button'
 import VideoThumbnail from '../Ui/VideoThumbnail'
 import styles from './VideoBlockForm.module.scss'
 
-type Props = {
-  block?: BlockWith<TVideo>
-}
-
-export default function VideoBlockForm({ block }: Props) {
+export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
   const [selectedRadio, setSelectedRadio] = useState('radio1')
   const [thumbnail, setThumbnail] = useState<string>('')
   const [videoUrl, setVideoUrl] = useState<string>('')
@@ -90,9 +86,9 @@ export default function VideoBlockForm({ block }: Props) {
                 disabled={selectedRadio !== 'radio1'}
               />
               {videoUrl && (
-                <div className={styles.delete} onClick={deleteHandler}>
+                <button type="button" className={styles.delete} onClick={deleteHandler}>
                   <TiDeleteOutline />
-                </div>
+                </button>
               )}
             </div>
           </label>

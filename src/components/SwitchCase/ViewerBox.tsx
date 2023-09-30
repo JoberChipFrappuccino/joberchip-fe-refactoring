@@ -3,17 +3,18 @@ import { GoogleMapBlock } from '@/components/Blocks/GoogleMapBlock'
 import { ImageBlock } from '@/components/Blocks/ImageBlock'
 import { LinkBlock } from '@/components/Blocks/LinkBlock'
 import { PageBlock } from '@/components/Blocks/PageBlock'
+import { TemplateBlock } from '@/components/Blocks/TemplateBlock'
 import { TextBlock } from '@/components/Blocks/TextBlock'
 import { VideoBlock } from '@/components/Blocks/VideoBlock'
 import { EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import type { BlockType, BlockWith } from '@/models/space'
-import { TemplateBlock } from '../Blocks/TemplateBlock'
 
-interface Props<T extends BlockType> {
+export interface BlockBaseWithBlockProps<T extends BlockType> {
   block: BlockWith<T>
-  mode: SpaceMode
+  mode: SharePageMode
 }
-function getViewerComponent<T extends BlockType>({ block, mode }: Props<T>) {
+
+function getViewerComponent<T extends BlockType>({ block, mode }: BlockBaseWithBlockProps<T>) {
   switch (block.type) {
     case TEXT:
       return <TextBlock mode={mode} block={block} />
@@ -40,6 +41,6 @@ function getViewerComponent<T extends BlockType>({ block, mode }: Props<T>) {
   }
 }
 
-export function ViewerBox<T extends BlockType>({ block, mode }: Props<T>) {
+export function ViewerBox<T extends BlockType>({ block, mode }: BlockBaseWithBlockProps<T>) {
   return getViewerComponent({ block, mode })
 }

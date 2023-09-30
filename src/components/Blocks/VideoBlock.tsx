@@ -1,15 +1,11 @@
-/* eslint-disable multiline-ternary */
-import { type BlockWith } from '@/models/space'
+import classNames from 'classnames'
+import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import styles from './VideoBlock.module.scss'
 
-type Props = {
-  block: BlockWith<TVideo>
-  mode: SpaceMode
-}
-export function VideoBlock({ block, mode }: Props) {
+export function VideoBlock({ block, mode }: BlockBaseWithBlockProps<TVideo>) {
   return (
     <div className={styles.container}>
-      <div className={mode === 'edit' ? 'cover' : ''} />
+      <div className={classNames(mode === 'edit' && 'cover')} />
       {block.src.includes('youtube') ? (
         <iframe className={mode} src={`${block.src}?autoplay=1&mute=1`} />
       ) : (

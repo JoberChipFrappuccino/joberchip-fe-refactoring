@@ -20,20 +20,10 @@ export default function Detail() {
         <h1 className="detail-title">Detail Page</h1>
         <h1 className="text-sky-900">Count : {count}</h1>
         <div>
-          <button
-            className="mr-4"
-            onClick={() => {
-              setCount((prev) => ++prev)
-            }}
-          >
+          <button type="button" className="mr-4" onClick={() => setCount((prev) => ++prev)}>
             Increment
           </button>
-          <button
-            className="mr-4"
-            onClick={() => {
-              setCount((prev) => --prev)
-            }}
-          >
+          <button type="button" className="mr-4" onClick={() => setCount((prev) => --prev)}>
             Decrement
           </button>
         </div>

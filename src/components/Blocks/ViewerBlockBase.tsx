@@ -1,4 +1,4 @@
-import BlockCover from '@/components/SharePage/BlockCover'
+import { BlockCover } from '@/components/SharePage/BlockCover'
 import BlockPortal from '@/components/SharePage/BlockPortal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
@@ -6,23 +6,24 @@ import { BLOCK, PAGE, TEMPLATE } from '@/constants/blockTypeConstant'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
-import ModalPortal from '@/templates/ModalPortal'
+import { ModalPortal } from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { Switch } from 'antd'
+import classNames from 'classnames'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { ConfirmModal } from '../Modal/ConfirmModal'
 import styles from './ViewerBlockBase.module.scss'
 
-interface Props {
+export interface BlockBaseProps {
   children: ReactNode
   block: BlockBase<BlockType>
 }
 
-export function ViewerBlockBase({ block, children }: Props) {
+export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useBlockAction()
-  const { sharePage: space, removeBlockById, mode } = useSharePageStore()
+  const { sharePage, removeBlockById, mode } = useSharePageStore()
   const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockAction()
   const [confirmModal, setConfirmModal] = useState(false)
 
@@ -41,9 +42,9 @@ export function ViewerBlockBase({ block, children }: Props) {
         <Switch
           defaultChecked={!block.visible}
           onChange={() => {
-            for (let i = 0; i < space.children.length; i++) {
-              if (space.children[i].objectId === block.objectId) {
-                space.children[i].visible = !space.children[i].visible
+            for (let i = 0; i < sharePage.children.length; i++) {
+              if (sharePage.children[i].objectId === block.objectId) {
+                sharePage.children[i].visible = !sharePage.children[i].visible
                 // todo : block visibe상태를 변경하는 API를 호출해야 합니다.
                 break
               }
@@ -78,12 +79,7 @@ export function ViewerBlockBase({ block, children }: Props) {
     const copyLinkItem = {
       key: `${block.objectId}-view-block-3`,
       icon: (
-        <button
-          className={styles.kebobBtn}
-          onClick={() => {
-            clip((block as BlockWith<TTemplate>).url)
-          }}
-        >
+        <button className={styles.kebobBtn} onClick={() => clip((block as BlockWith<TTemplate>).url)}>
           링크 복사
         </button>
       )
@@ -120,11 +116,16 @@ export function ViewerBlockBase({ block, children }: Props) {
   useEffect(() => {
     setFocus(activeBlockId === block.objectId)
   }, [activeBlockId])
-
   return (
     <div className={styles.container}>
       {mode === 'edit' && (
-        <aside className={[styles.menu, activeBlockId === block.objectId ? 'kebobMenu' : ''].join(' ')}>
+        <aside
+          className={classNames(styles.menu, [
+            {
+              kebobMenu: activeBlockId === block.objectId
+            }
+          ])}
+        >
           <DropDownMenu
             trigger="click"
             items={items}

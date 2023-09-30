@@ -1,16 +1,12 @@
-import { type BlockWith } from '@/models/space'
+import classNames from 'classnames'
+import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import BlockLogo from './BlockLogo'
 import styles from './LinkBlock.module.scss'
 
-type Props = {
-  block: BlockWith<TLink>
-  mode: SpaceMode
-}
-
-export function LinkBlock({ block, mode }: Props) {
+export function LinkBlock({ block, mode }: BlockBaseWithBlockProps<TLink>) {
   return (
     <div className={styles.container}>
-      <div className={mode === 'edit' ? 'cover' : ''} />
+      <div className={classNames(mode === 'edit' && 'cover')} />
       <div className={styles.itemBox}>
         <BlockLogo logo={block.src} />
         <div className={styles.titleUrl}>
@@ -24,15 +20,11 @@ export function LinkBlock({ block, mode }: Props) {
           )}
         </div>
       </div>
-      <div
-        className={styles.footer}
-        onClick={() => {
-          window.location.href = block.src
-        }}
-      >
+      {/* // ? : a 태그로 변경 가능할 것 같은데 어떤가용..? */}
+      <button type="button" className={styles.footer} onClick={() => (window.location.href = block.src)}>
         <div className={styles.footerLeft}>바로가기</div>
         <div className={styles.footerright} />
-      </div>
+      </button>
     </div>
   )
 }

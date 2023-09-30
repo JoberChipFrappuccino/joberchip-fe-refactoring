@@ -1,15 +1,10 @@
+import { TEMPLATE_SEARCH_BOX_OPTIONS } from '@/constants/sharePageConstant'
 import { Input, Select } from 'antd'
 import { useState } from 'react'
 import styles from './TemplateSearchBox.module.scss'
 
 export function TemplateSearchBox() {
-  const options = [
-    { value: '문서', label: '문서' },
-    { value: '문서 제목', label: '문서 제목' },
-    { value: '해시태그', label: '해시태그' }
-  ]
-
-  const [selectedOption, setSelectedOption] = useState(options[0].value)
+  const [selectedOption, setSelectedOption] = useState(TEMPLATE_SEARCH_BOX_OPTIONS[0].value)
 
   const handleChange = (value: string) => {
     setSelectedOption(value)
@@ -24,9 +19,9 @@ export function TemplateSearchBox() {
       <div className={styles.searchBox}>
         <Select
           className={styles.select}
-          defaultValue={options[0].value}
+          defaultValue={TEMPLATE_SEARCH_BOX_OPTIONS[0].value}
           onChange={handleChange}
-          options={options}
+          options={TEMPLATE_SEARCH_BOX_OPTIONS}
           size="large"
           style={{
             width: '10rem'

@@ -1,9 +1,11 @@
 import { type ReactNode } from 'react'
 import reactDom from 'react-dom'
-type Props = {
+
+export interface BlockPortalProps {
   children: ReactNode
 }
-export default function BlockPortal({ children }: Props) {
+
+export default function BlockPortal({ children }: BlockPortalProps) {
   if (typeof window === 'undefined') {
     return null
   }

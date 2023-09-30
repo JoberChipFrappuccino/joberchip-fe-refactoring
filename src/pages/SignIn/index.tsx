@@ -47,29 +47,17 @@ export default function SignIn() {
     <div>
       <h1>SignIn</h1>
       <div>
-        <button
-          onClick={async () => {
-            await loginById('1')
-          }}
-        >
+        <button type="button" onClick={() => loginById('1')}>
           test1 유저로 로그인
         </button>
       </div>
       <div>
-        <button
-          onClick={async () => {
-            await loginById('2')
-          }}
-        >
+        <button type="button" onClick={() => loginById('2')}>
           test2 유저로 로그인
         </button>
       </div>
       <div>
-        <button
-          onClick={async () => {
-            await loginById('3')
-          }}
-        >
+        <button type="button" onClick={() => loginById('3')}>
           test3 유저로 로그인 (에러)
         </button>
       </div>

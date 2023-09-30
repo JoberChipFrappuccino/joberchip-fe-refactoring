@@ -1,5 +1,6 @@
 import { getSpaceAPI, getSpaceFromBackAPI } from '@/api/space'
 import { type SharePage } from '@/models/space'
+import to from '@/utils/api'
 import { create } from 'zustand'
 
 interface Privilege {
@@ -11,16 +12,15 @@ interface SharePageState {
   isFetching: boolean
   isLoaded: boolean
   isFalture: boolean
-  mode: SpaceMode
-  setSpaceMode: (spaceMode: SpaceMode) => void
-  loadSpace: (pageId: string) => Promise<boolean>
-  loadSpaceFromBack: (pageId: string) => Promise<boolean>
-  // loadSpacePrivligeByUserId: (userId: string) => Promise<Privilege>
+  mode: SharePageMode
+  setSharePageMode: (sharePageMode: SharePageMode) => void
+  loadSharePage: (pageId: string) => Promise<boolean>
+  loadSharePageFromBack: (pageId: string) => Promise<boolean>
   addBlock: (section_id: string, options: object) => Promise<boolean>
   removeBlock: (section_id: string, block_id: string) => Promise<boolean>
   setPrivilege: (previlige: Privilege) => void
   removeBlockById: (blockId: string) => void
-  setSpace: (space: SharePage) => void
+  setSharePage: (space: SharePage) => void
 }
 
 export const useSharePageStore = create<SharePageState>((set) => {
@@ -44,12 +44,12 @@ export const useSharePageStore = create<SharePageState>((set) => {
     isFetching: true,
     isLoaded: false,
     isFalture: false,
-    setSpaceMode: (spaceMode: SpaceMode) => {
+    setSharePageMode: (spaceMode: SharePageMode) => {
       set({ mode: spaceMode })
     },
-    loadSpace: async (pageId: string) => {
+    loadSharePage: async (pageId: string) => {
       set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
-      const { data } = await getSpaceAPI(pageId)
+      const { data } = await to(getSpaceAPI(pageId))
       if (data) {
         // HACK : width -> w로 변경 예정입니다. 이 코드는 10/6 이전에 삭제됩니다.
         data.children.forEach((block) => {
@@ -63,23 +63,22 @@ export const useSharePageStore = create<SharePageState>((set) => {
       set(() => ({ isFetching: false, isLoaded: false, isFalture: true }))
       return false
     },
-    loadSpaceFromBack: async (pageId: string) => {
+    loadSharePageFromBack: async (pageId: string) => {
       set(() => ({ isFetching: true, isLoaded: true, isFalture: false }))
-      const { data } = await getSpaceFromBackAPI(pageId)
+      const { data } = await to(getSpaceFromBackAPI(pageId))
       if (data) {
         // HACK : width -> w로 변경 예정입니다. 이 코드는 10/6 이전에 삭제됩니다.
         data.children.forEach((block) => {
           block.w = Number(block.width)
           block.h = Number(block.height)
         })
-
-        set(() => ({ sharePage: data, isFetching: false, isLoaded: true, isFalture: false }))
+        set(() => ({ sharePage: { ...data, pageId }, isFetching: false, isLoaded: true, isFalture: false }))
         return true
       }
       set(() => ({ isFetching: false, isLoaded: false, isFalture: true }))
       return false
     },
-    setSpace: (space: SharePage) => {
+    setSharePage: (space: SharePage) => {
       set(() => ({ sharePage: space, isLoaded: true, isFalture: false }))
     },
     setPrivilege: (privilege: Privilege) => {

@@ -1,12 +1,11 @@
-import { type ReactNode } from 'react'
+import { type BlockPortalProps } from '../SharePage/BlockPortal'
 import styles from './TemplatePreviewModal.module.scss'
 
-type Props = {
-  children: ReactNode
+interface TemplatePreviewModalProps extends BlockPortalProps {
   onClose: () => void
 }
 
-export default function TemplatePreviewModal({ onClose, children }: Props) {
+export function TemplatePreviewModal({ onClose, children }: TemplatePreviewModalProps) {
   return (
     <div className={styles.container}>
       <div className={styles.cover}>

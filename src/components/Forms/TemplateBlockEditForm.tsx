@@ -1,14 +1,10 @@
-import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { Input, Select, Switch } from 'antd'
+import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import FormButton from '../Ui/Button'
 import styles from './TemplateBlockEditForm.module.scss'
 
-type Props = {
-  block: BlockWith<TTemplate>
-}
-
-export function TemplateBlockEditForm({ block }: Props) {
+export function TemplateBlockEditForm({ block }: BlockBaseWithBlockFormProps<TTemplate>) {
   const { setOpenDrawer } = useBlockAction()
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -22,11 +18,11 @@ export function TemplateBlockEditForm({ block }: Props) {
         <h2>템플릿 설정</h2>
         <div className={styles.inputCover}>
           <p>템플릿 제목 *</p>
-          <Input value={block.title} />
+          <Input value={block?.title ? block.title : ''} />
         </div>
         <div className={styles.inputCover}>
           <p>템플릿 설명</p>
-          <Input value={block.description} />
+          <Input value={block?.description ? block.description : ''} />
         </div>
         <div className={styles.inputCover}>
           <p>저장할 폴더를 선택해주세요.</p>

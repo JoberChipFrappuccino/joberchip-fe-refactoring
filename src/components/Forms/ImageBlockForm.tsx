@@ -1,16 +1,12 @@
-import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { TiDeleteOutline } from 'react-icons/ti'
+import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import FormButton from '../Ui/Button'
 import ImgThumbnail from '../Ui/ImgThumbnail'
 import styles from './ImageBlockForm.module.scss'
 
-type Props = {
-  block?: BlockWith<TImage>
-}
-
-export default function ImageBlockForm({ block }: Props) {
+export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
   const [thumbnail, setThumbnail] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !title || !thumbnail
@@ -51,9 +47,9 @@ export default function ImageBlockForm({ block }: Props) {
           <div className={styles.inputbox}>
             <input type="text" value={title} onChange={onChangetitle} placeholder="사진 제목을 입력해주세요." />
             {title && (
-              <div className={styles.delTitle} onClick={deleteTitle}>
+              <button type="button" className={styles.delTitle} onClick={deleteTitle}>
                 <TiDeleteOutline />
-              </div>
+              </button>
             )}
           </div>
           <h3 className={styles.formText}>사진 첨부</h3>

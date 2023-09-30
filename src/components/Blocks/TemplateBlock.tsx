@@ -1,20 +1,19 @@
-import { type BlockWith } from '@/models/space'
-import ModalPortal from '@/templates/ModalPortal'
+import { TemplatePreviewModal } from '@/components/Modal/TemplatePreviewModal'
+import { type BlockBaseWithBlockProps } from '@/components/SwitchCase/ViewerBox'
+import { ModalPortal } from '@/templates/ModalPortal'
+import classNames from 'classnames'
 import { useState } from 'react'
-import TemplatePreviewModal from '../Modal/TemplatePreviewModal'
 import styles from './TemplateBlock.module.scss'
 
-type Props = {
-  block: BlockWith<TTemplate>
-  mode: SpaceMode
+interface TemplateBlockProps extends BlockBaseWithBlockProps<TTemplate> {
   preview?: boolean
 }
-export function TemplateBlock({ block, mode, preview = false }: Props) {
+export function TemplateBlock({ block, mode, preview = false }: TemplateBlockProps) {
   const [open, setOpen] = useState(false)
 
   return (
     <div className={styles.container}>
-      <aside className={mode === 'edit' ? 'cover' : ''} />
+      <aside className={classNames(mode === 'edit' && 'cover')} />
       <div className={styles.contentCover}>
         <div className={styles.cover}>
           <img className={styles.img} src={block.iconUrl} alt="template icon" />
@@ -25,14 +24,9 @@ export function TemplateBlock({ block, mode, preview = false }: Props) {
         </div>
       </div>
       {preview ? (
-        <div
-          className={styles.preview}
-          onClick={() => {
-            setOpen(true)
-          }}
-        >
+        <button className={styles.preview} type="button" onClick={() => setOpen(true)}>
           템플릿 미리 보기
-        </div>
+        </button>
       ) : (
         <div className={styles.direct}>
           <a href="/">바로 가기</a>
@@ -40,11 +34,7 @@ export function TemplateBlock({ block, mode, preview = false }: Props) {
       )}
       {open && (
         <ModalPortal>
-          <TemplatePreviewModal
-            onClose={() => {
-              setOpen(false)
-            }}
-          >
+          <TemplatePreviewModal onClose={() => setOpen(false)}>
             <img className={styles.img} src={block.previewURL} alt="template preciew Image" />
           </TemplatePreviewModal>
         </ModalPortal>

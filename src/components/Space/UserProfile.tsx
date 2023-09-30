@@ -4,6 +4,7 @@ import { useUserStore } from '@/store/user'
 import { useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import styles from './UserProfile.module.scss'
+
 export function UserProfile() {
   const queryClient = useQueryClient()
 
@@ -28,7 +29,7 @@ export function UserProfile() {
         <Link to="/space/space1" className={styles.mySpaceBtn}>
           내 스페이스 바로가기
         </Link>
-        <button className={styles.addSpaceBtn} onClick={handleOnClickCreateSpace}>
+        <button type="button" className={styles.addSpaceBtn} onClick={handleOnClickCreateSpace}>
           내 스페이스 추가하기
         </button>
       </div>

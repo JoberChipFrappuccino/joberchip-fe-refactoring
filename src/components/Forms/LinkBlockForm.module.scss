@@ -26,14 +26,14 @@ input {
   }
 }
 
-.forms input[type="text"] {
+.forms input[type='text'] {
   display: flex;
   width: 100%;
   height: 3.375rem;
   font-size: 1rem;
-  border-radius: .375rem;
-  padding-left: .875rem;
-  border: solid .0625rem #e2e6ef;
+  border-radius: 0.375rem;
+  padding-left: 0.875rem;
+  border: solid 0.0625rem #e2e6ef;
   &::placeholder {
     color: #e2e6ef;
   }
@@ -41,12 +41,15 @@ input {
 
 .inputbox {
   position: relative;
-  .delTitle, .delLink {
+  .delTitle,
+  .delLink {
     top: 0;
     bottom: 0;
     right: 0;
     display: flex;
     width: 30px;
+    background-color: transparent;
+    border: none;
     position: absolute;
     align-items: center;
     cursor: pointer;

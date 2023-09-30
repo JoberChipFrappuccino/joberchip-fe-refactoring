@@ -1,13 +1,11 @@
-import { type BlockWith } from '@/models/space'
+import classNames from 'classnames'
+import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import styles from './EmbedBlock.module.scss'
-type Props = {
-  block: BlockWith<TEmbed>
-  mode: SpaceMode
-}
-export function EmbedBlock({ block, mode }: Props) {
+
+export function EmbedBlock({ block, mode }: BlockBaseWithBlockProps<TEmbed>) {
   return (
     <div className={styles.container}>
-      <div className={mode === 'edit' ? 'cover' : ''} />
+      <div className={classNames(mode === 'edit' && 'cover')} />
       <iframe className={mode} src={block.src} allowFullScreen />
       <p className={styles.loading}>Loading...</p>
     </div>

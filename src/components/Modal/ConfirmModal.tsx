@@ -1,14 +1,18 @@
-import { type ReactNode } from 'react'
+import { type BlockPortalProps } from '../SharePage/BlockPortal'
 import styles from './ConfirmModal.module.scss'
 
-type Props = {
-  children: ReactNode
+interface ConfirmModalProps extends BlockPortalProps {
   onConfirm: (isConfimed: boolean) => void
   cancelBtnText?: string
   confirmBtnText?: string
 }
 
-export function ConfirmModal({ onConfirm, children, cancelBtnText = '취소 하기', confirmBtnText = '확인' }: Props) {
+export function ConfirmModal({
+  onConfirm,
+  children,
+  cancelBtnText = '취소 하기',
+  confirmBtnText = '확인'
+}: ConfirmModalProps) {
   return (
     <div className={styles.container}>
       <div className={styles.cover}>

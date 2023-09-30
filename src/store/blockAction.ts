@@ -2,8 +2,6 @@ import { BLOCK, TEXT } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
 import { create } from 'zustand'
 
-export type FormType = TTemplate | TPage | TBlock
-export type DrawerMode = 'create' | 'edit'
 interface FormTypeState {
   formType: FormType
   blockType: BlockType
@@ -14,7 +12,7 @@ interface FormTypeState {
   setFormType: (type: FormType) => void
   setBlockType: (type: BlockType) => void
   setOpenDrawer: (open: boolean) => void
-  setDrawerMode: (mode: 'create' | 'edit') => void
+  setDrawerMode: (mode: DrawerMode) => void
 }
 
 export const useBlockAction = create<FormTypeState>((set) => ({

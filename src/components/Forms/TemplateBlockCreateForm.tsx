@@ -3,6 +3,7 @@ import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useUserStore } from '@/store/user'
 import { useQuery } from '@tanstack/react-query'
+import classNames from 'classnames'
 import { useState } from 'react'
 import { TemplateBlock } from '../Blocks/TemplateBlock'
 import { TemplateSearchBox } from '../SharePage/TemplateSearchBox'
@@ -26,21 +27,25 @@ export function TemplateBlockCreateForm() {
     alert('추가되었습니다. (템플릿 미구현)')
     setOpenDrawer(false)
   }
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <TemplateSearchBox />
       <div className={styles.blockViewer}>
         {templates?.map((template) => {
           return (
-            <div
+            <button
+              type="button"
               key={`create-form-${template.templateId}`}
-              className={[styles.blockCover, templateId === template.templateId ? styles.selected : ''].join(' ')}
-              onClick={() => {
-                handleOnClick(template)
-              }}
+              className={classNames(styles.blockCover, [
+                {
+                  [styles.selected]: templateId === template.templateId
+                }
+              ])}
+              onClick={() => handleOnClick(template)}
             >
               <TemplateBlock block={template} mode={'view'} preview={true} />
-            </div>
+            </button>
           )
         })}
       </div>

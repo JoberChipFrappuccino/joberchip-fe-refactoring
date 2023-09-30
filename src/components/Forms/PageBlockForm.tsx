@@ -1,18 +1,11 @@
 import { useBlockAction } from '@/store/blockAction'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
+import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import TreeLayout from '../Tree/TreeLayout'
 import FormButton from '../Ui/Button'
 import styles from './PageBlockForm.module.scss'
 
-type Props = {
-  block?: {
-    title?: string
-    description?: string
-    location?: string
-  }
-}
-
-export default function PageBlockForm(block: Props) {
+export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [location, setLocation] = useState<string>('')
@@ -22,9 +15,9 @@ export default function PageBlockForm(block: Props) {
   // const [selectedFile, setSelectedFile] = useState<string>('')
   const isButtonDisabled = !title || !description || !location
 
-  const titleValue = block.block?.title
-  const descriptionValue = block.block?.description
-  const locationValue = block.block?.location
+  const titleValue = block?.title
+  const descriptionValue = block?.description
+  const locationValue = block?.location
 
   useEffect(() => {
     setTitle(titleValue ?? '')
@@ -89,7 +82,7 @@ export default function PageBlockForm(block: Props) {
             />
             {isLocationVisible && (
               <div>
-                <TreeLayout onSelectTreeNode={onSelectTreeNode} drawerMode={drawerMode === 'edit'}/>
+                <TreeLayout onSelectTreeNode={onSelectTreeNode} drawerMode={drawerMode === 'edit'} />
               </div>
             )}
           </div>
