@@ -60,7 +60,7 @@
         "height": 1,
         "width": 4,
         "type": "TEXT",
-        "text": "the quick brown fox jumps over the lazy dog",
+        "description": "the quick brown fox jumps over the lazy dog",
         "visible": false
       },
       {
@@ -173,7 +173,7 @@
         "height": 1,
         "width": 4,
         "type": "TEXT",
-        "text": "the quick brown fox jumps over the lazy dog",
+        "description": "the quick brown fox jumps over the lazy dog",
         "visible": false
       },
       {
