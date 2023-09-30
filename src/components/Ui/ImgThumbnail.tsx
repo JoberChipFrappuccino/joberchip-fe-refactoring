@@ -70,18 +70,13 @@ export default function ImgThumbnail({ radio, imgData, buttonActive, img }: Prop
         key={key}
       />
       {thumbnail ? (
-        <div
-          className={styles.thumbnailVideo}
-          onClick={() => {
-            changeMediaRemove()
-          }}
-        >
+        <button type="button" className={styles.thumbnailVideo} onClick={() => changeMediaRemove()}>
           {/* API 작업 이후 image만 포함할 예정 */}
           <img src={thumbnail} />
           <div className={styles.minus}>
             <HiOutlineMinusCircle />
           </div>
-        </div>
+        </button>
       ) : (
         <div style={{ display: selectedRadio !== 'radio2' ? 'none' : 'block' }} />
       )}

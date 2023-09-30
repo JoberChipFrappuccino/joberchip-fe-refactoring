@@ -58,6 +58,7 @@ export function ActionBlockFormBase({ children }: Props) {
             return (
               <div key={form.type}>
                 <button
+                  type="button"
                   className={classNames([
                     {
                       [styles.active]: form.type === blockType,

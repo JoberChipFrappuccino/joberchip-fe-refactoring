@@ -86,9 +86,9 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
                 disabled={selectedRadio !== 'radio1'}
               />
               {videoUrl && (
-                <div className={styles.delete} onClick={deleteHandler}>
+                <button type="button" className={styles.delete} onClick={deleteHandler}>
                   <TiDeleteOutline />
-                </div>
+                </button>
               )}
             </div>
           </label>

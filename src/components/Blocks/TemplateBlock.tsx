@@ -24,14 +24,9 @@ export function TemplateBlock({ block, mode, preview = false }: TemplateBlockPro
         </div>
       </div>
       {preview ? (
-        <div
-          className={styles.preview}
-          onClick={() => {
-            setOpen(true)
-          }}
-        >
+        <button className={styles.preview} type="button" onClick={() => setOpen(true)}>
           템플릿 미리 보기
-        </div>
+        </button>
       ) : (
         <div className={styles.direct}>
           <a href="/">바로 가기</a>
@@ -39,11 +34,7 @@ export function TemplateBlock({ block, mode, preview = false }: TemplateBlockPro
       )}
       {open && (
         <ModalPortal>
-          <TemplatePreviewModal
-            onClose={() => {
-              setOpen(false)
-            }}
-          >
+          <TemplatePreviewModal onClose={() => setOpen(false)}>
             <img className={styles.img} src={block.previewURL} alt="template preciew Image" />
           </TemplatePreviewModal>
         </ModalPortal>

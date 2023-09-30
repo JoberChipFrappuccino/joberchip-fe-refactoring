@@ -36,21 +36,21 @@ export function SpaceActionBar({ isActive }: ActionBarProps) {
       ])}
     >
       <Tooltip title="페이지 추가하기">
-        <button className={styles.item} onClick={() => changeBlockType(PAGE)}>
+        <button className={styles.item} type="button" onClick={() => changeBlockType(PAGE)}>
           <div className={styles.actionicon}>
             <img src={`${baseURL}/page_icon.svg`} alt="page action bar icon" />
           </div>
         </button>
       </Tooltip>
       <Tooltip title="템플릿 추가하기">
-        <button className={styles.item} onClick={() => changeBlockType(TEMPLATE)}>
+        <button className={styles.item} type="button" onClick={() => changeBlockType(TEMPLATE)}>
           <div className={styles.actionicon}>
             <img src={`${baseURL}/templat_icon.svg`} alt="page action bar icon" />
           </div>
         </button>
       </Tooltip>
       <Tooltip title="블럭 추가하기">
-        <button className={styles.item} onClick={() => changeBlockType(TEXT)}>
+        <button className={styles.item} type="button" onClick={() => changeBlockType(TEXT)}>
           <div className={styles.actionicon}>
             <img src={`${baseURL}/block_icon.svg`} alt="page action bar icon" />
           </div>

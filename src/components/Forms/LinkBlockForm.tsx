@@ -63,18 +63,18 @@ export function LinkBlockForm({ block }: BlockBaseWithBlockFormProps<TLink>) {
           <div className={styles.inputbox}>
             <input type="text" value={title} onChange={onChangeTitle} placeholder="링크 제목을 입력해주세요." />
             {title && (
-              <div className={styles.delTitle} onClick={deleteTitle}>
+              <button type="button" className={styles.delTitle} onClick={deleteTitle}>
                 <TiDeleteOutline />
-              </div>
+              </button>
             )}
           </div>
           <h3 className={styles.formTexts}>URL 링크 주소 삽입</h3>
           <div className={styles.inputbox}>
             <input type="text" value={link} onChange={onChangeLink} placeholder="링크 주소를 입력해주세요." />
             {link && (
-              <div className={styles.delLink} onClick={deleteLink}>
+              <button type="button" className={styles.delLink} onClick={deleteLink}>
                 <TiDeleteOutline />
-              </div>
+              </button>
             )}
           </div>
         </div>

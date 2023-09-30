@@ -33,19 +33,18 @@ export function TemplateBlockCreateForm() {
       <div className={styles.blockViewer}>
         {templates?.map((template) => {
           return (
-            <div
+            <button
+              type="button"
               key={`create-form-${template.templateId}`}
               className={classNames(styles.blockCover, [
                 {
                   [styles.selected]: templateId === template.templateId
                 }
               ])}
-              onClick={() => {
-                handleOnClick(template)
-              }}
+              onClick={() => handleOnClick(template)}
             >
               <TemplateBlock block={template} mode={'view'} preview={true} />
-            </div>
+            </button>
           )
         })}
       </div>

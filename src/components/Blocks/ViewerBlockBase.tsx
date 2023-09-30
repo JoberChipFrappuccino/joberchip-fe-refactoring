@@ -79,12 +79,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
     const copyLinkItem = {
       key: `${block.objectId}-view-block-3`,
       icon: (
-        <button
-          className={styles.kebobBtn}
-          onClick={() => {
-            clip((block as BlockWith<TTemplate>).url)
-          }}
-        >
+        <button className={styles.kebobBtn} onClick={() => clip((block as BlockWith<TTemplate>).url)}>
           링크 복사
         </button>
       )

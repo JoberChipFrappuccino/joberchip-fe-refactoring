@@ -77,12 +77,7 @@ export default function VideoThumbnail({ radio, imgData, buttonActive, img, vide
         key={key}
       />
       {thumbnail ? (
-        <div
-          className={styles.thumbnailVideo}
-          onClick={() => {
-            changeMediaRemove()
-          }}
-        >
+        <button className={styles.thumbnailVideo} type="button" onClick={() => changeMediaRemove()}>
           {thumbnail.includes('youtu') ? (
             <img src={`https://img.youtube.com/vi/${youtubeThumb}/maxresdefault.jpg`} />
           ) : (
@@ -93,7 +88,7 @@ export default function VideoThumbnail({ radio, imgData, buttonActive, img, vide
           <div className={styles.minus}>
             <HiOutlineMinusCircle />
           </div>
-        </div>
+        </button>
       ) : (
         <div style={{ display: selectedRadio !== 'radio2' ? 'none' : 'block' }} />
       )}

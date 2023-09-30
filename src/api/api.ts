@@ -4,7 +4,7 @@ import { errorController } from './controller/error'
 
 const authAPI = axios.create({
   baseURL:
-    process.env.NODE_ENV === 'production' ? 'http://ec2-34-228-10-85.compute-1.amazonaws.com' : 'http://localhost:5173',
+    process.env.NODE_ENV === 'production' ? process.env.FRONT_SERVER_BASE_URL : `http://localhost:${process.env.PORT}`,
   timeout: 10000
 })
 
@@ -30,13 +30,13 @@ authAPI.interceptors.response.use(
 )
 
 const backAuthAPI = axios.create({
-  baseURL: 'http://13.125.76.45:8080',
+  baseURL: process.env.BACK_SERVER_BASE_URL,
   timeout: 10000
 })
 
 backAuthAPI.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) ? localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) : ''
+    const token = localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) ?? localStorage.getItem(BACK_MOCK_ACCESS_TOKEN)
     config.headers['Content-Type'] = 'application/json; charset=utf-8'
     config.headers.Authorization = token
     return config

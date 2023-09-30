@@ -29,7 +29,7 @@ export function UserProfile() {
         <Link to="/space/space1" className={styles.mySpaceBtn}>
           내 스페이스 바로가기
         </Link>
-        <button className={styles.addSpaceBtn} onClick={handleOnClickCreateSpace}>
+        <button type="button" className={styles.addSpaceBtn} onClick={handleOnClickCreateSpace}>
           내 스페이스 추가하기
         </button>
       </div>

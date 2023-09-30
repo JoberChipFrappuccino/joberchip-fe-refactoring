@@ -35,7 +35,7 @@ export function Profile() {
       {
         key: `${sharePage.pageId}-profile-3`,
         label: '링크 복사',
-        onClick: () => clip(`http://localhost:5173/space/${sharePage.pageId}`)
+        onClick: () => clip(`${process.env.FRONT_SERVER_BASE_URL}/space/${sharePage.pageId}`)
       },
       {
         key: 'Profile-divider-3',
