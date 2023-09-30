@@ -15,7 +15,6 @@ interface SharePageState {
   setSpaceMode: (spaceMode: SpaceMode) => void
   loadSpace: (pageId: string) => Promise<boolean>
   loadSpaceFromBack: (pageId: string) => Promise<boolean>
-  // loadSpacePrivligeByUserId: (userId: string) => Promise<Privilege>
   addBlock: (section_id: string, options: object) => Promise<boolean>
   removeBlock: (section_id: string, block_id: string) => Promise<boolean>
   setPrivilege: (previlige: Privilege) => void

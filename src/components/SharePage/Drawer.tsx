@@ -1,4 +1,6 @@
-import { useBlockAction } from '@/store/blockAction'
+import { DRAWER_TITLE } from '@/constants/Drawer'
+import { type BlockType } from '@/models/space'
+import { useBlockAction, type DrawerMode } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
 import { Drawer as AntdDrawer } from 'antd'
 import { useEffect, useState, type ReactNode } from 'react'
@@ -18,25 +20,12 @@ export function Drawer() {
   let BaseComponent = ActionBlockFormBase
 
   if (blockType === PAGE || blockType === TEMPLATE) {
-    // * 페이지, 템플릿의 BaseComponent를 바꿔야합니다요.
     // eslint-disable-next-line react/display-name, react/jsx-no-useless-fragment
     BaseComponent = ({ children }: { children: ReactNode }) => <>{children}</>
   }
 
   useEffect(() => {
-    let nextTitle = drawerMode === 'edit' ? ' 수정' : ' 추가'
-    switch (blockType) {
-      case PAGE:
-        nextTitle = '페이지' + nextTitle
-        break
-      case TEMPLATE:
-        nextTitle = '템플릿' + nextTitle
-        break
-      default:
-        nextTitle = '블록' + nextTitle
-        break
-    }
-    setTitle(nextTitle)
+    setTitle(getDrawerTitle(drawerMode, blockType))
   }, [drawerMode, blockType])
 
   return (
@@ -45,9 +34,7 @@ export function Drawer() {
       placement="right"
       bodyStyle={{ padding: '0' }}
       width={500}
-      onClose={() => {
-        setOpenDrawer(false)
-      }}
+      onClose={() => setOpenDrawer(false)}
       open={openDrawer}
     >
       <BaseComponent>
@@ -56,4 +43,9 @@ export function Drawer() {
       </BaseComponent>
     </AntdDrawer>
   )
+}
+
+function getDrawerTitle(drawerMode: DrawerMode, blockType: BlockType) {
+  const postfix = drawerMode === 'edit' ? '정보 수정' : '추가하기'
+  return `${DRAWER_TITLE[blockType]} ${postfix}`
 }

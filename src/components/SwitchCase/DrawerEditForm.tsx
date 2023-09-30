@@ -12,7 +12,7 @@ interface Props<T extends BlockType> {
   block: BlockWith<T>
   mode: DrawerMode
 }
-function getEditFormComponent<T extends BlockType>({ block, mode }: Props<T>) {
+function getEditFormComponent<T extends BlockType>({ block }: Props<T>) {
   switch (block.type) {
     case TEXT:
       return <TextBlockForm block={block} />

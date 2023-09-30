@@ -1,7 +1,9 @@
+import { PAGE, TEMPLATE, TEXT } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
 import { Tooltip } from 'antd'
+import classNames from 'classnames'
 import { useCallback } from 'react'
 import styles from './SpaceActionBar.module.scss'
 
@@ -21,18 +23,23 @@ export function SpaceActionBar({ isActive }: Props) {
     [formType]
   )
 
-  let additionalClassName = isActive ? styles.visible : styles.hidden
-  if (mode === 'view') additionalClassName = styles.hidden
-
   const baseURL =
-    process.env.NODE_ENV === 'production' ? 'http://ec2-34-228-10-85.compute-1.amazonaws.com' : 'http://localhost:5173/'
+    process.env.NODE_ENV === 'production' ? process.env.FRONT_SERVER_BASE_URL : `http://localhost:${process.env.PORT}`
+
   return (
-    <div className={[styles.container, additionalClassName].join(' ')}>
+    <div
+      className={classNames(styles.container, [
+        {
+          [styles.visible]: isActive || mode === 'view',
+          [styles.hidden]: !isActive
+        }
+      ])}
+    >
       <Tooltip title="페이지 생성하기">
         <button
           className={styles.item}
           onClick={() => {
-            changeBlockType('PAGE')
+            changeBlockType(PAGE)
           }}
         >
           <div className={styles.actionicon}>
@@ -44,7 +51,7 @@ export function SpaceActionBar({ isActive }: Props) {
         <button
           className={styles.item}
           onClick={() => {
-            changeBlockType('TEMPLATE')
+            changeBlockType(TEMPLATE)
           }}
         >
           <div className={styles.actionicon}>
@@ -56,7 +63,7 @@ export function SpaceActionBar({ isActive }: Props) {
         <button
           className={styles.item}
           onClick={() => {
-            changeBlockType('TEXT')
+            changeBlockType(TEXT)
           }}
         >
           <div className={styles.actionicon}>

@@ -1,6 +1,6 @@
 import { Drawer } from '@/components/SharePage/Drawer'
 import { Profile } from '@/components/SharePage/Profile'
-import { SpaceViewer } from '@/components/SharePage/SpaceViewer'
+import { BlocksViewer } from '@/components/SharePage/SharePageBlocksViewer'
 import { SEO, SPACE } from '@/constants'
 import useServerSideProps from '@/hooks/serverSideProps'
 import { type SharePage } from '@/models/space'
@@ -84,7 +84,7 @@ export default function ShareableSpace() {
       <aside>{<Drawer />}</aside>
       <div className={styles.viewer}>
         <div className={styles.spaceViewer}>
-          <section>{isLoaded && <SpaceViewer />}</section>
+          <section>{isLoaded && <BlocksViewer />}</section>
         </div>
       </div>
     </>
