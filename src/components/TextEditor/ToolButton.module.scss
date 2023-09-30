@@ -1,0 +1,25 @@
+@import '../../variables.scss';
+
+.toolItem {
+  width: 58px;
+  height: 58px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  img {
+    width: 80%;
+    height: 80%;
+  }
+  span {
+    position: absolute;
+  }
+}
+
+.toolOptionActive {
+  background-color: $jober-blue;
+  color: #e2e6ef;
+}

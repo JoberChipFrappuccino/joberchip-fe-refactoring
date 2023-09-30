@@ -115,7 +115,7 @@ export default function ToolOption({
         </div>
       )}
       {type === 'align-options' && (
-        <div className={styles.optionContainer}>
+        <div className={`${styles.optionContainer} ${styles.alignContainer} `}>
           {ALIGN_OPTIONS.map((align, index) => (
             <div
               key={index}

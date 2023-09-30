@@ -1,89 +1,79 @@
-// 폰트, 글자 크기, 볼드, 이탤릭 (1)
-// 밑줄, 취소선, 색상, 정렬, 그냥 목록, 숫자목록 (2)
 import styles from '../components/TextEditor/ToolOption.module.scss'
 
 export const TOOL_TYPES = [
   {
-    tools: [
-      {
-        label: 'font',
-        icon: '',
-        text: '기본서체',
-        action: 'font',
-        type: 'options',
-        option: 'font-options'
-      },
-      {
-        label: 'size',
-        icon: '',
-        text: '14',
-        action: 'size',
-        type: 'options',
-        option: 'size-options'
-      },
-      {
-        label: 'bold',
-        text: '',
-        icon: 'bold.svg',
-        action: 'BOLD',
-        type: 'inline'
-      },
-      {
-        label: 'italic',
-        text: '',
-        icon: 'italic.svg',
-        action: 'ITALIC',
-        type: 'inline'
-      },
-      {
-        label: 'underline',
-        icon: 'underline.svg',
-        action: 'UNDERLINE',
-        type: 'inline',
-        text: ''
-      },
-      {
-        label: 'strikethrough',
-        icon: 'strikethrough.svg',
-        action: 'STRIKETHROUGH',
-        type: 'inline',
-        text: ''
-      },
-      {
-        label: 'color',
-        icon: 'color.svg',
-        action: 'color',
-        type: 'options',
-        option: 'color-options',
-        text: ''
-      },
-      {
-        label: 'align',
-        icon: 'align.svg',
-        action: 'align',
-        option: 'align-options',
-        type: 'options',
-        text: ''
-      }
-    ]
+    label: 'font',
+    icon: '',
+    text: '서체',
+    action: 'font',
+    type: 'options',
+    option: 'font-options'
   },
   {
-    tools: [
-      {
-        label: 'ordered',
-        icon: 'ordered.svg',
-        action: 'ordered-list-item',
-        type: 'block',
-        text: ''
-      },
-      {
-        label: 'unordered',
-        icon: 'unordered.svg',
-        action: 'unordered-list-item',
-        type: 'block',
-        text: ''
-      }
-    ]
+    label: 'size',
+    icon: '',
+    text: '크기',
+    action: 'size',
+    type: 'options',
+    option: 'size-options'
+  },
+  {
+    label: 'bold',
+    text: '',
+    icon: 'bold.svg',
+    action: 'BOLD',
+    type: 'inline'
+  },
+  {
+    label: 'italic',
+    text: '',
+    icon: 'italic.svg',
+    action: 'ITALIC',
+    type: 'inline'
+  },
+  {
+    label: 'underline',
+    icon: 'underline.svg',
+    action: 'UNDERLINE',
+    type: 'inline',
+    text: ''
+  },
+  {
+    label: 'strikethrough',
+    icon: 'strikethrough.svg',
+    action: 'STRIKETHROUGH',
+    type: 'inline',
+    text: ''
+  },
+  {
+    label: 'color',
+    icon: 'color.svg',
+    action: 'color',
+    type: 'options',
+    option: 'color-options',
+    text: ''
+  },
+  {
+    label: 'align',
+    icon: 'align.svg',
+    action: 'align',
+    option: 'align-options',
+    type: 'options',
+    text: ''
+  },
+  {
+    label: 'ordered',
+    icon: 'ordered.svg',
+    action: 'ordered-list-item',
+    type: 'block',
+    text: ''
+  },
+  {
+    label: 'unordered',
+    icon: 'unordered.svg',
+    action: 'unordered-list-item',
+    type: 'block',
+    text: ''
   }
 ]
 
