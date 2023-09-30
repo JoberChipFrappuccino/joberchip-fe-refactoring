@@ -24,7 +24,6 @@ export default function ShareableSpace() {
   const SSRSpace: SharePage = useServerSideProps(SPACE)
   const { sharePage, loadSharePage, setSharePage, isLoaded, isFetching, setSharePageMode } = useSharePageStore()
   const { spaceId } = useParams<Params>()
-
   useEffect(() => {
     // CASE : CSR
     // react 내부적으로 주소를 이동할 경우 space를 다시 로드합니다.
@@ -73,6 +72,8 @@ export default function ShareableSpace() {
       setSharePage(nextSpace)
     }
   }, [isFetching])
+
+  if (sharePage?.pageId !== spaceId) return <div>...loading</div>
 
   return (
     <>

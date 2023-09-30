@@ -71,6 +71,8 @@ export default function ShareableSpace() {
     }
   }, [isFetching])
 
+  if (sharePage?.pageId !== spaceId) return <div>...loading</div>
+
   return (
     <>
       <Helmet>

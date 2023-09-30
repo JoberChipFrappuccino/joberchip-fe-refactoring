@@ -72,7 +72,7 @@ export const useSharePageStore = create<SharePageState>((set) => {
           block.w = Number(block.width)
           block.h = Number(block.height)
         })
-        set(() => ({ sharePage: data, isFetching: false, isLoaded: true, isFalture: false }))
+        set(() => ({ sharePage: { ...data, pageId }, isFetching: false, isLoaded: true, isFalture: false }))
         return true
       }
       set(() => ({ isFetching: false, isLoaded: false, isFalture: true }))
