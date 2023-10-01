@@ -1,7 +1,7 @@
 {
   "space1": {
     "pageId": "space1",
-    "pagepageProfileImage": "http://ec2-34-228-10-85.compute-1.amazonaws.com/profile_1.png",
+    "pagepageProfileImage": "http://34.228.10.85/profile_1.png",
     "title": "foo",
     "description": "bar",
     "children": [
@@ -36,7 +36,7 @@
         "height": 2,
         "width": 2,
         "type": "IMAGE",
-        "src": "http://ec2-34-228-10-85.compute-1.amazonaws.com/img2.jpg",
+        "src": "http://34.228.10.85/img2.jpg",
         "alt": "춤추는 인간2",
         "visible": false
       },
@@ -81,7 +81,7 @@
         "height": 2,
         "width": 2,
         "type": "VIDEO",
-        "src": "http://ec2-34-228-10-85.compute-1.amazonaws.com/test.mp4",
+        "src": "http://34.228.10.85/test.mp4",
         "caption": "쓸모없는 비디오",
         "visible": false
       },
@@ -105,16 +105,16 @@
         "templateId": "template_1_1",
         "title": "재직 증명서",
         "description": "자버 재직 증명서",
-        "previewURL": "http://ec2-34-228-10-85.compute-1.amazonaws.com/preview_1.png",
-        "iconUrl": "http://ec2-34-228-10-85.compute-1.amazonaws.com/img2.jpg",
-        "url": "http://ec2-34-228-10-85.compute-1.amazonaws.com/template_1_1.html",
+        "previewURL": "http://34.228.10.85/preview_1.png",
+        "iconUrl": "http://34.228.10.85/img2.jpg",
+        "url": "http://34.228.10.85/template_1_1.html",
         "visible": false
       }
     ]
   },
   "space2": {
     "pageId": "space2",
-    "pageProfileImage": "http://ec2-34-228-10-85.compute-1.amazonaws.com/profile_2.jpg",
+    "pageProfileImage": "http://34.228.10.85/profile_2.jpg",
     "title": "user2의 최상위 페이지",
     "description": "어쩌고 저쩌고 ㅎㅎ",
     "blocks": [
@@ -149,7 +149,7 @@
         "height": 2,
         "width": 2,
         "type": "IMAGE",
-        "src": "http://ec2-34-228-10-85.compute-1.amazonaws.com/img2.jpg",
+        "src": "http://34.228.10.85/img2.jpg",
         "alt": "춤추는 인간2",
         "visible": false
       },
@@ -194,7 +194,7 @@
         "height": 2,
         "width": 2,
         "type": "VIDEO",
-        "src": "http://ec2-34-228-10-85.compute-1.amazonaws.com/test.mp4",
+        "src": "http://34.228.10.85/test.mp4",
         "caption": "쓸모없는 비디오",
         "visible": false
       },

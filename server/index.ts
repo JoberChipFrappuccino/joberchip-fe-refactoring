@@ -6,7 +6,7 @@ import authRouter from '~/routes/auth'
 import spaceRouter from './routes/space'
 import templateRouter from './routes/templates'
 
-const PORT = 5173
+const PORT = process.env.PORT ?? 7282
 const app = express()
 
 if (process.env.NODE_ENV !== 'production') {
