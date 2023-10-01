@@ -1,3 +1,6 @@
+const dotenv = require('dotenv')
+dotenv.config()
+
 module.exports = {
   apps: [
     {
@@ -9,7 +12,7 @@ module.exports = {
       // max_memory_restart: "512M", // 프로그램의 메모리 크기가 일정 크기 이상이 되면 재시작한다.
       env: {
         // 개발 환경설정
-        PORT: 3030,
+        PORT: process.env.PORT,
         NODE_ENV: 'development'
       }
     },
@@ -22,7 +25,7 @@ module.exports = {
       watch: false, //bin폴더, routes폴더를 감시해서 변경사항 실행
       env: {
         // 환경 변수 설정
-        PORT: 4040,
+        PORT: process.env.PORT,
         NODE_ENV: 'production'
       },
       output: './logs/pm2/console.log', // 로그 출력 경로 재설정

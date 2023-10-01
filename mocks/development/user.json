@@ -3,14 +3,14 @@
     "userId": "user1",
     "email": "test1@google.com",
     "username": "foo",
-    "profileImg": "http://localhost:5173/profile_1.png",
+    "profileImg": "http://localhost:7282/profile_1.png",
     "accessToken": "token-example:test1@google.com"
   },
   "test2@google.com": {
     "userId": "user2",
     "email": "test2@google.com",
     "username": "waldo",
-    "profileImg": "http://localhost:5173/profile_2.jpg",
+    "profileImg": "http://localhost:7282/profile_2.jpg",
     "accessToken": "token-example:test2@google.com"
   }
 }

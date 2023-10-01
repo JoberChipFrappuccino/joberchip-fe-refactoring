@@ -1,7 +1,7 @@
 {
   "space1": {
     "pageId": "space1",
-    "pageProfileImage": "http://localhost:5173/profile_1.png",
+    "pageProfileImage": "http://localhost:7282/profile_1.png",
     "title": "user1의 스페이스",
     "description": "안녕하세요",
     "children": [
@@ -36,7 +36,7 @@
         "height": 2,
         "width": 2,
         "type": "IMAGE",
-        "src": "http://localhost:5173/img2.jpg",
+        "src": "http://localhost:7282/img2.jpg",
         "alt": "춤추는 인간2",
         "visible": false
       },
@@ -81,7 +81,7 @@
         "height": 2,
         "width": 2,
         "type": "VIDEO",
-        "src": "http://localhost:5173/test.mp4",
+        "src": "http://localhost:7282/test.mp4",
         "caption": "쓸모없는 비디오",
         "visible": false
       },
@@ -105,16 +105,16 @@
         "templateId": "template_1_1",
         "title": "재직 증명서",
         "description": "자버 재직 증명서",
-        "previewURL": "http://localhost:5173/preview_1.png",
-        "iconUrl": "http://localhost:5173/template_icon_1.png",
-        "url": "http://localhost:5173/template_1.html",
+        "previewURL": "http://localhost:7282/preview_1.png",
+        "iconUrl": "http://localhost:7282/template_icon_1.png",
+        "url": "http://localhost:7282/template_1.html",
         "visible": false
       }
     ]
   },
   "space2": {
     "pageId": "space2",
-    "pageProfileImage": "http://localhost:5173/profile_2.jpg",
+    "pageProfileImage": "http://localhost:7282/profile_2.jpg",
     "title": "user2의 최상위 페이지",
     "description": "어쩌고 저쩌고 ㅎㅎ",
     "blocks": [
@@ -149,7 +149,7 @@
         "height": 2,
         "width": 2,
         "type": "IMAGE",
-        "src": "http://localhost:5173/img2.jpg",
+        "src": "http://localhost:7282/img2.jpg",
         "alt": "춤추는 인간2",
         "visible": false
       },
@@ -194,7 +194,7 @@
         "height": 2,
         "width": 2,
         "type": "VIDEO",
-        "src": "http://localhost:5173/test.mp4",
+        "src": "http://localhost:7282/test.mp4",
         "caption": "쓸모없는 비디오",
         "visible": false
       },
