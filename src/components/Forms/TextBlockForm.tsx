@@ -1,3 +1,4 @@
+import { PARSE_ERROR_TEXT } from '@/constants/textEditorOptions'
 import { useBlockAction } from '@/store/blockAction'
 import { EditorState, convertFromRaw } from 'draft-js'
 import { useEffect, useState } from 'react'
@@ -11,14 +12,19 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   const [editableBlock, setEditableBlock] = useState<EditorState>(EditorState.createEmpty())
   const { drawerMode, setOpenDrawer } = useBlockAction()
   const [isButtonDisabled, setisButtonDisabled] = useState(true)
-
-  const textValue = block?.description ?? ''
+  const [textValue] = useState(block?.description ?? '')
 
   useEffect(() => {
     if (drawerMode === 'create') {
       setEditableBlock(EditorState.createEmpty())
     } else {
-      setEditableBlock(EditorState.createWithContent(convertFromRaw(JSON.parse(textValue))))
+      try {
+        const descriptionJSON = JSON.parse(textValue)
+        setEditableBlock(EditorState.createWithContent(convertFromRaw(descriptionJSON)))
+      } catch (error) {
+        console.error('JSON 파싱 중 오류가 발생했습니다:', error)
+        setEditableBlock(EditorState.createWithContent(convertFromRaw(JSON.parse(PARSE_ERROR_TEXT))))
+      }
     }
   }, [])
 

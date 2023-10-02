@@ -207,3 +207,6 @@ export const StyleMap = {
   },
   ...sizes
 }
+
+export const PARSE_ERROR_TEXT =
+  '{"blocks":[{"key":"c3r5h","text":"자버칩프라푸치노","type":"center","depth":0,"inlineStyleRanges":[{"offset":0,"length":3,"style":"size24"},{"offset":0,"length":2,"style":"red"},{"offset":6,"length":2,"style":"UNDERLINE"}],"entityRanges":[],"data":{}}],"entityMap":{}}'
