@@ -8,7 +8,7 @@ import styles from './UserProfile.module.scss'
 export function UserProfile() {
   const queryClient = useQueryClient()
 
-  const { user } = useUserStore()
+  const { user, signOut } = useUserStore()
   const handleOnClickCreateSpace = () => {
     createSpaceAPI()
       .then(({ message }) => {
@@ -26,6 +26,16 @@ export function UserProfile() {
         <p>자버칩 소속</p>
       </div>
       <div className={styles.buttonCover}>
+        <button
+          className={styles.mySpaceBtn}
+          type="button"
+          onClick={() => {
+            signOut()
+            window.location.reload()
+          }}
+        >
+          임시 로그아웃 버튼
+        </button>
         <Link to="/space/space1" className={styles.mySpaceBtn}>
           내 스페이스 바로가기
         </Link>

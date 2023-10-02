@@ -8,10 +8,11 @@ import { useMemo, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import styles from './Profile.module.scss'
+import { ProfileForm } from './ProfileForm'
 
 export function Profile() {
   const [openConfirmModal, setConfirmModal] = useState(false)
-  const { mode, setSharePageMode: setSpaceMode, sharePage } = useSharePageStore()
+  const { mode, setSharePageMode, sharePage } = useSharePageStore()
   const items = useMemo(
     () => [
       {
@@ -38,20 +39,20 @@ export function Profile() {
           <Switch
             checkedChildren="공유 화면 미리보기"
             unCheckedChildren="편집 하기"
-            onChange={() => setSpaceMode(mode === 'view' ? 'edit' : 'view')}
+            onChange={() => setSharePageMode(mode === 'view' ? 'edit' : 'view')}
           />
         )
-      },
-      {
-        key: 'Profile-divider-4',
-        type: 'divider'
-      },
-      {
-        key: `${sharePage.pageId}-profile-5`,
-        danger: true,
-        label: '삭제하기',
-        onClick: () => setConfirmModal(true)
       }
+      // {
+      //   key: 'Profile-divider-4',
+      //   type: 'divider'
+      // },
+      // {
+      //   key: `${sharePage.pageId}-profile-5`,
+      //   danger: true,
+      //   label: '삭제하기',
+      //   onClick: () => setConfirmModal(true)
+      // }
     ],
     [mode]
   )
@@ -63,8 +64,15 @@ export function Profile() {
           <img src={sharePage.pageProfileImage ?? '/default_profile.png'} alt={`${sharePage.title} thumbnail`} />
         </div>
         <div className={styles.profile}>
-          <h2>{sharePage.title}</h2>
-          <p>{sharePage.description}</p>
+          {mode === 'view' ? (
+            <>
+              <h2>{sharePage.title}</h2>
+              <p>{sharePage.description}</p>{' '}
+            </>
+          ) : (
+            <ProfileForm />
+          )}
+
           <ul className={styles.followCover}>
             <li>
               <span>팔로워</span>

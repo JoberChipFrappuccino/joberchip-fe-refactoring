@@ -43,6 +43,7 @@ export const useUserStore = create<UserState>((set) => {
       return res
     },
     getUserInfo: async () => {
+      if (!localStorage.getItem(ACCESS_TOKEN)) return false
       set((state) => ({ ...state, isFetching: true, isSignedIn: false }))
       const user = await getUserInfoAPI()
       if (!user) {
@@ -56,7 +57,6 @@ export const useUserStore = create<UserState>((set) => {
     signOut: () => {
       // todo : logout API있다면 호출합니다.
       localStorage.removeItem(ACCESS_TOKEN)
-
       set((state) => {
         const user: User = {
           userId: '',
