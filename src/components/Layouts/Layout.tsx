@@ -1,5 +1,4 @@
 import { Header } from '@/components/Menus/Header'
-import { SideNavBar } from '@/components/Menus/SideNavBar'
 import { useUserStore } from '@/store/user'
 import { Layout as AntdLayout } from 'antd'
 import { useEffect } from 'react'
@@ -15,27 +14,22 @@ export default function Layout() {
 
   useEffect(() => {
     if (isSignedIn) {
-      if (location.pathname === '/signup' || location.pathname === '/signin') {
-        navigate('/')
-      }
+      navigate('/')
+      return
     }
+
     if (!isSignedIn) {
-      getUserInfo().then((res) => {
-        if (!res) {
-          if (location.pathname !== '/signup') {
-            navigate('/signin')
-          }
-        }
+      getUserInfo().then((isSuccess) => {
+        !isSuccess && navigate('/signin')
       })
     }
-  }, [location.pathname])
+  }, [location.pathname, isSignedIn])
 
   return (
     // * HMR을 위해 div로 감싸줍니다.
     <div>
       <div id="portal" />
       <AntdLayout className={styles.layout} style={{ background: '#fff', height: '100%' }}>
-        {location.pathname !== '/' && <SideNavBar />}
         <Content>
           <Header />
           <Outlet />

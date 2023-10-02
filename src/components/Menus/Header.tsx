@@ -48,7 +48,7 @@ export function Header(props: any) {
   return (
     <Layout className={styles.container}>
       <div className={styles.cover}>
-        {location.pathname !== '/' && (
+        {location.pathname !== '/' && !location.pathname.includes('/sign') && (
           <>
             <Button
               type="text"
@@ -104,7 +104,7 @@ export function Header(props: any) {
             </Drawer>
           </>
         )}
-        {location.pathname === '/' ? <HomeHeader /> : <BreadCrumbBox />}
+        {location.pathname === '/' || location.pathname.includes('/sign') ? <HomeHeader /> : <BreadCrumbBox />}
       </div>
     </Layout>
   )

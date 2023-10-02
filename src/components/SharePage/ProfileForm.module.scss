@@ -1,0 +1,26 @@
+@import '/src/variables.scss';
+.cover {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    margin-right: 1rem;
+    padding: 0px;
+    &:focus {
+      border: $jober-blue;
+    }
+  }
+  .description {
+    font-size: 1rem;
+    color: grey;
+    border: none;
+    margin-right: 1rem;
+    padding: 0px;
+    &:focus {
+      border: $jober-blue;
+    }
+  }
+}

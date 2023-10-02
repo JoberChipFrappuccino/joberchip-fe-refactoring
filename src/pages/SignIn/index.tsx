@@ -1,6 +1,7 @@
 import { ACCESS_TOKEN, BACK_MOCK_ACCESS_TOKEN } from '@/constants'
 import { useUserStore } from '@/store/user'
 import { useNavigate } from 'react-router-dom'
+import styles from './SignIn.module.scss'
 
 export default function SignIn() {
   const navigate = useNavigate()
@@ -47,17 +48,17 @@ export default function SignIn() {
     <div>
       <h1>SignIn</h1>
       <div>
-        <button type="button" onClick={() => loginById('1')}>
+        <button className={styles.signInBtn} type="button" onClick={() => loginById('1')}>
           test1 유저로 로그인
         </button>
       </div>
       <div>
-        <button type="button" onClick={() => loginById('2')}>
+        <button className={styles.signInBtn} type="button" onClick={() => loginById('2')}>
           test2 유저로 로그인
         </button>
       </div>
       <div>
-        <button type="button" onClick={() => loginById('3')}>
+        <button className={styles.signInBtn} type="button" onClick={() => loginById('3')}>
           test3 유저로 로그인 (에러)
         </button>
       </div>

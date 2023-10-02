@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react'
 
-export function useDebounce<T>(value: T, delay: number = 2000, onChaged: (value: T) => void = () => {}) {
+export function useDebounce<T extends object | string>(
+  value: T,
+  delay: number = 2000,
+  onChaged: (value: T) => void = () => {}
+) {
   const [debouncedValue, setDebouncedValue] = useState(value)
 
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value)
+      if (checkSameValue(value, debouncedValue)) return
       onChaged(value)
     }, delay)
 
@@ -15,4 +20,11 @@ export function useDebounce<T>(value: T, delay: number = 2000, onChaged: (value:
   }, [typeof value === 'object' ? JSON.stringify(value) : value, delay])
 
   return debouncedValue
+}
+
+function checkSameValue(value: string | object, nextValue: string | object) {
+  if (typeof value === 'object') {
+    return JSON.stringify(value) === JSON.stringify(nextValue)
+  }
+  return value === nextValue
 }
