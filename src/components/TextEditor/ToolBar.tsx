@@ -33,20 +33,11 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
   const handleNext = (e: React.MouseEvent) => {
     e.preventDefault()
     setOffset(toolWidth * 4)
-
-    // if (offset < (tools.length - 1) * toolWidth) {
-    //   // setOffset(offset + toolWidth + 46);
-    //   setOffset(46 * 4)
-    // }
   }
 
   const handleTogggleClick = (e: React.MouseEvent, inlineStyle: string) => {
     e.preventDefault()
     if (inlineStyle === null) return
-    // 토글 중복 활성화 수정중
-    // if (inlineStyle.includes('size')) {
-    //   setActiveSize(inlineStyle)
-    // }
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle))
   }
 
@@ -146,10 +137,6 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
           type={optionType}
           toggleButton={toggleButton}
           blockButton={blockButton}
-          // editorState={editorState}
-          // setToggleButton={setToggleButton}
-          // activeSize={activeSize}
-          // setActiveSize={setActiveSize}
           handle={optionType === 'align-options' ? handleBlockClick : handleTogggleClick}
         />
       )}

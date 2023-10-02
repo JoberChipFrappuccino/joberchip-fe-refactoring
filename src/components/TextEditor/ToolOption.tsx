@@ -8,55 +8,46 @@ import {
 import styles from './ToolOption.module.scss'
 
 export default function ToolOption({
-  // editorState,
-  // setToggleButton,
-  // activeSize,
-  // setActiveSize
   type,
   handle,
   blockButton,
   toggleButton
 }: {
-  // editorState: EditorState
-  // setToggleButton: Record<string, boolean>
-  // activeSize: string
-  // setActiveSize: string
   type: string
   handle: (e: React.MouseEvent, value: string) => void
   blockButton: string
   toggleButton: Record<string, boolean>
 }) {
-  const handleSizeClick = (e: React.MouseEvent, selectedSize: string) => {
-    e.preventDefault()
-
-    // 토글 중복 활성화 수정중
-    // const newSizeToggleState = { ...toggleButton }
-    // SIZE_OPTIONS.forEach((size) => {
-    //   newSizeToggleState[size] = size === selectedSize
-    // })
-    // setToggleButton({
-    //  ...toggleButton,
-    //  [selectedSize]: true,
-    //  [activeSize]: false
-    // })
-
-    // setActiveSize(selectedSize)
-    handle(e, selectedSize)
-  }
-
   return (
     <div className={styles.container}>
+      {type === 'font-options' && (
+        <>
+          <span className={styles.label}>글자서체</span>
+          <div className={`${styles.optionContainer} ${styles.fontContainer} `}>
+            {FONT_OPTIONS.map((font, index) => (
+              <div
+                key={index}
+                onMouseDown={(e) => {
+                  handle(e, font.style)
+                }}
+                className={`${toggleButton[font.style] ? styles.optionActive : ''}`}
+              >
+                {font.label}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
       {type === 'size-options' && (
         <>
           <span className={styles.label}>글자크기</span>
-          <div className={styles.optionContainer}>
+          <div className={`${styles.optionContainer} ${styles.sizeContainer}`}>
             {SIZE_OPTIONS.map((size, index) => (
               <div
                 key={index}
-                className={`${styles.option} ${toggleButton[size] ? styles.optionActive : styles.optionnonActive}`}
+                className={`${toggleButton[size] ? styles.optionActive : styles.optionDisable}`}
                 onMouseDown={(e) => {
-                  // handle(e, `${size}`)
-                  handleSizeClick(e, size)
+                  handle(e, size)
                 }}
               >
                 {size.slice(4)}
@@ -68,7 +59,7 @@ export default function ToolOption({
       {type === 'color-options' && (
         <>
           <span className={styles.label}>글자색</span>
-          <div className={styles.optionContainer}>
+          <div className={`${styles.optionContainer} ${styles.colorWrap}`}>
             {TEXT_COLORS_OPTIONS.map((colors, index) => (
               <div
                 key={index}
@@ -99,35 +90,23 @@ export default function ToolOption({
           </div>
         </>
       )}
-      {type === 'font-options' && (
-        <div className={`${styles.optionContainer} ${styles.fontContainer} `}>
-          {FONT_OPTIONS.map((font, index) => (
-            <div
-              key={index}
-              onMouseDown={(e) => {
-                handle(e, font.style)
-              }}
-              className={`${toggleButton[font.style] ? styles.optionActive : ''}`}
-            >
-              {font.label}
-            </div>
-          ))}
-        </div>
-      )}
       {type === 'align-options' && (
-        <div className={`${styles.optionContainer} ${styles.alignContainer} `}>
-          {ALIGN_OPTIONS.map((align, index) => (
-            <div
-              key={index}
-              onMouseDown={(e) => {
-                handle(e, align.style)
-              }}
-              className={blockButton && align.style === blockButton ? styles.optionActive : ''}
-            >
-              {align.style}
-            </div>
-          ))}
-        </div>
+        <>
+          <span className={styles.label}>글자정렬</span>
+          <div className={`${styles.optionContainer} ${styles.alignContainer} `}>
+            {ALIGN_OPTIONS.map((align, index) => (
+              <div
+                key={index}
+                onMouseDown={(e) => {
+                  handle(e, align.style)
+                }}
+                className={blockButton && align.style === blockButton ? styles.optionActive : ''}
+              >
+                {align.style}
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   )

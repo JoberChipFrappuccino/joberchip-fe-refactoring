@@ -4,10 +4,6 @@ import { Editor, EditorState, convertFromRaw, type ContentBlock } from 'draft-js
 import { useEffect, useState } from 'react'
 import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import styles from './TextBlock.module.scss'
-type Props = {
-  block: BlockWith<'text'>
-  mode: SpaceMode
-}
 
 function blockStyleFn(contentBlock: ContentBlock) {
   const type = contentBlock.getType()
@@ -26,7 +22,7 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
   useEffect(() => {
-    setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(block.text))))
+    setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(block.description))))
   }, [])
 
   const onchange = () => {
