@@ -17,6 +17,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive)
 
 export function BlocksViewer() {
   const [rowHeight, setRowHeight] = useState(100)
+  const [margin, setMargin] = useState(40)
   const { sharePage, setSharePage, mode } = useSharePageStore()
   const [grid, setGridLayout] = useState({
     breakpoints: 'lg',
@@ -51,8 +52,13 @@ export function BlocksViewer() {
         cols={{ lg: 4 }}
         rowHeight={rowHeight}
         width={1000}
-        margin={[18, 18]}
-        onWidthChange={(width, _margin, cols) => setRowHeight(getBlockHeightRatio(width, cols))}
+        margin={[margin, margin]}
+        onWidthChange={(width, _margin, cols) => {
+          if (width > 768) setMargin(40)
+          else setMargin(18)
+
+          setRowHeight(getBlockHeightRatio(width, cols))
+        }}
         onLayoutChange={(layout, _layouts) => {
           if (mode === 'view') return
           const changedLayout = sortLayout(layout)

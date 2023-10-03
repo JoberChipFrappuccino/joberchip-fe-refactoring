@@ -40,6 +40,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
       key: `${block.objectId}-view-block-1`,
       label: (
         <Switch
+          className={styles.switchBtn}
           defaultChecked={!block.visible}
           onChange={() => {
             for (let i = 0; i < sharePage.children.length; i++) {
@@ -52,9 +53,8 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
           }}
         />
       ),
-      icon: <p>공개 설정</p>
+      icon: '공개 설정'
     }
-
     const pageInformationEditItem = {
       key: `${block.objectId}-view-block-2`,
       icon: (
@@ -75,7 +75,6 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
         </button>
       )
     }
-
     const copyLinkItem = {
       key: `${block.objectId}-view-block-3`,
       icon: (
@@ -84,12 +83,10 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
         </button>
       )
     }
-
     const templateDetailSettingItem = {
       key: `${block.objectId}-view-block-4`,
       icon: <button className={styles.kebobBtn}>템플릿 상세 설정</button>
     }
-
     const deleteItem = {
       key: `${block.objectId}-view-block-5`,
       danger: true,
