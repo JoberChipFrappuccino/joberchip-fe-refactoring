@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-type APIResponseStatus = 'success' | 'failure'
+export type APIResponseStatus = 'success' | 'failure'
 
 export interface ResponseBase<T> {
   status: APIResponseStatus

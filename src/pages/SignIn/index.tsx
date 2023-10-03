@@ -30,11 +30,15 @@ export default function SignIn() {
 
     // * 임시로 mock Token을 추가합니다.
     const mock1Token =
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyUm9sZXMiOiJST0xFX1VTRVIiLCJleHAiOjE2OTc1NDQ3MTQsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJ1c2VyMSJ9.aEUYbCpQRUKjcgCPPZgRTbwJ_a6EnH1ofsNNNK3zSvDk9nqPWhWj7_iQNMtDxZk-XBoYYiuN_2c1QbxH482OuQ'
-    localStorage.setItem(BACK_MOCK_ACCESS_TOKEN, mock1Token)
+      id === '1'
+        ? process.env.BACK_MOCK_TOKEN_1
+        : id === '2'
+        ? process.env.BACK_MOCK_TOKEN_2
+        : process.env.BACK_MOCK_TOKEN_3
+    localStorage.setItem(BACK_MOCK_ACCESS_TOKEN, mock1Token ?? '')
     // * 로그인 API 구현 전 까지 아래 토큰으로 대체합니다.
-    const frontMockToken = 'token-example:test1@google.com'
-    localStorage.setItem(ACCESS_TOKEN, frontMockToken)
+    const frontMockToken = process.env.FRONT_MOCK_TOKEN_1
+    localStorage.setItem(ACCESS_TOKEN, frontMockToken ?? '')
 
     if (res.status === 'success') {
       alert(res.message)
@@ -59,7 +63,7 @@ export default function SignIn() {
       </div>
       <div>
         <button className={styles.signInBtn} type="button" onClick={() => loginById('3')}>
-          test3 유저로 로그인 (에러)
+          test3 유저로 로그인
         </button>
       </div>
     </div>

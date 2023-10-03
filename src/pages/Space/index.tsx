@@ -1,48 +1,51 @@
-import { fetchSpaceListAPI } from '@/api/space'
 import { GroupSpace } from '@/components/Space/GroupSpace'
 import { GroupSpaceItem } from '@/components/Space/GroupSpaceItem'
 import { Search } from '@/components/Space/Search'
 import { UserProfile } from '@/components/Space/UserProfile'
-import { SPACE_LIST } from '@/constants/queryKeyConstant'
+import { useSpaceList } from '@/hooks/spaceList'
+import { type SpaceList } from '@/models/space'
+import { type User } from '@/models/user'
 import { useUserStore } from '@/store/user'
-import to from '@/utils/api'
-import { useQuery } from '@tanstack/react-query'
 import styles from './Space.module.scss'
 
 export default function Space() {
   const { user } = useUserStore()
-  const { data: res } = useQuery([SPACE_LIST], () => to(fetchSpaceListAPI()), {
-    staleTime: 1000 * 60 * 60
-  })
+  const { data, status, message, isLoaded } = useSpaceList(user.userId)
 
-  if (res?.status === 'failure') alert(res?.message)
+  // TODO : TOAST UI로 수정하기
+  if (isLoaded && status === 'failure') alert(message)
 
   return (
     <div className={styles.container}>
       <div className={styles.cover}>
         <Search />
         <UserProfile />
-        <GroupSpace title="개인 스페이스 (링크 클릭하면 에러납니다)">
-          {res?.data?.map((space) => {
-            return (
-              <GroupSpaceItem
-                key={space.spaceId}
-                link={`/temp/space/${space.mainPageId}`}
-                text={`${user.username}님의 스페이스, id : ${space.mainPageId}`}
-              />
-            )
-          })}
+        <GroupSpace title="개인 스페이스 (백엔드 서버 API를 호출)">
+          {GroupItemsByParticipationType('DEFAULT', data, user)}
         </GroupSpace>
-        <GroupSpace title="단체 스페이스 (임시)">
-          <GroupSpaceItem text="user 2의 단체 스페이스" link="/space/space2" />
+        <GroupSpace title="단체 스페이스">
           <GroupSpaceItem
             style={{ borderBottom: '1px solid grey', borderTop: '1px solid grey' }}
-            text="자버 회사 소개 스페이스"
-            link="/space/space3"
+            text="자버 회사 소개 스페이스 (임시)"
+            link="/space/space1"
           />
-          <GroupSpaceItem text="자버칩프라푸치노 프로젝트 소개 스페이스" link="/space/space4" />
+          {GroupItemsByParticipationType('PARTICIPANT', data, user)}
         </GroupSpace>
       </div>
     </div>
   )
+}
+
+function GroupItemsByParticipationType(type: ParticipationType, spaceList: SpaceList[] | null, user: User) {
+  return spaceList
+    ?.filter((space) => space.participationType === type)
+    .map((space) => {
+      return (
+        <GroupSpaceItem
+          key={space.spaceId}
+          link={`/temp/space/${space.mainPageId}`}
+          text={`${user.username}님의 스페이스, id : ${space.mainPageId}`}
+        />
+      )
+    })
 }
