@@ -1,8 +1,12 @@
+@import '/src/utils.scss';
+
 .btn {
   background-color: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
+  // * 스크린 사이즈에 상관 없이 14px로 고정합니다.
+  font-size: 14px;
 }
 .container {
   width: 100%;

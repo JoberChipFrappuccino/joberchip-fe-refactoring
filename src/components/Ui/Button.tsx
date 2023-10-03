@@ -1,13 +1,18 @@
+import classNames from 'classnames'
 import styles from './Button.module.scss'
 
 export type FormButtonProps = {
   title: string
   event: boolean
+  additionalStyle?: string
 }
 
-export default function FormButton({ title, event }: FormButtonProps) {
+export default function FormButton({ title, event, additionalStyle }: FormButtonProps) {
   return (
-    <button className={event ? styles.disabledButton : styles.activeButton} disabled={event}>
+    <button
+      className={classNames(event ? styles.disabledButton : styles.activeButton, additionalStyle)}
+      disabled={event}
+    >
       {title}
     </button>
   )

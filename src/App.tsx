@@ -17,7 +17,6 @@ export default function App() {
       <Route path="/temp" element={<TempSharePageLayout />}>
         <Route path="/temp/space/:spaceId" element={<TempSharePage />} />
       </Route>
-
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Space />} />
         <Route path="/signup" element={<SignUp />} />
