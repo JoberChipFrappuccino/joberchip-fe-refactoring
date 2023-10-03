@@ -1,11 +1,11 @@
 @import '/src/variables.scss';
-
+@import '/src/utils.scss';
 .container {
   display: flex;
   height: 100%;
   flex-direction: column;
   .blockViewer {
-    padding: 0 1.25rem;
+    padding: 0 1.25rem toRem(80px) 1.25rem;
     flex: 1;
     .blockCover {
       display: block;
@@ -19,10 +19,10 @@
       padding: 0;
       cursor: pointer;
     }
-  }
-  .selected {
-    box-sizing: content-box;
-    border: 3px solid $jober-blue;
-    height: calc(auto - 5px);
+    .selected {
+      box-sizing: content-box;
+      border: 3px solid $jober-blue;
+      height: calc(auto - 5px);
+    }
   }
 }

@@ -32,7 +32,6 @@ export function Profile() {
         key: 'Profile-divider-2',
         type: 'divider'
       },
-
       {
         key: `${sharePage.pageId}-profile-4`,
         label: (

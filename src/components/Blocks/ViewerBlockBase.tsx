@@ -57,7 +57,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
     }
     const pageInformationEditItem = {
       key: `${block.objectId}-view-block-2`,
-      icon: (
+      label: (
         <button
           className={styles.kebobBtn}
           onClick={() => {
@@ -77,7 +77,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
     }
     const copyLinkItem = {
       key: `${block.objectId}-view-block-3`,
-      icon: (
+      label: (
         <button className={styles.kebobBtn} onClick={() => clip((block as BlockWith<TTemplate>).url)}>
           링크 복사
         </button>
@@ -85,12 +85,12 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
     }
     const templateDetailSettingItem = {
       key: `${block.objectId}-view-block-4`,
-      icon: <button className={styles.kebobBtn}>템플릿 상세 설정</button>
+      label: <button className={styles.kebobBtn}>템플릿 상세 설정</button>
     }
     const deleteItem = {
       key: `${block.objectId}-view-block-5`,
       danger: true,
-      label: '삭제하기',
+      label: <p className={styles.delBtn}>삭제하기</p>,
       onClick: () => setConfirmModal(true)
     }
 
