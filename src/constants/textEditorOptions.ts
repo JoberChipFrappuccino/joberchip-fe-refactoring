@@ -141,80 +141,6 @@ export const ALIGN_OPTIONS = [
   { style: 'right', icon: '', text: '오른쪽' }
 ]
 
-export const StyleMap = {
-  black: {
-    color: '#111111'
-  },
-  gray: {
-    color: '#E2E2E2'
-  },
-  white: {
-    color: '#ffffff'
-  },
-  red: {
-    color: '#FF0000'
-  },
-  orange: {
-    color: '#ff9300'
-  },
-  yellow: {
-    color: '#FFdb30'
-  },
-  green: {
-    color: '#1FA99E'
-  },
-  blue: {
-    color: '#00B3F2'
-  },
-  purple: {
-    color: '#AA1F91'
-  },
-  blackBg: {
-    backgroundColor: '#111111'
-  },
-  grayBg: {
-    backgroundColor: '#E2E2E2'
-  },
-  whiteBg: {
-    backgroundColor: '#ffffff'
-  },
-  redBg: {
-    backgroundColor: '#FF0000'
-  },
-  orangeBg: {
-    backgroundColor: '#ff9300'
-  },
-  yellowBg: {
-    backgroundColor: '#FFdb30'
-  },
-  greenBg: {
-    backgroundColor: '#1FA99E'
-  },
-  blueBg: {
-    backgroundColor: '#00B3F2'
-  },
-  purpleBg: {
-    backgroundColor: '#AA1F91'
-  },
-  font1: {
-    fontFamily: 'Pretendard-Regular'
-  },
-  font2: {
-    fontFamily: 'Noto Sans KR'
-  },
-  font3: {
-    fontFamily: 'TheJamsil5Bold'
-  },
-  ...sizes
-}
-
-export const PARSE_ERROR_TEXT =
-  '{"blocks":[{"key":"c3r5h","text":"자버칩프라푸치노","type":"center","depth":0,"inlineStyleRanges":[{"offset":0,"length":3,"style":"size24"},{"offset":0,"length":2,"style":"red"},{"offset":6,"length":2,"style":"UNDERLINE"}],"entityRanges":[],"data":{}}],"entityMap":{}}'
-
-export const SIZE = {
-  ...sizes
-}
-
 export const FONT = {
   font1: {
     fontFamily: 'Pretendard-Regular'
@@ -287,9 +213,23 @@ export const BGCOLOR = {
   }
 }
 
+export const SIZE = {
+  ...sizes
+}
+
 export const optionStyleMaps = {
   size: SIZE,
   font: FONT,
   textcolor: TEXTCOLOR,
   bgcolor: BGCOLOR
 }
+
+export const StyleMap = {
+  ...FONT,
+  ...TEXTCOLOR,
+  ...BGCOLOR,
+  ...sizes
+}
+
+export const PARSE_ERROR_TEXT =
+  '{"blocks":[{"key":"c3r5h","text":"자버칩프라푸치노","type":"center","depth":0,"inlineStyleRanges":[{"offset":0,"length":3,"style":"size24"},{"offset":0,"length":2,"style":"red"},{"offset":6,"length":2,"style":"UNDERLINE"}],"entityRanges":[],"data":{}}],"entityMap":{}}'
