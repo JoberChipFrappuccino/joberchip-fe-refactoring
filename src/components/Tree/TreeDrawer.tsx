@@ -43,15 +43,7 @@ export const TreeDrawer: React.FC = () => {
 
   return (
     <>
-      <button
-        style={{
-          backgroundColor: 'transparent',
-          border: 'none',
-          cursor: 'pointer',
-          padding: 0
-        }}
-        onClick={onOpen}
-      >
+      <button className={styles.btn} onClick={onOpen}>
         저장위치 변경
       </button>
       <Drawer title="저장위치 변경" placement="right" onClose={onClose} open={open}>
@@ -62,7 +54,7 @@ export const TreeDrawer: React.FC = () => {
                 <BiHomeAlt /> 어쩌구의 공유페이지
               </h3>
             </div>
-            <TreeLayout onSelectTreeNode={onSelectTreeNode}/>
+            <TreeLayout onSelectTreeNode={onSelectTreeNode} />
           </form>
         </div>
         <FormButton title={'페이지 이동하기'} event={isButtonDisabled} />

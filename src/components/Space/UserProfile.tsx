@@ -51,7 +51,8 @@ export function UserProfile() {
           내 스페이스 바로가기 (백엔드 서버 API를 호출)
         </Link>
         <button type="button" className={styles.addSpaceBtn} onClick={handleOnClickCreateSpace}>
-          내 스페이스 추가하기
+          <img src="/add_circle.png" alt="add circle icon" />
+          <span>스페이스 추가하기</span>
         </button>
       </div>
     </div>

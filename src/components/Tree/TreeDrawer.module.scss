@@ -1,20 +1,26 @@
+.btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
 .container {
   width: 100%;
   height: 100%;
-}
 
-.formBox {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  flex-grow: 1;
+  .formBox {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    flex-grow: 1;
 
-  .forms {
-    padding: 0 20px 0 20px;
-  }
+    .forms {
+      padding: 0 20px 0 20px;
+    }
 
-  .formText {
+    .formText {
       margin-top: 30px;
+    }
   }
 }

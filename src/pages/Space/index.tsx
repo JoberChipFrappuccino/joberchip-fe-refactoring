@@ -6,6 +6,7 @@ import { useSpaceList } from '@/hooks/spaceList'
 import { type SpaceList } from '@/models/space'
 import { type User } from '@/models/user'
 import { useUserStore } from '@/store/user'
+import classNames from 'classnames'
 import styles from './Space.module.scss'
 
 export default function Space() {
@@ -24,11 +25,7 @@ export default function Space() {
           {GroupItemsByParticipationType('OWNER', data, user)}
         </GroupSpace>
         <GroupSpace title="단체 스페이스">
-          <GroupSpaceItem
-            style={{ borderBottom: '1px solid grey', borderTop: '1px solid grey' }}
-            text="자버 회사 소개 스페이스 (임시)"
-            link="/space/space1"
-          />
+          <GroupSpaceItem text="자버 회사 소개 스페이스 (임시)" link="/space/space1" />
           {GroupItemsByParticipationType('PARTICIPANT', data, user)}
         </GroupSpace>
       </div>
@@ -39,13 +36,16 @@ export default function Space() {
 function GroupItemsByParticipationType(type: ParticipationType, spaceList: SpaceList[] | null, user: User) {
   return spaceList
     ?.filter((space) => space.participationType === type)
-    .map((space) => {
+    .map((space, i, spaces) => {
       return (
-        <GroupSpaceItem
-          key={space.spaceId}
-          link={`/temp/space/${space.mainPageId}`}
-          text={`${user.username}님의 스페이스, id : ${space.mainPageId}`}
-        />
+        <>
+          <GroupSpaceItem
+            key={space.spaceId}
+            link={`/temp/space/${space.mainPageId}`}
+            text={`${user.username}님의 스페이스, id : ${space.mainPageId}`}
+          />
+          <div className={classNames(spaces.length - 1 !== i && styles.divider)} />
+        </>
       )
     })
 }

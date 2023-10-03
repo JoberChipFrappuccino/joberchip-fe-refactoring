@@ -2,25 +2,26 @@
 .cover {
   display: flex;
   align-items: center;
+  width: 100%;
   margin-bottom: 16px;
+  input {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 1rem;
+    padding: 0px;
+    border: none;
+  }
+  input:focus {
+    border: $jober-blue;
+  }
   .title {
     font-size: 2rem;
     font-weight: bold;
-    border: none;
-    margin-right: 1rem;
-    padding: 0px;
-    &:focus {
-      border: $jober-blue;
-    }
   }
   .description {
     font-size: 1rem;
     color: grey;
-    border: none;
-    margin-right: 1rem;
-    padding: 0px;
-    &:focus {
-      border: $jober-blue;
-    }
   }
 }
