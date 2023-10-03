@@ -12,8 +12,9 @@
     border: solid .0625rem #e2e6ef;
     p {
       display: flex;
-      transition: 0.3s;
+      font-size: 2rem;
       color: #e2e6ef;
+      transition: 0.3s;
       padding-bottom: 6px;
     }
   }
@@ -26,6 +27,7 @@
   }
   
   .thumbnailVideo {
+    padding: 0;
     width: 100%;
     display: flex;
     cursor: pointer;
@@ -46,6 +48,10 @@
       width: 100%;
       height: 100%;
       display: flex;
+    }
+    img {
+      display: flex;
+      width: 100%;
     }
     .minus {
       inset: 0;
