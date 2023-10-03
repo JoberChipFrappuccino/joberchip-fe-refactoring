@@ -18,7 +18,7 @@ interface ToolbarProps {
   setEditorState: React.Dispatch<React.SetStateAction<EditorState>>
 }
 
-const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorState }) => {
+export default function ToolBar(props: ToolbarProps) {
   const [optionType, setOptionType] = useState('')
   const [blockButton, setBlockButton] = useState('')
   const [toggleButton, setToggleButton] = useState<Record<string, boolean>>({})
@@ -34,19 +34,19 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
 
   const handleNext = (e: React.MouseEvent) => {
     e.preventDefault()
-    setOffset(toolWidth * 5)
+    setOffset(props.toolWidth * 5)
   }
 
   const handleTogggleClick = (e: React.MouseEvent, inlineStyle: string) => {
     e.preventDefault()
     if (inlineStyle === null) return
-    setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle))
+    props.setEditorState(RichUtils.toggleInlineStyle(props.editorState, inlineStyle))
   }
 
   const handleBlockClick = (e: React.MouseEvent, blockType: string) => {
     e.preventDefault()
     if (blockType === null) return
-    setEditorState(RichUtils.toggleBlockType(editorState, blockType))
+    props.setEditorState(RichUtils.toggleBlockType(props.editorState, blockType))
   }
 
   const handleOptionType = (e: React.MouseEvent, type: string, label: string) => {
@@ -68,11 +68,11 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
         toggleState[option.style] = inlineStyles.has(option.style)
       }
     })
-
     return toggleState
   }
+
   useEffect(() => {
-    const inlineStyle = editorState.getCurrentInlineStyle()
+    const inlineStyle = props.editorState.getCurrentInlineStyle()
 
     const BOLD = inlineStyle.has('BOLD')
     const ITALIC = inlineStyle.has('ITALIC')
@@ -94,16 +94,16 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
       ...textBgColorToggleState
     })
 
-    const currentSelection = editorState.getSelection()
+    const currentSelection = props.editorState.getSelection()
     const currentKey = currentSelection.getStartKey()
-    const currentBlock = editorState.getCurrentContent().getBlockForKey(currentKey)
+    const currentBlock = props.editorState.getCurrentContent().getBlockForKey(currentKey)
 
     setBlockButton(currentBlock.getType())
-  }, [editorState])
+  }, [props.editorState])
 
   const toggleSubOption = (selectedStyle: string, style: string) => {
-    const selection = editorState.getSelection()
-    const currentContent = editorState.getCurrentContent()
+    const selection = props.editorState.getSelection()
+    const currentContent = props.editorState.getCurrentContent()
 
     let nextContentState: ContentState = currentContent
 
@@ -120,8 +120,8 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
         }, currentContent)
       }
 
-      let nextEditorState = EditorState.push(editorState, nextContentState, 'change-inline-style')
-      const currentStyle = editorState.getCurrentInlineStyle()
+      let nextEditorState = EditorState.push(props.editorState, nextContentState, 'change-inline-style')
+      const currentStyle = props.editorState.getCurrentInlineStyle()
 
       if (selection.isCollapsed()) {
         nextEditorState = currentStyle.reduce((state, color) => {
@@ -133,9 +133,9 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
         nextEditorState = RichUtils.toggleInlineStyle(nextEditorState, selectedStyle)
       }
 
-      setEditorState(nextEditorState)
+      props.setEditorState(nextEditorState)
     } else {
-      setEditorState(RichUtils.toggleInlineStyle(editorState, selectedStyle))
+      props.setEditorState(RichUtils.toggleInlineStyle(props.editorState, selectedStyle))
     }
     setselectedOption(style)
   }
@@ -156,7 +156,7 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
             className={styles.toolList}
             style={{
               transform: `translateX(-${offset}px)`,
-              width: `${TOOL_TYPES.length * toolWidth}px`
+              width: `${TOOL_TYPES.length * props.toolWidth}px`
             }}
           >
             {TOOL_TYPES.map((tool, index) => (
@@ -179,16 +179,16 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
         />
       </div>
       {optionType && (
-        <ToolOption
-          type={optionType}
-          toggleButton={toggleButton}
-          blockButton={blockButton}
-          handleOptionToggle={handleOptionToggle}
-          handle={optionType === 'align-options' ? handleBlockClick : handleTogggleClick}
-        />
+        <div className={styles.toolOptionContainer}>
+          <ToolOption
+            type={optionType}
+            toggleButton={toggleButton}
+            blockButton={blockButton}
+            handleOptionToggle={handleOptionToggle}
+            handle={optionType === 'align-options' ? handleBlockClick : handleTogggleClick}
+          />
+        </div>
       )}
     </>
   )
 }
-
-export default ToolBar

@@ -6,34 +6,30 @@ import styles from './TextEditor.module.scss'
 import ToolBar from './ToolBar'
 import './draft.css'
 
-export default function TextEditor({
-  editorIsOpen,
-  editableBlock,
-  setEditableBlock,
-  setisButtonDisabled,
-  isButtonDisabled
-}: {
+interface TextEditorProps {
   editorIsOpen: boolean
   editableBlock: any
   setEditableBlock: any
   setisButtonDisabled: React.Dispatch<React.SetStateAction<boolean>>
   isButtonDisabled: boolean
-}) {
+}
+
+export default function TextEditor(props: TextEditorProps) {
   const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty())
 
   const onChange = (editorState: EditorState) => {
     setEditorState(editorState)
     if (editorState.getCurrentContent().hasText()) {
-      setEditableBlock(editorState)
-      setisButtonDisabled(false)
+      props.setEditableBlock(editorState)
+      props.setisButtonDisabled(false)
     } else {
-      setisButtonDisabled(true)
+      props.setisButtonDisabled(true)
     }
   }
 
   useEffect(() => {
-    editableBlock ? setEditorState(editableBlock) : setEditorState(EditorState.createEmpty())
-  }, [editableBlock])
+    props.editableBlock ? setEditorState(props.editableBlock) : setEditorState(EditorState.createEmpty())
+  }, [props.editableBlock])
 
   const getBlockStyle = (block: any): string => {
     switch (block.getType()) {
@@ -50,8 +46,8 @@ export default function TextEditor({
 
   return (
     <div className={styles.container}>
-      {editorIsOpen && <ToolBar editorState={editorState} setEditorState={setEditorState} toolWidth={58} />}
-      <div className={`${styles.editorContainer}  ${editorIsOpen ? styles.focused : ''}`}>
+      {props.editorIsOpen && <ToolBar editorState={editorState} setEditorState={setEditorState} toolWidth={58} />}
+      <div className={`${styles.editorContainer}  ${props.editorIsOpen ? styles.focused : ''}`}>
         <Editor
           editorState={editorState}
           onChange={onChange}
@@ -60,7 +56,7 @@ export default function TextEditor({
           blockStyleFn={getBlockStyle}
         />
       </div>
-      {editorIsOpen && <FormButton title={'텍스트 입력완료'} event={isButtonDisabled} />}
+      {props.editorIsOpen && <FormButton title={'텍스트 입력완료'} event={props.isButtonDisabled} />}
     </div>
   )
 }
