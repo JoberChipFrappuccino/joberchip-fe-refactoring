@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
 import { SpaceActionBar } from '../ActionBar/SpaceActionBar'
 import { ViewerBlockBase } from '../Blocks/ViewerBlockBase'
+import MainBlockInfo from '../Ui/MainBlockInfo'
 import styles from './SharePageBlocksViewer.module.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
@@ -43,6 +44,7 @@ export function BlocksViewer() {
 
   return (
     <div className={styles.layout}>
+      {sharePage.children.length === 0 && <MainBlockInfo />}
       <ResponsiveGridLayout
         layouts={mode === 'edit' ? grid.layouts : viewModeGrid.layouts}
         breakpoints={BREAKPOINTS}

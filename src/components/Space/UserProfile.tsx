@@ -47,7 +47,7 @@ export function UserProfile() {
         <Link to="/space/space1" className={styles.mySpaceBtn}>
           내 스페이스 바로가기 (프론트 서버 API를 호출)
         </Link>
-        <Link to={myPersonalSpace?.mainPageId ?? ''} className={styles.mySpaceBtn}>
+        <Link to={`/temp/space/${myPersonalSpace?.mainPageId}` ?? '/'} className={styles.mySpaceBtn}>
           내 스페이스 바로가기 (백엔드 서버 API를 호출)
         </Link>
         <button type="button" className={styles.addSpaceBtn} onClick={handleOnClickCreateSpace}>
