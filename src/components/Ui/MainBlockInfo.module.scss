@@ -1,53 +1,77 @@
+@import '/src/utils.scss';
+@import '/src/variables.scss';
+@import '/src/maxin.scss';
+
 .mainbg {
   display: flex;
-}
-.blockcontainer {
-  display: flex;
-  max-width: 700px;
-  padding: 50px 0 80px 0;
+  justify-content: center;
+  width: 100%;
+  max-width: 940px;
   margin: 0 auto 100px auto;
-  border-radius: 20px;
-  justify-content: center;
-  border: dashed 2px #aeb9d1;
+  .blockcontainer {
+    display: flex;
+    justify-content: center;
+    max-width: 900px;
+    width: 100%;
+    padding: 50px 0 80px 0;
+    margin: 0 20px;
+    border-radius: 20px;
+    border: dashed 2px $cool-grey1;
+    .blockinfobox {
+      width: toRem(320px);
+      display: flex;
+      border-radius: toRem(20px);
+      flex-direction: column;
+      .plus {
+        display: flex;
+        font-size: 2rem;
+        color: $cool-grey1;
+        margin-bottom: 30px;
+        justify-content: center;
+      }
+      .iconbox {
+        padding: 0 10px;
+        display: flex;
+        justify-content: space-between;
+        .iconsvg {
+          width: toRem(70px);
+          height: toRem(70px);
+          padding: 0.5rem;
+          display: flex;
+          border-radius: toRem(10px);
+          border: solid 2px $cool-grey1;
+          background-color: $highlight-blue;
+        }
+        .itemtitle {
+          margin-top: 10px;
+          display: flex;
+          color: $cool-grey1;
+          font-size: 1.25rem;
+          justify-content: center;
+        }
+      }
+      .footertitle {
+        display: flex;
+        font-size: 1.25rem;
+        margin-top: 30px;
+        color: #aeb9d1;
+        justify-content: center;
+      }
+    }
+  }
 }
-.blockinfobox {
-  width: 320px;
-  display: flex;
-  border-radius: 20px;
-  flex-direction: column;
+
+@include tablet {
+  .mainbg {
+    .blockcontainer {
+      padding: 30px 0 50px 0;
+    }
+  }
 }
-.plus {
-  display: flex;
-  font-size: 50px;
-  color: #aeb9d1;
-  margin-bottom: 30px;
-  justify-content: center;
-}
-.footertitle {
-  display: flex;
-  font-size: 24px;
-  margin-top: 30px;
-  color: #aeb9d1;
-  justify-content: center;
-}
-.iconbox {
-  padding: 0 10px;
-  display: flex;
-  justify-content: space-between;
-}
-.iconsvg {
-  width: 70px;
-  height: 70px;
-  padding: 10px;
-  display: flex;
-  border-radius: 10px;
-  border: solid 2px #aeb9d1;
-  background-color: #e2e6ef;
-}
-.itemtitle {
-  margin-top: 10px;
-  display: flex;
-  color: #aeb9d1;
-  font-size: 24px;
-  justify-content: center;
+@include mobile {
+  .mainbg {
+    .blockcontainer {
+      padding: 10px 0 20px 0;
+    }
+  }
 }

@@ -1,13 +1,21 @@
 @import './variables.scss';
+@import './utils.scss';
 
 body {
   width: 100%;
   margin: 0;
-  font-size: 16px;
 }
+
 * {
   box-sizing: border-box;
+  font-size: 16px;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 iframe {
   border: 0;
 }
@@ -61,8 +69,8 @@ iframe {
   position: absolute;
   right: 0.5rem;
   bottom: 0.5rem;
-  width: 12px;
-  height: 12px;
+  width: toRem(12px);
+  height: toRem(12px);
   border-right: 3px solid transparent;
   border-bottom: 3px solid transparent;
 }
@@ -116,8 +124,8 @@ iframe {
     z-index: 5;
   }
   .react-resizable-handle::after {
-    width: 10px;
-    height: 10px;
+    width: toRem(10px);
+    height: toRem(10px);
     background-color: $cool-grey3;
     border-right: 3px solid white;
     border-bottom: 3px solid white;
@@ -125,14 +133,12 @@ iframe {
 }
 
 @media screen and (max-width: 768px) {
-  html,
-  body {
+  * {
     font-size: 14px;
   }
 }
 @media screen and (max-width: 390px) {
-  html,
-  body {
+  * {
     font-size: 12px;
   }
 }
