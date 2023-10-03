@@ -21,7 +21,7 @@ export default function Space() {
         <Search />
         <UserProfile />
         <GroupSpace title="개인 스페이스 (백엔드 서버 API를 호출)">
-          {GroupItemsByParticipationType('DEFAULT', data, user)}
+          {GroupItemsByParticipationType('OWNER', data, user)}
         </GroupSpace>
         <GroupSpace title="단체 스페이스">
           <GroupSpaceItem
