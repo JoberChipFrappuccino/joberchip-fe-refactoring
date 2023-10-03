@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 @font-face {
   font-family: 'Pretendard-Regular';
   src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -31,7 +33,26 @@
     cursor: pointer;
     color: #aeb9d1;
     &.fontContainer {
+      height: 80px;
+      display: flex;
       flex-direction: column;
+      flex-wrap: nowrap;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      .fontOption {
+        margin-bottom: 10px;
+      }
+      .font1 {
+        font-family: 'Pretendard-Regular';
+      }
+      .font2 {
+        font-family: 'Noto Sans KR', sans-serif;
+      }
+      .font3 {
+        font-family: 'TheJamsil5Bold';
+      }
     }
     &.sizeContainer {
       display: flex;
@@ -146,5 +167,6 @@
 }
 
 .colorOptionActive {
-  border: 1px solid #4c61ff;
+  border: 2px solid $jober-blue;
+  box-sizing: border-box;
 }

@@ -28,7 +28,7 @@ export default function ToolOption(props: ToolOptionProps) {
                 onMouseDown={(e) => {
                   props.handleOptionToggle(e, font.style, 'font')
                 }}
-                className={`${props.toggleButton[font.style] ? styles.optionActive : ''}`}
+                className={`${styles.fontOption} ${props.toggleButton[font.style] ? styles.optionActive : ''}`}
               >
                 {font.label}
               </div>
