@@ -1,3 +1,4 @@
+import { GoogleMapBlockForm } from '@/components/Forms/GoogleMapBlockForm'
 import { ImageBlockForm } from '@/components/Forms/ImageBlockForm'
 import { LinkBlockForm } from '@/components/Forms/LinkBlockForm'
 import { PageBlockForm } from '@/components/Forms/PageBlockForm'
@@ -24,7 +25,7 @@ function getCreateFormComponent({ blockType }: DrawerCreateFormProps) {
     case VIDEO:
       return <VideoBlockForm />
     case MAP:
-      return <h1>GoogleMap block form example</h1>
+      return <GoogleMapBlockForm />
     case PAGE:
       return <PageBlockForm />
     case TEMPLATE:
