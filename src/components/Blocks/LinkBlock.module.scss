@@ -1,26 +1,26 @@
+@import '/src/maxin.scss';
+
 .container {
   width: 100%;
   height: 100%;
   display: flex;
   overflow: hidden;
-  align-items: center;
+  border-radius: 1rem;
   flex-direction: column;
-  border-radius: 0.625rem;
   justify-content: center;
   background-color: white;
-
+  .contentCover {
+    flex: 1;
   .itemBox {
     width: 100%;
     height: 100%;
     display: flex;
-    padding-bottom: 1rem;
-    padding-top: 1.25rem;
-    padding-left: 1.25rem;
+    padding: 1rem;
     .titleUrl {
       display: flex;
-      max-width: 200px;
+      max-width: 12.5rem;
       overflow: hidden;
-      padding-top: 3px;
+      padding-top: 0.1875rem;
       margin-left: 1.25rem;
       flex-direction: column;
       span {
@@ -34,26 +34,45 @@
         &:hover {
           color: #4c61ff;
         }
+        @include mobile {
+          display: none;
+        }
       }
     }
   }
 }
-.footer {
+}
+.container .footer {
+  border: 0;
+  padding: 0;
   width: 100%;
-  height: 50px;
   color: white;
+  outline: none;
   display: flex;
   cursor: pointer;
+  height: 3.125rem;
   background-color: black;
   justify-content: space-between;
-  border-color: transparent;
+  @include mobile {
+    height: 2.125rem;
+  }
   .footerLeft {
     height: 100%;
     display: flex;
     align-items: center;
     padding-left: 1.25rem;
+    @include mobile {
+      font-size: 0.625rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 1.25rem;
+    }
     p {
       padding: 0.5rem 0;
+      @include mobile {
+        padding: 0.5rem 0;
+      }
     }
   }
   .footerright {
@@ -71,22 +90,4 @@
 .cover {
   width: 100%;
   height: 100%;
-}
-
-@media screen and (max-width: 768px) {
-  .titleUrl {
-    a {
-      display: none;
-    }
-  }
-  .footerLeft {
-    font-size: 10px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 1.25rem;
-    p {
-      padding: 0.5rem 0;
-    }
-  }
 }

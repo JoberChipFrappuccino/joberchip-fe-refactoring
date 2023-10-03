@@ -4,6 +4,10 @@
   padding: 0 1.25rem 0 1.25rem;
   justify-content: space-between;
   margin-bottom: 2.5rem;
+  button:hover {
+    transform: scale(0.96);
+    box-shadow: none;
+  }
 }
 
 .actionNavigation button {
@@ -34,10 +38,14 @@
   width: 3.75rem;
   height: 3.75rem;
   display: flex;
-  font-size: 2.25rem;
   color: #e2e6ef;
   align-items: center;
   justify-content: center;
+  svg {
+    display: flex;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
 }
 
 .title {

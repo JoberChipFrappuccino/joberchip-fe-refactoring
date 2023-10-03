@@ -7,17 +7,19 @@ export function LinkBlock({ block, mode }: BlockBaseWithBlockProps<TLink>) {
   return (
     <div className={styles.container}>
       <div className={classNames(mode === 'edit' && 'cover')} />
-      <div className={styles.itemBox}>
-        <BlockLogo logo={block.src} />
-        <div className={styles.titleUrl}>
-          <span>{block.title}</span>
-          {block.w === 1 ? (
-            <a style={{ display: 'none' }} href={block.src}>
-              {block.src}
-            </a>
-          ) : (
-            <a href={block.src}>{block.src}</a>
-          )}
+      <div className={styles.contentCover}>
+        <div className={styles.itemBox}>
+          <BlockLogo logo={block.src} />
+          <div className={styles.titleUrl}>
+            <span>{block.title}</span>
+            {block.w === 1 ? (
+              <a style={{ display: 'none' }} href={block.src}>
+                {block.src}
+              </a>
+            ) : (
+              <a href={block.src}>{block.src}</a>
+            )}
+          </div>
         </div>
       </div>
       {/* // ? : a 태그로 변경 가능할 것 같은데 어떤가용..? */}

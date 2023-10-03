@@ -48,7 +48,7 @@
 .checkbox {
   display: flex;
   &:last-child {
-    margin-top: 14px;
+    margin-top: .875rem;
   }
 }
 
@@ -81,14 +81,14 @@
       bottom: 0;
       right: 0;
       display: flex;
-      width: 30px;
+      width: 3rem;
       position: absolute;
       align-items: center;
       background-color: transparent;
       border-color: transparent;
       cursor: pointer;
       svg {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
         color: #aeb9d1;
       }
     }
