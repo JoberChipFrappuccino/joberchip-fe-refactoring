@@ -6,7 +6,8 @@ body {
   margin: 0;
 }
 
-* {
+html,
+body {
   box-sizing: border-box;
   font-size: 16px;
 }
@@ -133,12 +134,14 @@ iframe {
 }
 
 @media screen and (max-width: 768px) {
-  * {
+  html,
+  body {
     font-size: 14px;
   }
 }
 @media screen and (max-width: 390px) {
-  * {
+  html,
+  body {
     font-size: 12px;
   }
 }
