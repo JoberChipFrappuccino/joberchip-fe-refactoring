@@ -16,7 +16,6 @@
 }
 
 .container {
-  width: 100%;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -32,9 +31,6 @@
     cursor: pointer;
     color: #aeb9d1;
     &.fontContainer {
-      flex-direction: column;
-    }
-    &.alignContainer {
       flex-direction: column;
     }
     &.sizeContainer {

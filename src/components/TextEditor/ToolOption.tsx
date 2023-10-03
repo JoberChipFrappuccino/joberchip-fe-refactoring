@@ -91,7 +91,7 @@ export default function ToolOption(props: ToolOptionProps) {
       {props.type === 'align-options' && (
         <>
           <span className={styles.label}>글자정렬</span>
-          <div className={`${styles.optionContainer} ${styles.alignContainer} `}>
+          <div className={styles.optionContainer}>
             {ALIGN_OPTIONS.map((align, index) => (
               <div
                 key={index}
@@ -100,7 +100,7 @@ export default function ToolOption(props: ToolOptionProps) {
                 }}
                 className={props.blockButton && align.style === props.blockButton ? styles.optionActive : ''}
               >
-                {align.style}
+                {align.text}
               </div>
             ))}
           </div>

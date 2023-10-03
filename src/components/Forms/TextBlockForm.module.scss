@@ -7,9 +7,9 @@
   height: 100%;
   justify-content: space-between;
   box-sizing: border-box;
+  overflow: hidden;
   .formContainer {
     padding: 0 20px 0 20px;
-    width: 100%;
     .label {
       color: $base-black;
     }

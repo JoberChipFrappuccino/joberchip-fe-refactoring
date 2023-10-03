@@ -43,7 +43,7 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <div className={styles.formContainer}>
-        <span className={styles.label}>텍스트 첨부</span>
+        <h3>텍스트 첨부</h3>
         <div
           className={`${styles.editorContainer} ${editorIsOpen ? styles.opened : ''}`}
           onFocus={handleEditorFocus}

@@ -136,9 +136,9 @@ export const TEXT_BGCOLORS_OPTIONS = [
 ]
 
 export const ALIGN_OPTIONS = [
-  { style: 'left', icon: '' },
-  { style: 'center', icon: '' },
-  { style: 'right', icon: '' }
+  { style: 'left', icon: '', text: '왼쪽' },
+  { style: 'center', icon: '', text: '가운데' },
+  { style: 'right', icon: '', text: '오른쪽' }
 ]
 
 export const StyleMap = {
