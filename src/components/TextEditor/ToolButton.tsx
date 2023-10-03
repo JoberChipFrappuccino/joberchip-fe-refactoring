@@ -16,7 +16,7 @@ interface ToolButtonProps {
   toggleButton: Record<string, boolean>
   handleBlockClick: (e: React.MouseEvent, action: string) => void
   handleTogggleClick: (e: React.MouseEvent, action: string) => void
-  handleOptionType: (e: React.MouseEvent, option: string) => void
+  handleOptionType: (e: React.MouseEvent, option: string, label: string) => void
 }
 
 export default function ToolButton(props: ToolButtonProps) {
@@ -35,7 +35,7 @@ export default function ToolButton(props: ToolButtonProps) {
           props.handleTogggleClick(e, props.tool.action)
         } else {
           if (props.tool.option) {
-            props.handleOptionType(e, props.tool.option)
+            props.handleOptionType(e, props.tool.option, props.tool.label)
           }
         }
       }}

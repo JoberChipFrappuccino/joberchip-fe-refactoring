@@ -3,9 +3,10 @@ import {
   SIZE_OPTIONS,
   TEXT_BGCOLORS_OPTIONS,
   TEXT_COLORS_OPTIONS,
-  TOOL_TYPES
+  TOOL_TYPES,
+  optionStyleMaps
 } from '@/constants/textEditorOptions'
-import { RichUtils, type DraftInlineStyle, type EditorState } from 'draft-js'
+import { EditorState, Modifier, RichUtils, type ContentState, type DraftInlineStyle } from 'draft-js'
 import React, { useEffect, useState } from 'react'
 import styles from './ToolBar.module.scss'
 import ToolButton from './ToolButton'
@@ -22,6 +23,7 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
   const [blockButton, setBlockButton] = useState('')
   const [toggleButton, setToggleButton] = useState<Record<string, boolean>>({})
   const [offset, setOffset] = useState(0)
+  const [selectedOption, setselectedOption] = useState('')
 
   const handlePrev = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -32,7 +34,7 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
 
   const handleNext = (e: React.MouseEvent) => {
     e.preventDefault()
-    setOffset(toolWidth * 4)
+    setOffset(toolWidth * 5)
   }
 
   const handleTogggleClick = (e: React.MouseEvent, inlineStyle: string) => {
@@ -47,12 +49,13 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
     setEditorState(RichUtils.toggleBlockType(editorState, blockType))
   }
 
-  const handleOptionType = (e: React.MouseEvent, type: string) => {
+  const handleOptionType = (e: React.MouseEvent, type: string, label: string) => {
     e.preventDefault()
     if (type === optionType) {
       setOptionType('')
     } else {
       setOptionType(type)
+      setselectedOption(label)
     }
   }
 
@@ -98,6 +101,49 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
     setBlockButton(currentBlock.getType())
   }, [editorState])
 
+  const toggleSubOption = (selectedStyle: string, style: string) => {
+    const selection = editorState.getSelection()
+    const currentContent = editorState.getCurrentContent()
+
+    let nextContentState: ContentState = currentContent
+
+    if (
+      selectedOption === style ||
+      selectedOption === 'color' ||
+      (selectedOption === 'textcolor' && style === 'bgcolor') ||
+      (selectedOption === 'bgcolor' && style === 'textcolor')
+    ) {
+      if (style in optionStyleMaps) {
+        const styleMap = optionStyleMaps[style as keyof typeof optionStyleMaps]
+        nextContentState = Object.keys(styleMap).reduce((contentState, color) => {
+          return Modifier.removeInlineStyle(contentState, selection, color)
+        }, currentContent)
+      }
+
+      let nextEditorState = EditorState.push(editorState, nextContentState, 'change-inline-style')
+      const currentStyle = editorState.getCurrentInlineStyle()
+
+      if (selection.isCollapsed()) {
+        nextEditorState = currentStyle.reduce((state, color) => {
+          return RichUtils.toggleInlineStyle(state as EditorState, color as string)
+        }, nextEditorState)
+      }
+
+      if (!currentStyle.has(selectedStyle)) {
+        nextEditorState = RichUtils.toggleInlineStyle(nextEditorState, selectedStyle)
+      }
+
+      setEditorState(nextEditorState)
+    } else {
+      setEditorState(RichUtils.toggleInlineStyle(editorState, selectedStyle))
+    }
+    setselectedOption(style)
+  }
+
+  const handleOptionToggle = (e: React.MouseEvent, selectedStyle: string, style: string) => {
+    e.preventDefault()
+    toggleSubOption(selectedStyle, style)
+  }
   return (
     <>
       <div className={styles.toolbar}>
@@ -128,7 +174,7 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
           </div>
         </div>
         <div
-          className={`${styles.slideButtons} ${styles.nextButton} ${offset < 232 ? styles.show : styles.hidden}`}
+          className={`${styles.slideButtons} ${styles.nextButton} ${offset < 290 ? styles.show : styles.hidden}`}
           onMouseDown={handleNext}
         />
       </div>
@@ -137,6 +183,7 @@ const ToolBar: React.FC<ToolbarProps> = ({ toolWidth, editorState, setEditorStat
           type={optionType}
           toggleButton={toggleButton}
           blockButton={blockButton}
+          handleOptionToggle={handleOptionToggle}
           handle={optionType === 'align-options' ? handleBlockClick : handleTogggleClick}
         />
       )}

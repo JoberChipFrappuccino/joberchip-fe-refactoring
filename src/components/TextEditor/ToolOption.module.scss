@@ -39,8 +39,11 @@
     }
     &.sizeContainer {
       display: flex;
-      gap: 30px;
       justify-content: flex-start;
+      .sizeOption {
+        width: calc(100% / 9);
+        height: 40px;
+      }
     }
     &.colorWrap {
       margin-bottom: 10px;

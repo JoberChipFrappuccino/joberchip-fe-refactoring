@@ -11,12 +11,14 @@ export default function ToolOption({
   type,
   handle,
   blockButton,
-  toggleButton
+  toggleButton,
+  handleOptionToggle
 }: {
   type: string
   handle: (e: React.MouseEvent, value: string) => void
   blockButton: string
   toggleButton: Record<string, boolean>
+  handleOptionToggle: (e: React.MouseEvent, value: string, type: string) => void
 }) {
   return (
     <div className={styles.container}>
@@ -28,7 +30,7 @@ export default function ToolOption({
               <div
                 key={index}
                 onMouseDown={(e) => {
-                  handle(e, font.style)
+                  handleOptionToggle(e, font.style, 'font')
                 }}
                 className={`${toggleButton[font.style] ? styles.optionActive : ''}`}
               >
@@ -45,9 +47,9 @@ export default function ToolOption({
             {SIZE_OPTIONS.map((size, index) => (
               <div
                 key={index}
-                className={`${toggleButton[size] ? styles.optionActive : styles.optionDisable}`}
+                className={`${styles.sizeOption} ${toggleButton[size] ? styles.optionActive : styles.optionDisable}`}
                 onMouseDown={(e) => {
-                  handle(e, size)
+                  handleOptionToggle(e, size, 'size')
                 }}
               >
                 {size.slice(4)}
@@ -67,7 +69,7 @@ export default function ToolOption({
                   toggleButton[colors.style] ? styles.colorOptionActive : ''
                 }`}
                 onMouseDown={(e) => {
-                  handle(e, colors.style)
+                  handleOptionToggle(e, colors.style, 'textcolor')
                 }}
               >
                 가
@@ -81,7 +83,7 @@ export default function ToolOption({
                 key={index}
                 className={`${styles.bgOptions} ${toggleButton[bg.style] ? styles.colorOptionActive : ''}`}
                 onMouseDown={(e) => {
-                  handle(e, bg.style)
+                  handleOptionToggle(e, bg.style, 'bgcolor')
                 }}
               >
                 <div className={`${styles.innerrect} ${bg.className}`}>가</div>

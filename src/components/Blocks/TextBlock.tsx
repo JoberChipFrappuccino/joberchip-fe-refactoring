@@ -23,7 +23,7 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
 
   useEffect(() => {
     try {
-      const descriptionJSON = JSON.parse(block.description)
+      const descriptionJSON = JSON.parse(checkValidation(block.description, '“', '”'))
       setEditorState(EditorState.createWithContent(convertFromRaw(descriptionJSON)))
     } catch (error) {
       console.error('JSON 파싱 중 오류가 발생했습니다:', error)
@@ -49,4 +49,17 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
       </div>
     </div>
   )
+}
+
+// HACK : 임시 함수 , 올바른 데이터가 들어오면 삭제?
+function checkValidation(text: string, ...validator: string[]) {
+  let newText = text
+  let isChaged = false
+  for (let i = 0; i < validator.length; i++) {
+    if (!text.includes(validator[i])) continue
+    newText = newText.split(validator[i]).join('"')
+    isChaged = true
+  }
+  if (!isChaged) return text
+  return newText.slice(1, newText.length - 1)
 }
