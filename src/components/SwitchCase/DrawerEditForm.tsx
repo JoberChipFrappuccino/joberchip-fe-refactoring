@@ -1,3 +1,4 @@
+import { GoogleMapBlockForm } from '@/components/Forms/GoogleMapBlockForm'
 import { ImageBlockForm } from '@/components/Forms/ImageBlockForm'
 import { LinkBlockForm } from '@/components/Forms/LinkBlockForm'
 import { PageBlockForm } from '@/components/Forms/PageBlockForm'
@@ -23,7 +24,7 @@ function getEditFormComponent<T extends BlockType>({ block }: BlockBaseWithBlock
     case VIDEO:
       return <VideoBlockForm block={block} />
     case MAP:
-      return <h1>GoogleMap block form example</h1>
+      return <GoogleMapBlockForm block={block} />
     case PAGE:
       return <PageBlockForm block={block} />
     case TEMPLATE:

@@ -54,8 +54,16 @@ export interface PageBlock extends BlockBase<TPage> {
   url: string
 }
 export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
-  src: string
-  caption: string
+  src: string | undefined
+  blockId: number // 지도 블록의 고유 식별자
+  address: string // 주소 정보
+  latitude: number // 위도
+  longitude: number // 경도
+  x: number // X 좌표
+  y: number // Y 좌표
+  height: number // 블록 높이
+  width: number // 블록 너비
+
 }
 
 export interface EmbedBlock extends BlockBase<TEmbed> {
