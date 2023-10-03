@@ -1,116 +1,133 @@
 @import '/src/variables.scss';
+@import '/src/maxin.scss';
+@import '/src/utils.scss';
+
 .container {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 900px;
-  margin: 40px auto;
-  background-color: white;
-  height: 360px;
-  padding: 30px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  border-radius: 1rem;
-  ul {
-    padding: 0;
-  }
-  li {
-    list-style: none;
-  }
-  .profileCover {
+  justify-content: center;
+  .inner {
     display: flex;
-    .profileImageCover {
-      width: 114px;
-      height: 114px;
-      border-radius: 75px;
-      overflow: hidden;
-      margin-left: 1rem;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+    flex-direction: column;
+    width: 100%;
+    max-width: toRem(900px);
+    background-color: white;
+    padding: toRem(38px);
+    margin: toRem(40px) toRem(20px) 0 toRem(20px);
+    box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.089);
+    border-radius: 1rem;
+    ul {
+      margin: 0;
+      margin-top: 2rem;
+      padding: 0;
     }
-    .profile {
-      flex: 1;
-      padding-left: 1rem;
-      h2 {
-        font-size: 2rem;
-        font-weight: bold;
-        margin: 0;
-        margin-bottom: 1rem;
-      }
-      p {
-        font-size: 1rem;
-        color: grey;
-        margin: 0;
-      }
+    li {
+      list-style: none;
     }
-    .iconCover {
+    .profileCover {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 0.5rem;
-      background-color: $base-white;
-      border-radius: 1rem;
-      cursor: pointer;
-      .icon {
-        width: 1.4rem;
-        height: 1.4rem;
-        fill: $base-black;
+      .profileImageCover {
+        width: toRem(114px);
+        height: toRem(114px);
+        min-width: toRem(114px);
+        border-radius: toRem(57px);
+        overflow: hidden;
+        @include tablet {
+          & {
+            width: toRem(100px);
+            height: toRem(100px);
+            min-width: toRem(100px);
+            border-radius: toRem(50px);
+          }
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
-    }
-    .followCover {
-      display: flex;
-      align-items: center;
-      li span {
-        &:first-child {
+      .profile {
+        flex: 1;
+        padding-left: toRem(64px);
+        h2 {
+          font-size: 2rem;
+          font-weight: bold;
+          margin: 0;
+          margin-bottom: 1rem;
+        }
+        p {
           font-size: 1rem;
-          padding-right: 0.3rem;
           color: grey;
+          margin: 0;
+        }
+      }
+      .iconCover {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+        background-color: $base-white;
+        border-radius: 1rem;
+        cursor: pointer;
+        .icon {
+          width: 1.4rem;
+          height: 1.4rem;
+          fill: $base-black;
+        }
+      }
+      .followCover {
+        display: flex;
+        align-items: center;
+        li span {
+          &:first-child {
+            font-size: 1rem;
+            padding-right: 0.3rem;
+            color: grey;
+          }
+          &:nth-child(2) {
+            font-size: 1rem;
+            margin-right: 1rem;
+          }
+        }
+      }
+      .navCover {
+        display: inline-block;
+        width: fit-content;
+        height: fit-content;
+        background-color: $highlight-blue;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        border-radius: 0.2rem;
+        a {
+          color: $jober-blue;
+          white-space: nowrap;
+        }
+      }
+    }
+    .messageCover {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background-color: #f7f8fa;
+      padding: 2rem 4rem;
+      border-radius: 1rem;
+      li {
+        flex: 1;
+        p {
+          text-align: center;
+          margin: 0;
+          &:first-child {
+            font-size: 1.5rem;
+            padding-bottom: 1rem;
+            font-weight: bold;
+            color: $jober-blue;
+          }
         }
         &:nth-child(2) {
-          font-size: 1rem;
-          margin-right: 1rem;
+          border-left: 1px solid #e6e6e6;
+          border-right: 1px solid #e6e6e6;
         }
-      }
-    }
-    .navCover {
-      display: inline-block;
-      width: fit-content;
-      height: fit-content;
-      background-color: $highlight-blue;
-      padding: 0.5rem;
-      border-radius: 0.2rem;
-      a {
-        color: $jober-blue;
-        white-space: nowrap;
-      }
-    }
-  }
-  .messageCover {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background-color: #f7f8fa;
-    padding: 2rem 4rem;
-    border-radius: 1rem;
-    li {
-      flex: 1;
-      p {
-        text-align: center;
-        margin: 0;
-        &:first-child {
-          font-size: 1.5rem;
-          padding-bottom: 1rem;
-          font-weight: bold;
-          color: $jober-blue;
-        }
-      }
-      &:nth-child(2) {
-        border-left: 1px solid #e6e6e6;
-        border-right: 1px solid #e6e6e6;
       }
     }
   }
@@ -123,10 +140,37 @@
   background-color: transparent;
   cursor: pointer;
 }
+.switchBtn {
+  margin-left: 0.5rem;
+}
 
-@media screen and (max-width: 768px) {
+@include tablet {
   .container {
-    box-shadow: none;
-    border-radius: 0;
+    .inner {
+      padding: toRem(20px);
+      .profileCover {
+        .profile {
+          padding-left: toRem(32px);
+        }
+      }
+    }
+  }
+}
+
+@include mobile {
+  .container {
+    .inner {
+      border: transparent;
+      box-shadow: none;
+      padding: toRem(15px);
+      padding-top: toRem(35px);
+      margin: 0;
+      border-radius: 0;
+      .profileCover {
+        .profile {
+          padding-left: toRem(18px);
+        }
+      }
+    }
   }
 }

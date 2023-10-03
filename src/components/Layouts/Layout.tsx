@@ -29,7 +29,7 @@ export default function Layout() {
     // * HMR을 위해 div로 감싸줍니다.
     <div>
       <div id="portal" />
-      <AntdLayout className={styles.layout} style={{ background: '#fff', height: '100%' }}>
+      <AntdLayout className={styles.layout}>
         <Content>
           <Header />
           <Outlet />

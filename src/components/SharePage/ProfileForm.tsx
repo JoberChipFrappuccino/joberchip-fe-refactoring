@@ -24,7 +24,7 @@ export function ProfileForm() {
   })
 
   return (
-    <div>
+    <>
       <div className={styles.cover}>
         <input //
           className={styles.title}
@@ -53,6 +53,6 @@ export function ProfileForm() {
         />
         {isDescriptionLoading && <Spin />}
       </div>
-    </div>
+    </>
   )
 }
