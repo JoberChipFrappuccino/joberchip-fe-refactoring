@@ -1,4 +1,7 @@
+/* eslint-disable object-shorthand */
 import { useBlockAction } from '@/store/blockAction'
+import { useSharePageStore } from '@/store/sharePage'
+import { getNextYOfLastBlock } from '@/utils/api'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { TiDeleteOutline } from 'react-icons/ti'
 import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
@@ -7,6 +10,7 @@ import ImgThumbnail from '../Ui/ImgThumbnail'
 import styles from './ImageBlockForm.module.scss'
 
 export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
+  const { sharePage } = useSharePageStore()
   const [thumbnail, setThumbnail] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !title || !thumbnail
@@ -22,12 +26,27 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const body = {
-      text: title,
-      src: thumbnail
+    if (drawerMode === 'create') {
+      const body = {
+        x: 0,
+        y: getNextYOfLastBlock(sharePage.children),
+        w: 1,
+        h: 1,
+        title: title,
+        attachedImage: thumbnail
+      }
+      // body에 data를 담아 post 전달 알림창으로 체크
+      alert(JSON.stringify(body))
+      // eslint-disable-next-line no-console
+      console.log('블록들의 상태', block)
+    } else if (drawerMode === 'edit') {
+      const body = {
+        title: title,
+        attachedImage: thumbnail
+      }
+      // body에 data를 담아 post 전달 알림창으로 체크
+      alert(JSON.stringify(body))
     }
-    // body에 data를 담아 post 전달 알림창으로 체크
-    alert(JSON.stringify(body))
   }
 
   const onChangetitle = (e: ChangeEvent<HTMLInputElement>) => {
