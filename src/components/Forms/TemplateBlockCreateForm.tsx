@@ -43,7 +43,6 @@ export function TemplateBlockCreateForm() {
       title: template?.title ?? '',
       description: template?.description ?? ''
     })
-    // console.log('템플릿 추가 Response :', res)
     setOpenDrawer(false)
   }
 

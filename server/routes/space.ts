@@ -3,11 +3,11 @@ import fs from 'fs'
 import path from 'path'
 const spaceRouter = express.Router()
 
-type Previlige = {
+type privilege = {
   edit: boolean
   delete: boolean
 }
-type SpaceMockData = Record<string, { previlige: Previlige }>
+type SpaceMockData = Record<string, { privilege: privilege }>
 
 spaceRouter.get('/', (req, res) => {
   const userId = req.query.id
@@ -23,8 +23,8 @@ spaceRouter.get('/', (req, res) => {
     return res.status(400).json({ message: 'Invalid user id' })
   }
   // * Privilege check
-  // previlige는 항상 false이고, 사용자 정보를 기반으로 previlige를 변경합니다.
-  data[userId].previlige = {
+  // privilege는 항상 false이고, 사용자 정보를 기반으로 privilege를 변경합니다.
+  data[userId].privilege = {
     edit: false,
     delete: false
   }

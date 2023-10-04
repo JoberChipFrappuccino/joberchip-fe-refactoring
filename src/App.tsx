@@ -15,7 +15,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/temp" element={<TempSharePageLayout />}>
-        <Route path="/temp/space/:spaceId" element={<TempSharePage />} />
+        <Route path="/temp/space/:pageId" element={<TempSharePage />} />
       </Route>
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Space />} />
@@ -23,7 +23,7 @@ export default function App() {
         <Route path="/signin" element={<SignIn />} />
       </Route>
       <Route path="/" element={<SharePageLayout />}>
-        <Route path="/space/:spaceId" element={<SharePage />} />
+        <Route path="/space/:pageId" element={<SharePage />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

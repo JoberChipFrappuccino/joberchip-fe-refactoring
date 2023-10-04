@@ -11,12 +11,11 @@ export type AddTemplateBlockAPIParams = Pick<BlockWith<TTemplate>, 'title' | 'de
 }
 
 export const addTemplateBlockAPI = async (body: AddTemplateBlockAPIParams) => {
-  //   console.log('ADD TEMPLATE BLOCK API BODY : ', body)
-  const response = await backAuthAPI<ResponseBase<BlockWith<TTemplate>>>('/v1/page/{pageId}/templateBlock', {
+  const { pageId, ...res } = body
+  const response = await backAuthAPI<ResponseBase<BlockWith<TTemplate>>>(`/v1/page/${pageId}/templateBlock`, {
     method: 'POST',
-    data: body
+    data: res
   })
-  //   console.log('ADD TEMPLATE BLOCK API RESPONSE : ', response)
   return {
     data: response.data.data,
     status: 'success',

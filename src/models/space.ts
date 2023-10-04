@@ -3,7 +3,7 @@ export interface SharePage {
   pageProfileImage: string
   title: string
   description: string
-  previlige?: {
+  privilege?: {
     edit: boolean
     delete: boolean
   }

@@ -19,21 +19,21 @@ export default function ShareableSpace() {
   const pageSource: PageSource = useServerSideProps(SEO)
   const SSRSpace: SharePage = useServerSideProps(SPACE)
   const { sharePage, loadSharePageFromBack, setSharePage, isLoaded, isFetching, setSharePageMode } = useSharePageStore()
-  const { spaceId } = useParams<Record<string, string>>()
+  const { pageId } = useParams<Record<string, string>>()
 
   useEffect(() => {
     // CASE : CSR
     // react 내부적으로 주소를 이동할 경우 space를 다시 로드합니다.
     // SSR시 데이터가 없을 경우도 여기에서 처리합니다.
     if (!SSRSpace?.pageId) {
-      loadSharePageFromBack(spaceId ?? '')
+      loadSharePageFromBack(pageId ?? '')
       return
     }
 
     // CASE : CSR
     // SSR로 로드한 spaceId와 이동할 space가 다르다면 space를 다시 로드합니다.
-    if (SSRSpace?.pageId !== spaceId) {
-      loadSharePageFromBack(spaceId ?? '')
+    if (SSRSpace?.pageId !== pageId) {
+      loadSharePageFromBack(pageId ?? '')
       return
     }
 
@@ -41,14 +41,14 @@ export default function ShareableSpace() {
     // HACK : 권한은 임시로 업데이트하는 척 합니다.
     const nextSpace: SharePage = {
       ...SSRSpace,
-      previlige: {
+      privilege: {
         edit: true,
         delete: true
       }
     }
-    if (nextSpace.previlige?.edit) setSharePageMode('edit')
+    if (nextSpace.privilege?.edit) setSharePageMode('edit')
     setSharePage(nextSpace)
-  }, [spaceId])
+  }, [pageId])
 
   useEffect(() => {
     // CASE : CSR
@@ -56,17 +56,17 @@ export default function ShareableSpace() {
     if (!isFetching) {
       const nextSpace: SharePage = {
         ...sharePage,
-        previlige: {
+        privilege: {
           edit: true,
           delete: true
         }
       }
-      if (nextSpace.previlige?.edit) setSharePageMode('edit')
+      if (nextSpace.privilege?.edit) setSharePageMode('edit')
       setSharePage(nextSpace)
     }
   }, [isFetching])
 
-  if (sharePage?.pageId !== spaceId) return <div>...loading</div>
+  if (sharePage?.pageId !== pageId) return <div>...loading</div>
 
   return (
     <>

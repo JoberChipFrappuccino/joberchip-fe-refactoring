@@ -16,26 +16,26 @@ interface PageSource {
 }
 
 type Params = {
-  spaceId: string
+  pageId: string
 }
 
 export default function ShareableSpace() {
   const pageSource: PageSource = useServerSideProps(SEO)
   const SSRSpace: SharePage = useServerSideProps(SPACE)
   const { sharePage, loadSharePage, setSharePage, isLoaded, isFetching, setSharePageMode } = useSharePageStore()
-  const { spaceId } = useParams<Params>()
+  const { pageId } = useParams<Params>()
   useEffect(() => {
     // CASE : CSR
     // react 내부적으로 주소를 이동할 경우 space를 다시 로드합니다.
     if (!SSRSpace?.pageId) {
-      loadSharePage(spaceId ?? '')
+      loadSharePage(pageId ?? '')
       return
     }
 
     // CASE : CSR
-    // SSR로 로드한 spaceId와 이동할 space가 다르다면 space를 다시 로드합니다.
-    if (SSRSpace?.pageId !== spaceId) {
-      loadSharePage(spaceId ?? '')
+    // SSR로 로드한 pageId와 이동할 space가 다르다면 space를 다시 로드합니다.
+    if (SSRSpace?.pageId !== pageId) {
+      loadSharePage(pageId ?? '')
       return
     }
 
@@ -43,19 +43,14 @@ export default function ShareableSpace() {
     // HACK : 권한은 임시로 업데이트하는 척 합니다.
     const nextSpace: SharePage = {
       ...SSRSpace,
-      previlige: {
+      privilege: {
         edit: SSRSpace.pageId === 'space1',
         delete: SSRSpace.pageId === 'space1'
       }
     }
-    if (nextSpace.previlige.edit) setSharePageMode('edit')
-    // HACK : width, height를 number로 변환합니다. 10/6 이전까지 backend API연동 후 삭제합니다.
-    nextSpace.children.forEach((block) => {
-      block.w = Number(block.width)
-      block.h = Number(block.height)
-    })
+    if (nextSpace?.privilege?.edit) setSharePageMode('edit')
     setSharePage(nextSpace)
-  }, [spaceId])
+  }, [pageId])
 
   useEffect(() => {
     // CASE : CSR
@@ -63,17 +58,17 @@ export default function ShareableSpace() {
     if (!isFetching) {
       const nextSpace: SharePage = {
         ...sharePage,
-        previlige: {
+        privilege: {
           edit: sharePage.pageId === 'space1',
           delete: sharePage.pageId === 'space1'
         }
       }
-      if (nextSpace.previlige.edit) setSharePageMode('edit')
+      if (nextSpace?.privilege?.edit) setSharePageMode('edit')
       setSharePage(nextSpace)
     }
   }, [isFetching])
 
-  if (sharePage?.pageId !== spaceId) return <div>...loading</div>
+  if (sharePage?.pageId !== pageId) return <div>...loading</div>
 
   return (
     <>
