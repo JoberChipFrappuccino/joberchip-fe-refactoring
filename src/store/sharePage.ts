@@ -1,6 +1,6 @@
 import { getSpaceAPI, getSpaceFromBackAPI } from '@/api/space'
 import { type SharePage } from '@/models/space'
-import to from '@/utils/api'
+import { to } from '@/utils/api'
 import { create } from 'zustand'
 
 interface Privilege {
@@ -61,6 +61,18 @@ export const useSharePageStore = create<SharePageState>((set) => {
       set(() => ({ isFetching: true, isLoaded: true, isFalture: false }))
       const { data } = await to(getSpaceFromBackAPI(pageId))
       if (data) {
+        // HACK : x,y,h,w,가 없을 경우를 대비해서 필터링
+        data.children = data.children.filter((item) => {
+          if (
+            typeof item.x !== 'number' ||
+            typeof item.y !== 'number' ||
+            typeof item.h !== 'number' ||
+            typeof item.w !== 'number'
+          ) {
+            return false
+          }
+          return true
+        })
         set(() => ({ sharePage: { ...data, pageId }, isFetching: false, isLoaded: true, isFalture: false }))
         return true
       }

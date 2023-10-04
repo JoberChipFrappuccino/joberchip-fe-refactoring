@@ -1,4 +1,3 @@
-import { BACK_MOCK_ACCESS_TOKEN } from '@/constants'
 import { type SharePage, type SpaceList } from '@/models/space'
 import { type ResponseBase } from './../utils/api'
 import { authAPI, backAuthAPI } from './api'
@@ -12,12 +11,7 @@ export const getSpaceFromBackAPI = async (pageId: string): Promise<ResponseBase<
     status: number
     message: string
     response: SharePage
-  }>(`/v1/page/${pageId}`, {
-    method: 'GET',
-    headers: {
-      Authorization: localStorage.getItem(BACK_MOCK_ACCESS_TOKEN)
-    }
-  })
+  }>(`/v1/page/${pageId}`)
   return {
     data: data.response,
     status: 'success',

@@ -24,9 +24,11 @@ export function TemplateBlock({ block, mode, preview = false }: TemplateBlockPro
         </div>
       </div>
       {preview ? (
-        <button className={styles.preview} type="button" onClick={() => setOpen(true)}>
-          템플릿 미리 보기
-        </button>
+        <div className={styles.previewBtnCover}>
+          <button className={styles.preview} type="button" onClick={() => setOpen(true)}>
+            템플릿 미리 보기
+          </button>
+        </div>
       ) : (
         <div className={styles.direct}>
           <a href="/">바로 가기</a>

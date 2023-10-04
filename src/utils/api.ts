@@ -11,7 +11,7 @@ export interface ResponseBase<T> {
 /**
  * @description 성공, 실패 여부 메시지를 포함한 API 응답을 반환합니다.
  */
-export default async function to<T>(promise: Promise<ResponseBase<T>>): Promise<ResponseBase<T>> {
+export async function to<T>(promise: Promise<ResponseBase<T>>): Promise<ResponseBase<T>> {
   try {
     return await promise
   } catch (error) {
