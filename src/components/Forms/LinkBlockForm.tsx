@@ -1,4 +1,8 @@
+/* eslint-disable object-shorthand */
+import { addLinkBlockAPI } from '@/api/blocks'
 import { useBlockAction } from '@/store/blockAction'
+import { useSharePageStore } from '@/store/sharePage'
+import { getNextYOfLastBlock } from '@/utils/api'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { TiDeleteOutline } from 'react-icons/ti'
 import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
@@ -6,10 +10,12 @@ import FormButton from '../Ui/Button'
 import styles from './LinkBlockForm.module.scss'
 
 export function LinkBlockForm({ block }: BlockBaseWithBlockFormProps<TLink>) {
+  const { sharePage, setSharePage } = useSharePageStore()
   const [link, setLink] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !link || !title
   const { drawerMode } = useBlockAction()
+  const { setOpenDrawer } = useBlockAction()
 
   const titleValue = block?.title ?? ''
   const linkValue = block?.src ?? ''
@@ -19,14 +25,39 @@ export function LinkBlockForm({ block }: BlockBaseWithBlockFormProps<TLink>) {
     setLink(linkValue ?? '')
   }, [titleValue, linkValue])
 
-  const submitAddHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitAddHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const body = {
-      text: title,
-      url: link
+    const pageId = sharePage.pageId
+    const data = {
+      x: 0,
+      y: getNextYOfLastBlock(sharePage.children),
+      w: 2,
+      h: 2,
+      title: title,
+      link: link,
+      type: 'LINK',
+      visible: true
     }
-    // body에 data를 담아 post 전달 알림창으로 체크
-    alert(JSON.stringify(body))
+    try {
+      if (drawerMode === 'create') {
+        const { data: responseData } = await addLinkBlockAPI(pageId, data)
+        const updatedSharePage = {
+          ...sharePage,
+          children: [...sharePage.children, responseData]
+        }
+        setSharePage(updatedSharePage)
+        setOpenDrawer(false)
+      } else if (drawerMode === 'edit') {
+        await addLinkBlockAPI(pageId, {
+          title: title,
+          link: link
+        })
+        // const newBlocks = [...sharePage.children.push(res.data)]
+        setOpenDrawer(false)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const submitEditHandler = (e: FormEvent<HTMLFormElement>) => {
