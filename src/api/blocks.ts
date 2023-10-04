@@ -22,3 +22,25 @@ export const addTemplateBlockAPI = async (body: AddTemplateBlockAPIParams) => {
     message: '블록을 추가했습니다.'
   }
 }
+
+export type AddLinkBlockParams = {
+  x?: number
+  y?: number
+  w?: number
+  h?: number
+  title: string
+  link: string
+}
+
+export const addLinkBlockAPI = async (pageId: any, body: AddLinkBlockParams) => {
+  const response = await backAuthAPI(`/v1/page/${pageId}/linkBlock`, {
+    method: 'POST',
+    data: body
+  })
+  // eslint-disable-next-line no-console
+  return {
+    data: response.data.response,
+    status: 'success',
+    message: '링크 블록을 추가했습니다.'
+  }
+}
