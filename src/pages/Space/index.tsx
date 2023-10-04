@@ -7,6 +7,7 @@ import { type SpaceList } from '@/models/space'
 import { type User } from '@/models/user'
 import { useUserStore } from '@/store/user'
 import classNames from 'classnames'
+import { Helmet } from 'react-helmet'
 import styles from './Space.module.scss'
 
 export default function Space() {
@@ -18,6 +19,9 @@ export default function Space() {
 
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>Jober Chip</title>
+      </Helmet>
       <div className={styles.cover}>
         <Search />
         <UserProfile />
@@ -28,6 +32,7 @@ export default function Space() {
           <GroupSpaceItem key="group-space" text="자버 회사 소개 스페이스 (임시)" link="/space/space1" />
           {GroupItemsByParticipationType('PARTICIPANT', data, user)}
         </GroupSpace>
+        H
       </div>
     </div>
   )

@@ -3,12 +3,13 @@ import { loadableReady } from '@loadable/component'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { DEFAULT_CACHE_TIME } from './constants'
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      cacheTime: 1000 * 60 * 5, // 5분
+      cacheTime: DEFAULT_CACHE_TIME, // 5분
       retry: 0
     }
   }

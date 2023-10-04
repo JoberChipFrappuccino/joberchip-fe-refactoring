@@ -11,8 +11,8 @@ import { useParams } from 'react-router-dom'
 import styles from './SharePage.module.scss'
 
 interface PageSource {
-  title: Record<string, string>
-  description: Record<string, string>
+  title: string
+  description: string
 }
 
 type Params = {
@@ -68,19 +68,17 @@ export default function ShareableSpace() {
     }
   }, [isFetching])
 
-  if (sharePage?.pageId !== pageId) return <div>...loading</div>
-
   return (
     <>
       <Helmet>
         {/* // TODO : default pageSource + SSR일 경우 두 가지로 분기해야함 */}
-        <title>{pageSource.title['/']}</title>
+        <title>{pageSource.title ?? 'Jober'}</title>
       </Helmet>
       {isLoaded && <Profile />}
       <aside>{<Drawer />}</aside>
       <div className={styles.viewer}>
         <div className={styles.spaceViewer}>
-          <section>{isLoaded && <BlocksViewer />}</section>
+          <section>{sharePage?.pageId === pageId && isLoaded && <BlocksViewer />}</section>
         </div>
       </div>
     </>

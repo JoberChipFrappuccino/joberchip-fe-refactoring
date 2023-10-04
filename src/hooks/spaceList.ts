@@ -1,4 +1,5 @@
 import { fetchSpaceListAPI } from '@/api/space'
+import { DEFAULT_CACHE_TIME } from '@/constants'
 import { SPACE_LIST } from '@/constants/queryKeyConstant'
 import { type SpaceList } from '@/models/space'
 import { to, type ResponseBase } from '@/utils/api'
@@ -9,7 +10,7 @@ interface SpaceListResponse {
 }
 export function useSpaceList(userId: string): ResponseBase<SpaceList[]> & SpaceListResponse {
   const { data: res } = useQuery([SPACE_LIST, userId], () => to(fetchSpaceListAPI()), {
-    staleTime: 1000 * 60 * 60,
+    staleTime: DEFAULT_CACHE_TIME,
     enabled: !!userId
   })
 

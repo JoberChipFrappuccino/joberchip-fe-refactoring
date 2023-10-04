@@ -1,5 +1,5 @@
 import App from '@/App'
-import { SEO, SPACE } from '@/constants'
+import { DEFAULT_CACHE_TIME, SEO, SPACE } from '@/constants'
 import { SSRProvider } from '@/context/ssr'
 import { ChunkExtractor } from '@loadable/server'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -14,12 +14,9 @@ import { getSpaceBySpaceId } from '~/utils/getSpaceById'
 export default async function renderHome(url: string, req: Request, res: Response) {
   const serverSideData: Record<string, unknown> = {}
 
-  serverSideData[SEO] = JSON.stringify({
-    title: {
-      '/': 'jober chip',
-      '/detail': 'jober chip | 누군가의 디테일 페이지'
-    }
-  })
+  console.log('URL :', url)
+
+  serverSideData[SEO] = JSON.stringify({})
   serverSideData[SPACE] = JSON.stringify({}) // CSR시 빈 객체로 초기화
 
   if (url.includes('/temp/space/')) {
@@ -27,13 +24,18 @@ export default async function renderHome(url: string, req: Request, res: Respons
       const pageId = url.split('/temp/space/')[1]
       const { data } = await api(`/v1/page/${pageId}`)
       serverSideData[SPACE] = JSON.stringify(data.response)
+      serverSideData[SEO] = JSON.stringify({ title: data.response.title, description: data.response.description })
     } catch (error) {
       console.error(error)
-      serverSideData[SPACE] = JSON.stringify({})
     }
   } else if (url.includes('/space/')) {
     const spaceId = url.split('/space/')[1]
-    serverSideData[SPACE] = JSON.stringify(getSpaceBySpaceId(spaceId))
+    const reponse = getSpaceBySpaceId(spaceId)
+    serverSideData[SPACE] = JSON.stringify(reponse)
+    serverSideData[SEO] = JSON.stringify({
+      title: 'Jober Chip | Test Page',
+      description: 'The lazy fox jumps over the brown quick dog'
+    })
   }
 
   const webStats = path.resolve(__dirname, './web/loadable-stats.json')
@@ -47,7 +49,7 @@ export default async function renderHome(url: string, req: Request, res: Respons
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
-        cacheTime: 1000 * 60 * 5, // 5분
+        cacheTime: DEFAULT_CACHE_TIME, // 5분
         retry: 0
       }
     }
