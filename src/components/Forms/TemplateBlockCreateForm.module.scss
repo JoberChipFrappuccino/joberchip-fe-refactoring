@@ -1,5 +1,6 @@
 @import '/src/variables.scss';
 @import '/src/utils.scss';
+@import '/src/maxin.scss';
 .container {
   display: flex;
   height: 100%;
@@ -23,6 +24,14 @@
       box-sizing: content-box;
       border: 3px solid $jober-blue;
       height: calc(auto - 5px);
+    }
+  }
+  .formBtn {
+    min-height: toRem(76px);
+    @include tablet {
+      & {
+        min-height: toRem(60px);
+      }
     }
   }
 }

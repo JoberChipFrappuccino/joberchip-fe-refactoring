@@ -1,7 +1,7 @@
 import { fetchSpaceListAPI } from '@/api/space'
 import { SPACE_LIST } from '@/constants/queryKeyConstant'
 import { type SpaceList } from '@/models/space'
-import to, { type ResponseBase } from '@/utils/api'
+import { to, type ResponseBase } from '@/utils/api'
 import { useQuery } from '@tanstack/react-query'
 
 interface SpaceListResponse {
