@@ -1,12 +1,15 @@
+import { useBlockAction } from '@/store/blockAction'
 import { Autocomplete, GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
 import { Input } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { type SearchProps } from 'antd/es/input/Search'
+import React, { useEffect, useState, type FormEvent } from 'react'
 import { SkeletonTheme } from 'react-loading-skeleton'
 import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
+import FormButton from '../Ui/Button'
 import styles from './ImageBlockForm.module.scss'
 
 const { Search } = Input
-
+// Todo 인풋창으로 주소 만들어서 안적히면 빈문자 백앤드로 보내기. 지도 api 연동 준 함수로 쓰되 x,높이, 임의값으로 하기
 export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>) {
   const apikey = process.env.REACT_APP_GOOGLE_MAPS_API
   // console.log(process.env.REACT_APP_GOOGLE_MAPS_API)
@@ -15,33 +18,47 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
     libraries: ['places']
   })
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true) // 초기값을 true로 설정
+
+  const onSearch: SearchProps['onSearch'] = (
+    value: string,
+    event?:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLElement, MouseEvent>
+      | React.KeyboardEvent<HTMLInputElement>
+      | undefined,
+    info?: { source: any }
+  ) => {}
+
   const [center, setCenter] = useState({
-    lat: 37.5642135,
-    lng: 127.0016985
+    lat: block?.latitude ?? 37.5642135,
+    lng: block?.longitude ?? 127.0016985,
+    address: block?.address ?? ''
   })
+  const [query, setQuery] = useState('')
 
   const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null)
   const [isLoading, setIsLoading] = useState(true) // 로딩 상태 추가
-
+  const { drawerMode } = useBlockAction()
   const onAutocompleteLoad = (autocompleteParam: google.maps.places.Autocomplete) => {
     setAutocomplete(autocompleteParam)
   }
 
   const onAutocompletePlaceChanged = () => {
-    if (autocomplete !== null) {
-      const place = autocomplete.getPlace()
-      if (place.geometry?.location) {
-        const newLat = place.geometry.location.lat()
-        const newLng = place.geometry.location.lng()
-        // console.log(place)
-        // console.log(newLat)
-        // console.log(newLng)
-        setCenter({
-          lat: newLat,
-          lng: newLng
-        })
-      }
-    }
+    if (autocomplete === null) return
+    const place = autocomplete.getPlace()
+    if (!place.geometry?.location) return
+
+    const newLat = place.geometry.location.lat()
+    const newLng = place.geometry.location.lng()
+    // const address = place.formatted_address
+
+    setCenter((prev) => ({
+      ...prev,
+      lat: newLat,
+      lng: newLng
+    }))
+    setIsButtonDisabled(false)
   }
 
   useEffect(() => {
@@ -61,10 +78,21 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
     }
   }
 
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const body = {
+      latitude: center.lat,
+      longitude: center.lng,
+      address: center.address
+    }
+    // body에 data를 담아 post 전달 알림창으로 체크
+    alert(JSON.stringify(body))
+  }
+
   return (
     <div className={styles.container}>
-      <form className={styles.formBox}>
-        <div className={styles.forms}>
+      <form className={styles.formBox} onSubmit={submitHandler}>
+        <div>
           {isLoading ? (
             <SkeletonTheme>{/* 로딩 중에만 Skeleton 테마 렌더링 */}</SkeletonTheme>
           ) : (
@@ -79,9 +107,18 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
                 <Search
                   placeholder="장소를 입력하세요"
                   loading={isLoading}
-                  defaultValue=""
+                  className={styles.formBoxs}
+                  defaultValue={query}
                   onPressEnter={(e) => {
                     handleSearchEnter(e)
+                  }}
+                  allowClear
+                  enterButton="Search"
+                  size="large"
+                  onSearch={onSearch}
+                  onChange={(e) => {
+                    if (e.target.value === '') setIsButtonDisabled(true)
+                    setQuery(e.target.value)
                   }}
                 />
               </Autocomplete>
@@ -101,6 +138,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
             </>
           )}
         </div>
+        <FormButton title={drawerMode === 'create' ? '지도 추가하기' : '지도 수정하기'} event={isButtonDisabled} />
       </form>
     </div>
   )
