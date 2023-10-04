@@ -41,12 +41,12 @@ export default function ShareableSpace() {
     // HACK : 권한은 임시로 업데이트하는 척 합니다.
     const nextSpace: SharePage = {
       ...SSRSpace,
-      previlige: {
+      privilege: {
         edit: true,
         delete: true
       }
     }
-    if (nextSpace.previlige?.edit) setSharePageMode('edit')
+    if (nextSpace.privilege?.edit) setSharePageMode('edit')
     setSharePage(nextSpace)
   }, [spaceId])
 
@@ -56,12 +56,12 @@ export default function ShareableSpace() {
     if (!isFetching) {
       const nextSpace: SharePage = {
         ...sharePage,
-        previlige: {
+        privilege: {
           edit: true,
           delete: true
         }
       }
-      if (nextSpace.previlige?.edit) setSharePageMode('edit')
+      if (nextSpace.privilege?.edit) setSharePageMode('edit')
       setSharePage(nextSpace)
     }
   }, [isFetching])

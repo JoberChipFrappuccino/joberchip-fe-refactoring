@@ -1,11 +1,11 @@
 import fs from 'fs'
 import path from 'path'
 
-type Previlige = {
+type Privilege = {
   edit: boolean
   delete: boolean
 }
-type SpaceMockData = Record<string, { previlige: Previlige }>
+type SpaceMockData = Record<string, { privilege: Privilege }>
 
 export function getSpaceBySpaceId(spaceId: string) {
   const data: SpaceMockData = JSON.parse(
@@ -18,7 +18,7 @@ export function getSpaceBySpaceId(spaceId: string) {
   // * Privilege check
   // 사용자 아이디가 없으면 권한 없음
 
-  data[spaceId].previlige = {
+  data[spaceId].privilege = {
     edit: false,
     delete: false
   }

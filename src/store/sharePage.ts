@@ -18,7 +18,7 @@ interface SharePageState {
   loadSharePageFromBack: (pageId: string) => Promise<boolean>
   addBlock: (section_id: string, options: object) => Promise<boolean>
   removeBlock: (section_id: string, block_id: string) => Promise<boolean>
-  setPrivilege: (previlige: Privilege) => void
+  setPrivilege: (privilege: Privilege) => void
   removeBlockById: (blockId: string) => void
   setSharePage: (space: SharePage) => void
 }
@@ -34,7 +34,7 @@ export const useSharePageStore = create<SharePageState>((set) => {
       },
       title: '',
       description: '',
-      previlige: {
+      privilege: {
         edit: false,
         delete: false
       },
@@ -83,7 +83,7 @@ export const useSharePageStore = create<SharePageState>((set) => {
       set(() => ({ sharePage: space, isLoaded: true, isFalture: false }))
     },
     setPrivilege: (privilege: Privilege) => {
-      set((state) => ({ ...state, sharePage: { ...state.sharePage, previlige: privilege } }))
+      set((state) => ({ ...state, sharePage: { ...state.sharePage, privilege } }))
     },
     removeBlockById: async (blockId: string) => {
       set((state) => {

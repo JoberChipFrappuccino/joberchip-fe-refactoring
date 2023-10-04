@@ -21,20 +21,21 @@ export function BlocksViewer() {
   const { sharePage, setSharePage, mode } = useSharePageStore()
   const [grid, setGridLayout] = useState({
     breakpoints: 'lg',
-    layouts: { lg: getBlockLayout(sharePage.children, mode) } // , md: layout, sm: layout, xs: layout, xxs: layout
+    layouts: { lg: getBlockLayout(sharePage.children, 'edit') } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
   const [viewModeGrid, setViewModeGrid] = useState({
     breakpoints: 'lg',
     layouts: { lg: getBlockLayout(sharePage.children, 'view') } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
+
   const { activeBlockId, setActiveBlockId } = useBlockAction()
   useDebounce(grid.layouts.lg, LAYOUT_DEBOUNCE_TIME, (nextLayout) => {
-    // TODO : 백엔드에 변경된 nextLayout을 줍니당.
+    // TODO : 백엔드에 변경된 nextLayout을 줍니
     // console.log('layout changed', nextLayout)
   })
 
   useEffect(() => {
-    const nextLayout = getBlockLayout(sharePage.children, mode)
+    const nextLayout = getBlockLayout(sharePage.children, 'edit')
     setGridLayout(() => ({ breakpoints: 'lg', layouts: { lg: nextLayout } }))
     const nextViewLayout = getBlockLayout(
       sharePage.children.filter((item) => !item.visible),
@@ -56,7 +57,6 @@ export function BlocksViewer() {
         onWidthChange={(width, _margin, cols) => {
           if (width > 768) setMargin(40)
           else setMargin(18)
-
           setRowHeight(getBlockHeightRatio(width, cols))
         }}
         onLayoutChange={(layout, _layouts) => {
@@ -92,7 +92,7 @@ export function BlocksViewer() {
       </ResponsiveGridLayout>
       {/* * Deprecated * */}
       {/* <BlockActionBar isActive={activeBlockId !== ''} /> */}
-      <SpaceActionBar isActive={activeBlockId === ''} />
+      {mode === 'edit' && <SpaceActionBar isActive={activeBlockId === ''} />}
     </div>
   )
 }
@@ -121,10 +121,10 @@ function sortLayout(layout: BlockItem[]): Layout[] {
 
 function getBlockLayout(blocks: SharePage['children'], mode: SharePageMode): Layout[] {
   return blocks.map((block) => {
-    const { objectId: blockId, ...rest } = block
+    const { objectId, ...rest } = block
     return {
-      blockId,
-      i: blockId,
+      objectId,
+      i: objectId,
       isDraggable: mode !== 'view',
       isResizable: mode !== 'view',
       static: false, // ?? : 고정 여부 확인이 필요합니다.

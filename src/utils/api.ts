@@ -36,7 +36,7 @@ export async function to<T>(promise: Promise<ResponseBase<T>>): Promise<Response
 export function getNextYOfLastBlock(blocks: SharePage['children']) {
   let lastOfY = 0
   for (let i = 0; i < blocks.length; i++) {
-    if (lastOfY < blocks[i].y) lastOfY = blocks[i].y
+    if (lastOfY < blocks[i].y + blocks[i].h) lastOfY = blocks[i].y + blocks[i].h
   }
   return lastOfY + 1
 }
