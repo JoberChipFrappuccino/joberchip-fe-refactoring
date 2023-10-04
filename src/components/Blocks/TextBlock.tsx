@@ -23,7 +23,7 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
 
   useEffect(() => {
     try {
-      const descriptionJSON = JSON.parse(checkValidation(block.description, '“', '”'))
+      const descriptionJSON = JSON.parse(checkValidation(block.src, '“', '”'))
       setEditorState(EditorState.createWithContent(convertFromRaw(descriptionJSON)))
     } catch (error) {
       console.error('JSON 파싱 중 오류가 발생했습니다:', error)

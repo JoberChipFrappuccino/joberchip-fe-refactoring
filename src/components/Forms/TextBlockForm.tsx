@@ -12,7 +12,7 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   const [editableBlock, setEditableBlock] = useState<EditorState>(EditorState.createEmpty())
   const { drawerMode, setOpenDrawer } = useBlockAction()
   const [isButtonDisabled, setisButtonDisabled] = useState(true)
-  const [textValue] = useState(block?.description ?? '')
+  const [textValue] = useState(block?.src ?? '')
 
   useEffect(() => {
     if (drawerMode === 'create') {

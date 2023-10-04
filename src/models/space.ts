@@ -3,7 +3,7 @@ export interface SharePage {
   pageProfileImage: string
   title: string
   description: string
-  previlige: {
+  previlige?: {
     edit: boolean
     delete: boolean
   }
@@ -34,7 +34,7 @@ export type BlockBase<T extends BlockType> = {
 }
 
 export interface TextBlock extends BlockBase<TText> {
-  description: string
+  src: string
 }
 
 export interface ImageBlock extends BlockBase<TImage> {
@@ -63,7 +63,6 @@ export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
   y: number // Y 좌표
   height: number // 블록 높이
   width: number // 블록 너비
-
 }
 
 export interface EmbedBlock extends BlockBase<TEmbed> {
@@ -106,5 +105,6 @@ export type BlockWith<T> = //
 export interface SpaceList {
   spaceId: string
   mainPageId: string
+  mainPageTitle: string
   participationType: ParticipationType
 }

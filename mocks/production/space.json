@@ -101,7 +101,7 @@
         "x": 0,
         "height": 1,
         "width": 2,
-        "type": "template",
+        "type": "TEMPLATE",
         "templateId": "template_1_1",
         "title": "재직 증명서",
         "description": "자버 재직 증명서",
