@@ -62,11 +62,6 @@ export default function ShareableSpace() {
         }
       }
       if (nextSpace.previlige?.edit) setSharePageMode('edit')
-      // HACK : width, height를 number로 변환합니다. 10/6 이전까지 backend API연동 후 삭제합니다.
-      nextSpace.children.forEach((block) => {
-        block.w = Number(block.width)
-        block.h = Number(block.height)
-      })
       setSharePage(nextSpace)
     }
   }, [isFetching])

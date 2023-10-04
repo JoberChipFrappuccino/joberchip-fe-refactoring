@@ -21,11 +21,11 @@ export default function Space() {
       <div className={styles.cover}>
         <Search />
         <UserProfile />
-        <GroupSpace title="개인 스페이스 (백엔드 서버 API를 호출)">
+        <GroupSpace key="personal-space" title="개인 스페이스 (백엔드 서버 API를 호출)">
           {GroupItemsByParticipationType('OWNER', data, user)}
         </GroupSpace>
         <GroupSpace title="단체 스페이스">
-          <GroupSpaceItem text="자버 회사 소개 스페이스 (임시)" link="/space/space1" />
+          <GroupSpaceItem key="group-space" text="자버 회사 소개 스페이스 (임시)" link="/space/space1" />
           {GroupItemsByParticipationType('PARTICIPANT', data, user)}
         </GroupSpace>
       </div>
@@ -40,9 +40,9 @@ function GroupItemsByParticipationType(type: ParticipationType, spaceList: Space
       return (
         <>
           <GroupSpaceItem
-            key={space.spaceId}
+            key={`${type}-item-${space.spaceId}`}
             link={`/temp/space/${space.mainPageId}`}
-            text={`${user.username}님의 스페이스, id : ${space.mainPageId}`}
+            text={space.mainPageTitle}
           />
           <div className={classNames(spaces.length - 1 !== i && styles.divider)} />
         </>

@@ -1,5 +1,5 @@
 import { getUserInfoAPI, signInAPI } from '@/api/user'
-import { ACCESS_TOKEN } from '@/constants'
+import { ACCESS_TOKEN, BACK_MOCK_ACCESS_TOKEN } from '@/constants'
 import { type User } from '@/models/user'
 import { create } from 'zustand'
 
@@ -57,6 +57,7 @@ export const useUserStore = create<UserState>((set) => {
     signOut: () => {
       // todo : logout API있다면 호출합니다.
       localStorage.removeItem(ACCESS_TOKEN)
+      localStorage.removeItem(BACK_MOCK_ACCESS_TOKEN)
       set((state) => {
         const user: User = {
           userId: '',
