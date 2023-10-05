@@ -1,8 +1,10 @@
 import { createPageAPI } from '@/api/page'
 import { editPageProfileAPI } from '@/api/space'
+import { BLOCK_SIZE } from '@/constants/blockSizeConstant'
+import { PAGE } from '@/constants/blockTypeConstant'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
-import { getNextYOfLastBlock } from '@/utils/api'
+import { getNextYOfLastBlock, to } from '@/utils/api'
 import { toast } from '@/utils/toast'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
@@ -18,7 +20,7 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
   const [parentPageTitle, setParentPageTitle] = useState<string>('')
   const [isLocationVisible, setLocationVisible] = useState<boolean>(false)
   const [treeLayoutToggle, setTreeLayoutToggle] = useState<boolean>(false)
-  const { drawerMode } = useBlockAction()
+  const { drawerMode, setOpenDrawer } = useBlockAction()
   const isButtonDisabled = !title || !description || !location
 
   const titleValue = block?.title
@@ -43,16 +45,12 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
         parentPageId,
         x: 0,
         y: getNextYOfLastBlock(sharePage.children),
-        w: 2,
-        h: 2
+        w: BLOCK_SIZE[PAGE].minWidth,
+        h: BLOCK_SIZE[PAGE].minHeight
       }
-      createPageAPI(body)
-        .then(({ message }) => {
-          alert(message)
-        })
-        .catch(({ message }) => {
-          alert(message)
-        })
+      to(createPageAPI(body)).then((res) => {
+        toast(res.message, res.status, { autoClose: 500 })
+      })
     } else {
       const form = new FormData()
       form.append('title', title)
@@ -62,6 +60,7 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
         toast(res.message, res.status, { autoClose: 500 })
       })
     }
+    setOpenDrawer(false)
   }
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {

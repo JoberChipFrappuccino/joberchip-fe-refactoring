@@ -32,6 +32,9 @@
         margin-left: 1.25rem;
         flex-direction: column;
         text-align: start;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         h3 {
           margin: 0;
           display: flex;

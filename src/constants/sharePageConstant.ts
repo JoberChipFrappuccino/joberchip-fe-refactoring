@@ -1,4 +1,5 @@
 export const LAYOUT_DEBOUNCE_TIME = 7000
+export const USER_PROFILE_DEVOUNCE_TIME = 2000
 export const BREAKPOINTS = { lg: 1200 }
 
 export const TEMPLATE_SEARCH_BOX_OPTIONS = [

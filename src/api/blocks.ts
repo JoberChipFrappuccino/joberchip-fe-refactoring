@@ -1,6 +1,49 @@
 import { type BlockWith } from '@/models/space'
-import { type ResponseBase } from '@/utils/api'
 import { backAuthAPI } from './api'
+
+export type addGoogleMapBlockParams = {
+  x: number
+  y: number
+  w: number
+  h: number
+  address?: string
+  latitude: number
+  longitude: number
+}
+
+/**
+ * @description 지도 블럭 생성 API
+ * @see https://www.notion.so/ee4e2a88bd384a2ab031fc5593fbc93a
+ */
+export const addGoogleMapBlockAPI = async (pageId: any, body: addGoogleMapBlockParams) => {
+  const response = await backAuthAPI(`/v1/page/${pageId}/mapBlock`, {
+    method: 'POST',
+    data: body
+  })
+  return {
+    data: response.data.response,
+    status: 'success',
+    message: '구글 맵 블록을 추가했습니다.'
+  }
+}
+
+export type editGoogleMapBlockParams = {
+  address?: string
+  latitude: number
+  longitude: number
+}
+
+export const editGoogleMapBlockAPI = async (pageId: any, blockId: any, body: editGoogleMapBlockParams) => {
+  const response = await backAuthAPI(`/v1/page/${pageId}/mapBlock/${blockId}`, {
+    method: 'PUT',
+    data: body
+  })
+  return {
+    data: response.data.response,
+    status: 'success',
+    message: '구글 맵 블록을 수정했습니다.'
+  }
+}
 
 export type AddTemplateBlockAPIParams = Pick<BlockWith<TTemplate>, 'title' | 'description'> & {
   pageId: string
@@ -15,12 +58,13 @@ export type AddTemplateBlockAPIParams = Pick<BlockWith<TTemplate>, 'title' | 'de
  */
 export const addTemplateBlockAPI = async (body: AddTemplateBlockAPIParams) => {
   const { pageId, ...res } = body
-  const response = await backAuthAPI<ResponseBase<BlockWith<TTemplate>>>(`/v1/page/${pageId}/templateBlock`, {
+  const { data } = await backAuthAPI(`/v1/page/${pageId}/templateBlock`, {
     method: 'POST',
     data: res
   })
+
   return {
-    data: response.data.data,
+    data: data.response,
     status: 'success',
     message: '블록을 추가했습니다.'
   }

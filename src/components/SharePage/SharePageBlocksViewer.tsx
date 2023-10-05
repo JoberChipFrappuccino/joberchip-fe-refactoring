@@ -33,7 +33,7 @@ export function BlocksViewer() {
 
   const { activeBlockId, setActiveBlockId } = useBlockAction()
   useDebounce(grid.layouts.lg, LAYOUT_DEBOUNCE_TIME, (nextLayout) => {
-    // TODO : 백엔드에 변경된 nextLayout을 줍니다.
+    // WARN : 최초 랜더링시에도 호출되는 문제가 있습니다! (최초 랜더링시에는 호출되지 않아야 합니다.)
     to(fetchBlockPosition(sharePage.pageId, convertLayoutToBlockParams(sharePage.children, nextLayout))).then((res) => {
       toast(res.message, res.status, { autoClose: 500 })
     })

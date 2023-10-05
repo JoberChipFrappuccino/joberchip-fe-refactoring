@@ -44,11 +44,8 @@ export function UserProfile() {
         >
           임시 로그아웃 버튼
         </button>
-        <Link to="/space/space1" className={styles.mySpaceBtn}>
-          내 스페이스 바로가기 (프론트 서버 API를 호출)
-        </Link>
         <Link to={`/temp/space/${myPersonalSpace?.mainPageId}` ?? '/'} className={styles.mySpaceBtn}>
-          내 스페이스 바로가기 (백엔드 서버 API를 호출)
+          내 스페이스 바로가기
         </Link>
         <button type="button" className={styles.addSpaceBtn} onClick={handleOnClickCreateSpace}>
           <img src="/add_circle.png" alt="add circle icon" />

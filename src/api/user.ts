@@ -18,7 +18,7 @@ export const signInAPI = async (user: ReqeustUserData): Promise<LoginResponse> =
   try {
     const { data } = await authAPI<User>('/api/auth/signin', {
       method: 'POST',
-      data: JSON.stringify(user)
+      data: user
     })
     return {
       data,
