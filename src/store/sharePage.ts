@@ -74,7 +74,6 @@ export const useSharePageStore = create<SharePageState>((set) => {
     setSharePage: (space: SharePage) => {
       set(() => ({ sharePage: space, isLoaded: true, isFalture: false }))
     },
-
     removeBlockById: async (blockId: string) => {
       set((state) => {
         for (let i = 0; i < state.sharePage.children.length; i++) {

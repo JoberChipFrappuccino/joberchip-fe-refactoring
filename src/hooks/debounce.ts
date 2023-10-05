@@ -22,7 +22,7 @@ export function useDebounce<T extends object | string>(
   return debouncedValue
 }
 
-function checkSameValue(value: string | object, nextValue: string | object) {
+export function checkSameValue(value: string | object, nextValue: string | object) {
   if (typeof value === 'object') {
     return JSON.stringify(value) === JSON.stringify(nextValue)
   }

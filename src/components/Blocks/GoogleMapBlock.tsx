@@ -13,7 +13,6 @@ interface Props {
 export function GoogleMapBlock({ block, mode }: BlockBaseWithBlockProps<TMap>) {
   const location: Props = block?.src ? JSON.parse(block.src.replace(/\\/g, '')) : {}
   // eslint-disable-next-line no-console
-  console.log(location)
   const apikey = process.env.REACT_APP_GOOGLE_MAPS_API
   // console.log(process.env.REACT_APP_GOOGLE_MAPS_API)
   const { isLoaded } = useJsApiLoader({

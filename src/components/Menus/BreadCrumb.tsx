@@ -1,30 +1,25 @@
 import { fetchBreadCrumb, type BreadCrumbItems } from '@/api/space'
-import { to } from '@/utils/api'
+import { DEFAULT_CACHE_TIME } from '@/constants'
+import { BREAD_CRUMB } from '@/constants/queryKeyConstant'
 import { toast } from '@/utils/toast'
+import { useQuery } from '@tanstack/react-query'
 import { Breadcrumb } from 'antd'
-import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 export function BreadCrumbBox() {
   const { pageId } = useParams<{ pageId: string }>()
+  const { data } = useQuery([BREAD_CRUMB, pageId ?? ''], () => fetchBreadCrumb(pageId), {
+    staleTime: DEFAULT_CACHE_TIME,
+    enabled: !!pageId
+  })
 
-  const [items, setItems] = useState<BreadCrumbItems[]>([])
+  if (data?.status === 'failure') toast(data?.message, data?.status, { autoClose: 500 })
 
-  useEffect(() => {
-    if (!pageId) {
-      process.env.NODE_ENV === 'development' && console.error('pageId가 없습니다.')
-      return
-    }
-    to(fetchBreadCrumb(pageId)).then((res) => {
-      if (!res.data || res.status === 'failure') {
-        toast(res.message, res.status)
-        return
-      }
-      setItems(convertResponseToAntdBreadCrumb(pageId, res.data))
-    })
-  }, [pageId])
-
-  return <Breadcrumb separator=">" items={items} />
+  return data?.data && pageId ? (
+    <Breadcrumb separator=">" items={convertResponseToAntdBreadCrumb(pageId ?? '', data?.data)} />
+  ) : (
+    <div>loading...</div>
+  )
 }
 
 function convertResponseToAntdBreadCrumb(pageId: string, res: BreadCrumbItems): BreadCrumbItems[] {
