@@ -1,3 +1,4 @@
+import { TOAST_AUTO_CLOSE_TIME } from '@/constants'
 import { toast as reactToast, type ToastOptions } from 'react-toastify'
 import { type APIResponseStatus, type ResponseBase } from './api'
 interface ToastPrams {
@@ -8,7 +9,9 @@ interface ToastPrams {
 export function toast(
   message: ToastPrams['message'],
   status: ToastPrams['status'] = 'success',
-  options: ToastPrams['options'] = {}
+  options: ToastPrams['options'] = {
+    autoClose: TOAST_AUTO_CLOSE_TIME
+  }
 ) {
   const type = status === 'failure' ? 'error' : 'success'
   reactToast(message, {

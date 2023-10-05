@@ -1,4 +1,5 @@
 import { useBlockAction } from '@/store/blockAction'
+import { toast } from '@/utils/toast'
 import { Input, Select, Switch } from 'antd'
 import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import FormButton from '../Ui/Button'
@@ -8,7 +9,7 @@ export function TemplateBlockEditForm({ block }: BlockBaseWithBlockFormProps<TTe
   const { setOpenDrawer } = useBlockAction()
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    alert('수정되었습니다. (템플릿 미구현)')
+    toast('수정되었습니다. (템플릿 미구현)')
     setOpenDrawer(false)
   }
 
