@@ -2,7 +2,7 @@ import { BlockCover } from '@/components/SharePage/BlockCover'
 import BlockPortal from '@/components/SharePage/BlockPortal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
-import { BLOCK, PAGE, TEMPLATE } from '@/constants/blockTypeConstant'
+import { BLOCK, EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
@@ -43,6 +43,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
           className={styles.switchBtn}
           defaultChecked={!block.visible}
           onChange={() => {
+            switchToggleAPIByBlockType(block)
             for (let i = 0; i < sharePage.children.length; i++) {
               if (sharePage.children[i].objectId === block.objectId) {
                 sharePage.children[i].visible = !sharePage.children[i].visible
@@ -91,7 +92,10 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
       key: `${block.objectId}-view-block-5`,
       danger: true,
       label: <p className={styles.delBtn}>삭제하기</p>,
-      onClick: () => setConfirmModal(true)
+      onClick: () => {
+        switchDeleteAPIByBlockType(block)
+        setConfirmModal(true)
+      }
     }
 
     switchItems.push(publickSwitchItem)
@@ -183,5 +187,51 @@ function getUniqueDivierItem(key: string) {
   return {
     key,
     type: 'divider'
+  }
+}
+
+function switchToggleAPIByBlockType(block: BlockBase<BlockType>) {
+  switch (block.type) {
+    case TEXT:
+      return null
+    case IMAGE:
+      return null
+    case LINK:
+      return null
+    case PAGE:
+      return null
+    case EMBED:
+      return null
+    case VIDEO:
+      return null
+    case MAP:
+      return null
+    case TEMPLATE:
+      return null
+    default:
+      return null
+  }
+}
+
+function switchDeleteAPIByBlockType(block: BlockBase<BlockType>) {
+  switch (block.type) {
+    case TEXT:
+      return null
+    case IMAGE:
+      return null
+    case LINK:
+      return null
+    case PAGE:
+      return null
+    case EMBED:
+      return null
+    case VIDEO:
+      return null
+    case MAP:
+      return null
+    case TEMPLATE:
+      return null
+    default:
+      return null
   }
 }
