@@ -1,4 +1,7 @@
+import { createPageAPI } from '@/api/page'
 import { useBlockAction } from '@/store/blockAction'
+import { useSharePageStore } from '@/store/sharePage'
+import { getNextYOfLastBlock } from '@/utils/api'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import TreeLayout from '../Tree/TreeLayout'
@@ -6,6 +9,7 @@ import FormButton from '../Ui/Button'
 import styles from './PageBlockForm.module.scss'
 
 export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
+  const { sharePage } = useSharePageStore()
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [location, setLocation] = useState<string>('')
@@ -32,12 +36,21 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const body = {
-      text: title,
+      title,
       description,
-      location: isLocationVisible ? location : ''
+      parentPageId: '11ee6271-c1fe-7114-af3f-0e9d9a5c34b2',
+      x: 0,
+      y: getNextYOfLastBlock(sharePage.children),
+      w: 2,
+      h: 2
     }
-    // body에 data를 담아 post 전달 알림창으로 체크
-    alert(JSON.stringify(body))
+    createPageAPI(body)
+      .then(({ message }) => {
+        alert(message)
+      })
+      .catch(({ message }) => {
+        alert(message)
+      })
   }
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
