@@ -42,13 +42,9 @@ export default function ShareableSpace() {
     // CASE : SSR
     // HACK : 권한은 임시로 업데이트하는 척 합니다.
     const nextSpace: SharePage = {
-      ...SSRSpace,
-      privilege: {
-        edit: SSRSpace.pageId === 'space1',
-        delete: SSRSpace.pageId === 'space1'
-      }
+      ...SSRSpace
     }
-    if (nextSpace?.privilege?.edit) setSharePageMode('edit')
+    if (nextSpace?.privilege === 'EDIT') setSharePageMode('edit')
     setSharePage(nextSpace)
   }, [pageId])
 
@@ -57,13 +53,9 @@ export default function ShareableSpace() {
     // HACK : fetch가 완료되면 페이지 권한을 체크 후 업데트합니다.
     if (!isFetching) {
       const nextSpace: SharePage = {
-        ...sharePage,
-        privilege: {
-          edit: sharePage.pageId === 'space1',
-          delete: sharePage.pageId === 'space1'
-        }
+        ...sharePage
       }
-      if (nextSpace?.privilege?.edit) setSharePageMode('edit')
+      if (nextSpace?.privilege === 'EDIT') setSharePageMode('edit')
       setSharePage(nextSpace)
     }
   }, [isFetching])

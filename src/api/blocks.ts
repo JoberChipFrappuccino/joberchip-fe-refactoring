@@ -9,7 +9,10 @@ export type AddTemplateBlockAPIParams = Pick<BlockWith<TTemplate>, 'title' | 'de
   w: number
   h: number
 }
-
+/**
+ * @description 템플릿 블럭 생성 API
+ * @see  https://www.notion.so/8c67208f17a84c4d9e20bc5ee4a79935
+ */
 export const addTemplateBlockAPI = async (body: AddTemplateBlockAPIParams) => {
   const { pageId, ...res } = body
   const response = await backAuthAPI<ResponseBase<BlockWith<TTemplate>>>(`/v1/page/${pageId}/templateBlock`, {
@@ -31,7 +34,6 @@ export type AddLinkBlockParams = {
   title: string
   link: string
 }
-
 export const addLinkBlockAPI = async (pageId: any, body: AddLinkBlockParams) => {
   const response = await backAuthAPI(`/v1/page/${pageId}/linkBlock`, {
     method: 'POST',

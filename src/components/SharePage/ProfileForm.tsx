@@ -4,6 +4,11 @@ import { useSharePageStore } from '@/store/sharePage'
 import { Spin } from 'antd'
 import { useState } from 'react'
 
+import { editPageProfileAPI } from '@/api/space'
+import { BREAD_CRUMB } from '@/constants/queryKeyConstant'
+import { to } from '@/utils/api'
+import { toast } from '@/utils/toast'
+import { useQueryClient } from '@tanstack/react-query'
 import styles from './ProfileForm.module.scss'
 
 export function ProfileForm() {
@@ -12,14 +17,24 @@ export function ProfileForm() {
   const [isTitleLoading, setIsTitleLoading] = useState(false)
   const [description, setDescription] = useState(sharePage.description)
   const [isDescriptionLoading, setIsDescriptionLoading] = useState(false)
+  const queryClient = useQueryClient()
 
-  useDebounce(title, LAYOUT_DEBOUNCE_TIME, (nextTitle) => {
-    alert('title 변경' + nextTitle)
+  useDebounce(title, LAYOUT_DEBOUNCE_TIME, async (nextTitle) => {
+    const form = new FormData()
+    form.append('title', nextTitle)
+    await to(editPageProfileAPI(sharePage.pageId, form)).then((res) => {
+      queryClient.refetchQueries([BREAD_CRUMB])
+      toast(res.message, res.status, { autoClose: 500 })
+    })
     setIsTitleLoading(false)
   })
 
-  useDebounce(description, LAYOUT_DEBOUNCE_TIME, (nextDescription) => {
-    alert('description 변경' + nextDescription)
+  useDebounce(description, LAYOUT_DEBOUNCE_TIME, async (nextDescription) => {
+    const form = new FormData()
+    form.append('description', nextDescription)
+    await to(editPageProfileAPI(sharePage.pageId, form)).then((res) => {
+      toast(res.message, res.status, { autoClose: 500 })
+    })
     setIsDescriptionLoading(false)
   })
 

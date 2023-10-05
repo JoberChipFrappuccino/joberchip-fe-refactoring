@@ -1,3 +1,4 @@
+import { fetchBlockPosition, type FetchBlockPositionBlocksParam } from '@/api/space'
 import { ViewerBox } from '@/components/SwitchCase/ViewerBox'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { BREAKPOINTS, LAYOUT_DEBOUNCE_TIME } from '@/constants/sharePageConstant'
@@ -5,6 +6,8 @@ import { useDebounce } from '@/hooks/debounce'
 import type { BlockType, SharePage } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
+import { to } from '@/utils/api'
+import { toast } from '@/utils/toast'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type Layout } from 'react-grid-layout'
@@ -30,8 +33,10 @@ export function BlocksViewer() {
 
   const { activeBlockId, setActiveBlockId } = useBlockAction()
   useDebounce(grid.layouts.lg, LAYOUT_DEBOUNCE_TIME, (nextLayout) => {
-    // TODO : 백엔드에 변경된 nextLayout을 줍니
-    // console.log('layout changed', nextLayout)
+    // TODO : 백엔드에 변경된 nextLayout을 줍니다.
+    to(fetchBlockPosition(sharePage.pageId, convertLayoutToBlockParams(sharePage.children, nextLayout))).then((res) => {
+      toast(res.message, res.status, { autoClose: 500 })
+    })
   })
 
   useEffect(() => {
@@ -156,4 +161,25 @@ function updateBlockPosition(changedLayout: Layout[], blocks: SharePage['childre
     return block
   })
   return blocks
+}
+
+function convertLayoutToBlockParams(
+  children: SharePage['children'],
+  layout: Layout[]
+): FetchBlockPositionBlocksParam[] {
+  return layout.map((item) => {
+    const type = children.find((child) => child.objectId === item.i)?.type
+    if (typeof type === 'undefined') {
+      throw new Error('type is undefined')
+    }
+    const { i, x, y, w, h } = item
+    return {
+      blockId: i,
+      blockType: type,
+      x,
+      y,
+      w,
+      h
+    }
+  })
 }

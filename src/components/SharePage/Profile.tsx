@@ -87,7 +87,7 @@ export function Profile() {
             </nav>
           </div>
           <div>
-            {sharePage.privilege?.edit && (
+            {sharePage.privilege === 'EDIT' && (
               <DropDownMenu
                 statefulKeys={[
                   `${sharePage.pageId}-profile-1`,

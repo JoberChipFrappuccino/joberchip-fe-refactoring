@@ -37,7 +37,6 @@ const backAuthAPI = axios.create({
 backAuthAPI.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) ?? localStorage.getItem(BACK_MOCK_ACCESS_TOKEN)
-    config.headers['Content-Type'] = 'application/json; charset=utf-8'
     config.headers.Authorization = token
     return config
   },

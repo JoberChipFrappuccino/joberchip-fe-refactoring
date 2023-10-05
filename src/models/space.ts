@@ -3,11 +3,9 @@ export interface SharePage {
   pageProfileImage: string
   title: string
   description: string
-  privilege?: {
-    edit: boolean
-    delete: boolean
-  }
+  privilege: PrivilegeType
   children: Array<BlockWith<BlockType>>
+  visible?: boolean // 최상위 페이지는 visible속성이 없습니다.
 }
 
 export type BlockType = TText | TImage | TLink | TPage | TEmbed | TVideo | TMap | TTemplate | 'BASE' // HACK : "BASE"는 임시 코드

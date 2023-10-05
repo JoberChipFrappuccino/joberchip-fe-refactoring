@@ -3,11 +3,7 @@ import fs from 'fs'
 import path from 'path'
 const spaceRouter = express.Router()
 
-type privilege = {
-  edit: boolean
-  delete: boolean
-}
-type SpaceMockData = Record<string, { privilege: privilege }>
+type SpaceMockData = Record<string, { privilege: PrivilegeType }>
 
 spaceRouter.get('/', (req, res) => {
   const userId = req.query.id
@@ -24,11 +20,7 @@ spaceRouter.get('/', (req, res) => {
   }
   // * Privilege check
   // privilege는 항상 false이고, 사용자 정보를 기반으로 privilege를 변경합니다.
-  data[userId].privilege = {
-    edit: false,
-    delete: false
-  }
-
+  data[userId].privilege = 'EDIT'
   return res.status(200).json(data[userId])
 })
 
