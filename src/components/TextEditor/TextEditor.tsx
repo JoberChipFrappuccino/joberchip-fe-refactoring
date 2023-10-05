@@ -1,6 +1,6 @@
 import { StyleMap } from '@/constants/textEditorOptions'
 import { Editor, EditorState } from 'draft-js'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import FormButton from '../Ui/Button'
 import styles from './TextEditor.module.scss'
 import ToolBar from './ToolBar'
@@ -8,19 +8,17 @@ import './draft.css'
 
 interface TextEditorProps {
   editorIsOpen: boolean
-  editableBlock: any
-  setEditableBlock: any
   setisButtonDisabled: React.Dispatch<React.SetStateAction<boolean>>
   isButtonDisabled: boolean
+  editorState: EditorState
+  setEditorState: any
 }
 
 export default function TextEditor(props: TextEditorProps) {
-  const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty())
-
   const onChange = (editorState: EditorState) => {
-    setEditorState(editorState)
+    props.setEditorState(editorState)
     if (editorState.getCurrentContent().hasText()) {
-      props.setEditableBlock(editorState)
+      props.setEditorState(editorState)
       props.setisButtonDisabled(false)
     } else {
       props.setisButtonDisabled(true)
@@ -28,8 +26,8 @@ export default function TextEditor(props: TextEditorProps) {
   }
 
   useEffect(() => {
-    props.editableBlock ? setEditorState(props.editableBlock) : setEditorState(EditorState.createEmpty())
-  }, [props.editableBlock])
+    props.editorState ? props.setEditorState(props.editorState) : props.setEditorState(EditorState.createEmpty())
+  }, [props.editorState])
 
   const getBlockStyle = (block: any): string => {
     switch (block.getType()) {
@@ -46,10 +44,12 @@ export default function TextEditor(props: TextEditorProps) {
 
   return (
     <div className={styles.container}>
-      {props.editorIsOpen && <ToolBar editorState={editorState} setEditorState={setEditorState} toolWidth={58} />}
+      {props.editorIsOpen && (
+        <ToolBar editorState={props.editorState} setEditorState={props.setEditorState} toolWidth={58} />
+      )}
       <div className={`${styles.editorContainer}  ${props.editorIsOpen ? styles.focused : ''}`}>
         <Editor
-          editorState={editorState}
+          editorState={props.editorState}
           onChange={onChange}
           placeholder="텍스트를 입력해주세요"
           customStyleMap={StyleMap}

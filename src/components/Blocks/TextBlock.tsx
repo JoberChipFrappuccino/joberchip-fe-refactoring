@@ -29,7 +29,7 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
       console.error('JSON 파싱 중 오류가 발생했습니다:', error)
       setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(PARSE_ERROR_TEXT))))
     }
-  }, [])
+  }, [block.src])
 
   const onchange = () => {
     setEditorState(editorState)
@@ -52,7 +52,7 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
 }
 
 // HACK : 맥 따옴표 제거 임시 함수, 올바른 데이터가 만들어지면 삭제 예정
-function checkValidation(text: string, ...validator: string[]) {
+export function checkValidation(text: string, ...validator: string[]) {
   let newText = text
   let isChaged = false
   for (let i = 0; i < validator.length; i++) {
