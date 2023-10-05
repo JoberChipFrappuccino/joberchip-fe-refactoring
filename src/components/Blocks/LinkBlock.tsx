@@ -22,7 +22,6 @@ export function LinkBlock({ block, mode }: BlockBaseWithBlockProps<TLink>) {
           </div>
         </div>
       </div>
-      {/* // ? : a 태그로 변경 가능할 것 같은데 어떤가용..? */}
       <button type="button" className={styles.footer} onClick={() => (window.location.href = block.src)}>
         <div className={styles.footerLeft}>바로가기</div>
         <div className={styles.footerright} />

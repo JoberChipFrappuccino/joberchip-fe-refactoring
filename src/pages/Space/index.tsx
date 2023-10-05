@@ -25,14 +25,13 @@ export default function Space() {
       <div className={styles.cover}>
         <Search />
         <UserProfile />
-        <GroupSpace key="personal-space" title="개인 스페이스 (백엔드 서버 API를 호출)">
+        <GroupSpace key="personal-space" title="개인 스페이스">
           {GroupItemsByParticipationType('OWNER', data, user)}
         </GroupSpace>
         <GroupSpace title="단체 스페이스">
-          <GroupSpaceItem key="group-space" text="자버 회사 소개 스페이스 (임시)" link="/space/space1" />
+          <GroupSpaceItem key="group-space" text="자버 회사 소개 스페이스" link="/" />
           {GroupItemsByParticipationType('PARTICIPANT', data, user)}
         </GroupSpace>
-        H
       </div>
     </div>
   )

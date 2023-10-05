@@ -1,16 +1,149 @@
+@import '/src/variables.scss';
+@import '/src/maxin.scss';
+
 .container {
-  position: relative;
-  display: flex;
   width: 100%;
   height: 100%;
-  justify-content: center;
-  align-items: center;
-  .view {
-    width: 100%;
-    height: 100%;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  border-radius: 1rem;
+  flex-direction: column;
+  .contentCover {
+    flex: 1;
+    .cover {
+      display: flex;
+      height: 100%;
+      padding: 1rem;
+      .img {
+        width: 100%;
+        height: 100%;
+        max-width: 2.5rem;
+        max-height: 2.5rem;
+        object-fit: cover;
+        @include mobile {
+          display: flex;
+          width: 1.7rem;
+          height: 1.7rem;
+        }
+      }
+      .contentBox {
+        display: flex;
+        margin-left: 1.25rem;
+        flex-direction: column;
+        text-align: start;
+        h3 {
+          margin: 0;
+          display: flex;
+          font-weight: 700;
+          font-size: 0.875rem;
+          padding-top: 0.1875rem;
+          flex-direction: column;
+        }
+        p {
+          margin: 0;
+          display: flex;
+          color: #c9c9c9;
+          font-size: 0.75rem;
+          @include mobile {
+            display: none;
+          }
+        }
+      }
+    }
   }
-  .edit {
-    width: 80%;
-    height: 80%;
+  .direct,
+  .preview {
+    border: 0;
+    padding: 0;
+    color: white;
+    outline: none;
+    display: flex;
+    cursor: pointer;
+    height: 3.125rem;
+    background-color: black;
+    justify-content: space-between;
+    @include mobile {
+      height: 2.125rem;
+    }
+    a {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 1.25rem;
+      @include mobile {
+        font-size: 0.75rem;
+      }
+    }
+  }
+  .previewBtnCover {
+    display: flex;
+    width: 100%;
+    background-color: $cool-grey3;
+    justify-content: flex-end;
+    .preview {
+      display: inline-block;
+      text-align: end;
+      background-color: $cool-grey3;
+      padding-right: 1.25rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .contentBox {
+    p {
+      display: none;
+    }
+  }
+  h3 {
+    font-size: 0.625rem;
+  }
+  .direct,
+  .preview {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 1.25rem;
+  }
+}
+
+.footer {
+  border: 0;
+  padding: 0;
+  width: 100%;
+  color: white;
+  outline: none;
+  display: flex;
+  cursor: pointer;
+  height: 3.125rem;
+  background-color: black;
+  justify-content: space-between;
+  @include mobile {
+    height: 2.125rem;
+  }
+  .footerLeft {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 1.25rem;
+    @include mobile {
+      font-size: 0.625rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 1.25rem;
+    }
+    p {
+      padding: 0.5rem 0;
+      @include mobile {
+        padding: 0.5rem 0;
+      }
+    }
+  }
+  .footerright {
+    display: flex;
+    width: 2.1875rem;
+    background-color: #3b4753;
   }
 }

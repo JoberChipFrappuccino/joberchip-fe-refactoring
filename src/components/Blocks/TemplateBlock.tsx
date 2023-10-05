@@ -16,7 +16,7 @@ export function TemplateBlock({ block, mode, preview = false }: TemplateBlockPro
       <aside className={classNames(mode === 'edit' && 'cover')} />
       <div className={styles.contentCover}>
         <div className={styles.cover}>
-          <img className={styles.img} src={block.iconUrl} alt="template icon" />
+          <img className={styles.img} src={'/template_action_bar_icon.png'} alt="template icon" />
           <div className={styles.contentBox}>
             <h3>{block.title}</h3>
             <p>{block.description}</p>

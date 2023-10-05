@@ -12,5 +12,12 @@
     "username": "waldo",
     "profileImg": "http://34.228.10.85/profile_2.png",
     "accessToken": "token-example:test2@google.com"
+  },
+  "test3@google.com": {
+    "userId": "user3",
+    "email": "test3@google.com",
+    "username": "fredo",
+    "profileImg": "http://34.228.10.85/profile_2.jpg",
+    "accessToken": "token-example:test3@google.com"
   }
 }

@@ -1,4 +1,5 @@
 import { addGoogleMapBlockAPI, editGoogleMapBlockAPI } from '@/api/blocks'
+import { MAP } from '@/constants/blockTypeConstant'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
 import { getNextYOfLastBlock } from '@/utils/api'
@@ -12,15 +13,13 @@ import FormButton from '../Ui/Button'
 import styles from './ImageBlockForm.module.scss'
 
 const { Search } = Input
-// Todo 인풋창으로 주소 만들어서 안적히면 빈문자 백앤드로 보내기. 지도 api 연동 준 함수로 쓰되 x,높이, 임의값으로 하기
 export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>) {
   const apikey = process.env.REACT_APP_GOOGLE_MAPS_API
-  // console.log(process.env.REACT_APP_GOOGLE_MAPS_API)
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: apikey ?? '',
     libraries: ['places']
   })
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true) // 초기값을 true로 설정
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const onSearch: SearchProps['onSearch'] = (
     value: string,
@@ -41,7 +40,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
   const { sharePage, setSharePage } = useSharePageStore()
   const { setOpenDrawer } = useBlockAction()
   const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null)
-  const [isLoading, setIsLoading] = useState(true) // 로딩 상태 추가
+  const [isLoading, setIsLoading] = useState(true)
   const { drawerMode } = useBlockAction()
   const onAutocompleteLoad = (autocompleteParam: google.maps.places.Autocomplete) => {
     setAutocomplete(autocompleteParam)
@@ -56,7 +55,6 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
 
     const newLat = place.geometry.location.lat()
     const newLng = place.geometry.location.lng()
-    // const address = place.formatted_address
 
     setCenter((prev) => ({
       ...prev,
@@ -89,12 +87,12 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
     const data = {
       x: 0,
       y: getNextYOfLastBlock(sharePage.children),
-      w: 2,
+      w: 4,
       h: 2,
       latitude: center.lat,
       longitude: center.lng,
       address,
-      type: 'MAP',
+      type: MAP,
       visible: true
     }
     try {
@@ -112,7 +110,6 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
           longitude: center.lng,
           address
         })
-        // const newBlocks = [...sharePage.children.push(res.data)]
         setOpenDrawer(false)
       }
     } catch (error) {
@@ -143,7 +140,6 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
                 <Search
                   placeholder="장소를 입력하세요"
                   loading={isLoading}
-                  className={styles.formBoxs}
                   defaultValue={query}
                   onPressEnter={(e) => {
                     handleSearchEnter(e)
