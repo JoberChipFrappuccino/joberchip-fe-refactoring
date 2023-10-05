@@ -9,7 +9,6 @@ import { renderToString } from 'react-dom/server'
 import { Helmet } from 'react-helmet'
 import { StaticRouter } from 'react-router-dom/server'
 import { api } from '~/api/api'
-import { getSpaceBySpaceId } from '~/utils/getSpaceById'
 
 export default async function renderHome(url: string, req: Request, res: Response) {
   const serverSideData: Record<string, unknown> = {}
@@ -24,18 +23,23 @@ export default async function renderHome(url: string, req: Request, res: Respons
       const pageId = url.split('/temp/space/')[1]
       const { data } = await api(`/v1/page/${pageId}`)
       serverSideData[SPACE] = JSON.stringify(data.response)
-      serverSideData[SEO] = JSON.stringify({ title: data.response.title, description: data.response.description })
+      serverSideData[SEO] = JSON.stringify({
+        title: data.response.title,
+        description: data.response.description,
+        profileImageLink: data.response.profileImageLink
+      })
     } catch (error) {
       console.error(error)
     }
   } else if (url.includes('/space/')) {
-    const spaceId = url.split('/space/')[1]
-    const reponse = getSpaceBySpaceId(spaceId)
-    serverSideData[SPACE] = JSON.stringify(reponse)
-    serverSideData[SEO] = JSON.stringify({
-      title: 'Jober Chip | Test Page',
-      description: 'The lazy fox jumps over the brown quick dog'
-    })
+    // HACK : MOCK API 임시 코드
+    // const spaceId = url.split('/space/')[1]
+    // const reponse = getSpaceBySpaceId(spaceId)
+    // serverSideData[SPACE] = JSON.stringify(reponse)
+    // serverSideData[SEO] = JSON.stringify({
+    //   title: 'Jober Chip | Test Page',
+    //   description: 'The lazy fox jumps over the brown quick dog'
+    // })
   }
 
   const webStats = path.resolve(__dirname, './web/loadable-stats.json')

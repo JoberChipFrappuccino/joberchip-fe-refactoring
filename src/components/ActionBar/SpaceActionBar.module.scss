@@ -1,12 +1,12 @@
 @import '/src/utils.scss';
 .container {
-  position: sticky;
+  position: fixed;
   display: flex;
   justify-content: space-around;
   align-items: center;
   left: 0;
   right: 0;
-  bottom: 2rem;
+  bottom: 4rem;
   width: toRem(224px);
   height: toRem(50px);
   border: 1px solde block;
@@ -28,7 +28,7 @@
 }
 // * Animation
 .hidden {
-  // bottom: -100px;
+  bottom: -5rem;
   animation: hiddenAnimation 500ms ease-in-out;
   animation-fill-mode: forwards;
 }
@@ -44,6 +44,7 @@
   border-radius: 5px;
   background-color: #4c61ff;
 }
+
 @keyframes hiddenAnimation {
   0% {
     opacity: 1;
