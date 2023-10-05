@@ -72,7 +72,7 @@ export default function ShareableSpace() {
     <>
       <Helmet>
         {/* // TODO : default pageSource + SSR일 경우 두 가지로 분기해야함 */}
-        <title>{pageSource.title ?? 'Jober'}</title>
+        <title>{pageSource.title ? `Jober chip | ${pageSource.title}` : 'Jober'}</title>
       </Helmet>
       {isLoaded && <Profile />}
       <aside>{<Drawer />}</aside>

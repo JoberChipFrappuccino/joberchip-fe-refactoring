@@ -14,7 +14,7 @@ import { getSpaceBySpaceId } from '~/utils/getSpaceById'
 export default async function renderHome(url: string, req: Request, res: Response) {
   const serverSideData: Record<string, unknown> = {}
 
-  console.log('URL :', url)
+  console.log('SSR request url :', url)
 
   serverSideData[SEO] = JSON.stringify({})
   serverSideData[SPACE] = JSON.stringify({}) // CSR시 빈 객체로 초기화

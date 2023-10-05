@@ -1,15 +1,20 @@
 import loadable from '@loadable/component'
 import { Route, Routes } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css'
 import './App.scss'
-const NotFound = loadable(() => import('./pages/NotFound'))
+
+// * Layouts
 const Layout = loadable(() => import('./components/Layouts/Layout'))
 const SharePageLayout = loadable(() => import('./components/Layouts/SpaceLayout'))
+const TempSharePageLayout = loadable(() => import('./components/Layouts/TempSharePageLayout'))
+
+// * Pages
 const Space = loadable(() => import('./pages/Space'))
 const SharePage = loadable(() => import('./pages/SharePage'))
 const SignUp = loadable(() => import('./pages/SignUp'))
 const SignIn = loadable(() => import('./pages/SignIn'))
-const TempSharePageLayout = loadable(() => import('./components/Layouts/TempSharePageLayout'))
 const TempSharePage = loadable(() => import('./pages/TempSharePage'))
+const NotFound = loadable(() => import('./pages/NotFound'))
 
 export default function App() {
   return (
