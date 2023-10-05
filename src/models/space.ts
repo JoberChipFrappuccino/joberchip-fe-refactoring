@@ -3,10 +3,7 @@ export interface SharePage {
   pageProfileImage: string
   title: string
   description: string
-  privilege?: {
-    edit: boolean
-    delete: boolean
-  }
+  privilege: PrivilegeType
   children: Array<BlockWith<BlockType>>
 }
 

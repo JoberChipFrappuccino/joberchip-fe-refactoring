@@ -3,10 +3,6 @@ import { type SharePage } from '@/models/space'
 import { to } from '@/utils/api'
 import { create } from 'zustand'
 
-interface Privilege {
-  edit: boolean
-  delete: boolean
-}
 interface SharePageState {
   sharePage: SharePage // ? Partial<Space> | Space  할까요? Space 할까요?
   isFetching: boolean
@@ -18,7 +14,6 @@ interface SharePageState {
   loadSharePageFromBack: (pageId: string) => Promise<boolean>
   addBlock: (section_id: string, options: object) => Promise<boolean>
   removeBlock: (section_id: string, block_id: string) => Promise<boolean>
-  setPrivilege: (privilege: Privilege) => void
   removeBlockById: (blockId: string) => void
   setSharePage: (space: SharePage) => void
 }
@@ -34,10 +29,7 @@ export const useSharePageStore = create<SharePageState>((set) => {
       },
       title: '',
       description: '',
-      privilege: {
-        edit: false,
-        delete: false
-      },
+      privilege: null,
       children: []
     },
     mode: 'view',
@@ -82,9 +74,7 @@ export const useSharePageStore = create<SharePageState>((set) => {
     setSharePage: (space: SharePage) => {
       set(() => ({ sharePage: space, isLoaded: true, isFalture: false }))
     },
-    setPrivilege: (privilege: Privilege) => {
-      set((state) => ({ ...state, sharePage: { ...state.sharePage, privilege } }))
-    },
+
     removeBlockById: async (blockId: string) => {
       set((state) => {
         for (let i = 0; i < state.sharePage.children.length; i++) {

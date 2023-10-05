@@ -1,14 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 
-type Privilege = {
-  edit: boolean
-  delete: boolean
-}
 type Space = {
   title: string
   description: string
-  privilege: Privilege
+  privilege: PrivilegeType
 }
 
 type SpaceMockData = Record<string, Space>
@@ -24,9 +20,6 @@ export function getSpaceBySpaceId(spaceId: string) {
   // * Privilege check
   // 사용자 아이디가 없으면 권한 없음
 
-  data[spaceId].privilege = {
-    edit: false,
-    delete: false
-  }
+  data[spaceId].privilege = 'EDIT'
   return data[spaceId]
 }
