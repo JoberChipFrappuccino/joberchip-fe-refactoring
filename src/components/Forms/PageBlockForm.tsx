@@ -12,11 +12,11 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
   const { sharePage } = useSharePageStore()
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
-  const [location, setLocation] = useState<string>('')
+  const [parentPageId, setParentPageId] = useState<string>('')
+  const [parentPageTitle, setParentPageTitle] = useState<string>('')
   const [isLocationVisible, setLocationVisible] = useState<boolean>(false)
   const [treeLayoutToggle, setTreeLayoutToggle] = useState<boolean>(false)
   const { drawerMode } = useBlockAction()
-  // const [selectedFile, setSelectedFile] = useState<string>('')
   const isButtonDisabled = !title || !description || !location
 
   const titleValue = block?.title
@@ -26,19 +26,20 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
   useEffect(() => {
     setTitle(titleValue ?? '')
     setDescription(descriptionValue ?? '')
-    setLocation(locationValue ?? '')
+    setParentPageId(locationValue ?? '')
   }, [titleValue, descriptionValue, locationValue])
 
   const toggleLocation = () => {
     setLocationVisible(!isLocationVisible)
     setTreeLayoutToggle(!treeLayoutToggle)
   }
+
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const body = {
       title,
       description,
-      parentPageId: '11ee6271-c1fe-7114-af3f-0e9d9a5c34b2',
+      parentPageId,
       x: 0,
       y: getNextYOfLastBlock(sharePage.children),
       w: 2,
@@ -64,10 +65,9 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
 
   const onSelectTreeNode = (selectedKeys?: React.Key[], info?: any) => {
     const selectedNode = info.selectedNodes[0]
-    if (selectedNode?.key) {
-      // const nodePath = selectedNode.keyPath.map((key: string) => key.toString()).join(' > ')
-      // setSelectedFile(nodePath) // 클릭한 파일의 경로를 상태에 저장
-      setLocation(selectedNode.key)
+    if (selectedNode?.pageId) {
+      setParentPageId(selectedNode.pageId)
+      setParentPageTitle(selectedNode.title)
     }
   }
 
@@ -88,7 +88,7 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
           <div>
             <input
               type="text"
-              value={location}
+              value={parentPageTitle}
               onClick={toggleLocation}
               readOnly
               placeholder="페이지 위치를 설정해주세요."
