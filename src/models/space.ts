@@ -55,7 +55,7 @@ export interface PageBlock extends BlockBase<TPage> {
 }
 export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
   src: string | undefined
-  blockId: number // 지도 블록의 고유 식별자
+  blockId?: number // 지도 블록의 고유 식별자
   address: string // 주소 정보
   latitude: number // 위도
   longitude: number // 경도

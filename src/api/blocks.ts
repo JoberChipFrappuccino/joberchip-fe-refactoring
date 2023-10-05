@@ -50,7 +50,7 @@ export type addGoogleMapBlockParams = {
   y: number
   w: number
   h: number
-  address: string
+  address?: string
   latitude: number
   longitude: number
 }
@@ -68,7 +68,7 @@ export const addGoogleMapBlockAPI = async (pageId: any, body: addGoogleMapBlockP
   }
 }
 export type editGoogleMapBlockParams = {
-  address: string
+  address?: string
   latitude: number
   longitude: number
 }

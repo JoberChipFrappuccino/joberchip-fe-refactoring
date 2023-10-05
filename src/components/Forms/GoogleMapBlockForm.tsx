@@ -47,6 +47,8 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
     setAutocomplete(autocompleteParam)
   }
 
+  const blockId = block?.objectId ?? ''
+
   const onAutocompletePlaceChanged = () => {
     if (autocomplete === null) return
     const place = autocomplete.getPlace()
@@ -105,7 +107,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
         setSharePage(updatedSharePage)
         setOpenDrawer(false)
       } else if (drawerMode === 'edit') {
-        await editGoogleMapBlockAPI(pageId, block?.blockId, {
+        await editGoogleMapBlockAPI(pageId, blockId, {
           latitude: center.lat,
           longitude: center.lng,
           address
