@@ -1,7 +1,9 @@
 import { createPageAPI } from '@/api/page'
+import { editPageProfileAPI } from '@/api/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
 import { getNextYOfLastBlock } from '@/utils/api'
+import { toast } from '@/utils/toast'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import TreeLayout from '../Tree/TreeLayout'
@@ -22,13 +24,11 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
   const titleValue = block?.title
   const descriptionValue = block?.description
   const locationValue = block?.location
-
   useEffect(() => {
     setTitle(titleValue ?? '')
     setDescription(descriptionValue ?? '')
-    setParentPageId(locationValue ?? '')
+    // setParentPageId(locationValue ?? '')
   }, [titleValue, descriptionValue, locationValue])
-
   const toggleLocation = () => {
     setLocationVisible(!isLocationVisible)
     setTreeLayoutToggle(!treeLayoutToggle)
@@ -36,22 +36,32 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const body = {
-      title,
-      description,
-      parentPageId,
-      x: 0,
-      y: getNextYOfLastBlock(sharePage.children),
-      w: 2,
-      h: 2
+    if (drawerMode === 'create') {
+      const body = {
+        title,
+        description,
+        parentPageId,
+        x: 0,
+        y: getNextYOfLastBlock(sharePage.children),
+        w: 2,
+        h: 2
+      }
+      createPageAPI(body)
+        .then(({ message }) => {
+          alert(message)
+        })
+        .catch(({ message }) => {
+          alert(message)
+        })
+    } else {
+      const form = new FormData()
+      form.append('title', title)
+      form.append('description', description)
+      form.append('parentPageId', parentPageId)
+      editPageProfileAPI(block?.objectId ?? '', form).then((res) => {
+        toast(res.message, res.status, { autoClose: 500 })
+      })
     }
-    createPageAPI(body)
-      .then(({ message }) => {
-        alert(message)
-      })
-      .catch(({ message }) => {
-        alert(message)
-      })
   }
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
