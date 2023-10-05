@@ -1,3 +1,4 @@
+import { deleteBlockAPI, deletePageAPI } from '@/api/delete'
 import { BlockCover } from '@/components/SharePage/BlockCover'
 import BlockPortal from '@/components/SharePage/BlockPortal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
@@ -93,7 +94,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
       danger: true,
       label: <p className={styles.delBtn}>삭제하기</p>,
       onClick: () => {
-        switchDeleteAPIByBlockType(block)
+        switchDeleteAPIByBlockType(block, sharePage.pageId)
         setConfirmModal(true)
       }
     }
@@ -213,25 +214,37 @@ function switchToggleAPIByBlockType(block: BlockBase<BlockType>) {
   }
 }
 
-function switchDeleteAPIByBlockType(block: BlockBase<BlockType>) {
+// HACK : 파라메터 상수로 변경 필요
+function switchDeleteAPIByBlockType(block: BlockBase<BlockType>, pageId: string) {
   switch (block.type) {
     case TEXT:
-      return null
+      return deleteBlock('textBlock', block.objectId, pageId)
     case IMAGE:
-      return null
+      return deleteBlock('imageBlock', block.objectId, pageId)
     case LINK:
-      return null
+      return deleteBlock('linkBlock', block.objectId, pageId)
     case PAGE:
-      return null
+      return deleteBlock('pageBlock', block.objectId, pageId)
     case EMBED:
       return null
     case VIDEO:
-      return null
+      return deleteBlock('videoBlock', block.objectId, pageId)
     case MAP:
-      return null
+      return deleteBlock('mapBlock', block.objectId, pageId)
     case TEMPLATE:
-      return null
+      return deleteBlock('templateBlock', block.objectId, pageId)
     default:
       return null
+  }
+}
+
+async function deleteBlock(blockType: string, blockId: string, pageId: string) {
+  try {
+    if (blockType === 'pageBlock') {
+      await deletePageAPI(blockId)
+    }
+    await deleteBlockAPI(pageId, blockType, blockId)
+  } catch (error) {
+    console.error(error)
   }
 }
