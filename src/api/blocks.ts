@@ -44,3 +44,43 @@ export const addLinkBlockAPI = async (pageId: any, body: AddLinkBlockParams) => 
     message: '링크 블록을 추가했습니다.'
   }
 }
+
+export type addGoogleMapBlockParams = {
+  x: number
+  y: number
+  w: number
+  h: number
+  address?: string
+  latitude: number
+  longitude: number
+}
+
+export const addGoogleMapBlockAPI = async (pageId: any, body: addGoogleMapBlockParams) => {
+  const response = await backAuthAPI(`/v1/page/${pageId}/mapBlock`, {
+    method: 'POST',
+    data: body
+  })
+  // eslint-disable-next-line no-console
+  return {
+    data: response.data.response,
+    status: 'success',
+    message: '구글 맵 블록을 추가했습니다.'
+  }
+}
+export type editGoogleMapBlockParams = {
+  address?: string
+  latitude: number
+  longitude: number
+}
+
+export const editGoogleMapBlockAPI = async (pageId: any, blockId: any, body: editGoogleMapBlockParams) => {
+  const response = await backAuthAPI(`/v1/page/${pageId}/mapBlock/${blockId}`, {
+    method: 'PUT',
+    data: body
+  })
+  return {
+    data: response.data.response,
+    status: 'success',
+    message: '구글 맵 블록을 수정했습니다.'
+  }
+}

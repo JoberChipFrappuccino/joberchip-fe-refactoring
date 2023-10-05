@@ -1,8 +1,11 @@
+import { addGoogleMapBlockAPI, editGoogleMapBlockAPI } from '@/api/blocks'
 import { useBlockAction } from '@/store/blockAction'
+import { useSharePageStore } from '@/store/sharePage'
+import { getNextYOfLastBlock } from '@/utils/api'
 import { Autocomplete, GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
 import { Input } from 'antd'
 import { type SearchProps } from 'antd/es/input/Search'
-import React, { useEffect, useState, type FormEvent } from 'react'
+import React, { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { SkeletonTheme } from 'react-loading-skeleton'
 import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import FormButton from '../Ui/Button'
@@ -17,7 +20,6 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
     googleMapsApiKey: apikey ?? '',
     libraries: ['places']
   })
-
   const [isButtonDisabled, setIsButtonDisabled] = useState(true) // 초기값을 true로 설정
 
   const onSearch: SearchProps['onSearch'] = (
@@ -29,20 +31,23 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
       | undefined,
     info?: { source: any }
   ) => {}
-
+  const [address, setAddress] = useState<string>('')
   const [center, setCenter] = useState({
     lat: block?.latitude ?? 37.5642135,
     lng: block?.longitude ?? 127.0016985,
     address: block?.address ?? ''
   })
   const [query, setQuery] = useState('')
-
+  const { sharePage, setSharePage } = useSharePageStore()
+  const { setOpenDrawer } = useBlockAction()
   const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null)
   const [isLoading, setIsLoading] = useState(true) // 로딩 상태 추가
   const { drawerMode } = useBlockAction()
   const onAutocompleteLoad = (autocompleteParam: google.maps.places.Autocomplete) => {
     setAutocomplete(autocompleteParam)
   }
+
+  const blockId = block?.objectId ?? ''
 
   const onAutocompletePlaceChanged = () => {
     if (autocomplete === null) return
@@ -78,15 +83,46 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
     }
   }
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const body = {
+    const pageId = sharePage.pageId
+    const data = {
+      x: 0,
+      y: getNextYOfLastBlock(sharePage.children),
+      w: 2,
+      h: 2,
       latitude: center.lat,
       longitude: center.lng,
-      address: center.address
+      address,
+      type: 'MAP',
+      visible: true
     }
-    // body에 data를 담아 post 전달 알림창으로 체크
-    alert(JSON.stringify(body))
+    try {
+      if (drawerMode === 'create') {
+        const { data: responseData } = await addGoogleMapBlockAPI(pageId, data)
+        const updatedSharePage = {
+          ...sharePage,
+          children: [...sharePage.children, responseData]
+        }
+        setSharePage(updatedSharePage)
+        setOpenDrawer(false)
+      } else if (drawerMode === 'edit') {
+        await editGoogleMapBlockAPI(pageId, blockId, {
+          latitude: center.lat,
+          longitude: center.lng,
+          address
+        })
+        // const newBlocks = [...sharePage.children.push(res.data)]
+        setOpenDrawer(false)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const onChangeAddress = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    setAddress(e.target.value)
   }
 
   return (
@@ -137,6 +173,12 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
               </GoogleMap>
             </>
           )}
+        </div>
+        <div className={styles.forms}>
+          <h3>상세주소</h3>
+          <div className={styles.inputbox}>
+            <input type="text" value={address} onChange={onChangeAddress} placeholder="주소를 입력해주세요" />
+          </div>
         </div>
         <FormButton title={drawerMode === 'create' ? '지도 추가하기' : '지도 수정하기'} event={isButtonDisabled} />
       </form>
