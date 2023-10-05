@@ -3,6 +3,7 @@ import { MAP } from '@/constants/blockTypeConstant'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
 import { getNextYOfLastBlock } from '@/utils/api'
+import { toast } from '@/utils/toast'
 import { Autocomplete, GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
 import { Input } from 'antd'
 import { type SearchProps } from 'antd/es/input/Search'
@@ -10,7 +11,7 @@ import React, { useEffect, useState, type ChangeEvent, type FormEvent } from 're
 import { SkeletonTheme } from 'react-loading-skeleton'
 import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
 import FormButton from '../Ui/Button'
-import styles from './ImageBlockForm.module.scss'
+import styles from './GoogleMapBlockForm.module.scss'
 
 const { Search } = Input
 export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>) {
@@ -30,7 +31,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
       | undefined,
     info?: { source: any }
   ) => {}
-  const [address, setAddress] = useState<string>('')
+  const [address, setAddress] = useState(block?.title ?? '')
   const [center, setCenter] = useState({
     lat: block?.latitude ?? 37.5642135,
     lng: block?.longitude ?? 127.0016985,
@@ -87,7 +88,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
     const data = {
       x: 0,
       y: getNextYOfLastBlock(sharePage.children),
-      w: 4,
+      w: 1,
       h: 2,
       latitude: center.lat,
       longitude: center.lng,
@@ -96,6 +97,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
       visible: true
     }
     try {
+      // WARN : API 호출 후, 에러 처리를 해야 합니다! any타입도 제거해주세요!
       if (drawerMode === 'create') {
         const { data: responseData } = await addGoogleMapBlockAPI(pageId, data)
         const updatedSharePage = {
@@ -103,6 +105,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
           children: [...sharePage.children, responseData]
         }
         setSharePage(updatedSharePage)
+        toast('지도가 추가되었습니다.', 'success', { autoClose: 500 })
         setOpenDrawer(false)
       } else if (drawerMode === 'edit') {
         await editGoogleMapBlockAPI(pageId, blockId, {
@@ -110,6 +113,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
           longitude: center.lng,
           address
         })
+        toast('지도가 수정되었습니다.', 'success', { autoClose: 500 })
         setOpenDrawer(false)
       }
     } catch (error) {
@@ -137,22 +141,25 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
                   componentRestrictions: { country: 'KR' }
                 }}
               >
-                <Search
-                  placeholder="장소를 입력하세요"
-                  loading={isLoading}
-                  defaultValue={query}
-                  onPressEnter={(e) => {
-                    handleSearchEnter(e)
-                  }}
-                  allowClear
-                  enterButton="Search"
-                  size="large"
-                  onSearch={onSearch}
-                  onChange={(e) => {
-                    if (e.target.value === '') setIsButtonDisabled(true)
-                    setQuery(e.target.value)
-                  }}
-                />
+                <div className={styles.searchBox}>
+                  <Search
+                    className={styles.searcInput}
+                    placeholder="장소를 입력하세요"
+                    loading={isLoading}
+                    defaultValue={query}
+                    onPressEnter={(e) => {
+                      handleSearchEnter(e)
+                    }}
+                    allowClear
+                    enterButton="Search"
+                    size="large"
+                    onSearch={onSearch}
+                    onChange={(e) => {
+                      if (e.target.value === '') setIsButtonDisabled(true)
+                      setQuery(e.target.value)
+                    }}
+                  />
+                </div>
               </Autocomplete>
               <GoogleMap
                 mapContainerStyle={{ width: '100%', height: '400px' }}

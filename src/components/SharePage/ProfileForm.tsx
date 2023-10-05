@@ -2,7 +2,7 @@ import { USER_PROFILE_DEVOUNCE_TIME } from '@/constants/sharePageConstant'
 import { useDebounce } from '@/hooks/debounce'
 import { useSharePageStore } from '@/store/sharePage'
 import { Spin } from 'antd'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { editPageProfileAPI } from '@/api/space'
 import { BREAD_CRUMB, SPACE_LIST } from '@/constants/queryKeyConstant'
@@ -20,6 +20,8 @@ export function ProfileForm() {
   const queryClient = useQueryClient()
 
   useDebounce(title, USER_PROFILE_DEVOUNCE_TIME, async (nextTitle) => {
+    if (mode === 'view') return
+    if (sharePage.title === nextTitle) return
     const form = new FormData()
     form.append('title', nextTitle)
     await to(editPageProfileAPI(sharePage.pageId, form)).then((res) => {
@@ -32,6 +34,8 @@ export function ProfileForm() {
   })
 
   useDebounce(description, USER_PROFILE_DEVOUNCE_TIME, async (nextDescription) => {
+    if (mode === 'view') return
+    if (sharePage.description === nextDescription) return
     const form = new FormData()
     form.append('description', nextDescription)
     await to(editPageProfileAPI(sharePage.pageId, form)).then((res) => {
@@ -41,6 +45,11 @@ export function ProfileForm() {
     setIsDescriptionLoading(false)
   })
 
+  useEffect(() => {
+    setTitle(() => sharePage.title)
+    setDescription(() => sharePage.description)
+  }, [sharePage.title, sharePage.description])
+
   return (
     <>
       <div className={styles.cover}>
@@ -48,7 +57,7 @@ export function ProfileForm() {
           className={styles.title}
           type="text"
           disabled={mode === 'view'}
-          defaultValue={title}
+          value={title}
           onChange={(e) => {
             setTitle(e.target.value)
             setIsTitleLoading(true)
@@ -62,7 +71,7 @@ export function ProfileForm() {
           className={styles.description}
           type="text"
           disabled={mode === 'view'}
-          defaultValue={description}
+          value={description}
           onChange={(e) => {
             setDescription(e.target.value)
             setIsDescriptionLoading(true)

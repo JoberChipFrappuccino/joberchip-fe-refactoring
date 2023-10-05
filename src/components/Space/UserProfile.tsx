@@ -2,6 +2,7 @@ import { createSpaceAPI } from '@/api/space'
 import { SPACE_LIST } from '@/constants/queryKeyConstant'
 import { useSpaceList } from '@/hooks/spaceList'
 import { useUserStore } from '@/store/user'
+import { toast } from '@/utils/toast'
 import { useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import styles from './UserProfile.module.scss'
@@ -13,12 +14,13 @@ export function UserProfile() {
 
   const handleOnClickCreateSpace = () => {
     createSpaceAPI()
-      .then(({ message }) => {
-        alert(message)
+      .then((res) => {
+        toast(res.message, res.status, { autoClose: 500 })
         queryClient.refetchQueries([SPACE_LIST])
       })
-      .catch(({ message }) => {
-        alert(message)
+      .catch((err) => {
+        if (process.env.NODE_ENV === 'development') console.error(err)
+        toast(err.message, 'failure', { autoClose: 500 })
       })
   }
 

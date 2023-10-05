@@ -40,7 +40,7 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
     const addData = {
       x: 0,
       y: getNextYOfLastBlock(sharePage.children),
-      w: 2,
+      w: 1,
       h: 2,
       title: title,
       attachedImage: file,

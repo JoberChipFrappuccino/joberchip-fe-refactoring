@@ -58,7 +58,7 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
     const addData = {
       x: 0,
       y: getNextYOfLastBlock(sharePage.children),
-      w: 2,
+      w: 1,
       h: 2,
       title: file.name,
       videoLink: `https://www.youtube.com/embed/${youtubeThumb}`,

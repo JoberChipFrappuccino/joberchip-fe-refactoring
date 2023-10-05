@@ -23,7 +23,7 @@ export const useSharePageStore = create<SharePageState>((set) => {
     // ? 이거 속성 다 뺄 수 없나..? Partial<Space> | Space 이렇게 되면 좋게싸..
     sharePage: {
       pageId: '',
-      pageProfileImage: '/profile_3.png', // * default image 넣어야함
+      profileImageLink: '/profile_3.png', // * default image 넣어야함
       layout: {
         styles: {}
       },
@@ -79,7 +79,6 @@ export const useSharePageStore = create<SharePageState>((set) => {
         for (let i = 0; i < state.sharePage.children.length; i++) {
           if (state.sharePage.children[i].objectId === blockId) {
             state.sharePage.children.splice(i, 1)
-            // todo : block 삭제 API를 호출해야 합니다.
             break
           }
         }
