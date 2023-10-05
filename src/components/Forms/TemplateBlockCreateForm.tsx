@@ -1,5 +1,6 @@
 import { addTemplateBlockAPI } from '@/api/blocks'
 import { getTemplates } from '@/api/template'
+import { DEFAULT_CACHE_TIME } from '@/constants'
 import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
@@ -18,7 +19,7 @@ export function TemplateBlockCreateForm() {
   const { sharePage } = useSharePageStore()
   const { setOpenDrawer } = useBlockAction()
   const { data: templates } = useQuery(['template', user.userId], () => getTemplates(user.userId), {
-    staleTime: 1000 * 60 * 5
+    staleTime: DEFAULT_CACHE_TIME
   })
   const [templateId, setTemplateId] = useState('')
 

@@ -1,5 +1,6 @@
 import { ACCESS_TOKEN, BACK_MOCK_ACCESS_TOKEN } from '@/constants'
 import { useUserStore } from '@/store/user'
+import { toast } from '@/utils/toast'
 import { useNavigate } from 'react-router-dom'
 import styles from './SignIn.module.scss'
 
@@ -41,11 +42,11 @@ export default function SignIn() {
     localStorage.setItem(ACCESS_TOKEN, frontMockToken ?? '')
 
     if (res.status === 'success') {
-      alert(res.message)
+      toast(res.message)
       navigate('/')
       return
     }
-    alert(res.message)
+    toast(res.message, 'failure')
   }
 
   return (

@@ -81,3 +81,28 @@ export const fetchSpaceListAPI = async (): Promise<ResponseBase<SpaceList[]>> =>
     data: data.response
   }
 }
+
+export interface BreadCrumbItems {
+  parentId?: string
+  pageId: string
+  title: string | JSX.Element
+  children?: BreadCrumbItems[]
+}
+
+interface FetchBreadCrumbAPIResponse {
+  status: number
+  success: boolean
+  response: BreadCrumbItems
+}
+/**
+ * @description BreadCrumb 조회 API
+ * @see https://www.notion.so/Back-End-987b88625bae4cae90cf32fee45534b4?p=b76e833f9067409da16a5e376e740f8a&pm=s
+ */
+export async function fetchBreadCrumb(pageId: string): Promise<ResponseBase<BreadCrumbItems>> {
+  const { data } = await backAuthAPI<FetchBreadCrumbAPIResponse>(`/v1/page/${pageId}/breadCrumbBar`)
+  return {
+    status: 'success',
+    message: 'BreadCrumb 조회 성공',
+    data: data.response
+  }
+}

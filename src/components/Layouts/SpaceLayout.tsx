@@ -2,6 +2,7 @@ import { Header } from '@/components/Menus/Header'
 import { Layout as AntdLayout } from 'antd'
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import styles from './Layout.module.scss'
 
 const { Content } = AntdLayout
@@ -17,6 +18,7 @@ export default function SpaceLayout() {
     // * HMR을 위해 div로 감싸줍니다.
     <div>
       <div id="portal" />
+      <ToastContainer />
       <AntdLayout className={styles.layout}>
         <Content>
           <Header collapsedChange={collapsedChange} collapsed={collapsed} />

@@ -21,65 +21,6 @@ iframe {
   border: 0;
 }
 
-.react-grid-layout {
-  position: relative;
-  transition: height 200ms ease;
-}
-.react-grid-item {
-  border-radius: 1rem;
-  transition: all 200ms ease;
-  transition-property: left, top;
-  padding: 1px !important;
-}
-.react-grid-item img {
-  pointer-events: none;
-  user-select: none;
-}
-.react-grid-item.cssTransforms {
-  transition-property: transform;
-}
-.react-grid-item.resizing {
-  z-index: 1;
-  will-change: width, height;
-}
-
-.react-grid-item.react-draggable-dragging {
-  transition: none;
-  z-index: 3;
-  will-change: transform;
-}
-
-.react-grid-item.dropping {
-  visibility: hidden;
-}
-
-.react-grid-item.react-grid-placeholder {
-  background: $jober-blue;
-  opacity: 0.2;
-  transition-duration: 100ms;
-  z-index: 2;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-}
-
-.react-grid-item > .react-resizable-handle::after {
-  content: '';
-  position: absolute;
-  right: 0.5rem;
-  bottom: 0.5rem;
-  width: toRem(12px);
-  height: toRem(12px);
-  border-right: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-}
-
-.react-resizable-hide > .react-resizable-handle {
-  display: none;
-}
-
 /* * SpaceMode 타입에 따라서 Blocks에서 사용되는 클레스 * */
 .view {
   width: 100%;
@@ -144,18 +85,4 @@ iframe {
   body {
     font-size: 12px;
   }
-}
-
-.react-grid-item > .react-resizable-handle.react-resizable-handle-se {
-  bottom: 1px;
-  right: 1px;
-  cursor: se-resize;
-}
-
-/* Convert Antd Default Style to SCSS */
-.ant-switch.ant-switch-checked {
-  background-color: $jober-blue;
-}
-.ant-switch.ant-switch-checked:hover {
-  background-color: #253ef9 !important;
 }

@@ -5,7 +5,13 @@ type Privilege = {
   edit: boolean
   delete: boolean
 }
-type SpaceMockData = Record<string, { privilege: Privilege }>
+type Space = {
+  title: string
+  description: string
+  privilege: Privilege
+}
+
+type SpaceMockData = Record<string, Space>
 
 export function getSpaceBySpaceId(spaceId: string) {
   const data: SpaceMockData = JSON.parse(

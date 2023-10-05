@@ -1,5 +1,5 @@
 import App from '@/App'
-import { POST_API_KEY, SEO, SPACE } from '@/constants'
+import { DEFAULT_CACHE_TIME, SEO, SPACE } from '@/constants'
 import { SSRProvider } from '@/context/ssr'
 import { ChunkExtractor } from '@loadable/server'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -8,45 +8,34 @@ import path from 'path'
 import { renderToString } from 'react-dom/server'
 import { Helmet } from 'react-helmet'
 import { StaticRouter } from 'react-router-dom/server'
+import { api } from '~/api/api'
 import { getSpaceBySpaceId } from '~/utils/getSpaceById'
 
 export default async function renderHome(url: string, req: Request, res: Response) {
   const serverSideData: Record<string, unknown> = {}
 
-  interface SEOData {
-    title: string
-    description: string
-  }
-  const data: SEOData = await new Promise((resolve) => {
-    setTimeout(() => {
-      const response = {
-        title: '브라우저에서 페이지 소스를 확인해주세요!',
-        description: 'this code show you how to use react server side rendering'
-      }
-      resolve(response)
-    }, 100)
-  })
+  console.log('SSR request url :', url)
 
-  serverSideData[POST_API_KEY] = JSON.stringify(data)
-  serverSideData[SEO] = JSON.stringify({
-    title: {
-      '/': 'jober chip | 누군가의 공유 페이지',
-      '/detail': 'jober chip | 누군가의 디테일 페이지'
-    }
-  })
+  serverSideData[SEO] = JSON.stringify({})
   serverSideData[SPACE] = JSON.stringify({}) // CSR시 빈 객체로 초기화
 
   if (url.includes('/temp/space/')) {
-    console.info('BACK_END에서 SPACE DETAIL을 조회합니다.')
-    console.info('(미구현, BACK API 수정 중..)')
-
-    // const spaceId = url.split('/temp/space/')[1]
-    // serverSideData[SPACE] = JSON.stringify(getSpaceBySpaceId(spaceId))
-    // const backResponse = await api(`/v1/page/${spaceId}`)
-    // console.log('backResponse : ', backResponse)
+    try {
+      const pageId = url.split('/temp/space/')[1]
+      const { data } = await api(`/v1/page/${pageId}`)
+      serverSideData[SPACE] = JSON.stringify(data.response)
+      serverSideData[SEO] = JSON.stringify({ title: data.response.title, description: data.response.description })
+    } catch (error) {
+      console.error(error)
+    }
   } else if (url.includes('/space/')) {
     const spaceId = url.split('/space/')[1]
-    serverSideData[SPACE] = JSON.stringify(getSpaceBySpaceId(spaceId))
+    const reponse = getSpaceBySpaceId(spaceId)
+    serverSideData[SPACE] = JSON.stringify(reponse)
+    serverSideData[SEO] = JSON.stringify({
+      title: 'Jober Chip | Test Page',
+      description: 'The lazy fox jumps over the brown quick dog'
+    })
   }
 
   const webStats = path.resolve(__dirname, './web/loadable-stats.json')
@@ -60,7 +49,7 @@ export default async function renderHome(url: string, req: Request, res: Respons
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
-        cacheTime: 1000 * 60 * 5, // 5분
+        cacheTime: DEFAULT_CACHE_TIME, // 5분
         retry: 0
       }
     }
