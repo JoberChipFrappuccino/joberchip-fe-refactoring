@@ -53,11 +53,10 @@ export function SideNavBar(props: any) {
             }}
           >
             <Space direction="vertical" style={{ marginTop: '20px' }}>
-              <Avatar
-                size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
-                icon={<UserOutlined />}
-                style={{ backgroundColor: '#4C61FF' }}
-              />
+              <div>
+                <UserOutlined />
+              </div>
+              <Avatar size={{ xl: 80, xxl: 100 }} icon={<UserOutlined />} style={{ backgroundColor: '#4C61FF' }} />
             </Space>
             <h2 style={{ margin: 'none' }}>김자버</h2>
             <Button style={{ backgroundColor: '#4C61FF', color: '#FFFFFF', border: 'none' }} block>

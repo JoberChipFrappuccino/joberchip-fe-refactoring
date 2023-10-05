@@ -1,15 +1,18 @@
-import { Avatar, ConfigProvider, Layout, Tabs } from 'antd'
+import { ConfigProvider, Layout } from 'antd'
+import styles from './spaceListBar.module.scss'
 
 const { Sider } = Layout
 
 const siderStyle: React.CSSProperties = {
   textAlign: 'center',
-  backgroundColor: '#EAEAEA'
+  backgroundColor: '#292D32'
 }
+
+const USER = ['김PM', '신UI', '박FE', '신BE']
 
 export function SpaceListBar() {
   return (
-    <Sider width={65} style={siderStyle}>
+    <Sider width={75} style={siderStyle}>
       <ConfigProvider
         theme={{
           token: {
@@ -17,21 +20,22 @@ export function SpaceListBar() {
           }
         }}
       >
-        <Tabs
-          tabPosition={'left'}
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-          items={new Array(3).fill(null).map((_, i) => {
-            const id = String(i + 1)
-            return {
-              label: (
-                <Avatar size={50} shape="square" style={{ backgroundColor: '#292D32' }}>
-                  {id}
-                </Avatar>
-              ),
-              key: id
-            }
-          })}
-        />
+        <div className={styles.tabContainer}>
+          <div className={styles.topWrap}>
+            <div className={`${styles.tabButton} ${styles.homeButton}`}>
+              <img src="/sideBar/home.svg" alt="home" />
+            </div>
+            <div className={`${styles.tabButton} ${styles.ownerButton}`}>김자버</div>
+          </div>
+          {USER.map((user, i) => (
+            <div key={i} className={`${styles.tabButton} ${styles.userButton}`}>
+              {user}
+            </div>
+          ))}
+          <div className={`${styles.tabButton} ${styles.plusButton}`}>
+            <img src="/sideBar/plus.svg" alt="plus" />
+          </div>
+        </div>
       </ConfigProvider>
     </Sider>
   )
