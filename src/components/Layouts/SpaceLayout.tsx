@@ -1,7 +1,8 @@
 import { Header } from '@/components/Menus/Header'
+import { useUserStore } from '@/store/user'
 import { Layout as AntdLayout } from 'antd'
-import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import styles from './Layout.module.scss'
 
@@ -9,6 +10,12 @@ const { Content } = AntdLayout
 
 export default function SpaceLayout() {
   const [collapsed, setCollapsed] = useState(false)
+  const location = useLocation()
+  const { isSignedIn, getUserInfo } = useUserStore()
+
+  useEffect(() => {
+    if (!isSignedIn) getUserInfo()
+  }, [location.pathname, isSignedIn])
 
   const collapsedChange = (e: boolean) => {
     setCollapsed(e)
