@@ -23,6 +23,7 @@ export default function ToolBar(props: ToolbarProps) {
   const [blockButton, setBlockButton] = useState('')
   const [toggleButton, setToggleButton] = useState<Record<string, boolean>>({})
   const [offset, setOffset] = useState(0)
+  const [responseOffset, setresponseOffset] = useState(0)
   const [selectedOption, setselectedOption] = useState('')
 
   const handlePrev = (e: React.MouseEvent) => {
@@ -34,7 +35,7 @@ export default function ToolBar(props: ToolbarProps) {
 
   const handleNext = (e: React.MouseEvent) => {
     e.preventDefault()
-    setOffset(props.toolWidth * 5)
+    setOffset(props.toolWidth * responseOffset)
   }
 
   const handleTogggleClick = (e: React.MouseEvent, inlineStyle: string) => {
@@ -144,6 +145,28 @@ export default function ToolBar(props: ToolbarProps) {
     e.preventDefault()
     toggleSubOption(selectedStyle, style)
   }
+
+  // HACK : 툴바 반응형 임시 조정, 리팩토링 후 삭제 예정
+  useEffect(() => {
+    if (innerWidth > 500) {
+      setresponseOffset(2.8)
+    } else if (innerWidth > 450 && innerWidth < 500) {
+      setresponseOffset(3)
+    } else if (innerWidth > 400 && innerWidth < 450) {
+      setresponseOffset(3.8)
+    } else if (innerWidth > 380 && innerWidth <= 400) {
+      setresponseOffset(4.2)
+    } else if (innerWidth > 360 && innerWidth <= 380) {
+      setresponseOffset(4.5)
+    } else if (innerWidth >= 350 && innerWidth <= 360) {
+      setresponseOffset(5)
+    } else if (innerWidth <= 330) {
+      setresponseOffset(5.5)
+    } else {
+      setresponseOffset(5)
+    }
+  }, [])
+
   return (
     <>
       <div className={styles.toolbar}>
@@ -174,7 +197,9 @@ export default function ToolBar(props: ToolbarProps) {
           </div>
         </div>
         <div
-          className={`${styles.slideButtons} ${styles.nextButton} ${offset < 290 ? styles.show : styles.hidden}`}
+          className={`${styles.slideButtons} ${styles.nextButton} ${
+            offset < props.toolWidth * responseOffset ? styles.show : styles.hidden
+          }`}
           onMouseDown={handleNext}
         />
       </div>
