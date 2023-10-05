@@ -1,6 +1,5 @@
 import { useSpaceList } from '@/hooks/spaceList'
 import { useTree } from '@/hooks/tree'
-import { useSharePageStore } from '@/store/sharePage'
 import { useUserStore } from '@/store/user'
 import { Tree } from 'antd'
 import type { DataNode } from 'antd/es/tree'
@@ -15,8 +14,9 @@ interface Props {
 export default function TreeLayout({ onSelectTreeNode, drawerMode = true }: Props) {
   const { user } = useUserStore()
   const { data } = useSpaceList(user?.userId ?? '')
-  const { sharePage } = useSharePageStore()
-  const space = data?.find((space) => space.mainPageId === sharePage.pageId)
+
+  // const space = data?.find((space) => space.mainPageId === sharePage.pageId)
+  const space = data ? data[0] : undefined
   const spaceId = space?.spaceId
 
   const defaultData: DataNode[] = []
@@ -27,7 +27,7 @@ export default function TreeLayout({ onSelectTreeNode, drawerMode = true }: Prop
     if (treeData) {
       setGData([treeData]) // 또는 treeData 전체를 사용할 수 있음
     }
-  }, [treeData])
+  }, [treeData, spaceId])
 
   // const onDrop: TreeProps['onDrop'] = (info) => {
   //   const dropKey = info.node.key

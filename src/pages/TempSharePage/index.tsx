@@ -13,6 +13,7 @@ import styles from './SharePage.module.scss'
 interface PageSource {
   title: string
   description: string
+  profileImageLink: string
 }
 
 export default function ShareableSpace() {
@@ -61,8 +62,9 @@ export default function ShareableSpace() {
   return (
     <>
       <Helmet>
-        {/* // TODO : default pageSource + SSR일 경우 두 가지로 분기해야함 */}
         <title>{pageSource.title ? `Jober chip | ${pageSource.title}` : 'Jober'}</title>
+        <meta name="description" content={pageSource.description ?? ''} />
+        <link rel="favicon" href={pageSource.profileImageLink ?? '/favicon.ico'} />
       </Helmet>
       {isLoaded && <Profile />}
       <aside>{<Drawer />}</aside>

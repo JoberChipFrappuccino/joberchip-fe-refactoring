@@ -8,37 +8,42 @@ export default function SignIn() {
   const navigate = useNavigate()
   const { signIn, isFetching } = useUserStore()
 
-  const loginById = async (id: '1' | '2' | '3') => {
+  const loginById = async (id: '1' | '2' | '3' | '4' | '5') => {
     if (isFetching) return
     const userData = {
       username: '',
       password: ''
     }
+    let backMockToken = process.env.BACK_MOCK_TOKEN_1
+    let frontMockToken = process.env.FRONT_MOCK_TOKEN_1
     if (id === '1') {
       userData.username = 'test1@google.com'
       userData.password = '1234'
-    }
-    if (id === '2') {
+    } else if (id === '2') {
       userData.username = 'test2@google.com'
       userData.password = '1234'
-    }
-    // ! 3번 ID 유저는 없습니다. 에러 확인용 입니다.
-    if (id === '3') {
+      backMockToken = process.env.BACK_MOCK_TOKEN_2
+      frontMockToken = process.env.FRONT_MOCK_TOKEN_2
+    } else if (id === '3') {
       userData.username = 'test3@google.com'
       userData.password = '1234'
+      backMockToken = process.env.BACK_MOCK_TOKEN_3
+      frontMockToken = process.env.FRONT_MOCK_TOKEN_3
+    } else if (id === '4') {
+      userData.username = 'test4@google.com'
+      userData.password = '1234'
+      backMockToken = process.env.BACK_MOCK_TOKEN_4
+      frontMockToken = process.env.FRONT_MOCK_TOKEN_4
+    } else if (id === '5') {
+      userData.username = 'test5@google.com'
+      userData.password = '1234'
+      backMockToken = process.env.BACK_MOCK_TOKEN_5
+      frontMockToken = process.env.FRONT_MOCK_TOKEN_5
     }
     const res = await signIn(userData)
 
-    // * 임시로 mock Token을 추가합니다.
-    const mock1Token =
-      id === '1'
-        ? process.env.BACK_MOCK_TOKEN_1
-        : id === '2'
-        ? process.env.BACK_MOCK_TOKEN_2
-        : process.env.BACK_MOCK_TOKEN_3
-    localStorage.setItem(BACK_MOCK_ACCESS_TOKEN, mock1Token ?? '')
+    localStorage.setItem(BACK_MOCK_ACCESS_TOKEN, backMockToken ?? '')
     // * 로그인 API 구현 전 까지 아래 토큰으로 대체합니다.
-    const frontMockToken = process.env.FRONT_MOCK_TOKEN_1
     localStorage.setItem(ACCESS_TOKEN, frontMockToken ?? '')
 
     if (res.status === 'success') {
@@ -65,6 +70,16 @@ export default function SignIn() {
       <div>
         <button className={styles.signInBtn} type="button" onClick={() => loginById('3')}>
           test3 유저로 로그인
+        </button>
+      </div>
+      <div>
+        <button className={styles.signInBtn} type="button" onClick={() => loginById('4')}>
+          test4 유저로 로그인
+        </button>
+      </div>
+      <div>
+        <button className={styles.signInBtn} type="button" onClick={() => loginById('5')}>
+          test5 유저로 로그인
         </button>
       </div>
     </div>

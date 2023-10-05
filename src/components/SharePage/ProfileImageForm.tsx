@@ -26,10 +26,6 @@ export function ProfileImageForm() {
         if (base64) {
           // eslint-disable-next-line @typescript-eslint/no-base-to-string
           const str = base64?.toString()
-          if (str && str.length > 1048576) {
-            alert('이미지는 1MB이하여야합니다!')
-            return
-          }
           // eslint-disable-next-line @typescript-eslint/no-base-to-string
           setProfileImage(str)
         }
