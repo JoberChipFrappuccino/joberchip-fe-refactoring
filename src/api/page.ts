@@ -14,10 +14,11 @@ export interface NewPage {
 }
 export type CreatePageAPIParams = Pick<BlockWith<TPage>, 'title' | 'description' | 'x' | 'y' | 'h' | 'w'>
 
-export const createPageAPI = async (body: CreatePageAPIParams): Promise<ResponseBase<null>> => {
+export const createPageAPI = async (body: CreatePageAPIParams): Promise<ResponseBase<BlockWith<TPage>>> => {
   type Response = {
     status: number
     success: boolean
+    response: BlockWith<TPage>
   }
   const { data } = await backAuthAPI<Response>('/v1/page/new', {
     method: 'POST',
@@ -27,6 +28,6 @@ export const createPageAPI = async (body: CreatePageAPIParams): Promise<Response
   return {
     status: 'success',
     message: '페이지를 생성했습니다.',
-    data: null
+    data: data.response
   }
 }

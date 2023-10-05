@@ -4,7 +4,7 @@ import { BLOCK_SIZE } from '@/constants/blockSizeConstant'
 import { PAGE } from '@/constants/blockTypeConstant'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
-import { getNextYOfLastBlock, to } from '@/utils/api'
+import { getNextYOfLastBlock } from '@/utils/api'
 import { toast } from '@/utils/toast'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { type BlockBaseWithBlockFormProps } from '../SwitchCase/DrawerEditForm'
@@ -13,7 +13,7 @@ import FormButton from '../Ui/Button'
 import styles from './PageBlockForm.module.scss'
 
 export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
-  const { sharePage } = useSharePageStore()
+  const { sharePage, setSharePage } = useSharePageStore()
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [parentPageId, setParentPageId] = useState<string>('')
@@ -29,8 +29,8 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
   useEffect(() => {
     setTitle(titleValue ?? '')
     setDescription(descriptionValue ?? '')
-    // setParentPageId(locationValue ?? '')
   }, [titleValue, descriptionValue, locationValue])
+
   const toggleLocation = () => {
     setLocationVisible(!isLocationVisible)
     setTreeLayoutToggle(!treeLayoutToggle)
@@ -43,12 +43,19 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
         title,
         description,
         parentPageId,
-        x: 0,
+        x: 2,
         y: getNextYOfLastBlock(sharePage.children),
-        w: BLOCK_SIZE[PAGE].minWidth,
+        w: 1,
         h: BLOCK_SIZE[PAGE].minHeight
       }
-      to(createPageAPI(body)).then((res) => {
+      createPageAPI(body).then((res) => {
+        const pageBlock = res.data
+        if (pageBlock) {
+          setSharePage({
+            ...sharePage,
+            children: [...sharePage.children, pageBlock]
+          })
+        }
         toast(res.message, res.status, { autoClose: 500 })
       })
     } else {

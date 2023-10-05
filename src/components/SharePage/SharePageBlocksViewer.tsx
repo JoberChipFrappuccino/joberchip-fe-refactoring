@@ -34,6 +34,7 @@ export function BlocksViewer() {
   const { activeBlockId, setActiveBlockId } = useBlockAction()
   useDebounce(grid.layouts.lg, LAYOUT_DEBOUNCE_TIME, (nextLayout) => {
     // WARN : 최초 랜더링시에도 호출되는 문제가 있습니다! (최초 랜더링시에는 호출되지 않아야 합니다.)
+    if (mode === 'view') return
     to(fetchBlockPosition(sharePage.pageId, convertLayoutToBlockParams(sharePage.children, nextLayout))).then((res) => {
       toast(res.message, res.status, { autoClose: 500 })
     })
@@ -43,7 +44,7 @@ export function BlocksViewer() {
     const nextLayout = getBlockLayout(sharePage.children, 'edit')
     setGridLayout(() => ({ breakpoints: 'lg', layouts: { lg: nextLayout } }))
     const nextViewLayout = getBlockLayout(
-      sharePage.children.filter((item) => !item.visible),
+      sharePage.children.filter((item) => item.visible),
       mode
     )
     setViewModeGrid(() => ({ breakpoints: 'lg', layouts: { lg: nextViewLayout } }))
@@ -81,7 +82,7 @@ export function BlocksViewer() {
         }}
       >
         {sharePage.children.map((block) => {
-          if (mode === 'view' && block.visible) return null
+          if (mode === 'view' && !block.visible) return null
           return (
             <div
               className={classNames(styles.item, block.objectId === activeBlockId && 'activeBlock')}

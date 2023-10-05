@@ -43,7 +43,7 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
           content: editortext,
           x: 0,
           y: getNextYOfLastBlock(sharePage.children),
-          w: 2,
+          w: 1,
           h: 1
         }
         const { data: responseData } = await addTextBlockAPI(pageId, textblock)

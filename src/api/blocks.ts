@@ -29,8 +29,9 @@ export const addGoogleMapBlockAPI = async (pageId: any, body: addGoogleMapBlockP
 
 export type editGoogleMapBlockParams = {
   address?: string
-  latitude: number
-  longitude: number
+  latitude?: number
+  longitude?: number
+  visible?: boolean
 }
 
 export const editGoogleMapBlockAPI = async (pageId: any, blockId: any, body: editGoogleMapBlockParams) => {
@@ -91,8 +92,9 @@ export const addLinkBlockAPI = async (pageId: any, body: AddLinkBlockParams) => 
 }
 
 export type EditLinkBlockParams = {
-  title: string
-  link: string
+  title?: string
+  link?: string
+  visible?: boolean
 }
 
 export const editLinkBlockAPI = async (pageId: any, blockId: any, body: EditLinkBlockParams) => {

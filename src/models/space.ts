@@ -1,6 +1,6 @@
 export interface SharePage {
   pageId: string
-  pageProfileImage: string
+  profileImageLink: string
   title: string
   description: string
   privilege: PrivilegeType
@@ -55,6 +55,7 @@ export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
   src: string | undefined
   blockId?: number // 지도 블록의 고유 식별자
   address: string // 주소 정보
+  title: string // 제목
   latitude: number // 위도
   longitude: number // 경도
   x: number // X 좌표

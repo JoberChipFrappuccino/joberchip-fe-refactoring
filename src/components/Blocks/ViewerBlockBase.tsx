@@ -1,4 +1,7 @@
+import { editGoogleMapBlockAPI, editImageBlockAPI, editLinkBlockAPI, editVideoBlockAPI } from '@/api/blocks'
 import { deleteBlockAPI, deletePageAPI } from '@/api/delete'
+import { editPageProfileAPI } from '@/api/space'
+import { editTextBlockAPI } from '@/api/textblock'
 import { BlockCover } from '@/components/SharePage/BlockCover'
 import BlockPortal from '@/components/SharePage/BlockPortal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
@@ -9,6 +12,7 @@ import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
 import { ModalPortal } from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
+import { toast } from '@/utils/toast'
 import { Switch } from 'antd'
 import classNames from 'classnames'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
@@ -42,13 +46,12 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
       label: (
         <Switch
           className={styles.switchBtn}
-          defaultChecked={!block.visible}
+          defaultChecked={block.visible}
           onChange={() => {
-            switchToggleAPIByBlockType(block)
+            switchToggleAPIByBlockType(sharePage.pageId, block)
             for (let i = 0; i < sharePage.children.length; i++) {
               if (sharePage.children[i].objectId === block.objectId) {
                 sharePage.children[i].visible = !sharePage.children[i].visible
-                // todo : block visibe상태를 변경하는 API를 호출해야 합니다.
                 break
               }
             }
@@ -118,6 +121,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   useEffect(() => {
     setFocus(activeBlockId === block.objectId)
   }, [activeBlockId])
+
   return (
     <div className={styles.container}>
       {mode === 'edit' && (
@@ -160,6 +164,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
             onConfirm={(isConfirm) => {
               if (isConfirm) removeBlockById(block.objectId)
               setConfirmModal(false)
+              setActiveBlockId('')
             }}
           >
             <p
@@ -191,26 +196,28 @@ function getUniqueDivierItem(key: string) {
   }
 }
 
-function switchToggleAPIByBlockType(block: BlockBase<BlockType>) {
+function switchToggleAPIByBlockType(pageId: string, block: BlockBase<BlockType>) {
+  const form = new FormData()
   switch (block.type) {
     case TEXT:
-      return null
+      return editTextBlockAPI(pageId, block.objectId, { visible: !block.visible })
     case IMAGE:
-      return null
+      form.append('visible', !block.visible ? 'true' : 'false')
+      return editImageBlockAPI(pageId, block.objectId, form)
     case LINK:
-      return null
+      return editLinkBlockAPI(pageId, block.objectId, { visible: !block.visible })
     case PAGE:
-      return null
-    case EMBED:
-      return null
+      form.append('visible', !block.visible ? 'true' : 'false')
+      return editPageProfileAPI(pageId, form)
     case VIDEO:
-      return null
+      form.append('visible', !block.visible ? 'true' : 'false')
+      return editVideoBlockAPI(pageId, block.objectId, form)
     case MAP:
-      return null
+      return editGoogleMapBlockAPI(pageId, block.objectId, { visible: !block.visible })
     case TEMPLATE:
-      return null
+      return toast('템플릿 공개 설정은 아직 지원하지 않습니다.', 'success')
     default:
-      return null
+      return toast('잘못된 입력입니다.', 'failure')
   }
 }
 

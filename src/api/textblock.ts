@@ -25,17 +25,18 @@ export const addTextBlockAPI = async (pageId: string, body: RequestTextBlockAddD
 }
 
 interface RequestTextBlockEditData {
-  content: string
+  content?: string
+  visible?: boolean
 }
 
 /**
  * @description 텍스트블록 수정 API
  * @see https://www.notion.so/2-cdf1976fd3e641dd84bd77df574fb471?p=de99c95f224848148558741b65871dfa&pm=s
  */
-export const editTextBlockAPI = async (pageId: string, blockId: string, content: RequestTextBlockEditData) => {
+export const editTextBlockAPI = async (pageId: string, blockId: string, data: RequestTextBlockEditData) => {
   const response = await backAuthAPI(`/v1/page/${pageId}/textBlock/${blockId}`, {
     method: 'PUT',
-    data: content
+    data
   })
   return {
     status: 'success',

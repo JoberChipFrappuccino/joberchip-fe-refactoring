@@ -31,7 +31,7 @@ export const BLOCK_SIZE = {
   },
   MAP: {
     minWidth: 1,
-    maxWidth: 2,
+    maxWidth: 4,
     minHeight: 1,
     maxHeight: 2
   },

@@ -39,7 +39,7 @@ export function TemplateBlockCreateForm() {
       pageId: sharePage.pageId,
       x: 0,
       y: getNextYOfLastBlock(sharePage.children),
-      w: 4,
+      w: 1,
       h: 2,
       title: template?.title ?? '',
       description: template?.description ?? ''
