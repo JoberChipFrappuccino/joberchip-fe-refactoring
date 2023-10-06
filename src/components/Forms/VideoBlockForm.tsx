@@ -18,6 +18,7 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const { setOpenDrawer } = useBlockAction()
   const [youtubeThumb, setYoutubeThumb] = useState<string>('')
+  const [youtubeUrl, setYoutubeUrl] = useState<string>('')
 
   const thumbnailValue = block?.src ?? ''
   const blockId = block?.objectId ?? ''
@@ -44,7 +45,8 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
     } else if (videoUrl.includes('v=')) {
       setYoutubeThumb(videoUrl.split('v=')[1])
     }
-  }, [thumbnailValue, videoUrl])
+    setYoutubeUrl(youtubeThumb ? `https://www.youtube.com/embed/${youtubeThumb}` : '')
+  }, [thumbnailValue, videoUrl, youtubeThumb])
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -61,14 +63,14 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
       w: 1,
       h: 2,
       title: file.name,
-      videoLink: `https://www.youtube.com/embed/${youtubeThumb}`,
+      videoLink: youtubeUrl,
       attachedVideo: file,
       type: 'VIDEO',
       visible: true
     }
 
     const editData = {
-      videoLink: `https://www.youtube.com/embed/${youtubeThumb}`,
+      videoLink: youtubeUrl,
       attachedVideo: file
     }
 
@@ -78,10 +80,15 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
     addform.append('w', addData.w.toString())
     addform.append('h', addData.h.toString())
     addform.append('title', addData.title)
-    addData.videoLink && addform.append('videoLink', addData.videoLink)
-    addData.attachedVideo && addform.append('attachedVideo', addData.attachedVideo)
+    // addData.videoLink && addform.append('videoLink', addData.videoLink)
+    // addData.attachedVideo && addform.append('attachedVideo', addData.attachedVideo)
     addform.append('type', addData.type)
     addform.append('visible', addData.visible.toString())
+    if (addData.videoLink) {
+      addform.append('videoLink', addData.videoLink)
+    } else if (addData.attachedVideo) {
+      addform.append('attachedVideo', addData.attachedVideo)
+    }
 
     const editform = new FormData()
     editform.append('videoLink', editData.videoLink)
@@ -96,6 +103,7 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
         }
         setSharePage(updatedSharePage)
         setOpenDrawer(false)
+        setYoutubeUrl('')
       } else if (drawerMode === 'edit') {
         const { data: responseData } = await editVideoBlockAPI(pageId, blockId, editform)
         const existingBlockIndex = sharePage.children.findIndex((block) => block.objectId === responseData.objectId)
