@@ -172,14 +172,14 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
                 margin: 0
               }}
             >
-              진짜 지웁니다?
+              삭제 시 복구가 어렵습니다.
             </p>
             <p
               style={{
                 margin: 0
               }}
             >
-              복구 못해요?
+              정말 삭제하시겠습니까?
             </p>
           </ConfirmModal>
         </ModalPortal>

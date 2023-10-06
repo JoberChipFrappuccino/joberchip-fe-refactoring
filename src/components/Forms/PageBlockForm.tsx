@@ -26,6 +26,7 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
   const titleValue = block?.title
   const descriptionValue = block?.description
   const locationValue = block?.location
+
   useEffect(() => {
     setTitle(titleValue ?? '')
     setDescription(descriptionValue ?? '')
@@ -68,6 +69,7 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
       })
     }
     setOpenDrawer(false)
+    window.location.reload()
   }
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {

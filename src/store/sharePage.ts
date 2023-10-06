@@ -21,6 +21,7 @@ interface SharePageState {
 export const useSharePageStore = create<SharePageState>((set) => {
   return {
     // ? 이거 속성 다 뺄 수 없나..? Partial<Space> | Space 이렇게 되면 좋게싸..
+    spaceId: '',
     sharePage: {
       pageId: '',
       profileImageLink: '/profile_3.png', // * default image 넣어야함
