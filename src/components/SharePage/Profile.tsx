@@ -2,8 +2,11 @@ import { editPageProfileAPI } from '@/api/space'
 import { ConfirmModal } from '@/components/Modal/ConfirmModal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { TreeDrawer } from '@/components/Tree/TreeDrawer'
+import { useSpaceList } from '@/hooks/spaceList'
 import { useSharePageStore } from '@/store/sharePage'
+import { useUserStore } from '@/store/user'
 import { ModalPortal } from '@/templates/ModalPortal'
+import { clip } from '@/utils/copy'
 import { toast } from '@/utils/toast'
 import { Switch } from 'antd'
 import { useState } from 'react'
@@ -15,6 +18,11 @@ import { ProfileImageForm } from './ProfileImageForm'
 export function Profile() {
   const [openConfirmModal, setConfirmModal] = useState(false)
   const { mode, setSharePageMode, sharePage } = useSharePageStore()
+  const { user } = useUserStore()
+  const { data } = useSpaceList(user.userId)
+
+  const rootPage = data?.find((page) => page.mainPageId === sharePage.pageId)
+
   const items = [
     {
       key: `${sharePage.pageId}-profile-1`,
@@ -35,10 +43,19 @@ export function Profile() {
       key: 'Profile-divider-1',
       type: 'divider'
     },
-    {
-      key: `${sharePage.pageId}-profile-2`,
-      icon: <TreeDrawer />
-    },
+    rootPage?.mainPageId
+      ? {
+          key: `${sharePage.pageId}-profile-4`,
+          label: (
+            <button className={styles.kebobBtn} onClick={() => clip(window.location.href)}>
+              링크 복사
+            </button>
+          )
+        }
+      : {
+          key: `${sharePage.pageId}-profile-2`,
+          icon: <TreeDrawer />
+        },
     {
       key: 'Profile-divider-2',
       type: 'divider'
@@ -53,6 +70,7 @@ export function Profile() {
         />
       )
     }
+
     // {
     //   key: 'Profile-divider-4',
     //   type: 'divider'

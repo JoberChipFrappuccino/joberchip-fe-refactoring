@@ -12,7 +12,7 @@ export function PageBlock({ block, mode }: BlockBaseWithBlockProps<TPage>) {
       <aside className={classNames(mode === 'edit' && 'cover')} />
       <div className={styles.contentCover}>
         <div className={styles.cover}>
-          <img className={styles.img} src={'/template_icon_1.png'} alt="template icon" />
+          <img className={styles.img} src={'/page_icon.png'} alt="page block icon" />
           <div className={styles.contentBox}>
             <h3>{block.title}</h3>
             <p>{block.description}</p>
