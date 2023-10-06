@@ -103,19 +103,23 @@ export function Profile() {
             ) : (
               <ProfileForm />
             )}
-            <ul className={styles.followCover}>
-              <li>
-                <span>팔로워</span>
-                <span>0</span>
-              </li>
-              <li>
-                <span>팔로잉</span>
-                <span>0</span>
-              </li>
-            </ul>
-            <nav className={styles.navCover}>
-              <a href="/">{'스페이스 홈 바로가기 >'}</a>
-            </nav>
+            {rootPage?.mainPageId && sharePage.privilege === 'EDIT' && (
+              <>
+                <ul className={styles.followCover}>
+                  <li>
+                    <span>팔로워</span>
+                    <span>0</span>
+                  </li>
+                  <li>
+                    <span>팔로잉</span>
+                    <span>0</span>
+                  </li>
+                </ul>
+                <nav className={styles.navCover}>
+                  <a href="/">{'스페이스 홈 바로가기 >'}</a>
+                </nav>
+              </>
+            )}
           </div>
           <div>
             {sharePage.privilege === 'EDIT' && (
@@ -135,20 +139,22 @@ export function Profile() {
           </div>
         </div>
         {/* // CASE : 이 부분은 Root Page일 경우 또는 편집 권한이 있는 경우만 나와야합니다  */}
-        <ul className={styles.messageCover}>
-          <li>
-            <p>3</p>
-            <p>발송전</p>
-          </li>
-          <li>
-            <p>5</p>
-            <p>발송후</p>
-          </li>
-          <li>
-            <p>1</p>
-            <p>미확인</p>
-          </li>
-        </ul>
+        {rootPage?.mainPageId && sharePage.privilege === 'EDIT' && (
+          <ul className={styles.messageCover}>
+            <li>
+              <p>3</p>
+              <p>발송전</p>
+            </li>
+            <li>
+              <p>5</p>
+              <p>발송후</p>
+            </li>
+            <li>
+              <p>1</p>
+              <p>미확인</p>
+            </li>
+          </ul>
+        )}
         {openConfirmModal && (
           <ModalPortal>
             <ConfirmModal

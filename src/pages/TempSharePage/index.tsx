@@ -28,6 +28,7 @@ export default function ShareableSpace() {
     // SSR시 데이터가 없을 경우도 여기에서 처리합니다.
     if (!SSRSpace?.pageId) {
       loadSharePageFromBack(pageId ?? '')
+
       return
     }
 
@@ -35,6 +36,7 @@ export default function ShareableSpace() {
     // SSR로 로드한 spaceId와 이동할 space가 다르다면 space를 다시 로드합니다.
     if (SSRSpace?.pageId !== pageId) {
       loadSharePageFromBack(pageId ?? '')
+
       return
     }
 

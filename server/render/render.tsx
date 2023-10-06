@@ -30,6 +30,7 @@ export default async function renderHome(url: string, req: Request, res: Respons
       })
     } catch (error) {
       console.error(error)
+      return res.status(404).send('<h1>NOT FOUND</h1>')
     }
   } else if (url.includes('/space/')) {
     // HACK : MOCK API 임시 코드
