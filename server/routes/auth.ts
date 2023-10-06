@@ -43,8 +43,7 @@ authRouter.post('/signin', (req, res) => {
   const data: UserMockData = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, `../mocks/${process.env.NODE_ENV}/user.json`), 'utf8')
   )
-  console.log('body :', body)
-  console.log('data :', data)
+
   if (!data[body.username]) {
     return res.status(400).json({
       message: '존재하지 않는 이메일입니다.\n 아이디 또는 패스워드를 확인해주세요.'

@@ -1,6 +1,9 @@
-import { useSpaceList } from '@/hooks/spaceList'
+import { fetchBreadCrumb } from '@/api/space'
+import { DEFAULT_CACHE_TIME } from '@/constants'
+import { BREAD_CRUMB } from '@/constants/queryKeyConstant'
 import { useTree } from '@/hooks/tree'
-import { useUserStore } from '@/store/user'
+import { useSharePageStore } from '@/store/sharePage'
+import { useQuery } from '@tanstack/react-query'
 import { Tree } from 'antd'
 import type { DataNode } from 'antd/es/tree'
 import { useEffect, useState } from 'react'
@@ -12,12 +15,17 @@ interface Props {
 }
 
 export default function TreeLayout({ onSelectTreeNode, drawerMode = true }: Props) {
-  const { user } = useUserStore()
-  const { data } = useSpaceList(user?.userId ?? '')
+  const { sharePage } = useSharePageStore()
+  const { data: breadCrumbData } = useQuery(
+    [BREAD_CRUMB, sharePage.pageId ?? ''],
+    () => fetchBreadCrumb(sharePage.pageId),
+    {
+      staleTime: DEFAULT_CACHE_TIME,
+      enabled: !!sharePage.pageId
+    }
+  )
 
-  // const space = data?.find((space) => space.mainPageId === sharePage.pageId)
-  const space = data ? data[0] : undefined
-  const spaceId = space?.spaceId
+  const spaceId = breadCrumbData?.data?.parentId
 
   const defaultData: DataNode[] = []
   const { data: treeData } = useTree(spaceId ?? '')
