@@ -13,9 +13,9 @@ export function ImageBlock({ block, mode }: BlockBaseWithBlockProps<TImage>) {
         alt={block.title}
       />
       {block.title && (
-        <caption className={styles.caption}>
+        <div className={styles.caption}>
           <p>{block.title.split('&&')[0]}</p>
-        </caption>
+        </div>
       )}
     </div>
   )

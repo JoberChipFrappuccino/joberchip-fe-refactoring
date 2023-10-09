@@ -1,11 +1,9 @@
-import { useBlockAction } from '@/store/blockAction'
 import classNames from 'classnames'
 import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import BlockLogo from './BlockLogo'
 import styles from './LinkBlock.module.scss'
 
 export function LinkBlock({ block, mode }: BlockBaseWithBlockProps<TLink>) {
-  const { setActiveBlockId } = useBlockAction()
   return (
     <div className={styles.container}>
       <div className={classNames(mode === 'edit' && 'cover')} />
@@ -24,17 +22,10 @@ export function LinkBlock({ block, mode }: BlockBaseWithBlockProps<TLink>) {
           </div>
         </div>
       </div>
-      <button
-        type="button"
-        className={styles.footer}
-        onClick={() => {
-          setActiveBlockId('')
-          window.location.href = block.src
-        }}
-      >
+      <a type="button" className={styles.footer} href={block.src} target="_blank" rel="noreferrer">
         <div className={styles.footerLeft}>바로가기</div>
         <div className={styles.footerright} />
-      </button>
+      </a>
     </div>
   )
 }

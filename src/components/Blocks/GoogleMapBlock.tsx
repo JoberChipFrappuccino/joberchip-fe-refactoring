@@ -53,9 +53,9 @@ export function GoogleMapBlock({ block, mode }: BlockBaseWithBlockProps<TMap>) {
         </GoogleMap>
       )}
       {block.title && (
-        <caption className={styles.caption}>
+        <div className={styles.caption}>
           <p>{block.title}</p>
-        </caption>
+        </div>
       )}
     </div>
   )

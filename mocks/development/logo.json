@@ -58,6 +58,11 @@
       "alt": "페이스북메신저"
     },
     {
+      "logo_id": "github",
+      "src": "/BlockLogo/github.png",
+      "alt": "깃허브"
+    },
+    {
       "logo_id": "facebook",
       "src": "/BlockLogo/facebook.png",
       "alt": "페이스북"
