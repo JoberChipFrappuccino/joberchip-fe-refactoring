@@ -33,7 +33,11 @@ export type editGoogleMapBlockParams = {
   longitude?: number
   visible?: boolean
 }
-
+/**
+ *
+ * @description 지도 블럭 수정 API
+ * @see https://www.notion.so/6489900f63984b38be7b8be3b55c2a35
+ */
 export const editGoogleMapBlockAPI = async (pageId: any, blockId: any, body: editGoogleMapBlockParams) => {
   const response = await backAuthAPI(`/v1/page/${pageId}/mapBlock/${blockId}`, {
     method: 'PUT',
@@ -79,6 +83,11 @@ export type AddLinkBlockParams = {
   title: string
   link: string
 }
+/**
+ *
+ * @description 링크 블럭 생성 API
+ * @see https://www.notion.so/8bbf5e1b6e974bd89e78874644e320b7
+ */
 export const addLinkBlockAPI = async (pageId: any, body: AddLinkBlockParams) => {
   const response = await backAuthAPI(`/v1/page/${pageId}/linkBlock`, {
     method: 'POST',
@@ -96,7 +105,10 @@ export type EditLinkBlockParams = {
   link?: string
   visible?: boolean
 }
-
+/**
+ * @description 링크 블럭 수정 API
+ * @see https://www.notion.so/107bc7366c3142f28b58b331989506fe
+ */
 export const editLinkBlockAPI = async (pageId: any, blockId: any, body: EditLinkBlockParams) => {
   const response = await backAuthAPI(`/v1/page/${pageId}/linkBlock/${blockId}`, {
     method: 'PUT',
@@ -118,6 +130,10 @@ export type AddImageBlockParams = {
   attachedImage: File
 }
 
+/**
+ * @description 이미지 블럭 생성 API
+ * @see https://www.notion.so/2ef9f22aad1a4836ad75df5446826013
+ */
 export const addImageBlockAPI = async (pageId: any, form: any) => {
   const response = await backAuthAPI(`/v1/page/${pageId}/imageBlock`, {
     method: 'POST',
@@ -138,6 +154,10 @@ export type EditImageBlockParams = {
   attachedImage: File
 }
 
+/**
+ * @description 이미지 블럭 수정 API
+ * @see https://www.notion.so/73170cb13eba4ac5b5f34ed4ff113214
+ */
 export const editImageBlockAPI = async (pageId: any, blockId: any, form: any) => {
   const response = await backAuthAPI(`/v1/page/${pageId}/imageBlock/${blockId}`, {
     method: 'PUT',
@@ -159,7 +179,10 @@ export type AddVideoBlockParams = {
   videoLink?: string
   attachedImage?: File
 }
-
+/**
+ * @description 비디오 블럭 생성 API
+ * @see https://www.notion.so/b3c240148be4470abb5ac0895de28575
+ */
 export const addVideoBlockAPI = async (pageId: any, form: any) => {
   const response = await backAuthAPI(`/v1/page/${pageId}/videoBlock`, {
     method: 'POST',
@@ -181,6 +204,11 @@ export type EditVideoBlockParams = {
   attachedImage: File
 }
 
+/**
+ *
+ * @description 비디오 블럭 수정 API
+ * @see https://www.notion.so/131f17790b8c4606891e4ca075f35f01
+ */
 export const editVideoBlockAPI = async (pageId: any, blockId: any, form: any) => {
   const response = await backAuthAPI(`/v1/page/${pageId}/videoBlock/${blockId}`, {
     method: 'PUT',
