@@ -7,8 +7,8 @@ export function ImageBlock({ block, mode }: BlockBaseWithBlockProps<TImage>) {
     <div className={styles.container}>
       <div className={classNames(mode === 'edit' && 'cover')} />
       <img
-        className={block.title?.split('&&')[1]?.includes('contain') ? styles.contain : ''}
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        className={block.title?.split('&&')[1]?.includes('contain') ? styles.contain : styles.cover}
+        style={{ width: '100%', height: '100%' }}
         src={block.src}
         alt={block.title}
       />

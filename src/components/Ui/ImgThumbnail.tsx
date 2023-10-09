@@ -63,9 +63,7 @@ export default function ImgThumbnail({ radio, imgData, buttonActive, img }: Prop
         name="file"
         accept=".jpeg, .jpg, .png"
         style={{ display: 'none' }}
-        onChange={(e) => {
-          changeMedia(e)
-        }}
+        onChange={(e) => changeMedia(e)}
         disabled={!!img}
         key={key}
       />
