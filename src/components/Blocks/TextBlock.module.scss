@@ -1,13 +1,15 @@
+@import '/src/utils.scss';
+
 .container {
   position: relative;
   display: flex;
   width: 100%;
   height: 100%;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  overflow: scroll;
   .view {
     width: 100%;
-    height: 100%;
     display: flex;
   }
   .edit {
@@ -16,8 +18,7 @@
   }
   .editorContainer {
     width: 100%;
-    height: 100%;
-    padding: 20px;
+    padding-left: toRem(15px);
     overflow-x: scroll;
     &::-webkit-scrollbar {
       display: none;

@@ -10,13 +10,11 @@ interface Props {
   lat?: BlockBaseWithBlockProps<TMap>['block']['latitude']
   lng?: BlockBaseWithBlockProps<TMap>['block']['longitude']
 }
+
 export function GoogleMapBlock({ block, mode }: BlockBaseWithBlockProps<TMap>) {
   const location: Props = block?.src ? JSON.parse(block.src.replace(/\\/g, '')) : {}
-  // eslint-disable-next-line no-console
-  const apikey = process.env.REACT_APP_GOOGLE_MAPS_API
-  // console.log(process.env.REACT_APP_GOOGLE_MAPS_API)
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: apikey ?? '',
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API ?? '',
     libraries: ['places']
   })
   const [isLoading, setIsLoading] = useState(true) // 로딩 상태 추가
@@ -53,6 +51,11 @@ export function GoogleMapBlock({ block, mode }: BlockBaseWithBlockProps<TMap>) {
         >
           <Marker position={center} />
         </GoogleMap>
+      )}
+      {block.title && (
+        <div className={styles.caption}>
+          <p>{block.title}</p>
+        </div>
       )}
     </div>
   )

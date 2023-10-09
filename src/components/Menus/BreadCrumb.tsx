@@ -16,7 +16,13 @@ export function BreadCrumbBox() {
   if (data?.status === 'failure') toast(data?.message, data?.status, { autoClose: 500 })
 
   return data?.data && pageId ? (
-    <Breadcrumb separator=">" items={convertResponseToAntdBreadCrumb(pageId ?? '', data?.data)} />
+    <Breadcrumb
+      style={{
+        paddingLeft: '1rem'
+      }}
+      separator=">"
+      items={convertResponseToAntdBreadCrumb(pageId ?? '', data?.data)}
+    />
   ) : (
     <div>loading...</div>
   )

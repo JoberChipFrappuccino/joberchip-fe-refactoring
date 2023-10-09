@@ -1,4 +1,5 @@
 import { SpaceListBar } from '@/components/Menus/SpaceListBar'
+import { useUserStore } from '@/store/user'
 import { CloseOutlined, RightOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Button, Drawer, Layout, Menu, Space } from 'antd'
@@ -33,37 +34,36 @@ const items: MenuProps['items'] = [
   getItem('관리및문의', '관리및문의', [getItem('관리', '관리'), getItem('문의', '문의')])
 ]
 
-export function Header(props: any) {
+export function Header() {
   const [open, setOpen] = useState(false)
-
-  const onOpen = () => {
-    setOpen(true)
-  }
-
-  const onClose = () => {
-    setOpen(false)
-  }
+  const { user, isSignedIn } = useUserStore()
   const location = useLocation()
 
   return (
     <Layout className={styles.container}>
       <div className={styles.cover}>
-        {location.pathname !== '/' && !location.pathname.includes('/sign') && (
+        {location.pathname !== '/' && !location.pathname.includes('/sign') && isSignedIn && (
           <>
             <Button
               type="text"
               icon={<RightOutlined />}
-              onClick={onOpen}
+              onClick={() => setOpen(true)}
               style={{
                 fontSize: '16px',
                 width: 64,
                 height: 64
               }}
             />
-            <Drawer placement="left" bodyStyle={{ padding: 0 }} closable={false} onClose={onClose} open={open}>
+            <Drawer
+              placement="left"
+              bodyStyle={{ padding: 0 }}
+              closable={false}
+              onClose={() => setOpen(false)}
+              open={open}
+            >
               <div style={{ position: 'relative', display: 'flex', height: '100%' }}>
                 <Button
-                  onClick={onClose}
+                  onClick={() => setOpen(false)}
                   icon={<CloseOutlined />}
                   type="text"
                   style={{ position: 'absolute', top: 0, right: 0 }}
@@ -85,7 +85,7 @@ export function Header(props: any) {
                         <img src="/sideBar/user.svg" alt="user" />
                       </div>
                     </Space>
-                    <h2 style={{ margin: 'none' }}>김자버</h2>
+                    <h2 style={{ margin: 'none' }}>{user.username}</h2>
                     <Button
                       style={{
                         backgroundColor: '#4C61FF',
