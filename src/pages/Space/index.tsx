@@ -45,7 +45,7 @@ function GroupItemsByParticipationType(type: ParticipationType, spaceList: Space
         <>
           <GroupSpaceItem
             key={`${type}-item-${space.spaceId}`}
-            link={`/temp/space/${space.mainPageId}`}
+            link={`/space/${space.mainPageId}`}
             text={space.mainPageTitle}
           />
           <div className={classNames(spaces.length - 1 !== i && styles.divider)} />

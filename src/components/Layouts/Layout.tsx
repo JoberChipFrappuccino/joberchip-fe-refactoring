@@ -15,15 +15,13 @@ export default function Layout() {
 
   useEffect(() => {
     if (isSignedIn) {
-      navigate('/')
-      return
+      return navigate('/')
     }
 
-    if (!isSignedIn) {
-      getUserInfo().then((isSuccess) => {
-        !isSuccess && navigate('/signin')
-      })
-    }
+    getUserInfo().then((isSuccess) => {
+      if (isSuccess) return navigate('/')
+      if (location.pathname === '/' || location.pathname.includes('space')) navigate('/signin')
+    })
   }, [location.pathname, isSignedIn])
 
   return (

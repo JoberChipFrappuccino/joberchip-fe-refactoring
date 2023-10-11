@@ -18,9 +18,9 @@ export default async function renderHome(url: string, req: Request, res: Respons
   serverSideData[SEO] = JSON.stringify({})
   serverSideData[SPACE] = JSON.stringify({}) // CSR시 빈 객체로 초기화
 
-  if (url.includes('/temp/space/')) {
+  if (url.includes('/space/')) {
     try {
-      const pageId = url.split('/temp/space/')[1]
+      const pageId = url.split('/space/')[1]
       const { data } = await api(`/v1/page/${pageId}`)
       serverSideData[SPACE] = JSON.stringify(data.response)
       serverSideData[SEO] = JSON.stringify({

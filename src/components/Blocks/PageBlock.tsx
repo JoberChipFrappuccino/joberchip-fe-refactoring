@@ -24,8 +24,7 @@ export function PageBlock({ block, mode }: BlockBaseWithBlockProps<TPage>) {
         className={styles.footer}
         onClick={() => {
           setActiveBlockId('')
-
-          navigate(`/temp/space/${block.objectId}`)
+          navigate(`/space/${block.objectId}`)
         }}
       >
         <div className={styles.footerLeft}>바로가기</div>

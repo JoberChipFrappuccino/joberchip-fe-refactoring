@@ -1,13 +1,55 @@
 @import '/src/variables.scss';
 
-.signInBtn {
-  width: 10rem;
-  display: block;
-  text-align: center;
-  line-height: 60px;
-  border: none;
-  background-color: $highlight-blue;
-  color: $jober-blue;
-  margin-bottom: 1rem;
-  cursor: pointer;
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 0 1rem;
+  .title {
+    font-size: 2rem;
+  }
+  .label {
+    margin-top: 1rem;
+    padding-left: 0.5rem;
+  }
+  .input {
+    display: inline-block;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid $base-white;
+    outline-color: $jober-blue;
+  }
+  .submit {
+    background-color: $highlight-blue;
+    color: $jober-blue;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    border: 1px solid $highlight-blue;
+  }
+  .link {
+    background-color: $highlight-blue;
+    color: $jober-blue;
+    padding: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+    border: 1px solid $highlight-blue;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      border: 1px solid $jober-blue;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  input {
+    border: none;
+    border-radius: 0.2rem;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      border: 1px solid $jober-blue;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  p {
+    margin: 0;
+  }
 }

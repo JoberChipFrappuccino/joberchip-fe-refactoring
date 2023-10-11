@@ -15,10 +15,16 @@ export async function to<T>(promise: Promise<ResponseBase<T>>): Promise<Response
   try {
     return await promise
   } catch (error) {
+    console.error(error)
     if (axios.isAxiosError(error)) {
+      console.error(error)
+      const message =
+        error.response?.data.message ??
+        error.response?.data.error.message ??
+        '네트워크 오류가 발생했습니다. 다시 시도해주세요.'
       return {
         status: 'failure',
-        message: error.response?.data.message ?? '네트워크 오류가 발생했습니다. 다시 시도해주세요.',
+        message,
         data: null
       }
     }
