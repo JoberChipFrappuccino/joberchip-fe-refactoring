@@ -1,40 +1,42 @@
+import { signUpAPI } from '@/api/user'
 import { SignUpFormErrorWarn } from '@/components/SignUp/SignUpFormError'
+import { to } from '@/utils/api'
+import { toast } from '@/utils/toast'
 import { useForm, type SubmitHandler } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import styles from './SignUp.module.scss'
 
 export interface SignUpInputs {
-  email: string
+  // email: string
   username: string
   password: string
   checkPassword: string
 }
 
 export default function SignUp() {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors }
   } = useForm<SignUpInputs>({ mode: 'onBlur' })
 
   const onSubmit: SubmitHandler<SignUpInputs> = (data) => {
-    alert(`'회원가입을 시도합니다.' ${JSON.stringify(data)}`)
+    to(signUpAPI(data)).then((res) => {
+      toast(res.message, res.status, { autoClose: 500 })
+      if (res.status === 'success') return navigate('/signin')
+      reset()
+    })
   }
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Login Page</h1>
+      <h1 className={styles.title}>Sign Up</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center">
-        <p className={styles.label}>이메일을 입력해주세요.</p>
+        <p className={styles.label}>사용자 이름을 입력해주세요.</p>
         <input
-          type="email"
-          placeholder="이메일을 입력해주세요."
-          {...register('email', {
-            required: true
-          })}
-        />
-        <SignUpFormErrorWarn inputType="email" errors={errors} />
-        <p className={styles.label}>사용자 이름을 입력해주세요.2</p>
-        <input
+          className={styles.input}
           type="text"
           placeholder="영어, 숫자를 포함해서 4자 이상 12자 이하로 입력해주세요."
           {...register('username', {
@@ -44,9 +46,12 @@ export default function SignUp() {
             minLength: 4
           })}
         />
-        <SignUpFormErrorWarn inputType="username" errors={errors} />
+        <div className={styles.warn}>
+          <SignUpFormErrorWarn inputType="username" errors={errors} />
+        </div>
         <p className={styles.label}>비밀 번호를 입력해주세요.</p>
         <input
+          className={styles.input}
           type="password"
           placeholder="영어, 숫자를 포함해서 8자 이상 20자 이하로 입력해주세요."
           {...register('password', {
@@ -56,9 +61,12 @@ export default function SignUp() {
             validate: (v) => !!(v.match(/[a-zA-Z]/g) && v.match(/[0-9]/g))
           })}
         />
-        <SignUpFormErrorWarn inputType="password" errors={errors} />
+        <div className={styles.warn}>
+          <SignUpFormErrorWarn inputType="password" errors={errors} />
+        </div>
         <p className={styles.label}>비밀 번호를 확인합니다.</p>
         <input
+          className={styles.input}
           type="password"
           placeholder="비밀번호를 다시 입력해주세요."
           {...register('checkPassword', {
@@ -68,8 +76,10 @@ export default function SignUp() {
             validate: (value) => value === watch('password')
           })}
         />
-        <SignUpFormErrorWarn inputType="checkPassword" errors={errors} />
-        <input type="submit" value="Submit" />
+        <div className={styles.warn}>
+          <SignUpFormErrorWarn inputType="checkPassword" errors={errors} />
+        </div>
+        <input className={styles.submit} type="submit" value="Submit" />
       </form>
     </div>
   )

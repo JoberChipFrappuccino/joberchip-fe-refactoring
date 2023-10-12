@@ -2,13 +2,13 @@ import { ACCESS_TOKEN, BACK_MOCK_ACCESS_TOKEN } from '@/constants'
 import axios from 'axios'
 import { errorController } from './controller/error'
 
-const authAPI = axios.create({
+const mockAPI = axios.create({
   baseURL:
     process.env.NODE_ENV === 'production' ? process.env.FRONT_SERVER_BASE_URL : `http://localhost:${process.env.PORT}`,
   timeout: 10000
 })
 
-authAPI.interceptors.request.use(
+mockAPI.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem(ACCESS_TOKEN) ? localStorage.getItem(ACCESS_TOKEN) : ''
     config.headers.Authorization = token
@@ -20,7 +20,7 @@ authAPI.interceptors.request.use(
   }
 )
 
-authAPI.interceptors.response.use(
+mockAPI.interceptors.response.use(
   (res) => res,
   async (error) => {
     if (process.env.NODE_ENV === 'development') console.error(error)
@@ -28,15 +28,15 @@ authAPI.interceptors.response.use(
   }
 )
 
-const backAuthAPI = axios.create({
+const backAPI = axios.create({
   baseURL: process.env.BACK_SERVER_BASE_URL,
   timeout: 10000
 })
 
-backAuthAPI.interceptors.request.use(
+backAPI.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) ?? localStorage.getItem(BACK_MOCK_ACCESS_TOKEN)
-    config.headers.Authorization = token
+    const token = localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) ?? null
+    if (token) config.headers.Authorization = token
     return config
   },
   async (error) => {
@@ -45,4 +45,4 @@ backAuthAPI.interceptors.request.use(
   }
 )
 
-export { authAPI, backAuthAPI }
+export { mockAPI as authAPI, backAPI as backAuthAPI }

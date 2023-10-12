@@ -32,18 +32,14 @@ function convertResponseToAntdBreadCrumb(pageId: string, res: BreadCrumbItems): 
   const items = []
   items.push({
     pageId: res.pageId,
-    title: res.pageId === pageId ? res.title : <Link to={`/temp/space/${res.pageId}`}>{res.title}</Link>
+    title: res.pageId === pageId ? res.title : <Link to={`/space/${res.pageId}`}>{res.title}</Link>
   })
   let children = res.children ? res.children[0] : null
   while (children?.pageId) {
     items.push({
       pageId: children.pageId,
       title:
-        children.pageId === pageId ? (
-          children.title
-        ) : (
-          <Link to={`/temp/space/${children.pageId}`}>{children.title}</Link>
-        )
+        children.pageId === pageId ? children.title : <Link to={`/space/${children.pageId}`}>{children.title}</Link>
     })
     children = children.children ? children.children[0] : null
   }

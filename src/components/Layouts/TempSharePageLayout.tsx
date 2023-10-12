@@ -2,24 +2,20 @@ import { Header } from '@/components/Menus/Header'
 import { useUserStore } from '@/store/user'
 import { Layout as AntdLayout } from 'antd'
 import { useEffect } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import styles from './Layout.module.scss'
 
 const { Content } = AntdLayout
 
 export default function TempSpaceLayout() {
-  // const [collapsed, setCollapsed] = useState(false)
+  const navigate = useNavigate()
   const location = useLocation()
   const { isSignedIn, getUserInfo } = useUserStore()
 
   useEffect(() => {
-    if (!isSignedIn) getUserInfo()
+    if (!isSignedIn) getUserInfo().then((isSuccess) => !isSuccess && navigate('/signin'))
   }, [location.pathname, isSignedIn])
-
-  // const collapsedChange = (e: boolean) => {
-  //   setCollapsed(e)
-  // }
 
   return (
     // * HMR을 위해 div로 감싸줍니다.
