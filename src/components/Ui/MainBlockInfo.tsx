@@ -1,4 +1,4 @@
-import { HiPlus } from 'react-icons/hi'
+import { HiOutlinePlus } from 'react-icons/hi2'
 import styles from './MainBlockInfo.module.scss'
 
 const icons = [
@@ -13,7 +13,7 @@ export default function MainBlockInfo() {
       <div className={styles.blockcontainer}>
         <div className={styles.blockinfobox}>
           <div className={styles.plus}>
-            <HiPlus />
+            <HiOutlinePlus />
           </div>
           <div className={styles.iconbox}>
             {icons.map((e) => (
