@@ -17,19 +17,31 @@
   border: solid 0.0625rem #000000;
 }
 
+.mapbox {
+ display: flex;
+ overflow: hidden;
+ margin: 0 1.25rem;
+ border-radius: 1rem;
+ border: solid 0.0625rem #e2e6ef;
+}
+
 .formBox {
-  display: flex;
   width: 100%;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   .searchBox {
-    display: flex;
-    justify-content: center;
-    margin: 1.25rem 0;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h3 {
+      margin-left: 1.25rem;
+    }
     .searcInput {
-      width: 90%;
+      width: 100%;
+      display: flex;
+      padding: 0 1.25rem 1.25rem 1.25rem;
     }
   }
 
@@ -44,13 +56,12 @@
 }
 
 .forms input[type='text'] {
-  display: flex;
   width: 100%;
-  height: 3.375rem;
+  border: none;
+  outline: none;
+  display: flex;
   font-size: 1rem;
-  border-radius: 0.375rem;
-  padding-left: 0.875rem;
-  border: solid 0.0625rem #e2e6ef;
+  margin-left: 1rem;
   &::placeholder {
     color: #e2e6ef;
   }
@@ -85,7 +96,13 @@
 }
 
 .inputbox {
+  width: 100%;
+  display: flex;
+  height: 3.375rem;
+  overflow: hidden;
   position: relative;
+  border-radius: 0.375rem;
+  border: solid 0.0625rem #e2e6ef;
   .delTitle {
     top: 0;
     bottom: 0;

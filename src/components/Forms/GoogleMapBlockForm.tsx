@@ -142,6 +142,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
                 }}
               >
                 <div className={styles.searchBox}>
+                  <h3>주소*</h3>
                   <Search
                     className={styles.searcInput}
                     placeholder="장소를 입력하세요"
@@ -161,26 +162,28 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
                   />
                 </div>
               </Autocomplete>
-              <GoogleMap
-                mapContainerStyle={{ width: '100%', height: '400px' }}
-                center={center}
-                zoom={15}
-                options={{
-                  zoomControl: false,
-                  streetViewControl: false,
-                  mapTypeControl: false,
-                  fullscreenControl: false
-                }}
-              >
-                <Marker position={center} />
-              </GoogleMap>
+              <div className={styles.mapbox}>
+                <GoogleMap
+                  mapContainerStyle={{ width: '100%', height: '300px' }}
+                  center={center}
+                  zoom={15}
+                  options={{
+                    zoomControl: false,
+                    streetViewControl: false,
+                    mapTypeControl: false,
+                    fullscreenControl: false
+                  }}
+                >
+                  <Marker position={center} />
+                </GoogleMap>
+              </div>
             </>
           )}
-        </div>
-        <div className={styles.forms}>
-          <h3>상세주소</h3>
-          <div className={styles.inputbox}>
-            <input type="text" value={address} onChange={onChangeAddress} placeholder="주소를 입력해주세요" />
+          <div className={styles.forms}>
+            <h3>상세주소</h3>
+            <div className={styles.inputbox}>
+              <input type="text" value={address} onChange={onChangeAddress} placeholder="주소를 입력해주세요" />
+            </div>
           </div>
         </div>
         <FormButton title={drawerMode === 'create' ? '지도 추가하기' : '지도 수정하기'} event={isButtonDisabled} />
