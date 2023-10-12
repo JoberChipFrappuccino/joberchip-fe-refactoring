@@ -11,6 +11,7 @@ import { toast } from '@/utils/toast'
 import { Switch } from 'antd'
 import { useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import styles from './Profile.module.scss'
 import { ProfileForm } from './ProfileForm'
 import { ProfileImageForm } from './ProfileImageForm'
@@ -116,7 +117,10 @@ export function Profile() {
                   </li>
                 </ul>
                 <nav className={styles.navCover}>
-                  <a href="/">{'스페이스 홈 바로가기 >'}</a>
+                  <a href="/">
+                    스페이스 홈 바로가기
+                    <MdOutlineKeyboardArrowRight />
+                  </a>
                 </nav>
               </>
             )}

@@ -7,7 +7,7 @@
   justify-content: center;
   width: 100%;
   max-width: 940px;
-  margin: 2rem auto 100px auto;
+  margin: 50px auto 100px auto;
   .blockcontainer {
     display: flex;
     justify-content: center;
@@ -24,8 +24,8 @@
       flex-direction: column;
       .plus {
         display: flex;
-        font-size: 2rem;
-        color: $cool-grey1;
+        font-size: 3rem;
+        color: #aeb9d1;
         margin-bottom: 30px;
         justify-content: center;
       }
@@ -39,8 +39,8 @@
           padding: 0.5rem;
           display: flex;
           border-radius: toRem(10px);
-          border: solid 2px $cool-grey1;
-          background-color: $highlight-blue;
+          // border: solid 2px $cool-grey1;
+          background-color: #d2dbf3;
         }
         .itemtitle {
           margin-top: 10px;

@@ -9,7 +9,10 @@
     h1 {
       font-size: 2rem;
     }
-    padding: 18px 16px;
+    p {
+      color: rgb(150, 150, 150)
+    }
+    padding: 18px 26px;
   }
   .buttonCover {
     display: flex;
@@ -46,7 +49,7 @@
       }
       transition: all 200ms ease-in-out;
       &:hover {
-        border: 1px solid $cool-grey3;
+        border: 1px solid $jober-blue;
       }
     }
   }

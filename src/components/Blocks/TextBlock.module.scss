@@ -1,13 +1,13 @@
 @import '/src/utils.scss';
 
 .container {
-  position: relative;
-  display: flex;
   width: 100%;
   height: 100%;
-  justify-content: center;
+  display: flex;
+  overflow: auto;
+  position: relative;
   align-items: start;
-  overflow: scroll;
+  justify-content: center;
   .view {
     width: 100%;
     display: flex;
@@ -16,12 +16,18 @@
     width: 80%;
     height: 80%;
   }
-  .editorContainer {
+  .editorBoxr {
+    display: flex;
     width: 100%;
-    padding-left: toRem(15px);
-    overflow-x: scroll;
-    &::-webkit-scrollbar {
-      display: none;
+    height: 100%;
+    padding: 10px 0;
+    .editorContainer {
+      width: 100%;
+      overflow-x: auto;
+      padding-left: toRem(15px);
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 }

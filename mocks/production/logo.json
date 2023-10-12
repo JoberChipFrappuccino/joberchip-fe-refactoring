@@ -166,6 +166,11 @@
       "logo_id": "zoom",
       "src": "/BlockLogo/zoom.png",
       "alt": "줌"
+    },
+    {
+      "logo_id": "github",
+      "src": "/BlockLogo/github.png",
+      "alt": "깃허브"
     }
   ]
 }

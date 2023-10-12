@@ -38,14 +38,16 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
   return (
     <div className={styles.container}>
       <div className={classNames(mode === 'edit' && 'cover')} />
-      <div className={styles.editorContainer}>
-        <Editor
-          editorState={editorState}
-          readOnly={true}
-          onChange={onchange}
-          customStyleMap={StyleMap}
-          blockStyleFn={blockStyleFn}
-        />
+      <div className={styles.editorBoxr}>
+        <div className={styles.editorContainer}>
+          <Editor
+            editorState={editorState}
+            readOnly={true}
+            onChange={onchange}
+            customStyleMap={StyleMap}
+            blockStyleFn={blockStyleFn}
+          />
+        </div>
       </div>
     </div>
   )
