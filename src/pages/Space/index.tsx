@@ -6,16 +6,16 @@ import { useSpaceList } from '@/hooks/spaceList'
 import { type SpaceList } from '@/models/space'
 import { type User } from '@/models/user'
 import { useUserStore } from '@/store/user'
+import { toast } from '@/utils/toast'
 import classNames from 'classnames'
 import { Helmet } from 'react-helmet'
 import styles from './Space.module.scss'
 
 export default function Space() {
-  const { user } = useUserStore()
+  const { user, isSignedIn } = useUserStore()
   const { data, status, message, isLoaded } = useSpaceList(user.userId)
 
-  // TODO : TOAST UI로 수정하기
-  if (isLoaded && status === 'failure') alert(message)
+  if (isLoaded && status === 'failure') toast(message, status)
 
   return (
     <div className={styles.container}>
@@ -24,7 +24,7 @@ export default function Space() {
       </Helmet>
       <div className={styles.cover}>
         <Search />
-        <UserProfile />
+        {isSignedIn && <UserProfile />}
         <GroupSpace key="personal-space" title="개인 스페이스">
           {GroupItemsByParticipationType('OWNER', data, user)}
         </GroupSpace>

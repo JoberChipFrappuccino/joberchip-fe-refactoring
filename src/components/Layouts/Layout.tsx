@@ -14,9 +14,7 @@ export default function Layout() {
   const { isSignedIn, getUserInfo } = useUserStore()
 
   useEffect(() => {
-    if (isSignedIn) {
-      return navigate('/')
-    }
+    if (isSignedIn) return navigate('/')
 
     getUserInfo().then((isSuccess) => {
       if (isSuccess) return navigate('/')

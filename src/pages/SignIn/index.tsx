@@ -1,5 +1,4 @@
-import { signInAPI } from '@/api/user'
-import { to } from '@/utils/api'
+import { useUserStore } from '@/store/user'
 import { toast } from '@/utils/toast'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -13,11 +12,12 @@ export interface SignInInputs {
 export default function SignIn() {
   const navigate = useNavigate()
   const { handleSubmit, register } = useForm<SignInInputs>()
+  const { signIn } = useUserStore()
 
   const onSubmit = (data: SignInInputs) => {
-    to(signInAPI(data)).then((res) => {
-      toast(res.message, res.status, { autoClose: 500 })
-      if (res.status === 'success') return navigate('/')
+    signIn(data).then((res) => {
+      if (res.status === 'failure') return toast(res.message, res.status)
+      res.status === 'success' && navigate('/')
     })
   }
 

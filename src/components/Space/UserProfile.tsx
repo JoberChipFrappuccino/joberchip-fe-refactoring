@@ -44,7 +44,7 @@ export function UserProfile() {
             window.location.reload()
           }}
         >
-          임시 로그아웃 버튼
+          로그아웃
         </button>
         <Link to={`/space/${myPersonalSpace?.mainPageId}` ?? '/'} className={styles.mySpaceBtn}>
           내 스페이스 바로가기

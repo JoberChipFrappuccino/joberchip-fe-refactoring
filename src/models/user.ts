@@ -1,7 +1,7 @@
 export type User = {
   userId: string
   username: string
-  email: string
+  nickname: string
   profileImg: string
-  accessToken: string
+  accessToken?: string
 }

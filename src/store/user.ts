@@ -1,6 +1,7 @@
 import { getUserInfoAPI, signInAPI } from '@/api/user'
-import { ACCESS_TOKEN, BACK_MOCK_ACCESS_TOKEN } from '@/constants'
+import { BACK_MOCK_ACCESS_TOKEN } from '@/constants'
 import { type User } from '@/models/user'
+import { to } from '@/utils/api'
 import { create } from 'zustand'
 
 type LoginForm = {
@@ -27,42 +28,38 @@ export const useUserStore = create<UserState>((set) => {
     user: {},
     isFetching: false,
     isSignedIn: false,
-    signIn: async ({ username, password }: LoginForm) => {
+    signIn: async (form: LoginForm) => {
       set((state) => ({ ...state, isFetching: true, isSignedIn: false }))
-      const { data, ...res } = await signInAPI({
-        username,
-        password
-      })
-      if (data) {
-        set((state) => ({ ...state, user: data, isFetching: false, isSignedIn: true }))
-        localStorage.setItem(ACCESS_TOKEN, data.accessToken)
+      const { data, ...res } = await to(signInAPI(form))
+      // * Token이 있다면 localStorage에 저장합니다.
+      // * 사용자 정보가 있지 않기 떄문에 ISignedIn은 false로 둡니다.
+      if (data?.accessToken) {
+        localStorage.setItem(BACK_MOCK_ACCESS_TOKEN, data.accessToken)
       } else {
         set((state) => ({ ...state, isFetching: false, isSignedIn: false }))
-        localStorage.removeItem(ACCESS_TOKEN)
+        localStorage.removeItem(BACK_MOCK_ACCESS_TOKEN)
       }
       return res
     },
     getUserInfo: async () => {
-      if (!localStorage.getItem(ACCESS_TOKEN)) return false
+      if (!localStorage.getItem(BACK_MOCK_ACCESS_TOKEN)) return false
       set((state) => ({ ...state, isFetching: true, isSignedIn: false }))
-      const user = await getUserInfoAPI()
+      const { data: user } = await to(getUserInfoAPI())
       if (!user) {
         set((state) => ({ ...state, isFetching: false, isSignedIn: false }))
-        localStorage.removeItem(ACCESS_TOKEN)
+        localStorage.removeItem(BACK_MOCK_ACCESS_TOKEN)
         return false
       }
       set((state) => ({ ...state, user, isFetching: false, isSignedIn: true }))
       return true
     },
     signOut: () => {
-      // todo : logout API있다면 호출합니다.
-      localStorage.removeItem(ACCESS_TOKEN)
       localStorage.removeItem(BACK_MOCK_ACCESS_TOKEN)
       set((state) => {
         const user: User = {
           userId: '',
           username: '',
-          email: '',
+          nickname: '',
           profileImg: '',
           accessToken: ''
         }
