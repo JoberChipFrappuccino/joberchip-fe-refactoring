@@ -98,10 +98,18 @@
         background-color: $highlight-blue;
         padding: 0.5rem;
         margin-top: 0.5rem;
-        border-radius: 0.2rem;
+        border-radius: 0.5rem;
         a {
+          display: flex;
+          align-items: center;
           color: $jober-blue;
-          white-space: nowrap;
+          padding-left: 0.5rem;
+          // white-space: nowrap;
+          svg {
+            margin: auto;
+            display: flex;
+            font-size: 1.25rem;
+          }
         }
       }
     }
