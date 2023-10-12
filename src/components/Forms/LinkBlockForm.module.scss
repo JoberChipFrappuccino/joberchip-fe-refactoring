@@ -5,7 +5,7 @@
 }
 
 .formTexts {
-  padding-top: .875rem;
+  padding-top: 0.875rem;
 }
 
 .formBox {
@@ -21,25 +21,28 @@
   }
 }
 
-.forms input[type="text"] {
-  display: flex;
+.forms input[type='text'] {
   width: 100%;
-  height: 3.375rem;
+  border: none;
+  outline: none;
+  display: flex;
   font-size: 1rem;
-  border-radius: .375rem;
-  padding-left: .875rem;
-  border: solid .0625rem #e2e6ef;
+  margin-left: 1rem;
   &::placeholder {
     color: #e2e6ef;
   }
 }
 
 .inputbox {
+  width: 100%;
+  display: flex;
+  height: 3.375rem;
+  overflow: hidden;
   position: relative;
-  input {
-    display: flex;
-  }
-  .delTitle, .delLink {
+  border-radius: 0.375rem;
+  border: solid 0.0625rem #e2e6ef;
+  .delTitle,
+  .delLink {
     top: 0;
     bottom: 0;
     right: 0;
