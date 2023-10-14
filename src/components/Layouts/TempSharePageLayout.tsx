@@ -2,19 +2,18 @@ import { Header } from '@/components/Menus/Header'
 import { useUserStore } from '@/store/user'
 import { Layout as AntdLayout } from 'antd'
 import { useEffect } from 'react'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import styles from './Layout.module.scss'
 
 const { Content } = AntdLayout
 
 export default function TempSpaceLayout() {
-  const navigate = useNavigate()
   const location = useLocation()
   const { isSignedIn, getUserInfo } = useUserStore()
 
   useEffect(() => {
-    if (!isSignedIn) getUserInfo().then((isSuccess) => !isSuccess && navigate('/signin'))
+    if (!isSignedIn) getUserInfo()
   }, [location.pathname, isSignedIn])
 
   return (
