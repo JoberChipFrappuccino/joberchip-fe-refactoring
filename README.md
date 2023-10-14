@@ -1,6 +1,6 @@
 <div align=center>
 
-# [🧋자버칩프라푸치노 사이트🧋](http://ec2-34-228-10-85.compute-1.amazonaws.com/)
+# [자버칩프라푸치노 사이트](http://ec2-34-228-10-85.compute-1.amazonaws.com/)
 **``` 임시 로그아웃 버튼을 누르면 새로운 User로 작성이 가능합니다 ```** <br>
 
 <img height="300" src="https://github.com/atsunsetree/joberchip-be/assets/128345842/02fd1980-6e18-4863-b148-b053bfc101ef"></img>
@@ -31,7 +31,7 @@
 ## 👤 TEAM JOBERCHIP
 
 **FRONT-END**
-|[정태욱](https://github.com/peacepiece7)(👑)|[김다슬](https://github.com/7581058-UQ)|[박철민](https://github.com/DICEPT)|[백지욱](https://github.com/beakjiuk)|[주하림](https://github.com/nyeJiiii)|
+|[정태욱](https://github.com/peacepiece7)(👑)|[김다슬](https://github.com/7581058)|[박철민](https://github.com/DICEPT)|[백지욱](https://github.com/beakjiuk)|[주하림](https://github.com/wngkfla01)|
 |:---:|:---:|:---:|:---:|:---:|
 |<a href="https://github.com/gdtknight"><img src="https://avatars.githubusercontent.com/u/73880776?v=4" width=150px alt="정태욱">|<a href="https://github.com/Horaiz-UQ"><img src="https://avatars.githubusercontent.com/u/100559990?v=4" width=150px alt="김다슬">|<a href="https://github.com/DICEPT"><img src="https://avatars.githubusercontent.com/u/106785596?v=4" width=150px alt="박철민">|<a href="https://github.com/beakjiuk"><img src="https://avatars.githubusercontent.com/u/83908991?v=4" width=150px alt="백지욱">|<a href="https://github.com/wngkfla01"><img src="https://avatars.githubusercontent.com/u/64509945?v=4" width=150px alt="주하림">|
 
@@ -42,25 +42,27 @@
 
 <br></br>
 
-## 🪧 역할 분담
+## 파트 분배
+
+[피그마에서 파트 분배 확인하기](https://www.figma.com/file/EztDbyA2nY9Xtyp7cxBlbD/%ED%8C%8C%EC%9D%B4%EB%84%90-%ED%94%84%EB%A1%A0%ED%8A%B8%ED%8C%80-%ED%8C%8C%ED%8A%B8-%EB%B6%84%EB%B0%B0-%ED%94%BC%EA%B7%B8%EC%9E%BC?type=whiteboard&node-id=0-1&t=7yVkdM6yeGtwS8yg-0)
 
 |기능|담당|
-|:--:|:--:|
-|`회원관리`|한혜지|
-|`스페이스`|신용호|
-|`페이지`|신용호, 한혜지|
-|`페이지트리 조회`|신용호|
-|`템플릿 추가`|신용호, 최해솔|
-|`S3 파일 업로드`|신용호|
-|`링크 블럭`|박장희, 한혜지|
-|`이미지 블럭`|최해솔|
-|`비디오 블럭`|김용원|
-|`지도 블럭`|한혜지|
-|`텍스트 블럭`|박장희, 한혜지|
-|`블럭, 페이지 공개설정`|신용호|
-|`블럭 위치 이동 API`|신용호|
-|`CI/CD구축`|신용호|
-|`AWS배포`|신용호|
+|`회원관리`|정태욱|
+|`스페이스`|정태욱|
+|`블럭 공통`|정태욱|
+|`GNB`|주하림, 김다슬|
+|`페이지 트리 구조`|주하림|
+|`BreadCrumb`|주하림|
+|`페이지 블럭`|주하림|
+|`템플릿 블럭`|정태욱|
+|`링크 블럭`|박철민|
+|`이미지 블럭`|박철민|
+|`동영상 블럭`|박철민|
+|`지도 블럭`|백지욱|
+|`텍스트 블럭`|김다슬|
+|`텍스트 에디터 기능`|김다슬|
+|`블럭, 페이지 공통 설정 및 레이아웃`|정태욱|
+|`배포`|정태욱|
 
 
 <br></br>
