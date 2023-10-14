@@ -1,7 +1,7 @@
-import { PARSE_ERROR_TEXT, StyleMap } from '@/constants/textEditorOptions'
+import { StyleMap } from '@/constants/textEditorOptions'
 import classNames from 'classnames'
 import { Editor, EditorState, convertFromRaw, type ContentBlock } from 'draft-js'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { type BlockBaseWithBlockProps } from '../SwitchCase/ViewerBox'
 import styles from './TextBlock.module.scss'
 
@@ -21,16 +21,6 @@ function blockStyleFn(contentBlock: ContentBlock) {
 export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
-  useEffect(() => {
-    try {
-      const descriptionJSON = JSON.parse(checkValidation(block.src, '“', '”'))
-      setEditorState(EditorState.createWithContent(convertFromRaw(descriptionJSON)))
-    } catch (error) {
-      console.error('JSON 파싱 중 오류가 발생했습니다:', error)
-      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(PARSE_ERROR_TEXT))))
-    }
-  }, [block.src])
-
   const onchange = () => {
     setEditorState(editorState)
   }
@@ -41,7 +31,11 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
       <div className={styles.editorBoxr}>
         <div className={styles.editorContainer}>
           <Editor
-            editorState={editorState}
+            editorState={
+              block.src
+                ? EditorState.createWithContent(convertFromRaw(JSON.parse(block.src)))
+                : EditorState.createEmpty()
+            }
             readOnly={true}
             onChange={onchange}
             customStyleMap={StyleMap}

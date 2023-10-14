@@ -40,6 +40,7 @@ export function BlocksViewer() {
     })
   })
 
+  // * "edit" 또는 "view" 모드가 변경되면 이에 맞는 레이아웃을 다시 그립니다.
   useEffect(() => {
     const nextLayout = getBlockLayout(sharePage.children, 'edit')
     setGridLayout(() => ({ breakpoints: 'lg', layouts: { lg: nextLayout } }))
@@ -61,9 +62,13 @@ export function BlocksViewer() {
         width={1000}
         margin={[margin, margin]}
         onWidthChange={(width, _margin, cols) => {
-          if (width > 768) setMargin(40)
-          else setMargin(18)
-          setRowHeight(getBlockHeightRatio(width, cols))
+          if (width > 768) {
+            setMargin(40)
+            setRowHeight(getBlockHeightRatio(width, cols, 0.7))
+          } else {
+            setMargin(18)
+            setRowHeight(getBlockHeightRatio(width, cols, 1))
+          }
         }}
         onLayoutChange={(layout, _layouts) => {
           if (mode === 'view') return
@@ -76,9 +81,7 @@ export function BlocksViewer() {
           setActiveBlockId(element.id)
           if (event.type === 'mousedown') return
           const targetElement = event.target as HTMLElement
-          if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) {
-            targetElement.closest('button')?.click()
-          }
+          if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) targetElement.closest('button')?.click()
         }}
       >
         {sharePage.children.map((block) => {
@@ -143,8 +146,8 @@ function getBlockLayout(blocks: SharePage['children'], mode: SharePageMode): Lay
   })
 }
 
-function getBlockHeightRatio(width: number, cols: number) {
-  return (width * 0.7) / cols
+function getBlockHeightRatio(width: number, cols: number, radio: number) {
+  return (width * radio) / cols
 }
 
 /**

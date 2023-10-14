@@ -9,6 +9,9 @@
   align-items: start;
   justify-content: center;
   overflow: auto;
+  li {
+    padding: 0.2rem 0;
+  }
   .view {
     width: 100%;
     display: flex;
@@ -25,7 +28,7 @@
     .editorContainer {
       width: 100%;
       overflow-x: auto;
-      padding-left: toRem(15px);
+      padding: 0 toRem(15px);
       &::-webkit-scrollbar {
         display: none;
       }

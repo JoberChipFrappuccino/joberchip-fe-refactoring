@@ -5,7 +5,7 @@ import { PageBlockForm } from '@/components/Forms/PageBlockForm'
 import { TemplateBlockEditForm } from '@/components/Forms/TemplateBlockEditForm'
 import { TextBlockForm } from '@/components/Forms/TextBlockForm'
 import { VideoBlockForm } from '@/components/Forms/VideoBlockForm'
-import { EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
+import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
 import { type BlockBaseWithBlockProps } from './ViewerBox'
 
@@ -18,9 +18,7 @@ function getEditFormComponent<T extends BlockType>({ block }: BlockBaseWithBlock
     case IMAGE:
       return <ImageBlockForm block={block} />
     case LINK:
-      return <LinkBlockForm block={block} key={block.objectId} />
-    case EMBED:
-      return <h1>Embed block form example</h1>
+      return <LinkBlockForm block={block} />
     case VIDEO:
       return <VideoBlockForm block={block} />
     case MAP:

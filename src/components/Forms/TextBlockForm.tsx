@@ -15,9 +15,13 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   const [editorIsOpen, setEditorIsOpen] = useState(false)
   const { drawerMode, setOpenDrawer } = useBlockAction()
   const [isButtonDisabled, setisButtonDisabled] = useState(true)
-  const [textValue] = useState(block?.src ?? '')
+  const [textValue, setTextValue] = useState(block?.src ?? '')
   const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty())
   const { sharePage, setSharePage } = useSharePageStore()
+
+  useEffect(() => {
+    setTextValue(block?.src ?? '')
+  }, [block?.objectId])
 
   useEffect(() => {
     if (drawerMode === 'create') {
@@ -31,7 +35,7 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
         setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(PARSE_ERROR_TEXT))))
       }
     }
-  }, [])
+  }, [textValue])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -101,6 +105,7 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
             isButtonDisabled={isButtonDisabled}
             editorState={editorState}
             setEditorState={setEditorState}
+            objectId={block?.objectId ?? ''}
           />
         </div>
       </div>

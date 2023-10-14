@@ -18,11 +18,11 @@
 }
 
 .mapbox {
- display: flex;
- overflow: hidden;
- margin: 0 1.25rem;
- border-radius: 1rem;
- border: solid 0.0625rem #e2e6ef;
+  display: flex;
+  overflow: hidden;
+  margin: 0 1.25rem;
+  border-radius: 1rem;
+  border: solid 0.0625rem #e2e6ef;
 }
 
 .formBox {
@@ -48,6 +48,9 @@
   .forms {
     margin: 1.25rem 0;
     padding: 0 1.25rem 0 1.25rem;
+    h3 {
+      margin: 1.5rem 0 0.5rem 0;
+    }
   }
 
   .formText {
