@@ -8,6 +8,9 @@
   justify-content: space-between;
   box-sizing: border-box;
   overflow: hidden;
+  li {
+    padding: 0.2rem 0;
+  }
   .formContainer {
     padding: 0 20px 0 20px;
     .label {

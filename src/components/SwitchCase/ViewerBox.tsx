@@ -1,4 +1,3 @@
-import { EmbedBlock } from '@/components/Blocks/EmbedBlock'
 import { GoogleMapBlock } from '@/components/Blocks/GoogleMapBlock'
 import { ImageBlock } from '@/components/Blocks/ImageBlock'
 import { LinkBlock } from '@/components/Blocks/LinkBlock'
@@ -6,7 +5,7 @@ import { PageBlock } from '@/components/Blocks/PageBlock'
 import { TemplateBlock } from '@/components/Blocks/TemplateBlock'
 import { TextBlock } from '@/components/Blocks/TextBlock'
 import { VideoBlock } from '@/components/Blocks/VideoBlock'
-import { EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
+import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import type { BlockType, BlockWith } from '@/models/space'
 
 export interface BlockBaseWithBlockProps<T extends BlockType> {
@@ -24,8 +23,6 @@ function getViewerComponent<T extends BlockType>({ block, mode }: BlockBaseWithB
       return <LinkBlock mode={mode} block={block} />
     case PAGE:
       return <PageBlock mode={mode} block={block} />
-    case EMBED:
-      return <EmbedBlock mode={mode} block={block} />
     case VIDEO:
       return <VideoBlock mode={mode} block={block} />
     case MAP:

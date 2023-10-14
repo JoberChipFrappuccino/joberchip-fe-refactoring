@@ -85,7 +85,7 @@ export function Header() {
                         <img src="/sideBar/user.svg" alt="user" />
                       </div>
                     </Space>
-                    <h2 style={{ margin: 'none' }}>{user.username}</h2>
+                    <h2 style={{ margin: '1rem' }}>{user.username}</h2>
                     <Button
                       style={{
                         backgroundColor: '#4C61FF',

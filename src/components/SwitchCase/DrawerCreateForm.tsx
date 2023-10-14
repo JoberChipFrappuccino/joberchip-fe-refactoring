@@ -5,7 +5,7 @@ import { PageBlockForm } from '@/components/Forms/PageBlockForm'
 import { TemplateBlockCreateForm } from '@/components/Forms/TemplateBlockCreateForm'
 import { TextBlockForm } from '@/components/Forms/TextBlockForm'
 import { VideoBlockForm } from '@/components/Forms/VideoBlockForm'
-import { EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
+import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
 
 interface DrawerCreateFormProps {
@@ -20,8 +20,7 @@ function getCreateFormComponent({ blockType }: DrawerCreateFormProps) {
       return <ImageBlockForm />
     case LINK:
       return <LinkBlockForm />
-    case EMBED:
-      return <h1>Embed block form example</h1>
+
     case VIDEO:
       return <VideoBlockForm />
     case MAP:

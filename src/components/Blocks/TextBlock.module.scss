@@ -9,6 +9,9 @@
   align-items: start;
   justify-content: center;
   overflow: auto;
+  li {
+    padding: 0.2rem 0;
+  }
   .view {
     width: 100%;
     display: flex;

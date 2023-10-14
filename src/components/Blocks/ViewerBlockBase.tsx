@@ -6,7 +6,7 @@ import { BlockCover } from '@/components/SharePage/BlockCover'
 import BlockPortal from '@/components/SharePage/BlockPortal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
-import { BLOCK, EMBED, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
+import { BLOCK, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
@@ -232,8 +232,6 @@ function switchDeleteAPIByBlockType(block: BlockBase<BlockType>, pageId: string)
       return deleteBlock('linkBlock', block.objectId, pageId)
     case PAGE:
       return deleteBlock('pageBlock', block.objectId, pageId)
-    case EMBED:
-      return null
     case VIDEO:
       return deleteBlock('videoBlock', block.objectId, pageId)
     case MAP:

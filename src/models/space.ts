@@ -8,7 +8,7 @@ export interface SharePage {
   visible?: boolean // 최상위 페이지는 visible속성이 없습니다.
 }
 
-export type BlockType = TText | TImage | TLink | TPage | TEmbed | TVideo | TMap | TTemplate | 'BASE' // HACK : "BASE"는 임시 코드
+export type BlockType = TText | TImage | TLink | TPage | TVideo | TMap | TTemplate | 'BASE' // HACK : "BASE"는 임시 코드
 
 export type BlockBase<T extends BlockType> = {
   objectId: string
@@ -64,10 +64,6 @@ export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
   width: number // 블록 너비
 }
 
-export interface EmbedBlock extends BlockBase<TEmbed> {
-  src: string
-  caption: string
-}
 export interface VideoBlock extends BlockBase<TVideo> {
   src: string
   caption: string
@@ -91,8 +87,6 @@ export type BlockWith<T> = //
     ? LinkBlock
     : T extends TPage
     ? PageBlock
-    : T extends TEmbed
-    ? EmbedBlock
     : T extends TVideo
     ? VideoBlock
     : T extends TMap
