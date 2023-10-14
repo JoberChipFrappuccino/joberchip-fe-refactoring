@@ -40,6 +40,7 @@ export function BlocksViewer() {
     })
   })
 
+  // * "edit" 또는 "view" 모드가 변경되면 이에 맞는 레이아웃을 다시 그립니다.
   useEffect(() => {
     const nextLayout = getBlockLayout(sharePage.children, 'edit')
     setGridLayout(() => ({ breakpoints: 'lg', layouts: { lg: nextLayout } }))
@@ -76,9 +77,7 @@ export function BlocksViewer() {
           setActiveBlockId(element.id)
           if (event.type === 'mousedown') return
           const targetElement = event.target as HTMLElement
-          if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) {
-            targetElement.closest('button')?.click()
-          }
+          if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) targetElement.closest('button')?.click()
         }}
       >
         {sharePage.children.map((block) => {

@@ -25,7 +25,7 @@
     .editorContainer {
       width: 100%;
       overflow-x: auto;
-      padding-left: toRem(15px);
+      padding: 0 toRem(15px);
       &::-webkit-scrollbar {
         display: none;
       }

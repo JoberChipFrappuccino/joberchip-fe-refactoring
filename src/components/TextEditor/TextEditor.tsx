@@ -12,6 +12,7 @@ interface TextEditorProps {
   isButtonDisabled: boolean
   editorState: EditorState
   setEditorState: any
+  objectId: string
 }
 
 export default function TextEditor(props: TextEditorProps) {
@@ -27,7 +28,7 @@ export default function TextEditor(props: TextEditorProps) {
 
   useEffect(() => {
     props.editorState ? props.setEditorState(props.editorState) : props.setEditorState(EditorState.createEmpty())
-  }, [props.editorState])
+  }, [props.objectId])
 
   const getBlockStyle = (block: any): string => {
     switch (block.getType()) {
