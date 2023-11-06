@@ -37,7 +37,8 @@ export function TemplateBlock({ block, mode, preview = false }: TemplateBlockPro
       {open && (
         <ModalPortal>
           <TemplatePreviewModal onClose={() => setOpen(false)}>
-            <img className={styles.img} src={block.previewURL} alt="template preciew Image" />
+            {/* HACK : 기업측에서 템플릿을 제공하지 않도록 정했기 때문에 임시 이미지로 대체합니다. */}
+            <img src={'/newbie_profile_form.png'} alt="template preview Image" />
           </TemplatePreviewModal>
         </ModalPortal>
       )}

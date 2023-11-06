@@ -8,7 +8,7 @@ export interface SharePage {
   visible?: boolean // 최상위 페이지는 visible속성이 없습니다.
 }
 
-export type BlockType = TText | TImage | TLink | TPage | TVideo | TMap | TTemplate | 'BASE' // HACK : "BASE"는 임시 코드
+export type BlockType = TText | TImage | TLink | TPage | TVideo | TMap | TTemplate | 'BASE' // HACK : "BASE"는 임시로 사용하는 타입
 
 export type BlockBase<T extends BlockType> = {
   objectId: string
