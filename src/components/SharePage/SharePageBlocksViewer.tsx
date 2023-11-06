@@ -30,10 +30,8 @@ export function BlocksViewer() {
     breakpoints: 'lg',
     layouts: { lg: getBlockLayout(sharePage.children, 'view') } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
-
   const { activeBlockId, setActiveBlockId } = useBlockAction()
   useDebounce(grid.layouts.lg, LAYOUT_DEBOUNCE_TIME, (nextLayout) => {
-    // WARN : 최초 랜더링시에도 호출되는 문제가 있습니다! (최초 랜더링시에는 호출되지 않아야 합니다.)
     if (mode === 'view') return
     to(fetchBlockPosition(sharePage.pageId, convertLayoutToBlockParams(sharePage.children, nextLayout))).then((res) => {
       toast(res.message, res.status, { autoClose: 500 })

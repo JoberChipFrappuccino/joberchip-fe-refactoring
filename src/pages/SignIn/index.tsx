@@ -34,9 +34,6 @@ export default function SignIn() {
       <div className={styles.link}>
         <Link to="/signup">Sign Up</Link>
       </div>
-      <div className={styles.link}>
-        <Link to="/test/signin">임시 로그인</Link>
-      </div>
     </div>
   )
 }
