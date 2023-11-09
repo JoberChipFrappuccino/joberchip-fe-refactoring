@@ -47,6 +47,7 @@
 [피그마에서 파트 분배 확인하기](https://www.figma.com/file/EztDbyA2nY9Xtyp7cxBlbD/%ED%8C%8C%EC%9D%B4%EB%84%90-%ED%94%84%EB%A1%A0%ED%8A%B8%ED%8C%80-%ED%8C%8C%ED%8A%B8-%EB%B6%84%EB%B0%B0-%ED%94%BC%EA%B7%B8%EC%9E%BC?type=whiteboard&node-id=0-1&t=7yVkdM6yeGtwS8yg-0)
 
 |기능|담당|
+|:--:|:--:|
 |`회원관리`|정태욱|
 |`스페이스`|정태욱|
 |`블럭 공통`|정태욱|
@@ -185,10 +186,26 @@ npm run start
 npm run start:pm2
 ```
 
+## 아키텍쳐 (백엔드 로직 일부 생략)
+
+![architecture_2st](https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/e7090c3b-9f15-4b0d-917f-dc4fc9081208)
 
 
-## 공유 페이지 접근 시퀀스 
+## 공유 페이지 접근 시퀀스 다이어그램
 
-![image](https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/52756ef7-9749-45c8-a908-17df8939667c)
+공유 페이지 접근시 `react-dom/server`의 `renderToString`을 사용하거나 `react-router-dom`의 `useNavigate`, `Link`에 따라 
 
-![image](https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/f34c19fc-96e8-4232-a27d-73d14efec550)
+SSR, CSR로 나뉘어 동작합니다.
+
+### 브라우저 URL로 주소를 이동했을 경우
+
+브라우저 URL로 주소를 이동했을 경우`react-dom/server`의 `renderToString`를 사용하여 SSR로 동작합니다.
+
+![ssr_sequnce](https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/afacda3b-211e-4ea2-aef6-ed57231ed0b5)
+
+### 웹 애플리케이션 안에서 주소를 이동했을 경우
+
+`react-router-dom`의 `useNavigate`, `Link`를 사용하여 이동한 경우에 해당됩니다. CSR로 동작합니다.
+
+![csr_sequence](https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/a403df9c-0e42-49ef-aae9-571434cf799f)
+
