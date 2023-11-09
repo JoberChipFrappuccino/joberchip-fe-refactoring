@@ -197,9 +197,9 @@ npm run start:pm2
 
 SSR, CSR로 나뉘어 동작합니다.
 
-### 브라우저 URL로 주소를 이동했을 경우
+### 브라우저 주소창에 URL을 입력하여 접속했을 경우
 
-브라우저 URL로 주소를 이동했을 경우`react-dom/server`의 `renderToString`를 사용하여 SSR로 동작합니다.
+브라우저 주소창에 URL을 입력하여 접속했을 경우 `react-dom/server`의 `renderToString`를 사용하여 SSR로 동작합니다.
 
 ![ssr_sequnce](https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/afacda3b-211e-4ea2-aef6-ed57231ed0b5)
 
