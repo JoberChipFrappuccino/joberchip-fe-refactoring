@@ -3,11 +3,10 @@ import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import classNames from 'classnames'
-import type { ReactNode } from 'react'
+import { useMemo, type ReactNode } from 'react'
 import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from 'react-icons/bi'
 import styles from './ActionBlockFormBase.module.scss'
 
-// todo block type을 알아야하는지 논의가 필요합니당.
 interface Props {
   children: ReactNode
 }
@@ -20,40 +19,50 @@ export function ActionBlockFormBase({ children }: Props) {
     type: BlockType
     icon: ReactNode
   }
-  const formTypes: FormType[] = [
-    {
-      type: LINK,
-      title: BLOCK_TYPE_TO_KOR[LINK],
-      icon: <BiLink />
-    },
-    {
-      type: IMAGE,
-      title: BLOCK_TYPE_TO_KOR[IMAGE],
-      icon: <BiImageAlt />
-    },
-    {
-      type: VIDEO,
-      title: BLOCK_TYPE_TO_KOR[VIDEO],
-      icon: <BiCaretRightSquare />
-    },
-    {
-      type: MAP,
-      title: BLOCK_TYPE_TO_KOR[MAP],
-      icon: <BiMapAlt />
-    },
-    {
-      type: TEXT,
-      title: BLOCK_TYPE_TO_KOR[TEXT],
-      icon: <BiPencil />
-    }
-  ]
+  const formTypes: FormType[] = useMemo(
+    () => [
+      {
+        type: LINK,
+        title: BLOCK_TYPE_TO_KOR[LINK],
+        icon: <BiLink />
+      },
+      {
+        type: IMAGE,
+        title: BLOCK_TYPE_TO_KOR[IMAGE],
+        icon: <BiImageAlt />
+      },
+      {
+        type: VIDEO,
+        title: BLOCK_TYPE_TO_KOR[VIDEO],
+        icon: <BiCaretRightSquare />
+      },
+      {
+        type: MAP,
+        title: BLOCK_TYPE_TO_KOR[MAP],
+        icon: <BiMapAlt />
+      },
+      {
+        type: TEXT,
+        title: BLOCK_TYPE_TO_KOR[TEXT],
+        icon: <BiPencil />
+      }
+    ],
+    []
+  )
   return (
     <div style={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
-      <div className={styles.ActionBlockFormBaseContainer}>
+      <div className={styles.container}>
         <h2>
           {formTypes.find((form) => form.type === blockType)?.title} {drawerMode === 'create' ? '추가' : '수정'}하기
         </h2>
-        <div className={styles.actionNavigation}>
+        <div
+          className={classNames([
+            styles.actionNavigation,
+            {
+              [styles.focusable]: drawerMode === 'create'
+            }
+          ])}
+        >
           {formTypes.map((form) => {
             return (
               <div key={form.type}>

@@ -4,12 +4,13 @@
   padding: 0 1.25rem 0 1.25rem;
   justify-content: space-between;
   margin-bottom: 2.5rem;
+}
+.actionNavigation.focusable {
   button:hover {
     transform: scale(0.96);
     box-shadow: none;
   }
 }
-
 .actionNavigation button {
   width: 4.625rem;
   height: 4.625rem;
@@ -28,10 +29,17 @@
   &.disable {
     cursor: default;
   }
+  &.active {
+    font-weight: 500;
+    color: white;
+    border: solid 0.0625rem #3b51fe;
+    background-color: #4c61ff;
+    box-shadow: 0rem 0rem 0.5rem 0.25rem rgba(0, 0, 0, 0.173);
+  }
 }
 
-.ActionBlockFormBaseContainer h2 {
-  margin-left: 20px;
+.container h2 {
+  margin: 2rem 0 1.5rem 1.5rem;
 }
 
 .icon {
@@ -53,15 +61,6 @@
   margin-top: 0.625rem;
   align-items: center;
   justify-content: center;
-}
-
-// active 스타일이 적용되지 않아 !important 사용
-.active {
-  font-weight: 500;
-  color: white !important;
-  border: solid 0.0625rem #3b51fe !important;
-  background-color: #4c61ff !important;
-  box-shadow: 0rem 0rem 0.5rem 0.25rem rgba(0, 0, 0, 0.173) !important;
 }
 
 #btnTitle {
