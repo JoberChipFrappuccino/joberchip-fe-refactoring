@@ -25,10 +25,9 @@ export default function ShareableSpace() {
   useEffect(() => {
     // CASE : CSR
     // react 내부적으로 주소를 이동할 경우 space를 다시 로드합니다.
-    // SSR시 데이터가 없을 경우도 여기에서 처리합니다.
+    // SSR시 데이터가 없는 경우도 여기에서 처리합니다.
     if (!SSRSpace?.pageId) {
       loadSharePageFromBack(pageId ?? '')
-
       return
     }
 
@@ -36,12 +35,10 @@ export default function ShareableSpace() {
     // SSR로 로드한 spaceId와 이동할 space가 다르다면 space를 다시 로드합니다.
     if (SSRSpace?.pageId !== pageId) {
       loadSharePageFromBack(pageId ?? '')
-
       return
     }
 
     // CASE : SSR
-    // HACK : 권한은 임시로 업데이트하는 척 합니다.
     const nextSpace: SharePage = {
       ...SSRSpace
     }
@@ -49,9 +46,9 @@ export default function ShareableSpace() {
     setSharePage(nextSpace)
   }, [pageId])
 
+  // CASE : CSR
+  // SSR시 isFetching은 항상 false라서 해당 Effect는 동작하지 않습니다.
   useEffect(() => {
-    // CASE : CSR
-    // HACK : fetch가 완료되면 페이지 권한을 체크 후 업데트합니다.
     if (!isFetching) {
       const nextSpace: SharePage = {
         ...sharePage
