@@ -10,7 +10,6 @@ export function useDebounce<T extends object | string>(
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value)
-      if (checkSameValue(value, debouncedValue)) return
       onChaged(value)
     }, delay)
 

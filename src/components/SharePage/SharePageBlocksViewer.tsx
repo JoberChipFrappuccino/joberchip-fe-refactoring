@@ -31,8 +31,10 @@ export function BlocksViewer() {
     layouts: { lg: getBlockLayout(sharePage.children, 'view') } // , md: layout, sm: layout, xs: layout, xxs: layout
   })
   const { activeBlockId, setActiveBlockId } = useBlockAction()
+
   useDebounce(grid.layouts.lg, LAYOUT_DEBOUNCE_TIME, (nextLayout) => {
     if (mode === 'view') return
+    // TODO : ComponentDidMount시 useDebounce hook의 콜백이 호출됩니다. 이를 방지하려면 object.id, w,h,x,y를 비교하는 로직을 추가하여 해결합니다.
     to(fetchBlockPosition(sharePage.pageId, convertLayoutToBlockParams(sharePage.children, nextLayout))).then((res) => {
       toast(res.message, res.status, { autoClose: 500 })
     })
