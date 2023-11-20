@@ -21,7 +21,6 @@
 > **기간** : 2023. 09. 18. ~ 2023. 10. 06. <br/>
 > **기타** : 패스트캠퍼스 부트캠프의 PM&UXUI&FE&BE 협업으로 진행된 기업연계 파이널 프로젝트입니다. <br><br/>
 
-
 <p align=center>
 <img src="https://img.shields.io/github/issues-closed/JoberChipFrappuccino/joberchip-fe?style=flat"/>
 <img src="https://img.shields.io/github/last-commit/JoberChipFrappuccino/joberchip-fe?style=flat"/>
@@ -113,6 +112,31 @@
 </p> <br></br>
 
 
+## 실행 방법
+
+### Developmenet
+
+```bash
+# 번들링
+npm run build:dev
+
+# 서버 실행
+npm run dev
+```
+
+### Production
+
+```bash
+# 번들링
+npm run build:prod
+
+# 서버 실행
+npm run start
+# 또는
+npm run start:pm2
+```
+
+
 ## 🖥️ 기능 소개
 ### 1. 스페이스
 | 기본생성 |  자동저장  | 템플릿 생성 |
@@ -159,36 +183,11 @@
 |<img src="https://github.com/atsunsetree/joberchip-be/assets/128345842/e46d8a94-43a8-4575-9eb3-7095a910522d" width=600/>|<img src="https://github.com/atsunsetree/joberchip-be/assets/128345842/767b1bc9-3f4c-4001-ab8b-6003bb401c78" width=600/>|
 |설명|설명|
 
-
 <br></br>
-
-## 실행 방법
-
-### Developmenet
-
-```bash
-# 번들링
-npm run build:dev
-
-# 서버 실행
-npm run dev
-```
-
-### Production
-
-```bash
-# 번들링
-npm run build:prod
-
-# 서버 실행
-npm run start
-# 또는
-npm run start:pm2
-```
 
 ## 아키텍쳐 (백엔드 로직 일부 생략)
 
-![architecture_2st](https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/e7090c3b-9f15-4b0d-917f-dc4fc9081208)
+<img width="1173" alt="joberchip-architecture" src="https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/c36783a2-2ef7-4405-bc0b-99e90536f5d7">
 
 
 ## 공유 페이지 접근 시퀀스 다이어그램
