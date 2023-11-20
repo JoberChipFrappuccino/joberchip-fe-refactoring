@@ -185,7 +185,7 @@ npm run start:pm2
 
 <br></br>
 
-## 아키텍쳐 (백엔드 로직 일부 생략)
+## 아키텍쳐
 
 <img width="1173" alt="joberchip-architecture" src="https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/c36783a2-2ef7-4405-bc0b-99e90536f5d7">
 
