@@ -25,6 +25,7 @@ export default function Space() {
       <div className={styles.container}>
         <Helmet>
           <title>Jober Chip</title>
+          <meta name="description" content="Jober Chip Home Page" />
         </Helmet>
         <div className={styles.cover}>
           <Search />

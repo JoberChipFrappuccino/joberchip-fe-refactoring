@@ -42,6 +42,7 @@ export default function ShareableSpace() {
     const nextSpace: SharePage = {
       ...SSRSpace
     }
+
     if (nextSpace.privilege === 'EDIT') setSharePageMode('edit')
     setSharePage(nextSpace)
   }, [pageId])
@@ -66,8 +67,11 @@ export default function ShareableSpace() {
       </Header>
       <Helmet>
         <title>{pageSource.title ? `Jober chip | ${pageSource.title}` : 'Jober'}</title>
-        <meta name="description" content={pageSource.description ?? ''} />
+        <meta name="description" content={pageSource.description} />
         <link rel="favicon" href={pageSource.profileImageLink ?? '/favicon.ico'} />
+        <meta property="og:title" content={pageSource.title} />
+        <meta property="og:description" content={pageSource.description} />
+        <meta property="og:image" content={pageSource.profileImageLink} />
       </Helmet>
       {isLoaded && <Profile />}
       {<Drawer />}
