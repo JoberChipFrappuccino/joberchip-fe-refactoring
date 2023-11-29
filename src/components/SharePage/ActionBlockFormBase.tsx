@@ -1,11 +1,11 @@
 import classNames from 'classnames'
 import { useMemo, type ReactNode } from 'react'
-import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from 'react-icons/bi'
 import { IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import styles from './ActionBlockFormBase.module.scss'
+import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from './berrel'
 
 interface Props {
   children: ReactNode

@@ -1,5 +1,5 @@
+import { MdKeyboardArrowRight } from '@react-icons/all-files/md/MdKeyboardArrowRight'
 import { type CSSProperties } from 'react'
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import styles from './GroupSpaceItem.module.scss'
 
@@ -16,7 +16,7 @@ export function GroupSpaceItem({ icon = 'user', text, link, style }: GroupSpaceI
       <img src={`/${icon}_space_icon.png`} alt={`/${icon} space icon`} />
       <Link to={link}>{text}</Link>
       <span>
-        <MdOutlineKeyboardArrowRight />
+        <MdKeyboardArrowRight />
       </span>
     </div>
   )

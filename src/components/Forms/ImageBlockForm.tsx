@@ -1,6 +1,5 @@
-/* eslint-disable object-shorthand */
+import { TiDeleteOutline } from '@react-icons/all-files/ti/TiDeleteOutline'
 import { useEffect, useState, type FormEvent } from 'react'
-import { TiDeleteOutline } from 'react-icons/ti'
 import { addImageBlockAPI, editImageBlockAPI } from '@/api/blocks'
 import { IMAGE } from '@/constants/blockTypeConstant'
 import { useBlockAction } from '@/store/blockAction'

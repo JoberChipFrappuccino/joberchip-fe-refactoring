@@ -1,4 +1,4 @@
-import { HiOutlinePlus } from 'react-icons/hi2'
+import { HiOutlinePlus } from '@react-icons/all-files/hi/HiOutlinePlus'
 import styles from './MainBlockInfo.module.scss'
 
 const icons = [

@@ -1,5 +1,5 @@
+import { TiDeleteOutline } from '@react-icons/all-files/ti/TiDeleteOutline'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
-import { TiDeleteOutline } from 'react-icons/ti'
 import { addVideoBlockAPI, editVideoBlockAPI } from '@/api/blocks'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'

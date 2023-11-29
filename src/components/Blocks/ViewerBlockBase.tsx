@@ -1,7 +1,7 @@
+import { BsThreeDotsVertical } from '@react-icons/all-files/bs/BsThreeDotsVertical'
 import { Switch } from 'antd'
 import classNames from 'classnames'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { BsThreeDotsVertical } from 'react-icons/bs'
 import { editGoogleMapBlockAPI, editImageBlockAPI, editLinkBlockAPI, editVideoBlockAPI } from '@/api/blocks'
 import { deleteBlockAPI, deletePageAPI } from '@/api/delete'
 import { editPageProfileAPI } from '@/api/space'

@@ -1,7 +1,7 @@
+import { BsThreeDotsVertical } from '@react-icons/all-files/bs/BsThreeDotsVertical'
 import { Switch } from 'antd'
 import classNames from 'classnames'
 import { useMemo } from 'react'
-import { BsThreeDotsVertical } from 'react-icons/bs'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { useBlockAction } from '@/store/blockAction'
 import styles from './BlockActionBar.module.scss'

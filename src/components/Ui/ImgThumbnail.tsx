@@ -1,5 +1,5 @@
+import { HiOutlineMinusCircle } from '@react-icons/all-files/hi/HiOutlineMinusCircle'
 import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
-import { HiOutlineMinusCircle } from 'react-icons/hi'
 import styles from './ImgThumbnail.module.scss'
 
 type Props = {

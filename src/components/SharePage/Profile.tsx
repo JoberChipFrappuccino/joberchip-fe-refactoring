@@ -1,7 +1,7 @@
+import { BsThreeDotsVertical } from '@react-icons/all-files/bs/BsThreeDotsVertical'
+import { MdKeyboardArrowRight } from '@react-icons/all-files/md/MdKeyboardArrowRight'
 import { Switch } from 'antd'
 import { useState } from 'react'
-import { BsThreeDotsVertical } from 'react-icons/bs'
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { editPageProfileAPI } from '@/api/space'
 import { ConfirmModal } from '@/components/Modal/ConfirmModal'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
@@ -108,7 +108,7 @@ export function Profile() {
                 <nav className={styles.navCover}>
                   <a href="/">
                     스페이스 홈 바로가기
-                    <MdOutlineKeyboardArrowRight />
+                    <MdKeyboardArrowRight />
                   </a>
                 </nav>
               </>
