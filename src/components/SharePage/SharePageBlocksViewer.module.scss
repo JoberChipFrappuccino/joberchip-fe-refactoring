@@ -8,16 +8,12 @@
 }
 
 .layout {
-  .gridBox {
-    position: relative;
-    max-width: 940px;
-    width: 100%;
-    margin: 0 auto;
-    .item {
-      z-index: 11;
-      background-color: white;
-      border: 0px solid rgb(0, 0, 0);
-      padding: 0;
-    }
+  max-width: 940px;
+  margin: auto;
+  .item {
+    z-index: 11;
+    background-color: white;
+    border: 0px solid rgb(0, 0, 0);
+    padding: 0;
   }
 }

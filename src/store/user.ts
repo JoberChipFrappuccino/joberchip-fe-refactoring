@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { loadUserInfoAPI, signInAPI } from '@/apis/user'
+import { getUserInfoAPI, signInAPI } from '@/api/user'
 import { BACK_MOCK_ACCESS_TOKEN } from '@/constants'
 import { type User } from '@/models/user'
 import { to } from '@/utils/api'
@@ -19,7 +19,7 @@ interface UserState {
   isFetching: boolean
   isSignedIn: boolean
   signIn: (user: LoginForm) => Promise<LoginResponse>
-  loadUserInfo: () => Promise<boolean>
+  getUserInfo: () => Promise<boolean>
   signOut: VoidFunction
 }
 // TODO : Zustand 타입 정의 필요
@@ -42,10 +42,10 @@ export const useUserStore = create<UserState>((set) => {
       }
       return res
     },
-    loadUserInfo: async () => {
+    getUserInfo: async () => {
       if (!localStorage.getItem(BACK_MOCK_ACCESS_TOKEN)) return false
       set((state) => ({ ...state, isFetching: true, isSignedIn: false }))
-      const { data: user } = await to(loadUserInfoAPI())
+      const { data: user } = await to(getUserInfoAPI())
       if (!user) {
         set((state) => ({ ...state, isFetching: false, isSignedIn: false }))
         localStorage.removeItem(BACK_MOCK_ACCESS_TOKEN)

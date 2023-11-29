@@ -8,5 +8,5 @@ export const ACCESS_TOKEN = 'token'
 export const BACK_MOCK_ACCESS_TOKEN = 'BACK_MOCK_ACCESS_TOKEN'
 export const DROPDOWN_TRIGGER_ICON_ID = 'DROPDOWN_TRIGGER_ICON_ID'
 
-export const DEFAULT_STALE_TIME = 1000 * 60 * 5
+export const DEFAULT_CACHE_TIME = 1000 * 60 * 5
 export const TOAST_AUTO_CLOSE_TIME = 1500

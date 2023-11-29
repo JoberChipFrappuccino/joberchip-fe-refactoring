@@ -1,4 +1,4 @@
-import styles from '@/components/Common/TextEditor/ToolOption.module.scss'
+import styles from '../components/TextEditor/ToolOption.module.scss'
 
 export const TOOL_TYPES = [
   {

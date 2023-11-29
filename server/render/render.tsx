@@ -1,13 +1,13 @@
 import type { Request, Response } from 'express'
 import path from 'path'
 import { ChunkExtractor } from '@loadable/server'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { renderToString } from 'react-dom/server'
 import { Helmet } from 'react-helmet'
 import { StaticRouter } from 'react-router-dom/server'
-import { SEO, SPACE } from '@/constants'
-import QueryContext from '@/contexts/QueryContext'
-import { SSRProvider } from '@/contexts/ssr'
-import { Router } from '@/router'
+import App from '@/App'
+import { DEFAULT_CACHE_TIME, SEO, SPACE } from '@/constants'
+import { SSRProvider } from '@/context/ssr'
 import { api } from '~/api/api'
 
 export default async function renderHome(url: string, req: Request, res: Response) {
@@ -41,24 +41,29 @@ export default async function renderHome(url: string, req: Request, res: Respons
   const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats })
 
   const extractor = process.env.NODE_ENV === 'production' ? webExtractor : nodeExtractor
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        cacheTime: DEFAULT_CACHE_TIME, // 5분
+        retry: 0
+      }
+    }
+  })
 
   const jsx = extractor.collectChunks(
-    <StaticRouter location={url}>
-      <SSRProvider data={serverSideData}>
-        <QueryContext>
-          <Router />
-        </QueryContext>
-      </SSRProvider>
-    </StaticRouter>
+    <SSRProvider data={serverSideData}>
+      <StaticRouter location={url}>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </StaticRouter>
+    </SSRProvider>
   )
 
   const html = renderToString(jsx)
   const helmet = Helmet.renderStatic()
 
-  /**
-   * @description 동적 CSS 가져오기 이슈가 있습니다.
-   * @see https://github.com/gregberge/loadable-components/issues/94
-   */
   res.set('content-type', 'text/html')
   res.send(`
     <!DOCTYPE html>
@@ -66,16 +71,16 @@ export default async function renderHome(url: string, req: Request, res: Respons
       <head>
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <meta charSet="utf-8" />
-        <link rel="stylesheet" type="text/css" href="/web/App.css">
         ${helmet.title.toString()}
         ${webExtractor.getLinkTags()}
+        ${webExtractor.getStyleTags()}
       </head>
       <body>
         <div id="root">${html}
         </div>
+        <script id="__SERVER_DATA__" type="application/json">${JSON.stringify(serverSideData)}</script>
+        ${webExtractor.getScriptTags()}
       </body>
-      <script id="__SERVER_DATA__" type="application/json">${JSON.stringify(serverSideData)}</script>
-      ${webExtractor.getScriptTags()}
     </html>
     `)
 }

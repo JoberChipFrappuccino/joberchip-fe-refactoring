@@ -8,5 +8,6 @@ export const BLOCK_TYPE_TO_KOR: Record<BlockType, string> = {
   VIDEO: '비디오',
   MAP: '지도',
   LINK: '링크',
-  BASE: '기본'
+  BASE: '기본',
+  EMBED: '임베드'
 }
