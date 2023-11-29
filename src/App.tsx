@@ -9,13 +9,13 @@ import '@/styles/antd.scss'
 
 export default function App() {
   return (
-    <>
+    <div>
       <div id="portal" />
       <Layout>
         <Layout.Content className={styles.layout}>
           <Outlet />
         </Layout.Content>
       </Layout>
-    </>
+    </div>
   )
 }

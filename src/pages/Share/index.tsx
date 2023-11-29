@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useParams } from 'react-router-dom'
+import { BreadCrumbBox, Header, LeftMenu } from '@/components/Common/Menus'
 import { Drawer } from '@/components/SharePage/Drawer'
 import { Profile } from '@/components/SharePage/Profile'
 import { BlocksViewer } from '@/components/SharePage/SharePageBlocksViewer'
@@ -8,7 +9,6 @@ import { SEO, SPACE } from '@/constants'
 import { type SharePage } from '@/models/space'
 import { useSharePageStore } from '@/store/sharePage'
 import useServerSideProps from '@/hooks/serverSideProps'
-import styles from './SharePage.module.scss'
 
 interface PageSource {
   title: string
@@ -60,18 +60,18 @@ export default function ShareableSpace() {
 
   return (
     <>
+      <Header>
+        <LeftMenu />
+        <BreadCrumbBox />
+      </Header>
       <Helmet>
         <title>{pageSource.title ? `Jober chip | ${pageSource.title}` : 'Jober'}</title>
         <meta name="description" content={pageSource.description ?? ''} />
         <link rel="favicon" href={pageSource.profileImageLink ?? '/favicon.ico'} />
       </Helmet>
       {isLoaded && <Profile />}
-      <aside>{<Drawer />}</aside>
-      <div className={styles.viewer}>
-        <div className={styles.spaceViewer}>
-          <section>{sharePage?.pageId === pageId && isLoaded && <BlocksViewer />}</section>
-        </div>
-      </div>
+      {<Drawer />}
+      {sharePage?.pageId === pageId && isLoaded && <BlocksViewer />}
     </>
   )
 }

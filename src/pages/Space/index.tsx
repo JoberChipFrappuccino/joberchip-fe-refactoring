@@ -6,19 +6,13 @@ import { GroupSpaceItem } from '@/components/SpacePage/GroupSpaceItem'
 import { Search } from '@/components/SpacePage/Search'
 import { UserProfile } from '@/components/SpacePage/UserProfile'
 import { type SpaceList } from '@/models/space'
-import { toast } from '@/utils/toast'
 import { useSpaceList } from '@/hooks/spaceList'
 import { useUser } from '@/hooks/user'
 import styles from './Space.module.scss'
 
 export default function Space() {
   const { user, isSignedIn } = useUser()
-  const { data, status, message, isLoaded } = useSpaceList(user.userId)
-
-  // TODO : Controller 로직 hooks로 이동
-  if (isLoaded && status === 'failure') {
-    toast(message, status)
-  }
+  const { data } = useSpaceList(user.userId)
 
   if (!isSignedIn) return null
 

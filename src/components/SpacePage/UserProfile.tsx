@@ -16,6 +16,7 @@ export function UserProfile() {
     createSpaceAPI()
       .then((res) => {
         toast(res.message, res.status, { autoClose: 500 })
+        // TODO : invalidate query, refetch query 등 정리
         queryClient.refetchQueries([SPACE_LIST])
       })
       .catch((err) => {
