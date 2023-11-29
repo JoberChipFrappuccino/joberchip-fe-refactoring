@@ -1,29 +1,47 @@
-import { loadableReady } from '@loadable/component'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import loadable, { loadableReady } from '@loadable/component'
+import { StrictMode } from 'react'
 import { hydrateRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import { DEFAULT_CACHE_TIME } from '@/constants'
-import App from './App'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import './App.scss'
+import '@/styles/reset.scss'
+import '@/styles/toast.scss'
+import '@/styles/antd.scss'
+// * Layouts
+const Layout = loadable(() => import('./components/Common/layouts/Layout'))
+const SharePageLayout = loadable(() => import('./components/Common/layouts/SharePageLayout'))
+// * Pages
+const Space = loadable(() => import('./pages/Space'))
+const SignUp = loadable(() => import('./pages/SignUp'))
+const SignIn = loadable(() => import('./pages/SignIn'))
+const TestSignIn = loadable(() => import('./pages/TestSignIn'))
+const SharePage = loadable(() => import('./pages/Share'))
+const NotFound = loadable(() => import('./pages/NotFound'))
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      cacheTime: DEFAULT_CACHE_TIME, // 5분
-      retry: 0
-    }
-  }
-})
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <Space /> },
+      { path: '/signup', element: <SignUp /> },
+      { path: '/test/signin', element: <TestSignIn /> },
+      { path: '/signin', element: <SignIn /> }
+    ]
+  },
+  {
+    path: '/',
+    element: <SharePageLayout />,
+    children: [{ path: '/space/:pageId', element: <SharePage /> }]
+  },
+  { path: '*', element: <NotFound /> }
+])
 
 void loadableReady(() => {
   hydrateRoot(
     document.getElementById('root') as HTMLDivElement,
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <App />
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      </QueryClientProvider>
-    </BrowserRouter>
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
   )
 })
 

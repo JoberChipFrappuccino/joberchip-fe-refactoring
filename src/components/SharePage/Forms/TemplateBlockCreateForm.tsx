@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import { useState } from 'react'
 import { addTemplateBlockAPI } from '@/apis/blocks'
 import { getTemplates } from '@/apis/template'
-import { DEFAULT_CACHE_TIME } from '@/constants'
 import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
@@ -19,9 +18,7 @@ export function TemplateBlockCreateForm() {
   const { user } = useUserStore()
   const { sharePage, setSharePage } = useSharePageStore()
   const { setOpenDrawer } = useBlockAction()
-  const { data: templates } = useQuery(['template', user.userId], () => getTemplates(user.userId), {
-    staleTime: DEFAULT_CACHE_TIME
-  })
+  const { data: templates } = useQuery(['template', user.userId], () => getTemplates(user.userId))
   const [templateId, setTemplateId] = useState('')
 
   const handleOnClick = (block: BlockWith<TTemplate>) => {

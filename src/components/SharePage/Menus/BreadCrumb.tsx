@@ -2,14 +2,12 @@ import { useQuery } from '@tanstack/react-query'
 import { Breadcrumb } from 'antd'
 import { Link, useParams } from 'react-router-dom'
 import { fetchBreadCrumb, type BreadCrumbItems } from '@/apis/space'
-import { DEFAULT_CACHE_TIME } from '@/constants'
 import { BREAD_CRUMB } from '@/constants/queryKeyConstant'
 import { toast } from '@/utils/toast'
 
 export function BreadCrumbBox() {
   const { pageId } = useParams<{ pageId: string }>()
   const { data } = useQuery([BREAD_CRUMB, pageId ?? ''], () => fetchBreadCrumb(pageId), {
-    staleTime: DEFAULT_CACHE_TIME,
     enabled: !!pageId
   })
 

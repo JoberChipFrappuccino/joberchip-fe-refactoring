@@ -6,7 +6,7 @@ import { renderToString } from 'react-dom/server'
 import { Helmet } from 'react-helmet'
 import { StaticRouter } from 'react-router-dom/server'
 import App from '@/App'
-import { DEFAULT_CACHE_TIME, SEO, SPACE } from '@/constants'
+import { DEFAULT_STALE_TIME, SEO, SPACE } from '@/constants'
 import { SSRProvider } from '@/contexts/ssr'
 import { api } from '~/api/api'
 
@@ -45,7 +45,7 @@ export default async function renderHome(url: string, req: Request, res: Respons
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
-        cacheTime: DEFAULT_CACHE_TIME, // 5분
+        cacheTime: DEFAULT_STALE_TIME, // 5분
         retry: 0
       }
     }

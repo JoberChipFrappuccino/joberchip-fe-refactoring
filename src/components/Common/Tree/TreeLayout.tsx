@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query'
 import { Tree } from 'antd'
 import { useEffect, useState } from 'react'
 import { fetchBreadCrumb } from '@/apis/space'
-import { DEFAULT_CACHE_TIME } from '@/constants'
 import { BREAD_CRUMB } from '@/constants/queryKeyConstant'
 import { useSharePageStore } from '@/store/sharePage'
 import { useTree } from '@/hooks/tree'
@@ -19,7 +18,6 @@ export default function TreeLayout({ onSelectTreeNode }: Props) {
     [BREAD_CRUMB, sharePage.pageId ?? ''],
     () => fetchBreadCrumb(sharePage.pageId),
     {
-      staleTime: DEFAULT_CACHE_TIME,
       enabled: !!sharePage.pageId
     }
   )
