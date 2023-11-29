@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { editPageProfileAPI } from '@/api/space'
+import { editPageProfileAPI } from '@/apis/space'
 import { useSharePageStore } from '@/store/sharePage'
 import { toast } from '@/utils/toast'
 import styles from './ProfileImageForm.module.scss'

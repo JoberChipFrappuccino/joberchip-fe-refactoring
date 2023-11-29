@@ -63,6 +63,9 @@
   "settings": {
     "import/resolver": {
       "typescript": {}
+    },
+    "react": {
+      "version": "detect"
     }
   },
   "ignorePatterns": ["node_modules", "*.config.js", "scripts/*.js"]

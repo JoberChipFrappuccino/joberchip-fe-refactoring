@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { getUserInfoAPI, signInAPI } from '@/api/user'
+import { getUserInfoAPI, signInAPI } from '@/apis/user'
 import { BACK_MOCK_ACCESS_TOKEN } from '@/constants'
 import { type User } from '@/models/user'
 import { to } from '@/utils/api'

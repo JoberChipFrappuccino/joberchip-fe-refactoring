@@ -6,15 +6,15 @@ import '@/styles/toast.scss'
 import '@/styles/antd.scss'
 
 // * Layouts
-const Layout = loadable(() => import('./components/Layouts/Layout'))
-const SharePageLayout = loadable(() => import('./components/Layouts/TempSharePageLayout'))
+const Layout = loadable(() => import('./components/Common/layouts/Layout'))
+const SharePageLayout = loadable(() => import('./components/Common/layouts/SharePageLayout'))
 
 // * Pages
 const Space = loadable(() => import('./pages/Space'))
 const SignUp = loadable(() => import('./pages/SignUp'))
 const SignIn = loadable(() => import('./pages/SignIn'))
 const TestSignIn = loadable(() => import('./pages/TestSignIn'))
-const SharePage = loadable(() => import('./pages/TempSharePage'))
+const SharePage = loadable(() => import('./pages/Share'))
 const NotFound = loadable(() => import('./pages/NotFound'))
 
 export default function App() {

@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet'
 import { StaticRouter } from 'react-router-dom/server'
 import App from '@/App'
 import { DEFAULT_CACHE_TIME, SEO, SPACE } from '@/constants'
-import { SSRProvider } from '@/context/ssr'
+import { SSRProvider } from '@/contexts/ssr'
 import { api } from '~/api/api'
 
 export default async function renderHome(url: string, req: Request, res: Response) {

@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { getSpaceAPI, getSpaceFromBackAPI } from '@/api/space'
+import { getSpaceAPI, getSpaceFromBackAPI } from '@/apis/space'
 import { type SharePage } from '@/models/space'
 import { to } from '@/utils/api'
 

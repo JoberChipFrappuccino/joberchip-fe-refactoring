@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { fetchSpaceListAPI } from '@/api/space'
+import { fetchSpaceListAPI } from '@/apis/space'
 import { DEFAULT_CACHE_TIME } from '@/constants'
 import { SPACE_LIST } from '@/constants/queryKeyConstant'
 import { type SpaceList } from '@/models/space'

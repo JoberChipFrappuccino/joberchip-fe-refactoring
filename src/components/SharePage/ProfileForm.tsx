@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { Spin } from 'antd'
 import { useEffect, useState } from 'react'
-import { editPageProfileAPI } from '@/api/space'
+import { editPageProfileAPI } from '@/apis/space'
 import { BREAD_CRUMB, SPACE_LIST } from '@/constants/queryKeyConstant'
 import { USER_PROFILE_DEVOUNCE_TIME } from '@/constants/sharePageConstant'
 import { useSharePageStore } from '@/store/sharePage'
