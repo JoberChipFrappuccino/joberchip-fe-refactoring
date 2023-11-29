@@ -7,7 +7,7 @@ require('dotenv').config()
 module.exports = (e, r) => {
   return {
     target: 'node',
-    node: false, // it enables '__dirname' in files. If is not, '__dirname' always return '/'.
+    node: false,
     mode: r.mode,
     devtool: r.mode === 'production' ? false : 'inline-source-map',
     entry: {
@@ -24,7 +24,7 @@ module.exports = (e, r) => {
           test: /\.s?css$/i,
           exclude: /\.module\.s?css$/i,
           use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-        }, // CSS Module ([filename].module.css)
+        },
         {
           test: /\.module\.s?css$/i,
           use: [

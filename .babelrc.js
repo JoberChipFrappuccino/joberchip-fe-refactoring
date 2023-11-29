@@ -15,9 +15,3 @@ module.exports = {
     ]
   ]
 }
-
-/**
- * 참고 자료
- * 1. 불필요한 React import를 제거
- * https://velog.io/@sooyun9600/React-is-not-defined-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0
- */

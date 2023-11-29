@@ -12,7 +12,7 @@ import './antd.scss'
 // * Layouts
 const Layout = loadable(() => import('./components/Layouts/Layout'))
 // const SharePageLayout = loadable(() => import('./components/Layouts/SpaceLayout'))
-const TempSharePageLayout = loadable(() => import('./components/Layouts/TempSharePageLayout'))
+const SharePageLayout = loadable(() => import('./components/Layouts/TempSharePageLayout'))
 
 // * Pages
 const Space = loadable(() => import('./pages/Space'))
@@ -20,7 +20,7 @@ const Space = loadable(() => import('./pages/Space'))
 const SignUp = loadable(() => import('./pages/SignUp'))
 const SignIn = loadable(() => import('./pages/SignIn'))
 const TestSignIn = loadable(() => import('./pages/TestSignIn'))
-const TempSharePage = loadable(() => import('./pages/TempSharePage'))
+const SharePage = loadable(() => import('./pages/TempSharePage'))
 const NotFound = loadable(() => import('./pages/NotFound'))
 
 export default function App() {
@@ -32,12 +32,9 @@ export default function App() {
         <Route path="/test/signin" element={<TestSignIn />} />
         <Route path="/signin" element={<SignIn />} />
       </Route>
-      <Route path="/" element={<TempSharePageLayout />}>
-        <Route path="/space/:pageId" element={<TempSharePage />} />
-      </Route>
-      {/* <Route path="/" element={<SharePageLayout />}>
+      <Route path="/" element={<SharePageLayout />}>
         <Route path="/space/:pageId" element={<SharePage />} />
-      </Route> */}
+      </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
