@@ -1,16 +1,17 @@
 @import '/src/styles/utils.scss';
+@import '/src/styles/maxin.scss';
 
 .tabContainer {
   width: 100%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  padding-top: toRem(20px);
+  padding-top: 2rem;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
   .tabButton {
-    width: toRem(52px);
-    height: toRem(52px);
+    width: 5.2rem;
+    height: 5.2rem;
     border-radius: 4px;
     background-color: #e2e6ef;
     display: flex;
@@ -21,45 +22,42 @@
   .topWrap {
     display: flex;
     flex-direction: column;
-    gap: toRem(10px);
+    gap: 2rem;
     border-bottom: 1px solid #a2a4af;
-    padding-bottom: toRem(10px);
+    padding-bottom: 2rem;
     .homeButton {
       background-color: #3b4753;
       border: 1px solid #e2e6ef;
       img {
-        width: toRem(20px);
-        height: toRem(20px);
+        width: 2rem;
+        height: 2rem;
       }
     }
     .ownerButton {
       background-color: #4c61ff;
       color: #fff;
       position: relative;
+      @include mobile {
+        font-size: 1.2rem;
+      }
     }
   }
   .userButton {
     background-color: #e2e6ef;
     color: #aeb9d1;
     &:first-child {
-      margin-top: toRem(20px);
+      margin-top: 2rem;
+    }
+    @include mobile {
+      font-size: 1.2rem;
     }
   }
   .plusButton {
     background-color: #3b4753;
     border: 1px solid #e2e6ef;
     img {
-      width: toRem(20px);
-      height: toRem(20px);
+      width: 2rem;
+      height: 2rem;
     }
-  }
-}
-
-@media screen and (max-width: 390px) {
-  .ownerButton {
-    font-size: 12px;
-  }
-  .userButton {
-    font-size: 12px;
   }
 }

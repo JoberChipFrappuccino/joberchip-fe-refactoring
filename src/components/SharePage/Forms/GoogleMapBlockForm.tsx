@@ -212,7 +212,13 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
         <div className={styles.forms}>
           <h3>상세주소</h3>
           <div className={styles.inputbox}>
-            <input type="text" value={address} onChange={onChangeAddress} placeholder="주소를 입력해주세요" />
+            <Input
+              className={styles.input}
+              type="text"
+              value={address}
+              onChange={onChangeAddress}
+              placeholder="주소를 입력해주세요"
+            />
             {address && (
               <button type="button" className={styles.delTitle} onClick={() => setAddress('')}>
                 <TiDeleteOutline />

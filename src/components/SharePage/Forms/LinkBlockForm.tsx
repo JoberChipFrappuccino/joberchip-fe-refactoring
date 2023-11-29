@@ -1,5 +1,5 @@
-/* eslint-disable object-shorthand */
 import { TiDeleteOutline } from '@react-icons/all-files/ti/TiDeleteOutline'
+import { Input } from 'antd'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { addLinkBlockAPI, editLinkBlockAPI } from '@/apis/blocks'
 import { useBlockAction } from '@/store/blockAction'
@@ -35,14 +35,14 @@ export function LinkBlockForm({ block }: BlockBaseWithBlockFormProps<TLink>) {
       y: getNextYOfLastBlock(sharePage.children),
       w: 1,
       h: 2,
-      title: title,
-      link: link,
+      title,
+      link,
       type: 'LINK',
       visible: true
     }
     const editData = {
-      title: title,
-      link: link
+      title,
+      link
     }
     try {
       if (drawerMode === 'create') {
@@ -96,7 +96,13 @@ export function LinkBlockForm({ block }: BlockBaseWithBlockFormProps<TLink>) {
         <div className={styles.forms}>
           <h3>URL 링크 주소 제목*</h3>
           <div className={styles.inputbox}>
-            <input type="text" value={title} onChange={onChangeTitle} placeholder="링크 제목을 입력해주세요." />
+            <Input
+              className={styles.input}
+              type="text"
+              value={title}
+              onChange={onChangeTitle}
+              placeholder="링크 제목을 입력해주세요."
+            />
             {title && (
               <button type="button" className={styles.delTitle} onClick={deleteTitle}>
                 <TiDeleteOutline />
@@ -105,7 +111,13 @@ export function LinkBlockForm({ block }: BlockBaseWithBlockFormProps<TLink>) {
           </div>
           <h3 className={styles.formTexts}>URL 링크 주소 삽입*</h3>
           <div className={styles.inputbox}>
-            <input type="text" value={link} onChange={onChangeLink} placeholder="링크 주소를 입력해주세요." />
+            <Input
+              className={styles.input}
+              type="text"
+              value={link}
+              onChange={onChangeLink}
+              placeholder="링크 주소를 입력해주세요."
+            />
             {link && (
               <button type="button" className={styles.delLink} onClick={deleteLink}>
                 <TiDeleteOutline />

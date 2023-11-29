@@ -1,6 +1,7 @@
 @import '/src/styles/variables.scss';
 @import '/src/styles/maxin.scss';
 @import '/src/styles/utils.scss';
+@import '/src/styles/variables.scss';
 
 .container {
   display: flex;
@@ -9,11 +10,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: toRem(900px);
+    max-width: 90rem;
     background-color: white;
-    padding: toRem(38px);
-    margin: toRem(40px) toRem(20px) 0 toRem(20px);
-    box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.089);
+    padding: 3.8rem;
+    margin: 4rem 2rem 0 2rem;
+    box-shadow: $box-shadow-small;
     border-radius: 1rem;
     ul {
       margin: 0;
@@ -26,17 +27,17 @@
     .profileCover {
       display: flex;
       .profileImageCover {
-        width: toRem(114px);
-        height: toRem(114px);
-        min-width: toRem(114px);
-        border-radius: toRem(57px);
+        width: 11.4rem;
+        height: 11.4rem;
+        min-width: 11.4rem;
+        border-radius: 5.7rem;
         overflow: hidden;
         @include tablet {
           & {
-            width: toRem(100px);
-            height: toRem(100px);
-            min-width: toRem(100px);
-            border-radius: toRem(50px);
+            width: 10rem;
+            height: 10rem;
+            min-width: 10rem;
+            border-radius: 5rem;
           }
         }
         img {
@@ -47,15 +48,15 @@
       }
       .profile {
         flex: 1;
-        padding-left: toRem(64px);
+        padding-left: 6.4rem;
         h2 {
-          font-size: 2rem;
+          font-size: 3rem;
           font-weight: bold;
           margin: 0;
           margin-bottom: 1rem;
         }
         p {
-          font-size: 1rem;
+          font-size: 1.6rem;
           color: grey;
           margin: 0;
         }
@@ -71,8 +72,8 @@
         border-radius: 1rem;
         cursor: pointer;
         .icon {
-          width: 1.4rem;
-          height: 1.4rem;
+          width: 2rem;
+          height: 2rem;
           fill: $base-black;
         }
       }
@@ -81,12 +82,12 @@
         align-items: center;
         li span {
           &:first-child {
-            font-size: 1rem;
+            font-size: 1.6rem;
             padding-right: 0.3rem;
             color: grey;
           }
           &:nth-child(2) {
-            font-size: 1rem;
+            font-size: 1.6rem;
             margin-right: 1rem;
           }
         }
@@ -96,19 +97,19 @@
         width: fit-content;
         height: fit-content;
         background-color: $highlight-blue;
-        padding: 0.5rem;
-        margin-top: 0.5rem;
-        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 1rem;
         a {
           display: flex;
           align-items: center;
           color: $jober-blue;
-          padding-left: 0.5rem;
+          padding-left: 1rem;
           // white-space: nowrap;
           svg {
             margin: auto;
             display: flex;
-            font-size: 1.25rem;
+            font-size: 1.6rem;
           }
         }
       }
@@ -126,7 +127,7 @@
           text-align: center;
           margin: 0;
           &:first-child {
-            font-size: 1.5rem;
+            font-size: 2.4rem;
             padding-bottom: 1rem;
             font-weight: bold;
             color: $jober-blue;
@@ -155,10 +156,10 @@
 @include tablet {
   .container {
     .inner {
-      padding: toRem(20px);
+      padding: 2rem;
       .profileCover {
         .profile {
-          padding-left: toRem(32px);
+          padding-left: 3.2rem;
         }
       }
     }
@@ -170,13 +171,13 @@
     .inner {
       border: transparent;
       box-shadow: none;
-      padding: toRem(15px);
-      padding-top: toRem(35px);
+      padding: 1.5rem;
+      padding-top: 3.5rem;
       margin: 0;
       border-radius: 0;
       .profileCover {
         .profile {
-          padding-left: toRem(18px);
+          padding-left: 1.8rem;
         }
       }
     }

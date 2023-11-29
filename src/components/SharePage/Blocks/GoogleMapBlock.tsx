@@ -30,7 +30,7 @@ export function GoogleMapBlock({ block, mode }: BlockBaseWithBlockProps<TMap>) {
     <div className={styles.container}>
       <div className={classNames(mode === 'edit' && 'cover')} />
       {isLoading ? (
-        <SkeletonTheme>{/* 로딩 중에만 Skeleton 테마 렌더링 */}</SkeletonTheme>
+        <SkeletonTheme />
       ) : (
         <GoogleMap
           mapContainerStyle={{ width: '100%', height: '400px' }}

@@ -1,4 +1,5 @@
 import { TiDeleteOutline } from '@react-icons/all-files/ti/TiDeleteOutline'
+import { Input } from 'antd'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { addVideoBlockAPI, editVideoBlockAPI } from '@/apis/blocks'
 import { useBlockAction } from '@/store/blockAction'
@@ -159,7 +160,8 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
               <h3>동영상 URL 첨부</h3>
             </div>
             <div className={styles.inputbox}>
-              <input
+              <Input
+                className={styles.input}
                 type="text"
                 value={videoUrl}
                 onChange={onChangetitle}

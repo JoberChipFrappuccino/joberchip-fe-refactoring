@@ -52,7 +52,7 @@ export function SideNavBar(props: any) {
               margin: '0 auto'
             }}
           >
-            <Space direction="vertical" style={{ marginTop: '20px' }}>
+            <Space direction="vertical" style={{ marginTop: '2rem' }}>
               <div>
                 <UserOutlined />
               </div>

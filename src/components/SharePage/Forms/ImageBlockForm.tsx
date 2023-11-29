@@ -1,4 +1,5 @@
 import { TiDeleteOutline } from '@react-icons/all-files/ti/TiDeleteOutline'
+import { Input } from 'antd'
 import { useEffect, useState, type FormEvent } from 'react'
 import { addImageBlockAPI, editImageBlockAPI } from '@/apis/blocks'
 import { IMAGE } from '@/constants/blockTypeConstant'
@@ -89,7 +90,8 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
         <div className={styles.forms}>
           <h3>사진 제목*</h3>
           <div className={styles.inputbox}>
-            <input
+            <Input
+              className={styles.input}
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}

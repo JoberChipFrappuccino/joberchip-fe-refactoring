@@ -1,26 +1,18 @@
+@import '/src/styles/maxin.scss';
+
 .container {
   display: flex;
-  max-width: 2.5rem;
-  max-height: 2.5rem;
+  max-width: 3.2rem;
+  max-height: 3.2rem;
   overflow: hidden;
-  border-radius: 0.25rem;
+  border-radius: 0.4rem;
+  @include tablet {
+    max-width: 2.5rem;
+    max-height: 2.5rem;
+    border: solid 0.1rem #e6e6e6;
+  }
 }
 .logoStyle {
   display: flex;
   width: 100%;
-}
-
-@media screen and (max-width: 768px) {
-  .container {
-    display: flex;
-    max-width: 1.7rem;
-    max-height: 1.7rem;
-    overflow: hidden;
-    border-radius: 0.25rem;
-    border: solid .0625rem #e6e6e6 ;
-  }
-  .logoStyle {
-    display: flex;
-    width: 100%;
-  }
 }

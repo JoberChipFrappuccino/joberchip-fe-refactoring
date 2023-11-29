@@ -1,28 +1,25 @@
 @import '/src/styles/variables.scss';
+@import '/src/styles/maxin.scss';
 
 .userProfile {
-  width: 80px;
-  height: 80px;
+  width: 8rem;
+  height: 8rem;
   background-color: #4c61ff;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
-
-  img {
-    width: 30px;
-    height: 30px;
+  margin-top: 3rem;
+  @include tablet {
+    width: 7rem;
+    height: 7rem;
   }
-}
-
-@media screen and (max-width: 390px) {
-  .userProfile {
-    width: 70px;
-    height: 70px;
-    img {
-      width: 25px;
-      height: 25px;
+  img {
+    width: 3rem;
+    height: 3rem;
+    @include tablet {
+      width: 2.5rem;
+      height: 2.5rem;
     }
   }
 }

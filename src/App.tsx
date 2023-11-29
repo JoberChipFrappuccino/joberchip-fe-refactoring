@@ -2,10 +2,10 @@ import { Layout } from 'antd'
 import { Outlet } from 'react-router-dom'
 import styles from './App.module.scss'
 
-import './index.scss'
-import '@/styles/reset.scss'
+// import '@/styles/reset.scss'
 import '@/styles/toast.scss'
 import '@/styles/antd.scss'
+import './index.scss'
 
 export default function App() {
   return (

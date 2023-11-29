@@ -23,29 +23,29 @@
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #e2e6ef;
-  padding-left: toRem(15px);
+  padding-left: 1.5rem;
   .optionContainer {
     width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    font-size: 16px;
+    font-size: 1.6rem;
     cursor: pointer;
     color: #aeb9d1;
     &.fontContainer {
-      height: 80px;
+      height: 8rem;
       display: flex;
       flex-direction: column;
       flex-wrap: nowrap;
       overflow-y: scroll;
-      padding-top: 10px;
-      padding-left: 5px;
+      padding-top: 1rem;
+      padding-left: 0.5rem;
       &::-webkit-scrollbar {
         display: none;
       }
       .fontOption {
-        margin-bottom: 10px;
+        margin-bottom: 1rem;
         &:hover {
           color: #3b4753;
         }
@@ -65,7 +65,7 @@
       justify-content: flex-start;
       .sizeOption {
         width: calc(100% / 9);
-        height: 40px;
+        height: 4rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -76,12 +76,12 @@
       }
     }
     &.colorWrap {
-      margin-bottom: 10px;
+      margin-bottom: 1rem;
     }
     &.alignContainer {
       box-sizing: border-box;
       width: 100%;
-      padding: 10px 20px 20px 20px;
+      padding: 1rem 2rem 2rem 2rem;
       .alignOption {
         &:hover {
           color: #3b4753;
@@ -93,11 +93,11 @@
 
 .label {
   color: #aeb9d1;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 .textOptions {
-  width: 35px;
-  height: 35px;
+  width: 3.5rem;
+  height: 3.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -135,8 +135,8 @@
   }
 }
 .bgOptions {
-  width: 35px;
-  height: 35px;
+  width: 3.5rem;
+  height: 3.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -145,8 +145,8 @@
     transform: scale(1.2);
   }
   .innerrect {
-    width: 24px;
-    height: 24px;
+    width: 2.4rem;
+    height: 2.4rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -200,13 +200,13 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 35rem) {
   .textOptions {
-    width: 24px;
-    height: 24px;
+    width: 2.4rem;
+    height: 2.4rem;
   }
   .bgOptions {
-    width: 24px;
-    height: 24px;
+    width: 2.4rem;
+    height: 2.4rem;
   }
 }

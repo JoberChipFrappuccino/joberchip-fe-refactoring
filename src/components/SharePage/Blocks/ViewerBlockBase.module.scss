@@ -5,7 +5,7 @@
   width: 100%;
   height: 100%;
   border-radius: 1rem;
-  box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.089);
+  box-shadow: $box-shadow-small;
   .menu {
     // * .App.scss에서 block hover시 .kebob을 다루고 있습니다!
     position: absolute;
@@ -24,13 +24,13 @@
       border: none;
       background-color: transparent;
       .inactiveIcon {
-        width: 1rem;
-        height: 1rem;
+        width: 2rem;
+        height: 2rem;
         fill: transparent;
       }
       .activeIcon {
-        width: 1rem;
-        height: 1rem;
+        width: 2rem;
+        height: 2rem;
         fill: black;
         cursor: pointer;
       }
@@ -38,7 +38,6 @@
   }
   .link {
     position: absolute;
-    bottom: -2px;
     width: 100%;
     height: 2rem;
     background-color: $base-black;
@@ -47,6 +46,7 @@
     text-align: start;
     padding-left: 1rem;
     line-height: 2rem;
+    bottom: -2px;
     z-index: 2;
   }
 }

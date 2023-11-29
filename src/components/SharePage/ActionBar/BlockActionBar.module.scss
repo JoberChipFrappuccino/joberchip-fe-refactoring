@@ -1,3 +1,5 @@
+@import '/src/styles/varibles.scss';
+
 .container {
   position: fixed;
   display: flex;
@@ -7,19 +9,19 @@
   right: 0;
   bottom: 1rem;
   width: 50%;
-  max-width: 400px;
-  height: 40px;
+  max-width: 40rem;
+  height: 4rem;
   border: 1px solde block;
   border-radius: 1rem;
   margin: auto;
   z-index: 25;
   background-color: black;
-  box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.089);
+  box-shadow: $box-shadow-small;
   overflow: hidden;
   transition: opacity 500ms ease-in-out;
   .item {
-    min-width: 30px;
-    height: 30px;
+    min-width: 2rem;
+    height: 2rem;
     border-radius: 0.5rem;
     background-color: white;
     text-align: center;
@@ -55,7 +57,7 @@
   }
   70% {
     opacity: 0;
-    height: 50px;
+    height: 5rem;
   }
   100% {
     opacity: 0;
@@ -66,7 +68,7 @@
   0% {
     bottom: -10rem;
     opacity: 0;
-    height: 50px;
+    height: 5rem;
   }
   70% {
     bottom: 1rem;

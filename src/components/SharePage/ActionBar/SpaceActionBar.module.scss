@@ -1,4 +1,6 @@
 @import '/src/styles/utils.scss';
+@import '/src/styles/variables.scss';
+
 .container {
   position: fixed;
   display: flex;
@@ -7,14 +9,14 @@
   left: 0;
   right: 0;
   bottom: 4rem;
-  width: toRem(224px);
-  height: toRem(50px);
+  width: 24rem;
+  height: 5rem;
   border: 1px solde block;
   border-radius: 0.5rem;
   margin: auto;
   z-index: 25;
   background-color: white;
-  box-shadow: 0px 11.42857px 22.85714px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: $box-shadow-large;
   transition: opacity 500ms ease-in-out;
   .item {
     text-align: center;
@@ -38,9 +40,9 @@
 }
 .actionicon {
   display: flex;
-  width: 30px;
-  height: 30px;
-  padding: 6px;
+  width: 3.2rem;
+  height: 3.2rem;
+  padding: 0.5rem;
   border-radius: 5px;
   background-color: #4c61ff;
 }
@@ -51,7 +53,7 @@
   }
   70% {
     opacity: 0;
-    height: 50px;
+    height: 5rem;
   }
   100% {
     opacity: 0;
@@ -61,7 +63,7 @@
   0% {
     bottom: -10rem;
     opacity: 0;
-    height: 50px;
+    height: 5rem;
   }
   70% {
     bottom: 1rem;

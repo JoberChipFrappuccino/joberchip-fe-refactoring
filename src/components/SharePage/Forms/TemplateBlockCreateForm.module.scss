@@ -6,12 +6,12 @@
   height: 100%;
   flex-direction: column;
   .blockViewer {
-    padding: 0 1.25rem toRem(80px) 1.25rem;
+    padding: 0 1.25rem 8rem 1.25rem;
     flex: 1;
     .blockCover {
       display: block;
       width: 100%;
-      box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.089);
+      box-shadow: $box-shadow-small;
       border-radius: 1.1rem;
       margin-bottom: 1.25rem;
       box-sizing: border-box;
@@ -24,14 +24,6 @@
       box-sizing: content-box;
       border: 3px solid $jober-blue;
       height: calc(auto - 5px);
-    }
-  }
-  .formBtn {
-    min-height: toRem(76px);
-    @include tablet {
-      & {
-        min-height: toRem(60px);
-      }
     }
   }
 }

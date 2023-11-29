@@ -132,13 +132,13 @@
   left: -36px;
   position: absolute;
   text-align: right;
-  width: 30px;
+  width: 2rem;
 }
 .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listRTL:before {
   position: absolute;
   right: -36px;
   text-align: left;
-  width: 30px;
+  width: 2rem;
 }
 .public-DraftStyleDefault-orderedListItem:before {
   content: counter(ol0) '. ';

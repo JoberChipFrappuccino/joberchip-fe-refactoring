@@ -12,15 +12,15 @@
   background-color: rgba(0, 0, 0, 0.3);
   .cover {
     width: 100%;
-    max-width: 500px;
+    max-width: 50rem;
     padding: 1.25rem;
     background-color: $base-white;
     .previewCover {
       width: 100%;
-      max-width: 500px;
+      max-width: 50rem;
       img {
         width: 100%;
-        max-width: 500px;
+        max-width: 50rem;
       }
     }
     .confirmBtn {

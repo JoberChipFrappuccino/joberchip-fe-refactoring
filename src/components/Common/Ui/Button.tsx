@@ -10,7 +10,7 @@ export type FormButtonProps = {
 export default function FormButton({ title, event, additionalStyle }: FormButtonProps) {
   return (
     <button
-      className={classNames(event ? styles.disabledButton : styles.activeButton, additionalStyle)}
+      className={classNames([styles.container, event ? styles.disabledButton : styles.activeButton, additionalStyle])}
       disabled={event}
     >
       {title}

@@ -41,7 +41,7 @@ export const LeftMenu = () => {
                 margin: '0 auto'
               }}
             >
-              <Space direction="vertical" style={{ marginTop: '20px' }} align="center">
+              <Space direction="vertical" style={{ marginTop: '2rem' }} align="center">
                 <div className={styles.userProfile}>
                   <img src="/sideBar/user.svg" alt="user" />
                 </div>
@@ -52,7 +52,7 @@ export const LeftMenu = () => {
                   backgroundColor: '#4C61FF',
                   color: '#FFFFFF',
                   border: 'none',
-                  height: '50px',
+                  height: '5rem',
                   marginBottom: '10px',
                   fontSize: '16px',
                   fontWeight: '700'
@@ -66,7 +66,7 @@ export const LeftMenu = () => {
                   backgroundColor: '#ECECFB',
                   color: '#4C61FF',
                   border: 'none',
-                  height: '50px',
+                  height: '5rem',
                   marginBottom: '10px',
                   fontSize: '16px'
                 }}
@@ -79,7 +79,7 @@ export const LeftMenu = () => {
                   backgroundColor: '#ECECFB',
                   color: '#4C61FF',
                   border: 'none',
-                  height: '50px',
+                  height: '5rem',
                   marginBottom: '40px',
                   fontSize: '16px'
                 }}
