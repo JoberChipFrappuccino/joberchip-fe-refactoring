@@ -2,13 +2,13 @@ import { useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { createSpaceAPI } from '@/apis/space'
 import { SPACE_LIST } from '@/constants/queryKeyConstant'
-import { useUserStore } from '@/store/user'
 import { toast } from '@/utils/toast'
 import { useSpaceList } from '@/hooks/spaceList'
+import { useUser } from '@/hooks/user'
 import styles from './UserProfile.module.scss'
 
 export function UserProfile() {
-  const { user, signOut } = useUserStore()
+  const { user, signOut } = useUser()
   const { data } = useSpaceList(user.userId)
   const queryClient = useQueryClient()
 

@@ -7,11 +7,11 @@ import { TreeDrawer } from '@/components/Common/Tree/TreeDrawer'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { ConfirmModal } from '@/components/SharePage/Modals/ConfirmModal'
 import { useSharePageStore } from '@/store/sharePage'
-import { useUserStore } from '@/store/user'
 import { ModalPortal } from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { toast } from '@/utils/toast'
 import { useSpaceList } from '@/hooks/spaceList'
+import { useUser } from '@/hooks/user'
 import styles from './Profile.module.scss'
 import { ProfileForm } from './ProfileForm'
 import { ProfileImageForm } from './ProfileImageForm'
@@ -19,7 +19,7 @@ import { ProfileImageForm } from './ProfileImageForm'
 export function Profile() {
   const [openConfirmModal, setConfirmModal] = useState(false)
   const { mode, setSharePageMode, sharePage } = useSharePageStore()
-  const { user } = useUserStore()
+  const { user } = useUser()
   const { data } = useSpaceList(user.userId)
 
   const rootPage = data?.find((page) => page.mainPageId === sharePage.pageId)

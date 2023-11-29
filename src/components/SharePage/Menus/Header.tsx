@@ -4,7 +4,7 @@ import { Button, Drawer, Layout, Menu, Space } from 'antd'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { SpaceListBar } from '@/components/SharePage/Menus/SpaceListBar'
-import { useUserStore } from '@/store/user'
+import { useUser } from '@/hooks/user'
 import { BreadCrumbBox } from './BreadCrumb'
 import styles from './Header.module.scss'
 import { HomeHeader } from './HomeHeader'
@@ -36,7 +36,7 @@ const items: MenuProps['items'] = [
 
 export function Header() {
   const [open, setOpen] = useState(false)
-  const { user, isSignedIn } = useUserStore()
+  const { user, isSignedIn } = useUser()
   const location = useLocation()
 
   return (

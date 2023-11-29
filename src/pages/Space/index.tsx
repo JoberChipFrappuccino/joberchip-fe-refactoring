@@ -6,16 +6,21 @@ import { Search } from '@/components/SpacePage/Search'
 import { UserProfile } from '@/components/SpacePage/UserProfile'
 import { type SpaceList } from '@/models/space'
 import { type User } from '@/models/user'
-import { useUserStore } from '@/store/user'
 import { toast } from '@/utils/toast'
 import { useSpaceList } from '@/hooks/spaceList'
+import { useUser } from '@/hooks/user'
 import styles from './Space.module.scss'
 
 export default function Space() {
-  const { user, isSignedIn } = useUserStore()
+  const { user, isSignedIn } = useUser()
   const { data, status, message, isLoaded } = useSpaceList(user.userId)
 
-  if (isLoaded && status === 'failure') toast(message, status)
+  // TODO : Controller 로직 hooks로 이동
+  if (isLoaded && status === 'failure') {
+    toast(message, status)
+  }
+
+  if (!isSignedIn) return null
 
   return (
     <div className={styles.container}>
@@ -24,7 +29,7 @@ export default function Space() {
       </Helmet>
       <div className={styles.cover}>
         <Search />
-        {isSignedIn && <UserProfile />}
+        <UserProfile />
         <GroupSpace key="personal-space" title="개인 스페이스">
           {GroupItemsByParticipationType('OWNER', data, user)}
         </GroupSpace>
@@ -42,14 +47,10 @@ function GroupItemsByParticipationType(type: ParticipationType, spaceList: Space
     ?.filter((space) => space.participationType === type)
     .map((space, i, spaces) => {
       return (
-        <>
-          <GroupSpaceItem
-            key={`${type}-item-${space.spaceId}`}
-            link={`/space/${space.mainPageId}`}
-            text={space.mainPageTitle}
-          />
+        <div key={`${type}-item-${space.spaceId}`}>
+          <GroupSpaceItem link={`/space/${space.mainPageId}`} text={space.mainPageTitle} />
           <div className={classNames(spaces.length - 1 !== i && styles.divider)} />
-        </>
+        </div>
       )
     })
 }

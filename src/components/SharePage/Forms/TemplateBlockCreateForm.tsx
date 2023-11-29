@@ -6,16 +6,16 @@ import { getTemplates } from '@/apis/template'
 import { type BlockWith } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
-import { useUserStore } from '@/store/user'
 import { getNextYOfLastBlock } from '@/utils/api'
 import { toast } from '@/utils/toast'
+import { useUser } from '@/hooks/user'
 import FormButton from '../../Common/Ui/Button'
 import { TemplateBlock } from '../Blocks/TemplateBlock'
 import { TemplateSearchBox } from '../TemplateSearchBox'
 import styles from './TemplateBlockCreateForm.module.scss'
 
 export function TemplateBlockCreateForm() {
-  const { user } = useUserStore()
+  const { user } = useUser()
   const { sharePage, setSharePage } = useSharePageStore()
   const { setOpenDrawer } = useBlockAction()
   const { data: templates } = useQuery(['template', user.userId], () => getTemplates(user.userId))

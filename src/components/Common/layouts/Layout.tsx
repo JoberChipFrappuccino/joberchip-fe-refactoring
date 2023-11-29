@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { Header } from '@/components/SharePage/Menus/Header'
-import { useUserStore } from '@/store/user'
+import { useUser } from '@/hooks/user'
 import styles from './Layout.module.scss'
 
 const { Content } = AntdLayout
@@ -11,11 +11,10 @@ const { Content } = AntdLayout
 export default function Layout() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { isSignedIn, getUserInfo } = useUserStore()
+  const { isSignedIn, getUserInfo } = useUser()
 
   useEffect(() => {
     if (isSignedIn) return navigate('/')
-
     getUserInfo().then((isSuccess) => {
       if (isSuccess) return navigate('/')
       if (location.pathname === '/' || location.pathname.includes('space')) navigate('/signin')

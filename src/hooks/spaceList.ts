@@ -8,7 +8,7 @@ interface SpaceListResponse {
   isLoaded: boolean
 }
 export function useSpaceList(userId: string): ResponseBase<SpaceList[]> & SpaceListResponse {
-  const { data: res } = useQuery([SPACE_LIST, userId], () => to(fetchSpaceListAPI()), {
+  const { data: res, isFetched } = useQuery([SPACE_LIST, userId], () => to(fetchSpaceListAPI()), {
     enabled: !!userId
   })
 
@@ -16,6 +16,6 @@ export function useSpaceList(userId: string): ResponseBase<SpaceList[]> & SpaceL
     data: res?.data ?? null,
     message: res?.message ?? '스페이스 리스트를 불러오지 못했습니다.',
     status: res?.status ?? 'failure',
-    isLoaded: !!res
+    isLoaded: isFetched
   }
 }

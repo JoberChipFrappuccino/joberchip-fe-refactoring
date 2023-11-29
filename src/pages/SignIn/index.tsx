@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import { useUserStore } from '@/store/user'
 import { toast } from '@/utils/toast'
+import { useUser } from '@/hooks/user'
 import styles from './SignIn.module.scss'
 
 export interface SignInInputs {
@@ -12,7 +12,7 @@ export interface SignInInputs {
 export default function SignIn() {
   const navigate = useNavigate()
   const { handleSubmit, register } = useForm<SignInInputs>()
-  const { signIn } = useUserStore()
+  const { signIn } = useUser()
 
   const onSubmit = (data: SignInInputs) => {
     signIn(data).then((res) => {
