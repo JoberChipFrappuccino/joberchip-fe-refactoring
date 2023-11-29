@@ -1,6 +1,6 @@
-import styles from './HomeHeader.module.scss'
+import styles from './HomeLogo.module.scss'
 
-export function HomeHeader() {
+export function HomeLogo() {
   return (
     <div className={styles.container}>
       <a className={styles.homeLogo} href="/">

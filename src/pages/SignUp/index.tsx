@@ -1,13 +1,12 @@
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { signUpAPI } from '@/apis/user'
+import { Header, HomeLogo } from '@/components/Common/Menus'
 import { SignUpFormErrorWarn } from '@/components/SignUpPage/SignUpFormError'
-import { to } from '@/utils/api'
-import { toast } from '@/utils/toast'
+import { to, toast } from '@/utils'
 import styles from './SignUp.module.scss'
 
 export interface SignUpInputs {
-  // email: string
   username: string
   password: string
   checkPassword: string
@@ -31,57 +30,62 @@ export default function SignUp() {
     })
   }
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Sign Up</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center">
-        <p className={styles.label}>사용자 이름을 입력해주세요.</p>
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="영어, 숫자를 포함해서 4자 이상 12자 이하로 입력해주세요."
-          {...register('username', {
-            required: true,
-            pattern: /^[a-zA-Z0-9]{4,12}$/i,
-            maxLength: 12,
-            minLength: 4
-          })}
-        />
-        <div className={styles.warn}>
-          <SignUpFormErrorWarn inputType="username" errors={errors} />
-        </div>
-        <p className={styles.label}>비밀 번호를 입력해주세요.</p>
-        <input
-          className={styles.input}
-          type="password"
-          placeholder="영어, 숫자를 포함해서 8자 이상 20자 이하로 입력해주세요."
-          {...register('password', {
-            required: true,
-            maxLength: 20,
-            minLength: 8,
-            validate: (v) => !!(v.match(/[a-zA-Z]/g) && v.match(/[0-9]/g))
-          })}
-        />
-        <div className={styles.warn}>
-          <SignUpFormErrorWarn inputType="password" errors={errors} />
-        </div>
-        <p className={styles.label}>비밀 번호를 확인합니다.</p>
-        <input
-          className={styles.input}
-          type="password"
-          placeholder="비밀번호를 다시 입력해주세요."
-          {...register('checkPassword', {
-            required: true,
-            minLength: 8,
-            maxLength: 20,
-            validate: (value) => value === watch('password')
-          })}
-        />
-        <div className={styles.warn}>
-          <SignUpFormErrorWarn inputType="checkPassword" errors={errors} />
-        </div>
-        <input className={styles.submit} type="submit" value="Submit" />
-      </form>
-    </div>
+    <>
+      <Header>
+        <HomeLogo />
+      </Header>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Sign Up</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center">
+          <p className={styles.label}>사용자 이름을 입력해주세요.</p>
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="영어, 숫자를 포함해서 4자 이상 12자 이하로 입력해주세요."
+            {...register('username', {
+              required: true,
+              pattern: /^[a-zA-Z0-9]{4,12}$/i,
+              maxLength: 12,
+              minLength: 4
+            })}
+          />
+          <div className={styles.warn}>
+            <SignUpFormErrorWarn inputType="username" errors={errors} />
+          </div>
+          <p className={styles.label}>비밀 번호를 입력해주세요.</p>
+          <input
+            className={styles.input}
+            type="password"
+            placeholder="영어, 숫자를 포함해서 8자 이상 20자 이하로 입력해주세요."
+            {...register('password', {
+              required: true,
+              maxLength: 20,
+              minLength: 8,
+              validate: (v) => !!(v.match(/[a-zA-Z]/g) && v.match(/[0-9]/g))
+            })}
+          />
+          <div className={styles.warn}>
+            <SignUpFormErrorWarn inputType="password" errors={errors} />
+          </div>
+          <p className={styles.label}>비밀 번호를 확인합니다.</p>
+          <input
+            className={styles.input}
+            type="password"
+            placeholder="비밀번호를 다시 입력해주세요."
+            {...register('checkPassword', {
+              required: true,
+              minLength: 8,
+              maxLength: 20,
+              validate: (value) => value === watch('password')
+            })}
+          />
+          <div className={styles.warn}>
+            <SignUpFormErrorWarn inputType="checkPassword" errors={errors} />
+          </div>
+          <input className={styles.submit} type="submit" value="Submit" />
+        </form>
+      </div>
+    </>
   )
 }
 

@@ -1,7 +1,7 @@
 import { Layout as AntdLayout } from 'antd'
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import { Header } from '@/components/SharePage/Menus/Header'
+import { Header } from '@/components/Common/Menus/Header'
 import styles from './Layout.module.scss'
 
 const { Content } = AntdLayout

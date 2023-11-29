@@ -1,11 +1,11 @@
 import classNames from 'classnames'
 import { Helmet } from 'react-helmet'
+import { Header, LeftMenu, HomeLogo } from '@/components/Common/Menus'
 import { GroupSpace } from '@/components/SpacePage/GroupSpace'
 import { GroupSpaceItem } from '@/components/SpacePage/GroupSpaceItem'
 import { Search } from '@/components/SpacePage/Search'
 import { UserProfile } from '@/components/SpacePage/UserProfile'
 import { type SpaceList } from '@/models/space'
-import { type User } from '@/models/user'
 import { toast } from '@/utils/toast'
 import { useSpaceList } from '@/hooks/spaceList'
 import { useUser } from '@/hooks/user'
@@ -23,26 +23,32 @@ export default function Space() {
   if (!isSignedIn) return null
 
   return (
-    <div className={styles.container}>
-      <Helmet>
-        <title>Jober Chip</title>
-      </Helmet>
-      <div className={styles.cover}>
-        <Search />
-        <UserProfile />
-        <GroupSpace key="personal-space" title="개인 스페이스">
-          {GroupItemsByParticipationType('OWNER', data, user)}
-        </GroupSpace>
-        <GroupSpace title="단체 스페이스">
-          <GroupSpaceItem key="group-space" text="자버 회사 소개 스페이스" link="/" />
-          {GroupItemsByParticipationType('PARTICIPANT', data, user)}
-        </GroupSpace>
+    <>
+      <Header>
+        <LeftMenu />
+        <HomeLogo />
+      </Header>
+      <div className={styles.container}>
+        <Helmet>
+          <title>Jober Chip</title>
+        </Helmet>
+        <div className={styles.cover}>
+          <Search />
+          <UserProfile />
+          <GroupSpace key="personal-space" title="개인 스페이스">
+            {GetGroupItemsByParticipationType('OWNER', data)}
+          </GroupSpace>
+          <GroupSpace title="단체 스페이스">
+            <GroupSpaceItem key="group-space" text="자버 회사 소개 스페이스" link="/" />
+            {GetGroupItemsByParticipationType('PARTICIPANT', data)}
+          </GroupSpace>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
-function GroupItemsByParticipationType(type: ParticipationType, spaceList: SpaceList[] | null, user: User) {
+function GetGroupItemsByParticipationType(type: ParticipationType, spaceList: SpaceList[] | null) {
   return spaceList
     ?.filter((space) => space.participationType === type)
     .map((space, i, spaces) => {

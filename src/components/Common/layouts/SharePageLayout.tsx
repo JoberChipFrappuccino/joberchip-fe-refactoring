@@ -2,7 +2,7 @@ import { Layout as AntdLayout } from 'antd'
 
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import { Header } from '@/components/SharePage/Menus/Header'
+import { Header } from '@/components/Common/Menus/Header'
 import styles from './Layout.module.scss'
 // HACK : webpack이 node_modules안에있는 css파일 해석하지 못하는 에러가 있어서 임시로 css파일을 카피해서 사용중입니다.
 import '@/styles/reactGridLayout.scss'

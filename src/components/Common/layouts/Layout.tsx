@@ -2,7 +2,7 @@ import { Layout as AntdLayout } from 'antd'
 import { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import { Header } from '@/components/SharePage/Menus/Header'
+import { Header } from '@/components/Common/Menus/Header'
 import { useUser } from '@/hooks/user'
 import styles from './Layout.module.scss'
 

@@ -1,7 +1,7 @@
 import type { MenuProps } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import { Avatar, Button, Layout, Menu, Space } from 'antd'
-import { SpaceListBar } from '@/components/SharePage/Menus/SpaceListBar'
+import { SpaceListBar } from '@/components/Common/Menus/SpaceListBar'
 
 const { Sider } = Layout
 
