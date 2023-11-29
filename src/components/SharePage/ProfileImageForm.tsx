@@ -1,7 +1,7 @@
-import { editPageProfileAPI } from '@/api/space'
+import { useState } from 'react'
+import { editPageProfileAPI } from '@/apis/space'
 import { useSharePageStore } from '@/store/sharePage'
 import { toast } from '@/utils/toast'
-import { useState } from 'react'
 import styles from './ProfileImageForm.module.scss'
 export function ProfileImageForm() {
   const [profileImage, setProfileImage] = useState('')

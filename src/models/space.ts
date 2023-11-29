@@ -5,7 +5,7 @@ export interface SharePage {
   description: string
   privilege: PrivilegeType
   children: Array<BlockWith<BlockType>>
-  visible?: boolean // 최상위 페이지는 visible속성이 없습니다.
+  visible?: boolean
 }
 
 export type BlockType = TText | TImage | TLink | TPage | TVideo | TMap | TTemplate | 'BASE' // HACK : "BASE"는 임시로 사용하는 타입
@@ -53,15 +53,15 @@ export interface PageBlock extends BlockBase<TPage> {
 }
 export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
   src: string | undefined
-  blockId?: number // 지도 블록의 고유 식별자
-  address: string // 주소 정보
-  title: string // 제목
-  latitude: number // 위도
-  longitude: number // 경도
-  x: number // X 좌표
-  y: number // Y 좌표
-  height: number // 블록 높이
-  width: number // 블록 너비
+  blockId?: number
+  address: string
+  title: string
+  latitude: number
+  longitude: number
+  x: number
+  y: number
+  height: number
+  width: number
 }
 
 export interface VideoBlock extends BlockBase<TVideo> {

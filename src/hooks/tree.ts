@@ -1,11 +1,16 @@
-import { fetchTreeAPI } from '@/api/tree'
-import { TREE } from '@/constants/queryKeyConstant'
-import { type Tree } from '@/models/tree'
-import { to, type ResponseBase } from '@/utils/api'
 import { useQuery } from '@tanstack/react-query'
+import { fetchTreeAPI } from '@/apis/tree'
+import { TREE } from '@/constants/queryKeyConstant'
+import { to, type ResponseBase } from '@/utils/api'
 
 interface TreeResponse {
   isLoaded: boolean
+}
+
+interface Tree {
+  id: string
+  name: string
+  children: Tree[]
 }
 
 export function useTree(spaceId: string): ResponseBase<Tree> & TreeResponse {

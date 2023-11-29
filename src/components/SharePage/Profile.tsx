@@ -1,17 +1,16 @@
-import { editPageProfileAPI } from '@/api/space'
-import { ConfirmModal } from '@/components/Modal/ConfirmModal'
-import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
-import { TreeDrawer } from '@/components/Tree/TreeDrawer'
-import { useSpaceList } from '@/hooks/spaceList'
-import { useSharePageStore } from '@/store/sharePage'
-import { useUserStore } from '@/store/user'
-import { ModalPortal } from '@/templates/ModalPortal'
-import { clip } from '@/utils/copy'
-import { toast } from '@/utils/toast'
+import { BsThreeDotsVertical } from '@react-icons/all-files/bs/BsThreeDotsVertical'
+import { MdKeyboardArrowRight } from '@react-icons/all-files/md/MdKeyboardArrowRight'
 import { Switch } from 'antd'
 import { useState } from 'react'
-import { BsThreeDotsVertical } from 'react-icons/bs'
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
+import { editPageProfileAPI } from '@/apis/space'
+import { TreeDrawer } from '@/components/Common/Tree/TreeDrawer'
+import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
+import { ConfirmModal } from '@/components/SharePage/Modals/ConfirmModal'
+import { useSharePageStore } from '@/store/sharePage'
+import { ModalPortal } from '@/templates/ModalPortal'
+import { clip, toast } from '@/utils'
+import { useSpaceList } from '@/hooks/spaceList'
+import { useUser } from '@/hooks/user'
 import styles from './Profile.module.scss'
 import { ProfileForm } from './ProfileForm'
 import { ProfileImageForm } from './ProfileImageForm'
@@ -19,7 +18,7 @@ import { ProfileImageForm } from './ProfileImageForm'
 export function Profile() {
   const [openConfirmModal, setConfirmModal] = useState(false)
   const { mode, setSharePageMode, sharePage } = useSharePageStore()
-  const { user } = useUserStore()
+  const { user } = useUser()
   const { data } = useSpaceList(user.userId)
 
   const rootPage = data?.find((page) => page.mainPageId === sharePage.pageId)
@@ -71,17 +70,6 @@ export function Profile() {
         />
       )
     }
-
-    // {
-    //   key: 'Profile-divider-4',
-    //   type: 'divider'
-    // },
-    // {
-    //   key: `${sharePage.pageId}-profile-5`,
-    //   danger: true,
-    //   label: '삭제하기',
-    //   onClick: () => setConfirmModal(true)
-    // }
   ]
 
   return (
@@ -119,7 +107,7 @@ export function Profile() {
                 <nav className={styles.navCover}>
                   <a href="/">
                     스페이스 홈 바로가기
-                    <MdOutlineKeyboardArrowRight />
+                    <MdKeyboardArrowRight />
                   </a>
                 </nav>
               </>

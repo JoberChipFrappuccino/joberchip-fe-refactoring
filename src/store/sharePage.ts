@@ -1,17 +1,17 @@
-import { getSpaceAPI, getSpaceFromBackAPI } from '@/api/space'
+import { create } from 'zustand'
+import { getSpaceAPI, getSpaceFromBackAPI } from '@/apis/space'
 import { type SharePage } from '@/models/space'
 import { to } from '@/utils/api'
-import { create } from 'zustand'
 
 interface SharePageState {
-  sharePage: SharePage // ? Partial<Space> | Space  할까요? Space 할까요?
+  sharePage: SharePage
   isFetching: boolean
   isLoaded: boolean
   isFalture: boolean
   mode: SharePageMode
   setSharePageMode: (sharePageMode: SharePageMode) => void
   loadSharePage: (pageId: string) => Promise<boolean>
-  loadSharePageFromBack: (pageId: string) => Promise<boolean>
+  loadSharePageFromBack: (pageId?: string) => Promise<boolean>
   addBlock: (section_id: string, options: object) => Promise<boolean>
   removeBlock: (section_id: string, block_id: string) => Promise<boolean>
   removeBlockById: (blockId: string) => void
@@ -20,11 +20,10 @@ interface SharePageState {
 
 export const useSharePageStore = create<SharePageState>((set) => {
   return {
-    // ? 이거 속성 다 뺄 수 없나..? Partial<Space> | Space 이렇게 되면 좋게싸..
     spaceId: '',
     sharePage: {
       pageId: '',
-      profileImageLink: '/profile_3.png', // * default image 넣어야함
+      profileImageLink: '/profile_1.png', // * default image 넣어야함
       layout: {
         styles: {}
       },
@@ -34,11 +33,11 @@ export const useSharePageStore = create<SharePageState>((set) => {
       children: []
     },
     mode: 'view',
-    isFetching: true,
+    isFetching: false,
     isLoaded: false,
     isFalture: false,
     setSharePageMode: (spaceMode: SharePageMode) => {
-      set({ mode: spaceMode })
+      set({ mode: spaceMode, isFetching: false, isLoaded: true, isFalture: false })
     },
     loadSharePage: async (pageId: string) => {
       set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
@@ -50,27 +49,31 @@ export const useSharePageStore = create<SharePageState>((set) => {
       set(() => ({ isFetching: false, isLoaded: false, isFalture: true }))
       return false
     },
-    loadSharePageFromBack: async (pageId: string) => {
-      set(() => ({ isFetching: true, isLoaded: true, isFalture: false }))
-      const { data } = await to(getSpaceFromBackAPI(pageId))
-      if (data) {
-        // HACK : x,y,h,w,가 없을 경우를 대비해서 필터링
-        data.children = data.children.filter((item) => {
-          if (
-            typeof item.x !== 'number' ||
-            typeof item.y !== 'number' ||
-            typeof item.h !== 'number' ||
-            typeof item.w !== 'number'
-          ) {
-            return false
-          }
-          return true
-        })
-        set(() => ({ sharePage: { ...data, pageId }, isFetching: false, isLoaded: true, isFalture: false }))
-        return true
+    loadSharePageFromBack: async (pageId?: string) => {
+      set(() => ({ isFetching: true, isLoaded: false, isFalture: false }))
+      if (!pageId) {
+        set(() => ({ isFetching: false, isLoaded: false, isFalture: true }))
+        return false
       }
-      set(() => ({ isFetching: false, isLoaded: false, isFalture: true }))
-      return false
+      const { data, status } = await to(getSpaceFromBackAPI(pageId))
+      if (data == null || status === 'failure') {
+        set(() => ({ isFetching: false, isLoaded: false, isFalture: true }))
+        return false
+      }
+      data.children = data.children.filter((item) => {
+        if (
+          typeof item.x !== 'number' ||
+          typeof item.y !== 'number' ||
+          typeof item.h !== 'number' ||
+          typeof item.w !== 'number'
+        ) {
+          return false
+        }
+        return true
+      })
+      const mode = data.privilege === 'EDIT' ? 'edit' : 'view'
+      set(() => ({ sharePage: { ...data, pageId }, mode, isFetching: false, isLoaded: true, isFalture: false }))
+      return true
     },
     setSharePage: (space: SharePage) => {
       set(() => ({ sharePage: space, isLoaded: true, isFalture: false }))

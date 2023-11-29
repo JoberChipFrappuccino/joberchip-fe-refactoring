@@ -1,14 +1,13 @@
-import { USER_PROFILE_DEVOUNCE_TIME } from '@/constants/sharePageConstant'
-import { useDebounce } from '@/hooks/debounce'
-import { useSharePageStore } from '@/store/sharePage'
+import { useQueryClient } from '@tanstack/react-query'
 import { Spin } from 'antd'
 import { useEffect, useState } from 'react'
-
-import { editPageProfileAPI } from '@/api/space'
+import { editPageProfileAPI } from '@/apis/space'
 import { BREAD_CRUMB, SPACE_LIST } from '@/constants/queryKeyConstant'
+import { USER_PROFILE_DEVOUNCE_TIME } from '@/constants/sharePageConstant'
+import { useSharePageStore } from '@/store/sharePage'
 import { to } from '@/utils/api'
 import { toast } from '@/utils/toast'
-import { useQueryClient } from '@tanstack/react-query'
+import { useDebounce } from '@/hooks/debounce'
 import styles from './ProfileForm.module.scss'
 
 export function ProfileForm() {

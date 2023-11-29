@@ -1,5 +1,5 @@
-import { TOAST_AUTO_CLOSE_TIME } from '@/constants'
 import { toast as reactToast, type ToastOptions } from 'react-toastify'
+import { TOAST_AUTO_CLOSE_TIME } from '@/constants'
 import { type APIResponseStatus, type ResponseBase } from './api'
 interface ToastPrams {
   message: ResponseBase<null>['message']

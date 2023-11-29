@@ -1,6 +1,6 @@
-import { TEMPLATE_SEARCH_BOX_OPTIONS } from '@/constants/sharePageConstant'
 import { Input, Select } from 'antd'
 import { useState } from 'react'
+import { TEMPLATE_SEARCH_BOX_OPTIONS } from '@/constants/sharePageConstant'
 import styles from './TemplateSearchBox.module.scss'
 
 export function TemplateSearchBox() {

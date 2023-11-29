@@ -1,0 +1,14 @@
+@import '/src/styles/variables.scss';
+
+.container {
+  display: flex;
+  background-color: $base-white;
+  padding: 0;
+  .cover {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 4rem;
+    border-bottom: 1px solid $cool-grey1;
+  }
+}

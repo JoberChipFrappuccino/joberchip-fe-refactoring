@@ -1,13 +1,13 @@
+import { Drawer as AntdDrawer } from 'antd'
+import { useEffect, useState, type ReactNode } from 'react'
+import { DrawerCreateForm } from '@/components/Common/SwitchCases/DrawerCreateForm'
+import { DrawerEditForm } from '@/components/Common/SwitchCases/DrawerEditForm'
+import { ActionBlockFormBase } from '@/components/SharePage/ActionBlockFormBase'
+import { PAGE, TEMPLATE } from '@/constants/blockTypeConstant'
 import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockAction } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
-import { Drawer as AntdDrawer } from 'antd'
-import { useEffect, useState, type ReactNode } from 'react'
-import { PAGE, TEMPLATE } from '../../constants/blockTypeConstant'
-import { DrawerCreateForm } from '../SwitchCase/DrawerCreateForm'
-import { DrawerEditForm } from '../SwitchCase/DrawerEditForm'
-import { ActionBlockFormBase } from './ActionBlockFormBase'
 
 export function Drawer() {
   const { openDrawer, setOpenDrawer, drawerMode, blockType } = useBlockAction()
