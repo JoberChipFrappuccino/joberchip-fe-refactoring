@@ -25,11 +25,11 @@ export function BlocksViewer() {
   const { sharePage, setSharePage, mode } = useSharePageStore()
   const [grid, setGridLayout] = useState({
     breakpoints: 'lg',
-    layouts: { lg: getBlockLayout(sharePage.children, 'edit') } // , md: layout, sm: layout, xs: layout, xxs: layout
+    layouts: { lg: getBlockLayout(sharePage.children, 'edit') }
   })
   const [viewModeGrid, setViewModeGrid] = useState({
     breakpoints: 'lg',
-    layouts: { lg: getBlockLayout(sharePage.children, 'view') } // , md: layout, sm: layout, xs: layout, xxs: layout
+    layouts: { lg: getBlockLayout(sharePage.children, 'view') }
   })
   const { activeBlockId, setActiveBlockId } = useBlockAction()
 

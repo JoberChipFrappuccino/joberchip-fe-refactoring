@@ -55,6 +55,10 @@ export default async function renderHome(url: string, req: Request, res: Respons
   const html = renderToString(jsx)
   const helmet = Helmet.renderStatic()
 
+  /**
+   * @description 동적 CSS 가져오기 이슈가 있습니다.
+   * @see https://github.com/gregberge/loadable-components/issues/94
+   */
   res.set('content-type', 'text/html')
   res.send(`
     <!DOCTYPE html>
@@ -62,16 +66,16 @@ export default async function renderHome(url: string, req: Request, res: Respons
       <head>
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <meta charSet="utf-8" />
+        <link rel="stylesheet" type="text/css" href="/web/App.css">
         ${helmet.title.toString()}
         ${webExtractor.getLinkTags()}
-        ${webExtractor.getStyleTags()}
       </head>
       <body>
         <div id="root">${html}
         </div>
-        <script id="__SERVER_DATA__" type="application/json">${JSON.stringify(serverSideData)}</script>
-        ${webExtractor.getScriptTags()}
       </body>
+      <script id="__SERVER_DATA__" type="application/json">${JSON.stringify(serverSideData)}</script>
+      ${webExtractor.getScriptTags()}
     </html>
     `)
 }

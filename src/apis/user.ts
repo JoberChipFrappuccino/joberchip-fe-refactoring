@@ -44,7 +44,7 @@ export const signUpAPI = async ({ username, password }: ReqeustUserData): Promis
   }
 }
 
-interface getUserInfoAPIResponse {
+interface loadUserInfoAPIResponse {
   response: User
   status: number
   success: boolean
@@ -53,8 +53,8 @@ interface getUserInfoAPIResponse {
  * @description 유저 정보 조회 API
  * @see https://www.notion.so/Back-End-987b88625bae4cae90cf32fee45534b4
  */
-export const getUserInfoAPI = async (): Promise<ResponseBase<User>> => {
-  const { data } = await backAuthAPI<getUserInfoAPIResponse>('/v1/user/profile', {
+export const loadUserInfoAPI = async (): Promise<ResponseBase<User>> => {
+  const { data } = await backAuthAPI<loadUserInfoAPIResponse>('/v1/user/profile', {
     method: 'GET'
   })
 

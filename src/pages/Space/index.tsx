@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { Helmet } from 'react-helmet'
+import { useNavigate } from 'react-router-dom'
 import { Header, LeftMenu, HomeLogo } from '@/components/Common/Menus'
 import { GroupSpace } from '@/components/SpacePage/GroupSpace'
 import { GroupSpaceItem } from '@/components/SpacePage/GroupSpaceItem'
@@ -11,7 +12,8 @@ import { useUser } from '@/hooks/user'
 import styles from './Space.module.scss'
 
 export default function Space() {
-  const { user, isSignedIn } = useUser()
+  const navigate = useNavigate()
+  const { user, isSignedIn } = useUser(() => navigate('/signin'))
   const { data } = useSpaceList(user.userId)
 
   if (!isSignedIn) return null
