@@ -12,7 +12,8 @@ interface RequestTextBlockAddData {
  * @description 텍스트블록 생성 API
  * @see https://www.notion.so/16b3bea33270447fa51a4a06858daac9
  */
-export const addTextBlockAPI = async (pageId: string, body: RequestTextBlockAddData) => {
+export const addTextBlockAPI = async (pageId: string | undefined, body: RequestTextBlockAddData) => {
+  if (!pageId) throw new Error('pageId가 없습니다.')
   const response = await backAuthAPI(`/v1/page/${pageId}/textBlock`, {
     method: 'POST',
     data: body
@@ -33,7 +34,8 @@ interface RequestTextBlockEditData {
  * @description 텍스트블록 수정 API
  * @see https://www.notion.so/2-cdf1976fd3e641dd84bd77df574fb471?p=de99c95f224848148558741b65871dfa&pm=s
  */
-export const editTextBlockAPI = async (pageId: string, blockId: string, data: RequestTextBlockEditData) => {
+export const editTextBlockAPI = async (pageId: string | undefined, blockId: string, data: RequestTextBlockEditData) => {
+  if (!pageId) throw new Error('pageId가 없습니다.')
   const response = await backAuthAPI(`/v1/page/${pageId}/textBlock/${blockId}`, {
     method: 'PUT',
     data

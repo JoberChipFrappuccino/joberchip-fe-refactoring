@@ -27,7 +27,7 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
 
   return (
     <div className={styles.container}>
-      <div className={classNames(mode === 'edit' && 'cover')} />
+      <div className={classNames(mode === 'EDIT' && 'cover')} />
       <div className={styles.editorBoxr}>
         <div className={styles.editorContainer}>
           <Editor

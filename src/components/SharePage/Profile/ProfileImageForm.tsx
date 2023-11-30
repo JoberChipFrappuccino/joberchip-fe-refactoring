@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { editPageProfileAPI } from '@/apis/space'
-import { useSharePageStore } from '@/store/sharePage'
 import { toast } from '@/utils/toast'
+import { useSharePage } from '@/hooks/useSharePageManager'
 import styles from './ProfileImageForm.module.scss'
 export function ProfileImageForm() {
   const [profileImage, setProfileImage] = useState('')
-  const { sharePage } = useSharePageStore()
+  const { sharePage, pageId } = useSharePage()
 
   const changeImageFile = () => {
     document.getElementById('ProfileImage')?.click()
@@ -17,7 +17,7 @@ export function ProfileImageForm() {
       const file = files[0]
       const form = new FormData()
       form.append('profileImage', file)
-      editPageProfileAPI(sharePage.pageId, form).then((res) => {
+      editPageProfileAPI(pageId, form).then((res) => {
         toast(res.message, 'success', { autoClose: 500 })
       })
       const reader = new FileReader()
@@ -26,7 +26,6 @@ export function ProfileImageForm() {
         if (base64) {
           // eslint-disable-next-line @typescript-eslint/no-base-to-string
           const str = base64?.toString()
-          // eslint-disable-next-line @typescript-eslint/no-base-to-string
           setProfileImage(str)
         }
       }

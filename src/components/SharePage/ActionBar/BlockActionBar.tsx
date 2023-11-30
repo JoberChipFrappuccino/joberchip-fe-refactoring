@@ -3,12 +3,12 @@ import { Switch } from 'antd'
 import classNames from 'classnames'
 import { useMemo } from 'react'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
-import { useBlockAction } from '@/store/blockAction'
+import { useBlockActionStore } from '@/store/blockAction'
 import styles from './BlockActionBar.module.scss'
 import { type ActionBarProps } from './SpaceActionBar'
 
 export function BlockActionBar({ isActive }: ActionBarProps) {
-  const { activeBlockId } = useBlockAction()
+  const { activeBlockId } = useBlockActionStore()
 
   const items = useMemo(
     () => [

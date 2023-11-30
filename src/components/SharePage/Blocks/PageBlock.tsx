@@ -1,15 +1,15 @@
 import classNames from 'classnames'
 import { useNavigate } from 'react-router-dom'
-import { useBlockAction } from '@/store/blockAction'
+import { useBlockActionStore } from '@/store/blockAction'
 import { type BlockBaseWithBlockProps } from '../../Common/SwitchCases/ViewerBox'
 import styles from './PageBlock.module.scss'
 
 export function PageBlock({ block, mode }: BlockBaseWithBlockProps<TPage>) {
   const navigate = useNavigate()
-  const { setActiveBlockId } = useBlockAction()
+  const { setActiveBlockId } = useBlockActionStore()
   return (
     <div className={styles.container}>
-      <aside className={classNames(mode === 'edit' && 'cover')} />
+      <aside className={classNames(mode === 'EDIT' && 'cover')} />
       <div className={styles.contentCover}>
         <div className={styles.cover}>
           <img className={styles.img} src={'/page_icon.png'} alt="page block icon" />

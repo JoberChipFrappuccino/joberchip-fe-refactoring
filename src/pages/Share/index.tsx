@@ -1,11 +1,11 @@
 import { Helmet } from 'react-helmet'
 import { BreadCrumbBox, Header, LeftMenu } from '@/components/Common/Menus'
 import { Drawer } from '@/components/SharePage/Drawer'
-import { Profile } from '@/components/SharePage/Profile'
+import { Profile } from '@/components/SharePage/Profile/Profile'
 import { BlocksViewer } from '@/components/SharePage/SharePageBlocksViewer'
 import { SEO } from '@/constants'
 import useServerSideProps from '@/hooks/serverSideProps'
-import { useSharePageStateManager } from '@/hooks/useSharePage'
+import { useSharePage } from '@/hooks/useSharePageManager'
 
 interface PageSource {
   title: string
@@ -15,7 +15,7 @@ interface PageSource {
 
 export default function ShareableSpace() {
   const pageSource: PageSource = useServerSideProps(SEO)
-  const { isLoaded } = useSharePageStateManager()
+  const { isSuccess } = useSharePage()
 
   return (
     <>
@@ -31,7 +31,7 @@ export default function ShareableSpace() {
         <meta property="og:description" content={pageSource.description} />
         <meta property="og:image" content={pageSource.profileImageLink} />
       </Helmet>
-      {isLoaded && (
+      {isSuccess && (
         <>
           <Profile />
           <Drawer />

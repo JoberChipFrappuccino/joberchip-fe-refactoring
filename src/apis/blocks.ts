@@ -15,7 +15,8 @@ export type addGoogleMapBlockParams = {
  * @description 지도 블럭 생성 API
  * @see https://www.notion.so/ee4e2a88bd384a2ab031fc5593fbc93a
  */
-export const addGoogleMapBlockAPI = async (pageId: any, body: addGoogleMapBlockParams) => {
+export const addGoogleMapBlockAPI = async (pageId: string | undefined, body: addGoogleMapBlockParams) => {
+  if (!pageId) throw new Error('pageId가 없습니다.')
   const response = await backAuthAPI(`/v1/page/${pageId}/mapBlock`, {
     method: 'POST',
     data: body
@@ -51,7 +52,7 @@ export const editGoogleMapBlockAPI = async (pageId: any, blockId: any, body: edi
 }
 
 export type AddTemplateBlockAPIParams = Pick<BlockWith<TTemplate>, 'title' | 'description'> & {
-  pageId: string
+  pageId: string | undefined
   x: number
   y: number
   w: number

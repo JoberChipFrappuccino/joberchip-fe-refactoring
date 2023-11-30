@@ -5,7 +5,7 @@ import styles from './ImageBlock.module.scss'
 export function ImageBlock({ block, mode }: BlockBaseWithBlockProps<TImage>) {
   return (
     <div className={styles.container}>
-      <div className={classNames(mode === 'edit' && 'cover')} />
+      <div className={classNames(mode === 'EDIT' && 'cover')} />
       <img
         className={block.title?.split('&&')[1]?.includes('contain') ? styles.contain : styles.cover}
         style={{ width: '100%', height: '100%' }}

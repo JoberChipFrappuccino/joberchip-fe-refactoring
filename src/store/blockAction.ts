@@ -15,7 +15,7 @@ interface FormTypeState {
   setDrawerMode: (mode: DrawerMode) => void
 }
 
-export const useBlockAction = create<FormTypeState>((set) => ({
+export const useBlockActionStore = create<FormTypeState>((set) => ({
   formType: BLOCK,
   blockType: TEXT,
   openDrawer: false,

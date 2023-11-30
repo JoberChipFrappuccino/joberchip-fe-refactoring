@@ -8,10 +8,12 @@ import { useSharePageStore } from '@/store/sharePage'
 import { to } from '@/utils/api'
 import { toast } from '@/utils/toast'
 import { useDebounce } from '@/hooks/debounce'
+import { useSharePage } from '@/hooks/useSharePageManager'
 import styles from './ProfileForm.module.scss'
 
 export function ProfileForm() {
-  const { mode, sharePage, setSharePage } = useSharePageStore()
+  const { sharePage, pageId } = useSharePage()
+  const { mode } = useSharePageStore()
   const [title, setTitle] = useState(sharePage.title)
   const [isTitleLoading, setIsTitleLoading] = useState(false)
   const [description, setDescription] = useState(sharePage.description)
@@ -19,27 +21,27 @@ export function ProfileForm() {
   const queryClient = useQueryClient()
 
   useDebounce(title, USER_PROFILE_DEVOUNCE_TIME, async (nextTitle) => {
-    if (mode === 'view') return
+    if (mode === 'VIEW') return
     if (sharePage.title === nextTitle) return
     const form = new FormData()
     form.append('title', nextTitle)
-    await to(editPageProfileAPI(sharePage.pageId, form)).then((res) => {
+    await to(editPageProfileAPI(pageId ?? '', form)).then((res) => {
       queryClient.refetchQueries([BREAD_CRUMB])
       queryClient.refetchQueries([SPACE_LIST])
-      setSharePage({ ...sharePage, title: nextTitle })
+      // setSharePage({ ...sharePage, title: nextTitle })
       toast(res.message, res.status, { autoClose: 500 })
     })
     setIsTitleLoading(false)
   })
 
   useDebounce(description, USER_PROFILE_DEVOUNCE_TIME, async (nextDescription) => {
-    if (mode === 'view') return
+    if (mode === 'VIEW') return
     if (sharePage.description === nextDescription) return
     const form = new FormData()
     form.append('description', nextDescription)
-    await to(editPageProfileAPI(sharePage.pageId, form)).then((res) => {
+    await to(editPageProfileAPI(pageId ?? '', form)).then((res) => {
       toast(res.message, res.status, { autoClose: 500 })
-      setSharePage({ ...sharePage, description: nextDescription })
+      // setSharePage({ ...sharePage, description: nextDescription })
     })
     setIsDescriptionLoading(false)
   })
@@ -55,7 +57,7 @@ export function ProfileForm() {
         <input //
           className={styles.title}
           type="text"
-          disabled={mode === 'view'}
+          disabled={mode === 'VIEW'}
           value={title}
           onChange={(e) => {
             setTitle(e.target.value)
@@ -69,7 +71,7 @@ export function ProfileForm() {
         <input
           className={styles.description}
           type="text"
-          disabled={mode === 'view'}
+          disabled={mode === 'VIEW'}
           value={description}
           onChange={(e) => {
             setDescription(e.target.value)

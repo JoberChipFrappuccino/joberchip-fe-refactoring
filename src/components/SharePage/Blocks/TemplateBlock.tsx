@@ -13,7 +13,7 @@ export function TemplateBlock({ block, mode, preview = false }: TemplateBlockPro
 
   return (
     <div className={styles.container}>
-      <aside className={classNames(mode === 'edit' && 'cover')} />
+      <aside className={classNames(mode === 'EDIT' && 'cover')} />
       <div className={styles.contentCover}>
         <div className={styles.cover}>
           <img className={styles.img} src={'/template_action_bar_icon.png'} alt="template icon" />

@@ -3,9 +3,9 @@ import { IoChevronDownOutline } from '@react-icons/all-files/io5/IoChevronDownOu
 import { useQuery } from '@tanstack/react-query'
 import { Tree } from 'antd'
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { fetchBreadCrumb } from '@/apis/space'
 import { BREAD_CRUMB } from '@/constants/queryKeyConstant'
-import { useSharePageStore } from '@/store/sharePage'
 import { useTree } from '@/hooks/tree'
 
 interface Props {
@@ -13,14 +13,10 @@ interface Props {
   drawerMode?: boolean
 }
 export default function TreeLayout({ onSelectTreeNode }: Props) {
-  const { sharePage } = useSharePageStore()
-  const { data: breadCrumbData } = useQuery(
-    [BREAD_CRUMB, sharePage.pageId ?? ''],
-    () => fetchBreadCrumb(sharePage.pageId),
-    {
-      enabled: !!sharePage.pageId
-    }
-  )
+  const { pageId } = useParams()
+  const { data: breadCrumbData } = useQuery([BREAD_CRUMB, pageId ?? ''], () => fetchBreadCrumb(pageId), {
+    enabled: !!pageId
+  })
 
   const spaceId = breadCrumbData?.data?.parentId
   const defaultData: DataNode[] = []

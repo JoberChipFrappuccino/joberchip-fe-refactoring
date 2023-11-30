@@ -1,4 +1,5 @@
 import loadable from '@loadable/component'
+import { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 const App = loadable(() => import('./App'))
@@ -15,7 +16,14 @@ export const Router = () => {
         <Route path="/" element={<Space />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/space/:pageId" element={<SharePage />} />
+        <Route
+          path="/space/:pageId"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <SharePage />
+            </Suspense>
+          }
+        />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

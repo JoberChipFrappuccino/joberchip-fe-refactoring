@@ -1,23 +1,24 @@
 import { TiDeleteOutline } from '@react-icons/all-files/ti/TiDeleteOutline'
 import { Input } from 'antd'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
-import { addVideoBlockAPI, editVideoBlockAPI } from '@/apis/blocks'
-import { useBlockAction } from '@/store/blockAction'
-import { useSharePageStore } from '@/store/sharePage'
+import { editVideoBlockAPI } from '@/apis/blocks'
+// import { addVideoBlockAPI, editVideoBlockAPI } from '@/apis/blocks'
+import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/api'
+import { useSharePage } from '@/hooks/useSharePageManager'
 import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
 import FormButton from '../../Common/Ui/Button'
 import VideoThumbnail from '../../Common/Ui/VideoThumbnail'
 import styles from './VideoBlockForm.module.scss'
 
 export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
-  const { sharePage, setSharePage } = useSharePageStore()
+  const { sharePage, pageId } = useSharePage()
   const [selectedRadio, setSelectedRadio] = useState('radio1')
   const [thumbnail, setThumbnail] = useState<string>('')
   const [videoUrl, setVideoUrl] = useState<string>('')
-  const { drawerMode } = useBlockAction()
+  const { drawerMode } = useBlockActionStore()
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-  const { setOpenDrawer } = useBlockAction()
+  const { setOpenDrawer } = useBlockActionStore()
   const [youtubeThumb, setYoutubeThumb] = useState<string>('')
   const [youtubeUrl, setYoutubeUrl] = useState<string>('')
 
@@ -51,7 +52,6 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const pageId = sharePage.pageId
 
     // Base64 이미지 데이터를 File 객체로 변환하는 기능
     const base64ImageData = thumbnail
@@ -96,15 +96,15 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
 
     try {
       if (drawerMode === 'create') {
-        const { data: responseData } = await addVideoBlockAPI(pageId, addform)
-        const updatedSharePage = {
-          ...sharePage,
-          children: [...sharePage.children, { ...responseData }]
-        }
-        setSharePage(updatedSharePage)
+        // const { data: responseData } = await addVideoBlockAPI(pageId, addform)
+        // const updatedSharePage = {
+        //   ...sharePage,
+        //   children: [...sharePage.children, { ...responseData }]
+        // }
+        // setSharePage(updatedSharePage)
         setOpenDrawer(false)
         setYoutubeUrl('')
-      } else if (drawerMode === 'edit') {
+      } else if (drawerMode === 'EDIT') {
         const { data: responseData } = await editVideoBlockAPI(pageId, blockId, editform)
         const existingBlockIndex = sharePage.children.findIndex((block) => block.objectId === responseData.objectId)
         const updatedChildren = [...sharePage.children]
@@ -113,11 +113,11 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
         } else {
           updatedChildren.push(responseData)
         }
-        const updatedSharePage = {
-          ...sharePage,
-          children: updatedChildren
-        }
-        setSharePage(updatedSharePage)
+        // const updatedSharePage = {
+        //   ...sharePage,
+        //   children: updatedChildren
+        // }
+        // setSharePage(updatedSharePage)
         setOpenDrawer(false)
       }
     } catch (error) {

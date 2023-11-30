@@ -28,7 +28,7 @@ export function GoogleMapBlock({ block, mode }: BlockBaseWithBlockProps<TMap>) {
 
   return (
     <div className={styles.container}>
-      <div className={classNames(mode === 'edit' && 'cover')} />
+      <div className={classNames(mode === 'EDIT' && 'cover')} />
       {isLoading ? (
         <SkeletonTheme />
       ) : (

@@ -2,28 +2,25 @@ import { type BlockType, type SharePage, type SpaceList } from '@/models/space'
 import { type ResponseBase } from './../utils/api'
 import { authAPI, backAuthAPI } from './api'
 
+interface SharePageResponse {
+  status: number
+  success: boolean
+  response: SharePage
+}
 /**
  * @description 스페이스 상세내용 조회 API
  * @see https://www.notion.so/72d474ef1cfd45cf81feaade1ce4b9fc
  */
-export const getSpaceFromBackAPI = async (pageId: string): Promise<ResponseBase<SharePage>> => {
-  const { data } = await backAuthAPI<{
-    status: number
-    message: string
-    response: SharePage
-  }>(`/v1/page/${pageId}`)
-  return {
-    data: data.response,
-    status: 'success',
-    message: '스페이스를 불러왔습니다.'
-  }
+export const getSpaceFromBackAPI = async (pageId: string): Promise<SharePage> => {
+  const { data } = await backAuthAPI<SharePageResponse>(`/v1/page/${pageId}`)
+  return data.response
 }
 
 /**
  * @description 스페이스 상세내용 조회 API (FRONT MOCK API)
  * @see https://www.notion.so/72d474ef1cfd45cf81feaade1ce4b9fc
  */
-export const getSpaceAPI = async (spaceId: string): Promise<ResponseBase<SharePage>> => {
+export const getSpaceMockAPI = async (spaceId: string): Promise<ResponseBase<SharePage>> => {
   const { data } = await authAPI<SharePage>('/api/space', {
     method: 'GET',
     params: {
@@ -61,13 +58,13 @@ export const createSpaceAPI = async (): Promise<ResponseBase<null>> => {
 interface FetchSpaceListAPIResponse {
   status: number
   success: boolean
-  response: SpaceList[]
+  response: SpaceList
 }
 /**
  * @description 스페이스 리스트 조회 API
  * @see https://www.notion.so/e893a51ab9cd4b609020c3abe0ed5cb7
  */
-export const fetchSpaceListAPI = async (): Promise<ResponseBase<SpaceList[]>> => {
+export const fetchSpaceListAPI = async (): Promise<ResponseBase<SpaceList>> => {
   const { data } = await backAuthAPI<FetchSpaceListAPIResponse>('/v1/space/list', {
     method: 'GET'
   })
@@ -116,9 +113,10 @@ interface EditPageProfileParams {
  * @see https://www.notion.so/9cf94562cc7b483d8cc75da7a5c0db19
  */
 export async function editPageProfileAPI(
-  pageId: string,
+  pageId: string | undefined,
   formData: FormData
 ): Promise<ResponseBase<EditPageProfileParams>> {
+  if (!pageId) throw new Error('pageId가 없습니다.')
   const { data } = await backAuthAPI(`/v1/page/${pageId}`, {
     method: 'PUT',
     headers: {

@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom'
 import { createSpaceAPI } from '@/apis/space'
 import { SPACE_LIST } from '@/constants/queryKeyConstant'
 import { toast } from '@/utils/toast'
-import { useSpaceList } from '@/hooks/spaceList'
 import { useUser } from '@/hooks/user'
 import styles from './UserProfile.module.scss'
 
 export function UserProfile() {
-  const { user, signOut } = useUser()
-  const { data } = useSpaceList(user.userId)
+  const { user, signOut, spaceList } = useUser()
+
   const queryClient = useQueryClient()
 
   const handleOnClickCreateSpace = () => {
@@ -28,7 +27,7 @@ export function UserProfile() {
   /**
    * @description myPersonalSpace는 사용자의 최상위 공유 페이지 정보로 유저마다 단 하나만 존재합니다.
    */
-  const myPersonalSpace = data?.find((space) => space.participationType === 'DEFAULT')
+  const myPersonalSpace = spaceList?.find((space) => space.participationType === 'DEFAULT')
 
   return (
     <div className={styles.container}>

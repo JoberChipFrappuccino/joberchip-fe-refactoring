@@ -10,6 +10,7 @@ const mockAPI = axios.create({
 
 mockAPI.interceptors.request.use(
   (config) => {
+    if (typeof window === 'undefined') return config
     const token = localStorage.getItem(ACCESS_TOKEN) ? localStorage.getItem(ACCESS_TOKEN) : ''
     config.headers.Authorization = token
     return config
@@ -35,6 +36,7 @@ const backAPI = axios.create({
 
 backAPI.interceptors.request.use(
   (config) => {
+    if (typeof window === 'undefined') return config
     const token = localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) ?? null
     if (token) config.headers.Authorization = token
     return config

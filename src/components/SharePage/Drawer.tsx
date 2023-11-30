@@ -6,13 +6,13 @@ import { ActionBlockFormBase } from '@/components/SharePage/ActionBlockFormBase'
 import { PAGE, TEMPLATE } from '@/constants/blockTypeConstant'
 import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
-import { useBlockAction } from '@/store/blockAction'
-import { useSharePageStore } from '@/store/sharePage'
+import { useBlockActionStore } from '@/store/blockAction'
+import { useSharePage } from '@/hooks/useSharePageManager'
 
 export function Drawer() {
-  const { openDrawer, setOpenDrawer, drawerMode, blockType } = useBlockAction()
-  const { sharePage } = useSharePageStore()
-  const { activeBlockId } = useBlockAction()
+  const { openDrawer, setOpenDrawer, drawerMode, blockType } = useBlockActionStore()
+  const { sharePage } = useSharePage()
+  const { activeBlockId } = useBlockActionStore()
   const [title, setTitle] = useState('')
 
   const block = sharePage.children.find((item) => item.objectId === activeBlockId)
@@ -39,14 +39,14 @@ export function Drawer() {
     >
       <BaseComponent>
         {drawerMode === 'create' && <DrawerCreateForm blockType={blockType} />}
-        {drawerMode === 'edit' && block && <DrawerEditForm block={block} mode={drawerMode} />}
+        {drawerMode === 'EDIT' && block && <DrawerEditForm block={block} mode={drawerMode} />}
       </BaseComponent>
     </AntdDrawer>
   )
 }
 
 function getDrawerTitle(drawerMode: DrawerMode, blockType: BlockType) {
-  const postfix = drawerMode === 'edit' ? '정보 수정' : '추가하기'
+  const postfix = drawerMode === 'EDIT' ? '정보 수정' : '추가하기'
   if (blockType === PAGE || blockType === TEMPLATE) return `${BLOCK_TYPE_TO_KOR[blockType]} ${postfix}`
   return `블럭 ${postfix}`
 }

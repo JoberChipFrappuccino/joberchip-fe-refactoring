@@ -1,10 +1,11 @@
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js'
 import { useEffect, useState } from 'react'
-import { addTextBlockAPI, editTextBlockAPI } from '@/apis/textblock'
+// import { addTextBlockAPI, editTextBlockAPI } from '@/apis/textblock'
+import { editTextBlockAPI } from '@/apis/textblock'
 import { PARSE_ERROR_TEXT } from '@/constants/textEditorOptions'
-import { useBlockAction } from '@/store/blockAction'
-import { useSharePageStore } from '@/store/sharePage'
-import { getNextYOfLastBlock } from '@/utils/api'
+import { useBlockActionStore } from '@/store/blockAction'
+// import { getNextYOfLastBlock } from '@/utils/api'
+import { useSharePage } from '@/hooks/useSharePageManager'
 import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
 import TextEditor from '../../Common/TextEditor/TextEditor'
 import FormButton from '../../Common/Ui/Button'
@@ -13,11 +14,11 @@ import styles from './TextBlockForm.module.scss'
 
 export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   const [editorIsOpen, setEditorIsOpen] = useState(false)
-  const { drawerMode, setOpenDrawer } = useBlockAction()
+  const { drawerMode, setOpenDrawer } = useBlockActionStore()
   const [isButtonDisabled, setisButtonDisabled] = useState(true)
   const [textValue, setTextValue] = useState(block?.src ?? '')
   const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty())
-  const { sharePage, setSharePage } = useSharePageStore()
+  const { sharePage, pageId } = useSharePage()
 
   useEffect(() => {
     setTextValue(block?.src ?? '')
@@ -39,25 +40,25 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const pageId = sharePage.pageId
+
     const editortext = JSON.stringify(convertToRaw(editorState.getCurrentContent()))
     try {
       if (drawerMode === 'create') {
-        const textblock = {
-          content: editortext,
-          x: 0,
-          y: getNextYOfLastBlock(sharePage.children),
-          w: 1,
-          h: 1
-        }
-        const { data: responseData } = await addTextBlockAPI(pageId, textblock)
-        const updatedSharePage = {
-          ...sharePage,
-          children: [...sharePage.children, { ...responseData }]
-        }
-        setSharePage(updatedSharePage)
+        // const textblock = {
+        //   content: editortext,
+        //   x: 0,
+        //   y: getNextYOfLastBlock(sharePage.children),
+        //   w: 1,
+        //   h: 1
+        // }
+        // const { data: responseData } = await addTextBlockAPI(pageId, textblock)
+        // const updatedSharePage = {
+        //   ...sharePage,
+        //   children: [...sharePage.children, { ...responseData }]
+        // }
+        // setSharePage(updatedSharePage)
         setOpenDrawer(false)
-      } else if (drawerMode === 'edit') {
+      } else if (drawerMode === 'EDIT') {
         const blockId = block?.objectId ?? ''
         const textblock = {
           content: editortext
@@ -70,11 +71,11 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
         } else {
           updatedChildren.push(responseData)
         }
-        const updatedSharePage = {
-          ...sharePage,
-          children: updatedChildren
-        }
-        setSharePage(updatedSharePage)
+        // const updatedSharePage = {
+        //   ...sharePage,
+        //   children: updatedChildren
+        // }
+        // setSharePage(updatedSharePage)
         setOpenDrawer(false)
       }
     } catch (error) {

@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { addTemplateBlockAPI } from '@/apis/blocks'
 import { getTemplates } from '@/apis/template'
 import { type BlockWith } from '@/models/space'
-import { useBlockAction } from '@/store/blockAction'
-import { useSharePageStore } from '@/store/sharePage'
+import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/api'
 import { toast } from '@/utils/toast'
+import { useSharePage } from '@/hooks/useSharePageManager'
 import { useUser } from '@/hooks/user'
 import FormButton from '../../Common/Ui/Button'
 import { TemplateBlock } from '../Blocks/TemplateBlock'
@@ -16,8 +16,8 @@ import styles from './TemplateBlockCreateForm.module.scss'
 
 export function TemplateBlockCreateForm() {
   const { user } = useUser()
-  const { sharePage, setSharePage } = useSharePageStore()
-  const { setOpenDrawer } = useBlockAction()
+  const { sharePage, pageId } = useSharePage()
+  const { setOpenDrawer } = useBlockActionStore()
   const { data: templates } = useQuery(['template', user.userId], () => getTemplates(user.userId))
   const [templateId, setTemplateId] = useState('')
 
@@ -33,7 +33,7 @@ export function TemplateBlockCreateForm() {
       return
     }
     const body = {
-      pageId: sharePage.pageId,
+      pageId,
       x: 0,
       y: getNextYOfLastBlock(sharePage.children),
       w: 1,
@@ -44,13 +44,13 @@ export function TemplateBlockCreateForm() {
     addTemplateBlockAPI(body).then((res) => {
       // HACK : 시간 관계상 에러처리를 하지 않습니다.
       if (res.data) {
-        setSharePage({ ...sharePage, children: [...sharePage.children, res.data] })
+        // setSharePage({ ...sharePage, children: [...sharePage.children, res.data] })
         toast(res.message, 'success', { autoClose: 500 })
       } else toast(res.message, 'failure', { autoClose: 500 })
       setOpenDrawer(false)
     })
 
-    setSharePage({ ...sharePage, children: [...sharePage.children] })
+    // setSharePage({ ...sharePage, children: [...sharePage.children] })
     setOpenDrawer(false)
   }
 
@@ -70,7 +70,7 @@ export function TemplateBlockCreateForm() {
               ])}
               onClick={() => handleOnClick(template)}
             >
-              <TemplateBlock block={template} mode={'view'} preview={true} />
+              <TemplateBlock block={template} mode={'VIEW'} preview={true} />
             </button>
           )
         })}

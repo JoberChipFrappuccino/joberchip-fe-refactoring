@@ -1,23 +1,24 @@
 import { TiDeleteOutline } from '@react-icons/all-files/ti/TiDeleteOutline'
 import { Input } from 'antd'
 import { useEffect, useState, type FormEvent } from 'react'
-import { addImageBlockAPI, editImageBlockAPI } from '@/apis/blocks'
+import { editImageBlockAPI } from '@/apis/blocks'
+// import { addImageBlockAPI, editImageBlockAPI } from '@/apis/blocks'
 import { IMAGE } from '@/constants/blockTypeConstant'
-import { useBlockAction } from '@/store/blockAction'
-import { useSharePageStore } from '@/store/sharePage'
+import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/api'
+import { useSharePage } from '@/hooks/useSharePageManager'
 import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
 import FormButton from '../../Common/Ui/Button'
 import ImgThumbnail from '../../Common/Ui/ImgThumbnail'
 import styles from './ImageBlockForm.module.scss'
 
 export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
-  const { sharePage, setSharePage } = useSharePageStore()
+  const { sharePage, pageId } = useSharePage()
   const [thumbnail, setThumbnail] = useState('')
   const [title, setTitle] = useState('')
   const isButtonDisabled = !title || !thumbnail
-  const { drawerMode } = useBlockAction()
-  const { setOpenDrawer } = useBlockAction()
+  const { drawerMode } = useBlockActionStore()
+  const { setOpenDrawer } = useBlockActionStore()
 
   const titleValue = block?.title ?? ''
   const thumbnailValue = block?.src ?? ''
@@ -31,7 +32,6 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
   /** 이미지 블록 정보 API 전달 함수 */
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const pageId = sharePage.pageId
 
     const addform = new FormData()
     const editform = new FormData()
@@ -56,14 +56,14 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
 
     try {
       if (drawerMode === 'create') {
-        const { data: responseData } = await addImageBlockAPI(pageId, addform)
-        const updatedSharePage = {
-          ...sharePage,
-          children: [...sharePage.children, { ...responseData }]
-        }
-        setSharePage(updatedSharePage)
+        // const { data: responseData } = await addImageBlockAPI(pageId, addform)
+        // const updatedSharePage = {
+        //   ...sharePage,
+        //   children: [...sharePage.children, { ...responseData }]
+        // }
+        // setSharePage(updatedSharePage)
         setOpenDrawer(false)
-      } else if (drawerMode === 'edit') {
+      } else if (drawerMode === 'EDIT') {
         const { data: responseData } = await editImageBlockAPI(pageId, blockId, editform)
         const existingBlockIndex = sharePage.children.findIndex((block) => block.objectId === responseData.objectId)
         const updatedChildren = [...sharePage.children]
@@ -72,11 +72,11 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
         } else {
           updatedChildren.push(responseData)
         }
-        const updatedSharePage = {
-          ...sharePage,
-          children: updatedChildren
-        }
-        setSharePage(updatedSharePage)
+        // const updatedSharePage = {
+        //   ...sharePage,
+        //   children: updatedChildren
+        // }
+        // setSharePage(updatedSharePage)
         setOpenDrawer(false)
       }
     } catch (error) {

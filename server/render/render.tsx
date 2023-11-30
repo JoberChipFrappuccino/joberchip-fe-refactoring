@@ -13,7 +13,7 @@ import { api } from '~/api/api'
 export default async function renderHome(url: string, req: Request, res: Response) {
   const serverSideData: Record<string, unknown> = {}
 
-  console.log('SSR request url :', url)
+  console.info('SSR request url :', url)
 
   serverSideData[SEO] = JSON.stringify({})
   serverSideData[SPACE] = JSON.stringify({}) // CSR시 빈 객체로 초기화

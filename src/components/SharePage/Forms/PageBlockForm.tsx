@@ -3,24 +3,24 @@ import { createPageAPI } from '@/apis/page'
 import { editPageProfileAPI } from '@/apis/space'
 import { BLOCK_SIZE } from '@/constants/blockSizeConstant'
 import { PAGE } from '@/constants/blockTypeConstant'
-import { useBlockAction } from '@/store/blockAction'
-import { useSharePageStore } from '@/store/sharePage'
+import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/api'
 import { toast } from '@/utils/toast'
+import { useSharePage } from '@/hooks/useSharePageManager'
 import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
 import TreeLayout from '../../Common/Tree/TreeLayout'
 import FormButton from '../../Common/Ui/Button'
 import styles from './PageBlockForm.module.scss'
 
 export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
-  const { sharePage, setSharePage } = useSharePageStore()
+  const { sharePage } = useSharePage()
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [parentPageId, setParentPageId] = useState<string>('')
   const [parentPageTitle, setParentPageTitle] = useState<string>('')
   const [isLocationVisible, setLocationVisible] = useState<boolean>(false)
   const [treeLayoutToggle, setTreeLayoutToggle] = useState<boolean>(false)
-  const { drawerMode, setOpenDrawer } = useBlockAction()
+  const { drawerMode, setOpenDrawer } = useBlockActionStore()
   const isButtonDisabled = !title || !description || !location
 
   const titleValue = block?.title
@@ -52,10 +52,10 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
       createPageAPI(body).then((res) => {
         const pageBlock = res.data
         if (pageBlock) {
-          setSharePage({
-            ...sharePage,
-            children: [...sharePage.children, pageBlock]
-          })
+          // setSharePage({
+          //   ...sharePage,
+          //   children: [...sharePage.children, pageBlock]
+          // })
         }
         toast(res.message, res.status, { autoClose: 500 })
       })
@@ -113,7 +113,7 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
             />
             {isLocationVisible && (
               <div>
-                <TreeLayout onSelectTreeNode={onSelectTreeNode} drawerMode={drawerMode === 'edit'} />
+                <TreeLayout onSelectTreeNode={onSelectTreeNode} drawerMode={drawerMode === 'EDIT'} />
               </div>
             )}
           </div>

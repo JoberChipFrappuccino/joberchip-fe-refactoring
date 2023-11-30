@@ -6,7 +6,7 @@ import styles from './LinkBlock.module.scss'
 export function LinkBlock({ block, mode }: BlockBaseWithBlockProps<TLink>) {
   return (
     <div className={styles.container}>
-      <div className={classNames(mode === 'edit' && 'cover')} />
+      <div className={classNames(mode === 'EDIT' && 'cover')} />
       <div className={styles.contentCover}>
         <div className={styles.itemBox}>
           <BlockLogo logo={block.src} />

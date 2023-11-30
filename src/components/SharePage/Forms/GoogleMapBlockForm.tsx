@@ -4,12 +4,13 @@ import { Input } from 'antd'
 import { type SearchProps } from 'antd/es/input/Search'
 import React, { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { SkeletonTheme } from 'react-loading-skeleton'
-import { addGoogleMapBlockAPI, editGoogleMapBlockAPI } from '@/apis/blocks'
-import { MAP } from '@/constants/blockTypeConstant'
-import { useBlockAction } from '@/store/blockAction'
-import { useSharePageStore } from '@/store/sharePage'
-import { getNextYOfLastBlock } from '@/utils/api'
+// import { addGoogleMapBlockAPI, editGoogleMapBlockAPI } from '@/apis/blocks'
+import { editGoogleMapBlockAPI } from '@/apis/blocks'
+// import { MAP } from '@/constants/blockTypeConstant'
+import { useBlockActionStore } from '@/store/blockAction'
+// import { getNextYOfLastBlock } from '@/utils/api'
 import { toast } from '@/utils/toast'
+import { useSharePage } from '@/hooks/useSharePageManager'
 import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
 import FormButton from '../../Common/Ui/Button'
 import styles from './GoogleMapBlockForm.module.scss'
@@ -42,11 +43,11 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
     address: block?.address ?? ''
   })
   const [query, setQuery] = useState('')
-  const { sharePage, setSharePage } = useSharePageStore()
-  const { openDrawer, setOpenDrawer } = useBlockAction()
+  const { sharePage, pageId } = useSharePage()
+  const { openDrawer, setOpenDrawer } = useBlockActionStore()
   const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const { drawerMode } = useBlockAction()
+  const { drawerMode } = useBlockActionStore()
   const onAutocompleteLoad = (autocompleteParam: google.maps.places.Autocomplete) => {
     setAutocomplete(autocompleteParam)
   }
@@ -80,7 +81,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
 
   // 페이지가 처음 로드될 때 기존의 값으로 센터를 설정
   useEffect(() => {
-    if (openDrawer && drawerMode === 'edit' && latData !== undefined && lngData !== undefined) {
+    if (openDrawer && drawerMode === 'EDIT' && latData !== undefined && lngData !== undefined) {
       // 서버에서 가져온 위치로 지도의 센터를 설정
       setCenter({
         lat: latData,
@@ -103,31 +104,30 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const pageId = sharePage.pageId
-    const data = {
-      x: 0,
-      y: getNextYOfLastBlock(sharePage.children),
-      w: 1,
-      h: 2,
-      latitude: center.lat,
-      longitude: center.lng,
-      address,
-      type: MAP,
-      visible: true
-    }
+    // const data = {
+    //   x: 0,
+    //   y: getNextYOfLastBlock(sharePage.children),
+    //   w: 1,
+    //   h: 2,
+    //   latitude: center.lat,
+    //   longitude: center.lng,
+    //   address,
+    //   type: MAP,
+    //   visible: true
+    // }
     try {
       // WARN : API 호출 후, 에러 처리를 해야 합니다! any타입도 제거해주세요!
       if (drawerMode === 'create') {
-        const { data: responseData } = await addGoogleMapBlockAPI(pageId, data)
-        const updatedSharePage = {
-          ...sharePage,
-          children: [...sharePage.children, responseData]
-        }
-        setSharePage(updatedSharePage)
+        // const { data: responseData } = await addGoogleMapBlockAPI(pageId, data)
+        // const updatedSharePage = {
+        //   ...sharePage,
+        //   children: [...sharePage.children, responseData]
+        // }
+        // setSharePage(updatedSharePage)
         toast('지도가 추가되었습니다.', 'success', { autoClose: 500 })
 
         setOpenDrawer(false)
-      } else if (drawerMode === 'edit') {
+      } else if (drawerMode === 'EDIT') {
         const { data: responseData } = await editGoogleMapBlockAPI(pageId, blockId, {
           latitude: center.lat,
           longitude: center.lng,
@@ -140,11 +140,11 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
         } else {
           updatedChildren.push(responseData)
         }
-        const updatedSharePage = {
-          ...sharePage,
-          children: updatedChildren
-        }
-        setSharePage(updatedSharePage)
+        // const updatedSharePage = {
+        //   ...sharePage,
+        //   children: updatedChildren
+        // }
+        // setSharePage(updatedSharePage)
         toast('지도가 수정되었습니다.', 'success', { autoClose: 500 })
         setOpenDrawer(false)
       }

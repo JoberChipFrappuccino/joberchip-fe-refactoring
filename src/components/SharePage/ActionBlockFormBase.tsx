@@ -3,16 +3,16 @@ import { useMemo, type ReactNode } from 'react'
 import { IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
-import { useBlockAction } from '@/store/blockAction'
+import { useBlockActionStore } from '@/store/blockAction'
 import styles from './ActionBlockFormBase.module.scss'
-import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from './berrel'
+import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from './icons'
 
 interface Props {
   children: ReactNode
 }
 
 export function ActionBlockFormBase({ children }: Props) {
-  const { blockType, setBlockType, drawerMode } = useBlockAction()
+  const { blockType, setBlockType, drawerMode } = useBlockActionStore()
 
   type FormType = {
     title: string
@@ -71,11 +71,11 @@ export function ActionBlockFormBase({ children }: Props) {
                   className={classNames([
                     {
                       [styles.active]: form.type === blockType,
-                      [styles.disable]: drawerMode === 'edit'
+                      [styles.disable]: drawerMode === 'EDIT'
                     }
                   ])}
                   onClick={() => setBlockType(form.type)}
-                  disabled={drawerMode === 'edit'}
+                  disabled={drawerMode === 'EDIT'}
                 >
                   <div className={styles.icon}>{form.icon}</div>
                 </button>

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { useCallback } from 'react'
 import { PAGE, TEMPLATE, TEXT } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
-import { useBlockAction } from '@/store/blockAction'
+import { useBlockActionStore } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
 import styles from './SpaceActionBar.module.scss'
 export interface ActionBarProps {
@@ -11,7 +11,7 @@ export interface ActionBarProps {
 }
 export function SpaceActionBar({ isActive }: ActionBarProps) {
   const { mode } = useSharePageStore()
-  const { formType, setOpenDrawer, setBlockType, setDrawerMode } = useBlockAction()
+  const { formType, setOpenDrawer, setBlockType, setDrawerMode } = useBlockActionStore()
 
   const changeBlockType = useCallback(
     (type: BlockType) => {
@@ -29,7 +29,7 @@ export function SpaceActionBar({ isActive }: ActionBarProps) {
     <div
       className={classNames(styles.container, [
         {
-          [styles.visible]: isActive || mode === 'view',
+          [styles.visible]: isActive || mode === 'VIEW',
           [styles.hidden]: !isActive
         }
       ])}

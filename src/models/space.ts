@@ -1,5 +1,4 @@
 export interface SharePage {
-  pageId: string
   profileImageLink: string
   title: string
   description: string
@@ -95,9 +94,10 @@ export type BlockWith<T> = //
     ? TemplateBlock
     : never
 
-export interface SpaceList {
+export interface SpaceMeta {
   spaceId: string
   mainPageId: string
   mainPageTitle: string
   participationType: ParticipationType
 }
+export type SpaceList = SpaceMeta[]

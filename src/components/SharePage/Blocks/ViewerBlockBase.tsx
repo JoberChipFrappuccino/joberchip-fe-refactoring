@@ -12,11 +12,12 @@ import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { BLOCK, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
-import { useBlockAction } from '@/store/blockAction'
+import { useBlockActionStore } from '@/store/blockAction'
 import { useSharePageStore } from '@/store/sharePage'
 import { ModalPortal } from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { toast } from '@/utils/toast'
+import { useSharePage } from '@/hooks/useSharePageManager'
 import { ConfirmModal } from '../Modals/ConfirmModal'
 import styles from './ViewerBlockBase.module.scss'
 
@@ -27,9 +28,11 @@ export interface BlockBaseProps {
 
 export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   const [focus, setFocus] = useState(false)
-  const { activeBlockId, setActiveBlockId } = useBlockAction()
-  const { sharePage, removeBlockById, mode } = useSharePageStore()
-  const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockAction()
+  const { activeBlockId, setActiveBlockId } = useBlockActionStore()
+  const { mode } = useSharePageStore()
+  const { sharePage, pageId } = useSharePage()
+
+  const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockActionStore()
   const [confirmModal, setConfirmModal] = useState(false)
 
   const items = useMemo(() => {
@@ -48,7 +51,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
           className={styles.switchBtn}
           defaultChecked={block.visible}
           onChange={() => {
-            switchToggleAPIByBlockType(sharePage.pageId, block)
+            switchToggleAPIByBlockType(pageId, block)
             for (let i = 0; i < sharePage.children.length; i++) {
               if (sharePage.children[i].objectId === block.objectId) {
                 sharePage.children[i].visible = !sharePage.children[i].visible
@@ -66,7 +69,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
         <button
           className={styles.kebobBtn}
           onClick={() => {
-            setDrawerMode('edit')
+            setDrawerMode('EDIT')
             setBlockType(block.type)
             if (block.type === TEMPLATE || block.type === PAGE) {
               setFormType(block.type)
@@ -97,7 +100,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
       danger: true,
       label: <p className={styles.delBtn}>삭제하기</p>,
       onClick: () => {
-        switchDeleteAPIByBlockType(block, sharePage.pageId)
+        switchDeleteAPIByBlockType(pageId, block)
         setConfirmModal(true)
       }
     }
@@ -124,7 +127,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
 
   return (
     <div className={styles.container}>
-      {mode === 'edit' && (
+      {mode === 'EDIT' && (
         <aside
           className={classNames(styles.menu, [
             {
@@ -162,7 +165,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
             cancelBtnText="취소"
             confirmBtnText="삭제하기"
             onConfirm={(isConfirm) => {
-              if (isConfirm) removeBlockById(block.objectId)
+              // if (isConfirm) removeBlockById(block.objectId)
               setConfirmModal(false)
               setActiveBlockId('')
             }}
@@ -196,7 +199,8 @@ function getUniqueDivierItem(key: string) {
   }
 }
 
-function switchToggleAPIByBlockType(pageId: string, block: BlockBase<BlockType>) {
+function switchToggleAPIByBlockType(pageId: string | undefined, block: BlockBase<BlockType>) {
+  if (!pageId) return toast("잘못된 접근입니다. 'pageId'가 존재하지 않습니다.", 'failure')
   const form = new FormData()
   switch (block.type) {
     case TEXT:
@@ -222,7 +226,8 @@ function switchToggleAPIByBlockType(pageId: string, block: BlockBase<BlockType>)
 }
 
 // HACK : 파라메터 상수로 변경 필요
-function switchDeleteAPIByBlockType(block: BlockBase<BlockType>, pageId: string) {
+function switchDeleteAPIByBlockType(pageId: string | undefined, block: BlockBase<BlockType>) {
+  if (!pageId) return null
   switch (block.type) {
     case TEXT:
       return deleteBlock('textBlock', block.objectId, pageId)
