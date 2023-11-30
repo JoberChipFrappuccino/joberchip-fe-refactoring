@@ -131,7 +131,7 @@ export async function editPageProfileAPI(
   }
 }
 
-export interface FetchBlockPositionBlocksParam {
+export interface FetchLayoutBlocksParam {
   blockId: string // blockId
   blockType: BlockType // BlockType
   x: number
@@ -140,7 +140,7 @@ export interface FetchBlockPositionBlocksParam {
   h: number
 }
 
-interface FetchBlockPosition {
+interface FetchLayoutResponse {
   status: number
   success: boolean
   response: boolean
@@ -149,11 +149,11 @@ interface FetchBlockPosition {
  * @description 페이지 내 블록 위치 / 형태 수정
  * @see https://www.notion.so/954491d9c292452c8fb13fe95280c3d7
  */
-export async function fetchBlockPosition(
+export async function fetchLayout(
   pageId: string,
-  blocks: FetchBlockPositionBlocksParam[]
-): Promise<ResponseBase<FetchBlockPosition>> {
-  const { data } = await backAuthAPI<FetchBlockPosition>(`/v1/page/${pageId}/blocks`, {
+  blocks: FetchLayoutBlocksParam[]
+): Promise<ResponseBase<FetchLayoutResponse>> {
+  const { data } = await backAuthAPI<FetchLayoutResponse>(`/v1/page/${pageId}/blocks`, {
     method: 'POST',
     data: {
       blocks

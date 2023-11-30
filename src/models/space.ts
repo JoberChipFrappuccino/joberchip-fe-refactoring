@@ -1,15 +1,6 @@
-export interface SharePage {
-  profileImageLink: string
-  title: string
-  description: string
-  privilege: PrivilegeType
-  children: Array<BlockWith<BlockType>>
-  visible?: boolean
-}
-
 export type BlockType = TText | TImage | TLink | TPage | TVideo | TMap | TTemplate | 'BASE' // HACK : "BASE"는 임시로 사용하는 타입
 
-export type BlockBase<T extends BlockType> = {
+export interface BlockBase<T extends BlockType> {
   objectId: string
   type: T
   y: number
@@ -29,7 +20,6 @@ export type BlockBase<T extends BlockType> = {
   isBounded?: boolean
   static?: boolean
 }
-
 export interface TextBlock extends BlockBase<TText> {
   src: string
 }
@@ -62,12 +52,10 @@ export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
   height: number
   width: number
 }
-
 export interface VideoBlock extends BlockBase<TVideo> {
   src: string
   caption: string
 }
-
 export interface TemplateBlock extends BlockBase<TTemplate> {
   templateId: string
   title: string
@@ -101,3 +89,13 @@ export interface SpaceMeta {
   participationType: ParticipationType
 }
 export type SpaceList = SpaceMeta[]
+
+export type BlockItem = BlockWith<BlockType>
+export interface SharePage {
+  profileImageLink: string
+  title: string
+  description: string
+  privilege: PrivilegeType
+  children: BlockItem[]
+  visible?: boolean
+}

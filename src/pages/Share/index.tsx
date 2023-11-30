@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet'
 import { BreadCrumbBox, Header, LeftMenu } from '@/components/Common/Menus'
-import { BlocksViewer } from '@/components/SharePage/DnDViewer/Viewer'
+import { BlocksViewer } from '@/components/SharePage/DnDViewer/BlocksViewer'
 import { Drawer } from '@/components/SharePage/Drawer/Drawer'
 import { Profile } from '@/components/SharePage/Profile/Profile'
 import { SEO } from '@/constants'

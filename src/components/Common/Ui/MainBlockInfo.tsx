@@ -7,7 +7,7 @@ const icons = [
   { title: '블록', url: '/block_white_icon.svg' }
 ]
 
-export default function MainBlockInfo() {
+export const MainBlockInfo = () => {
   return (
     <div className={styles.mainbg}>
       <div className={styles.blockcontainer}>

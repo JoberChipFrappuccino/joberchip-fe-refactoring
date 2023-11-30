@@ -27,12 +27,12 @@ export interface BlockBaseProps {
 }
 
 export function ViewerBlockBase({ block, children }: BlockBaseProps) {
-  const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useBlockActionStore()
   const { mode } = useSharePageMode()
   const { sharePage, pageId } = useSharePageQuery()
-
   const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockActionStore()
+
+  const [focus, setFocus] = useState(false)
   const [confirmModal, setConfirmModal] = useState(false)
 
   const items = useMemo(() => {
