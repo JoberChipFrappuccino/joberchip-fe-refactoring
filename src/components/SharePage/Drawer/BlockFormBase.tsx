@@ -4,14 +4,14 @@ import { IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockActionStore } from '@/store/blockAction'
-import styles from './ActionBlockFormBase.module.scss'
-import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from './icons'
+import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from '../icons'
+import styles from './BlockFormBase.module.scss'
 
 interface Props {
   children: ReactNode
 }
 
-export function ActionBlockFormBase({ children }: Props) {
+export function BlockFormBase({ children }: Props) {
   const { blockType, setBlockType, drawerMode } = useBlockActionStore()
 
   type FormType = {
@@ -49,11 +49,16 @@ export function ActionBlockFormBase({ children }: Props) {
     ],
     []
   )
+
+  if (blockType === 'PAGE' || blockType === 'TEMPLATE') {
+    return children
+  }
+
   return (
     <div style={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
       <div className={styles.container}>
         <h2>
-          {formTypes.find((form) => form.type === blockType)?.title} {drawerMode === 'create' ? '추가' : '수정'}하기
+          {formTypes.find((form) => form.type === blockType)?.title} {drawerMode === 'create' ? '추가하기' : '수정하기'}
         </h2>
         <div
           className={classNames([

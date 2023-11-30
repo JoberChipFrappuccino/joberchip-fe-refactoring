@@ -1,8 +1,8 @@
 import { Drawer as AntdDrawer } from 'antd'
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useState } from 'react'
 import { DrawerCreateForm } from '@/components/Common/SwitchCases/DrawerCreateForm'
 import { DrawerEditForm } from '@/components/Common/SwitchCases/DrawerEditForm'
-import { ActionBlockFormBase } from '@/components/SharePage/ActionBlockFormBase'
+import { BlockFormBase } from '@/components/SharePage/Drawer/BlockFormBase'
 import { PAGE, TEMPLATE } from '@/constants/blockTypeConstant'
 import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
@@ -17,13 +17,6 @@ export function Drawer() {
 
   const block = sharePage.children.find((item) => item.objectId === activeBlockId)
 
-  let BaseComponent = ActionBlockFormBase
-
-  if (blockType === PAGE || blockType === TEMPLATE) {
-    // eslint-disable-next-line react/display-name, react/jsx-no-useless-fragment
-    BaseComponent = ({ children }: { children: ReactNode }) => <>{children}</>
-  }
-
   useEffect(() => {
     setTitle(getDrawerTitle(drawerMode, blockType))
   }, [drawerMode, blockType])
@@ -37,10 +30,10 @@ export function Drawer() {
       onClose={() => setOpenDrawer(false)}
       open={openDrawer}
     >
-      <BaseComponent>
+      <BlockFormBase>
         {drawerMode === 'create' && <DrawerCreateForm blockType={blockType} />}
         {drawerMode === 'EDIT' && block && <DrawerEditForm block={block} mode={drawerMode} />}
-      </BaseComponent>
+      </BlockFormBase>
     </AntdDrawer>
   )
 }
