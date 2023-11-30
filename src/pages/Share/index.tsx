@@ -4,8 +4,8 @@ import { BlocksViewer } from '@/components/SharePage/DnDViewer/Viewer'
 import { Drawer } from '@/components/SharePage/Drawer/Drawer'
 import { Profile } from '@/components/SharePage/Profile/Profile'
 import { SEO } from '@/constants'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import useServerSideProps from '@/hooks/serverSideProps'
-import { useSharePage } from '@/hooks/useSharePageManager'
 
 interface PageSource {
   title: string
@@ -15,7 +15,7 @@ interface PageSource {
 
 export default function ShareableSpace() {
   const pageSource: PageSource = useServerSideProps(SEO)
-  const { isSuccess } = useSharePage()
+  const { isSuccess } = useSharePageQuery()
 
   return (
     <>

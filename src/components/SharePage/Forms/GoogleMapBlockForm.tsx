@@ -7,10 +7,10 @@ import { SkeletonTheme } from 'react-loading-skeleton'
 // import { addGoogleMapBlockAPI, editGoogleMapBlockAPI } from '@/apis/blocks'
 import { editGoogleMapBlockAPI } from '@/apis/blocks'
 // import { MAP } from '@/constants/blockTypeConstant'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 // import { getNextYOfLastBlock } from '@/utils/api'
 import { toast } from '@/utils/toast'
-import { useSharePage } from '@/hooks/useSharePageManager'
 import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
 import FormButton from '../../Common/Ui/Button'
 import styles from './GoogleMapBlockForm.module.scss'
@@ -43,7 +43,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
     address: block?.address ?? ''
   })
   const [query, setQuery] = useState('')
-  const { sharePage, pageId } = useSharePage()
+  const { sharePage, pageId } = useSharePageQuery()
   const { openDrawer, setOpenDrawer } = useBlockActionStore()
   const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null)
   const [isLoading, setIsLoading] = useState(true)

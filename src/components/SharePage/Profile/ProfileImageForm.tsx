@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { editPageProfileAPI } from '@/apis/space'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { toast } from '@/utils/toast'
-import { useSharePage } from '@/hooks/useSharePageManager'
 import styles from './ProfileImageForm.module.scss'
 export function ProfileImageForm() {
   const [profileImage, setProfileImage] = useState('')
-  const { sharePage, pageId } = useSharePage()
+  const { sharePage, pageId } = useSharePageQuery()
 
   const changeImageFile = () => {
     document.getElementById('ProfileImage')?.click()

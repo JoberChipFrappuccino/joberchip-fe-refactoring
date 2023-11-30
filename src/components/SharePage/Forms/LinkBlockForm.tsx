@@ -3,15 +3,15 @@ import { Input } from 'antd'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { editLinkBlockAPI } from '@/apis/blocks'
 // import { addLinkBlockAPI, editLinkBlockAPI } from '@/apis/blocks'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 // import { getNextYOfLastBlock } from '@/utils/api'
-import { useSharePage } from '@/hooks/useSharePageManager'
 import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
 import FormButton from '../../Common/Ui/Button'
 import styles from './LinkBlockForm.module.scss'
 
 export function LinkBlockForm({ block }: BlockBaseWithBlockFormProps<TLink>) {
-  const { sharePage, pageId } = useSharePage()
+  const { sharePage, pageId } = useSharePageQuery()
   const [link, setLink] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const isButtonDisabled = !link || !title

@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 // import { addTextBlockAPI, editTextBlockAPI } from '@/apis/textblock'
 import { editTextBlockAPI } from '@/apis/textblock'
 import { PARSE_ERROR_TEXT } from '@/constants/textEditorOptions'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 // import { getNextYOfLastBlock } from '@/utils/api'
-import { useSharePage } from '@/hooks/useSharePageManager'
 import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
 import TextEditor from '../../Common/TextEditor/TextEditor'
 import FormButton from '../../Common/Ui/Button'
@@ -18,7 +18,7 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   const [isButtonDisabled, setisButtonDisabled] = useState(true)
   const [textValue, setTextValue] = useState(block?.src ?? '')
   const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty())
-  const { sharePage, pageId } = useSharePage()
+  const { sharePage, pageId } = useSharePageQuery()
 
   useEffect(() => {
     setTextValue(block?.src ?? '')

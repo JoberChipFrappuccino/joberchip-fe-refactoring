@@ -3,17 +3,17 @@ import { createPageAPI } from '@/apis/page'
 import { editPageProfileAPI } from '@/apis/space'
 import { BLOCK_SIZE } from '@/constants/blockSizeConstant'
 import { PAGE } from '@/constants/blockTypeConstant'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/api'
 import { toast } from '@/utils/toast'
-import { useSharePage } from '@/hooks/useSharePageManager'
 import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
 import TreeLayout from '../../Common/Tree/TreeLayout'
 import FormButton from '../../Common/Ui/Button'
 import styles from './PageBlockForm.module.scss'
 
 export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
-  const { sharePage } = useSharePage()
+  const { sharePage } = useSharePageQuery()
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [parentPageId, setParentPageId] = useState<string>('')

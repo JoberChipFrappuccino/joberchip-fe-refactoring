@@ -4,14 +4,14 @@ import { useMemo } from 'react'
 import { editPageProfileAPI } from '@/apis/space'
 import { TreeDrawer } from '@/components/Common/Tree/TreeDrawer'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { clip } from '@/utils'
-import { useSharePage } from '@/hooks/useSharePageManager'
 import { useSharePageMode } from '@/hooks/useSharePageMode'
 import { useUser } from '@/hooks/useUser'
 import styles from './ProfileDropDownMenu.module.scss'
 
 export default function ProfileDropDownMenu() {
-  const { sharePage, pageId } = useSharePage()
+  const { sharePage, pageId } = useSharePageQuery()
   const { mode, setSharePageMode } = useSharePageMode()
   const { spaceList } = useUser()
   const rootPage = spaceList?.find((page) => page.mainPageId === pageId)

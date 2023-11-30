@@ -6,10 +6,10 @@ import { fetchBlockPosition, type FetchBlockPositionBlocksParam } from '@/apis/s
 import { ViewerBox } from '@/components/Common/SwitchCases/ViewerBox'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { BREAKPOINTS, LAYOUT_DEBOUNCE_TIME } from '@/constants/sharePageConstant'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { to, toast } from '@/utils'
 import { useDebounce } from '@/hooks/useDebounce'
-import { useSharePage } from '@/hooks/useSharePageManager'
 import { useSharePageMode } from '@/hooks/useSharePageMode'
 import MainBlockInfo from '../../Common/Ui/MainBlockInfo'
 import { SpaceActionBar } from '../ActionBar/SpaceActionBar'
@@ -23,7 +23,7 @@ export function BlocksViewer() {
   const [rowHeight, setRowHeight] = useState(100)
   const [margin, setMargin] = useState(40)
   const { mode } = useSharePageMode()
-  const { sharePage, pageId } = useSharePage()
+  const { sharePage, pageId } = useSharePageQuery()
   const [grid, setGridLayout] = useState({
     breakpoints: 'lg',
     layouts: { lg: getBlockLayout(sharePage?.children, 'EDIT') }

@@ -6,12 +6,12 @@ import { BlockFormBase } from '@/components/SharePage/Drawer/BlockFormBase'
 import { PAGE, TEMPLATE } from '@/constants/blockTypeConstant'
 import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
-import { useSharePage } from '@/hooks/useSharePageManager'
 
 export function Drawer() {
   const { openDrawer, setOpenDrawer, drawerMode, blockType } = useBlockActionStore()
-  const { sharePage } = useSharePage()
+  const { sharePage } = useSharePageQuery()
   const { activeBlockId } = useBlockActionStore()
   const [title, setTitle] = useState('')
 

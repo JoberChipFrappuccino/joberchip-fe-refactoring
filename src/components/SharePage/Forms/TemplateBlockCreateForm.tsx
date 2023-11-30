@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { addTemplateBlockAPI } from '@/apis/blocks'
 import { getTemplates } from '@/apis/template'
 import { type BlockWith } from '@/models/space'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/api'
 import { toast } from '@/utils/toast'
-import { useSharePage } from '@/hooks/useSharePageManager'
 import { useUser } from '@/hooks/useUser'
 import FormButton from '../../Common/Ui/Button'
 import { TemplateBlock } from '../Blocks/TemplateBlock'
@@ -16,7 +16,7 @@ import styles from './TemplateBlockCreateForm.module.scss'
 
 export function TemplateBlockCreateForm() {
   const { user } = useUser()
-  const { sharePage, pageId } = useSharePage()
+  const { sharePage, pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
   const { data: templates } = useQuery(['template', user.userId], () => getTemplates(user.userId))
   const [templateId, setTemplateId] = useState('')

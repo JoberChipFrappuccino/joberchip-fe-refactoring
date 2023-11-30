@@ -1,7 +1,7 @@
-import { useSharePage } from '@/hooks/useSharePageManager'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import styles from './ProfileViewMode.module.scss'
 export default function ProfileViewMode() {
-  const { sharePage } = useSharePage()
+  const { sharePage } = useSharePageQuery()
   return (
     <div className={styles.container}>
       <div className={styles.profileImageCover}>

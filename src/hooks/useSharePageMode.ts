@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { useSharePageModeStore } from '@/store/sharePage'
-import { useSharePage } from './useSharePageManager'
+import { useSharePageQuery } from '../queries/useSharePageQuery'
 
 export const useSharePageMode = () => {
-  const { pageId, isSuccess } = useSharePage()
+  const { pageId, isSuccess } = useSharePageQuery()
   const { mode, setSharePageMode } = useSharePageModeStore()
 
   useEffect(() => {

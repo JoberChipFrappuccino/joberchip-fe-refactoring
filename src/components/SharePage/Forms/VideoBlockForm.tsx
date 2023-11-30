@@ -3,16 +3,16 @@ import { Input } from 'antd'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { editVideoBlockAPI } from '@/apis/blocks'
 // import { addVideoBlockAPI, editVideoBlockAPI } from '@/apis/blocks'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/api'
-import { useSharePage } from '@/hooks/useSharePageManager'
 import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
 import FormButton from '../../Common/Ui/Button'
 import VideoThumbnail from '../../Common/Ui/VideoThumbnail'
 import styles from './VideoBlockForm.module.scss'
 
 export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
-  const { sharePage, pageId } = useSharePage()
+  const { sharePage, pageId } = useSharePageQuery()
   const [selectedRadio, setSelectedRadio] = useState('radio1')
   const [thumbnail, setThumbnail] = useState<string>('')
   const [videoUrl, setVideoUrl] = useState<string>('')

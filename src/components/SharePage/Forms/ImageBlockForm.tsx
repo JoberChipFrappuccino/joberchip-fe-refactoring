@@ -4,16 +4,16 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { editImageBlockAPI } from '@/apis/blocks'
 // import { addImageBlockAPI, editImageBlockAPI } from '@/apis/blocks'
 import { IMAGE } from '@/constants/blockTypeConstant'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/api'
-import { useSharePage } from '@/hooks/useSharePageManager'
 import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
 import FormButton from '../../Common/Ui/Button'
 import ImgThumbnail from '../../Common/Ui/ImgThumbnail'
 import styles from './ImageBlockForm.module.scss'
 
 export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
-  const { sharePage, pageId } = useSharePage()
+  const { sharePage, pageId } = useSharePageQuery()
   const [thumbnail, setThumbnail] = useState('')
   const [title, setTitle] = useState('')
   const isButtonDisabled = !title || !thumbnail
