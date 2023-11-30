@@ -4,23 +4,23 @@ import { Responsive, WidthProvider } from 'react-grid-layout'
 import { fetchLayout } from '@/apis/space'
 import { ViewerBox } from '@/components/Common/SwitchCases/ViewerBox'
 import { MainBlockInfo } from '@/components/Common/Ui/MainBlockInfo'
+import { SpaceActionBar } from '@/components/SharePage/ActionBar/SpaceActionBar'
+import { ViewerBlockBase } from '@/components/SharePage/DnDViewer/ViewerBlockBase'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { BREAKPOINTS, LAYOUT_DEBOUNCE_TIME } from '@/constants/sharePageConstant'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
+import { useSharePageModeStore } from '@/store/sharePage'
 import { to, toast } from '@/utils'
 import { calculateRatio, convertLayoutToParam, getLayoutByMode, sortLayout } from '@/utils/SharePage'
 import { useDebounce } from '@/hooks/useDebounce'
-import { useSharePageMode } from '@/hooks/useSharePageMode'
-import { SpaceActionBar } from '../ActionBar/SpaceActionBar'
-import styles from './BlocksViewer.module.scss'
-import { ViewerBlockBase } from './ViewerBlockBase'
 import '@/styles/reactGridLayout.scss'
+import styles from './BlocksViewer.module.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
 export const BlocksViewer = () => {
-  const { mode } = useSharePageMode()
+  const { mode } = useSharePageModeStore()
   const { sharePage, pageId } = useSharePageQuery()
   const { activeBlockId, setActiveBlockId } = useBlockActionStore()
 
@@ -99,20 +99,3 @@ export const BlocksViewer = () => {
     </div>
   )
 }
-
-/**
- * @description 레이아웃 변경시 블록의 위치를 업데이트합니다.
- * @description 참조값만 바꾸기 때문에 리렌더링이 발생하지 않습니다.
- */
-// function updateBlockPosition(changedLayout: Layout[], blocks: SharePage['children']) {
-//   changedLayout.forEach((item) => {
-//     const block = blocks.find((block) => block.objectId === item.i)
-//     if (!block) return block
-//     block.x = item.x
-//     block.y = item.y
-//     block.w = item.w
-//     block.h = item.h
-//     return block
-//   })
-//   return blocks
-// }

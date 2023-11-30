@@ -4,13 +4,13 @@ import { useCallback } from 'react'
 import { PAGE, TEMPLATE, TEXT } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockActionStore } from '@/store/blockAction'
-import { useSharePageMode } from '@/hooks/useSharePageMode'
+import { useSharePageModeStore } from '@/store/sharePage'
 import styles from './SpaceActionBar.module.scss'
 export interface ActionBarProps {
   isActive: boolean
 }
 export function SpaceActionBar({ isActive }: ActionBarProps) {
-  const { mode } = useSharePageMode()
+  const { mode } = useSharePageModeStore()
   const { formType, setOpenDrawer, setBlockType, setDrawerMode } = useBlockActionStore()
 
   const changeBlockType = useCallback(

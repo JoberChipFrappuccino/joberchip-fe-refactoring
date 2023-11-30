@@ -5,14 +5,14 @@ import { editPageProfileAPI } from '@/apis/space'
 import { BREAD_CRUMB, SPACE_LIST } from '@/constants/queryKeyConstant'
 import { USER_PROFILE_DEVOUNCE_TIME } from '@/constants/sharePageConstant'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useSharePageModeStore } from '@/store/sharePage'
 import { to, toast } from '@/utils'
 import { useDebounce } from '@/hooks/useDebounce'
-import { useSharePageMode } from '@/hooks/useSharePageMode'
 import styles from './ProfileForm.module.scss'
 
 export function ProfileForm() {
   const { sharePage, pageId } = useSharePageQuery()
-  const { mode } = useSharePageMode()
+  const { mode } = useSharePageModeStore()
   const [title, setTitle] = useState(sharePage.title)
   const [isTitleLoading, setIsTitleLoading] = useState(false)
   const [description, setDescription] = useState(sharePage.description)

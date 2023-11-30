@@ -14,10 +14,10 @@ import { BLOCK, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constant
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
+import { useSharePageModeStore } from '@/store/sharePage'
 import { ModalPortal } from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { toast } from '@/utils/toast'
-import { useSharePageMode } from '@/hooks/useSharePageMode'
 import { ConfirmModal } from '../Modals/ConfirmModal'
 import styles from './ViewerBlockBase.module.scss'
 
@@ -28,7 +28,7 @@ export interface BlockBaseProps {
 
 export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   const { activeBlockId, setActiveBlockId } = useBlockActionStore()
-  const { mode } = useSharePageMode()
+  const { mode } = useSharePageModeStore()
   const { sharePage, pageId } = useSharePageQuery()
   const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockActionStore()
 

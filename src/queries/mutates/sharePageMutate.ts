@@ -7,6 +7,9 @@ interface MutationFnParams {
   blockLayout: FetchLayoutBlocksParam[]
 }
 
+/**
+ * @deprecated 레이아웃이 리액트 내부 상태로만 관리되기 때문에, 헤당 mutation은 사용하지 않습니다.
+ */
 export const layoutChangeMutation = (queryClient: QueryClient) => {
   const mutation = useMutation({
     mutationFn: ({ pageId, blockLayout }: MutationFnParams) => {
@@ -24,12 +27,11 @@ export const layoutChangeMutation = (queryClient: QueryClient) => {
       const layout: Layout[] = blockLayout.map((item) => ({ ...item, i: item.blockId }))
       if (typeof previousSharePage === 'undefined') throw new Error('previousSharePage is undefined')
       return { ...previousSharePage, children: updateBlockPosition(layout, previousSharePage.children) }
+    },
+    onError: (_err, _newBlockLayout, context) => {
+      queryClient.setQueryData(['todos'], context)
     }
-    // onError: (err, newTodo, context) => {
-    //     queryClient.setQueryData(['todos'], context.previousTodos)
-    //   },
   })
-
   return mutation
 }
 

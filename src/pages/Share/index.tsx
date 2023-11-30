@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { BreadCrumbBox, Header, LeftMenu } from '@/components/Common/Menus'
 import { BlocksViewer } from '@/components/SharePage/DnDViewer/BlocksViewer'
@@ -5,6 +6,7 @@ import { Drawer } from '@/components/SharePage/Drawer/Drawer'
 import { Profile } from '@/components/SharePage/Profile/Profile'
 import { SEO } from '@/constants'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useSharePageModeStore } from '@/store/sharePage'
 import useServerSideProps from '@/hooks/serverSideProps'
 
 interface PageSource {
@@ -13,9 +15,16 @@ interface PageSource {
   profileImageLink: string
 }
 
-export default function ShareableSpace() {
+export default function SharePage() {
   const pageSource: PageSource = useServerSideProps(SEO)
-  const { isSuccess } = useSharePageQuery()
+  const { pageId, isSuccess } = useSharePageQuery()
+  const { mode, setSharePageMode } = useSharePageModeStore()
+
+  useEffect(() => {
+    if (isSuccess) {
+      setSharePageMode(mode === 'EDIT' ? 'VIEW' : 'EDIT')
+    }
+  }, [pageId, isSuccess])
 
   return (
     <>
