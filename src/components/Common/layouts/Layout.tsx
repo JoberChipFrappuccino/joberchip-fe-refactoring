@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { Header } from '@/components/Common/Menus/Header'
-import { useUser } from '@/hooks/user'
+import { useUser } from '@/hooks/useUser'
 import styles from './Layout.module.scss'
 
 const { Content } = AntdLayout

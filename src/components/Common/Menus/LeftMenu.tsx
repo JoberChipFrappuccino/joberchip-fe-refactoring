@@ -3,7 +3,7 @@ import { CloseOutlined, RightOutlined } from '@ant-design/icons'
 import { Button, Drawer, Menu, Space } from 'antd'
 import { useState } from 'react'
 import { SpaceListBar } from '@/components/Common/Menus/SpaceListBar'
-import { useUser } from '@/hooks/user'
+import { useUser } from '@/hooks/useUser'
 import styles from './LeftMenu.module.scss'
 
 export const LeftMenu = () => {

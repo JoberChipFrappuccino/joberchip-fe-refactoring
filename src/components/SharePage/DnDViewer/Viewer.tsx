@@ -7,10 +7,10 @@ import { ViewerBox } from '@/components/Common/SwitchCases/ViewerBox'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { BREAKPOINTS, LAYOUT_DEBOUNCE_TIME } from '@/constants/sharePageConstant'
 import { useBlockActionStore } from '@/store/blockAction'
-import { useSharePageStore } from '@/store/sharePage'
 import { to, toast } from '@/utils'
-import { useDebounce } from '@/hooks/debounce'
+import { useDebounce } from '@/hooks/useDebounce'
 import { useSharePage } from '@/hooks/useSharePageManager'
+import { useSharePageMode } from '@/hooks/useSharePageMode'
 import MainBlockInfo from '../../Common/Ui/MainBlockInfo'
 import { SpaceActionBar } from '../ActionBar/SpaceActionBar'
 import styles from './Viewer.module.scss'
@@ -22,7 +22,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive)
 export function BlocksViewer() {
   const [rowHeight, setRowHeight] = useState(100)
   const [margin, setMargin] = useState(40)
-  const { mode } = useSharePageStore()
+  const { mode } = useSharePageMode()
   const { sharePage, pageId } = useSharePage()
   const [grid, setGridLayout] = useState({
     breakpoints: 'lg',

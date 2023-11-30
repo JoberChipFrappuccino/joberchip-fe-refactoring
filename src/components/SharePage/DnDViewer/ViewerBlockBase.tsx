@@ -13,11 +13,11 @@ import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { BLOCK, IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
 import { useBlockActionStore } from '@/store/blockAction'
-import { useSharePageStore } from '@/store/sharePage'
 import { ModalPortal } from '@/templates/ModalPortal'
 import { clip } from '@/utils/copy'
 import { toast } from '@/utils/toast'
 import { useSharePage } from '@/hooks/useSharePageManager'
+import { useSharePageMode } from '@/hooks/useSharePageMode'
 import { ConfirmModal } from '../Modals/ConfirmModal'
 import styles from './ViewerBlockBase.module.scss'
 
@@ -29,7 +29,7 @@ export interface BlockBaseProps {
 export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   const [focus, setFocus] = useState(false)
   const { activeBlockId, setActiveBlockId } = useBlockActionStore()
-  const { mode } = useSharePageStore()
+  const { mode } = useSharePageMode()
   const { sharePage, pageId } = useSharePage()
 
   const { setOpenDrawer, setFormType, setDrawerMode, setBlockType } = useBlockActionStore()

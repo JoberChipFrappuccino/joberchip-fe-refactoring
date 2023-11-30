@@ -6,7 +6,7 @@ import { GroupSpaceItem } from '@/components/SpacePage/GroupSpaceItem'
 import { Search } from '@/components/SpacePage/Search'
 import { UserProfile } from '@/components/SpacePage/UserProfile'
 import { type SpaceList } from '@/models/space'
-import { useUser } from '@/hooks/user'
+import { useUser } from '@/hooks/useUser'
 import styles from './Space.module.scss'
 
 export default function Space() {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { createSpaceAPI } from '@/apis/space'
 import { SPACE_LIST } from '@/constants/queryKeyConstant'
 import { toast } from '@/utils/toast'
-import { useUser } from '@/hooks/user'
+import { useUser } from '@/hooks/useUser'
 import styles from './UserProfile.module.scss'
 
 export function UserProfile() {

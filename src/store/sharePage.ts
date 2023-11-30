@@ -26,7 +26,7 @@ interface SharePageState {
 // SSR로 받아온 데이터를 Zustand에 저장하고 이후 Zustand를 통해 관리
 // 이 경우 SSR, CSR간의 데이터 불일치가 발생할 수 있음
 
-export const useSharePageStore = create<SharePageState>((set) => {
+export const useSharePageModeStore = create<SharePageState>((set) => {
   return {
     // spaceId: '',
     // sharePage: {

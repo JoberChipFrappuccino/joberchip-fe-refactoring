@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { Header, HomeLogo } from '@/components/Common/Menus'
 import { toast } from '@/utils/toast'
-import { useUser } from '@/hooks/user'
+import { useUser } from '@/hooks/useUser'
 import styles from './SignIn.module.scss'
 
 export interface SignInInputs {

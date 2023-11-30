@@ -3,16 +3,16 @@ import { Switch } from 'antd'
 import { useMemo } from 'react'
 import { editPageProfileAPI } from '@/apis/space'
 import { TreeDrawer } from '@/components/Common/Tree/TreeDrawer'
-import { useSharePageStore } from '@/store/sharePage'
+import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { clip } from '@/utils'
 import { useSharePage } from '@/hooks/useSharePageManager'
-import { useUser } from '@/hooks/user'
-import { DropDownMenu } from '../DropDownMenu'
+import { useSharePageMode } from '@/hooks/useSharePageMode'
+import { useUser } from '@/hooks/useUser'
 import styles from './ProfileDropDownMenu.module.scss'
 
 export default function ProfileDropDownMenu() {
   const { sharePage, pageId } = useSharePage()
-  const { mode, setSharePageMode } = useSharePageStore()
+  const { mode, setSharePageMode } = useSharePageMode()
   const { spaceList } = useUser()
   const rootPage = spaceList?.find((page) => page.mainPageId === pageId)
 
