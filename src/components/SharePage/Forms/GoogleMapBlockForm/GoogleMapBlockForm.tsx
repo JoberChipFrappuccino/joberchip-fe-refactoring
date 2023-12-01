@@ -1,10 +1,12 @@
 import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import type { EmbedGoogleMapBlock } from '@/models/space'
 import { GoogleMap, Marker } from '@react-google-maps/api'
+import { useQueryClient } from '@tanstack/react-query'
 import { type FormEvent, useRef, useEffect } from 'react'
 import { addGoogleMapBlockAPI, editGoogleMapBlockAPI } from '@/apis/blocks'
 import FormButton from '@/components/Common/Ui/Button'
 import { MAP } from '@/constants/blockTypeConstant'
+import { addBlockMutation } from '@/queries/mutates/sharePageMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { useMapStore, type Center } from '@/store/map'
@@ -21,6 +23,8 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
   const { address, setCenter, center, setAddress } = useMapStore()
   const { sharePage, pageId } = useSharePageQuery()
   const { setOpenDrawer, drawerMode } = useBlockActionStore()
+  const queryClient = useQueryClient()
+  const addMutation = addBlockMutation(queryClient)
 
   const blockId = block?.objectId ?? ''
 
@@ -44,15 +48,17 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
         visible: true,
         ...center
       }
-
       await addGoogleMapBlockAPI(pageId, newBlock)
-      toast('지도가 추가되었습니다.', 'success', { autoClose: 500 })
+
+      addMutation.mutate({ pageId, newBlock })
+      alert('지도가 추가되었습니다.')
+      toast('지도가 추가되었습니다.', 'success')
     } else if (drawerMode === 'EDIT') {
       await editGoogleMapBlockAPI(pageId, blockId, {
         ...center,
         address
       })
-      toast('지도가 수정되었습니다.', 'success', { autoClose: 500 })
+      toast('지도가 수정되었습니다.', 'success')
     }
     setOpenDrawer(false)
   }
@@ -79,7 +85,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
           </>
         )}
         <AddressForm />
-        <FormButton title={drawerMode === 'CREATE' ? '지도 추가하기' : '지도 수정하기'} event={!!address} />
+        <FormButton title={drawerMode === 'CREATE' ? '지도 추가하기' : '지도 수정하기'} event={false} />
       </form>
     </div>
   )

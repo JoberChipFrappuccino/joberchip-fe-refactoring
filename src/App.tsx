@@ -1,5 +1,6 @@
 import { Layout } from 'antd'
 import { Outlet } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import styles from './App.module.scss'
 
 // import '@/styles/reset.scss'
@@ -11,6 +12,7 @@ export default function App() {
   return (
     <div>
       <div id="portal" />
+      <ToastContainer />
       <Layout>
         <Layout.Content className={styles.layout}>
           <Outlet />

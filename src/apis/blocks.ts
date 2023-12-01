@@ -1,4 +1,4 @@
-import { type BlockWith } from '@/models/space'
+import { type EmbedGoogleMapBlock, type BlockWith } from '@/models/space'
 import { backAuthAPI } from './api'
 
 export type addGoogleMapBlockParams = {
@@ -11,18 +11,23 @@ export type addGoogleMapBlockParams = {
   longitude?: number
 }
 
+interface AddGoogleMapBlockResponse {
+  response: EmbedGoogleMapBlock
+  status: number
+  success: boolean
+}
 /**
  * @description 지도 블럭 생성 API
  * @see https://www.notion.so/ee4e2a88bd384a2ab031fc5593fbc93a
  */
 export const addGoogleMapBlockAPI = async (pageId: string | undefined, body: addGoogleMapBlockParams) => {
   if (!pageId) throw new Error('pageId가 없습니다.')
-  const response = await backAuthAPI(`/v1/page/${pageId}/mapBlock`, {
+  const { data } = await backAuthAPI<AddGoogleMapBlockResponse>(`/v1/page/${pageId}/mapBlock`, {
     method: 'POST',
     data: body
   })
   return {
-    data: response.data.response,
+    data: data.response,
     status: 'success',
     message: '구글 맵 블록을 추가했습니다.'
   }
@@ -35,7 +40,6 @@ export type editGoogleMapBlockParams = {
   visible?: boolean
 }
 /**
- *
  * @description 지도 블럭 수정 API
  * @see https://www.notion.so/6489900f63984b38be7b8be3b55c2a35
  */

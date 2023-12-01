@@ -1,7 +1,8 @@
 import { useMutation, type QueryClient } from '@tanstack/react-query'
 import { type Layout } from 'react-grid-layout'
+import { addGoogleMapBlockAPI } from '@/apis/blocks'
 import { type FetchLayoutBlocksParam, fetchLayout } from '@/apis/space'
-import { type SharePage } from '@/models/space'
+import { type BlockItem, type SharePage } from '@/models/space'
 interface MutationFnParams {
   pageId: string
   blockLayout: FetchLayoutBlocksParam[]
@@ -46,4 +47,30 @@ function updateBlockPosition(changedLayout: Layout[], blocks: SharePage['childre
     return block
   })
   return blocks
+}
+
+interface AddBlockMutationFnParams {
+  pageId: string | undefined
+  newBlock: Partial<BlockItem>
+}
+export function addBlockMutation(queryClient: QueryClient) {
+  const mutation = useMutation({
+    mutationFn: ({ pageId, newBlock }: AddBlockMutationFnParams) => {
+      if (newBlock.type === 'MAP') {
+        return addGoogleMapBlockAPI(pageId, newBlock)
+      }
+      return addGoogleMapBlockAPI(pageId, newBlock)
+    },
+    onSuccess: (data, { pageId }) => {
+      const { data: block } = data
+      queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
+        if (!oldData) throw new Error('oldData is undefined')
+        return { ...oldData, children: [...oldData.children, block] }
+      })
+    },
+    onError: (_err, _newBlock, context) => {
+      queryClient.setQueryData(['todos'], context)
+    }
+  })
+  return mutation
 }
