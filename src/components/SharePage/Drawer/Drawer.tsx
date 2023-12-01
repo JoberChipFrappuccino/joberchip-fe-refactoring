@@ -31,7 +31,7 @@ export function Drawer() {
       open={openDrawer}
     >
       <BlockFormBase>
-        {drawerMode === 'create' && <DrawerCreateForm blockType={blockType} />}
+        {drawerMode === 'CREATE' && <DrawerCreateForm blockType={blockType} />}
         {drawerMode === 'EDIT' && block && <DrawerEditForm block={block} mode={drawerMode} />}
       </BlockFormBase>
     </AntdDrawer>

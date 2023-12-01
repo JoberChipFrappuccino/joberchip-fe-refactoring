@@ -13,24 +13,23 @@ const baseURL =
 export function SpaceActionBar() {
   const { mode } = useSharePageModeStore()
   const { activeBlockId, formType, setOpenDrawer, setBlockType, setDrawerMode } = useBlockActionStore()
+  const isActive = activeBlockId === ''
 
   const changeBlockType = useCallback(
     (type: BlockType) => {
-      setDrawerMode('create')
+      setDrawerMode('CREATE')
       setBlockType(type)
       setOpenDrawer(true)
     },
     [formType]
   )
 
-  if (mode === 'EDIT') return null
-
   return (
     <div
       className={classNames(styles.container, [
         {
-          [styles.visible]: activeBlockId || mode === 'VIEW',
-          [styles.hidden]: !activeBlockId
+          [styles.visible]: isActive || mode === 'VIEW',
+          [styles.hidden]: !isActive
         }
       ])}
     >

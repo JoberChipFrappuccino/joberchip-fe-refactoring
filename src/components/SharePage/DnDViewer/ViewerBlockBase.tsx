@@ -30,10 +30,12 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   }, [activeBlockId])
 
   const handleDelete = useCallback(() => {}, [])
+
   const handleOnClickBlockCover = useCallback(() => {
     setActiveBlockId('')
     setFocus(() => false)
   }, [])
+
   const handleOnConfirm = useCallback(() => {
     // if (isConfirm) removeBlockById(block.objectId)
     setConfirmModal(false)

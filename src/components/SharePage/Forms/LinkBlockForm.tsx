@@ -46,7 +46,7 @@ export function LinkBlockForm({ block }: BlockBaseWithBlockFormProps<TLink>) {
       link
     }
     try {
-      if (drawerMode === 'create') {
+      if (drawerMode === 'CREATE') {
         // const { data: responseData } = await addLinkBlockAPI(pageId, addData)
         // const updatedSharePage = {
         //   ...sharePage,
@@ -93,7 +93,7 @@ export function LinkBlockForm({ block }: BlockBaseWithBlockFormProps<TLink>) {
 
   return (
     <div className={styles.container}>
-      <form className={styles.formBox} onSubmit={drawerMode === 'create' ? submitHandler : submitHandler}>
+      <form className={styles.formBox} onSubmit={drawerMode === 'CREATE' ? submitHandler : submitHandler}>
         <div className={styles.forms}>
           <h3>URL 링크 주소 제목*</h3>
           <div className={styles.inputbox}>
@@ -126,7 +126,7 @@ export function LinkBlockForm({ block }: BlockBaseWithBlockFormProps<TLink>) {
             )}
           </div>
         </div>
-        <FormButton title={drawerMode === 'create' ? '링크 추가하기' : '링크 수정하기'} event={isButtonDisabled} />
+        <FormButton title={drawerMode === 'CREATE' ? '링크 추가하기' : '링크 수정하기'} event={isButtonDisabled} />
       </form>
     </div>
   )

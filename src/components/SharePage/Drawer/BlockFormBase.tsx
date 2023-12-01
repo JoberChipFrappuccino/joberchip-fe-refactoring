@@ -1,10 +1,10 @@
 import classNames from 'classnames'
 import { useMemo, type ReactNode } from 'react'
+import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from '@/components/SharePage/icons'
 import { IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { BLOCK_TO } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockActionStore } from '@/store/blockAction'
-import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from '../icons'
 import styles from './BlockFormBase.module.scss'
 
 interface FormType {
@@ -54,16 +54,16 @@ export function BlockFormBase({ children }: Props) {
   }
 
   return (
-    <>
+    <div className={styles.flexContainer}>
       <div className={styles.container}>
         <h2>
-          {formTypes.find((form) => form.type === blockType)?.title} {drawerMode === 'create' ? '추가하기' : '수정하기'}
+          {formTypes.find((form) => form.type === blockType)?.title} {drawerMode === 'CREATE' ? '추가하기' : '수정하기'}
         </h2>
         <div
           className={classNames([
             styles.actionNavigation,
             {
-              [styles.focusable]: drawerMode === 'create'
+              [styles.focusable]: drawerMode === 'CREATE'
             }
           ])}
         >
@@ -99,6 +99,6 @@ export function BlockFormBase({ children }: Props) {
         </div>
       </div>
       <div className={styles.inner}>{children}</div>
-    </>
+    </div>
   )
 }

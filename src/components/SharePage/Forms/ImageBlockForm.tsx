@@ -55,7 +55,7 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
     editform.append('title', title)
 
     try {
-      if (drawerMode === 'create') {
+      if (drawerMode === 'CREATE') {
         // const { data: responseData } = await addImageBlockAPI(pageId, addform)
         // const updatedSharePage = {
         //   ...sharePage,
@@ -106,7 +106,7 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
           <h3 className={styles.formText}>사진 첨부*</h3>
           <ImgThumbnail img={thumbnail} imgData={setThumbnail} />
         </div>
-        <FormButton title={drawerMode === 'create' ? '사진 추가하기' : '사진 수정하기'} event={isButtonDisabled} />
+        <FormButton title={drawerMode === 'CREATE' ? '사진 추가하기' : '사진 수정하기'} event={isButtonDisabled} />
       </form>
     </div>
   )

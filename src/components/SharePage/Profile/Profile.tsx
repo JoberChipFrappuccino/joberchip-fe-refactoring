@@ -10,14 +10,14 @@ import ProfileSwitchCase from './ProfileSwitchCase'
 
 export function Profile() {
   const [openConfirmModal, setConfirmModal] = useState(false)
-  const { sharePage, pageId } = useSharePageQuery()
+  const { pageId } = useSharePageQuery()
   const { spaceList } = useUser()
   const rootPage = spaceList?.find((page) => page.mainPageId === pageId)
 
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
-        <ProfileSwitchCase rootPage={!!rootPage?.mainPageId} mode={sharePage.privilege === 'EDIT' ? 'EDIT' : 'VIEW'} />
+        <ProfileSwitchCase rootPage={!!rootPage?.mainPageId} />
         {openConfirmModal && (
           <ModalPortal>
             <ConfirmModal
@@ -25,6 +25,7 @@ export function Profile() {
                 toast(isConfirm ? '삭제 되었습니다.' : '취소 되었습니다.', 'success', { autoClose: 500 })
                 setConfirmModal(false)
               }}
+              onClose={() => setConfirmModal(false)}
               cancelBtnText="취소"
               confirmBtnText="삭제하기"
             >

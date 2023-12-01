@@ -2,13 +2,13 @@ import { type BlockWith } from '@/models/space'
 import { backAuthAPI } from './api'
 
 export type addGoogleMapBlockParams = {
-  x: number
-  y: number
-  w: number
-  h: number
+  x?: number
+  y?: number
+  w?: number
+  h?: number
   address?: string
-  latitude: number
-  longitude: number
+  latitude?: number
+  longitude?: number
 }
 
 /**

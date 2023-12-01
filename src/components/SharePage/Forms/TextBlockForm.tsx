@@ -25,7 +25,7 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
   }, [block?.objectId])
 
   useEffect(() => {
-    if (drawerMode === 'create') {
+    if (drawerMode === 'CREATE') {
       setEditorState(EditorState.createEmpty())
     } else {
       try {
@@ -43,7 +43,7 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
 
     const editortext = JSON.stringify(convertToRaw(editorState.getCurrentContent()))
     try {
-      if (drawerMode === 'create') {
+      if (drawerMode === 'CREATE') {
         // const textblock = {
         //   content: editortext,
         //   x: 0,
@@ -110,7 +110,7 @@ export function TextBlockForm({ block }: BlockBaseWithBlockFormProps<TText>) {
           />
         </div>
       </div>
-      <FormButton title={drawerMode === 'create' ? '텍스트 추가하기' : '텍스트 수정하기'} event={isButtonDisabled} />
+      <FormButton title={drawerMode === 'CREATE' ? '텍스트 추가하기' : '텍스트 수정하기'} event={isButtonDisabled} />
     </form>
   )
 }

@@ -47,7 +47,6 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
   )
 }
 
-// HACK : 맥 따옴표 제거 임시 함수, 올바른 데이터가 만들어지면 삭제 예정
 export function checkValidation(text: string, ...validator: string[]) {
   let newText = text
   let isChaged = false

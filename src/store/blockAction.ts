@@ -19,7 +19,7 @@ export const useBlockActionStore = create<FormTypeState>((set) => ({
   formType: BLOCK,
   blockType: TEXT,
   openDrawer: false,
-  drawerMode: 'create',
+  drawerMode: 'CREATE',
   activeBlockId: '',
   setActiveBlockId: (id: string) => {
     set((state) => ({ ...state, activeBlockId: id }))

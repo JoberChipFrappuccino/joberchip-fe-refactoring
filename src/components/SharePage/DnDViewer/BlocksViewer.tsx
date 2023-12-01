@@ -14,8 +14,8 @@ import { useSharePageModeStore } from '@/store/sharePage'
 import { to, toast } from '@/utils'
 import { calculateRatio, convertLayoutToParam, getLayoutByMode, sortLayout } from '@/utils/SharePage'
 import { useDebounce } from '@/hooks/useDebounce'
-import '@/styles/reactGridLayout.scss'
 import styles from './BlocksViewer.module.scss'
+import '@/styles/reactGridLayout.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
@@ -111,7 +111,7 @@ export const BlocksViewer = () => {
           })}
         </ResponsiveGridLayout>
       </div>
-      <SpaceActionBar />
+      {mode === 'EDIT' && <SpaceActionBar />}
     </div>
   )
 }

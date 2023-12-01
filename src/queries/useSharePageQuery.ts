@@ -18,5 +18,8 @@ export const useSharePageQuery: SharePageHook = () => {
     return getSpaceFromBackAPI(pageId ?? '')
   })
 
+  // HACK : children 중에 x가 없는 것들은 제거해준다.
+  data.children = data.children.filter((child) => typeof child.x === 'number' || typeof child.x === 'string')
+
   return { sharePage: data, pageId, ...rest }
 }

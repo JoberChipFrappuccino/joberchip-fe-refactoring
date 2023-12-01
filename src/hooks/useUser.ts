@@ -5,10 +5,8 @@ import { useUserStore } from '@/store/user'
 
 export const useUser = (redirectPath: string = '/signin') => {
   const { isSignedIn, loadUserInfo, signIn, signOut, user } = useUserStore()
-
   // * 사용자 정보를 조회하면 자주 사용되는 userId에 종속적인 hook입니다. 편의상 내부에 있지만 외부로 빼도 상관없습니다.
   const { spaceList } = useSpaceListQuery(user.userId)
-
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
@@ -20,10 +18,10 @@ export const useUser = (redirectPath: string = '/signin') => {
   useEffect(() => {
     if (isSignedIn) return
     loadUserInfo() //
-      .then((isSuccess) => {
-        if (isSuccess) return
-        navigate(redirectPath)
-      })
+    // .then((isSuccess) => {
+    //   if (isSuccess) return
+    //   navigate(redirectPath)
+    // })
   }, [pathname, isSignedIn])
 
   return { user, spaceList, signIn, signOut: handleSignOut, isSignedIn }

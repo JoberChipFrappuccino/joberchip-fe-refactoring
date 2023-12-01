@@ -17,12 +17,13 @@ interface PageSource {
 
 export default function SharePage() {
   const pageSource: PageSource = useServerSideProps(SEO)
-  const { pageId, isSuccess } = useSharePageQuery()
-  const { mode, setSharePageMode } = useSharePageModeStore()
+  const { pageId, isSuccess, sharePage } = useSharePageQuery()
+  const { setSharePageMode } = useSharePageModeStore()
 
   useEffect(() => {
     if (isSuccess) {
-      setSharePageMode(mode === 'EDIT' ? 'VIEW' : 'EDIT')
+      if (typeof sharePage.privilege === 'string') setSharePageMode(sharePage.privilege)
+      else setSharePageMode('VIEW')
     }
   }, [pageId, isSuccess])
 

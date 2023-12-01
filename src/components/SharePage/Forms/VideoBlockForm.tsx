@@ -95,7 +95,7 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
     editform.append('attachedVideo', editData.attachedVideo)
 
     try {
-      if (drawerMode === 'create') {
+      if (drawerMode === 'CREATE') {
         // const { data: responseData } = await addVideoBlockAPI(pageId, addform)
         // const updatedSharePage = {
         //   ...sharePage,
@@ -195,7 +195,7 @@ export function VideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
             videoUrl={videoUrl}
           />
         </div>
-        <FormButton title={drawerMode === 'create' ? '동영상 추가하기' : '동영상 수정하기'} event={isButtonDisabled} />
+        <FormButton title={drawerMode === 'CREATE' ? '동영상 추가하기' : '동영상 수정하기'} event={isButtonDisabled} />
       </form>
     </div>
   )

@@ -1,4 +1,5 @@
-import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
+import { Input } from 'antd'
+import { useState, type ChangeEvent, type FormEvent } from 'react'
 import { createPageAPI } from '@/apis/page'
 import { editPageProfileAPI } from '@/apis/space'
 import { BLOCK_SIZE } from '@/constants/blockSizeConstant'
@@ -14,32 +15,21 @@ import styles from './PageBlockForm.module.scss'
 
 export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
   const { sharePage } = useSharePageQuery()
-  const [title, setTitle] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const [parentPageId, setParentPageId] = useState<string>('')
-  const [parentPageTitle, setParentPageTitle] = useState<string>('')
-  const [isLocationVisible, setLocationVisible] = useState<boolean>(false)
-  const [treeLayoutToggle, setTreeLayoutToggle] = useState<boolean>(false)
+  const [title, setTitle] = useState(block?.title ?? '')
+  const [description, setDescription] = useState(block?.description ?? '')
+  const [parentPageId, setParentPageId] = useState('')
+  const [parentPageTitle, setParentPageTitle] = useState('')
+  const [isLocationVisible, setLocationVisible] = useState(false)
   const { drawerMode, setOpenDrawer } = useBlockActionStore()
   const isButtonDisabled = !title || !description || !location
 
-  const titleValue = block?.title
-  const descriptionValue = block?.description
-  const locationValue = block?.location
-
-  useEffect(() => {
-    setTitle(titleValue ?? '')
-    setDescription(descriptionValue ?? '')
-  }, [titleValue, descriptionValue, locationValue])
-
   const toggleLocation = () => {
-    setLocationVisible(!isLocationVisible)
-    setTreeLayoutToggle(!treeLayoutToggle)
+    setLocationVisible((prev) => !prev)
   }
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (drawerMode === 'create') {
+    if (drawerMode === 'CREATE') {
       const body = {
         title,
         description,
@@ -73,11 +63,10 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
   }
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
     setTitle(e.target.value)
   }
+
   const onChangeDescription = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
     setDescription(e.target.value)
   }
 
@@ -94,9 +83,9 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
       <form className={styles.formBox} onSubmit={submitHandler}>
         <div className={styles.forms}>
           <h3>페이지 제목</h3>
-          <input type="text" value={title} onChange={onChangeTitle} placeholder="페이지제목" />
+          <Input type="text" value={title} onChange={onChangeTitle} placeholder="페이지제목" />
           <h3>페이지 설명</h3>
-          <input
+          <Input
             type="text"
             value={description}
             onChange={onChangeDescription}
@@ -104,7 +93,7 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
           />
           <h3>페이지 위치 설정</h3>
           <div>
-            <input
+            <Input
               type="text"
               value={parentPageTitle}
               onClick={toggleLocation}
@@ -118,7 +107,7 @@ export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
             )}
           </div>
         </div>
-        <FormButton title={drawerMode === 'create' ? '페이지 추가하기' : '페이지 수정하기'} event={isButtonDisabled} />
+        <FormButton title={drawerMode === 'CREATE' ? '페이지 추가하기' : '페이지 수정하기'} event={isButtonDisabled} />
       </form>
     </div>
   )

@@ -1,4 +1,5 @@
 import { MdKeyboardArrowRight } from '@react-icons/all-files/md/MdKeyboardArrowRight'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import MockFoolowList from './MockFoolowList'
 import MockMessageList from './MockMessageList'
 import ProfileDropDownMenu from './ProfileDropDownMenu'
@@ -9,6 +10,7 @@ interface ProfileEditModeProps {
   rootPage: boolean
 }
 export default function ProfileEditMode({ rootPage }: ProfileEditModeProps) {
+  const { sharePage } = useSharePageQuery()
   return (
     <>
       <div className={styles.container}>
@@ -25,7 +27,7 @@ export default function ProfileEditMode({ rootPage }: ProfileEditModeProps) {
             </a>
           </nav>
         </div>
-        <ProfileDropDownMenu />
+        {sharePage.privilege === 'EDIT' && <ProfileDropDownMenu />}
       </div>
       {rootPage && <MockMessageList />}
     </>
