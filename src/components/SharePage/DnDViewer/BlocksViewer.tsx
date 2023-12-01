@@ -1,6 +1,6 @@
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
-import { Responsive, WidthProvider } from 'react-grid-layout'
+import { useCallback, useEffect, useState } from 'react'
+import { Responsive, WidthProvider, type ResponsiveProps } from 'react-grid-layout'
 import { fetchLayout } from '@/apis/space'
 import { ViewerBox } from '@/components/Common/SwitchCases/ViewerBox'
 import { MainBlockInfo } from '@/components/Common/Ui/MainBlockInfo'
@@ -44,15 +44,41 @@ export const BlocksViewer = () => {
     setViewModeGrid(() => getLayoutByMode(visibleChildren, 'VIEW'))
   }, [mode])
 
-  const handleWidthChange = (width: number, cols: number) => {
-    if (width > 768) {
-      setMargin(40)
-      setRowHeight(calculateRatio(width, cols, 0.7))
-      return
-    }
-    setMargin(18)
-    setRowHeight(calculateRatio(width, cols, 1))
-  }
+  const handleWidthChange: ResponsiveProps['onWidthChange'] = //
+    useCallback<NonNullable<ResponsiveProps['onWidthChange']>>(
+      (width, _margin, cols) => {
+        if (width > 768) {
+          setMargin(40)
+          setRowHeight(calculateRatio(width, cols, 0.7))
+        } else {
+          setMargin(18)
+          setRowHeight(calculateRatio(width, cols, 1))
+        }
+      },
+      [rowHeight, margin]
+    )
+
+  const handleChangeLayout: ResponsiveProps['onLayoutChange'] = //
+    useCallback<NonNullable<ResponsiveProps['onLayoutChange']>>(
+      (layout, _layouts) => {
+        if (mode === 'VIEW') return
+        const changedLayout = sortLayout(layout)
+        if (JSON.stringify(sortLayout(changedLayout)) === JSON.stringify(editModeGrid.layouts.lg)) return // TODO : 비교로직 수정 필요
+        setEditModeGrid(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
+      },
+      [activeBlockId]
+    )
+
+  const handleOnDragStart: ResponsiveProps['onDragStart'] = //
+    useCallback<NonNullable<ResponsiveProps['onDragStart']>>(
+      (_layout, _oldItem, _newItem, _placeholder, e, el) => {
+        setActiveBlockId(el.id)
+        if (e.type === 'mousedown') return
+        const targetElement = e.target as HTMLElement
+        if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) targetElement.closest('button')?.click()
+      },
+      [activeBlockId]
+    )
 
   return (
     <div className={styles.layout}>
@@ -65,19 +91,9 @@ export const BlocksViewer = () => {
           rowHeight={rowHeight}
           width={1000}
           margin={[margin, margin]}
-          onWidthChange={(width, _margin, cols) => handleWidthChange(width, cols)}
-          onLayoutChange={(layout, _layouts) => {
-            if (mode === 'VIEW') return
-            const changedLayout = sortLayout(layout)
-            if (JSON.stringify(sortLayout(changedLayout)) === JSON.stringify(editModeGrid.layouts.lg)) return
-            setEditModeGrid(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
-          }}
-          onDragStart={(_layout, _oldItem, _newItem, _placeholder, event, element) => {
-            setActiveBlockId(element.id)
-            if (event.type === 'mousedown') return
-            const targetElement = event.target as HTMLElement
-            if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) targetElement.closest('button')?.click()
-          }}
+          onWidthChange={handleWidthChange}
+          onLayoutChange={handleChangeLayout}
+          onDragStart={handleOnDragStart}
         >
           {sharePage.children.map((block) => {
             if (mode === 'VIEW' && !block.visible) return null
@@ -95,7 +111,7 @@ export const BlocksViewer = () => {
           })}
         </ResponsiveGridLayout>
       </div>
-      {mode === 'EDIT' && <SpaceActionBar isActive={activeBlockId === ''} />}
+      <SpaceActionBar />
     </div>
   )
 }

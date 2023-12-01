@@ -4,7 +4,7 @@ import { DrawerCreateForm } from '@/components/Common/SwitchCases/DrawerCreateFo
 import { DrawerEditForm } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { BlockFormBase } from '@/components/SharePage/Drawer/BlockFormBase'
 import { PAGE, TEMPLATE } from '@/constants/blockTypeConstant'
-import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
+import { BLOCK_TO } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
@@ -40,6 +40,6 @@ export function Drawer() {
 
 function getDrawerTitle(drawerMode: DrawerMode, blockType: BlockType) {
   const postfix = drawerMode === 'EDIT' ? '정보 수정' : '추가하기'
-  if (blockType === PAGE || blockType === TEMPLATE) return `${BLOCK_TYPE_TO_KOR[blockType]} ${postfix}`
+  if (blockType === PAGE || blockType === TEMPLATE) return `${BLOCK_TO.KR[blockType]} ${postfix}`
   return `블럭 ${postfix}`
 }

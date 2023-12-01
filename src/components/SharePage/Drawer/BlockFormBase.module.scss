@@ -1,79 +1,85 @@
 @import '/src/styles/variables.scss';
 
-.actionNavigation {
-  display: flex;
-  padding: 0 2rem 0 2rem;
-  justify-content: space-between;
-  margin-bottom: 2.5rem;
-}
-.actionNavigation.focusable {
-  button:hover {
-    transform: scale(0.96);
-    box-shadow: none;
-  }
-}
-.actionNavigation button {
-  width: 8rem;
-  height: 8rem;
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  transition: 0.3s;
-  align-items: center;
-  border-radius: 1rem;
-  background-color: white;
-  border: solid 0.0625rem #eeeeee;
-  box-shadow: $box-shadow-small;
-  cursor: pointer;
-  &.disable {
-    cursor: default;
-  }
-  &.active {
-    font-weight: 500;
-    color: white;
-    border: solid 0.0625rem #3b51fe;
-    background-color: #4c61ff;
-    box-shadow: $box-shadow-medium;
-  }
-}
-
-.container h2 {
-  margin: 2rem 0 1.5rem 1.5rem;
-}
-
-.icon {
-  width: 3.75rem;
-  height: 3.75rem;
-  display: flex;
-  color: #e2e6ef;
-  align-items: center;
-  justify-content: center;
-  svg {
+  .actionNavigation {
     display: flex;
-    width: 4rem;
-    height: 4rem;
+    padding: 0 2rem 0 2rem;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
   }
-}
+  .actionNavigation.focusable {
+    button:hover {
+      transform: scale(0.96);
+      box-shadow: none;
+    }
+  }
+  .actionNavigation button {
+    width: 8rem;
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 0.3s;
+    align-items: center;
+    border-radius: 1rem;
+    background-color: white;
+    border: solid 0.0625rem #eeeeee;
+    box-shadow: $box-shadow-small;
+    cursor: pointer;
+    &.disable {
+      cursor: default;
+    }
+    &.active {
+      font-weight: 500;
+      color: white;
+      border: solid 0.0625rem #3b51fe;
+      background-color: #4c61ff;
+      box-shadow: $box-shadow-medium;
+    }
+  }
+  .container h2 {
+    margin: 2rem 0 1.5rem 1.5rem;
+  }
+  .icon {
+    width: 3.75rem;
+    height: 3.75rem;
+    display: flex;
+    color: #e2e6ef;
+    align-items: center;
+    justify-content: center;
+    svg {
+      display: flex;
+      width: 4rem;
+      height: 4rem;
+    }
+  }
 
-.title {
-  display: flex;
-  margin-top: 1rem;
-  align-items: center;
-  justify-content: center;
-}
+  .title {
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
 
-#btnTitle {
-  display: flex;
-  color: #aeaeae;
-  margin-top: 1rem;
-  align-items: center;
-  justify-content: center;
-}
+  #btnTitle {
+    display: flex;
+    color: #aeaeae;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
 
-// activeText 스타일이 적용되지 않아 !important 사용
-.activeText {
-  display: flex;
-  font-weight: 500;
-  justify-content: center;
-  color: rgb(0, 0, 0) !important;
+  .activeText {
+    display: flex;
+    font-weight: 500;
+    justify-content: center;
+    color: rgb(0, 0, 0) !important;
+  }
+
+  .inner {
+    display: flex;
+    height: 100%;
+  }
 }

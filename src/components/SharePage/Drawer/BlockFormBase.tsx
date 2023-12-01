@@ -7,18 +7,17 @@ import { useBlockActionStore } from '@/store/blockAction'
 import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from '../icons'
 import styles from './BlockFormBase.module.scss'
 
+interface FormType {
+  title: string
+  type: BlockType
+  icon: ReactNode
+}
 interface Props {
   children: ReactNode
 }
-
 export function BlockFormBase({ children }: Props) {
   const { blockType, setBlockType, drawerMode } = useBlockActionStore()
 
-  type FormType = {
-    title: string
-    type: BlockType
-    icon: ReactNode
-  }
   const formTypes: FormType[] = useMemo(
     () => [
       {
@@ -55,7 +54,7 @@ export function BlockFormBase({ children }: Props) {
   }
 
   return (
-    <div style={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
+    <>
       <div className={styles.container}>
         <h2>
           {formTypes.find((form) => form.type === blockType)?.title} {drawerMode === 'create' ? '추가하기' : '수정하기'}
@@ -99,7 +98,7 @@ export function BlockFormBase({ children }: Props) {
           })}
         </div>
       </div>
-      <div style={{ display: 'flex', height: '100%', width: '100%' }}>{children}</div>
-    </div>
+      <div className={styles.inner}>{children}</div>
+    </>
   )
 }

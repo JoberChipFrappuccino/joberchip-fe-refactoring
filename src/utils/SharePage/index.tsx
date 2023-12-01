@@ -28,6 +28,10 @@ interface GetLatoutByMode {
   breakpoints: 'lg'
   layouts: { lg: Layout[] }
 }
+/**
+ * @description 블록의 모드를 기반으로 옵션을 설정합니다.
+ * @todo 현제 min, max값이 매직넘버로 되어 있지만, 추후 블럭의 타입에 따라서 min, max 제한이 필요합니다.
+ */
 export function getLayoutByMode(blocks: SharePage['children'], mode: SharePageMode): GetLatoutByMode {
   const layout = blocks.map((block) => {
     const { objectId, ...rest } = block
@@ -36,7 +40,7 @@ export function getLayoutByMode(blocks: SharePage['children'], mode: SharePageMo
       i: objectId,
       isDraggable: mode !== 'VIEW',
       isResizable: mode !== 'VIEW',
-      static: false, // ?? : 고정 여부 확인이 필요합니다.
+      static: false,
       minW: 1,
       maxW: 4,
       minH: 1,
@@ -71,6 +75,9 @@ export function updateBlockPosition(changedLayout: Layout[], blocks: SharePage['
   return blocks
 }
 
+/**
+ * @description API 호출을 위한 파라미터로 레이아웃을 변환시킵니다.
+ */
 export function convertLayoutToParam(children: SharePage['children'], layout: Layout[]): FetchLayoutBlocksParam[] {
   return layout.map((item) => {
     const type = children.find((child) => child.objectId === item.i)?.type
