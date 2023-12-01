@@ -10,12 +10,7 @@ export function TemplatePreviewModal({ onClose, children }: TemplatePreviewModal
     <div className={styles.container}>
       <div className={styles.cover}>
         <div className={styles.previewCover}>{children}</div>
-        <button
-          className={styles.confirmBtn}
-          onClick={() => {
-            onClose()
-          }}
-        >
+        <button className={styles.confirmBtn} onClick={onClose}>
           확인
         </button>
       </div>

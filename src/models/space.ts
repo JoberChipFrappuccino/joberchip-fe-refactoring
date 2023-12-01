@@ -1,4 +1,4 @@
-export type BlockType = TText | TImage | TLink | TPage | TVideo | TMap | TTemplate | 'BASE' // HACK : "BASE"는 임시로 사용하는 타입
+export type BlockType = TText | TImage | TLink | TPage | TVideo | TMap | TTemplate | TBlock
 
 export interface BlockBase<T extends BlockType> {
   objectId: string

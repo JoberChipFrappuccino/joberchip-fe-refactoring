@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useMemo, type ReactNode } from 'react'
 import { IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/blockTypeConstant'
-import { BLOCK_TYPE_TO_KOR } from '@/constants/drawerConstant'
+import { BLOCK_TO } from '@/constants/drawerConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockActionStore } from '@/store/blockAction'
 import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from '../icons'
@@ -23,27 +23,27 @@ export function BlockFormBase({ children }: Props) {
     () => [
       {
         type: LINK,
-        title: BLOCK_TYPE_TO_KOR[LINK],
+        title: BLOCK_TO.KR[LINK],
         icon: <BiLink />
       },
       {
         type: IMAGE,
-        title: BLOCK_TYPE_TO_KOR[IMAGE],
+        title: BLOCK_TO.KR[IMAGE],
         icon: <BiImageAlt />
       },
       {
         type: VIDEO,
-        title: BLOCK_TYPE_TO_KOR[VIDEO],
+        title: BLOCK_TO.KR[VIDEO],
         icon: <BiCaretRightSquare />
       },
       {
         type: MAP,
-        title: BLOCK_TYPE_TO_KOR[MAP],
+        title: BLOCK_TO.KR[MAP],
         icon: <BiMapAlt />
       },
       {
         type: TEXT,
-        title: BLOCK_TYPE_TO_KOR[TEXT],
+        title: BLOCK_TO.KR[TEXT],
         icon: <BiPencil />
       }
     ],
