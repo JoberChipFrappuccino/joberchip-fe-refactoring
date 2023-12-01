@@ -35,6 +35,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    e.stopPropagation()
     if (drawerMode === 'CREATE') {
       const newBlock = {
         x: 0,

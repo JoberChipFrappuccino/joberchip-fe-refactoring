@@ -27,7 +27,7 @@ export const SearchForm = forwardRef((_props, ref: Ref<HTMLInputElement>) => {
       }}
     >
       <div className={styles.searchBox}>
-        <input type="search" ref={ref} className={styles.searcInput} placeholder="장소를 입력하세요" />
+        <input type="text" ref={ref} className={styles.searcInput} placeholder="장소를 입력하세요" />
       </div>
     </Autocomplete>
   )

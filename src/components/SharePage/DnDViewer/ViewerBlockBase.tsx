@@ -1,15 +1,17 @@
+import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useEffect, useState, type ReactNode, useCallback } from 'react'
-// import { deleteBlockAPI, deletePageAPI } from '@/apis/delete'
 import { BlockCover } from '@/components/SharePage/BlockCover'
 import BlockPortal from '@/components/SharePage/BlockPortal'
 import EditorDropDownMenu from '@/components/SharePage/DnDViewer/EditorDropDownMenu'
 import { ConfirmModal } from '@/components/SharePage/Modals/ConfirmModal'
-// import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockBase, type BlockType } from '@/models/space'
+import { deleteBlockMutation } from '@/queries/mutates/sharePageMutate'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { useSharePageModeStore } from '@/store/sharePage'
 import { ModalPortal } from '@/templates/ModalPortal'
+import { toast } from '@/utils'
 import ConfirmModalContent from '../Modals/ConfirmModalContent'
 import styles from './ViewerBlockBase.module.scss'
 
@@ -21,6 +23,9 @@ export interface BlockBaseProps {
 export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   const { activeBlockId, setActiveBlockId } = useBlockActionStore()
   const { mode } = useSharePageModeStore()
+  const { pageId } = useSharePageQuery()
+  const queryClient = useQueryClient()
+  const deleteMutation = deleteBlockMutation(queryClient)
 
   const [focus, setFocus] = useState(false)
   const [confirmModal, setConfirmModal] = useState(false)
@@ -29,7 +34,10 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
     setFocus(activeBlockId === block.objectId)
   }, [activeBlockId])
 
-  const handleDelete = useCallback(() => {}, [])
+  const handleDelete = () => {
+    deleteMutation.mutate({ pageId, block })
+    toast('블록이 삭제되었습니다.', 'success')
+  }
 
   const handleOnClickBlockCover = useCallback(() => {
     setActiveBlockId('')
@@ -37,7 +45,6 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   }, [])
 
   const handleOnConfirm = useCallback(() => {
-    // if (isConfirm) removeBlockById(block.objectId)
     setConfirmModal(false)
     setActiveBlockId('')
   }, [])
@@ -76,37 +83,3 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
     </div>
   )
 }
-
-// HACK : 파라메터 상수로 변경 필요
-// function switchDeleteAPIByBlockType(pageId: string | undefined, block: BlockBase<BlockType>) {
-//   if (!pageId) return null
-//   switch (block.type) {
-//     case TEXT:
-//       return deleteBlock('textBlock', block.objectId, pageId)
-//     case IMAGE:
-//       return deleteBlock('imageBlock', block.objectId, pageId)
-//     case LINK:
-//       return deleteBlock('linkBlock', block.objectId, pageId)
-//     case PAGE:
-//       return deleteBlock('pageBlock', block.objectId, pageId)
-//     case VIDEO:
-//       return deleteBlock('videoBlock', block.objectId, pageId)
-//     case MAP:
-//       return deleteBlock('mapBlock', block.objectId, pageId)
-//     case TEMPLATE:
-//       return deleteBlock('templateBlock', block.objectId, pageId)
-//     default:
-//       return null
-//   }
-// }
-
-// async function deleteBlock(blockType: string, blockId: string, pageId: string) {
-//   try {
-//     if (blockType === 'pageBlock') {
-//       await deletePageAPI(blockId)
-//     }
-//     await deleteBlockAPI(pageId, blockType, blockId)
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
