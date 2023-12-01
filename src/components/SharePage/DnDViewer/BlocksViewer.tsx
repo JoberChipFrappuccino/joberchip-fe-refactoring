@@ -42,7 +42,7 @@ export const BlocksViewer = () => {
     setEditModeGrid(() => getLayoutByMode(sharePage.children, 'EDIT'))
     const visibleChildren = sharePage.children.filter((item) => item.visible)
     setViewModeGrid(() => getLayoutByMode(visibleChildren, 'VIEW'))
-  }, [mode])
+  }, [mode, pageId])
 
   const handleWidthChange: ResponsiveProps['onWidthChange'] = //
     useCallback<NonNullable<ResponsiveProps['onWidthChange']>>(

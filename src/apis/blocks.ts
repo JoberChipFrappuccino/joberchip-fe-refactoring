@@ -1,15 +1,5 @@
-import { type EmbedGoogleMapBlock, type BlockWith } from '@/models/space'
+import { type EmbedGoogleMapBlock, type BlockWith, type BlockItem } from '@/models/space'
 import { backAuthAPI } from './api'
-
-export type addGoogleMapBlockParams = {
-  x?: number
-  y?: number
-  w?: number
-  h?: number
-  address?: string
-  latitude?: number
-  longitude?: number
-}
 
 interface AddGoogleMapBlockResponse {
   response: EmbedGoogleMapBlock
@@ -20,7 +10,7 @@ interface AddGoogleMapBlockResponse {
  * @description 지도 블럭 생성 API
  * @see https://www.notion.so/ee4e2a88bd384a2ab031fc5593fbc93a
  */
-export const addGoogleMapBlockAPI = async (pageId: string | undefined, body: addGoogleMapBlockParams) => {
+export const addGoogleMapBlockAPI = async (pageId: string | undefined, body: Partial<BlockItem>) => {
   if (!pageId) throw new Error('pageId가 없습니다.')
   const { data } = await backAuthAPI<AddGoogleMapBlockResponse>(`/v1/page/${pageId}/mapBlock`, {
     method: 'POST',
@@ -33,18 +23,17 @@ export const addGoogleMapBlockAPI = async (pageId: string | undefined, body: add
   }
 }
 
-export type editGoogleMapBlockParams = {
-  address?: string
-  latitude?: number
-  longitude?: number
-  visible?: boolean
+interface EditGoogleMapBlockResponse {
+  response: EmbedGoogleMapBlock
+  status: number
+  success: boolean
 }
 /**
  * @description 지도 블럭 수정 API
  * @see https://www.notion.so/6489900f63984b38be7b8be3b55c2a35
  */
-export const editGoogleMapBlockAPI = async (pageId: any, blockId: any, body: editGoogleMapBlockParams) => {
-  const response = await backAuthAPI(`/v1/page/${pageId}/mapBlock/${blockId}`, {
+export const editGoogleMapBlockAPI = async (pageId: string | undefined, blockId: string, body: Partial<BlockItem>) => {
+  const response = await backAuthAPI<EditGoogleMapBlockResponse>(`/v1/page/${pageId}/mapBlock/${blockId}`, {
     method: 'PUT',
     data: body
   })
@@ -89,7 +78,6 @@ export type AddLinkBlockParams = {
   link: string
 }
 /**
- *
  * @description 링크 블럭 생성 API
  * @see https://www.notion.so/8bbf5e1b6e974bd89e78874644e320b7
  */

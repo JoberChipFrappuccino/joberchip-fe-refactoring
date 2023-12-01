@@ -3,10 +3,9 @@ import type { EmbedGoogleMapBlock } from '@/models/space'
 import { GoogleMap, Marker } from '@react-google-maps/api'
 import { useQueryClient } from '@tanstack/react-query'
 import { type FormEvent, useRef, useEffect } from 'react'
-import { addGoogleMapBlockAPI, editGoogleMapBlockAPI } from '@/apis/blocks'
 import FormButton from '@/components/Common/Ui/Button'
 import { MAP } from '@/constants/blockTypeConstant'
-import { addBlockMutation } from '@/queries/mutates/sharePageMutate'
+import { addBlockMutation, editBlockMutation } from '@/queries/mutates/sharePageMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { useMapStore, type Center } from '@/store/map'
@@ -25,6 +24,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
   const { setOpenDrawer, drawerMode } = useBlockActionStore()
   const queryClient = useQueryClient()
   const addMutation = addBlockMutation(queryClient)
+  const editMutation = editBlockMutation(queryClient)
 
   const blockId = block?.objectId ?? ''
 
@@ -35,8 +35,6 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    // WARN : API 호출 후, 에러 처리를 해야 합니다! any타입도 제거해주세요!
     if (drawerMode === 'CREATE') {
       const newBlock = {
         x: 0,
@@ -48,16 +46,11 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
         visible: true,
         ...center
       }
-      await addGoogleMapBlockAPI(pageId, newBlock)
-
       addMutation.mutate({ pageId, newBlock })
-      alert('지도가 추가되었습니다.')
       toast('지도가 추가되었습니다.', 'success')
     } else if (drawerMode === 'EDIT') {
-      await editGoogleMapBlockAPI(pageId, blockId, {
-        ...center,
-        address
-      })
+      const body = { ...center, address }
+      editMutation.mutate({ pageId, blockId, body })
       toast('지도가 수정되었습니다.', 'success')
     }
     setOpenDrawer(false)
