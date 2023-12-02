@@ -5,9 +5,11 @@ import { useMemo } from 'react'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { useBlockActionStore } from '@/store/blockAction'
 import styles from './BlockActionBar.module.scss'
-import { type ActionBarProps } from './SpaceActionBar'
 
-export function BlockActionBar({ isActive }: ActionBarProps) {
+/**
+ * @deprecated 기획에서 제거된 컴포넌트입니다. 추후 추가될 수 있습니다.
+ */
+export function BlockActionBar() {
   const { activeBlockId } = useBlockActionStore()
 
   const items = useMemo(
@@ -25,7 +27,6 @@ export function BlockActionBar({ isActive }: ActionBarProps) {
         key: `${activeBlockId}-view-block-3`,
         danger: true,
         label: '삭제하기'
-        // icon: <RemoveBlockBtn/>
       }
     ],
     [activeBlockId]
@@ -35,8 +36,8 @@ export function BlockActionBar({ isActive }: ActionBarProps) {
     <div
       className={classNames(styles.container, [
         {
-          [styles.visible]: isActive,
-          [styles.hidden]: !isActive
+          [styles.visible]: !activeBlockId,
+          [styles.hidden]: !!activeBlockId
         }
       ])}
     >

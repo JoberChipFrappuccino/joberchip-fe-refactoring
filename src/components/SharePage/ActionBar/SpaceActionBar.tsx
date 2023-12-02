@@ -6,9 +6,6 @@ import { type BlockType } from '@/models/space'
 import { useBlockActionStore } from '@/store/blockAction'
 import styles from './SpaceActionBar.module.scss'
 
-const baseURL =
-  process.env.NODE_ENV === 'production' ? process.env.FRONT_SERVER_BASE_URL : `http://localhost:${process.env.PORT}`
-
 export function SpaceActionBar() {
   const { activeBlockId, formType, setOpenDrawer, setBlockType, setDrawerMode } = useBlockActionStore()
 
@@ -33,21 +30,21 @@ export function SpaceActionBar() {
       <Tooltip title="페이지 추가하기">
         <button className={styles.item} type="button" onClick={() => changeBlockType(PAGE)}>
           <div className={styles.actionicon}>
-            <img src={`${baseURL}/page_icon.svg`} alt="page action bar icon" />
+            <img src={'/page_icon.svg'} alt="page action bar icon" />
           </div>
         </button>
       </Tooltip>
       <Tooltip title="템플릿 추가하기">
         <button className={styles.item} type="button" onClick={() => changeBlockType(TEMPLATE)}>
           <div className={styles.actionicon}>
-            <img src={`${baseURL}/templat_icon.svg`} alt="page action bar icon" />
+            <img src={'/templat_icon.svg'} alt="page action bar icon" />
           </div>
         </button>
       </Tooltip>
       <Tooltip title="블럭 추가하기">
         <button className={styles.item} type="button" onClick={() => changeBlockType(TEXT)}>
           <div className={styles.actionicon}>
-            <img src={`${baseURL}/block_icon.svg`} alt="page action bar icon" />
+            <img src={'/block_icon.svg'} alt="page action bar icon" />
           </div>
         </button>
       </Tooltip>

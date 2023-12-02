@@ -1,10 +1,8 @@
 import { Autocomplete } from '@react-google-maps/api'
-import { type Ref, forwardRef } from 'react'
 import { useMapStore } from '@/store/map'
 import styles from './GoogleMapBlockForm.module.scss'
 
-// eslint-disable-next-line react/display-name
-export const SearchForm = forwardRef((_props, ref: Ref<HTMLInputElement>) => {
+export const SearchForm = () => {
   const { setAddress, autoComplete, setAutoComplete, setCenter } = useMapStore()
 
   const onAutocompletePlaceChanged = () => {
@@ -27,8 +25,8 @@ export const SearchForm = forwardRef((_props, ref: Ref<HTMLInputElement>) => {
       }}
     >
       <div className={styles.searchBox}>
-        <input type="text" ref={ref} className={styles.searcInput} placeholder="장소를 입력하세요" />
+        <input type="text" className={styles.searcInput} placeholder="장소를 입력하세요" />
       </div>
     </Autocomplete>
   )
-})
+}

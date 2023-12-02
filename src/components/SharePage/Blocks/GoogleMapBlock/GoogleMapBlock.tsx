@@ -1,18 +1,13 @@
 import { GoogleMap, Marker } from '@react-google-maps/api'
 import classNames from 'classnames'
 import { type BlockBaseWithBlockProps } from '@/components/Common/SwitchCases/ViewerBox'
+import { getCenter, needToConvertAbbr } from '@/utils/SharePage'
 import { useLoadGoogleMap } from '@/hooks/useGoogleMap'
 import styles from './GoogleMapBlock.module.scss'
 
 export function GoogleMapBlock({ block, mode }: BlockBaseWithBlockProps<TMap>) {
   const { isLoaded } = useLoadGoogleMap()
-
-  const location = block?.src ? JSON.parse(block.src) : {}
-
-  const center = {
-    lat: location?.latitude ?? block?.latitude ?? 37.5642135,
-    lng: location?.longitude ?? block?.longitude ?? 127.0016985
-  }
+  const center = getCenter(block)
 
   return (
     <div className={styles.container}>
@@ -20,7 +15,7 @@ export function GoogleMapBlock({ block, mode }: BlockBaseWithBlockProps<TMap>) {
       {isLoaded && (
         <GoogleMap
           mapContainerStyle={{ width: '100%', height: '400px' }}
-          center={center}
+          center={needToConvertAbbr(center)}
           zoom={15}
           options={{
             zoomControl: false,
@@ -29,7 +24,7 @@ export function GoogleMapBlock({ block, mode }: BlockBaseWithBlockProps<TMap>) {
             fullscreenControl: false
           }}
         >
-          <Marker position={center} />
+          <Marker position={needToConvertAbbr(center)} />
         </GoogleMap>
       )}
       {block.title && (

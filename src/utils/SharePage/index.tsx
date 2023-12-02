@@ -1,6 +1,7 @@
 import { type Layout } from 'react-grid-layout'
 import { type FetchLayoutBlocksParam } from '@/apis/space'
-import { type BlockType, type SharePage } from '@/models/space'
+import { type EmbedGoogleMapBlock, type BlockType, type SharePage } from '@/models/space'
+import { type Center } from '@/store/map'
 
 interface BlockItem {
   i: string
@@ -94,4 +95,22 @@ export function convertLayoutToParam(children: SharePage['children'], layout: La
       h
     }
   })
+}
+
+export function getCenter(block?: EmbedGoogleMapBlock) {
+  if (!block?.src) {
+    return {
+      latitude: 37.5642135,
+      longitude: 127.0016985
+    }
+  }
+  const centerNoAddress: Omit<Center, 'address'> = JSON.parse(block.src)
+  return centerNoAddress
+}
+
+export function needToConvertAbbr(center: Center) {
+  return {
+    lat: center.latitude,
+    lng: center.longitude
+  }
 }
