@@ -36,6 +36,8 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
 
   const handleDelete = () => {
     deleteMutation.mutate({ pageId, block })
+    setActiveBlockId('')
+    setFocus(() => false)
     toast('블록이 삭제되었습니다.', 'success')
   }
 

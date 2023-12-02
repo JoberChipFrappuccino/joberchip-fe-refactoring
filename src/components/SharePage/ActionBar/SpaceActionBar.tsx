@@ -4,16 +4,13 @@ import { useCallback } from 'react'
 import { PAGE, TEMPLATE, TEXT } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
 import { useBlockActionStore } from '@/store/blockAction'
-import { useSharePageModeStore } from '@/store/sharePage'
 import styles from './SpaceActionBar.module.scss'
 
 const baseURL =
   process.env.NODE_ENV === 'production' ? process.env.FRONT_SERVER_BASE_URL : `http://localhost:${process.env.PORT}`
 
 export function SpaceActionBar() {
-  const { mode } = useSharePageModeStore()
   const { activeBlockId, formType, setOpenDrawer, setBlockType, setDrawerMode } = useBlockActionStore()
-  const isActive = activeBlockId === ''
 
   const changeBlockType = useCallback(
     (type: BlockType) => {
@@ -28,8 +25,8 @@ export function SpaceActionBar() {
     <div
       className={classNames(styles.container, [
         {
-          [styles.visible]: isActive || mode === 'VIEW',
-          [styles.hidden]: !isActive
+          [styles.visible]: !activeBlockId,
+          [styles.hidden]: !!activeBlockId
         }
       ])}
     >

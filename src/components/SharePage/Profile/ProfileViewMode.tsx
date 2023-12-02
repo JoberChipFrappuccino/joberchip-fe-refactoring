@@ -1,6 +1,6 @@
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
-import ProfileDropDownMenu from './ProfileDropDownMenu'
 import styles from './ProfileViewMode.module.scss'
+
 export default function ProfileViewMode() {
   const { sharePage } = useSharePageQuery()
   return (
@@ -12,7 +12,6 @@ export default function ProfileViewMode() {
         <h2>{sharePage.title}</h2>
         <p>{sharePage.description}</p>
       </div>
-      {sharePage.privilege === 'EDIT' && <ProfileDropDownMenu />}
     </div>
   )
 }
