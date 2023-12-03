@@ -14,6 +14,7 @@
   "rules": {
     "no-console": [2, { "allow": ["warn", "error"] }],
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/member-delimiter-style": "off",
     "react/self-closing-comp": [
       "error",
       {

@@ -3,7 +3,8 @@ import { backAuthAPI } from './api'
 /**
  * @description 블럭 삭제 API
  */
-export const deleteBlockAPI = async (pageId: string, blockType: string, blockId: string) => {
+export const deleteBlockAPI = async (pageId: string | undefined, blockType: string, blockId: string) => {
+  if (!pageId) throw new Error('pageId가 없습니다.')
   const response = await backAuthAPI(`/v1/page/${pageId}/${blockType}/${blockId}`, {
     method: 'DELETE'
   })

@@ -2,15 +2,16 @@ import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCase
 import { TiDeleteOutline } from '@react-icons/all-files/ti/TiDeleteOutline'
 import { Input } from 'antd'
 import { useState, type FormEvent } from 'react'
-import { editImageBlockAPI } from '@/apis/blocks'
+import { addImageBlockAPI, editImageBlockAPI } from '@/apis/blocks'
 import FormButton from '@/components/Common/Ui/Button'
 import ImgThumbnail from '@/components/Common/Ui/ImgThumbnail'
 import { IMAGE } from '@/constants/blockTypeConstant'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
-import { getNextYOfLastBlock } from '@/utils/api'
+import FormManager from '@/utils/FormManager'
 import styles from './ImageBlockForm.module.scss'
-// import { addImageBlockAPI, editImageBlockAPI } from '@/apis/blocks'
+
+const form = new FormManager()
 
 export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
   const { sharePage, pageId } = useSharePageQuery()
@@ -27,55 +28,18 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const addform = new FormData()
-    const editform = new FormData()
-
-    if (thumbnail.startsWith('data:image')) {
-      const base64ImageData = thumbnail
-      const blob = await fetch(base64ImageData).then((response) => response.blob())
-      const file = new File([blob], 'image.png', { type: 'image/png' })
-      addform.append('attachedImage', file, 'image.png')
-      editform.append('attachedImage', file, 'image.png')
+    if (drawerMode === 'CREATE') {
+      form.addDefaultOptionToBlock(sharePage.children)
+      form.append('type', IMAGE)
+      form.append('attachedImage', thumbnail, 'image.png')
+      form.append('title', title)
+      await addImageBlockAPI(pageId, form.getForm())
+    } else if (drawerMode === 'EDIT') {
+      form.append('title', title)
+      form.append('attachedImage', thumbnail, 'image.png')
+      await editImageBlockAPI(pageId, blockId, form.getForm())
     }
-
-    addform.append('x', '0')
-    addform.append('y', getNextYOfLastBlock(sharePage.children).toString())
-    addform.append('w', '1')
-    addform.append('h', '2')
-    addform.append('title', title)
-    addform.append('type', IMAGE)
-    addform.append('visible', 'true')
-
-    editform.append('title', title)
-
-    try {
-      if (drawerMode === 'CREATE') {
-        // const { data: responseData } = await addImageBlockAPI(pageId, addform)
-        // const updatedSharePage = {z
-        //   ...sharePage,
-        //   children: [...sharePage.children, { ...responseData }]
-        // }
-        // setSharePage(updatedSharePage)
-        setOpenDrawer(false)
-      } else if (drawerMode === 'EDIT') {
-        const { data: responseData } = await editImageBlockAPI(pageId, blockId, editform)
-        const existingBlockIndex = sharePage.children.findIndex((block) => block.objectId === responseData.objectId)
-        const updatedChildren = [...sharePage.children]
-        if (existingBlockIndex !== -1) {
-          updatedChildren[existingBlockIndex] = responseData
-        } else {
-          updatedChildren.push(responseData)
-        }
-        // const updatedSharePage = {
-        //   ...sharePage,
-        //   children: updatedChildren
-        // }
-        // setSharePage(updatedSharePage)
-        setOpenDrawer(false)
-      }
-    } catch (error) {
-      console.error(error)
-    }
+    setOpenDrawer(false)
   }
 
   return (

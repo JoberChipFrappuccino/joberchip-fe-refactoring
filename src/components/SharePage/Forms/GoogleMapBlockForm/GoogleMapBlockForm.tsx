@@ -34,7 +34,6 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    e.stopPropagation()
     if (drawerMode === 'CREATE') {
       const newBlock = {
         x: 0,
@@ -46,7 +45,7 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
         visible: true,
         ...center
       }
-      addMutation.mutate({ pageId, newBlock })
+      addMutation.mutate({ pageId, blockType: 'mapBlock', newBlock })
       toast('지도가 추가되었습니다.', 'success')
     } else if (drawerMode === 'EDIT') {
       editMutation.mutate({ pageId, blockId, body: { ...center, address } })

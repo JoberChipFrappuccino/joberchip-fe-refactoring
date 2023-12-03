@@ -1,6 +1,29 @@
 import { type EmbedGoogleMapBlock, type BlockWith, type BlockItem } from '@/models/space'
 import { backAuthAPI } from './api'
 
+export type blockAPIType =
+  | 'mapBlock'
+  | 'linkBlock'
+  | 'videoBlock'
+  | 'pageBlock'
+  | 'textBlock'
+  | 'templateBlock'
+  | 'imageBlock'
+  | 'baseBlock'
+
+export const addBlockAPI = async (pageId: string | undefined, type: blockAPIType, body: Partial<BlockItem>) => {
+  if (!pageId) throw new Error('pageId가 없습니다.')
+  const { data } = await backAuthAPI(`/v1/page/${pageId}/${type}`, {
+    method: 'POST',
+    data: body
+  })
+  return {
+    data: data.response,
+    status: 'success',
+    message: '블록을 추가했습니다.'
+  }
+}
+
 interface AddGoogleMapBlockResponse {
   response: EmbedGoogleMapBlock
   status: number

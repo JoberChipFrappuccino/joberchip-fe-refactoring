@@ -1,21 +1,19 @@
 import { useMutation, type QueryClient } from '@tanstack/react-query'
-import { addGoogleMapBlockAPI, editGoogleMapBlockAPI } from '@/apis/blocks'
+import { type blockAPIType, editGoogleMapBlockAPI, addBlockAPI } from '@/apis/blocks'
 import { deleteBlockAPI, deletePageAPI } from '@/apis/delete'
-import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockBase, type BlockType, type BlockItem, type SharePage } from '@/models/space'
 
 interface AddBlockMutationFnParams {
   pageId: string | undefined
+  blockType: blockAPIType
   newBlock: Partial<BlockItem>
 }
 export const addBlockMutation = (queryClient: QueryClient) => {
   const mutation = useMutation({
-    mutationFn: ({ pageId, newBlock }: AddBlockMutationFnParams) => {
-      if (newBlock.type === 'MAP') {
-        return addGoogleMapBlockAPI(pageId, newBlock)
-      }
-      return addGoogleMapBlockAPI(pageId, newBlock)
+    mutationFn: ({ pageId, blockType, newBlock }: AddBlockMutationFnParams) => {
+      return addBlockAPI(pageId, blockType, newBlock)
     },
+
     onSuccess: (data, { pageId }) => {
       const { data: block } = data
       queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
@@ -23,12 +21,14 @@ export const addBlockMutation = (queryClient: QueryClient) => {
         return { ...oldData, children: [...oldData.children, block] }
       })
     },
+
     onError: (_err, _newBlock, context) => {
       // queryClient.setQueryData(['todos'], context)
     }
   })
   return mutation
 }
+
 interface EditBlockMutationFnParams {
   pageId: string | undefined
   blockId: string
@@ -60,6 +60,19 @@ export const editBlockMutation = (queryClient: QueryClient) => {
   return mutation
 }
 
+// TODO : 이거 어떻게 해결할지 고민해보기
+type TblockAPIType = Record<BlockType, blockAPIType>
+const BLOCK_API_TYPE: TblockAPIType = {
+  TEXT: 'textBlock',
+  LINK: 'linkBlock',
+  MAP: 'mapBlock',
+  VIDEO: 'videoBlock',
+  PAGE: 'pageBlock',
+  TEMPLATE: 'templateBlock',
+  IMAGE: 'imageBlock',
+  BLOCK: 'baseBlock'
+}
+
 interface DeleteBlockMutationFnParams {
   pageId: string | undefined
   block: BlockBase<BlockType>
@@ -67,7 +80,10 @@ interface DeleteBlockMutationFnParams {
 export const deleteBlockMutation = (queryClient: QueryClient) => {
   const mutation = useMutation({
     mutationFn: ({ pageId, block }: DeleteBlockMutationFnParams) => {
-      return switchDeleteAPIByBlockType(pageId, block)
+      const type = BLOCK_API_TYPE[block.type]
+      const blockId = block.objectId
+      if (type === 'pageBlock') return deletePageAPI(blockId)
+      return deleteBlockAPI(pageId, type, blockId)
     },
     onSuccess: (_data, { pageId, block }) => {
       queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
@@ -81,34 +97,4 @@ export const deleteBlockMutation = (queryClient: QueryClient) => {
     }
   })
   return mutation
-}
-
-// HACK : 파라메터 상수로 변경 필요
-function switchDeleteAPIByBlockType(pageId: string | undefined, block: BlockBase<BlockType>) {
-  if (!pageId) throw new Error("Can't find pageId")
-  switch (block.type) {
-    case TEXT:
-      return deleteBlock('textBlock', block.objectId, pageId)
-    case IMAGE:
-      return deleteBlock('imageBlock', block.objectId, pageId)
-    case LINK:
-      return deleteBlock('linkBlock', block.objectId, pageId)
-    case PAGE:
-      return deleteBlock('pageBlock', block.objectId, pageId)
-    case VIDEO:
-      return deleteBlock('videoBlock', block.objectId, pageId)
-    case MAP:
-      return deleteBlock('mapBlock', block.objectId, pageId)
-    case TEMPLATE:
-      return deleteBlock('templateBlock', block.objectId, pageId)
-    default:
-      throw new Error("Can't find block type")
-  }
-}
-
-function deleteBlock(deleteBlockName: string, blockId: string, pageId: string) {
-  if (deleteBlockName === 'pageBlock') {
-    return deletePageAPI(blockId)
-  }
-  return deleteBlockAPI(pageId, deleteBlockName, blockId)
 }
