@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import { StaticRouter } from 'react-router-dom/server'
 import { SEO, SPACE } from '@/constants'
 import QueryContext from '@/contexts/QueryContext'
-import { SSRProvider } from '@/contexts/ssr'
+import { SSRProvider } from '@/contexts/SSRContext'
 import { Router } from '@/router'
 import { api } from '~/api/api'
 

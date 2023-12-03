@@ -10,8 +10,7 @@ import { useUser } from '@/hooks/useUser'
 import styles from './Space.module.scss'
 
 export default function Space() {
-  const { isSignedIn, spaceList } = useUser()
-  if (!isSignedIn) return null
+  const { spaceList } = useUser('/signin')
 
   return (
     <>

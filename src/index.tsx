@@ -2,7 +2,7 @@ import { loadableReady } from '@loadable/component'
 import { hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import QueryContext from './contexts/QueryContext'
-import { SSRProvider } from './contexts/ssr'
+import { SSRProvider } from './contexts/SSRContext'
 import { Router } from './router'
 
 void loadableReady(() => {

@@ -1,33 +1,27 @@
+import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { TiDeleteOutline } from '@react-icons/all-files/ti/TiDeleteOutline'
 import { Input } from 'antd'
-import { useEffect, useState, type FormEvent } from 'react'
+import { useState, type FormEvent } from 'react'
 import { editImageBlockAPI } from '@/apis/blocks'
-// import { addImageBlockAPI, editImageBlockAPI } from '@/apis/blocks'
+import FormButton from '@/components/Common/Ui/Button'
+import ImgThumbnail from '@/components/Common/Ui/ImgThumbnail'
 import { IMAGE } from '@/constants/blockTypeConstant'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/api'
-import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
-import FormButton from '../../Common/Ui/Button'
-import ImgThumbnail from '../../Common/Ui/ImgThumbnail'
 import styles from './ImageBlockForm.module.scss'
+// import { addImageBlockAPI, editImageBlockAPI } from '@/apis/blocks'
 
 export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
   const { sharePage, pageId } = useSharePageQuery()
-  const [thumbnail, setThumbnail] = useState('')
-  const [title, setTitle] = useState('')
-  const isButtonDisabled = !title || !thumbnail
   const { drawerMode } = useBlockActionStore()
   const { setOpenDrawer } = useBlockActionStore()
 
-  const titleValue = block?.title ?? ''
-  const thumbnailValue = block?.src ?? ''
-  const blockId = block?.objectId ?? ''
+  const [thumbnail, setThumbnail] = useState(block?.src ?? '')
+  const [title, setTitle] = useState(block?.title ?? '')
+  const isButtonDisabled = !title || !thumbnail
 
-  useEffect(() => {
-    setTitle(titleValue ?? '')
-    setThumbnail(thumbnailValue ?? '')
-  }, [titleValue, thumbnailValue])
+  const blockId = block?.objectId ?? ''
 
   /** 이미지 블록 정보 API 전달 함수 */
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -57,7 +51,7 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
     try {
       if (drawerMode === 'CREATE') {
         // const { data: responseData } = await addImageBlockAPI(pageId, addform)
-        // const updatedSharePage = {
+        // const updatedSharePage = {z
         //   ...sharePage,
         //   children: [...sharePage.children, { ...responseData }]
         // }
