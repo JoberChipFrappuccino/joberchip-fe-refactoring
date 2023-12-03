@@ -29,9 +29,10 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
 
   const [focus, setFocus] = useState(false)
   const [confirmModal, setConfirmModal] = useState(false)
+  const { objectId } = block
 
   useEffect(() => {
-    setFocus(activeBlockId === block.objectId)
+    setFocus(activeBlockId === objectId)
   }, [activeBlockId])
 
   const handleDelete = () => {
@@ -54,13 +55,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
   return (
     <div className={styles.container}>
       {mode === 'EDIT' && (
-        <aside
-          className={classNames(styles.menu, [
-            {
-              kebobMenu: activeBlockId === block.objectId
-            }
-          ])}
-        >
+        <aside className={classNames(styles.menu, [{ kebobMenu: activeBlockId === objectId }])}>
           <EditorDropDownMenu block={block} onDelete={handleDelete} />
         </aside>
       )}

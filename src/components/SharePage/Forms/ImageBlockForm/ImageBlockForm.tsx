@@ -1,22 +1,26 @@
 import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { TiDeleteOutline } from '@react-icons/all-files/ti/TiDeleteOutline'
+import { useQueryClient } from '@tanstack/react-query'
 import { Input } from 'antd'
 import { useState, type FormEvent } from 'react'
-import { addImageBlockAPI, editImageBlockAPI } from '@/apis/blocks'
+import { type EditImageBlockBody, type AddImageBlockBody } from '@/apis/blocks/imageBlock'
 import FormButton from '@/components/Common/Ui/Button'
 import ImgThumbnail from '@/components/Common/Ui/ImgThumbnail'
 import { IMAGE } from '@/constants/blockTypeConstant'
+import { type SharePage } from '@/models/space'
+import { addImageBlockMutate, editImageBlockMutate } from '@/queries/mutates/imageBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
-import FormManager from '@/utils/FormManager'
+import { dataURLToBlob, getNextYOfLastBlock } from '@/utils'
 import styles from './ImageBlockForm.module.scss'
-
-const form = new FormManager()
 
 export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
   const { sharePage, pageId } = useSharePageQuery()
   const { drawerMode } = useBlockActionStore()
   const { setOpenDrawer } = useBlockActionStore()
+  const queryClient = useQueryClient()
+  const addMutate = addImageBlockMutate(queryClient)
+  const editMutate = editImageBlockMutate(queryClient)
 
   const [thumbnail, setThumbnail] = useState(block?.src ?? '')
   const [title, setTitle] = useState(block?.title ?? '')
@@ -27,17 +31,12 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
   /** 이미지 블록 정보 API 전달 함수 */
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
     if (drawerMode === 'CREATE') {
-      form.addDefaultOptionToBlock(sharePage.children)
-      form.append('type', IMAGE)
-      form.append('attachedImage', thumbnail, 'image.png')
-      form.append('title', title)
-      await addImageBlockAPI(pageId, form.getForm())
+      const body = getAddImageBlockBody(sharePage?.children ?? [], title, thumbnail)
+      addMutate.mutate({ pageId, body })
     } else if (drawerMode === 'EDIT') {
-      form.append('title', title)
-      form.append('attachedImage', thumbnail, 'image.png')
-      await editImageBlockAPI(pageId, blockId, form.getForm())
+      const body = getEditImageBlockBody(blockId, title, thumbnail)
+      editMutate.mutate({ pageId, body })
     }
     setOpenDrawer(false)
   }
@@ -68,4 +67,27 @@ export function ImageBlockForm({ block }: BlockBaseWithBlockFormProps<TImage>) {
       </form>
     </div>
   )
+}
+
+function getAddImageBlockBody(blocks: SharePage['children'], title: string, thumbnail: string): AddImageBlockBody {
+  return {
+    x: 0,
+    y: getNextYOfLastBlock(blocks),
+    w: 0,
+    h: 0,
+    type: IMAGE,
+    title,
+    attachedImage: dataURLToBlob(thumbnail)
+  }
+}
+
+function getEditImageBlockBody(blockId: string, title: string, thumbnail: string): EditImageBlockBody {
+  const body: EditImageBlockBody = {
+    objectId: blockId,
+    title,
+    attachedImage: dataURLToBlob(thumbnail)
+  }
+  thumbnail.startsWith('http') && delete body.attachedImage
+  !title && delete body.title
+  return body
 }

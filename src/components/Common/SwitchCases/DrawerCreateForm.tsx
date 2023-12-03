@@ -1,5 +1,5 @@
 import { GoogleMapBlockForm } from '@/components/SharePage/Forms/GoogleMapBlockForm/GoogleMapBlockForm'
-import { ImageBlockForm } from '@/components/SharePage/Forms/ImageBlockForm'
+import { ImageBlockForm } from '@/components/SharePage/Forms/ImageBlockForm/ImageBlockForm'
 import { LinkBlockForm } from '@/components/SharePage/Forms/LinkBlockForm'
 import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm'
 import { TemplateBlockCreateForm } from '@/components/SharePage/Forms/TemplateBlockCreateForm'

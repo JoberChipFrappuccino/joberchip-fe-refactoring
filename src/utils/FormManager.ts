@@ -1,7 +1,8 @@
-import { type BlockItem } from '@/models/space'
+import { type BlockType, type BlockItem, type BlockWith } from '@/models/space'
 import { getNextYOfLastBlock } from './api'
 
-class FormManager {
+type Name<T extends BlockType> = keyof BlockWith<T>
+class FormManager<T extends BlockType> {
   private readonly form: FormData
   constructor() {
     this.form = new FormData()
@@ -18,9 +19,9 @@ class FormManager {
     this.form.append('visible', 'true')
   }
 
-  append(name: string, value: string | Blob, filename?: string) {
+  append(name: Name<T>, value: string | Blob, filename?: string) {
     if (value instanceof Blob) {
-      this.form.append(name, value, filename)
+      this.form.append(String(name), value, filename)
       return
     }
 
@@ -29,18 +30,18 @@ class FormManager {
     } else if (value.includes('data:video')) {
       this.appendVideo(name, value, filename)
     } else {
-      this.form.append(name, value)
+      this.form.append(String(name), value)
     }
   }
 
-  private appendImage(name: string, value: string, filename?: string): void {
+  private appendImage(name: Name<T>, value: string, filename?: string): void {
     const blob = this.dataURLToBlob(value)
-    this.form.append(name, blob, filename)
+    this.form.append(String(name), blob, filename)
   }
 
-  private appendVideo(name: string, value: string, filename?: string): void {
+  private appendVideo(name: Name<T>, value: string, filename?: string): void {
     const blob = this.dataURLToBlob(value)
-    this.form.append(name, blob, filename)
+    this.form.append(String(name), blob, filename)
   }
 
   dataURLToBlob(dataURL: string): Blob {
@@ -58,6 +59,15 @@ class FormManager {
 
   getForm() {
     return this.form
+  }
+
+  getBody() {
+    const obj: Record<string, FormDataEntryValue> = {}
+    for (const [key, value] of this.form) {
+      obj[key] = value
+    }
+    // Name<T>가 BlockWith<BlockType>으로 key를 제한하기 떄문에 반환 타입을 단언할 수 있습니다.
+    return obj
   }
 }
 

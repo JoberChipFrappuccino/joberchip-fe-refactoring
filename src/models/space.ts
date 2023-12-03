@@ -45,8 +45,8 @@ export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
   blockId?: number
   address: string
   title: string
-  latitude: number
-  longitude: number
+  latitude: string
+  longitude: string
   x: number
   y: number
   height: number

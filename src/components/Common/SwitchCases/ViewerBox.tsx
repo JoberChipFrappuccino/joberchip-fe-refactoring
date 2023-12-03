@@ -1,6 +1,6 @@
 import type { BlockType, BlockWith } from '@/models/space'
 import { GoogleMapBlock } from '@/components/SharePage/Blocks/GoogleMapBlock/GoogleMapBlock'
-import { ImageBlock } from '@/components/SharePage/Blocks/ImageBlock'
+import { ImageBlock } from '@/components/SharePage/Blocks/ImageBlock/ImageBlock'
 import { LinkBlock } from '@/components/SharePage/Blocks/LinkBlock'
 import { PageBlock } from '@/components/SharePage/Blocks/PageBlock'
 import { TemplateBlock } from '@/components/SharePage/Blocks/TemplateBlock'

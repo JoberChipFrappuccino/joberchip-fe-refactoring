@@ -1,5 +1,5 @@
+import type { BlockBaseWithBlockProps } from '@/components/Common/SwitchCases/ViewerBox'
 import classNames from 'classnames'
-import { type BlockBaseWithBlockProps } from '../../Common/SwitchCases/ViewerBox'
 import styles from './ImageBlock.module.scss'
 
 export function ImageBlock({ block, mode }: BlockBaseWithBlockProps<TImage>) {

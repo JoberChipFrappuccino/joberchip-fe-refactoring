@@ -1,4 +1,4 @@
-import { type EmbedGoogleMapBlock, type BlockWith, type BlockItem } from '@/models/space'
+import { type BlockWith } from '@/models/space'
 import { backAuthAPI } from './api'
 
 export type blockAPIType =
@@ -10,62 +10,6 @@ export type blockAPIType =
   | 'templateBlock'
   | 'imageBlock'
   | 'baseBlock'
-
-export const addBlockAPI = async (pageId: string | undefined, type: blockAPIType, body: Partial<BlockItem>) => {
-  if (!pageId) throw new Error('pageId가 없습니다.')
-  const { data } = await backAuthAPI(`/v1/page/${pageId}/${type}`, {
-    method: 'POST',
-    data: body
-  })
-  return {
-    data: data.response,
-    status: 'success',
-    message: '블록을 추가했습니다.'
-  }
-}
-
-interface AddGoogleMapBlockResponse {
-  response: EmbedGoogleMapBlock
-  status: number
-  success: boolean
-}
-/**
- * @description 지도 블럭 생성 API
- * @see https://www.notion.so/ee4e2a88bd384a2ab031fc5593fbc93a
- */
-export const addGoogleMapBlockAPI = async (pageId: string | undefined, body: Partial<BlockItem>) => {
-  if (!pageId) throw new Error('pageId가 없습니다.')
-  const { data } = await backAuthAPI<AddGoogleMapBlockResponse>(`/v1/page/${pageId}/mapBlock`, {
-    method: 'POST',
-    data: body
-  })
-  return {
-    data: data.response,
-    status: 'success',
-    message: '구글 맵 블록을 추가했습니다.'
-  }
-}
-
-interface EditGoogleMapBlockResponse {
-  response: EmbedGoogleMapBlock
-  status: number
-  success: boolean
-}
-/**
- * @description 지도 블럭 수정 API
- * @see https://www.notion.so/6489900f63984b38be7b8be3b55c2a35
- */
-export const editGoogleMapBlockAPI = async (pageId: string | undefined, blockId: string, body: Partial<BlockItem>) => {
-  const response = await backAuthAPI<EditGoogleMapBlockResponse>(`/v1/page/${pageId}/mapBlock/${blockId}`, {
-    method: 'PUT',
-    data: body
-  })
-  return {
-    data: response.data.response,
-    status: 'success',
-    message: '구글 맵 블록을 수정했습니다.'
-  }
-}
 
 export type AddTemplateBlockAPIParams = Pick<BlockWith<TTemplate>, 'title' | 'description'> & {
   pageId: string | undefined
@@ -134,55 +78,6 @@ export const editLinkBlockAPI = async (pageId: any, blockId: any, body: EditLink
     data: response.data.response,
     status: 'success',
     message: '링크 블록을 수정했습니다.'
-  }
-}
-
-export type AddImageBlockParams = {
-  x?: number
-  y?: number
-  w?: number
-  h?: number
-  title: string
-  attachedImage: File
-}
-
-/**
- * @description 이미지 블럭 생성 API
- * @see https://www.notion.so/2ef9f22aad1a4836ad75df5446826013
- */
-export const addImageBlockAPI = async (pageId: any, form: any) => {
-  const response = await backAuthAPI(`/v1/page/${pageId}/imageBlock`, {
-    method: 'POST',
-    data: form,
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  })
-  return {
-    data: response.data.response,
-    status: 'success',
-    message: '이미지 블록을 추가했습니다.'
-  }
-}
-
-export type EditImageBlockParams = {
-  title: string
-  attachedImage: File
-}
-
-/**
- * @description 이미지 블럭 수정 API
- * @see https://www.notion.so/73170cb13eba4ac5b5f34ed4ff113214
- */
-export const editImageBlockAPI = async (pageId: any, blockId: any, form: any) => {
-  const response = await backAuthAPI(`/v1/page/${pageId}/imageBlock/${blockId}`, {
-    method: 'PUT',
-    data: form
-  })
-  return {
-    data: response.data.response,
-    status: 'success',
-    message: '이미지 블록을 수정했습니다.'
   }
 }
 

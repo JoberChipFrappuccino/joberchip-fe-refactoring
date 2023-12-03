@@ -2,9 +2,10 @@ import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCase
 import { GoogleMap, Marker } from '@react-google-maps/api'
 import { useQueryClient } from '@tanstack/react-query'
 import { type FormEvent, useEffect } from 'react'
+import { type EditGoogleMapBlockBody, type AddGoogleMapBlockBody } from '@/apis/blocks/mapBlock'
 import FormButton from '@/components/Common/Ui/Button'
 import { MAP } from '@/constants/blockTypeConstant'
-import { addBlockMutation, editBlockMutation } from '@/queries/mutates/sharePageMutate'
+import { addMapBlockMutate, editMapBLockMutate } from '@/queries/mutates/mapBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { useMapStore } from '@/store/map'
@@ -18,12 +19,13 @@ import { SearchForm } from './SearchForm'
 
 export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>) {
   const { isLoaded } = useLoadGoogleMap()
+  // TODO : MAP STORE를 react-hook-form으로 대체
   const { address, setCenter, center, setAddress } = useMapStore()
   const { sharePage, pageId } = useSharePageQuery()
   const { setOpenDrawer, drawerMode } = useBlockActionStore()
   const queryClient = useQueryClient()
-  const addMutation = addBlockMutation(queryClient)
-  const editMutation = editBlockMutation(queryClient)
+  const addMutation = addMapBlockMutate(queryClient)
+  const editMutation = editMapBLockMutate(queryClient)
 
   const blockId = block?.objectId ?? ''
 
@@ -35,20 +37,27 @@ export function GoogleMapBlockForm({ block }: BlockBaseWithBlockFormProps<TMap>)
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (drawerMode === 'CREATE') {
-      const newBlock = {
+      const createBody: AddGoogleMapBlockBody = {
+        objectId: blockId,
         x: 0,
         y: getNextYOfLastBlock(sharePage.children),
         w: 1,
         h: 2,
-        address,
         type: MAP,
-        visible: true,
-        ...center
+        address,
+        latitude: String(center.latitude),
+        longitude: String(center.longitude)
       }
-      addMutation.mutate({ pageId, blockType: 'mapBlock', newBlock })
+      addMutation.mutate({ pageId, newBlock: createBody })
       toast('지도가 추가되었습니다.', 'success')
     } else if (drawerMode === 'EDIT') {
-      editMutation.mutate({ pageId, blockId, body: { ...center, address } })
+      const editBody: EditGoogleMapBlockBody = {
+        objectId: blockId,
+        address,
+        latitude: String(center.latitude),
+        longitude: String(center.longitude)
+      }
+      editMutation.mutate({ pageId, editBlock: editBody })
       toast('지도가 수정되었습니다.', 'success')
     }
     setOpenDrawer(false)
