@@ -73,8 +73,8 @@ function getAddImageBlockBody(blocks: SharePage['children'], title: string, thum
   return {
     x: 0,
     y: getNextYOfLastBlock(blocks),
-    w: 0,
-    h: 0,
+    w: 2,
+    h: 1,
     type: IMAGE,
     title,
     attachedImage: dataURLToBlob(thumbnail)

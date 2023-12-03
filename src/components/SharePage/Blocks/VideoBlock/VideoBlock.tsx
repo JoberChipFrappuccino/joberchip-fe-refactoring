@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { type BlockBaseWithBlockProps } from '../../Common/SwitchCases/ViewerBox'
+import { type BlockBaseWithBlockProps } from '@/components/Common/SwitchCases/ViewerBox'
 import styles from './VideoBlock.module.scss'
 
 export function VideoBlock({ block, mode }: BlockBaseWithBlockProps<TVideo>) {

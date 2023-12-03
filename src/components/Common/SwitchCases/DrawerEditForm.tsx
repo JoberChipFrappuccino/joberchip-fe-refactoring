@@ -4,7 +4,7 @@ import { LinkBlockForm } from '@/components/SharePage/Forms/LinkBlockForm'
 import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm'
 import { TemplateBlockEditForm } from '@/components/SharePage/Forms/TemplateBlockEditForm'
 import { TextBlockForm } from '@/components/SharePage/Forms/TextBlockForm'
-import { VideoBlockForm } from '@/components/SharePage/Forms/VideoBlockForm'
+import FixedVideoBlockForm from '@/components/SharePage/Forms/VideoBlockForm/VideoBlockForm'
 import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
 import { type BlockBaseWithBlockProps } from './ViewerBox'
@@ -20,7 +20,7 @@ function getEditFormComponent<T extends BlockType>({ block }: BlockBaseWithBlock
     case LINK:
       return <LinkBlockForm block={block} />
     case VIDEO:
-      return <VideoBlockForm block={block} />
+      return <FixedVideoBlockForm block={block} />
     case MAP:
       return <GoogleMapBlockForm block={block} />
     case PAGE:

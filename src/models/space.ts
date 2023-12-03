@@ -52,9 +52,15 @@ export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
   height: number
   width: number
 }
+
+/**
+ * @param title video.mp4"로 고정되어 있습니다. 추후 기획에 따라 변경될 수 있는 필드입니다.
+ * @param description 명세서에는 있지만 실제로는 없는 필드입니다. 추후 기획에 따라 변경될 수 있는 필드입니다.
+ */
 export interface VideoBlock extends BlockBase<TVideo> {
+  title: string
   src: string
-  caption: string
+  // description: string
 }
 export interface TemplateBlock extends BlockBase<TTemplate> {
   templateId: string

@@ -3,7 +3,7 @@ import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
 import styles from './VideoThumbnail.module.scss'
 
 type Props = {
-  radio?: string
+  radio: string
   imgData?: Dispatch<SetStateAction<string>>
   buttonActive?: Dispatch<SetStateAction<boolean>>
   img: string
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export default function VideoThumbnail({ radio, imgData, buttonActive, img, videoUrl }: Props) {
-  const [selectedRadio, setSelectedRadio] = useState<string>('radio1')
+  const [selectedRadio, setSelectedRadio] = useState<string>(radio)
   const [thumbnail, setThumbnail] = useState<string>('')
   const [youtubeThumb, setYoutubeThumb] = useState<string>('')
   const [key, setKey] = useState(0)
