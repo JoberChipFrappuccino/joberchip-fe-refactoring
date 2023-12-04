@@ -7,7 +7,6 @@ interface AddGoogleMapBlockResponse {
   success: boolean
 }
 export interface AddGoogleMapBlockBody {
-  objectId: EmbedGoogleMapBlock['objectId']
   x: EmbedGoogleMapBlock['x']
   y: EmbedGoogleMapBlock['y']
   w: EmbedGoogleMapBlock['w']

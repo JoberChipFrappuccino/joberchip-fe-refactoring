@@ -1,6 +1,6 @@
-import { GoogleMapBlockForm } from '@/components/SharePage/Forms/GoogleMapBlockForm/GoogleMapBlockForm'
 import { ImageBlockForm } from '@/components/SharePage/Forms/ImageBlockForm/ImageBlockForm'
 import { LinkBlockForm } from '@/components/SharePage/Forms/LinkBlockForm'
+import { EditMapBlock } from '@/components/SharePage/Forms/MapBlockForm/EditMapBlock'
 import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm'
 import { TemplateBlockEditForm } from '@/components/SharePage/Forms/TemplateBlockEditForm'
 import { TextBlockForm } from '@/components/SharePage/Forms/TextBlockForm'
@@ -22,7 +22,7 @@ function getEditFormComponent<T extends BlockType>({ block }: BlockBaseWithBlock
     case VIDEO:
       return <EditVideoBlock block={block} />
     case MAP:
-      return <GoogleMapBlockForm block={block} />
+      return <EditMapBlock block={block} />
     case PAGE:
       return <PageBlockForm block={block} />
     case TEMPLATE:

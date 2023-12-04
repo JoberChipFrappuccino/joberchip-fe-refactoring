@@ -1,7 +1,7 @@
 import { TiDeleteOutline } from '@react-icons/all-files/ti/TiDeleteOutline'
 import { Input } from 'antd'
 import { useMapStore } from '@/store/map'
-import styles from './GoogleMapBlockForm.module.scss'
+import styles from './MapBlockForm.module.scss'
 
 export default function AddressForm() {
   const { address, setAddress } = useMapStore()

@@ -1,6 +1,6 @@
-import { GoogleMapBlockForm } from '@/components/SharePage/Forms/GoogleMapBlockForm/GoogleMapBlockForm'
 import { ImageBlockForm } from '@/components/SharePage/Forms/ImageBlockForm/ImageBlockForm'
 import { LinkBlockForm } from '@/components/SharePage/Forms/LinkBlockForm'
+import { AddMapBlock } from '@/components/SharePage/Forms/MapBlockForm/AddMapBlock'
 import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm'
 import { TemplateBlockCreateForm } from '@/components/SharePage/Forms/TemplateBlockCreateForm'
 import { TextBlockForm } from '@/components/SharePage/Forms/TextBlockForm'
@@ -23,7 +23,7 @@ function getCreateFormComponent({ blockType }: DrawerCreateFormProps) {
     case VIDEO:
       return <AddVideoBlock />
     case MAP:
-      return <GoogleMapBlockForm />
+      return <AddMapBlock />
     case PAGE:
       return <PageBlockForm />
     case TEMPLATE:

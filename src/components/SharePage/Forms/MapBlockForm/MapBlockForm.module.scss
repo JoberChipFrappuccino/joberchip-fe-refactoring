@@ -30,27 +30,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  .searchBox {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    h3 {
-      margin-left: 1.25rem;
-    }
-    .searcInput {
-      width: 100%;
-      display: flex;
-    }
-  }
-
-  .forms {
+  .inner {
     padding: 1.25rem 2rem;
-    h3 {
-      margin: 1.75rem 0;
-    }
   }
-
   .formText {
     margin-top: 1.875rem;
   }
