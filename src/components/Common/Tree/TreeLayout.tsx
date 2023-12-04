@@ -1,33 +1,26 @@
-import type { DataNode } from 'antd/es/tree'
+import type { EventDataNode } from 'antd/es/tree'
+import type { Key } from 'react'
 import { IoChevronDownOutline } from '@react-icons/all-files/io5/IoChevronDownOutline'
-import { useQuery } from '@tanstack/react-query'
 import { Tree } from 'antd'
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { fetchBreadCrumb } from '@/apis/space'
-import { BREAD_CRUMB } from '@/constants/querykey'
 import { useTree } from '@/hooks/tree'
+import type { ITree } from '@/hooks/tree'
 
-interface Props {
-  onSelectTreeNode?: () => void
-  drawerMode?: boolean
+export type TreeInfo = {
+  event: 'select'
+  selected: boolean
+  selectedNodes: ITree[]
+  node: EventDataNode<ITree>
+  nativeEvent: MouseEvent
 }
-export default function TreeLayout({ onSelectTreeNode }: Props) {
-  const { pageId } = useParams()
-  const { data: breadCrumbData } = useQuery([BREAD_CRUMB, pageId ?? ''], () => fetchBreadCrumb(pageId), {
-    enabled: !!pageId
-  })
 
-  const spaceId = breadCrumbData?.data?.parentId
-  const defaultData: DataNode[] = []
-  const { data: treeData } = useTree(spaceId ?? '')
-  const [gData, setGData] = useState(defaultData)
+interface TreeLayoutProps {
+  spaceId: string
+  onSelectTreeNode: (key: Key[], info: TreeInfo) => void
+}
+export default function TreeLayout({ onSelectTreeNode, spaceId }: TreeLayoutProps) {
+  const { data: treeData } = useTree(spaceId)
 
-  useEffect(() => {
-    if (treeData) {
-      setGData([treeData] as unknown as DataNode[])
-    }
-  }, [treeData, spaceId])
+  if (!treeData) return null
 
   return (
     <Tree
@@ -35,9 +28,18 @@ export default function TreeLayout({ onSelectTreeNode }: Props) {
       draggable={false}
       blockNode
       switcherIcon={<IoChevronDownOutline />}
-      treeData={gData}
-      defaultExpandAll
-      onSelect={onSelectTreeNode}
+      treeData={[addKey(treeData)]}
+      onSelect={(key, info) => {
+        onSelectTreeNode(key, info)
+      }}
     />
   )
+}
+
+function addKey(treeData: ITree) {
+  treeData.key = treeData.pageId
+  treeData.children = treeData.children?.map((item) => {
+    return addKey(item)
+  })
+  return treeData
 }

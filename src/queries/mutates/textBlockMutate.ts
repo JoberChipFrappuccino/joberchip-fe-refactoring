@@ -5,7 +5,7 @@ import {
   addTextBlockAPI,
   editTextBlockAPI,
   type RequestTextBlockEditData
-} from '@/apis/blocks/textblock'
+} from '@/apis/blocks/textBlock'
 
 export const addTextBlockMutate = (queryClient: QueryClient) => {
   const mutation = useMutation({

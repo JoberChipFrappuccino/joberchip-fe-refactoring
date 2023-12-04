@@ -1,6 +1,6 @@
+import type { BlockBaseWithBlockProps } from '@/components/Common/SwitchCases/ViewerBox'
 import { GoogleMap, Marker } from '@react-google-maps/api'
 import classNames from 'classnames'
-import { type BlockBaseWithBlockProps } from '@/components/Common/SwitchCases/ViewerBox'
 import { getCenter, needToConvertAbbr } from '@/utils/SharePage'
 import { useLoadGoogleMap } from '@/hooks/useGoogleMap'
 import styles from './GoogleMapBlock.module.scss'

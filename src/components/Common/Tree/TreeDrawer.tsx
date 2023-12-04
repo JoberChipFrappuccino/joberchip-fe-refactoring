@@ -1,24 +1,19 @@
 import { BiHomeAlt } from '@react-icons/all-files/bi/BiHomeAlt'
 import { Drawer } from 'antd'
-import React, { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent, type Key } from 'react'
+import { useBreadCrumb } from '@/hooks/useBreadCrumb'
 import FormButton from '../Ui/Button'
 import styles from './TreeDrawer.module.scss'
-import TreeLayout from './TreeLayout'
+import TreeLayout, { type TreeInfo } from './TreeLayout'
 
-export const TreeDrawer: React.FC = () => {
+export const TreeDrawer = () => {
+  const { breadCrumb } = useBreadCrumb()
   const [open, setOpen] = useState(false)
   const [newFileLocation, setNewFileLocation] = useState<string>('')
   const isButtonDisabled = !newFileLocation
   const fileLocation = ''
-  const onOpen = () => {
-    setOpen(true)
-  }
 
-  const onClose = () => {
-    setOpen(false)
-  }
-
-  const onSelectTreeNode = (selectedKeys?: React.Key[], info?: any) => {
+  const onSelectTreeNode = (_keys: Key[], info: TreeInfo) => {
     const selectedNode = info.selectedNodes[0]
     if (selectedNode?.key) {
       setNewFileLocation(selectedNode.key)
@@ -39,16 +34,16 @@ export const TreeDrawer: React.FC = () => {
 
   return (
     <>
-      <button className={styles.btn} onClick={onOpen}>
+      <button className={styles.btn} onClick={() => setOpen(true)}>
         저장위치 변경
       </button>
-      <Drawer title="저장위치 변경" placement="right" onClose={onClose} open={open}>
+      <Drawer title="저장위치 변경" placement="right" onClose={() => setOpen(false)} open={open}>
         <div className={styles.container}>
           <form className={styles.formBox} onSubmit={submitHandler}>
             <div className={styles.forms}>
               <BiHomeAlt /> 공유페이지
             </div>
-            <TreeLayout onSelectTreeNode={onSelectTreeNode} />
+            {breadCrumb?.parentId && <TreeLayout spaceId={breadCrumb.parentId} onSelectTreeNode={onSelectTreeNode} />}
           </form>
         </div>
         <FormButton title={'페이지 이동하기'} event={isButtonDisabled} />

@@ -1,8 +1,8 @@
+import type { BlockType } from '@/models/block'
 import classNames from 'classnames'
 import { useMemo, type ReactNode } from 'react'
 import { BiCaretRightSquare, BiImageAlt, BiLink, BiMapAlt, BiPencil } from '@/components/SharePage/icons'
 import { BLOCK_TO, IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/block'
-import { type BlockType } from '@/models/space'
 import { useBlockActionStore } from '@/store/blockAction'
 import styles from './BlockFormBase.module.scss'
 

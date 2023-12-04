@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { BLOCK, TEXT } from '@/constants/block'
-import { type BlockType } from '@/models/space'
+import { type BlockType } from '@/models/block'
 
 interface FormTypeState {
   formType: FormType

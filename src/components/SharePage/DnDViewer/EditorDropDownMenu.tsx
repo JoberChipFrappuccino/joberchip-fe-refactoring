@@ -1,12 +1,12 @@
 import { BsThreeDotsVertical } from '@react-icons/all-files/bs/BsThreeDotsVertical'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
+import { editTextBlockAPI } from '@/apis/blocks'
 import { editImageBlockAPI } from '@/apis/blocks/imageBlock'
 import { editLinkBlockAPI } from '@/apis/blocks/linkBlock'
 import { editGoogleMapBlockAPI } from '@/apis/blocks/mapBlock'
-import { editTextBlockAPI } from '@/apis/blocks/textblock'
 import { editVideoBlockAPI } from '@/apis/blocks/videoBlock'
-import { editPageProfileAPI } from '@/apis/space'
+import { editPageProfileAPI } from '@/apis/page/page'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { IMAGE, LINK, TEXT, BLOCK, MAP, PAGE, TEMPLATE, VIDEO, BLOCK_TO } from '@/constants/block'
@@ -34,6 +34,7 @@ export default function EditorDropDownMenu({ block, onDelete }: EditorDropDownMe
             className={styles.switchBtn}
             defaultChecked={block.visible}
             onChange={() => {
+              // TODO : 이거 무슨 로직인지 확인하기
               switchToggleAPIByBlockType(pageId, block)
               for (let i = 0; i < sharePage.children.length; i++) {
                 if (sharePage.children[i].objectId === block.objectId) {

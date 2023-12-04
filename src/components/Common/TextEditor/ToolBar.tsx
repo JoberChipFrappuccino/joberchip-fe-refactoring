@@ -1,5 +1,5 @@
 import { EditorState, Modifier, RichUtils, type ContentState, type DraftInlineStyle } from 'draft-js'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   FONT_OPTIONS,
   SIZE_OPTIONS,

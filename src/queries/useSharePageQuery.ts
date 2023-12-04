@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { getSpaceFromBackAPI } from '@/apis/space'
+import { getSpaceFromBackAPI } from '@/apis/page/page'
 import { SPACE } from '@/constants'
 import { type SharePage } from '@/models/space'
 import useServerSideProps from '../hooks/serverSideProps'

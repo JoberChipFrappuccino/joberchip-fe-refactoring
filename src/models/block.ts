@@ -91,3 +91,13 @@ export type BlockWith<T> = //
     ? TemplateBlock
     : never
 export type BlockItem = BlockWith<BlockType>
+
+export type blockAPIType =
+  | 'mapBlock'
+  | 'linkBlock'
+  | 'videoBlock'
+  | 'pageBlock'
+  | 'textBlock'
+  | 'templateBlock'
+  | 'imageBlock'
+  | 'baseBlock'

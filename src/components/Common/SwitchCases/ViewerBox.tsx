@@ -1,4 +1,3 @@
-import type { BlockType, BlockWith } from '@/models/space'
 import { GoogleMapBlock } from '@/components/SharePage/Blocks/GoogleMapBlock/GoogleMapBlock'
 import { ImageBlock } from '@/components/SharePage/Blocks/ImageBlock/ImageBlock'
 import { LinkBlock } from '@/components/SharePage/Blocks/LinkBlock/LinkBlock'
@@ -7,6 +6,7 @@ import { TemplateBlock } from '@/components/SharePage/Blocks/TemplateBlock'
 import { TextBlock } from '@/components/SharePage/Blocks/TextBlock/TextBlock'
 import { VideoBlock } from '@/components/SharePage/Blocks/VideoBlock/VideoBlock'
 import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/block'
+import { type BlockType, type BlockWith } from '@/models/block'
 
 export interface BlockBaseWithBlockProps<T extends BlockType> {
   block: BlockWith<T>

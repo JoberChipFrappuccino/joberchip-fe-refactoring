@@ -1,12 +1,12 @@
 import { EditImageBlock } from '@/components/SharePage/Forms/ImageBlockForm/EditImageBlock'
 import { EditLinkBlock } from '@/components/SharePage/Forms/LinkBlockForm/EditLinkBlock'
 import { EditMapBlock } from '@/components/SharePage/Forms/MapBlockForm/EditMapBlock'
-import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm'
+import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm/PageBlockForm'
 import { EditTemplateBlockForm } from '@/components/SharePage/Forms/TemplateBlockForm/EditTemplateBlockForm'
 import EditTextBlock from '@/components/SharePage/Forms/TextBlockForm/EditTextBlock'
 import EditVideoBlock from '@/components/SharePage/Forms/VideoBlockForm/EditVideoBlock'
 import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/block'
-import { type BlockType } from '@/models/space'
+import { type BlockType } from '@/models/block'
 import { type BlockBaseWithBlockProps } from './ViewerBox'
 
 export interface BlockBaseWithBlockFormProps<T extends BlockType> extends Partial<BlockBaseWithBlockProps<T>> {}

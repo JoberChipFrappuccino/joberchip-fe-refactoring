@@ -1,7 +1,5 @@
 import { create } from 'zustand'
-// import { getSpaceMockAPI, getSpaceFromBackAPI } from '@/apis/space'
-// import { type SharePage } from '@/models/space'
-// import { to } from '@/utils/api'
+
 export interface Center {
   latitude: number
   longitude: number

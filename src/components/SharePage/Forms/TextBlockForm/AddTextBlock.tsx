@@ -1,4 +1,4 @@
-import type { RequestTextBlockAddData } from '@/apis/blocks/textblock'
+import type { RequestTextBlockAddData } from '@/apis/blocks/textBlock'
 import { useQueryClient } from '@tanstack/react-query'
 import { addTextBlockMutate } from '@/queries/mutates/textBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
