@@ -29,10 +29,13 @@ export interface ImageBlock extends BlockBase<TImage> {
   title: string
 }
 
+/**
+ * @warn 요청 body에 들어가는 link 필드는 응답에서 src로 변환되어 옵니다.
+ */
 export interface LinkBlock extends BlockBase<TLink> {
   src: string
+  link: string
   title: string
-  description: string
 }
 export interface PageBlock extends BlockBase<TPage> {
   title: string

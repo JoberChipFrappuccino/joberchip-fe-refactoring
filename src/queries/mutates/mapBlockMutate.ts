@@ -24,7 +24,7 @@ export const addMapBlockMutate = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const editMapBLockMutate = (queryClient: QueryClient) => {
+export const editMapBlockMutate = (queryClient: QueryClient) => {
   const mutation = useMutation({
     mutationFn: ({ pageId, editBlock }: { pageId: string | undefined; editBlock: EditGoogleMapBlockBody }) => {
       return editGoogleMapBlockAPI(pageId, editBlock)

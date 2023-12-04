@@ -18,8 +18,17 @@ export const useSharePageQuery: SharePageHook = () => {
     return getSpaceFromBackAPI(pageId ?? '')
   })
 
-  // HACK : children 중에 x가 없는 것들은 제거해준다.
-  data.children = data.children.filter((child) => typeof child.x === 'number' || typeof child.x === 'string')
+  // HACK : x,y,w,h가 없는 경우가 있으서 임의의 값으로 채워줍니다.
+  // HACK : 화면이 로드되면 자동으로 최적화된 위치로 재배치됩니다.
+  data.children = data.children.map((child) => {
+    if (typeof child.x !== 'number' || typeof child.x !== 'string') {
+      child.x = 0
+      child.y = 0
+      child.w = 2
+      child.h = 1
+    }
+    return child
+  })
 
   return { sharePage: data, pageId, ...rest }
 }

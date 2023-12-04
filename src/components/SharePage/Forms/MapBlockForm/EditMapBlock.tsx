@@ -1,7 +1,7 @@
 import type { EditGoogleMapBlockBody } from '@/apis/blocks/mapBlock'
 import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { useQueryClient } from '@tanstack/react-query'
-import { editMapBLockMutate } from '@/queries/mutates/mapBlockMutate'
+import { editMapBlockMutate } from '@/queries/mutates/mapBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { useMapStore } from '@/store/map'
@@ -16,7 +16,7 @@ export function EditMapBlock({ block }: BlockBaseWithBlockFormProps<TMap>) {
   const { pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
   const queryClient = useQueryClient()
-  const editMutation = editMapBLockMutate(queryClient)
+  const editMutation = editMapBlockMutate(queryClient)
 
   const handleSubmit = () => {
     const editBlock: EditGoogleMapBlockBody = {

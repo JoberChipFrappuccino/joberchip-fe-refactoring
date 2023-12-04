@@ -1,5 +1,5 @@
-import { ImageBlockForm } from '@/components/SharePage/Forms/ImageBlockForm/ImageBlockForm'
-import { LinkBlockForm } from '@/components/SharePage/Forms/LinkBlockForm'
+import { EditImageBlock } from '@/components/SharePage/Forms/ImageBlockForm/EditImageBlock'
+import { EditLinkBlock } from '@/components/SharePage/Forms/LinkBlockForm/EditLinkBlock'
 import { EditMapBlock } from '@/components/SharePage/Forms/MapBlockForm/EditMapBlock'
 import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm'
 import { TemplateBlockEditForm } from '@/components/SharePage/Forms/TemplateBlockEditForm'
@@ -16,9 +16,9 @@ function getEditFormComponent<T extends BlockType>({ block }: BlockBaseWithBlock
     case TEXT:
       return <TextBlockForm block={block} />
     case IMAGE:
-      return <ImageBlockForm block={block} />
+      return <EditImageBlock block={block} />
     case LINK:
-      return <LinkBlockForm block={block} />
+      return <EditLinkBlock block={block} />
     case VIDEO:
       return <EditVideoBlock block={block} />
     case MAP:
