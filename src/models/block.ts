@@ -40,8 +40,7 @@ export interface LinkBlock extends BlockBase<TLink> {
 export interface PageBlock extends BlockBase<TPage> {
   title: string
   description: string
-  location: string
-  url: string
+  pageId: string
 }
 export interface EmbedGoogleMapBlock extends BlockBase<TMap> {
   src: string | undefined

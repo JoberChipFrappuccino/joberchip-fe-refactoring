@@ -6,6 +6,7 @@ import {
   type EditLinkBlockBody,
   editLinkBlockAPI
 } from '@/apis/blocks/linkBlock'
+import { SHARE_PAGE } from '@/constants/querykey'
 
 export const addLinkBlockMutate = (queryClient: QueryClient) => {
   const mutation = useMutation({
@@ -15,7 +16,7 @@ export const addLinkBlockMutate = (queryClient: QueryClient) => {
 
     onSuccess: (data, { pageId }) => {
       const { data: block } = data
-      queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
+      queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
         if (!oldData) throw new Error('해당 페이지에 대한 정보가 없습니다.')
         return { ...oldData, children: [...oldData.children, block] }
       })
@@ -35,7 +36,7 @@ export const editLinkBlockMutate = (queryClient: QueryClient) => {
     },
     onSuccess: (data, { pageId }) => {
       const { data: block } = data
-      queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
+      queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
         if (!oldData) throw new Error('해당 페이지에 대한 정보가 없습니다.')
         const newChildren = oldData.children.map((item) => {
           if (item.objectId === block.objectId) return block
@@ -45,7 +46,7 @@ export const editLinkBlockMutate = (queryClient: QueryClient) => {
       })
     },
     onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData(['sharePage', _newBlock], context)
+      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation
@@ -57,14 +58,14 @@ export const editLinkBlockMutate = (queryClient: QueryClient) => {
 //       return deleteImageBlockAPI(pageId, objectId)
 //     },
 //     onSuccess: (_data, { pageId, objectId }) => {
-//       queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
+//       queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
 //         if (!oldData) throw new Error('해당 페이지에 대한 정보가 없습니다.')
 //         const newChildren = oldData.children.filter((item) => item.objectId !== objectId)
 //         return { ...oldData, children: [...newChildren] }
 //       })
 //     },
 //     onError: (_err, _newBlock, context) => {
-//       // queryClient.setQueryData(['sharePage', _newBlock], context)
+//       // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
 //     }
 //   })
 //   return mutation

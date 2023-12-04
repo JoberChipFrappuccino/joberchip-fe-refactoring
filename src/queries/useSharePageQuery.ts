@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { getSpaceFromBackAPI } from '@/apis/page/page'
 import { SPACE } from '@/constants'
+import { SHARE_PAGE } from '@/constants/querykey'
 import { type SharePage } from '@/models/space'
 import useServerSideProps from '../hooks/serverSideProps'
 import useSuspenseQuery from './useSuspenseQuery'
@@ -13,7 +14,7 @@ type SharePageHook = () => {
 export const useSharePageQuery: SharePageHook = () => {
   const SSRSharePageState: SharePage = useServerSideProps(SPACE)
   const { pageId } = useParams()
-  const { data, ...rest } = useSuspenseQuery(['sharePage', pageId], () => {
+  const { data, ...rest } = useSuspenseQuery([SHARE_PAGE, pageId], () => {
     if (typeof window === 'undefined') return { ...SSRSharePageState, privilege: SSRSharePageState.privilege ?? 'VIEW' }
     return getSpaceFromBackAPI(pageId ?? '')
   })

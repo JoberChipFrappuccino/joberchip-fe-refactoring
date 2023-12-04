@@ -6,6 +6,7 @@ import {
   editTextBlockAPI,
   type RequestTextBlockEditData
 } from '@/apis/blocks/textBlock'
+import { SHARE_PAGE } from '@/constants/querykey'
 
 export const addTextBlockMutate = (queryClient: QueryClient) => {
   const mutation = useMutation({
@@ -15,7 +16,7 @@ export const addTextBlockMutate = (queryClient: QueryClient) => {
 
     onSuccess: (data, { pageId }) => {
       const { data: block } = data
-      queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
+      queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
         if (!oldData) throw new Error('oldData is undefined')
         return { ...oldData, children: [...oldData.children, block] }
       })
@@ -35,7 +36,7 @@ export const editTtextBlockMutate = (queryClient: QueryClient) => {
     },
     onSuccess: (data, { pageId }) => {
       const { data: block } = data
-      queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
+      queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
         if (!oldData) throw new Error('oldData is undefined')
         const newChildren = oldData.children.map((item) => {
           if (item.objectId === block.objectId) return block
@@ -45,7 +46,7 @@ export const editTtextBlockMutate = (queryClient: QueryClient) => {
       })
     },
     onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData(['sharePage', _newBlock], context)
+      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation

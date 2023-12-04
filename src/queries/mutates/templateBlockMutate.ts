@@ -1,6 +1,7 @@
 import type { SharePage } from '@/models/space'
 import { type QueryClient, useMutation } from '@tanstack/react-query'
 import { type AddTemplateBlockAPIBody, addTemplateBlockAPI } from '@/apis/blocks/templateBlock'
+import { SHARE_PAGE } from '@/constants/querykey'
 
 export const addTemplateBlockMutate = (queryClient: QueryClient) => {
   const mutation = useMutation({
@@ -10,7 +11,7 @@ export const addTemplateBlockMutate = (queryClient: QueryClient) => {
 
     onSuccess: (data, { pageId }) => {
       const { data: block } = data
-      queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
+      queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
         if (!oldData) throw new Error('oldData is undefined')
         return { ...oldData, children: [...oldData.children, block] }
       })

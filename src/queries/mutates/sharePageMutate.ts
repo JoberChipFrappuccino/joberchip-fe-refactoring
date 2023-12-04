@@ -2,6 +2,7 @@ import type { SharePage } from '@/models/space'
 import { useMutation, type QueryClient } from '@tanstack/react-query'
 import { deleteBlockAPI } from '@/apis/blocks'
 import { deletePageAPI } from '@/apis/page/page'
+import { SHARE_PAGE } from '@/constants/querykey'
 import { type BlockBase, type BlockType, type blockAPIType } from '@/models/block'
 
 // TODO : 이거 어떻게 해결할지 고민해보기
@@ -30,14 +31,14 @@ export const deleteBlockMutation = (queryClient: QueryClient) => {
       return deleteBlockAPI(pageId, type, blockId)
     },
     onSuccess: (_data, { pageId, block }) => {
-      queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
+      queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
         if (!oldData) throw new Error('oldData is undefined')
         const newChildren = oldData.children.filter((item) => item.objectId !== block.objectId)
         return { ...oldData, children: [...newChildren] }
       })
     },
     onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData(['sharePage', _newBlock], context)
+      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation

@@ -16,6 +16,17 @@ export async function fetchBreadCrumb(pageId?: string): Promise<ResponseBase<Bre
     data: data.response
   }
 }
+export interface BreadCrumbItems {
+  parentId?: string
+  pageId: string
+  title: string | JSX.Element
+  children?: BreadCrumbItems[]
+}
+interface FetchBreadCrumbAPIResponse {
+  status: number
+  success: boolean
+  response: BreadCrumbItems
+}
 
 /**
  * @description 페이지 생성 API
@@ -26,14 +37,31 @@ export const createPageAPI = async (body: CreatePageAPIBody) => {
     method: 'POST',
     data: body
   })
-
   if (!data.success) throw new Error('페이지 생성에 실패했습니다.')
-
   return {
     data: data.response,
     status: 'success',
     message: '페이지를 생성했습니다.'
   }
+}
+export interface NewPage {
+  parentPageId: string
+  title: string
+  description: string
+}
+export interface CreatePageAPIBody {
+  parentPageId: string
+  title: string
+  description: string
+  x: number
+  y: number
+  w: number
+  h: number
+}
+export interface CreatePageAPIResponse {
+  status: number
+  success: boolean
+  response: PageBlock
 }
 
 /**
@@ -68,6 +96,12 @@ export const fetchTreeAPI = async (spaceId: string): Promise<ResponseBase<ITree>
 export const getSpaceFromBackAPI = async (pageId: string): Promise<SharePage> => {
   const { data } = await backAuthAPI<SharePageResponse>(`/v1/page/${pageId}`)
   return data.response
+}
+
+interface SharePageResponse {
+  status: number
+  success: boolean
+  response: SharePage
 }
 
 /**
@@ -107,6 +141,12 @@ export async function editPageProfileAPI(
     data: data.response
   }
 }
+interface EditPageProfileParams {
+  title?: SharePage['title']
+  description?: SharePage['description']
+  visible?: SharePage['visible']
+  parentId?: string
+}
 
 /**
  * @description 페이지 내 블록 위치 / 형태 수정
@@ -128,46 +168,6 @@ export async function fetchLayout(
     data
   }
 }
-
-export interface BreadCrumbItems {
-  parentId?: string
-  pageId: string
-  title: string | JSX.Element
-  children?: BreadCrumbItems[]
-}
-interface FetchBreadCrumbAPIResponse {
-  status: number
-  success: boolean
-  response: BreadCrumbItems
-}
-export interface NewPage {
-  parentPageId: string
-  title: string
-  description: string
-}
-export interface CreatePageAPIBody {
-  x: PageBlock['x']
-  y: PageBlock['y']
-  w: PageBlock['w']
-  h: PageBlock['h']
-}
-export interface CreatePageAPIResponse {
-  status: number
-  success: boolean
-  response: PageBlock
-}
-interface SharePageResponse {
-  status: number
-  success: boolean
-  response: SharePage
-}
-interface EditPageProfileParams {
-  title?: SharePage['title']
-  description?: SharePage['description']
-  visible?: SharePage['visible']
-  parentId?: string
-}
-
 export interface FetchLayoutBlocksParam {
   blockId: string // blockId
   blockType: BlockType // BlockType

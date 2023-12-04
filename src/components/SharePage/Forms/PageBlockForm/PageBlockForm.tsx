@@ -1,12 +1,13 @@
 import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
+import { useQueryClient } from '@tanstack/react-query'
 import { useState, type Key } from 'react'
 import { useForm } from 'react-hook-form'
 import TreeLayout, { type TreeInfo } from '@/components/Common/Tree/TreeLayout'
 import FormButton from '@/components/Common/Ui/Button'
-// import { BLOCK_SIZE, PAGE } from '@/constants/block'
-// import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { createPageBlockMutate } from '@/queries/mutates/pageBlockMutate'
+import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
-// import { getNextYOfLastBlock } from '@/utils/api'
+import { getNextYOfLastBlock } from '@/utils/api'
 import { useBreadCrumb } from '@/hooks/useBreadCrumb'
 import styles from './PageBlockForm.module.scss'
 
@@ -15,51 +16,34 @@ interface PageFormInputs {
   description: string
 }
 export function PageBlockForm({ block }: BlockBaseWithBlockFormProps<TPage>) {
-  // const { sharePage } = useSharePageQuery()
+  const { sharePage } = useSharePageQuery()
   const { breadCrumb } = useBreadCrumb()
   const [parentPageId, setParentPageId] = useState('')
   const [parentPageTitle, setParentPageTitle] = useState('')
   const { drawerMode, setOpenDrawer } = useBlockActionStore()
-  const { register, handleSubmit, watch } = useForm<PageFormInputs>({
+  const { register, handleSubmit, watch, reset } = useForm<PageFormInputs>({
     defaultValues: {
       title: block?.title ?? '',
       description: block?.description ?? ''
     }
   })
+  const queryClient = useQueryClient()
+  const createPageMutation = createPageBlockMutate(queryClient)
 
   const submitHandler = (data: PageFormInputs) => {
     if (!parentPageId) return
-    // const body = {
-    //   title: data.title,
-    //   description: data.description,
-    //   parentPageId,
-    //   x: 0,
-    //   y: getNextYOfLastBlock(sharePage.children),
-    //   w: BLOCK_SIZE[PAGE].minWidth,
-    //   h: BLOCK_SIZE[PAGE].minHeight
-    // }
-    // createPageAPI(body).then((res) => {
-    //   const pageBlock = res.data
-    //   if (pageBlock) {
-    //     // setSharePage({
-    //     //   ...sharePage,
-    //     //   children: [...sharePage.children, pageBlock]
-    //     // })
-    //   }
-    //   toast(res.message, res.status, { autoClose: 500 })
-    // })
-    // if (drawerMode === 'CREATE') {
-    // } else {
-    //   const form = new FormData()
-    //   form.append('title', title)
-    //   form.append('description', description)
-    //   form.append('parentPageId', parentPageId)
-    //   editPageProfileAPI(block?.objectId ?? '', form).then((res) => {
-    //     toast(res.message, res.status, { autoClose: 500 })
-    //   })
-    // }
+    const body = {
+      parentPageId,
+      title: data.title,
+      description: data.description,
+      x: 0,
+      y: getNextYOfLastBlock(sharePage.children),
+      w: 2,
+      h: 1
+    }
+    createPageMutation.mutate({ body })
+    reset()
     setOpenDrawer(false)
-    window.location.reload()
   }
 
   const onSelectTreeNode = (_keys: Key[], info: TreeInfo) => {

@@ -3,6 +3,7 @@ import type { SharePage } from '@/models/space'
 import { type QueryClient, useMutation } from '@tanstack/react-query'
 import { deleteImageBlockAPI } from '@/apis/blocks/imageBlock'
 import { addVideoBlockAPI, editVideoBlockAPI } from '@/apis/blocks/videoBlock'
+import { SHARE_PAGE } from '@/constants/querykey'
 import { type VideoBlock } from '@/models/block'
 
 export const addVideoBlockMutate = (queryClient: QueryClient) => {
@@ -13,7 +14,7 @@ export const addVideoBlockMutate = (queryClient: QueryClient) => {
 
     onSuccess: (data, { pageId }) => {
       const { data: block } = data
-      queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
+      queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
         if (!oldData) throw new Error('oldData is undefined')
         return { ...oldData, children: [...oldData.children, block] }
       })
@@ -33,7 +34,7 @@ export const editVideoBlockMutate = (queryClient: QueryClient) => {
     },
     onSuccess: (data, { pageId }) => {
       const { data: block } = data
-      queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
+      queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
         if (!oldData) throw new Error('oldData is undefined')
         const newChildren = oldData.children.map((item) => {
           if (item.objectId === block.objectId) return block
@@ -43,7 +44,7 @@ export const editVideoBlockMutate = (queryClient: QueryClient) => {
       })
     },
     onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData(['sharePage', _newBlock], context)
+      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation
@@ -55,14 +56,14 @@ export const deleteVideoBlockMutate = (queryClient: QueryClient) => {
       return deleteImageBlockAPI(pageId, objectId)
     },
     onSuccess: (_data, { pageId, objectId }) => {
-      queryClient.setQueryData<SharePage>(['sharePage', pageId], (oldData) => {
+      queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
         if (!oldData) throw new Error('oldData is undefined')
         const newChildren = oldData.children.filter((item) => item.objectId !== objectId)
         return { ...oldData, children: [...newChildren] }
       })
     },
     onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData(['sharePage', _newBlock], context)
+      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation
