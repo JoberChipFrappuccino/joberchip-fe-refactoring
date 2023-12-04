@@ -1,11 +1,14 @@
 import { Input, Select, Switch } from 'antd'
+import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
+import FormButton from '@/components/Common/Ui/Button'
 import { useBlockActionStore } from '@/store/blockAction'
 import { toast } from '@/utils/toast'
-import { type BlockBaseWithBlockFormProps } from '../../Common/SwitchCases/DrawerEditForm'
-import FormButton from '../../Common/Ui/Button'
-import styles from './TemplateBlockEditForm.module.scss'
+import styles from './EditTemplateBlockForm.module.scss'
 
-export function TemplateBlockEditForm({ block }: BlockBaseWithBlockFormProps<TTemplate>) {
+/**
+ * @description 템플릿 블록은 기획에 포함되지 않은 기능으로, 일부 모양만 구현되어 있습니다.
+ */
+export function EditTemplateBlockForm({ block }: BlockBaseWithBlockFormProps<TTemplate>) {
   const { setOpenDrawer } = useBlockActionStore()
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

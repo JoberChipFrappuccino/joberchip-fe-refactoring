@@ -2,17 +2,18 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
+
   height: 100%;
   h2 {
     margin: 0;
   }
   .templateSettingContainer {
     border-bottom: 2px solid $cool-grey1;
-    padding-bottom: 1.25rem;
+    padding: 1.25rem;
   }
   .userSettingContainer {
     flex: 1;
+    padding: 1.25rem;
     h2 {
       margin-top: 1.25rem;
     }

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchSpaceListAPI } from '@/apis/space'
-import { SPACE_LIST } from '@/constants/queryKeyConstant'
+import { SPACE_LIST } from '@/constants/querykey'
 import { type SpaceList } from '@/models/space'
 
 interface UseSpaceListResponse {

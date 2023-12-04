@@ -1,14 +1,16 @@
 import { BsThreeDotsVertical } from '@react-icons/all-files/bs/BsThreeDotsVertical'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
-import { editGoogleMapBlockAPI, editImageBlockAPI, editLinkBlockAPI, editVideoBlockAPI } from '@/apis/blocks'
+import { editImageBlockAPI } from '@/apis/blocks/imageBlock'
+import { editLinkBlockAPI } from '@/apis/blocks/linkBlock'
+import { editGoogleMapBlockAPI } from '@/apis/blocks/mapBlock'
 import { editTextBlockAPI } from '@/apis/blocks/textblock'
+import { editVideoBlockAPI } from '@/apis/blocks/videoBlock'
 import { editPageProfileAPI } from '@/apis/space'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
-import { IMAGE, LINK, TEXT, BLOCK, MAP, PAGE, TEMPLATE, VIDEO } from '@/constants/blockTypeConstant'
-import { BLOCK_TO } from '@/constants/drawerConstant'
-import { type BlockBase, type BlockType, type BlockWith } from '@/models/space'
+import { IMAGE, LINK, TEXT, BLOCK, MAP, PAGE, TEMPLATE, VIDEO, BLOCK_TO } from '@/constants/block'
+import { type BlockBase, type BlockType, type BlockWith } from '@/models/block'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { clip, toast } from '@/utils'
@@ -128,23 +130,20 @@ function getUniqueDivierItem(key: string) {
 
 function switchToggleAPIByBlockType(pageId: string | undefined, block: BlockBase<BlockType>) {
   if (!pageId) return toast("잘못된 접근입니다. 'pageId'가 존재하지 않습니다.", 'failure')
-  const form = new FormData()
+  const { objectId, visible } = block
   switch (block.type) {
     case TEXT:
-      return editTextBlockAPI(pageId, block.objectId, { visible: !block.visible })
+      return editTextBlockAPI(pageId, { objectId, visible: !visible })
     case IMAGE:
-      form.append('visible', String(!block.visible))
-      return editImageBlockAPI(pageId, block.objectId, form)
+      return editImageBlockAPI(pageId, { objectId, visible: !visible })
     case LINK:
-      return editLinkBlockAPI(pageId, block.objectId, { visible: !block.visible })
+      return editLinkBlockAPI(pageId, { objectId, visible: !visible })
     case PAGE:
-      form.append('visible', String(!block.visible))
-      return editPageProfileAPI(pageId, form)
+      return editPageProfileAPI(pageId, { objectId, visible: !visible })
     case VIDEO:
-      form.append('visible', String(!block.visible))
-      return editVideoBlockAPI(pageId, block.objectId, form)
+      return editVideoBlockAPI(pageId, { objectId, visible: !visible })
     case MAP:
-      return editGoogleMapBlockAPI(pageId, block.objectId, { visible: !block.visible })
+      return editGoogleMapBlockAPI(pageId, { objectId, visible: !visible })
     case TEMPLATE:
       return toast('템플릿 공개 설정은 아직 지원하지 않습니다.', 'success')
     default:

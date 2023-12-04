@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { createSpaceAPI } from '@/apis/space'
-import { SPACE_LIST } from '@/constants/queryKeyConstant'
+import { SPACE_LIST } from '@/constants/querykey'
 import { toast } from '@/utils/toast'
 import { useUser } from '@/hooks/useUser'
 import styles from './UserProfile.module.scss'

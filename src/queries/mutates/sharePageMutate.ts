@@ -1,7 +1,8 @@
 import type { blockAPIType } from '@/apis/blocks'
-import type { BlockType, SharePage, BlockBase } from '@/models/space'
+import type { SharePage } from '@/models/space'
 import { useMutation, type QueryClient } from '@tanstack/react-query'
 import { deleteBlockAPI, deletePageAPI } from '@/apis/delete'
+import { type BlockBase, type BlockType } from '@/models/block'
 
 // TODO : 이거 어떻게 해결할지 고민해보기
 type TblockAPIType = Record<BlockType, blockAPIType>

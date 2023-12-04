@@ -6,7 +6,7 @@ import { PageBlock } from '@/components/SharePage/Blocks/PageBlock'
 import { TemplateBlock } from '@/components/SharePage/Blocks/TemplateBlock'
 import { TextBlock } from '@/components/SharePage/Blocks/TextBlock/TextBlock'
 import { VideoBlock } from '@/components/SharePage/Blocks/VideoBlock/VideoBlock'
-import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
+import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/block'
 
 export interface BlockBaseWithBlockProps<T extends BlockType> {
   block: BlockWith<T>

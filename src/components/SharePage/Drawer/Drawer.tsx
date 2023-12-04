@@ -1,11 +1,10 @@
 import { Drawer as AntdDrawer } from 'antd'
-import { useEffect, useState } from 'react'
-import { DrawerCreateForm } from '@/components/Common/SwitchCases/DrawerCreateForm'
+import { Suspense, useEffect, useState } from 'react'
+import { DrawerAddForm } from '@/components/Common/SwitchCases/DrawerAddForm'
 import { DrawerEditForm } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { BlockFormBase } from '@/components/SharePage/Drawer/BlockFormBase'
-import { PAGE, TEMPLATE } from '@/constants/blockTypeConstant'
-import { BLOCK_TO } from '@/constants/drawerConstant'
-import { type BlockType } from '@/models/space'
+import { BLOCK_TO, PAGE, TEMPLATE } from '@/constants/block'
+import { type BlockType } from '@/models/block'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 
@@ -31,8 +30,10 @@ export function Drawer() {
       open={openDrawer}
     >
       <BlockFormBase>
-        {drawerMode === 'CREATE' && <DrawerCreateForm blockType={blockType} />}
-        {drawerMode === 'EDIT' && block && <DrawerEditForm block={block} mode={drawerMode} />}
+        <Suspense fallback={<div>로딩중...</div>}>
+          {drawerMode === 'CREATE' && <DrawerAddForm blockType={blockType} />}
+          {drawerMode === 'EDIT' && block && <DrawerEditForm block={block} mode={drawerMode} />}
+        </Suspense>
       </BlockFormBase>
     </AntdDrawer>
   )

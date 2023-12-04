@@ -2,10 +2,10 @@ import { EditImageBlock } from '@/components/SharePage/Forms/ImageBlockForm/Edit
 import { EditLinkBlock } from '@/components/SharePage/Forms/LinkBlockForm/EditLinkBlock'
 import { EditMapBlock } from '@/components/SharePage/Forms/MapBlockForm/EditMapBlock'
 import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm'
-import { TemplateBlockEditForm } from '@/components/SharePage/Forms/TemplateBlockEditForm'
+import { EditTemplateBlockForm } from '@/components/SharePage/Forms/TemplateBlockForm/EditTemplateBlockForm'
 import EditTextBlock from '@/components/SharePage/Forms/TextBlockForm/EditTextBlock'
 import EditVideoBlock from '@/components/SharePage/Forms/VideoBlockForm/EditVideoBlock'
-import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
+import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/block'
 import { type BlockType } from '@/models/space'
 import { type BlockBaseWithBlockProps } from './ViewerBox'
 
@@ -26,7 +26,7 @@ function getEditFormComponent<T extends BlockType>({ block }: BlockBaseWithBlock
     case PAGE:
       return <PageBlockForm block={block} />
     case TEMPLATE:
-      return <TemplateBlockEditForm block={block} />
+      return <EditTemplateBlockForm block={block} />
     default: {
       if (process.env.NODE_ENV === 'development') {
         throw new Error('Please add a component')

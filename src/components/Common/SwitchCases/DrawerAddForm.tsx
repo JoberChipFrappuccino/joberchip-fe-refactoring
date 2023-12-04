@@ -2,10 +2,10 @@ import { AddImageBlock } from '@/components/SharePage/Forms/ImageBlockForm/AddIm
 import { AddLinkBlock } from '@/components/SharePage/Forms/LinkBlockForm/AddLinkBlock'
 import { AddMapBlock } from '@/components/SharePage/Forms/MapBlockForm/AddMapBlock'
 import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm'
-import { TemplateBlockCreateForm } from '@/components/SharePage/Forms/TemplateBlockCreateForm'
+import { AddTemplateBlockForm } from '@/components/SharePage/Forms/TemplateBlockForm/AddTemplateBlockForm'
 import AddTextBlock from '@/components/SharePage/Forms/TextBlockForm/AddTextBlock'
 import AddVideoBlock from '@/components/SharePage/Forms/VideoBlockForm/AddVideoBlock'
-import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
+import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/block'
 import { type BlockType } from '@/models/space'
 
 interface DrawerCreateFormProps {
@@ -27,7 +27,7 @@ function getCreateFormComponent({ blockType }: DrawerCreateFormProps) {
     case PAGE:
       return <PageBlockForm />
     case TEMPLATE:
-      return <TemplateBlockCreateForm />
+      return <AddTemplateBlockForm />
     default: {
       if (process.env.NODE_ENV === 'development') {
         throw new Error('Please add a component')
@@ -37,6 +37,6 @@ function getCreateFormComponent({ blockType }: DrawerCreateFormProps) {
   }
 }
 
-export function DrawerCreateForm({ blockType }: DrawerCreateFormProps) {
+export function DrawerAddForm({ blockType }: DrawerCreateFormProps) {
   return getCreateFormComponent({ blockType })
 }

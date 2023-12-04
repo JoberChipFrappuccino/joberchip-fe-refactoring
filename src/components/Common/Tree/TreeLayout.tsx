@@ -5,7 +5,7 @@ import { Tree } from 'antd'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { fetchBreadCrumb } from '@/apis/space'
-import { BREAD_CRUMB } from '@/constants/queryKeyConstant'
+import { BREAD_CRUMB } from '@/constants/querykey'
 import { useTree } from '@/hooks/tree'
 
 interface Props {

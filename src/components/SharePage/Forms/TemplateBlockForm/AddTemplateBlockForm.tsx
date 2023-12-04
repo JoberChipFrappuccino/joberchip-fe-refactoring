@@ -1,24 +1,28 @@
-import { useQuery } from '@tanstack/react-query'
+import type { BlockWith } from '@/models/space'
+import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useState } from 'react'
-import { addTemplateBlockAPI } from '@/apis/blocks'
-import { getTemplates } from '@/apis/template'
-import { type BlockWith } from '@/models/space'
+import FormButton from '@/components/Common/Ui/Button'
+import { TemplateBlock } from '@/components/SharePage/Blocks/TemplateBlock'
+import { TemplateSearchBox } from '@/components/SharePage/Forms/TemplateBlockForm/TemplateSearchBox'
+import { addTemplateBlockMutate } from '@/queries/mutates/templateBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useTemplateQuery } from '@/queries/useTemplateQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/api'
-import { toast } from '@/utils/toast'
 import { useUser } from '@/hooks/useUser'
-import FormButton from '../../Common/Ui/Button'
-import { TemplateBlock } from '../Blocks/TemplateBlock'
-import { TemplateSearchBox } from '../TemplateSearchBox'
-import styles from './TemplateBlockCreateForm.module.scss'
+import styles from './AddTemplateBlockForm.module.scss'
 
-export function TemplateBlockCreateForm() {
+/**
+ * @description 템플릿 블록은 기획에 포함되지 않은 기능으로, 일부 모양만 구현되어 있습니다.
+ */
+export function AddTemplateBlockForm() {
   const { user } = useUser()
   const { sharePage, pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
-  const { data: templates } = useQuery(['template', user.userId], () => getTemplates(user.userId))
+  const { templates } = useTemplateQuery(user.userId)
+  const queryClient = useQueryClient()
+  const addTemplateMutation = addTemplateBlockMutate(queryClient)
   const [templateId, setTemplateId] = useState('')
 
   const handleOnClick = (block: BlockWith<TTemplate>) => {
@@ -41,16 +45,7 @@ export function TemplateBlockCreateForm() {
       title: template?.title ?? '',
       description: template?.description ?? ''
     }
-    addTemplateBlockAPI(body).then((res) => {
-      // HACK : 시간 관계상 에러처리를 하지 않습니다.
-      if (res.data) {
-        // setSharePage({ ...sharePage, children: [...sharePage.children, res.data] })
-        toast(res.message, 'success', { autoClose: 500 })
-      } else toast(res.message, 'failure', { autoClose: 500 })
-      setOpenDrawer(false)
-    })
-
-    // setSharePage({ ...sharePage, children: [...sharePage.children] })
+    addTemplateMutation.mutate({ pageId, body })
     setOpenDrawer(false)
   }
 

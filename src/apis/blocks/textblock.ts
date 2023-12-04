@@ -1,4 +1,4 @@
-import { type ITextBlock } from '@/models/space'
+import { type ITextBlock } from '@/models/block'
 import { backAuthAPI } from '../api'
 
 export interface RequestTextBlockAddData {

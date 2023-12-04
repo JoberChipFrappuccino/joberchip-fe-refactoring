@@ -1,4 +1,4 @@
-import { type EmbedGoogleMapBlock } from '@/models/space'
+import type { EmbedGoogleMapBlock } from '@/models/block'
 import { backAuthAPI } from '../api'
 
 interface AddGoogleMapBlockResponse {
@@ -43,6 +43,7 @@ export interface EditGoogleMapBlockBody {
   latitude?: EmbedGoogleMapBlock['latitude']
   longitude?: EmbedGoogleMapBlock['longitude']
   address?: EmbedGoogleMapBlock['address']
+  visible?: EmbedGoogleMapBlock['visible']
 }
 /**
  * @description 지도 블럭 수정 API

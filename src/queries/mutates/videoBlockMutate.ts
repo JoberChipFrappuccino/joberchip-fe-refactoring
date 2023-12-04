@@ -1,8 +1,9 @@
 import type { EditVideoBlockBody, AddVideoBlockBody } from '@/apis/blocks/videoBlock'
-import type { SharePage, VideoBlock } from '@/models/space'
+import type { SharePage } from '@/models/space'
 import { type QueryClient, useMutation } from '@tanstack/react-query'
 import { deleteImageBlockAPI } from '@/apis/blocks/imageBlock'
 import { addVideoBlockAPI, editVideoBlockAPI } from '@/apis/blocks/videoBlock'
+import { type VideoBlock } from '@/models/block'
 
 export const addVideoBlockMutate = (queryClient: QueryClient) => {
   const mutation = useMutation({

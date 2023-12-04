@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchTreeAPI } from '@/apis/tree'
-import { TREE } from '@/constants/queryKeyConstant'
+import { TREE } from '@/constants/querykey'
 import { to, type ResponseBase } from '@/utils/api'
 
 interface TreeResponse {

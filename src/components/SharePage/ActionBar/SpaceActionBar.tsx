@@ -1,7 +1,7 @@
 import { Tooltip } from 'antd'
 import classNames from 'classnames'
 import { useCallback } from 'react'
-import { PAGE, TEMPLATE, TEXT } from '@/constants/blockTypeConstant'
+import { PAGE, TEMPLATE, TEXT } from '@/constants/block'
 import { type BlockType } from '@/models/space'
 import { useBlockActionStore } from '@/store/blockAction'
 import styles from './SpaceActionBar.module.scss'

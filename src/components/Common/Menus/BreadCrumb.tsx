@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Breadcrumb } from 'antd'
 import { Link, useParams } from 'react-router-dom'
 import { fetchBreadCrumb, type BreadCrumbItems } from '@/apis/space'
-import { BREAD_CRUMB } from '@/constants/queryKeyConstant'
+import { BREAD_CRUMB } from '@/constants/querykey'
 import { toast } from '@/utils/toast'
 
 export function BreadCrumbBox() {

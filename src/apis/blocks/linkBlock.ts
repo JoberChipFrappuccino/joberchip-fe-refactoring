@@ -1,4 +1,4 @@
-import { type LinkBlock } from '@/models/space'
+import type { LinkBlock } from '@/models/block'
 import { backAuthAPI } from '../api'
 
 export type AddLinkBlockBody = {
@@ -27,8 +27,9 @@ export const addLinkBlockAPI = async (pageId: string | undefined, body: AddLinkB
 
 export type EditLinkBlockBody = {
   objectId: LinkBlock['objectId']
-  title: LinkBlock['title']
-  link: LinkBlock['link']
+  title?: LinkBlock['title']
+  link?: LinkBlock['link']
+  visible?: LinkBlock['visible']
 }
 /**
  * @description 링크 블럭 수정 API

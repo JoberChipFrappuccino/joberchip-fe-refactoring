@@ -1,4 +1,4 @@
-import { type VideoBlock } from '@/models/space'
+import { type VideoBlock } from '@/models/block'
 import { backAuthAPI } from '../api'
 
 interface AddVideoBlockResponse {
@@ -43,9 +43,10 @@ interface EditVideoBlockResponse {
 }
 export interface EditVideoBlockBody {
   objectId: VideoBlock['objectId']
-  title: VideoBlock['title']
+  title?: VideoBlock['title']
   attachedVideo?: Blob
   videoLink?: string
+  visible?: VideoBlock['visible']
 }
 /**
  * @description 비디오 블럭 수정 API

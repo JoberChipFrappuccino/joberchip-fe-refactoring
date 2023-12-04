@@ -1,4 +1,4 @@
-import { type ImageBlock, type EmbedGoogleMapBlock } from '@/models/space'
+import type { ImageBlock, EmbedGoogleMapBlock } from '@/models/block'
 import { backAuthAPI } from '../api'
 
 interface AddImageBlockResponse {
@@ -46,6 +46,7 @@ export interface EditImageBlockBody {
   objectId: ImageBlock['objectId']
   title?: ImageBlock['title']
   attachedImage?: Blob
+  visible?: ImageBlock['visible']
 }
 /**
  * @description 이미지 블럭 수정 API

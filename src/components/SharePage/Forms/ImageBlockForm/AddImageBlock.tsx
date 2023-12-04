@@ -1,7 +1,7 @@
 import type { AddImageBlockBody } from '@/apis/blocks/imageBlock'
 import type { SharePage } from '@/models/space'
 import { useQueryClient } from '@tanstack/react-query'
-import { IMAGE } from '@/constants/blockTypeConstant'
+import { IMAGE } from '@/constants/block'
 import { addImageBlockMutate } from '@/queries/mutates/imageBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'

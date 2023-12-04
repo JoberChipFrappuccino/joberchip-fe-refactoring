@@ -1,5 +1,6 @@
 import type { AddImageBlockBody, EditImageBlockBody } from '@/apis/blocks/imageBlock'
-import type { SharePage, EmbedGoogleMapBlock } from '@/models/space'
+import type { ImageBlock } from '@/models/block'
+import type { SharePage } from '@/models/space'
 import { type QueryClient, useMutation } from '@tanstack/react-query'
 import { addImageBlockAPI, deleteImageBlockAPI, editImageBlockAPI } from '@/apis/blocks/imageBlock'
 
@@ -49,7 +50,7 @@ export const editImageBlockMutate = (queryClient: QueryClient) => {
 
 export const deleteImageBlockMutate = (queryClient: QueryClient) => {
   const mutation = useMutation({
-    mutationFn: ({ pageId, objectId }: { pageId: string | undefined; objectId: EmbedGoogleMapBlock['objectId'] }) => {
+    mutationFn: ({ pageId, objectId }: { pageId: string | undefined; objectId: ImageBlock['objectId'] }) => {
       return deleteImageBlockAPI(pageId, objectId)
     },
     onSuccess: (_data, { pageId, objectId }) => {

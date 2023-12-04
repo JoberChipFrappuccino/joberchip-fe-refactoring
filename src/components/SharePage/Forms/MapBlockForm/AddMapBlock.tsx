@@ -1,6 +1,6 @@
 import type { AddGoogleMapBlockBody } from '@/apis/blocks/mapBlock'
 import { useQueryClient } from '@tanstack/react-query'
-import { MAP } from '@/constants/blockTypeConstant'
+import { MAP } from '@/constants/block'
 import { addMapBlockMutate } from '@/queries/mutates/mapBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
