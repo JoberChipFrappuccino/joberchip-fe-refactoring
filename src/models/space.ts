@@ -20,7 +20,7 @@ export interface BlockBase<T extends BlockType> {
   isBounded?: boolean
   static?: boolean
 }
-export interface TextBlock extends BlockBase<TText> {
+export interface ITextBlock extends BlockBase<TText> {
   src: string
 }
 
@@ -76,7 +76,7 @@ export interface TemplateBlock extends BlockBase<TTemplate> {
 
 export type BlockWith<T> = //
   T extends TText
-    ? TextBlock
+    ? ITextBlock
     : T extends TImage
     ? ImageBlock
     : T extends TLink

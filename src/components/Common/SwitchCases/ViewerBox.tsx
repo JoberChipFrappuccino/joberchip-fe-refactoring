@@ -4,7 +4,7 @@ import { ImageBlock } from '@/components/SharePage/Blocks/ImageBlock/ImageBlock'
 import { LinkBlock } from '@/components/SharePage/Blocks/LinkBlock/LinkBlock'
 import { PageBlock } from '@/components/SharePage/Blocks/PageBlock'
 import { TemplateBlock } from '@/components/SharePage/Blocks/TemplateBlock'
-import { TextBlock } from '@/components/SharePage/Blocks/TextBlock'
+import { TextBlock } from '@/components/SharePage/Blocks/TextBlock/TextBlock'
 import { VideoBlock } from '@/components/SharePage/Blocks/VideoBlock/VideoBlock'
 import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 

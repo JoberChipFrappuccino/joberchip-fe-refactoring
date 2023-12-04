@@ -3,7 +3,7 @@ import { EditLinkBlock } from '@/components/SharePage/Forms/LinkBlockForm/EditLi
 import { EditMapBlock } from '@/components/SharePage/Forms/MapBlockForm/EditMapBlock'
 import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm'
 import { TemplateBlockEditForm } from '@/components/SharePage/Forms/TemplateBlockEditForm'
-import { TextBlockForm } from '@/components/SharePage/Forms/TextBlockForm'
+import EditTextBlock from '@/components/SharePage/Forms/TextBlockForm/EditTextBlock'
 import EditVideoBlock from '@/components/SharePage/Forms/VideoBlockForm/EditVideoBlock'
 import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
@@ -14,7 +14,7 @@ export interface BlockBaseWithBlockFormProps<T extends BlockType> extends Partia
 function getEditFormComponent<T extends BlockType>({ block }: BlockBaseWithBlockFormProps<T>) {
   switch (block?.type) {
     case TEXT:
-      return <TextBlockForm block={block} />
+      return <EditTextBlock block={block} />
     case IMAGE:
       return <EditImageBlock block={block} />
     case LINK:
