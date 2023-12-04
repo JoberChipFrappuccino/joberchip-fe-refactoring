@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { editPageProfileAPI } from '@/apis/page/page'
+import { editPageBlockAPI } from '@/apis/page/page'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
-import { toast } from '@/utils/toast'
 import styles from './ProfileImageForm.module.scss'
 export function ProfileImageForm() {
   const [profileImage, setProfileImage] = useState('')
@@ -13,24 +12,19 @@ export function ProfileImageForm() {
 
   const handleChageFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
-    if (files && files.length > 0) {
-      const file = files[0]
-      const form = new FormData()
-      form.append('profileImage', file)
-      editPageProfileAPI(pageId, form).then((res) => {
-        toast(res.message, 'success', { autoClose: 500 })
-      })
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        const base64 = reader.result
-        if (base64) {
-          // eslint-disable-next-line @typescript-eslint/no-base-to-string
-          const str = base64?.toString()
-          setProfileImage(str)
-        }
+    if (!files || files.length === 0) return
+    const file = files[0]
+    editPageBlockAPI(pageId, { profileImage: file })
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      const base64 = reader.result
+      if (base64) {
+        const str = String(base64)
+        // TODO : Optimistic UI 적용하기
+        setProfileImage(str)
       }
-      reader.readAsDataURL(file)
     }
+    reader.readAsDataURL(file)
   }
 
   return (

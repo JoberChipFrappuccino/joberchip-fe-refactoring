@@ -1,7 +1,7 @@
 import { AddImageBlock } from '@/components/SharePage/Forms/ImageBlockForm/AddImageBlock'
 import { AddLinkBlock } from '@/components/SharePage/Forms/LinkBlockForm/AddLinkBlock'
 import { AddMapBlock } from '@/components/SharePage/Forms/MapBlockForm/AddMapBlock'
-import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm/PageBlockForm'
+import { AddPageBlock } from '@/components/SharePage/Forms/PageBlockForm/AddPageBlock'
 import { AddTemplateBlockForm } from '@/components/SharePage/Forms/TemplateBlockForm/AddTemplateBlockForm'
 import AddTextBlock from '@/components/SharePage/Forms/TextBlockForm/AddTextBlock'
 import AddVideoBlock from '@/components/SharePage/Forms/VideoBlockForm/AddVideoBlock'
@@ -25,7 +25,7 @@ function getCreateFormComponent({ blockType }: DrawerCreateFormProps) {
     case MAP:
       return <AddMapBlock />
     case PAGE:
-      return <PageBlockForm />
+      return <AddPageBlock />
     case TEMPLATE:
       return <AddTemplateBlockForm />
     default: {

@@ -1,7 +1,7 @@
 import { BsThreeDotsVertical } from '@react-icons/all-files/bs/BsThreeDotsVertical'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
-import { editPageProfileAPI } from '@/apis/page/page'
+import { editPageBlockAPI } from '@/apis/page/page'
 import { TreeDrawer } from '@/components/Common/Tree/TreeDrawer'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
@@ -24,9 +24,7 @@ export default function ProfileDropDownMenu() {
           <Switch
             className={styles.switchBtn}
             onChange={() => {
-              const form = new FormData()
-              form.append('visible', !sharePage.visible ? 'true' : 'false')
-              editPageProfileAPI(pageId, form)
+              editPageBlockAPI(pageId, { visible: !sharePage.visible })
             }}
             defaultChecked={sharePage.visible}
           />

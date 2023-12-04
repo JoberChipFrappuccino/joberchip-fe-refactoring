@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import { Breadcrumb } from 'antd'
 import { Link, useParams } from 'react-router-dom'
-import { type BreadCrumbItems, fetchBreadCrumb } from '@/apis/page/page'
+import { type BreadCrumbItems, getBreadCrumb } from '@/apis/page/page'
 import { BREAD_CRUMB } from '@/constants/querykey'
 import { toast } from '@/utils/toast'
 
 export function BreadCrumbBox() {
   const { pageId } = useParams<{ pageId: string }>()
-  const { data } = useQuery([BREAD_CRUMB, pageId ?? ''], () => fetchBreadCrumb(pageId), {
+  const { data } = useQuery([BREAD_CRUMB, pageId ?? ''], () => getBreadCrumb(pageId), {
     enabled: !!pageId
   })
 

@@ -8,7 +8,7 @@ import { backAuthAPI } from '../api'
  * @description 페이지 주소 경로 조히 (BreadCrumb) API
  * @see https://www.notion.so/Back-End-987b88625bae4cae90cf32fee45534b4?p=b76e833f9067409da16a5e376e740f8a&pm=s
  */
-export async function fetchBreadCrumb(pageId?: string): Promise<ResponseBase<BreadCrumbItems>> {
+export async function getBreadCrumb(pageId?: string): Promise<ResponseBase<BreadCrumbItems>> {
   const { data } = await backAuthAPI<FetchBreadCrumbAPIResponse>(`/v1/page/${pageId}/breadCrumbBar`)
   return {
     status: 'success',
@@ -74,7 +74,7 @@ export const checkPagePrivilegeAPI = async (pageId: string) => {}
  * @description 페이지 트리 조회 API
  * @see https://www.notion.so/2-cdf1976fd3e641dd84bd77df574fb471?p=559b36ae88944c739ffef14d869e4637&pm=s
  */
-export const fetchTreeAPI = async (spaceId: string): Promise<ResponseBase<ITree>> => {
+export const getTreeAPI = async (spaceId: string): Promise<ResponseBase<ITree>> => {
   const { data } = await backAuthAPI<{
     status: number
     success: boolean
@@ -123,17 +123,18 @@ export const deletePageAPI = async (pageId: string) => {
  * @description 페이지 프로필(title, description) / 공개 여부(visible) / 위치 (parentId) 수정 API
  * @see https://www.notion.so/9cf94562cc7b483d8cc75da7a5c0db19
  */
-export async function editPageProfileAPI(
+export async function editPageBlockAPI(
   pageId: string | undefined,
-  formData: FormData
-): Promise<ResponseBase<EditPageProfileParams>> {
+  body: EditPageBlockBody
+): Promise<ResponseBase<PageBlock>> {
   if (!pageId) throw new Error('pageId가 없습니다.')
+  const form = convertBodyToForm(body)
   const { data } = await backAuthAPI(`/v1/page/${pageId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'multipart/form-data'
     },
-    data: formData
+    data: form
   })
   return {
     status: 'success',
@@ -141,11 +142,16 @@ export async function editPageProfileAPI(
     data: data.response
   }
 }
-interface EditPageProfileParams {
+/**
+ * @property parentPageId 부모 페이지 ID, 부모 페이지의 하위 페이지로 이동합니다.
+ * @property profileImage 프로필 이미지, *.png, *.jpeg, *.jpg 지원합니다.
+ */
+export interface EditPageBlockBody {
+  parentPageId?: string
   title?: SharePage['title']
   description?: SharePage['description']
+  profileImage?: File
   visible?: SharePage['visible']
-  parentId?: string
 }
 
 /**
@@ -180,4 +186,20 @@ interface FetchLayoutResponse {
   status: number
   success: boolean
   response: boolean
+}
+
+function convertBodyToForm<T>(body: T) {
+  type TKey = keyof T
+  const form = new FormData()
+  for (const key in body) {
+    const value = body[key as TKey]
+    if (typeof value === 'string') {
+      form.append(key, value)
+    } else if (value instanceof Blob) {
+      form.append(key, value, 'image.png')
+    } else {
+      form.append(key, String(value))
+    }
+  }
+  return form
 }

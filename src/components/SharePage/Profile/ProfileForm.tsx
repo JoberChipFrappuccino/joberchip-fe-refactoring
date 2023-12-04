@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { Spin } from 'antd'
 import { useEffect, useState } from 'react'
-import { editPageProfileAPI } from '@/apis/page/page'
+import { editPageBlockAPI } from '@/apis/page/page'
 import { BREAD_CRUMB, SPACE_LIST } from '@/constants/querykey'
 import { USER_PROFILE_DEVOUNCE_TIME } from '@/constants/space'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
@@ -22,9 +22,8 @@ export function ProfileForm() {
   useDebounce(title, USER_PROFILE_DEVOUNCE_TIME, async (nextTitle) => {
     if (mode === 'VIEW') return
     if (sharePage.title === nextTitle) return
-    const form = new FormData()
-    form.append('title', nextTitle)
-    await to(editPageProfileAPI(pageId ?? '', form)).then((res) => {
+
+    await to(editPageBlockAPI(pageId, { title: nextTitle })).then((res) => {
       queryClient.refetchQueries([BREAD_CRUMB])
       queryClient.refetchQueries([SPACE_LIST])
       // setSharePage({ ...sharePage, title: nextTitle })
@@ -38,7 +37,7 @@ export function ProfileForm() {
     if (sharePage.description === nextDescription) return
     const form = new FormData()
     form.append('description', nextDescription)
-    await to(editPageProfileAPI(pageId ?? '', form)).then((res) => {
+    await to(editPageBlockAPI(pageId, { description: nextDescription })).then((res) => {
       toast(res.message, res.status, { autoClose: 500 })
       // setSharePage({ ...sharePage, description: nextDescription })
     })

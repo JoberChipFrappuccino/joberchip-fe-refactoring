@@ -6,7 +6,7 @@ import { editImageBlockAPI } from '@/apis/blocks/imageBlock'
 import { editLinkBlockAPI } from '@/apis/blocks/linkBlock'
 import { editGoogleMapBlockAPI } from '@/apis/blocks/mapBlock'
 import { editVideoBlockAPI } from '@/apis/blocks/videoBlock'
-import { editPageProfileAPI } from '@/apis/page/page'
+import { editPageBlockAPI } from '@/apis/page/page'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { IMAGE, LINK, TEXT, BLOCK, MAP, PAGE, TEMPLATE, VIDEO, BLOCK_TO } from '@/constants/block'
@@ -140,7 +140,7 @@ function switchToggleAPIByBlockType(pageId: string | undefined, block: BlockBase
     case LINK:
       return editLinkBlockAPI(pageId, { objectId, visible: !visible })
     case PAGE:
-      return editPageProfileAPI(pageId, { objectId, visible: !visible })
+      return editPageBlockAPI(pageId, { visible: !visible })
     case VIDEO:
       return editVideoBlockAPI(pageId, { objectId, visible: !visible })
     case MAP:

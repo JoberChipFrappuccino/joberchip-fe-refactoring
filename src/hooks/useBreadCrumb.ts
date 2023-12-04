@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
-import { fetchBreadCrumb } from '@/apis/space'
+import { getBreadCrumb } from '@/apis/page/page'
 import { BREAD_CRUMB } from '@/constants/querykey'
 
 export const useBreadCrumb = () => {
   const { pageId } = useParams()
-  const { data } = useQuery([BREAD_CRUMB, pageId ?? ''], () => fetchBreadCrumb(pageId), {
+  const { data } = useQuery([BREAD_CRUMB, pageId ?? ''], () => getBreadCrumb(pageId), {
     enabled: !!pageId
   })
   return {
