@@ -1,33 +1,30 @@
-import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { type EditVideoBlockBody, type AddVideoBlockBody } from '@/apis/blocks/videoBlock'
 import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import FormButton from '@/components/Common/Ui/Button'
-import { addVideoBlockMutate, editVideoBlockMutate } from '@/queries/mutates/videoBlockMutate'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { type onSubmitAddFormParam } from '@/components/SharePage/Forms/VideoBlockForm/AddVideoBlock'
+import { type onSubmitEditFormParam } from '@/components/SharePage/Forms/VideoBlockForm/EditVideoBlock'
+import Preview from '@/components/SharePage/Forms/VideoBlockForm/Preview'
+import { Radio } from '@/components/SharePage/Forms/VideoBlockForm/Radio'
 import { useBlockActionStore } from '@/store/blockAction'
-import { getNextYOfLastBlock } from '@/utils'
 import { dataURIToBlob } from '@/utils/SharePage'
-import Preview from './Preview'
-import { Radio } from './Radio'
 import styles from './VideoBlockForm.module.scss'
 
 interface VideoInputs {
   url: string
   file: FileList
 }
-export default function FixedVideoBlockForm({ block }: BlockBaseWithBlockFormProps<TVideo>) {
-  const { openDrawer, drawerMode, setOpenDrawer } = useBlockActionStore()
-  const { sharePage, pageId } = useSharePageQuery()
+
+type VideoBlockFormProps = BlockBaseWithBlockFormProps<TVideo> & {
+  onSubmit: (data: onSubmitAddFormParam | onSubmitEditFormParam) => void
+}
+export default function Form({ block, onSubmit: onSubmitForm }: VideoBlockFormProps) {
+  const { openDrawer, drawerMode } = useBlockActionStore()
   const fileRef = useRef<HTMLInputElement | null>(null)
   const [activeRadio, setActiveRadio] = useState('')
   const { register, handleSubmit, watch, reset } = useForm<VideoInputs>({ mode: 'onBlur' })
   const { ref, ...rest } = register('file')
-  const queryClient = useQueryClient()
-  const addVideoMutation = addVideoBlockMutate(queryClient)
-  const editVideoMutation = editVideoBlockMutate(queryClient)
 
   useEffect(() => {
     if (typeof block?.src !== 'string') {
@@ -40,34 +37,13 @@ export default function FixedVideoBlockForm({ block }: BlockBaseWithBlockFormPro
   }, [openDrawer])
 
   const onSubmit = async (data: VideoInputs) => {
-    const bodyCommon: { videoLink?: string; attachedVideo?: Blob } = {}
-    if (activeRadio === 'radio1') bodyCommon.videoLink = `https://www.youtube.com/embed/${extractVideoId(data.url)}`
+    const body: { videoLink?: string; attachedVideo?: Blob } = {}
+    if (activeRadio === 'radio1') body.videoLink = `https://www.youtube.com/embed/${extractVideoId(data.url)}`
     else {
       const buf = await extractFileUrl(data.file)
-      bodyCommon.attachedVideo = dataURIToBlob(buf ?? '')
+      body.attachedVideo = dataURIToBlob(buf ?? '')
     }
-
-    if (drawerMode === 'CREATE') {
-      const body: AddVideoBlockBody = {
-        x: 0,
-        y: getNextYOfLastBlock(sharePage.children),
-        w: 2,
-        h: 1,
-        title: 'video.mp4',
-        ...bodyCommon
-      }
-      addVideoMutation.mutate({ pageId, body })
-    }
-
-    if (drawerMode === 'EDIT') {
-      const body: EditVideoBlockBody = {
-        objectId: block?.objectId ?? '',
-        title: 'video.mp4',
-        ...bodyCommon
-      }
-      editVideoMutation.mutate({ pageId, body })
-    }
-    setOpenDrawer(false)
+    onSubmitForm(body)
   }
 
   return (

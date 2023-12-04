@@ -4,7 +4,7 @@ import { LinkBlockForm } from '@/components/SharePage/Forms/LinkBlockForm'
 import { PageBlockForm } from '@/components/SharePage/Forms/PageBlockForm'
 import { TemplateBlockCreateForm } from '@/components/SharePage/Forms/TemplateBlockCreateForm'
 import { TextBlockForm } from '@/components/SharePage/Forms/TextBlockForm'
-import FixedVideoBlockForm from '@/components/SharePage/Forms/VideoBlockForm/VideoBlockForm'
+import AddVideoBlock from '@/components/SharePage/Forms/VideoBlockForm/AddVideoBlock'
 import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/blockTypeConstant'
 import { type BlockType } from '@/models/space'
 
@@ -21,7 +21,7 @@ function getCreateFormComponent({ blockType }: DrawerCreateFormProps) {
     case LINK:
       return <LinkBlockForm />
     case VIDEO:
-      return <FixedVideoBlockForm />
+      return <AddVideoBlock />
     case MAP:
       return <GoogleMapBlockForm />
     case PAGE:

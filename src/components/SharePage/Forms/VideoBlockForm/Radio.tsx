@@ -8,10 +8,11 @@ type RadioType = InputHTMLAttributes<HTMLInputElement> & {
   checked: boolean
   onToggle: (e: string) => void
 }
-export const Radio = ({ id, title, value, checked, onToggle }: RadioType) => {
+
+export const Radio = ({ id, title, value, checked, onToggle, onChange }: RadioType) => {
   return (
     <div className={styles.container} onClick={() => onToggle(id)}>
-      <input id={id} className={styles.input} type="radio" value={value} checked={checked} />
+      <input id={id} className={styles.input} type="radio" value={value} checked={checked} readOnly />
       <label htmlFor={id} className={styles.label}>
         {title}
       </label>
