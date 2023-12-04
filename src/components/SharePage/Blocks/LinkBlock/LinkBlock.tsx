@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { type BlockBaseWithBlockProps } from '../../Common/SwitchCases/ViewerBox'
+import { type BlockBaseWithBlockProps } from '@/components/Common/SwitchCases/ViewerBox'
 import BlockLogo from './BlockLogo'
 import styles from './LinkBlock.module.scss'
 
