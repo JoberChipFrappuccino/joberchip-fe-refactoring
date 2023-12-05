@@ -1,0 +1,32 @@
+@import '/src/styles/variables.scss';
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  box-shadow: $box-shadow-small;
+  .menu {
+    // * .App.scss에서 block hover시 .kebob을 다루고 있습니다!
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+  }
+}
+.link {
+  position: absolute;
+  width: 100%;
+  height: 2rem;
+  background-color: $base-black;
+  border-radius: 0 0 1rem 1rem;
+  color: white;
+  text-align: start;
+  padding-left: 1rem;
+  line-height: 2rem;
+  bottom: -2px;
+  z-index: 2;
+}

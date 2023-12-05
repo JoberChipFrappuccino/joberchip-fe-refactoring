@@ -1,8 +1,8 @@
-import { getUserInfoAPI, signInAPI } from '@/api/user'
+import { create } from 'zustand'
+import { loadUserInfoAPI, signInAPI } from '@/apis/user'
 import { BACK_MOCK_ACCESS_TOKEN } from '@/constants'
 import { type User } from '@/models/user'
 import { to } from '@/utils/api'
-import { create } from 'zustand'
 
 type LoginForm = {
   username: string
@@ -19,10 +19,11 @@ interface UserState {
   isFetching: boolean
   isSignedIn: boolean
   signIn: (user: LoginForm) => Promise<LoginResponse>
-  getUserInfo: () => Promise<boolean>
+  loadUserInfo: () => Promise<boolean>
   signOut: VoidFunction
 }
-// @ts-expect-error ㅎ ㅏ 최선인가..
+// TODO : Zustand 타입 정의 필요
+// @ts-expect-error
 export const useUserStore = create<UserState>((set) => {
   const store = {
     user: {},
@@ -41,10 +42,10 @@ export const useUserStore = create<UserState>((set) => {
       }
       return res
     },
-    getUserInfo: async () => {
+    loadUserInfo: async () => {
       if (!localStorage.getItem(BACK_MOCK_ACCESS_TOKEN)) return false
       set((state) => ({ ...state, isFetching: true, isSignedIn: false }))
-      const { data: user } = await to(getUserInfoAPI())
+      const { data: user } = await to(loadUserInfoAPI())
       if (!user) {
         set((state) => ({ ...state, isFetching: false, isSignedIn: false }))
         localStorage.removeItem(BACK_MOCK_ACCESS_TOKEN)

@@ -1,0 +1,74 @@
+@import '/src/styles/utils.scss';
+@import '/src/styles/variables.scss';
+
+.container {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  left: 0;
+  right: 0;
+  bottom: 4rem;
+  width: 24rem;
+  height: 5rem;
+  border: 1px solde block;
+  border-radius: 0.5rem;
+  margin: auto;
+  z-index: 25;
+  background-color: white;
+  box-shadow: $box-shadow-large;
+  transition: opacity 500ms ease-in-out;
+  .item {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+// * Animation
+.hidden {
+  bottom: -5rem;
+  animation: hiddenAnimation 500ms ease-in-out;
+  animation-fill-mode: forwards;
+}
+.visible {
+  animation: visibleAnimation 500ms ease-in-out;
+  animation-fill-mode: forwards;
+}
+.actionicon {
+  display: flex;
+  width: 3.2rem;
+  height: 3.2rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: #4c61ff;
+}
+
+@keyframes hiddenAnimation {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
+    height: 5rem;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes visibleAnimation {
+  0% {
+    bottom: -10rem;
+    opacity: 0;
+    height: 5rem;
+  }
+  70% {
+    bottom: 1rem;
+  }
+  100% {
+    opacity: 1;
+  }
+}

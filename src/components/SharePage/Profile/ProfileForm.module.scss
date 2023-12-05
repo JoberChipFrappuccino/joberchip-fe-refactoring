@@ -1,0 +1,29 @@
+@import '/src/styles/variables.scss';
+.cover {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1.6rem;
+  input {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 1.5rem;
+    padding: 0px;
+    border: none;
+  }
+  input:focus {
+    border: $jober-blue;
+  }
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    background-color: white;
+  }
+  .description {
+    font-size: 1.6rem;
+    color: grey;
+    background-color: white;
+  }
+}

@@ -37,7 +37,7 @@ const getConfig = (target) => {
           test: /\.s?css$/i,
           exclude: /\.module\.s?css$/i,
           use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-        }, // CSS Module ([filename].module.css)
+        },
         {
           test: /\.module\.s?css$/i,
           use: [
@@ -68,11 +68,7 @@ const getConfig = (target) => {
             new MiniCssExtractPlugin(),
             new webpack.DefinePlugin({ 'process.env': JSON.stringify(process.env) })
           ]
-        : [
-            new LoadablePlugin(),
-            new MiniCssExtractPlugin()
-            // new webpack.DefinePlugin({ 'process.env': JSON.stringify(process.env) })
-          ]
+        : [new LoadablePlugin(), new MiniCssExtractPlugin()]
   }
 }
 

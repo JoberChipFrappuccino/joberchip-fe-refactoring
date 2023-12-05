@@ -1,6 +1,6 @@
-import { BLOCK, TEXT } from '@/constants/blockTypeConstant'
-import { type BlockType } from '@/models/space'
 import { create } from 'zustand'
+import { BLOCK, TEXT } from '@/constants/block'
+import { type BlockType } from '@/models/block'
 
 interface FormTypeState {
   formType: FormType
@@ -15,11 +15,11 @@ interface FormTypeState {
   setDrawerMode: (mode: DrawerMode) => void
 }
 
-export const useBlockAction = create<FormTypeState>((set) => ({
+export const useBlockActionStore = create<FormTypeState>((set) => ({
   formType: BLOCK,
   blockType: TEXT,
   openDrawer: false,
-  drawerMode: 'create',
+  drawerMode: 'CREATE',
   activeBlockId: '',
   setActiveBlockId: (id: string) => {
     set((state) => ({ ...state, activeBlockId: id }))

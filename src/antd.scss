@@ -1,8 +1,0 @@
-@import '/src/variables.scss';
-/* Convert Antd Default Style to SCSS */
-.ant-switch.ant-switch-checked {
-  background-color: $jober-blue;
-}
-.ant-switch.ant-switch-checked:hover {
-  background-color: #253ef9 !important;
-}

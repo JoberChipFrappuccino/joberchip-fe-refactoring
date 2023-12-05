@@ -1,0 +1,45 @@
+@import '/src/styles/variables.scss';
+
+.toolbar {
+  width: 100%;
+  height: 5.8rem;
+  background-color: #fff;
+  display: flex;
+  border-bottom: 1px solid #f0f0f0;
+  .toolSlider {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .toolList {
+      width: 100%;
+      display: flex;
+      transition: transform 0.3s ease;
+    }
+  }
+  .slideButtons {
+    width: 5.8rem;
+    height: 5.8rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+  }
+  .prevButton {
+    background-image: url('/public/EditorIcons/prev.svg');
+  }
+  .nextButton {
+    background-image: url('/public/EditorIcons/next.svg');
+  }
+}
+
+.toolOptionContainer {
+  width: 100%;
+}
+
+.show {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}

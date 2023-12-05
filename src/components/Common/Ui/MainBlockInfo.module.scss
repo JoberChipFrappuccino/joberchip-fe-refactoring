@@ -1,0 +1,77 @@
+@import '/src/styles/utils.scss';
+@import '/src/styles/variables.scss';
+@import '/src/styles/maxin.scss';
+
+.mainbg {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 94rem;
+  margin: 5rem auto 10rem auto;
+  .blockcontainer {
+    display: flex;
+    justify-content: center;
+    max-width: 90rem;
+    width: 100%;
+    padding: 5rem 0 80px 0;
+    margin: 0 2rem;
+    border-radius: 2rem;
+    border: dashed 2px $cool-grey1;
+    .blockinfobox {
+      width: 32rem;
+      display: flex;
+      border-radius: 2rem;
+      flex-direction: column;
+      .plus {
+        display: flex;
+        font-size: 3.2rem;
+        color: #aeb9d1;
+        margin-bottom: 2rem;
+        justify-content: center;
+      }
+      .iconbox {
+        padding: 0 10px;
+        display: flex;
+        justify-content: space-between;
+        .iconsvg {
+          width: 7rem;
+          height: 7rem;
+          padding: 0.5rem;
+          display: flex;
+          border-radius: 1.2rem;
+          // border: solid 2px $cool-grey1;
+          background-color: #d2dbf3;
+        }
+        .itemtitle {
+          margin-top: 10px;
+          display: flex;
+          color: $cool-grey1;
+          font-size: 1.6rem;
+          justify-content: center;
+        }
+      }
+      .footertitle {
+        display: flex;
+        font-size: 1.6rem;
+        margin-top: 2rem;
+        color: #aeb9d1;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@include tablet {
+  .mainbg {
+    .blockcontainer {
+      padding: 2rem 0 5rem 0;
+    }
+  }
+}
+@include mobile {
+  .mainbg {
+    .blockcontainer {
+      padding: 10px 0 2rem 0;
+    }
+  }
+}

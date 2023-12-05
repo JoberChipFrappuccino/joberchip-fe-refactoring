@@ -1,0 +1,23 @@
+.title {
+  font-size: 3rem;
+}
+
+.description {
+  font-size: 1.6rem;
+  color: grey;
+}
+
+.layout {
+  .gridBox {
+    position: relative;
+    max-width: 94rem;
+    width: 100%;
+    margin: 0 auto;
+    .item {
+      z-index: 11;
+      background-color: white;
+      border: 0px solid rgb(0, 0, 0);
+      padding: 0;
+    }
+  }
+}

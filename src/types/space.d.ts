@@ -1,8 +1,8 @@
 // space
-declare type SharePageMode = 'view' | 'edit'
+declare type SharePageMode = 'VIEW' | 'EDIT'
 declare type ParticipationType = 'DEFAULT' | 'OWNER' | 'PARTICIPANT'
-declare type PrivilegeType = 'READ' | 'EDIT' | null
+declare type PrivilegeType = 'VIEW' | 'EDIT' | null
 
 // drawer
-declare type DrawerMode = 'create' | 'edit'
+declare type DrawerMode = 'CREATE' | 'EDIT'
 declare type FormType = TTemplate | TPage | TBlock

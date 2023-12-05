@@ -1,0 +1,33 @@
+@import '/src/styles/variables.scss';
+.container {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  h2 {
+    margin: 0;
+  }
+  .templateSettingContainer {
+    border-bottom: 2px solid $cool-grey1;
+    padding: 1.25rem;
+  }
+  .userSettingContainer {
+    flex: 1;
+    padding: 1.25rem;
+    h2 {
+      margin-top: 1.25rem;
+    }
+  }
+
+  .inputCover {
+    padding-top: 1.25rem;
+    p {
+      margin: 0;
+      padding-bottom: 0.5rem;
+    }
+    .split {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

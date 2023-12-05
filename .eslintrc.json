@@ -3,26 +3,70 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["plugin:react/recommended", "standard-with-typescript"],
+  "extends": ["plugin:react/recommended", "standard-with-typescript", "plugin:import/recommended"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "import"],
   "rules": {
-    "react/jsx-no-useless-fragment": "error", // 불필요한 fragment 제거
+    "react/jsx-no-useless-fragment": "error",
     "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/space-before-function-paren": "off", // 함수 앞에 공백을 넣어주는 것을 꺼줌
-    "@typescript-eslint/strict-boolean-expressions": "off", // if (a) {} 에서 a가 null이나 undefined일 때 에러를 발생시키는 것을 꺼줌
-    "@typescript-eslint/no-floating-promises": "off", // promise를 반환하는 함수에서 반환값을 사용하지 않을 때 에러를 발생시키는 것을 꺼줌
-    "@typescript-eslint/no-misused-promises": "off", // onSubmit(handleSubmit("foo"))을 할 때 에러를 발생시키는 것을 꺼줌
-    "@typescript-eslint/indent": "off", // indent는 prettier가 알아서 하도록 둡니다.
-    "@typescript-eslint/consistent-type-definitions": "off", // 개인적으로 interface는 스토어, 클레스의 명세서 정도로 사용하는 것을 선호해서 끕니다.
-    "@typescript-eslint/no-non-null-assertion": "off", // assertion을 허용합니다.
-    "@typescript-eslint/no-var-requires": "off", // require를 허용합니다.
-    "@typescript-eslint/explicit-function-return-type": "off", // 함수의 반환값을 명시하지 않아도 됩니다.
-    "eslint no-useless-return": "off"
+    "@typescript-eslint/space-before-function-paren": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "eslint no-useless-return": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": ["type", "builtin", "external", "internal", "parent", "sibling", "index", "object", "unknown"],
+        "pathGroups": [
+          {
+            "pattern": "@/react*",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@/hooks/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@/pages/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@/components/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "*.style",
+            "group": "unknown"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["@tanstack*"],
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ]
   },
-  "ignorePatterns": ["node_modules", "*.config.js"]
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    },
+    "react": {
+      "version": "detect"
+    }
+  },
+  "ignorePatterns": ["node_modules", "*.config.js", "scripts/*.js"]
 }

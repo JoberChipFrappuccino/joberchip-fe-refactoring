@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  cursor: pointer;
+  .input {
+    display: block;
+    margin-right: 1rem;
+  }
+  .label {
+    font-size: 2rem;
+    cursor: pointer;
+    font-weight: 700;
+  }
+}

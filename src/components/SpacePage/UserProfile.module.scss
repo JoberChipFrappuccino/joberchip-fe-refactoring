@@ -1,0 +1,56 @@
+@import '/src/styles/variables.scss';
+
+.container {
+  min-height: 19.9rem;
+  margin: 2rem 0;
+  background-color: $base-white;
+  border-radius: 0.5rem;
+  .profile {
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: rgb(150, 150, 150);
+    }
+    padding: 1.8rem 2.6rem;
+  }
+  .buttonCover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1.8rem 1.8rem 1.8rem;
+    button,
+    a {
+      width: 100%;
+      max-width: 48rem;
+      height: 60px;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    .mySpaceBtn {
+      display: block;
+      text-align: center;
+      line-height: 60px;
+      border: none;
+      background-color: $highlight-blue;
+      color: $jober-blue;
+      margin-bottom: 1rem;
+    }
+    .addSpaceBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid $cool-grey2;
+      background-color: $base-white;
+      height: 32px;
+      img {
+        margin-right: 0.5rem;
+      }
+      transition: all 200ms ease-in-out;
+      &:hover {
+        border: 1px solid $jober-blue;
+      }
+    }
+  }
+}

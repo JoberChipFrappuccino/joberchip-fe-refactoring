@@ -1,29 +1,20 @@
-import App from '@/App'
 import { loadableReady } from '@loadable/component'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { DEFAULT_CACHE_TIME } from './constants'
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      cacheTime: DEFAULT_CACHE_TIME, // 5분
-      retry: 0
-    }
-  }
-})
+import QueryContext from './contexts/QueryContext'
+import { SSRProvider } from './contexts/SSRContext'
+import { Router } from './router'
 
 void loadableReady(() => {
   hydrateRoot(
     document.getElementById('root') as HTMLDivElement,
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <App />
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      </QueryClientProvider>
-    </BrowserRouter>
+    <SSRProvider data={{}}>
+      <QueryContext>
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+      </QueryContext>
+    </SSRProvider>
   )
 })
 

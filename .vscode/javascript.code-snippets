@@ -5,7 +5,6 @@
     "description": "Creates a React Function component",
     "scope": "javascriptreact, typescriptreact"
   },
-  // postcss 에시입니다. 고쳐쓰세요!
   "Import Module CSS": {
     "prefix": "si",
     "body": ["import styles from './$TM_FILENAME_BASE.module.css'"],
