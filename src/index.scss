@@ -29,17 +29,21 @@ a {
 iframe {
   border: 0;
 }
+
 h1 {
-  font-size: 3.2rem;
+  font-size: $text-h-1;
   font-weight: 700;
 }
 h2 {
-  font-size: 2.8rem;
+  font-size: $text-h-2;
   font-weight: 700;
 }
 h3 {
-  font-size: 2.4rem;
+  font-size: $text-h-3;
   font-weight: 700;
+}
+p {
+  font-size: $text-p;
 }
 
 /* * SpaceMode 타입에 따라서 Blocks에서 사용되는 클레스 * */
