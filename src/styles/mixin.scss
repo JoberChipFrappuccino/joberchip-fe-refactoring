@@ -19,11 +19,12 @@
 
 // input, button
 @mixin button($border-color: #4c61ff, $bg-color: #f2f9ff, $color: #4c61ff) {
-  border: solid 0.1rem $bg-color;
+  border: solid 0.1rem transparent;
   color: $color;
   background-color: $bg-color;
   outline: none;
-  transition: border 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
   &:hover {
     border: solid 0.1rem $border-color;
   }
@@ -32,20 +33,20 @@
 
 @mixin button-nomal($border-color: #ececfb, $bg-color: #ffffff, $color: #040404) {
   background-color: $bg-color;
-  border: 0.1rem solid $bg-color;
+  border: solid 0.1rem transparent;
   color: $color;
-  transition: border 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
   &:hover {
     border: 0.1rem solid $border-color;
   }
   @content;
 }
 
-@mixin input($border-color: #ececfb, $bg-color: #ffffff, $hover-border-color: #4c61ff) {
+@mixin input($bg-color: #ffffff, $border-color: #ececfb, $hover-border-color: #4c61ff) {
   background-color: $bg-color;
   border: 1.5px solid $border-color;
   outline: none;
-  transition: border 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   &:hover {
     border: 1.5px solid $hover-border-color;
   }
@@ -64,9 +65,9 @@
   @content;
 }
 
-@mixin flex($d: row, $jc: center, $ai: null, $fw: null) {
+@mixin flex($fd: row, $jc: center, $ai: null, $fw: null) {
   display: flex;
-  flex-direction: $d;
+  flex-direction: $fd;
   justify-content: $jc;
   align-items: $ai;
   flex-wrap: $fw;

@@ -26,32 +26,27 @@
     flex: 1;
     padding-left: 6.4rem;
     @include tablet {
-      & {
-        padding-left: 3.2rem;
-      }
-      @include mobile {
-        & {
-          padding-left: 1.8rem;
-        }
-      }
+      padding-left: 3.2rem;
       h2 {
-        font-size: 3rem;
         font-weight: bold;
         margin: 0;
         margin-bottom: 1rem;
       }
       p {
-        font-size: 1.6rem;
         color: grey;
         margin: 0;
       }
     }
+    @include mobile {
+      padding-left: 1.8rem;
+    }
   }
   .navCover {
+    @include button;
     display: inline-block;
     width: fit-content;
     height: fit-content;
-    background-color: $highlight-blue;
+    background-color: $jober-blue-light;
     padding: 1rem;
     margin-top: 1rem;
     border-radius: 1rem;
@@ -63,7 +58,6 @@
       svg {
         margin: auto;
         display: flex;
-        font-size: 1.6rem;
       }
     }
   }

@@ -53,7 +53,13 @@ export function PageBlockForm({ block, onSubmit }: PageBlockFromProps) {
         <input type="text" placeholder="페이지 설명을 입력해주세요." {...register('description')} />
         <h3>페이지 위치 설정</h3>
         <div>
-          <input type="text" value={pageTitle} readOnly placeholder="페이지 위치를 설정해주세요." />
+          <input
+            className={styles.treeInput}
+            type="text"
+            value={pageTitle}
+            readOnly
+            placeholder="페이지 위치를 설정해주세요."
+          />
           <div>
             {breadCrumb?.parentId && (
               <TreeLayout spaceId={breadCrumb.parentId} pageId={pageId} onSelectTreeNode={onSelectTreeNode} />

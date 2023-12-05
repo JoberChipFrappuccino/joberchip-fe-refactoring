@@ -1,14 +1,13 @@
 @import '/src/styles/variables.scss';
+@import '/src/styles//mixin.scss';
 
 .container {
-  display: flex;
-  background-color: $base-white;
-  padding: 0;
+  @include flex;
+  background-color: $white;
   .cover {
-    display: flex;
-    align-items: center;
+    @include flex(null, null, center);
     width: 100%;
     min-height: 4rem;
-    border-bottom: 1px solid $cool-grey1;
+    border-bottom: 1px solid $gray-light-1;
   }
 }

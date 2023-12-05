@@ -1,18 +1,17 @@
 @import '/src/styles/variables.scss';
+@import '/src/styles/mixin.scss';
+
 .flexContainer {
-  display: flex;
-  flex-direction: column;
+  @include flex(column);
   height: 100%;
   .container {
-    display: flex;
-    flex-direction: column;
+    @include flex(column);
     & > h2 {
       margin: 2rem 0 1.5rem 1.5rem;
     }
     .actionNavigation {
-      display: flex;
+      @include flex(null, space-between);
       padding: 0 2rem 0 2rem;
-      justify-content: space-between;
       margin-bottom: 2.5rem;
     }
     .actionNavigation.focusable {
@@ -22,16 +21,13 @@
       }
     }
     .actionNavigation button {
+      @include flex(column, center, center);
       width: 8rem;
       height: 8rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       transition: 0.3s;
-      align-items: center;
       border-radius: 1rem;
-      background-color: white;
-      border: solid 0.0625rem #eeeeee;
+      background-color: $white;
+      border: solid 0.0625rem $gray-light-2;
       box-shadow: $box-shadow-small;
       cursor: pointer;
       &.disable {
@@ -40,18 +36,16 @@
       &.active {
         font-weight: 500;
         color: white;
-        border: solid 0.0625rem #3b51fe;
-        background-color: #4c61ff;
+        border: solid 0.0625rem $jober-blue-light;
+        background-color: $jober-blue;
         box-shadow: $box-shadow-medium;
       }
     }
     .icon {
+      @include flex(row, center, center);
       width: 3.75rem;
       height: 3.75rem;
-      display: flex;
       color: #e2e6ef;
-      align-items: center;
-      justify-content: center;
       svg {
         display: flex;
         width: 4rem;
@@ -59,22 +53,17 @@
       }
     }
     .title {
-      display: flex;
+      @include flex(row, center, center);
       margin-top: 1rem;
-      align-items: center;
-      justify-content: center;
     }
     #btnTitle {
-      display: flex;
+      @include flex(row, center, center);
       color: #aeaeae;
       margin-top: 1rem;
-      align-items: center;
-      justify-content: center;
     }
     .activeText {
-      display: flex;
+      @include flex;
       font-weight: 500;
-      justify-content: center;
       color: rgb(0, 0, 0) !important;
     }
   }

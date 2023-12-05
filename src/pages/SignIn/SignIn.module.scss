@@ -15,25 +15,25 @@
     display: inline-block;
     width: 100%;
     padding: 0.5rem;
-    border: 1px solid $base-white;
+    border: 1px solid $white;
     outline-color: $jober-blue;
   }
   .submit {
-    background-color: $highlight-blue;
+    background-color: $jober-blue-light;
     color: $jober-blue;
     width: 100%;
     padding: 1rem;
     margin-top: 1rem;
     cursor: pointer;
-    border: 1px solid $highlight-blue;
+    border: 1px solid $jober-blue-light;
   }
   .link {
-    background-color: $highlight-blue;
+    background-color: $jober-blue-light;
     color: $jober-blue;
     padding: 1rem;
     margin-top: 2rem;
     text-align: center;
-    border: 1px solid $highlight-blue;
+    border: 1px solid $jober-blue-light;
     transition: all 0.2s ease-in-out;
     &:hover {
       border: 1px solid $jober-blue;

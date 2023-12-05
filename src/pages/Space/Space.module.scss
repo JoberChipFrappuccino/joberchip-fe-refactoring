@@ -1,17 +1,16 @@
 @import '/src/styles/variables.scss';
+@import '/src/styles//mixin.scss';
 
 .container {
   width: 100%;
-  background-color: $ppt-grey;
+  background-color: $gray-light-3;
   min-height: 100vh;
   .cover {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    @include flex(column, center);
     max-width: 90rem;
     margin: 0 auto;
   }
 }
 .divider {
-  border-bottom: 1px solid $cool-grey2;
+  border-bottom: 1px solid $gray-light-2;
 }

@@ -1,5 +1,5 @@
 import { MdKeyboardArrowRight } from '@react-icons/all-files/md/MdKeyboardArrowRight'
-import MockFoolowList from './MockFoolowList'
+import MockFollowList from './MockFollowList'
 import MockMessageList from './MockMessageList'
 import styles from './ProfileEditMode.module.scss'
 import { ProfileForm } from './ProfileForm'
@@ -16,7 +16,7 @@ export default function ProfileEditMode({ rootPage }: ProfileEditModeProps) {
         </div>
         <div className={styles.profileCover}>
           <ProfileForm />
-          {rootPage && <MockFoolowList />}
+          {rootPage && <MockFollowList />}
           <nav className={styles.navCover}>
             <a href="/">
               스페이스 홈 바로가기

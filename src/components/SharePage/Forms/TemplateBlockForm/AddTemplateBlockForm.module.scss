@@ -3,22 +3,21 @@
 @import '/src/styles/mixin.scss';
 
 .container {
-  display: flex;
+  @include flex(column, null);
   height: 100%;
-  flex-direction: column;
   .blockViewer {
-    padding: 0 1.25rem 8rem 1.25rem;
+    padding: 0 2rem 8rem 2rem;
     flex: 1;
     .blockCover {
       display: block;
       width: 100%;
       box-shadow: $box-shadow-small;
-      border-radius: 1.1rem;
-      margin-bottom: 1.25rem;
+      border-radius: $radius;
       box-sizing: border-box;
       background-color: transparent;
       border: none;
       padding: 0;
+      margin-bottom: 1.25rem;
       cursor: pointer;
     }
     .selected {

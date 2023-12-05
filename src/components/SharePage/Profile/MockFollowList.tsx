@@ -1,5 +1,5 @@
 import styles from './MockFollowList.module.scss'
-export default function MockFoolowList() {
+export default function MockFollowList() {
   return (
     <ul className={styles.container}>
       <li>

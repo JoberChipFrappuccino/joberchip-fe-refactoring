@@ -5,11 +5,12 @@ import { BREAD_CRUMB } from '@/constants/querykey'
 
 export const useBreadCrumb = () => {
   const { pageId } = useParams()
-  const { data } = useQuery([BREAD_CRUMB, pageId ?? ''], () => getBreadCrumb(pageId), {
+  const { data, isLoading } = useQuery([BREAD_CRUMB, pageId ?? ''], () => getBreadCrumb(pageId), {
     enabled: !!pageId
   })
   return {
     breadCrumb: data?.data,
-    pageId
+    pageId,
+    isLoading
   }
 }

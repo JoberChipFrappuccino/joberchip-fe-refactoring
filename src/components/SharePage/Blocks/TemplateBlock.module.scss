@@ -2,13 +2,12 @@
 @import '/src/styles/mixin.scss';
 
 .container {
+  @include flex(column);
+  position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
   overflow: hidden;
-  position: relative;
-  border-radius: 1rem;
-  flex-direction: column;
+  border-radius: $radius-lg;
   .contentCover {
     flex: 1;
     .cover {
@@ -28,22 +27,19 @@
         }
       }
       .contentBox {
-        display: flex;
+        @include flex(column, null, null);
         margin-left: 1.25rem;
-        flex-direction: column;
         text-align: start;
         h3 {
+          @include flex(column, null, null);
+          font-size: $text-p;
           margin: 0;
-          display: flex;
-          font-weight: 700;
-          font-size: 1.6rem;
-          flex-direction: column;
         }
         p {
-          margin-top: 1rem;
           display: flex;
-          color: #c9c9c9;
-          font-size: 1.4rem;
+          margin-top: 1rem;
+          color: $gray-2;
+          font-size: $text-p-sm;
           @include mobile {
             display: none;
           }
@@ -53,34 +49,28 @@
   }
   .direct,
   .preview {
-    border: 0;
-    padding: 0;
+    @include flex(null, space-between);
     color: white;
     outline: none;
-    display: flex;
     cursor: pointer;
     height: 3.125rem;
-    background-color: black;
-    justify-content: space-between;
+    background-color: $black;
+    border: 0;
+    padding: 0;
     a {
+      @include flex(null, null, center);
       height: 100%;
-      display: flex;
-      align-items: center;
       padding-left: 1.25rem;
-      @include mobile {
-        font-size: 0.75rem;
-      }
     }
   }
   .previewBtnCover {
-    display: flex;
+    @include flex(null, flex-end);
     width: 100%;
-    background-color: $cool-grey3;
-    justify-content: flex-end;
+    background-color: $gray-dark;
     .preview {
       display: inline-block;
       text-align: end;
-      background-color: $cool-grey3;
+      background-color: $gray-dark;
       padding-right: 1.25rem;
     }
   }
@@ -92,14 +82,10 @@
       display: none;
     }
   }
-  h3 {
-    font-size: 1rem;
-  }
   .direct,
   .preview {
+    @include flex(null, null, center);
     height: 100%;
-    display: flex;
-    align-items: center;
     padding-left: 1.25rem;
   }
 }
