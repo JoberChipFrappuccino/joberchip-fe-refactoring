@@ -1,6 +1,6 @@
 import { Breadcrumb } from 'antd'
 import { Link } from 'react-router-dom'
-import { type BreadCrumbItems } from '@/apis/page/page'
+import { type BreadCrumbItems } from '@/apis/page'
 import { useBreadCrumb } from '@/hooks/useBreadCrumb'
 
 export function BreadCrumbBox() {

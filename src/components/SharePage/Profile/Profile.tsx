@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { ModalPortal } from '@/components/Common/Portal/ModalPortal'
 import { ConfirmModal } from '@/components/SharePage/Modals/ConfirmModal'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
-import { ModalPortal } from '@/templates/ModalPortal'
 import { toast } from '@/utils'
 import { useUser } from '@/hooks/useUser'
 import ConfirmModalContent from '../Modals/ConfirmModalContent'

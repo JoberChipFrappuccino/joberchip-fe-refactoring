@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useCallback, useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type ResponsiveProps } from 'react-grid-layout'
-import { fetchLayout } from '@/apis/page/page'
+import { fetchLayout } from '@/apis/page'
 import { ViewerBox } from '@/components/Common/SwitchCases/ViewerBox'
 import { MainBlockInfo } from '@/components/Common/Ui/MainBlockInfo'
 import { SpaceActionBar } from '@/components/SharePage/ActionBar/SpaceActionBar'

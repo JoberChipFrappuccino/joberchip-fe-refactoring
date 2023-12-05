@@ -1,7 +1,7 @@
 import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { useState, type Key } from 'react'
 import { useForm } from 'react-hook-form'
-import { type BreadCrumbItems } from '@/apis/page/page'
+import { type BreadCrumbItems } from '@/apis/page'
 import TreeLayout, { type TreeInfo } from '@/components/Common/Tree/TreeLayout'
 import FormButton from '@/components/Common/Ui/Button'
 import { useBlockActionStore } from '@/store/blockAction'

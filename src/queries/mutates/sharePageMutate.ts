@@ -1,7 +1,7 @@
 import type { SharePage } from '@/models/space'
 import { useMutation, type QueryClient } from '@tanstack/react-query'
 import { deleteBlockAPI } from '@/apis/blocks'
-import { deletePageAPI } from '@/apis/page/page'
+import { deletePageAPI } from '@/apis/page'
 import { SHARE_PAGE } from '@/constants/querykey'
 import { type BlockBase, type BlockType, type blockAPIType } from '@/models/block'
 

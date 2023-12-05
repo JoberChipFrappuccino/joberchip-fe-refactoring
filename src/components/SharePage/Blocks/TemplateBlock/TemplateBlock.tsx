@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import { useState } from 'react'
+import { ModalPortal } from '@/components/Common/Portal/ModalPortal'
 import { type BlockBaseWithBlockProps } from '@/components/Common/SwitchCases/ViewerBox'
 import { TemplatePreviewModal } from '@/components/SharePage/Modals/TemplatePreviewModal'
-import { ModalPortal } from '@/templates/ModalPortal'
 import styles from './TemplateBlock.module.scss'
 
 interface TemplateBlockProps extends BlockBaseWithBlockProps<TTemplate> {

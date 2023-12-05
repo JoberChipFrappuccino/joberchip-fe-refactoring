@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { type EditPageBlockBody } from '@/apis/page/page'
+import { type EditPageBlockBody } from '@/apis/page'
 import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { editPageBlockMutate } from '@/queries/mutates/pageBlockMutate'
 import { PageBlockForm, type PageBlockSubmitData } from './PageBlockForm'

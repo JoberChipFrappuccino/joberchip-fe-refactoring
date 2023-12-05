@@ -2,7 +2,7 @@ import type { BlockType, PageBlock } from '@/models/block'
 import { type SharePage } from '@/models/space'
 import { type ResponseBase } from '@/utils'
 import { type ITree } from '@/hooks/tree'
-import { backAuthAPI } from '../api'
+import { backAuthAPI } from './api'
 
 /**
  * @description 페이지 주소 경로 조히 (BreadCrumb) API

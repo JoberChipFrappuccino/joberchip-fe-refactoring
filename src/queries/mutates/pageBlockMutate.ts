@@ -1,5 +1,5 @@
 import { type QueryClient, useMutation } from '@tanstack/react-query'
-import { type CreatePageAPIBody, createPageAPI, editPageBlockAPI, type EditPageBlockBody } from '@/apis/page/page'
+import { type CreatePageAPIBody, createPageAPI, editPageBlockAPI, type EditPageBlockBody } from '@/apis/page'
 import { BREAD_CRUMB, SHARE_PAGE, TREE } from '@/constants/querykey'
 
 export const createPageBlockMutate = (queryClient: QueryClient) => {

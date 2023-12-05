@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useNavigate } from 'react-router-dom'
 import { useBlockActionStore } from '@/store/blockAction'
-import { type BlockBaseWithBlockProps } from '../../Common/SwitchCases/ViewerBox'
+import { type BlockBaseWithBlockProps } from '../../../Common/SwitchCases/ViewerBox'
 import styles from './PageBlock.module.scss'
 
 export function PageBlock({ block, mode }: BlockBaseWithBlockProps<TPage>) {

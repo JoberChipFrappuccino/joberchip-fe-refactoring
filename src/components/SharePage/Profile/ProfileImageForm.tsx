@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { editPageBlockAPI } from '@/apis/page/page'
+import { editPageBlockAPI } from '@/apis/page'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import styles from './ProfileImageForm.module.scss'
 export function ProfileImageForm() {

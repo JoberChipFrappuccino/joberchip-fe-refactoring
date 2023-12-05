@@ -1,7 +1,7 @@
 import { BsThreeDotsVertical } from '@react-icons/all-files/bs/BsThreeDotsVertical'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
-import { editPageBlockAPI } from '@/apis/page/page'
+import { editPageBlockAPI } from '@/apis/page'
 import { TreeDrawer } from '@/components/Common/Tree/TreeDrawer'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getTreeAPI } from '@/apis/page/page'
+import { getTreeAPI } from '@/apis/page'
 import { TREE } from '@/constants/querykey'
 import { type ResponseBase } from '@/utils/api'
 
