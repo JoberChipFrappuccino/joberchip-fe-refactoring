@@ -25,7 +25,6 @@ export default function TreeLayout({ onSelectTreeNode, spaceId, pageId }: TreeLa
 
   return (
     <Tree
-      className="draggable-tree"
       draggable={false}
       blockNode
       defaultSelectedKeys={[pageId ?? '']}

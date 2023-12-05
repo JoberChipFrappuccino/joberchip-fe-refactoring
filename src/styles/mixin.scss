@@ -1,0 +1,86 @@
+@import 'variables.scss';
+
+@mixin mobile {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) and (max-width: 1239px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1240px) {
+    @content;
+  }
+}
+// Font-size, color
+@mixin header1 {
+  font-size: 3rem;
+}
+@mixin header2 {
+  font-size: 2.5rem;
+}
+@mixin header3 {
+  font-size: 2rem;
+}
+@mixin header4 {
+  font-size: 1.5rem;
+}
+@mixin paragraph {
+  font-size: 1.6rem;
+}
+@mixin description {
+  font-size: 1.6rem;
+  color: $base-grey;
+}
+@mixin description-md {
+  font-size: 1.4rem;
+  color: $base-grey;
+}
+
+// input, button
+@mixin highlight-button {
+  border: solid 0.0625rem $highlight-blue;
+  background-color: $highlight-blue;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+  &:hover {
+    border: solid 0.0625rem $jober-blue;
+  }
+}
+
+@mixin highlight-input {
+  border: solid 0.0625rem $highlight-blue;
+  background-color: $highlight-blue;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+  &:focus {
+    border: solid 0.0625rem $jober-blue;
+  }
+  &:hover {
+    border: solid 0.0625rem $jober-blue;
+  }
+}
+
+@mixin nomal-button {
+  background-color: $base-white;
+  border: 1.5px solid $cool-grey2;
+  transition: border 200ms ease-in-out;
+  &:hover {
+    border: 1.5px solid $jober-blue;
+  }
+}
+
+@mixin nomal-input {
+  background-color: $base-white;
+  border: 1.5px solid $cool-grey2;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+  &:hover {
+    border: 1.5px solid $jober-blue;
+  }
+}

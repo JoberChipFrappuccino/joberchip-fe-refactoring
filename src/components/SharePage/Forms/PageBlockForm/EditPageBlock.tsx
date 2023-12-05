@@ -1,5 +1,4 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
 import { type EditPageBlockBody } from '@/apis/page/page'
 import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { editPageBlockMutate } from '@/queries/mutates/pageBlockMutate'
@@ -7,7 +6,6 @@ import { PageBlockForm, type PageBlockSubmitData } from './PageBlockForm'
 import styles from './PageBlockForm.module.scss'
 
 export const EditPageBlock = ({ block }: BlockBaseWithBlockFormProps<TPage>) => {
-  const { pageId } = useParams()
   const queryClient = useQueryClient()
   const editPageMutate = editPageBlockMutate(queryClient)
 
@@ -23,7 +21,7 @@ export const EditPageBlock = ({ block }: BlockBaseWithBlockFormProps<TPage>) => 
       title,
       description
     }
-    editPageMutate.mutate({ pageId, body })
+    editPageMutate.mutate({ pageId: block?.objectId, body })
   }
 
   return (

@@ -122,6 +122,8 @@ export const deletePageAPI = async (pageId: string) => {
 /**
  * @description 페이지 프로필(title, description) / 공개 여부(visible) / 위치 (parentId) 수정 API
  * @see https://www.notion.so/9cf94562cc7b483d8cc75da7a5c0db19
+ * @argument pageId 변경하고자 하는 페이지의 ID 필수로 입력해야 합니다.
+ * @argument body.parentPageId 부모 페이지 ID, 부모 페이지의 하위 페이지로 이동합니다. 헷갈리니까 주의합시다!
  */
 export async function editPageBlockAPI(
   pageId: string | undefined,

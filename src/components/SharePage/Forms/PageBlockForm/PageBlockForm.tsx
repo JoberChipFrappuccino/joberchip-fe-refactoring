@@ -1,6 +1,7 @@
 import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { useState, type Key } from 'react'
 import { useForm } from 'react-hook-form'
+import { type BreadCrumbItems } from '@/apis/page/page'
 import TreeLayout, { type TreeInfo } from '@/components/Common/Tree/TreeLayout'
 import FormButton from '@/components/Common/Ui/Button'
 import { useBlockActionStore } from '@/store/blockAction'
@@ -19,8 +20,8 @@ type PageBlockFromProps = BlockBaseWithBlockFormProps<TPage> & {
 }
 export function PageBlockForm({ block, onSubmit }: PageBlockFromProps) {
   const { breadCrumb, pageId } = useBreadCrumb()
-  const [parentPageId, setParentPageId] = useState(pageId ?? '')
-  const [parentPageTitle, setParentPageTitle] = useState(block?.title ?? '')
+  const [parentPageId, setParentPageId] = useState(pageId)
+  const [pageTitle, setPageTitle] = useState(getTitle(breadCrumb, pageId)) // pageId의 title을 넣어야함
   const { drawerMode, setOpenDrawer } = useBlockActionStore()
   const { register, handleSubmit, watch, reset } = useForm<PageFormInputs>({
     defaultValues: {
@@ -40,7 +41,7 @@ export function PageBlockForm({ block, onSubmit }: PageBlockFromProps) {
     const selectedNode = info.selectedNodes[0]
     if (selectedNode?.pageId) {
       setParentPageId(selectedNode.pageId)
-      setParentPageTitle(selectedNode.title)
+      setPageTitle(selectedNode.title)
     }
   }
   return (
@@ -52,7 +53,7 @@ export function PageBlockForm({ block, onSubmit }: PageBlockFromProps) {
         <input type="text" placeholder="페이지 설명을 입력해주세요." {...register('description')} />
         <h3>페이지 위치 설정</h3>
         <div>
-          <input type="text" value={parentPageTitle} readOnly placeholder="페이지 위치를 설정해주세요." />
+          <input type="text" value={pageTitle} readOnly placeholder="페이지 위치를 설정해주세요." />
           <div>
             {breadCrumb?.parentId && (
               <TreeLayout spaceId={breadCrumb.parentId} pageId={pageId} onSelectTreeNode={onSelectTreeNode} />
@@ -66,4 +67,16 @@ export function PageBlockForm({ block, onSubmit }: PageBlockFromProps) {
       />
     </form>
   )
+}
+
+function getTitle(breadCrumb?: BreadCrumbItems | null, pageId?: string): string {
+  if (!breadCrumb || pageId) return ''
+  if (breadCrumb.pageId === pageId) return breadCrumb.title as string
+  if (!breadCrumb.children) return ''
+
+  for (let i = 0; i < breadCrumb.children.length; i++) {
+    const title = getTitle(breadCrumb.children[i], pageId)
+    if (title) return title
+  }
+  return ''
 }

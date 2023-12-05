@@ -22,7 +22,7 @@ export default function ProfileDropDownMenu() {
         key: `${pageId}-profile-1`,
         label: (
           <Switch
-            className={styles.switchBtn}
+            style={{ textAlign: 'end' }}
             onChange={() => {
               editPageBlockAPI(pageId, { visible: !sharePage.visible })
             }}
