@@ -8,6 +8,7 @@ export interface ITree {
   pageId: string
   parentId: string
   title: string
+  selectable: boolean
   children: ITree[]
 }
 

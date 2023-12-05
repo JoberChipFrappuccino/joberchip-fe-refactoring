@@ -9,6 +9,7 @@ export const useBreadCrumb = () => {
     enabled: !!pageId
   })
   return {
-    breadCrumb: data?.data
+    breadCrumb: data?.data,
+    pageId
   }
 }

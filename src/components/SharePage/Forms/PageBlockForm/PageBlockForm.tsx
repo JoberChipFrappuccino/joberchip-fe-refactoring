@@ -18,9 +18,9 @@ type PageBlockFromProps = BlockBaseWithBlockFormProps<TPage> & {
   onSubmit: (data: PageBlockSubmitData) => void
 }
 export function PageBlockForm({ block, onSubmit }: PageBlockFromProps) {
-  const { breadCrumb } = useBreadCrumb()
-  const [parentPageId, setParentPageId] = useState('')
-  const [parentPageTitle, setParentPageTitle] = useState('')
+  const { breadCrumb, pageId } = useBreadCrumb()
+  const [parentPageId, setParentPageId] = useState(pageId ?? '')
+  const [parentPageTitle, setParentPageTitle] = useState(block?.title ?? '')
   const { drawerMode, setOpenDrawer } = useBlockActionStore()
   const { register, handleSubmit, watch, reset } = useForm<PageFormInputs>({
     defaultValues: {
@@ -43,7 +43,6 @@ export function PageBlockForm({ block, onSubmit }: PageBlockFromProps) {
       setParentPageTitle(selectedNode.title)
     }
   }
-
   return (
     <form className={styles.formBox} onSubmit={handleSubmit(submitHandler)}>
       <div className={styles.forms}>
@@ -55,7 +54,9 @@ export function PageBlockForm({ block, onSubmit }: PageBlockFromProps) {
         <div>
           <input type="text" value={parentPageTitle} readOnly placeholder="페이지 위치를 설정해주세요." />
           <div>
-            {breadCrumb?.parentId && <TreeLayout spaceId={breadCrumb.parentId} onSelectTreeNode={onSelectTreeNode} />}
+            {breadCrumb?.parentId && (
+              <TreeLayout spaceId={breadCrumb.parentId} pageId={pageId} onSelectTreeNode={onSelectTreeNode} />
+            )}
           </div>
         </div>
       </div>
