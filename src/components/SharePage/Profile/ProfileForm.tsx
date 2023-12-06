@@ -3,7 +3,7 @@ import { Spin } from 'antd'
 import { useEffect, useState } from 'react'
 import { editPageBlockAPI } from '@/apis/page'
 import { BREAD_CRUMB, SPACE_LIST } from '@/constants/querykey'
-import { USER_PROFILE_DEVOUNCE_TIME } from '@/constants/space'
+import { USER_PROFILE_DEBOUNCE_TIME } from '@/constants/space'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useSharePageModeStore } from '@/store/sharePage'
 import { to, toast } from '@/utils'
@@ -19,30 +19,30 @@ export function ProfileForm() {
   const [isDescriptionLoading, setIsDescriptionLoading] = useState(false)
   const queryClient = useQueryClient()
 
-  useDebounce(title, USER_PROFILE_DEVOUNCE_TIME, async (nextTitle) => {
+  const nextTitle = useDebounce(title, USER_PROFILE_DEBOUNCE_TIME)
+  const nextDescription = useDebounce(description, USER_PROFILE_DEBOUNCE_TIME)
+
+  useEffect(() => {
     if (mode === 'VIEW') return
     if (sharePage.title === nextTitle) return
-
-    await to(editPageBlockAPI(pageId, { title: nextTitle })).then((res) => {
-      queryClient.refetchQueries([BREAD_CRUMB])
-      queryClient.refetchQueries([SPACE_LIST])
-      // setSharePage({ ...sharePage, title: nextTitle })
+    to(editPageBlockAPI(pageId, { title: nextTitle })).then((res) => {
+      queryClient.invalidateQueries([BREAD_CRUMB])
+      queryClient.invalidateQueries([SPACE_LIST])
       toast(res.message, res.status, { autoClose: 500 })
+      setIsTitleLoading(false)
     })
-    setIsTitleLoading(false)
-  })
+  }, [nextTitle])
 
-  useDebounce(description, USER_PROFILE_DEVOUNCE_TIME, async (nextDescription) => {
+  useEffect(() => {
     if (mode === 'VIEW') return
     if (sharePage.description === nextDescription) return
     const form = new FormData()
     form.append('description', nextDescription)
-    await to(editPageBlockAPI(pageId, { description: nextDescription })).then((res) => {
+    to(editPageBlockAPI(pageId, { description: nextDescription })).then((res) => {
       toast(res.message, res.status, { autoClose: 500 })
-      // setSharePage({ ...sharePage, description: nextDescription })
+      setIsDescriptionLoading(false)
     })
-    setIsDescriptionLoading(false)
-  })
+  }, [nextDescription])
 
   useEffect(() => {
     setTitle(() => sharePage.title)

@@ -22,26 +22,26 @@ const ResponsiveGridLayout = WidthProvider(Responsive)
 export const BlocksViewer = () => {
   const { mode } = useSharePageModeStore()
   const { sharePage, pageId } = useSharePageQuery()
-  const { activeBlockId, setActiveBlockId } = useBlockActionStore()
 
+  const { activeBlockId, setActiveBlockId } = useBlockActionStore()
   const [editModeGrid, setEditModeGrid] = useState(getLayoutByMode(sharePage.children, 'EDIT'))
   const [viewModeGrid, setViewModeGrid] = useState(getLayoutByMode(sharePage.children, 'VIEW'))
   const [rowHeight, setRowHeight] = useState(100)
   const [margin, setMargin] = useState(40)
+
+  const nextLayout = useDebounce(editModeGrid.layouts.lg, LAYOUT_DEBOUNCE_TIME)
 
   useEffect(() => {
     setEditModeGrid(() => getLayoutByMode(sharePage.children, 'EDIT'))
     const visibleChildren = sharePage.children.filter((item) => item.visible)
     setViewModeGrid(() => getLayoutByMode(visibleChildren, 'VIEW'))
   }, [mode, pageId])
-
-  // * 레이아웃이 변경되면 서버에게 변경된 레이아웃을 알립니다.
-  useDebounce(editModeGrid.layouts.lg, LAYOUT_DEBOUNCE_TIME, (nextLayout) => {
+  useEffect(() => {
     if (mode === 'VIEW') return
     to(fetchLayout(pageId ?? '', convertLayoutToParam(sharePage.children, nextLayout))).then((res) => {
       toast(res.message, res.status, { autoClose: 500 })
     })
-  })
+  }, [nextLayout])
 
   // * "EDIT" || "VIEW" 모드가 변경되면 레이아웃을 다시 그립니다.
   const handleWidthChange: ResponsiveProps['onWidthChange'] = //
