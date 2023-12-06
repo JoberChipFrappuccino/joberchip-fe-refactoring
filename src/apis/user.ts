@@ -2,14 +2,6 @@ import { type User } from '@/models/user'
 import { type ResponseBase } from '@/utils/api'
 import { backAuthAPI } from './api'
 
-type ReqeustUserData = {
-  username: string
-  password: string
-}
-
-interface SignInAPIResponse {
-  accessToken: string
-}
 /**
  * @description 로그인 API
  * @see https://www.notion.so/c70dfd1d2d56400b9f937386c0927639
@@ -27,6 +19,13 @@ export const signInAPI = async ({ username, password }: ReqeustUserData): Promis
     message: '로그인을 성공했습니다.'
   }
 }
+type ReqeustUserData = {
+  username: string
+  password: string
+}
+interface SignInAPIResponse {
+  accessToken: string
+}
 
 /**
  * @description 회원가입 API
@@ -43,7 +42,6 @@ export const signUpAPI = async ({ username, password }: ReqeustUserData): Promis
     message: '회원가입이 완료되었습니다.'
   }
 }
-
 interface loadUserInfoAPIResponse {
   response: User
   status: number

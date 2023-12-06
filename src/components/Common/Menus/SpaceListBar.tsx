@@ -1,5 +1,5 @@
 import { ConfigProvider, Layout } from 'antd'
-import styles from './spaceListBar.module.scss'
+import styles from './SpaceListBar.module.scss'
 
 const { Sider } = Layout
 

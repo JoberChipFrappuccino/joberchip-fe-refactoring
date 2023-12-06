@@ -1,6 +1,6 @@
 import type { BlockType, PageBlock } from '@/models/block'
 import { type SharePage } from '@/models/space'
-import { type ResponseBase } from '@/utils'
+import { JSONToForm, type ResponseBase } from '@/utils'
 import { type ITree } from '@/hooks/tree'
 import { backAuthAPI } from './api'
 
@@ -97,7 +97,6 @@ export const getSpaceFromBackAPI = async (pageId: string): Promise<SharePage> =>
   const { data } = await backAuthAPI<SharePageResponse>(`/v1/page/${pageId}`)
   return data.response
 }
-
 interface SharePageResponse {
   status: number
   success: boolean
@@ -127,7 +126,7 @@ export const deletePageAPI = async (pageId: string) => {
  */
 export async function editPageBlockAPI(pageId: string | undefined, body: EditPageBlockBody) {
   if (!pageId) throw new Error('pageId가 없습니다.')
-  const form = convertBodyToForm(body)
+  const form = JSONToForm(body)
   const { data } = await backAuthAPI(`/v1/page/${pageId}`, {
     method: 'PUT',
     headers: {
@@ -185,20 +184,4 @@ interface FetchLayoutResponse {
   status: number
   success: boolean
   response: boolean
-}
-
-function convertBodyToForm<T>(body: T) {
-  type TKey = keyof T
-  const form = new FormData()
-  for (const key in body) {
-    const value = body[key as TKey]
-    if (typeof value === 'string') {
-      form.append(key, value)
-    } else if (value instanceof Blob) {
-      form.append(key, value, 'image.png')
-    } else {
-      form.append(key, String(value))
-    }
-  }
-  return form
 }

@@ -32,3 +32,19 @@ export async function to<T>(promise: Promise<ResponseBase<T>> | ResponseBase<T>)
     }
   }
 }
+
+export function JSONToForm<T>(body: T) {
+  type TKey = keyof T
+  const form = new FormData()
+  for (const key in body) {
+    const value = body[key as TKey]
+    if (typeof value === 'string') {
+      form.append(key, value)
+    } else if (value instanceof Blob) {
+      form.append(key, value, 'image.png')
+    } else {
+      form.append(key, String(value))
+    }
+  }
+  return form
+}

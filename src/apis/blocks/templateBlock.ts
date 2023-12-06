@@ -11,14 +11,6 @@ export const getTemplatesAPI = async (userId: string): Promise<Array<BlockWith<T
   return data
 }
 
-export type AddTemplateBlockAPIBody = {
-  x: TemplateBlock['x']
-  y: TemplateBlock['y']
-  w: TemplateBlock['w']
-  h: TemplateBlock['h']
-  title: TemplateBlock['title']
-  description: TemplateBlock['description']
-}
 /**
  * @description 템플릿 블럭 생성 API
  * @see  https://www.notion.so/8c67208f17a84c4d9e20bc5ee4a79935
@@ -28,10 +20,17 @@ export const addTemplateBlockAPI = async (pageId: string | undefined, body: AddT
     method: 'POST',
     data: body
   })
-
   return {
     data: data.response,
     status: 'success',
     message: '블록을 추가했습니다.'
   }
+}
+export type AddTemplateBlockAPIBody = {
+  x: TemplateBlock['x']
+  y: TemplateBlock['y']
+  w: TemplateBlock['w']
+  h: TemplateBlock['h']
+  title: TemplateBlock['title']
+  description: TemplateBlock['description']
 }
