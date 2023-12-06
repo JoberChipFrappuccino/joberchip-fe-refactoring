@@ -163,7 +163,10 @@ export function dataURIToBlob(dataURI: string) {
 }
 
 export function editBlockAPIByType(pageId: string | undefined, block: BlockBase<BlockType>) {
-  if (!pageId) return toast("잘못된 접근입니다. 'pageId'가 존재하지 않습니다.", 'failure')
+  if (!pageId) {
+    if (process.env.NODE_ENV === 'development') console.error('pageId가 없습니다.')
+    throw new Error('잘못된 접근입니다.')
+  }
   const { objectId, visible } = block
   switch (block.type) {
     case TEXT:
@@ -179,9 +182,14 @@ export function editBlockAPIByType(pageId: string | undefined, block: BlockBase<
     case MAP:
       return editGoogleMapBlockAPI(pageId, { objectId, visible: !visible })
     case TEMPLATE:
-      return toast('템플릿 공개 설정은 아직 지원하지 않습니다.', 'success')
+      toast('템플릿 공개 설정은 아직 지원하지 않습니다.', 'success')
+      return {
+        status: 'success',
+        message: '템플릿 공개 설정은 아직 지원하지 않습니다.'
+      }
     default:
-      return toast('잘못된 입력입니다.', 'failure')
+      if (process.env.NODE_ENV === 'development') console.error('block type과 일치하는 API가 없습니다.')
+      throw new Error('잘못된 접근입니다.')
   }
 }
 

@@ -6,15 +6,10 @@ import { BLOCK_TO, IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/block'
 import { useBlockActionStore } from '@/store/blockAction'
 import styles from './BlockFormBase.module.scss'
 
-interface FormType {
-  title: string
-  type: BlockType
-  icon: ReactNode
-}
-interface Props {
+interface BloackFormBaseProps {
   children: ReactNode
 }
-export function BlockFormBase({ children }: Props) {
+export function BlockFormBase({ children }: BloackFormBaseProps) {
   const { blockType, setBlockType, drawerMode } = useBlockActionStore()
   const forms = useMemo(() => formTypes(), [])
 
@@ -71,6 +66,11 @@ export function BlockFormBase({ children }: Props) {
   )
 }
 
+interface FormType {
+  title: string
+  type: BlockType
+  icon: ReactNode
+}
 function formTypes(): FormType[] {
   return [
     {

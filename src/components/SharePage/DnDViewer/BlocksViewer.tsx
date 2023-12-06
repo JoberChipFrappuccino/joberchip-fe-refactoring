@@ -75,7 +75,10 @@ export const BlocksViewer = () => {
         setActiveBlockId(el.id)
         if (e.type === 'mousedown') return
         const targetElement = e.target as HTMLElement
-        if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) targetElement.closest('button')?.click()
+        if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) {
+          // 컨텍스트가 비워졌을 떄 클릭 이벤트를 실행합니다.
+          setTimeout(() => targetElement.closest('button')?.click())
+        }
       },
       [activeBlockId]
     )

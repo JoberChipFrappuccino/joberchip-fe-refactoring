@@ -7,6 +7,7 @@ import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useSharePageModeStore } from '@/store/sharePage'
 import { clip } from '@/utils'
+import { getUniqueDivier } from '@/utils/SharePage'
 import { useUser } from '@/hooks/useUser'
 import styles from './ProfileDropDownMenu.module.scss'
 
@@ -15,26 +16,23 @@ export default function ProfileDropDownMenu() {
   const { mode, setSharePageMode } = useSharePageModeStore()
   const { spaceList } = useUser()
   const rootPage = spaceList?.find((page) => page.mainPageId === pageId)
-
   const items = useMemo(
     () => [
       {
         key: `${pageId}-profile-1`,
         label: (
-          <Switch
-            style={{ textAlign: 'end' }}
-            onChange={() => {
-              editPageBlockAPI(pageId, { visible: !sharePage.visible })
-            }}
-            defaultChecked={sharePage.visible}
-          />
+          <div className={styles.switchBtn}>
+            <Switch
+              onChange={() => {
+                editPageBlockAPI(pageId, { visible: !sharePage.visible })
+              }}
+              defaultChecked={sharePage.visible}
+            />
+          </div>
         ),
         icon: '공개설정'
       },
-      {
-        key: 'Profile-divider-1',
-        type: 'divider'
-      },
+      getUniqueDivier(),
       rootPage?.mainPageId
         ? {
             key: `${pageId}-profile-4`,
@@ -48,12 +46,9 @@ export default function ProfileDropDownMenu() {
             key: `${pageId}-profile-2`,
             icon: <TreeDrawer />
           },
+      getUniqueDivier(),
       {
-        key: 'Profile-divider-2',
-        type: 'divider'
-      },
-      {
-        key: `${pageId}-profile-4`,
+        key: `${pageId}-profile-5`,
         label: (
           <Switch
             checkedChildren="공유 화면 미리보기"

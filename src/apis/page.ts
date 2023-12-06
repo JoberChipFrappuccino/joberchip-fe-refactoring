@@ -125,10 +125,7 @@ export const deletePageAPI = async (pageId: string) => {
  * @argument pageId 변경하고자 하는 페이지의 ID 필수로 입력해야 합니다.
  * @argument body.parentPageId 부모 페이지 ID, 부모 페이지의 하위 페이지로 이동합니다. 헷갈리니까 주의합시다!
  */
-export async function editPageBlockAPI(
-  pageId: string | undefined,
-  body: EditPageBlockBody
-): Promise<ResponseBase<PageBlock>> {
+export async function editPageBlockAPI(pageId: string | undefined, body: EditPageBlockBody) {
   if (!pageId) throw new Error('pageId가 없습니다.')
   const form = convertBodyToForm(body)
   const { data } = await backAuthAPI(`/v1/page/${pageId}`, {
