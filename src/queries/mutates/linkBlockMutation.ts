@@ -1,14 +1,11 @@
 import type { SharePage } from '@/models/space'
-import { type QueryClient, useMutation } from '@tanstack/react-query'
-import {
-  type AddLinkBlockBody,
-  addLinkBlockAPI,
-  type EditLinkBlockBody,
-  editLinkBlockAPI
-} from '@/apis/blocks/linkBlock'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { type AddLinkBlockBody, type EditLinkBlockBody } from '@/apis/blocks/linkBlock'
+import { addLinkBlockAPI, editLinkBlockAPI } from '@/apis/blocks/linkBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
 
-export const useAddLinkBlockMutate = (queryClient: QueryClient) => {
+export const useAddLinkBlockMutate = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, body }: { pageId: string | undefined; body: AddLinkBlockBody }) => {
       return addLinkBlockAPI(pageId, body)
@@ -29,7 +26,8 @@ export const useAddLinkBlockMutate = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const useEditLinkBlockMutate = (queryClient: QueryClient) => {
+export const useEditLinkBlockMutate = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, body }: { pageId: string | undefined; body: EditLinkBlockBody }) => {
       return editLinkBlockAPI(pageId, body)

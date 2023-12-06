@@ -1,9 +1,10 @@
 import type { SharePage } from '@/models/space'
-import { type QueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AddTemplateBlockAPIBody, addTemplateBlockAPI } from '@/apis/blocks/templateBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
 
-export const useAddTemplateBlockMutation = (queryClient: QueryClient) => {
+export const useAddTemplateBlockMutation = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, body }: { pageId: string | undefined; body: AddTemplateBlockAPIBody }) => {
       return addTemplateBlockAPI(pageId, body)

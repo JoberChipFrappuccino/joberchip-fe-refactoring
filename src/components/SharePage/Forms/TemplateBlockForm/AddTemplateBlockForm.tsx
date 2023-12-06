@@ -1,4 +1,3 @@
-import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useState } from 'react'
 import FormButton from '@/components/Common/Ui/Button'
@@ -21,8 +20,7 @@ export function AddTemplateBlockForm() {
   const { sharePage, pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
   const { templates } = useTemplateQuery(user.userId)
-  const queryClient = useQueryClient()
-  const addTemplateMutation = useAddTemplateBlockMutation(queryClient)
+  const addTemplateMutation = useAddTemplateBlockMutation()
   const [templateId, setTemplateId] = useState('')
 
   const handleOnClick = (block: BlockWith<TTemplate>) => {

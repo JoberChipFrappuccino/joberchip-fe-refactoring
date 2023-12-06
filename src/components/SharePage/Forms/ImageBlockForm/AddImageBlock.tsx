@@ -1,6 +1,5 @@
 import type { AddImageBlockBody } from '@/apis/blocks/imageBlock'
 import type { SharePage } from '@/models/space'
-import { useQueryClient } from '@tanstack/react-query'
 import { IMAGE } from '@/constants/block'
 import { useAddImageBlockMutation } from '@/queries/mutates/imageBlockMutation'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
@@ -12,8 +11,7 @@ import styles from './ImageBlockForm.module.scss'
 export function AddImageBlock() {
   const { sharePage, pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
-  const queryClient = useQueryClient()
-  const addImageMutation = useAddImageBlockMutation(queryClient)
+  const addImageMutation = useAddImageBlockMutation()
 
   /** 이미지 블록 정보 API 전달 함수 */
   const handleSubmit = async (title: string, thumbnail: string) => {

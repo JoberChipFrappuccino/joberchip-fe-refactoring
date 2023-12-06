@@ -1,11 +1,12 @@
-import type { AddGoogleMapBlockBody, EditGoogleMapBlockBody } from '@/apis/blocks/mapBlock'
-import type { SharePage } from '@/models/space'
-import { type QueryClient, useMutation } from '@tanstack/react-query'
+import { type QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
+import { type AddGoogleMapBlockBody, type EditGoogleMapBlockBody } from '@/apis/blocks/mapBlock'
 import { addGoogleMapBlockAPI, editGoogleMapBlockAPI, deleteMapBlockAPI } from '@/apis/blocks/mapBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
 import { type EmbedGoogleMapBlock } from '@/models/block'
+import { type SharePage } from '@/models/space'
 
-export const useAddMapBlockMutation = (queryClient: QueryClient) => {
+export const useAddMapBlockMutation = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, newBlock }: { pageId: string | undefined; newBlock: AddGoogleMapBlockBody }) => {
       return addGoogleMapBlockAPI(pageId, newBlock)
@@ -26,7 +27,8 @@ export const useAddMapBlockMutation = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const useEditMapBlockMutation = (queryClient: QueryClient) => {
+export const useEditMapBlockMutation = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, editBlock }: { pageId: string | undefined; editBlock: EditGoogleMapBlockBody }) => {
       return editGoogleMapBlockAPI(pageId, editBlock)

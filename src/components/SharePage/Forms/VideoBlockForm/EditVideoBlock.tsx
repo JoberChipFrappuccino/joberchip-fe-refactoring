@@ -1,5 +1,4 @@
 import type { EditVideoBlockBody } from '@/apis/blocks/videoBlock'
-import { useQueryClient } from '@tanstack/react-query'
 import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { useEditVideoBlockMutation } from '@/queries/mutates/videoBlockMutation'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
@@ -15,8 +14,7 @@ export interface onSubmitEditFormParam {
 export default function EditVideoBlock({ block }: BlockBaseWithBlockFormProps<TVideo>) {
   const { pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
-  const queryClient = useQueryClient()
-  const editVideoMutation = useEditVideoBlockMutation(queryClient)
+  const editVideoMutation = useEditVideoBlockMutation()
 
   const handleSubmit = (data: onSubmitEditFormParam) => {
     const body: EditVideoBlockBody = {

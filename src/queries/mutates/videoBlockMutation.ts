@@ -1,10 +1,11 @@
 import type { EditVideoBlockBody, AddVideoBlockBody } from '@/apis/blocks/videoBlock'
 import type { SharePage } from '@/models/space'
-import { type QueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { addVideoBlockAPI, editVideoBlockAPI } from '@/apis/blocks/videoBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
 
-export const useAddVideoBlockMutation = (queryClient: QueryClient) => {
+export const useAddVideoBlockMutation = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, body }: { pageId: string | undefined; body: AddVideoBlockBody }) => {
       return addVideoBlockAPI(pageId, body)
@@ -25,7 +26,8 @@ export const useAddVideoBlockMutation = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const useEditVideoBlockMutation = (queryClient: QueryClient) => {
+export const useEditVideoBlockMutation = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, body }: { pageId: string | undefined; body: EditVideoBlockBody }) => {
       return editVideoBlockAPI(pageId, body)

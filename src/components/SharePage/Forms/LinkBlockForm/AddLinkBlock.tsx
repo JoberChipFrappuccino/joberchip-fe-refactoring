@@ -1,4 +1,3 @@
-import { useQueryClient } from '@tanstack/react-query'
 import { type AddLinkBlockBody } from '@/apis/blocks/linkBlock'
 import { type SharePage } from '@/models/space'
 import { useAddLinkBlockMutate } from '@/queries/mutates/linkBlockMutation'
@@ -9,8 +8,7 @@ import styles from './LinkBlockForm.module.scss'
 
 export function AddLinkBlock() {
   const { sharePage, pageId } = useSharePageQuery()
-  const queryClient = useQueryClient()
-  const addLinkMutation = useAddLinkBlockMutate(queryClient)
+  const addLinkMutation = useAddLinkBlockMutate()
   const handleSubmit = (data: LinkBlockFromInputs) => {
     const body = getLinkBlockBody(sharePage.children, data.title, data.link)
     addLinkMutation.mutate({ pageId, body })

@@ -1,5 +1,4 @@
 import type { AddGoogleMapBlockBody } from '@/apis/blocks/mapBlock'
-import { useQueryClient } from '@tanstack/react-query'
 import { MAP } from '@/constants/block'
 import { useAddMapBlockMutation } from '@/queries/mutates/mapBlockMutation'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
@@ -16,8 +15,7 @@ export function AddMapBlock() {
   const { address, center } = useMapStore()
   const { sharePage, pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
-  const queryClient = useQueryClient()
-  const AddMapMutation = useAddMapBlockMutation(queryClient)
+  const AddMapMutation = useAddMapBlockMutation()
 
   const handleSubmit = () => {
     const createBody: AddGoogleMapBlockBody = {

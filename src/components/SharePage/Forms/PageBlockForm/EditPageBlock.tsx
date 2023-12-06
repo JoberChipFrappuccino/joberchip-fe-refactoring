@@ -1,4 +1,3 @@
-import { useQueryClient } from '@tanstack/react-query'
 import { type EditPageBlockBody } from '@/apis/page'
 import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { useEditPageBlockMutation } from '@/queries/mutates/pageBlockMutation'
@@ -6,8 +5,7 @@ import { PageBlockForm, type PageBlockSubmitData } from './PageBlockForm'
 import styles from './PageBlockForm.module.scss'
 
 export const EditPageBlock = ({ block }: BlockBaseWithBlockFormProps<TPage>) => {
-  const queryClient = useQueryClient()
-  const editPageMutate = useEditPageBlockMutation(queryClient)
+  const editPageMutate = useEditPageBlockMutation()
 
   const handleSubmit = (data: PageBlockSubmitData) => {
     const { parentPageId, title, description } = data

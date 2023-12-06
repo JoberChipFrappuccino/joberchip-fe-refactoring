@@ -1,11 +1,12 @@
 import type { AddImageBlockBody, EditImageBlockBody } from '@/apis/blocks/imageBlock'
 import type { ImageBlock } from '@/models/block'
 import type { SharePage } from '@/models/space'
-import { type QueryClient, useMutation } from '@tanstack/react-query'
+import { type QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
 import { addImageBlockAPI, deleteImageBlockAPI, editImageBlockAPI } from '@/apis/blocks/imageBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
 
-export const useAddImageBlockMutation = (queryClient: QueryClient) => {
+export const useAddImageBlockMutation = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, body }: { pageId: string | undefined; body: AddImageBlockBody }) => {
       return addImageBlockAPI(pageId, body)
@@ -26,7 +27,8 @@ export const useAddImageBlockMutation = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const useEditImageBlockMutation = (queryClient: QueryClient) => {
+export const useEditImageBlockMutation = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, body }: { pageId: string | undefined; body: EditImageBlockBody }) => {
       return editImageBlockAPI(pageId, body)

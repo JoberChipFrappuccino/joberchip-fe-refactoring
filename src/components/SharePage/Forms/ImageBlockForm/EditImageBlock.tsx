@@ -1,5 +1,4 @@
 import type { EditImageBlockBody } from '@/apis/blocks/imageBlock'
-import { useQueryClient } from '@tanstack/react-query'
 import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { useEditImageBlockMutation } from '@/queries/mutates/imageBlockMutation'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
@@ -11,8 +10,7 @@ import styles from './ImageBlockForm.module.scss'
 export function EditImageBlock({ block }: BlockBaseWithBlockFormProps<TImage>) {
   const { pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
-  const queryClient = useQueryClient()
-  const editImageMutation = useEditImageBlockMutation(queryClient)
+  const editImageMutation = useEditImageBlockMutation()
 
   /** 이미지 블록 정보 API 전달 함수 */
   const handleSubmit = async (title: string, thumbnail: string) => {

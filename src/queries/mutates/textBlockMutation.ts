@@ -1,5 +1,5 @@
 import type { SharePage } from '@/models/space'
-import { type QueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   type RequestTextBlockAddData,
   addTextBlockAPI,
@@ -8,7 +8,8 @@ import {
 } from '@/apis/blocks/draftTextBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
 
-export const useAddTextBlockMutation = (queryClient: QueryClient) => {
+export const useAddTextBlockMutation = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, block }: { pageId: string | undefined; block: RequestTextBlockAddData }) => {
       return addTextBlockAPI(pageId, block)
@@ -29,7 +30,8 @@ export const useAddTextBlockMutation = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const useEditTextBlockMutation = (queryClient: QueryClient) => {
+export const useEditTextBlockMutation = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, block }: { pageId: string | undefined; block: RequestTextBlockEditData }) => {
       return editTextBlockAPI(pageId, block)

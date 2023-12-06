@@ -1,5 +1,5 @@
 import type { SharePage } from '@/models/space'
-import { useMutation, type QueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { deleteBlockAPI } from '@/apis/blocks'
 import { deletePageAPI } from '@/apis/page'
 import { SHARE_PAGE } from '@/constants/querykey'
@@ -21,7 +21,8 @@ interface DeleteBlockMutationFnParams {
   pageId: string | undefined
   block: BlockBase<BlockType>
 }
-export const useDeleteBlockMutation = (queryClient: QueryClient) => {
+export const useDeleteBlockMutation = () => {
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: ({ pageId, block }: DeleteBlockMutationFnParams) => {
       const type = BLOCK_API_TYPE[block.type]

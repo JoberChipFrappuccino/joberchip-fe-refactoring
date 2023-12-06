@@ -1,4 +1,3 @@
-import { useQueryClient } from '@tanstack/react-query'
 import { type RequestTextBlockAddData } from '@/apis/blocks'
 import { useAddTextBlockMutation } from '@/queries/mutates/textBlockMutation'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
@@ -9,8 +8,7 @@ import { TextBlockForm } from './TextBlockForm'
 export default function AddTextBlock() {
   const { setOpenDrawer } = useBlockActionStore()
   const { pageId, sharePage } = useSharePageQuery()
-  const queryClient = useQueryClient()
-  const addTextMutation = useAddTextBlockMutation(queryClient)
+  const addTextMutation = useAddTextBlockMutation()
   const handleSubmit = (content: string) => {
     const block: RequestTextBlockAddData = {
       content,

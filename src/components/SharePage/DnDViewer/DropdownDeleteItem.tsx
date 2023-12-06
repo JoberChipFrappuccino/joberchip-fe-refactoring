@@ -1,4 +1,3 @@
-import { useQueryClient } from '@tanstack/react-query'
 import { type BlockBase, type BlockType } from '@/models/block'
 import { useDeleteBlockMutation } from '@/queries/mutates/sharePageMutation'
 import { useBlockActionStore } from '@/store/blockAction'
@@ -11,8 +10,7 @@ interface DropDownDeleteItemProps {
 }
 export const DropdownDeleteItem = ({ pageId, block }: DropDownDeleteItemProps) => {
   const { setActiveBlockId } = useBlockActionStore()
-  const queryClient = useQueryClient()
-  const deleteMutation = useDeleteBlockMutation(queryClient)
+  const deleteMutation = useDeleteBlockMutation()
 
   const deleteBlock = () => {
     deleteMutation.mutate({ pageId, block })
