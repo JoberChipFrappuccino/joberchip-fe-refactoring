@@ -8,7 +8,7 @@ import {
 } from '@/apis/blocks/draftTextBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
 
-export const addTextBlockMutate = (queryClient: QueryClient) => {
+export const useAddTextBlockMutation = (queryClient: QueryClient) => {
   const mutation = useMutation({
     mutationFn: ({ pageId, block }: { pageId: string | undefined; block: RequestTextBlockAddData }) => {
       return addTextBlockAPI(pageId, block)
@@ -29,7 +29,7 @@ export const addTextBlockMutate = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const editTtextBlockMutate = (queryClient: QueryClient) => {
+export const useEditTextBlockMutation = (queryClient: QueryClient) => {
   const mutation = useMutation({
     mutationFn: ({ pageId, block }: { pageId: string | undefined; block: RequestTextBlockEditData }) => {
       return editTextBlockAPI(pageId, block)

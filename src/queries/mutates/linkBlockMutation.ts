@@ -8,7 +8,7 @@ import {
 } from '@/apis/blocks/linkBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
 
-export const addLinkBlockMutate = (queryClient: QueryClient) => {
+export const useAddLinkBlockMutate = (queryClient: QueryClient) => {
   const mutation = useMutation({
     mutationFn: ({ pageId, body }: { pageId: string | undefined; body: AddLinkBlockBody }) => {
       return addLinkBlockAPI(pageId, body)
@@ -29,7 +29,7 @@ export const addLinkBlockMutate = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const editLinkBlockMutate = (queryClient: QueryClient) => {
+export const useEditLinkBlockMutate = (queryClient: QueryClient) => {
   const mutation = useMutation({
     mutationFn: ({ pageId, body }: { pageId: string | undefined; body: EditLinkBlockBody }) => {
       return editLinkBlockAPI(pageId, body)
@@ -51,22 +51,3 @@ export const editLinkBlockMutate = (queryClient: QueryClient) => {
   })
   return mutation
 }
-
-// export const deleteImageBlockMutate = (queryClient: QueryClient) => {
-//   const mutation = useMutation({
-//     mutationFn: ({ pageId, objectId }: { pageId: string | undefined; objectId: EmbedGoogleMapBlock['objectId'] }) => {
-//       return deleteImageBlockAPI(pageId, objectId)
-//     },
-//     onSuccess: (_data, { pageId, objectId }) => {
-//       queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
-//         if (!oldData) throw new Error('해당 페이지에 대한 정보가 없습니다.')
-//         const newChildren = oldData.children.filter((item) => item.objectId !== objectId)
-//         return { ...oldData, children: [...newChildren] }
-//       })
-//     },
-//     onError: (_err, _newBlock, context) => {
-//       // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
-//     }
-//   })
-//   return mutation
-// }

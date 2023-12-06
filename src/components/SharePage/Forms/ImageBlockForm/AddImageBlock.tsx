@@ -2,7 +2,7 @@ import type { AddImageBlockBody } from '@/apis/blocks/imageBlock'
 import type { SharePage } from '@/models/space'
 import { useQueryClient } from '@tanstack/react-query'
 import { IMAGE } from '@/constants/block'
-import { addImageBlockMutate } from '@/queries/mutates/imageBlockMutate'
+import { useAddImageBlockMutation } from '@/queries/mutates/imageBlockMutation'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { dataURIToBlob, getNextYOfLastBlock } from '@/utils/SharePage'
@@ -13,12 +13,12 @@ export function AddImageBlock() {
   const { sharePage, pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
   const queryClient = useQueryClient()
-  const addMutate = addImageBlockMutate(queryClient)
+  const addImageMutation = useAddImageBlockMutation(queryClient)
 
   /** 이미지 블록 정보 API 전달 함수 */
   const handleSubmit = async (title: string, thumbnail: string) => {
     const body = getAddImageBlockBody(sharePage?.children ?? [], title, thumbnail)
-    addMutate.mutate({ pageId, body })
+    addImageMutation.mutate({ pageId, body })
     setOpenDrawer(false)
   }
 

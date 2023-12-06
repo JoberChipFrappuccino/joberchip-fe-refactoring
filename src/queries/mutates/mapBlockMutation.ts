@@ -1,14 +1,14 @@
-import type { AddImageBlockBody, EditImageBlockBody } from '@/apis/blocks/imageBlock'
-import type { ImageBlock } from '@/models/block'
+import type { AddGoogleMapBlockBody, EditGoogleMapBlockBody } from '@/apis/blocks/mapBlock'
 import type { SharePage } from '@/models/space'
 import { type QueryClient, useMutation } from '@tanstack/react-query'
-import { addImageBlockAPI, deleteImageBlockAPI, editImageBlockAPI } from '@/apis/blocks/imageBlock'
+import { addGoogleMapBlockAPI, editGoogleMapBlockAPI, deleteMapBlockAPI } from '@/apis/blocks/mapBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
+import { type EmbedGoogleMapBlock } from '@/models/block'
 
-export const addImageBlockMutate = (queryClient: QueryClient) => {
+export const useAddMapBlockMutation = (queryClient: QueryClient) => {
   const mutation = useMutation({
-    mutationFn: ({ pageId, body }: { pageId: string | undefined; body: AddImageBlockBody }) => {
-      return addImageBlockAPI(pageId, body)
+    mutationFn: ({ pageId, newBlock }: { pageId: string | undefined; newBlock: AddGoogleMapBlockBody }) => {
+      return addGoogleMapBlockAPI(pageId, newBlock)
     },
 
     onSuccess: (data, { pageId }) => {
@@ -26,10 +26,10 @@ export const addImageBlockMutate = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const editImageBlockMutate = (queryClient: QueryClient) => {
+export const useEditMapBlockMutation = (queryClient: QueryClient) => {
   const mutation = useMutation({
-    mutationFn: ({ pageId, body }: { pageId: string | undefined; body: EditImageBlockBody }) => {
-      return editImageBlockAPI(pageId, body)
+    mutationFn: ({ pageId, editBlock }: { pageId: string | undefined; editBlock: EditGoogleMapBlockBody }) => {
+      return editGoogleMapBlockAPI(pageId, editBlock)
     },
     onSuccess: (data, { pageId }) => {
       const { data: block } = data
@@ -49,10 +49,14 @@ export const editImageBlockMutate = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const deleteImageBlockMutate = (queryClient: QueryClient) => {
+interface DeleteMapBlockParams {
+  pageId: string | undefined
+  objectId: EmbedGoogleMapBlock['objectId']
+}
+export const deleteMapBlockMutate = (queryClient: QueryClient) => {
   const mutation = useMutation({
-    mutationFn: ({ pageId, objectId }: { pageId: string | undefined; objectId: ImageBlock['objectId'] }) => {
-      return deleteImageBlockAPI(pageId, objectId)
+    mutationFn: ({ pageId, objectId }: DeleteMapBlockParams) => {
+      return deleteMapBlockAPI(pageId, objectId)
     },
     onSuccess: (_data, { pageId, objectId }) => {
       queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {

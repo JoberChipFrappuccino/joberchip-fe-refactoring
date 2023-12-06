@@ -5,7 +5,6 @@ import { deletePageAPI } from '@/apis/page'
 import { SHARE_PAGE } from '@/constants/querykey'
 import { type BlockBase, type BlockType, type blockAPIType } from '@/models/block'
 
-// TODO : 이거 어떻게 해결할지 고민해보기
 type TblockAPIType = Record<BlockType, blockAPIType>
 const BLOCK_API_TYPE: TblockAPIType = {
   TEXT: 'textBlock',
@@ -22,7 +21,7 @@ interface DeleteBlockMutationFnParams {
   pageId: string | undefined
   block: BlockBase<BlockType>
 }
-export const deleteBlockMutation = (queryClient: QueryClient) => {
+export const useDeleteBlockMutation = (queryClient: QueryClient) => {
   const mutation = useMutation({
     mutationFn: ({ pageId, block }: DeleteBlockMutationFnParams) => {
       const type = BLOCK_API_TYPE[block.type]

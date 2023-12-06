@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { type RequestTextBlockAddData } from '@/apis/blocks'
-import { addTextBlockMutate } from '@/queries/mutates/textBlockMutate'
+import { useAddTextBlockMutation } from '@/queries/mutates/textBlockMutation'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/SharePage'
@@ -10,7 +10,7 @@ export default function AddTextBlock() {
   const { setOpenDrawer } = useBlockActionStore()
   const { pageId, sharePage } = useSharePageQuery()
   const queryClient = useQueryClient()
-  const addTextMutation = addTextBlockMutate(queryClient)
+  const addTextMutation = useAddTextBlockMutation(queryClient)
   const handleSubmit = (content: string) => {
     const block: RequestTextBlockAddData = {
       content,

@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { type AddVideoBlockBody } from '@/apis/blocks/videoBlock'
-import { addVideoBlockMutate } from '@/queries/mutates/videoBlockMutate'
+import { useAddVideoBlockMutation } from '@/queries/mutates/videoBlockMutation'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/SharePage'
@@ -16,7 +16,7 @@ export default function AddVideoBlock() {
   const { sharePage, pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
   const queryClient = useQueryClient()
-  const addVideoMutation = addVideoBlockMutate(queryClient)
+  const addVideoMutation = useAddVideoBlockMutation(queryClient)
 
   const handleSubmit = (data: onSubmitAddFormParam) => {
     const body: AddVideoBlockBody = {

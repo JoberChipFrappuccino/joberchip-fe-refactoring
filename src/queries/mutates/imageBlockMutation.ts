@@ -1,15 +1,14 @@
-import type { EditVideoBlockBody, AddVideoBlockBody } from '@/apis/blocks/videoBlock'
+import type { AddImageBlockBody, EditImageBlockBody } from '@/apis/blocks/imageBlock'
+import type { ImageBlock } from '@/models/block'
 import type { SharePage } from '@/models/space'
 import { type QueryClient, useMutation } from '@tanstack/react-query'
-import { deleteImageBlockAPI } from '@/apis/blocks/imageBlock'
-import { addVideoBlockAPI, editVideoBlockAPI } from '@/apis/blocks/videoBlock'
+import { addImageBlockAPI, deleteImageBlockAPI, editImageBlockAPI } from '@/apis/blocks/imageBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
-import { type VideoBlock } from '@/models/block'
 
-export const addVideoBlockMutate = (queryClient: QueryClient) => {
+export const useAddImageBlockMutation = (queryClient: QueryClient) => {
   const mutation = useMutation({
-    mutationFn: ({ pageId, body }: { pageId: string | undefined; body: AddVideoBlockBody }) => {
-      return addVideoBlockAPI(pageId, body)
+    mutationFn: ({ pageId, body }: { pageId: string | undefined; body: AddImageBlockBody }) => {
+      return addImageBlockAPI(pageId, body)
     },
 
     onSuccess: (data, { pageId }) => {
@@ -27,10 +26,10 @@ export const addVideoBlockMutate = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const editVideoBlockMutate = (queryClient: QueryClient) => {
+export const useEditImageBlockMutation = (queryClient: QueryClient) => {
   const mutation = useMutation({
-    mutationFn: ({ pageId, body }: { pageId: string | undefined; body: EditVideoBlockBody }) => {
-      return editVideoBlockAPI(pageId, body)
+    mutationFn: ({ pageId, body }: { pageId: string | undefined; body: EditImageBlockBody }) => {
+      return editImageBlockAPI(pageId, body)
     },
     onSuccess: (data, { pageId }) => {
       const { data: block } = data
@@ -50,9 +49,9 @@ export const editVideoBlockMutate = (queryClient: QueryClient) => {
   return mutation
 }
 
-export const deleteVideoBlockMutate = (queryClient: QueryClient) => {
+export const deleteImageBlockMutate = (queryClient: QueryClient) => {
   const mutation = useMutation({
-    mutationFn: ({ pageId, objectId }: { pageId: string | undefined; objectId: VideoBlock['objectId'] }) => {
+    mutationFn: ({ pageId, objectId }: { pageId: string | undefined; objectId: ImageBlock['objectId'] }) => {
       return deleteImageBlockAPI(pageId, objectId)
     },
     onSuccess: (_data, { pageId, objectId }) => {

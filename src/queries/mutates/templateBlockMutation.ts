@@ -3,7 +3,7 @@ import { type QueryClient, useMutation } from '@tanstack/react-query'
 import { type AddTemplateBlockAPIBody, addTemplateBlockAPI } from '@/apis/blocks/templateBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
 
-export const addTemplateBlockMutate = (queryClient: QueryClient) => {
+export const useAddTemplateBlockMutation = (queryClient: QueryClient) => {
   const mutation = useMutation({
     mutationFn: ({ pageId, body }: { pageId: string | undefined; body: AddTemplateBlockAPIBody }) => {
       return addTemplateBlockAPI(pageId, body)

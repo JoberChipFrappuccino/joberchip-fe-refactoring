@@ -5,7 +5,7 @@ import FormButton from '@/components/Common/Ui/Button'
 import { TemplateBlock } from '@/components/SharePage/Blocks/TemplateBlock/TemplateBlock'
 import { TemplateSearchBox } from '@/components/SharePage/Forms/TemplateBlockForm/TemplateSearchBox'
 import { type BlockWith } from '@/models/block'
-import { addTemplateBlockMutate } from '@/queries/mutates/templateBlockMutate'
+import { useAddTemplateBlockMutation } from '@/queries/mutates/templateBlockMutation'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useTemplateQuery } from '@/queries/useTemplateQuery'
 import { useBlockActionStore } from '@/store/blockAction'
@@ -22,7 +22,7 @@ export function AddTemplateBlockForm() {
   const { setOpenDrawer } = useBlockActionStore()
   const { templates } = useTemplateQuery(user.userId)
   const queryClient = useQueryClient()
-  const addTemplateMutation = addTemplateBlockMutate(queryClient)
+  const addTemplateMutation = useAddTemplateBlockMutation(queryClient)
   const [templateId, setTemplateId] = useState('')
 
   const handleOnClick = (block: BlockWith<TTemplate>) => {

@@ -1,7 +1,7 @@
 import type { EditImageBlockBody } from '@/apis/blocks/imageBlock'
 import { useQueryClient } from '@tanstack/react-query'
 import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
-import { editImageBlockMutate } from '@/queries/mutates/imageBlockMutate'
+import { useEditImageBlockMutation } from '@/queries/mutates/imageBlockMutation'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { dataURIToBlob } from '@/utils/SharePage'
@@ -12,12 +12,12 @@ export function EditImageBlock({ block }: BlockBaseWithBlockFormProps<TImage>) {
   const { pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
   const queryClient = useQueryClient()
-  const editMutation = editImageBlockMutate(queryClient)
+  const editImageMutation = useEditImageBlockMutation(queryClient)
 
   /** 이미지 블록 정보 API 전달 함수 */
   const handleSubmit = async (title: string, thumbnail: string) => {
     const body = getEditImageBlockBody(block?.objectId, title, thumbnail)
-    editMutation.mutate({ pageId, body })
+    editImageMutation.mutate({ pageId, body })
     setOpenDrawer(false)
   }
 
