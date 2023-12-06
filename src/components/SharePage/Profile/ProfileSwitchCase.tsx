@@ -1,4 +1,4 @@
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useSharePageModeStore } from '@/store/sharePage'
 import ProfileDropDownMenu from './ProfileDropDownMenu'
 import ProfileEditMode from './ProfileEditMode'

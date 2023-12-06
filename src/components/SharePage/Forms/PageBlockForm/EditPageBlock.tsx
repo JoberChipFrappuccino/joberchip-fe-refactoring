@@ -1,6 +1,6 @@
 import { type EditPageBlockBody } from '@/apis/page'
 import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
-import { useEditPageBlockMutation } from '@/queries/mutates/pageBlockMutation'
+import { useEditPageBlockMutation } from '@/hooks/mutations/pageBlockMutation'
 import { PageBlockForm, type PageBlockSubmitData } from './PageBlockForm'
 import styles from './PageBlockForm.module.scss'
 

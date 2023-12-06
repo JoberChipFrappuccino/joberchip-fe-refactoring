@@ -1,7 +1,7 @@
 import type { RequestTextBlockEditData } from '@/apis/blocks/draftTextBlock'
 import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
-import { useEditTextBlockMutation } from '@/queries/mutates/textBlockMutation'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useEditTextBlockMutation } from '@/hooks/mutations/textBlockMutation'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { TextBlockForm } from './TextBlockForm'
 

@@ -4,8 +4,8 @@ import { DrawerAddForm } from '@/components/Common/SwitchCases/DrawerAddForm'
 import { DrawerEditForm } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { BlockFormBase } from '@/components/SharePage/Drawer/BlockFormBase'
 import { BLOCK_TO, PAGE, TEMPLATE } from '@/constants/block'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { type BlockType } from '@/models/block'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 
 export function Drawer() {

@@ -1,5 +1,5 @@
-import { useCreatePageBlockMutation } from '@/queries/mutates/pageBlockMutation'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useCreatePageBlockMutation } from '@/hooks/mutations/pageBlockMutation'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { getNextYOfLastBlock } from '@/utils/SharePage'
 import { PageBlockForm, type PageBlockSubmitData } from './PageBlockForm'
 import styles from './PageBlockForm.module.scss'

@@ -1,6 +1,6 @@
 import { type RequestTextBlockAddData } from '@/apis/blocks'
-import { useAddTextBlockMutation } from '@/queries/mutates/textBlockMutation'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useAddTextBlockMutation } from '@/hooks/mutations/textBlockMutation'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/SharePage'
 import { TextBlockForm } from './TextBlockForm'

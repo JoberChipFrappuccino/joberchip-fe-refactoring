@@ -1,5 +1,5 @@
 import { loadUserInfoAPI } from '@/apis/user'
-import useSuspenseQuery from '@/queries/useSuspenseQuery'
+import useSuspenseQuery from '@/hooks/queries/useSuspenseQuery'
 
 export const useUser = () => {
   const { data } = useSuspenseQuery(['user'], () => loadUserInfoAPI())

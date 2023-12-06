@@ -1,4 +1,4 @@
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import styles from './ProfileViewMode.module.scss'
 
 export default function ProfileViewMode() {

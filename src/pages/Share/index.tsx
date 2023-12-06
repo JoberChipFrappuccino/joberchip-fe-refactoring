@@ -5,7 +5,7 @@ import { BlocksViewer } from '@/components/SharePage/DnDViewer/BlocksViewer'
 import { Drawer } from '@/components/SharePage/Drawer/Drawer'
 import { Profile } from '@/components/SharePage/Profile/Profile'
 import { SEO } from '@/constants'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useSharePageModeStore } from '@/store/sharePage'
 import useServerSideProps from '@/hooks/serverSideProps'
 

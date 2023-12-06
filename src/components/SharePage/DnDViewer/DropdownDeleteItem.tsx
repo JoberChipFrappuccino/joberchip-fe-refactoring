@@ -1,5 +1,5 @@
+import { useDeleteBlockMutation } from '@/hooks/mutations/sharePageMutation'
 import { type BlockBase, type BlockType } from '@/models/block'
-import { useDeleteBlockMutation } from '@/queries/mutates/sharePageMutation'
 import { useBlockActionStore } from '@/store/blockAction'
 import { toast } from '@/utils'
 import styles from './DropdownDeleteItem.module.scss'

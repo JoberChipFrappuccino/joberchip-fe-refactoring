@@ -1,6 +1,6 @@
 import { type AddVideoBlockBody } from '@/apis/blocks/videoBlock'
-import { useAddVideoBlockMutation } from '@/queries/mutates/videoBlockMutation'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useAddVideoBlockMutation } from '@/hooks/mutations/videoBlockMutation'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/SharePage'
 import Form from './Form'
