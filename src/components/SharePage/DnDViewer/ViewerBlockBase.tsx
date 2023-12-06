@@ -5,7 +5,7 @@ import { useEffect, useState, type ReactNode, useCallback } from 'react'
 import { ModalPortal } from '@/components/Common/Portal/ModalPortal'
 import BlockPortal from '@/components/SharePage/BlockPortal'
 import { BlockCover } from '@/components/SharePage/Blocks/BlockCover'
-import EditorDropDownMenu from '@/components/SharePage/DnDViewer/EditorDropDownMenu'
+import BlockDropDown from '@/components/SharePage/DnDViewer/BlockDropDown'
 import { ConfirmModal } from '@/components/SharePage/Modals/ConfirmModal'
 import { deleteBlockMutation } from '@/queries/mutates/sharePageMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
@@ -56,7 +56,7 @@ export function ViewerBlockBase({ block, children }: BlockBaseProps) {
     <div className={styles.container}>
       {mode === 'EDIT' && (
         <aside className={classNames(styles.menu, [{ kebobMenu: activeBlockId === objectId }])}>
-          <EditorDropDownMenu block={block} onDelete={handleDelete} />
+          <BlockDropDown block={block} onDelete={handleDelete} />
         </aside>
       )}
       {focus && (

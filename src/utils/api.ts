@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { type SharePage } from '@/models/space'
 
 export type APIResponseStatus = 'success' | 'failure'
 
@@ -34,15 +33,4 @@ export async function to<T>(promise: Promise<ResponseBase<T>>): Promise<Response
       data: null
     }
   }
-}
-
-/**
- * @description 가장 아래에 있는 블럭의 Y값을 반환합니다.
- */
-export function getNextYOfLastBlock(blocks: SharePage['children']) {
-  let lastOfY = 0
-  for (let i = 0; i < blocks.length; i++) {
-    if (lastOfY < blocks[i].y + blocks[i].h) lastOfY = blocks[i].y + blocks[i].h
-  }
-  return lastOfY + 1
 }

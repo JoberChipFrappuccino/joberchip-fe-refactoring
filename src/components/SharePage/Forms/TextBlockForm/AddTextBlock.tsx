@@ -1,9 +1,9 @@
-import type { RequestTextBlockAddData } from '@/apis/blocks/textBlock'
 import { useQueryClient } from '@tanstack/react-query'
+import { type RequestTextBlockAddData } from '@/apis/blocks'
 import { addTextBlockMutate } from '@/queries/mutates/textBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
-import { getNextYOfLastBlock } from '@/utils'
+import { getNextYOfLastBlock } from '@/utils/SharePage'
 import { TextBlockForm } from './TextBlockForm'
 
 export default function AddTextBlock() {

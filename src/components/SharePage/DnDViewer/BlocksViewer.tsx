@@ -29,6 +29,12 @@ export const BlocksViewer = () => {
   const [rowHeight, setRowHeight] = useState(100)
   const [margin, setMargin] = useState(40)
 
+  useEffect(() => {
+    setEditModeGrid(() => getLayoutByMode(sharePage.children, 'EDIT'))
+    const visibleChildren = sharePage.children.filter((item) => item.visible)
+    setViewModeGrid(() => getLayoutByMode(visibleChildren, 'VIEW'))
+  }, [mode, pageId])
+
   // * 레이아웃이 변경되면 서버에게 변경된 레이아웃을 알립니다.
   useDebounce(editModeGrid.layouts.lg, LAYOUT_DEBOUNCE_TIME, (nextLayout) => {
     if (mode === 'VIEW') return
@@ -38,12 +44,6 @@ export const BlocksViewer = () => {
   })
 
   // * "EDIT" || "VIEW" 모드가 변경되면 레이아웃을 다시 그립니다.
-  useEffect(() => {
-    setEditModeGrid(() => getLayoutByMode(sharePage.children, 'EDIT'))
-    const visibleChildren = sharePage.children.filter((item) => item.visible)
-    setViewModeGrid(() => getLayoutByMode(visibleChildren, 'VIEW'))
-  }, [mode, pageId])
-
   const handleWidthChange: ResponsiveProps['onWidthChange'] = //
     useCallback<NonNullable<ResponsiveProps['onWidthChange']>>(
       (width, _margin, cols) => {

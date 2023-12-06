@@ -3,7 +3,7 @@ import { type AddLinkBlockBody } from '@/apis/blocks/linkBlock'
 import { type SharePage } from '@/models/space'
 import { addLinkBlockMutate } from '@/queries/mutates/linkBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
-import { getNextYOfLastBlock } from '@/utils'
+import { getNextYOfLastBlock } from '@/utils/SharePage'
 import { LinkBlockForm, type LinkBlockFromInputs } from './LinkBlockForm'
 import styles from './LinkBlockForm.module.scss'
 

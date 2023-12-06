@@ -9,7 +9,7 @@ import { addTemplateBlockMutate } from '@/queries/mutates/templateBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useTemplateQuery } from '@/queries/useTemplateQuery'
 import { useBlockActionStore } from '@/store/blockAction'
-import { getNextYOfLastBlock } from '@/utils/api'
+import { getNextYOfLastBlock } from '@/utils/SharePage'
 import { useUser } from '@/hooks/useUser'
 import styles from './AddTemplateBlockForm.module.scss'
 

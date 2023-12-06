@@ -5,7 +5,7 @@ import { IMAGE } from '@/constants/block'
 import { addImageBlockMutate } from '@/queries/mutates/imageBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
-import { dataURLToBlob, getNextYOfLastBlock } from '@/utils'
+import { dataURIToBlob, getNextYOfLastBlock } from '@/utils/SharePage'
 import { ImageBlockForm } from './ImageBlockForm'
 import styles from './ImageBlockForm.module.scss'
 
@@ -37,6 +37,6 @@ function getAddImageBlockBody(blocks: SharePage['children'], title: string, thum
     h: 1,
     type: IMAGE,
     title,
-    attachedImage: dataURLToBlob(thumbnail)
+    attachedImage: dataURIToBlob(thumbnail)
   }
 }

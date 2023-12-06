@@ -4,7 +4,7 @@ import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCase
 import { editImageBlockMutate } from '@/queries/mutates/imageBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
-import { dataURLToBlob } from '@/utils'
+import { dataURIToBlob } from '@/utils/SharePage'
 import { ImageBlockForm } from './ImageBlockForm'
 import styles from './ImageBlockForm.module.scss'
 
@@ -33,7 +33,7 @@ function getEditImageBlockBody(blockId: string | undefined, title: string, thumb
   const body: EditImageBlockBody = {
     objectId: blockId,
     title,
-    attachedImage: dataURLToBlob(thumbnail)
+    attachedImage: dataURIToBlob(thumbnail)
   }
   thumbnail.startsWith('http') && delete body.attachedImage
   !title && delete body.title

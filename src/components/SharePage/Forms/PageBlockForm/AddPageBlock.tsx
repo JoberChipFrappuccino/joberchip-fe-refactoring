@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { createPageBlockMutate } from '@/queries/mutates/pageBlockMutate'
 import { useSharePageQuery } from '@/queries/useSharePageQuery'
-import { getNextYOfLastBlock } from '@/utils/api'
+import { getNextYOfLastBlock } from '@/utils/SharePage'
 import { PageBlockForm, type PageBlockSubmitData } from './PageBlockForm'
 import styles from './PageBlockForm.module.scss'
 
