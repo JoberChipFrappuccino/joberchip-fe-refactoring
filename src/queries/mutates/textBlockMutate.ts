@@ -5,7 +5,7 @@ import {
   addTextBlockAPI,
   editTextBlockAPI,
   type RequestTextBlockEditData
-} from '@/apis/blocks/textBlock'
+} from '@/apis/blocks/draftTextBlock'
 import { SHARE_PAGE } from '@/constants/querykey'
 
 export const addTextBlockMutate = (queryClient: QueryClient) => {

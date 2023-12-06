@@ -1,4 +1,4 @@
-import type { RequestTextBlockEditData } from '@/apis/blocks/textBlock'
+import type { RequestTextBlockEditData } from '@/apis/blocks/draftTextBlock'
 import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import { useQueryClient } from '@tanstack/react-query'
 import { editTtextBlockMutate } from '@/queries/mutates/textBlockMutate'

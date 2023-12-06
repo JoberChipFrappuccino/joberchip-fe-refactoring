@@ -1,4 +1,4 @@
-import { type TemplateBlock, type BlockWith } from '@/models/space'
+import { type BlockWith, type TemplateBlock } from '@/models/block'
 import { authAPI, backAuthAPI } from '../api'
 
 export const getTemplatesAPI = async (userId: string): Promise<Array<BlockWith<TTemplate>>> => {
