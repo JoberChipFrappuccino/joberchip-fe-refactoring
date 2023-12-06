@@ -1,7 +1,7 @@
 import type { BlockType, PageBlock } from '@/models/block'
 import { type SharePage } from '@/models/space'
 import { JSONToForm, type ResponseBase } from '@/utils'
-import { type ITree } from '@/hooks/tree'
+import { type ITree } from '@/hooks/useTree'
 import { backAuthAPI } from './api'
 
 /**

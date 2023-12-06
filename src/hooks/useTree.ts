@@ -19,7 +19,7 @@ export function useTree(spaceId: string): ResponseBase<ITree> {
   })
 
   return {
-    data: res?.data ?? null,
+    data: res?.data,
     message: res?.message ?? '스페이스 리스트를 불러오지 못했습니다.',
     status: res?.status ?? 'failure'
   }

@@ -20,7 +20,8 @@ export const useAddMapBlockMutation = () => {
       })
     },
 
-    onError: (_err, _newBlock, context) => {
+    onError: (_err, newBlock, context) => {
+      // queryClient.resetQueries([SHARE_PAGE])
       // queryClient.setQueryData(['todos'], context)
     }
   })

@@ -18,6 +18,7 @@ interface UserState {
   user: User
   isFetching: boolean
   isSignedIn: boolean
+  setUser: (user: User) => void
   signIn: (user: LoginForm) => Promise<LoginResponse>
   loadUserInfo: () => Promise<boolean>
   signOut: VoidFunction
@@ -29,6 +30,9 @@ export const useUserStore = create<UserState>((set) => {
     user: {},
     isFetching: false,
     isSignedIn: false,
+    setUser: (user: User) => {
+      set((state) => ({ ...state, user }))
+    },
     signIn: async (form: LoginForm) => {
       set((state) => ({ ...state, isFetching: true, isSignedIn: false }))
       const { data, ...res } = await to(signInAPI(form))

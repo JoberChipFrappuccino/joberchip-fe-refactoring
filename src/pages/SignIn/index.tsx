@@ -1,8 +1,7 @@
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Header, HomeLogo } from '@/components/Common/Menus'
-import { toast } from '@/utils/toast'
-import { useUser } from '@/hooks/useUser'
+import { useAuth } from '@/hooks/useAuth'
 import styles from './SignIn.module.scss'
 
 export interface SignInInputs {
@@ -11,15 +10,11 @@ export interface SignInInputs {
 }
 
 export default function SignIn() {
-  const navigate = useNavigate()
   const { handleSubmit, register } = useForm<SignInInputs>()
-  const { signIn } = useUser()
+  const { signIn } = useAuth()
 
   const onSubmit = (data: SignInInputs) => {
-    signIn(data).then((res) => {
-      if (res.status === 'failure') return toast(res.message, res.status)
-      res.status === 'success' && navigate('/')
-    })
+    signIn(data)
   }
 
   return (

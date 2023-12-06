@@ -6,11 +6,13 @@ import { GroupSpaceItem } from '@/components/SpacePage/GroupSpaceItem'
 import { Search } from '@/components/SpacePage/Search'
 import { UserProfile } from '@/components/SpacePage/UserProfile'
 import { type SpaceList } from '@/models/space'
-import { useUser } from '@/hooks/useUser'
+import { useSpaceListQuery } from '@/queries/useSpaceListQuery'
+import { useUser } from '@/hooks/useUserQuery'
 import styles from './Space.module.scss'
 
 export default function Space() {
-  const { spaceList } = useUser('/signin')
+  const { user } = useUser()
+  const { spaceList } = useSpaceListQuery(user.userId)
 
   return (
     <>

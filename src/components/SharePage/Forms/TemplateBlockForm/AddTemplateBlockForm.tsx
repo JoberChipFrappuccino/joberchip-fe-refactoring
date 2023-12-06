@@ -9,7 +9,7 @@ import { useSharePageQuery } from '@/queries/useSharePageQuery'
 import { useTemplateQuery } from '@/queries/useTemplateQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { getNextYOfLastBlock } from '@/utils/SharePage'
-import { useUser } from '@/hooks/useUser'
+import { useUser } from '@/hooks/useUserQuery'
 import styles from './AddTemplateBlockForm.module.scss'
 
 /**

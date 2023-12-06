@@ -33,12 +33,15 @@ const backAPI = axios.create({
   baseURL: process.env.BACK_SERVER_BASE_URL,
   timeout: 10000
 })
+const api = axios.create({
+  baseURL: process.env.BACK_SERVER_BASE_URL,
+  timeout: 10000
+})
 
 backAPI.interceptors.request.use(
   (config) => {
     if (typeof window === 'undefined') return config
-    const token = localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) ?? null
-    if (token) config.headers.Authorization = token
+    config.headers.Authorization = JSON.parse(localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) ?? '')
     return config
   },
   async (error) => {
@@ -47,4 +50,4 @@ backAPI.interceptors.request.use(
   }
 )
 
-export { mockAPI as authAPI, backAPI as backAuthAPI }
+export { mockAPI as authAPI, backAPI as backAuthAPI, api }

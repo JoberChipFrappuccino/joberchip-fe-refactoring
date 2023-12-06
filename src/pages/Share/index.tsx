@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { BreadCrumbBox, Header, LeftMenu } from '@/components/Common/Menus'
 import { BlocksViewer } from '@/components/SharePage/DnDViewer/BlocksViewer'
@@ -21,10 +21,9 @@ export default function SharePage() {
   const { setSharePageMode } = useSharePageModeStore()
 
   useEffect(() => {
-    if (isSuccess) {
-      if (typeof sharePage.privilege === 'string') setSharePageMode(sharePage.privilege)
-      else setSharePageMode('VIEW')
-    }
+    if (!isSuccess) return
+    if (typeof sharePage.privilege === 'string') setSharePageMode(sharePage.privilege)
+    else setSharePageMode('VIEW')
   }, [pageId, isSuccess])
 
   return (
@@ -43,7 +42,9 @@ export default function SharePage() {
       </Helmet>
       {isSuccess && (
         <>
-          <Profile />
+          <Suspense fallback={<div>로그인 시도중...</div>}>
+            <Profile />
+          </Suspense>
           <Drawer />
           <BlocksViewer />
         </>
