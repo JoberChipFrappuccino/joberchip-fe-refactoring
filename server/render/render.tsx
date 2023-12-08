@@ -13,6 +13,7 @@ import { api } from '~/api/api'
 export default async function renderHome(url: string, req: Request, res: Response) {
   const serverSideData: Record<string, unknown> = {}
 
+  // * 서버에 출력되는 로그입니다.
   console.info('SSR request url :', url)
 
   serverSideData[SEO] = JSON.stringify({})
