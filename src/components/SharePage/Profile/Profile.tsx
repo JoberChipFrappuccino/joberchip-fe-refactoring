@@ -4,7 +4,6 @@ import { ConfirmModal } from '@/components/SharePage/Modals/ConfirmModal'
 import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useSpaceListQuery } from '@/hooks/queries/useSpaceListQuery'
 import { toast } from '@/utils'
-import { useUser } from '@/hooks/useUserQuery'
 import ConfirmModalContent from '../Modals/ConfirmModalContent'
 import styles from './Profile.module.scss'
 import ProfileSwitchCase from './ProfileSwitchCase'
@@ -12,8 +11,7 @@ import ProfileSwitchCase from './ProfileSwitchCase'
 export function Profile() {
   const [openConfirmModal, setConfirmModal] = useState(false)
   const { pageId } = useSharePageQuery()
-  const { user } = useUser()
-  const { spaceList } = useSpaceListQuery(user.userId)
+  const { spaceList } = useSpaceListQuery()
   const rootPage = spaceList?.find((page) => page.mainPageId === pageId)
 
   return (

@@ -11,7 +11,7 @@ import styles from './UserProfile.module.scss'
 export function UserProfile() {
   const { user } = useUser()
   const { signOut } = useAuth()
-  const { spaceList } = useSpaceListQuery(user.userId)
+  const { spaceList } = useSpaceListQuery()
 
   const queryClient = useQueryClient()
 

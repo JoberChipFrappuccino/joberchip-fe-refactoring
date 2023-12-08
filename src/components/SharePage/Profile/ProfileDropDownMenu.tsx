@@ -9,14 +9,12 @@ import { useSpaceListQuery } from '@/hooks/queries/useSpaceListQuery'
 import { useSharePageModeStore } from '@/store/sharePage'
 import { clip } from '@/utils'
 import { getUniqueDivier } from '@/utils/SharePage'
-import { useUser } from '@/hooks/useUserQuery'
 import styles from './ProfileDropDownMenu.module.scss'
 
 export default function ProfileDropDownMenu() {
   const { sharePage, pageId } = useSharePageQuery()
   const { mode, setSharePageMode } = useSharePageModeStore()
-  const { user } = useUser()
-  const { spaceList } = useSpaceListQuery(user.userId)
+  const { spaceList } = useSpaceListQuery()
   const rootPage = spaceList?.find((page) => page.mainPageId === pageId)
   const items = useMemo(
     () => [
