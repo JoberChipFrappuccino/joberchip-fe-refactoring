@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { editPageBlockAPI } from '@/apis/page/page'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { editPageBlockAPI } from '@/apis/page'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import styles from './ProfileImageForm.module.scss'
 export function ProfileImageForm() {
   const [profileImage, setProfileImage] = useState('')

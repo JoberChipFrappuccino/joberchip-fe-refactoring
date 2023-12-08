@@ -45,7 +45,7 @@ export function MapBlockForm({ block, onSubmit }: MapBlockFormProps) {
         </GoogleMap>
         <AddressForm />
       </div>
-      <FormButton title={drawerMode === 'CREATE' ? '지도 추가하기' : '지도 수정하기'} event={!address} />
+      <FormButton title={drawerMode === 'CREATE' ? '지도 추가하기' : '지도 수정하기'} disabled={!address} />
     </form>
   )
 }

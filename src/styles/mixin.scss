@@ -1,0 +1,77 @@
+@import 'variables.scss';
+
+// responsive
+@mixin mobile {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-width: 768px) and (max-width: 1239px) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: 1240px) {
+    @content;
+  }
+}
+
+// input, button
+@mixin button($hover-border-color: #4c61ff, $bg-color: #f2f9ff, $color: #4c61ff) {
+  border: solid 0.1rem transparent;
+  color: $color;
+  background-color: $bg-color;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  font-size: 1.6rem;
+  cursor: pointer;
+  &:hover {
+    border: solid 0.1rem $hover-border-color;
+  }
+  @content;
+}
+
+@mixin button-nomal($border-color: #ececfb, $bg-color: #ffffff, $color: #040404) {
+  background-color: $bg-color;
+  border: solid 0.1rem transparent;
+  color: $color;
+  transition: all 200ms ease-in-out;
+  &:hover {
+    border: 0.1rem solid $border-color;
+  }
+  @content;
+}
+
+@mixin input($bg-color: #ffffff, $border-color: #ececfb, $hover-border-color: #4c61ff) {
+  background-color: $bg-color;
+  border: 1.5px solid $border-color;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  font-size: 1.6rem;
+  &:hover {
+    border: 1.5px solid $hover-border-color;
+  }
+  &:focus {
+    border: 1.5px solid $hover-border-color;
+  }
+  @content;
+}
+
+@mixin position($p: absolute, $t: 0, $l: 0, $r: 0, $b: 0) {
+  position: $p;
+  top: $t;
+  left: $l;
+  right: $r;
+  bottom: $b;
+  @content;
+}
+
+@mixin flex($fd: row, $jc: center, $ai: null, $fw: null) {
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-wrap: $fw;
+  @content;
+}

@@ -2,7 +2,7 @@ import { Input, Select, Switch } from 'antd'
 import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import FormButton from '@/components/Common/Ui/Button'
 import { useBlockActionStore } from '@/store/blockAction'
-import { toast } from '@/utils/toast'
+import { toast } from '@/utils'
 import styles from './EditTemplateBlockForm.module.scss'
 
 /**
@@ -12,7 +12,7 @@ export function EditTemplateBlockForm({ block }: BlockBaseWithBlockFormProps<TTe
   const { setOpenDrawer } = useBlockActionStore()
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    toast('수정되었습니다. (템플릿 미구현)')
+    toast('수정되었습니다. (템플릿 미구현)', 'success')
     setOpenDrawer(false)
   }
 
@@ -79,7 +79,7 @@ export function EditTemplateBlockForm({ block }: BlockBaseWithBlockFormProps<TTe
           </div>
         </div>
       </div>
-      <FormButton title="수정하기" event={false} />
+      <FormButton title="수정하기" disabled={false} />
     </form>
   )
 }

@@ -1,26 +1,24 @@
 @import '/src/styles/variables.scss';
+@import '/src/styles//mixin.scss';
 .conatiner {
   display: flex;
   padding-top: 2rem;
-  .searchBar {
+  input.searchBar {
+    @include input;
     flex: 1;
-    margin-right: 2rem;
     height: 42px;
-    border: none;
-    border-radius: 0.5rem;
+    border-radius: $radius;
+    margin-right: 2rem;
     padding: 1rem;
-    input {
-      &::placeholder {
-        color: #d8d8d8;
-      }
+    &::placeholder {
+      color: $gray-2;
     }
   }
-  .btn {
+  button.btn {
+    @include button($jober-blue, red, $black);
     width: 60px;
-    background-color: $cool-grey2;
-    border: 1px solid $cool-grey1;
-    border-radius: 0.2rem;
+    background-color: $gray-light-2;
+    border-radius: $radius;
     white-space: nowrap;
-    cursor: pointer;
   }
 }

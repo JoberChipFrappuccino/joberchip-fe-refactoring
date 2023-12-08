@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import { Editor, EditorState, convertFromRaw, type ContentBlock } from 'draft-js'
-import { useState } from 'react'
 import { type BlockBaseWithBlockProps } from '@/components/Common/SwitchCases/ViewerBox'
 import { StyleMap } from '@/constants/textEditorOptions'
 import styles from './TextBlock.module.scss'
@@ -19,12 +18,6 @@ function blockStyleFn(contentBlock: ContentBlock) {
 }
 
 export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty())
-
-  const onchange = () => {
-    setEditorState(editorState)
-  }
-
   return (
     <div className={styles.container}>
       <div className={classNames(mode === 'EDIT' && 'cover')} />
@@ -37,7 +30,7 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
                 : EditorState.createEmpty()
             }
             readOnly={true}
-            onChange={onchange}
+            onChange={() => {}}
             customStyleMap={StyleMap}
             blockStyleFn={blockStyleFn}
           />

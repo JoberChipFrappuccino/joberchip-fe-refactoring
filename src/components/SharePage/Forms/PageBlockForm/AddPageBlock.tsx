@@ -1,14 +1,12 @@
-import { useQueryClient } from '@tanstack/react-query'
-import { createPageBlockMutate } from '@/queries/mutates/pageBlockMutate'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
-import { getNextYOfLastBlock } from '@/utils/api'
+import { useCreatePageBlockMutation } from '@/hooks/mutations/pageBlockMutation'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
+import { getNextYOfLastBlock } from '@/utils/SharePage'
 import { PageBlockForm, type PageBlockSubmitData } from './PageBlockForm'
 import styles from './PageBlockForm.module.scss'
 
 export function AddPageBlock() {
   const { sharePage } = useSharePageQuery()
-  const queryClient = useQueryClient()
-  const createPageMutation = createPageBlockMutate(queryClient)
+  const createPageMutation = useCreatePageBlockMutation()
 
   const handleSubmit = (data: PageBlockSubmitData) => {
     const { parentPageId, title, description } = data

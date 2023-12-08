@@ -1,21 +1,24 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { createSpaceAPI } from '@/apis/space'
 import { SPACE_LIST } from '@/constants/querykey'
+import { useSpaceListQuery } from '@/hooks/queries/useSpaceListQuery'
 import { toast } from '@/utils/toast'
-import { useUser } from '@/hooks/useUser'
+import { useAuth } from '@/hooks/useAuth'
+import { useUser } from '@/hooks/useUserQuery'
 import styles from './UserProfile.module.scss'
 
 export function UserProfile() {
-  const { user, signOut, spaceList } = useUser()
-
+  const { user, isSuccess } = useUser()
+  const { signOut } = useAuth()
+  const { spaceList } = useSpaceListQuery()
   const queryClient = useQueryClient()
+  const navigate = useNavigate()
 
   const handleOnClickCreateSpace = () => {
     createSpaceAPI()
       .then((res) => {
         toast(res.message, res.status, { autoClose: 500 })
-        // TODO : invalidate query, refetch query 등 정리
         queryClient.refetchQueries([SPACE_LIST])
       })
       .catch((err) => {
@@ -23,11 +26,12 @@ export function UserProfile() {
         toast(err.message, 'failure', { autoClose: 500 })
       })
   }
-
   /**
    * @description myPersonalSpace는 사용자의 최상위 공유 페이지 정보로 유저마다 단 하나만 존재합니다.
    */
   const myPersonalSpace = spaceList?.find((space) => space.participationType === 'DEFAULT')
+
+  if (!isSuccess) return null
 
   return (
     <div className={styles.container}>
@@ -41,7 +45,7 @@ export function UserProfile() {
           type="button"
           onClick={() => {
             signOut()
-            window.location.reload()
+            navigate('/signin')
           }}
         >
           로그아웃

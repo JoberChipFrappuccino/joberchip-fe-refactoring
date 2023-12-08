@@ -40,7 +40,6 @@ export const createSpaceAPI = async (): Promise<ResponseBase<null>> => {
     data: null
   }
 }
-
 interface FetchSpaceListAPIResponse {
   status: number
   success: boolean

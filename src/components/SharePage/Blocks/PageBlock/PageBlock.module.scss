@@ -1,0 +1,125 @@
+@import '/src/styles/variables.scss';
+@import '/src/styles/mixin.scss';
+
+.container {
+  @include flex(column, null);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  .contentCover {
+    flex: 1;
+    .cover {
+      display: flex;
+      height: 100%;
+      padding: 1rem;
+      .img {
+        width: 100%;
+        height: 100%;
+        max-width: 4.2rem;
+        max-height: 4.2rem;
+        object-fit: cover;
+        @include mobile {
+          display: flex;
+        }
+      }
+      .contentBox {
+        @include flex(column, null);
+        text-align: start;
+        margin-left: 1.25rem;
+        h3 {
+          @include flex(column, null);
+          font-size: $text-p;
+          margin: 0;
+        }
+        p {
+          display: flex;
+          margin-top: 1rem;
+          color: #c9c9c9;
+          @include mobile {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .direct,
+  .preview {
+    @include flex(row, space-between);
+    height: 3.125rem;
+    background-color: black;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    a {
+      @include flex(row, null, center);
+      height: 100%;
+      padding-left: 1.25rem;
+    }
+  }
+  .previewBtnCover {
+    @include flex(row, end);
+    width: 100%;
+    background-color: $gray-dark;
+    .preview {
+      display: inline-block;
+      text-align: end;
+      background-color: $gray-dark;
+      padding-right: 1.25rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .contentBox {
+    p {
+      display: none;
+    }
+  }
+  .direct,
+  .preview {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 1.25rem;
+  }
+}
+.footer {
+  border: 0;
+  padding: 0;
+  width: 100%;
+  color: white;
+  outline: none;
+  display: flex;
+  cursor: pointer;
+  height: 3.125rem;
+  background-color: black;
+  justify-content: space-between;
+
+  .footerLeft {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 1.25rem;
+    @include mobile {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding-left: 1.25rem;
+    }
+    p {
+      padding: 0.5rem 0;
+      @include mobile {
+        padding: 0.5rem 0;
+      }
+    }
+  }
+  .footerright {
+    display: flex;
+    width: 2.1875rem;
+    background-color: #3b4753;
+  }
+}

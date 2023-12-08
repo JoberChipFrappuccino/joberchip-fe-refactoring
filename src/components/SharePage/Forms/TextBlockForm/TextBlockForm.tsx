@@ -69,7 +69,7 @@ export function TextBlockForm({ block, onSubmit }: TextBlockFormProps) {
           />
         </div>
       </div>
-      <FormButton title={drawerMode === 'CREATE' ? '텍스트 추가하기' : '텍스트 수정하기'} event={isButtonDisabled} />
+      <FormButton title={drawerMode === 'CREATE' ? '텍스트 추가하기' : '텍스트 수정하기'} disabled={isButtonDisabled} />
     </form>
   )
 }

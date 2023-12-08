@@ -1,21 +1,18 @@
 @import '/src/styles/variables.scss';
-@import '/src/styles/utils.scss';
+@import '/src/styles/mixin.scss';
 
 .container {
-  display: flex;
-  flex-direction: column;
+  @include flex(column, null);
   padding: 1.25rem;
   .searchBox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex(row, center, center);
     .select {
       margin-right: 1.25rem;
     }
   }
   .btn {
     width: 100%;
-    background-color: $highlight-blue;
+    background-color: $jober-blue-light;
     color: $jober-blue;
     border: none;
     padding: 0.75rem;

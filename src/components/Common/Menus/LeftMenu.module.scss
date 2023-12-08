@@ -1,14 +1,12 @@
 @import '/src/styles/variables.scss';
-@import '/src/styles/maxin.scss';
+@import '/src/styles/mixin.scss';
 
 .userProfile {
+  @include flex(null, center, center);
   width: 8rem;
   height: 8rem;
   background-color: #4c61ff;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-top: 3rem;
   @include tablet {
     width: 7rem;

@@ -1,9 +1,7 @@
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import { signUpAPI } from '@/apis/user'
 import { Header, HomeLogo } from '@/components/Common/Menus'
 import { SignUpFormErrorWarn } from '@/components/SignUpPage/SignUpFormError'
-import { to, toast } from '@/utils'
+import { useAuth } from '@/hooks/useAuth'
 import styles from './SignUp.module.scss'
 
 export interface SignUpInputs {
@@ -13,7 +11,6 @@ export interface SignUpInputs {
 }
 
 export default function SignUp() {
-  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -21,13 +18,11 @@ export default function SignUp() {
     reset,
     formState: { errors }
   } = useForm<SignUpInputs>({ mode: 'onBlur' })
+  const { signUp } = useAuth()
 
   const onSubmit: SubmitHandler<SignUpInputs> = (data) => {
-    to(signUpAPI(data)).then((res) => {
-      toast(res.message, res.status, { autoClose: 500 })
-      if (res.status === 'success') return navigate('/signin')
-      reset()
-    })
+    reset()
+    signUp(data)
   }
   return (
     <>

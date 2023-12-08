@@ -22,29 +22,27 @@ export function ImageBlockForm({ block, onSubmit }: ImageBlockFormProps) {
   }
 
   return (
-    <div className={styles.container}>
-      <form className={styles.formBox} onSubmit={handleSubmit}>
-        <div className={styles.forms}>
-          <h3>사진 제목*</h3>
-          <div className={styles.inputbox}>
-            <Input
-              className={styles.input}
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="사진 제목을 입력해주세요."
-            />
-            {title && (
-              <button type="button" className={styles.delTitle} onClick={() => setTitle('')}>
-                <TiDeleteOutline />
-              </button>
-            )}
-          </div>
-          <h3 className={styles.formText}>사진 첨부*</h3>
-          <ImgThumbnail img={thumbnail} imgData={setThumbnail} />
+    <form className={styles.formBox} onSubmit={handleSubmit}>
+      <div className={styles.forms}>
+        <h3>사진 제목*</h3>
+        <div className={styles.inputbox}>
+          <Input
+            className={styles.input}
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="사진 제목을 입력해주세요."
+          />
+          {title && (
+            <button type="button" className={styles.delTitle} onClick={() => setTitle('')}>
+              <TiDeleteOutline />
+            </button>
+          )}
         </div>
-        <FormButton title={drawerMode === 'CREATE' ? '사진 추가하기' : '사진 수정하기'} event={!title || !thumbnail} />
-      </form>
-    </div>
+        <h3 className={styles.thumbnailTitle}>사진 첨부*</h3>
+        <ImgThumbnail img={thumbnail} imgData={setThumbnail} />
+      </div>
+      <FormButton title={drawerMode === 'CREATE' ? '사진 추가하기' : '사진 수정하기'} disabled={!title || !thumbnail} />
+    </form>
   )
 }

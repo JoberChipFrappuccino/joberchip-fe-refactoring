@@ -1,4 +1,4 @@
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import styles from './ProfileViewMode.module.scss'
 
 export default function ProfileViewMode() {
@@ -6,7 +6,7 @@ export default function ProfileViewMode() {
   return (
     <div className={styles.container}>
       <div className={styles.profileImageCover}>
-        <img src={sharePage.profileImageLink} alt={`${sharePage.title} thumbnail`} />
+        <img src={sharePage?.profileImageLink} alt={`${sharePage.title} thumbnail`} />
       </div>
       <div className={styles.profileCover}>
         <h2>{sharePage.title}</h2>

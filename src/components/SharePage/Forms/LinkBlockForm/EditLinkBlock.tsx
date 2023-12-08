@@ -1,15 +1,13 @@
 import type { EditLinkBlockBody } from '@/apis/blocks/linkBlock'
 import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
-import { useQueryClient } from '@tanstack/react-query'
 import { LinkBlockForm, type LinkBlockFromInputs } from '@/components/SharePage/Forms/LinkBlockForm/LinkBlockForm'
-import { editLinkBlockMutate } from '@/queries/mutates/linkBlockMutate'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useEditLinkBlockMutate } from '@/hooks/mutations/linkBlockMutation'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import styles from './LinkBlockForm.module.scss'
 
 export function EditLinkBlock({ block }: BlockBaseWithBlockFormProps<TLink>) {
   const { pageId } = useSharePageQuery()
-  const queryClient = useQueryClient()
-  const editLinkMutation = editLinkBlockMutate(queryClient)
+  const editLinkMutation = useEditLinkBlockMutate()
   const handleSubmit = (data: LinkBlockFromInputs) => {
     const body: EditLinkBlockBody = {
       objectId: block?.objectId ?? '',

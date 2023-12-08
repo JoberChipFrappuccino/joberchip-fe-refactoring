@@ -1,5 +1,5 @@
-import { type BlockType, type BlockItem, type BlockWith } from '@/models/space'
-import { getNextYOfLastBlock } from './api'
+import { type BlockItem, type BlockType, type BlockWith } from '@/models/block'
+import { getNextYOfLastBlock } from './SharePage'
 
 type Name<T extends BlockType> = keyof BlockWith<T>
 class FormManager<T extends BlockType> {

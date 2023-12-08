@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ACCESS_TOKEN, BACK_MOCK_ACCESS_TOKEN } from '@/constants'
+import { getAccessToken } from '@/utils'
 import { errorController } from './controller/error'
 
 const mockAPI = axios.create({
@@ -33,12 +34,17 @@ const backAPI = axios.create({
   baseURL: process.env.BACK_SERVER_BASE_URL,
   timeout: 10000
 })
+const api = axios.create({
+  baseURL: process.env.BACK_SERVER_BASE_URL,
+  timeout: 10000
+})
 
 backAPI.interceptors.request.use(
   (config) => {
-    if (typeof window === 'undefined') return config
-    const token = localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) ?? null
-    if (token) config.headers.Authorization = token
+    const accessToken = getAccessToken(BACK_MOCK_ACCESS_TOKEN)
+    if (accessToken) {
+      config.headers.Authorization = accessToken
+    }
     return config
   },
   async (error) => {
@@ -47,4 +53,4 @@ backAPI.interceptors.request.use(
   }
 )
 
-export { mockAPI as authAPI, backAPI as backAuthAPI }
+export { mockAPI as authAPI, backAPI as backAuthAPI, api }

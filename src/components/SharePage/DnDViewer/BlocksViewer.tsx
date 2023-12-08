@@ -1,21 +1,20 @@
 import classNames from 'classnames'
 import { useCallback, useEffect, useState } from 'react'
 import { Responsive, WidthProvider, type ResponsiveProps } from 'react-grid-layout'
-import { fetchLayout } from '@/apis/page/page'
+import { fetchLayout } from '@/apis/page'
 import { ViewerBox } from '@/components/Common/SwitchCases/ViewerBox'
 import { MainBlockInfo } from '@/components/Common/Ui/MainBlockInfo'
 import { SpaceActionBar } from '@/components/SharePage/ActionBar/SpaceActionBar'
 import { ViewerBlockBase } from '@/components/SharePage/DnDViewer/ViewerBlockBase'
 import { DROPDOWN_TRIGGER_ICON_ID } from '@/constants'
 import { BREAKPOINTS, LAYOUT_DEBOUNCE_TIME } from '@/constants/space'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { useSharePageModeStore } from '@/store/sharePage'
 import { to, toast } from '@/utils'
 import { calculateRatio, convertLayoutToParam, getLayoutByMode, sortLayout } from '@/utils/SharePage'
 import { useDebounce } from '@/hooks/useDebounce'
 import styles from './BlocksViewer.module.scss'
-import '@/styles/reactGridLayout.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
@@ -23,30 +22,36 @@ export const BlocksViewer = () => {
   const { mode } = useSharePageModeStore()
   const { sharePage, pageId } = useSharePageQuery()
   const { activeBlockId, setActiveBlockId } = useBlockActionStore()
-
   const [editModeGrid, setEditModeGrid] = useState(getLayoutByMode(sharePage.children, 'EDIT'))
   const [viewModeGrid, setViewModeGrid] = useState(getLayoutByMode(sharePage.children, 'VIEW'))
-  const [rowHeight, setRowHeight] = useState(100)
-  const [margin, setMargin] = useState(40)
+  const [rowHeight, setRowHeight] = useState(0)
+  const [margin, setMargin] = useState(0)
 
-  // * 레이아웃이 변경되면 서버에게 변경된 레이아웃을 알립니다.
-  useDebounce(editModeGrid.layouts.lg, LAYOUT_DEBOUNCE_TIME, (nextLayout) => {
+  const nextLayout = useDebounce(editModeGrid.layouts.lg, LAYOUT_DEBOUNCE_TIME)
+
+  useEffect(() => {
     if (mode === 'VIEW') return
+    if (
+      JSON.stringify(convertLayoutToParam(sharePage.children, nextLayout)) ===
+      JSON.stringify(convertLayoutToParam(sharePage.children, editModeGrid.layouts.lg))
+    ) {
+      return
+    }
     to(fetchLayout(pageId ?? '', convertLayoutToParam(sharePage.children, nextLayout))).then((res) => {
-      toast(res.message, res.status, { autoClose: 500 })
+      if (res.data) toast('레이아웃이 변경되었습니다', 'success')
     })
-  })
+  }, [nextLayout])
 
-  // * "EDIT" || "VIEW" 모드가 변경되면 레이아웃을 다시 그립니다.
   useEffect(() => {
     setEditModeGrid(() => getLayoutByMode(sharePage.children, 'EDIT'))
     const visibleChildren = sharePage.children.filter((item) => item.visible)
     setViewModeGrid(() => getLayoutByMode(visibleChildren, 'VIEW'))
   }, [mode, pageId])
 
+  // * "EDIT" || "VIEW" 모드가 변경되면 레이아웃을 다시 그립니다.
   const handleWidthChange: ResponsiveProps['onWidthChange'] = //
     useCallback<NonNullable<ResponsiveProps['onWidthChange']>>(
-      (width, _margin, cols) => {
+      (width, _margin, cols, _padding) => {
         if (width > 768) {
           setMargin(40)
           setRowHeight(calculateRatio(width, cols, 0.7))
@@ -75,7 +80,10 @@ export const BlocksViewer = () => {
         setActiveBlockId(el.id)
         if (e.type === 'mousedown') return
         const targetElement = e.target as HTMLElement
-        if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) targetElement.closest('button')?.click()
+        if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) {
+          // 컨텍스트가 비워졌을 떄 클릭 이벤트를 실행합니다.
+          setTimeout(() => targetElement.closest('button')?.click())
+        }
       },
       [activeBlockId]
     )

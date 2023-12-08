@@ -16,7 +16,7 @@
     width: 100%;
     max-width: 35rem;
     height: 15rem;
-    background-color: $base-white;
+    background-color: $white;
     border-radius: 1rem;
     .contentCover {
       display: flex;
@@ -37,7 +37,7 @@
         transition: all 200ms ease;
       }
       .cancelBtn {
-        background-color: $cool-grey1;
+        background-color: $gray-light-1;
         border-bottom-left-radius: 1rem;
       }
       .cancelBtn:hover {
@@ -45,7 +45,7 @@
       }
       .confirmBtn {
         background-color: $jober-blue;
-        color: $base-white;
+        color: $white;
         border-bottom-right-radius: 1rem;
       }
       .confirmBtn:hover {

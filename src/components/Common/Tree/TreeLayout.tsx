@@ -2,8 +2,8 @@ import type { EventDataNode } from 'antd/es/tree'
 import { IoChevronDownOutline } from '@react-icons/all-files/io5/IoChevronDownOutline'
 import { Tree } from 'antd'
 import { type Key } from 'react'
-import { useTree } from '@/hooks/tree'
-import { type ITree } from '@/hooks/tree'
+import { useTree } from '@/hooks/useTree'
+import { type ITree } from '@/hooks/useTree'
 
 export type TreeInfo = {
   event: 'select'
@@ -25,7 +25,6 @@ export default function TreeLayout({ onSelectTreeNode, spaceId, pageId }: TreeLa
 
   return (
     <Tree
-      className="draggable-tree"
       draggable={false}
       blockNode
       defaultSelectedKeys={[pageId ?? '']}

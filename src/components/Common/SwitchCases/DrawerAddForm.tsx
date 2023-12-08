@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { AddImageBlock } from '@/components/SharePage/Forms/ImageBlockForm/AddImageBlock'
 import { AddLinkBlock } from '@/components/SharePage/Forms/LinkBlockForm/AddLinkBlock'
 import { AddMapBlock } from '@/components/SharePage/Forms/MapBlockForm/AddMapBlock'
@@ -27,7 +28,11 @@ function getCreateFormComponent({ blockType }: DrawerCreateFormProps) {
     case PAGE:
       return <AddPageBlock />
     case TEMPLATE:
-      return <AddTemplateBlockForm />
+      return (
+        <Suspense fallback={<p>loading...</p>}>
+          <AddTemplateBlockForm />
+        </Suspense>
+      )
     default: {
       if (process.env.NODE_ENV === 'development') {
         throw new Error('Please add a component')

@@ -1,8 +1,28 @@
 import { type Layout } from 'react-grid-layout'
-import { type FetchLayoutBlocksParam } from '@/apis/space'
-import { type EmbedGoogleMapBlock, type BlockType, type SharePage } from '@/models/space'
-import { type Center } from '@/store/map'
 
+import { v4 } from 'uuid'
+import {
+  editGoogleMapBlockAPI,
+  editImageBlockAPI,
+  editLinkBlockAPI,
+  editTextBlockAPI,
+  editVideoBlockAPI
+} from '@/apis/blocks'
+import { type FetchLayoutBlocksParam, editPageBlockAPI } from '@/apis/page'
+import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/block'
+import { type BlockBase, type BlockType, type EmbedGoogleMapBlock } from '@/models/block'
+import { type SharePage } from '@/models/space'
+import { type Center } from '@/store/map'
+import { toast } from '../toast'
+
+export function sortLayout(layout: BlockItem[]): Layout[] {
+  return layout.sort((a, b) => {
+    if (a.y === b.y) {
+      return a.x > b.x ? 1 : -1
+    }
+    return a.y > b.y ? 1 : -1
+  })
+}
 interface BlockItem {
   i: string
   x: number
@@ -16,19 +36,6 @@ interface BlockItem {
   isResizable?: boolean
 }
 
-export function sortLayout(layout: BlockItem[]): Layout[] {
-  return layout.sort((a, b) => {
-    if (a.y === b.y) {
-      return a.x > b.x ? 1 : -1
-    }
-    return a.y > b.y ? 1 : -1
-  })
-}
-
-interface GetLatoutByMode {
-  breakpoints: 'lg'
-  layouts: { lg: Layout[] }
-}
 /**
  * @description 블록의 모드를 기반으로 옵션을 설정합니다.
  * @todo 현제 min, max값이 매직넘버로 되어 있지만, 추후 블럭의 타입에 따라서 min, max 제한이 필요합니다.
@@ -54,7 +61,25 @@ export function getLayoutByMode(blocks: SharePage['children'], mode: SharePageMo
     layouts: { lg: layout }
   }
 }
+interface GetLatoutByMode {
+  breakpoints: 'lg'
+  layouts: { lg: Layout[] }
+}
 
+/**
+ * @description 가장 아래에 있는 블럭의 Y값을 반환합니다.
+ */
+export function getNextYOfLastBlock(blocks: SharePage['children']) {
+  let lastOfY = 0
+  for (let i = 0; i < blocks.length; i++) {
+    if (lastOfY < blocks[i].y + blocks[i].h) lastOfY = blocks[i].y + blocks[i].h
+  }
+  return lastOfY + 1
+}
+
+/**
+ * @description 스크린 사이즈에 따라서 블록의 크기를 계산합니다.
+ */
 export function calculateRatio(width: number, cols: number, radio: number) {
   return (width * radio) / cols
 }
@@ -97,6 +122,9 @@ export function convertLayoutToParam(children: SharePage['children'], layout: La
   })
 }
 
+/**
+ * @description 직렬화된 지도 정보에서 위도와 경도를 추출합니다.
+ */
 export function getCenter(block?: EmbedGoogleMapBlock) {
   if (!block?.src) {
     return {
@@ -108,6 +136,9 @@ export function getCenter(block?: EmbedGoogleMapBlock) {
   return centerNoAddress
 }
 
+/**
+ * @description API 호출을 위한 파라미터로 변환합니다.
+ */
 export function needToConvertAbbr(center: Center) {
   return {
     lat: center.latitude,
@@ -115,6 +146,9 @@ export function needToConvertAbbr(center: Center) {
   }
 }
 
+/**
+ * @description dataURL을 blob으로 변환합니다.
+ */
 export function dataURIToBlob(dataURI: string) {
   const splitDataURI = dataURI.split(',')
   const byteString = splitDataURI[0].includes('base64') ? atob(splitDataURI[1]) : decodeURI(splitDataURI[1])
@@ -126,4 +160,45 @@ export function dataURIToBlob(dataURI: string) {
   }
 
   return new Blob([ia], { type: mimeString })
+}
+
+export function editBlockAPIByType(pageId: string | undefined, block: BlockBase<BlockType>) {
+  if (!pageId) {
+    if (process.env.NODE_ENV === 'development') console.error('pageId가 없습니다.')
+    throw new Error('잘못된 접근입니다.')
+  }
+  const { objectId, visible } = block
+  switch (block.type) {
+    case TEXT:
+      return editTextBlockAPI(pageId, { objectId, visible: !visible })
+    case IMAGE:
+      return editImageBlockAPI(pageId, { objectId, visible: !visible })
+    case LINK:
+      return editLinkBlockAPI(pageId, { objectId, visible: !visible })
+    case PAGE:
+      return editPageBlockAPI(pageId, { visible: !visible })
+    case VIDEO:
+      return editVideoBlockAPI(pageId, { objectId, visible: !visible })
+    case MAP:
+      return editGoogleMapBlockAPI(pageId, { objectId, visible: !visible })
+    case TEMPLATE:
+      toast('템플릿 공개 설정은 아직 지원하지 않습니다.', 'success')
+      return {
+        status: 'success',
+        message: '템플릿 공개 설정은 아직 지원하지 않습니다.'
+      }
+    default:
+      if (process.env.NODE_ENV === 'development') console.error('block type과 일치하는 API가 없습니다.')
+      throw new Error('잘못된 접근입니다.')
+  }
+}
+
+/**
+ * @description 유니크한 키를 가진 divider를 반환합니다.
+ */
+export function getUniqueDivier() {
+  return {
+    key: v4(),
+    type: 'divider'
+  }
 }

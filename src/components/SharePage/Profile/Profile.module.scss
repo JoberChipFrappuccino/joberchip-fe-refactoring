@@ -1,21 +1,19 @@
 @import '/src/styles/variables.scss';
-@import '/src/styles/maxin.scss';
+@import '/src/styles/mixin.scss';
 @import '/src/styles/utils.scss';
 @import '/src/styles/variables.scss';
 
 .container {
-  display: flex;
-  justify-content: center;
+  @include flex(null, center);
   .inner {
-    display: flex;
-    flex-direction: column;
+    @include flex(column, center);
     width: 100%;
     max-width: 90rem;
     background-color: white;
     padding: 3.8rem;
     margin: 4rem 2rem 0 2rem;
     box-shadow: $box-shadow-small;
-    border-radius: 1rem;
+    border-radius: $radius-lg;
     @include tablet {
       & {
         padding: 2rem;
@@ -30,11 +28,6 @@
         box-shadow: none;
         border-radius: 0;
       }
-    }
-    ul {
-      margin: 0;
-      margin-top: 2rem;
-      padding: 0;
     }
     li {
       list-style: none;

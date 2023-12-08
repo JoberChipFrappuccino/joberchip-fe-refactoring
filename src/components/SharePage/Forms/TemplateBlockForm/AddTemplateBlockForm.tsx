@@ -1,28 +1,27 @@
-import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useState } from 'react'
 import FormButton from '@/components/Common/Ui/Button'
-import { TemplateBlock } from '@/components/SharePage/Blocks/TemplateBlock'
+import { TemplateBlock } from '@/components/SharePage/Blocks/TemplateBlock/TemplateBlock'
 import { TemplateSearchBox } from '@/components/SharePage/Forms/TemplateBlockForm/TemplateSearchBox'
+import { useAddTemplateBlockMutation } from '@/hooks/mutations/templateBlockMutation'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
+import { useTemplateQuery } from '@/hooks/queries/useTemplateQuery'
 import { type BlockWith } from '@/models/block'
-import { addTemplateBlockMutate } from '@/queries/mutates/templateBlockMutate'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
-import { useTemplateQuery } from '@/queries/useTemplateQuery'
 import { useBlockActionStore } from '@/store/blockAction'
-import { getNextYOfLastBlock } from '@/utils/api'
-import { useUser } from '@/hooks/useUser'
+import { getNextYOfLastBlock } from '@/utils/SharePage'
+import { useUser } from '@/hooks/useUserQuery'
 import styles from './AddTemplateBlockForm.module.scss'
 
 /**
  * @description 템플릿 블록은 기획에 포함되지 않은 기능으로, 일부 모양만 구현되어 있습니다.
  */
 export function AddTemplateBlockForm() {
-  const { user } = useUser()
+  const { user, isSuccess } = useUser()
   const { sharePage, pageId } = useSharePageQuery()
+  const { templates } = useTemplateQuery(user?.userId)
   const { setOpenDrawer } = useBlockActionStore()
-  const { templates } = useTemplateQuery(user.userId)
-  const queryClient = useQueryClient()
-  const addTemplateMutation = addTemplateBlockMutate(queryClient)
+  const addTemplateMutation = useAddTemplateBlockMutation()
+
   const [templateId, setTemplateId] = useState('')
 
   const handleOnClick = (block: BlockWith<TTemplate>) => {
@@ -49,6 +48,10 @@ export function AddTemplateBlockForm() {
     setOpenDrawer(false)
   }
 
+  if (!isSuccess) {
+    throw new Error('사용할 수 없는 기능입니다.')
+  }
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <TemplateSearchBox />
@@ -70,7 +73,7 @@ export function AddTemplateBlockForm() {
           )
         })}
       </div>
-      <FormButton title="템플릿 추가하기" event={!templateId} additionalStyle={styles.formBtn} />
+      <FormButton title="템플릿 추가하기" disabled={!templateId} additionalStyle={styles.formBtn} />
     </form>
   )
 }

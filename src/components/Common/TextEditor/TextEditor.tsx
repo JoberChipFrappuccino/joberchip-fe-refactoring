@@ -57,7 +57,7 @@ export default function TextEditor(props: TextEditorProps) {
           blockStyleFn={getBlockStyle}
         />
       </div>
-      {props.editorIsOpen && <FormButton title={'텍스트 입력완료'} event={props.isButtonDisabled} />}
+      {props.editorIsOpen && <FormButton title={'텍스트 입력완료'} disabled={props.isButtonDisabled} />}
     </div>
   )
 }

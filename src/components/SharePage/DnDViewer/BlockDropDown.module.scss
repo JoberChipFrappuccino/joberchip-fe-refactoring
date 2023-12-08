@@ -1,0 +1,23 @@
+@import '/src/styles/variables.scss';
+@import '/src/styles/mixin.scss';
+
+.iconCover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  .inactiveIcon {
+    width: 2rem;
+    height: 2rem;
+    fill: transparent;
+  }
+  .activeIcon {
+    width: 2rem;
+    height: 2rem;
+    fill: black;
+    cursor: pointer;
+  }
+}

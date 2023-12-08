@@ -6,57 +6,21 @@ import { BLOCK_TO, IMAGE, LINK, MAP, TEXT, VIDEO } from '@/constants/block'
 import { useBlockActionStore } from '@/store/blockAction'
 import styles from './BlockFormBase.module.scss'
 
-interface FormType {
-  title: string
-  type: BlockType
-  icon: ReactNode
-}
-interface Props {
+interface BloackFormBaseProps {
   children: ReactNode
 }
-export function BlockFormBase({ children }: Props) {
+export function BlockFormBase({ children }: BloackFormBaseProps) {
   const { blockType, setBlockType, drawerMode } = useBlockActionStore()
-
-  const formTypes: FormType[] = useMemo(
-    () => [
-      {
-        type: LINK,
-        title: BLOCK_TO.KR[LINK],
-        icon: <BiLink />
-      },
-      {
-        type: IMAGE,
-        title: BLOCK_TO.KR[IMAGE],
-        icon: <BiImageAlt />
-      },
-      {
-        type: VIDEO,
-        title: BLOCK_TO.KR[VIDEO],
-        icon: <BiCaretRightSquare />
-      },
-      {
-        type: MAP,
-        title: BLOCK_TO.KR[MAP],
-        icon: <BiMapAlt />
-      },
-      {
-        type: TEXT,
-        title: BLOCK_TO.KR[TEXT],
-        icon: <BiPencil />
-      }
-    ],
-    []
-  )
+  const forms = useMemo(() => formTypes(), [])
 
   if (blockType === 'PAGE' || blockType === 'TEMPLATE') {
     return children
   }
-
   return (
     <div className={styles.flexContainer}>
       <div className={styles.container}>
         <h2>
-          {formTypes.find((form) => form.type === blockType)?.title} {drawerMode === 'CREATE' ? '추가하기' : '수정하기'}
+          {forms.find((form) => form.type === blockType)?.title} {drawerMode === 'CREATE' ? '추가하기' : '수정하기'}
         </h2>
         <div
           className={classNames([
@@ -66,7 +30,7 @@ export function BlockFormBase({ children }: Props) {
             }
           ])}
         >
-          {formTypes.map((form) => {
+          {forms.map((form) => {
             return (
               <div key={form.type}>
                 <button
@@ -100,4 +64,39 @@ export function BlockFormBase({ children }: Props) {
       <div className={styles.inner}>{children}</div>
     </div>
   )
+}
+
+interface FormType {
+  title: string
+  type: BlockType
+  icon: ReactNode
+}
+function formTypes(): FormType[] {
+  return [
+    {
+      type: LINK,
+      title: BLOCK_TO.KR[LINK],
+      icon: <BiLink />
+    },
+    {
+      type: IMAGE,
+      title: BLOCK_TO.KR[IMAGE],
+      icon: <BiImageAlt />
+    },
+    {
+      type: VIDEO,
+      title: BLOCK_TO.KR[VIDEO],
+      icon: <BiCaretRightSquare />
+    },
+    {
+      type: MAP,
+      title: BLOCK_TO.KR[MAP],
+      icon: <BiMapAlt />
+    },
+    {
+      type: TEXT,
+      title: BLOCK_TO.KR[TEXT],
+      icon: <BiPencil />
+    }
+  ]
 }

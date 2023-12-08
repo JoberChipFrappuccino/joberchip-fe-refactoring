@@ -1,14 +1,13 @@
 @import '/src/styles/variables.scss';
+@import '/src/styles/mixin.scss';
 .container {
-  display: flex;
-  flex-direction: column;
-
+  @include flex(column, null);
   height: 100%;
   h2 {
     margin: 0;
   }
   .templateSettingContainer {
-    border-bottom: 2px solid $cool-grey1;
+    border-bottom: 2px solid $gray-light-1;
     padding: 1.25rem;
   }
   .userSettingContainer {
@@ -18,7 +17,6 @@
       margin-top: 1.25rem;
     }
   }
-
   .inputCover {
     padding-top: 1.25rem;
     p {
@@ -26,8 +24,7 @@
       padding-bottom: 0.5rem;
     }
     .split {
-      display: flex;
-      justify-content: space-between;
+      @include flex(row, space-between);
     }
   }
 }

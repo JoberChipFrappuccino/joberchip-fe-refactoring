@@ -1,40 +1,38 @@
 import { BsThreeDotsVertical } from '@react-icons/all-files/bs/BsThreeDotsVertical'
 import { Switch } from 'antd'
 import { useMemo } from 'react'
-import { editPageBlockAPI } from '@/apis/page/page'
+import { editPageBlockAPI } from '@/apis/page'
 import { TreeDrawer } from '@/components/Common/Tree/TreeDrawer'
 import { DropDownMenu } from '@/components/SharePage/DropDownMenu'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
+import { useSpaceListQuery } from '@/hooks/queries/useSpaceListQuery'
 import { useSharePageModeStore } from '@/store/sharePage'
 import { clip } from '@/utils'
-import { useUser } from '@/hooks/useUser'
+import { getUniqueDivier } from '@/utils/SharePage'
 import styles from './ProfileDropDownMenu.module.scss'
 
 export default function ProfileDropDownMenu() {
   const { sharePage, pageId } = useSharePageQuery()
+  const { spaceList } = useSpaceListQuery()
   const { mode, setSharePageMode } = useSharePageModeStore()
-  const { spaceList } = useUser()
   const rootPage = spaceList?.find((page) => page.mainPageId === pageId)
-
   const items = useMemo(
     () => [
       {
         key: `${pageId}-profile-1`,
         label: (
-          <Switch
-            className={styles.switchBtn}
-            onChange={() => {
-              editPageBlockAPI(pageId, { visible: !sharePage.visible })
-            }}
-            defaultChecked={sharePage.visible}
-          />
+          <div className={styles.switchBtn}>
+            <Switch
+              onChange={() => {
+                editPageBlockAPI(pageId, { visible: !sharePage.visible })
+              }}
+              defaultChecked={sharePage.visible}
+            />
+          </div>
         ),
         icon: '공개설정'
       },
-      {
-        key: 'Profile-divider-1',
-        type: 'divider'
-      },
+      getUniqueDivier(),
       rootPage?.mainPageId
         ? {
             key: `${pageId}-profile-4`,
@@ -48,12 +46,9 @@ export default function ProfileDropDownMenu() {
             key: `${pageId}-profile-2`,
             icon: <TreeDrawer />
           },
+      getUniqueDivier(),
       {
-        key: 'Profile-divider-2',
-        type: 'divider'
-      },
-      {
-        key: `${pageId}-profile-4`,
+        key: `${pageId}-profile-5`,
         label: (
           <Switch
             checkedChildren="공유 화면 미리보기"

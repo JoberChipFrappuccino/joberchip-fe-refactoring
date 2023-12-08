@@ -1,16 +1,31 @@
+// color
+$gray: #e2e6ef;
+$gray-2: #a2a4af;
+$gray-light-1: #e0e0e0;
+$gray-light-2: #ececfb;
+$gray-light-3: #f7f8fa;
+$gray-dark: #3b4753;
 $jober-blue: #4c61ff;
-$highlight-blue: #f2f9ff;
-$ppt-grey: #f7f8fa;
-$cool-grey1: #e0e0e0;
-$cool-grey2: #ececfb;
-$cool-grey3: #3b4753;
-$bg-main: #f7f8fa;
-$bg-jober-blue: #4c61ff;
-$base-white: #ffffff;
-$base-black: #040404;
-$base-grey: #e2e6ef;
+$jober-blue-light: #f2f9ff;
+$white: #ffffff;
+$white-light: #f7f8fa;
+$black: #040404;
 
 // box-shadow
 $box-shadow-large: 0px 1.1rem 2.2rem 0px rgba(0, 0, 0, 0.3);
 $box-shadow-medium: 0rem 0rem 0.5rem 0.25rem rgba(0, 0, 0, 0.173);
 $box-shadow-small: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.089);
+
+// font-size
+$text-h-1: 3.2rem;
+$text-h-2: 2.5rem;
+$text-h-3: 2.2rem;
+$text-h-4: 2rem;
+$text-p-lg: 1.8rem;
+$text-p: 1.6rem;
+$text-p-sm: 1.4rem;
+
+// border-radius
+$radius: 0.5rem;
+$radius-sm: 0.2rem;
+$radius-lg: 1rem;

@@ -1,8 +1,7 @@
 import type { EditGoogleMapBlockBody } from '@/apis/blocks/mapBlock'
 import type { BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
-import { useQueryClient } from '@tanstack/react-query'
-import { editMapBlockMutate } from '@/queries/mutates/mapBlockMutate'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useEditMapBlockMutation } from '@/hooks/mutations/mapBlockMutation'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { useMapStore } from '@/store/map'
 import { toast } from '@/utils/toast'
@@ -15,8 +14,7 @@ export function EditMapBlock({ block }: BlockBaseWithBlockFormProps<TMap>) {
   const { address, center } = useMapStore()
   const { pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
-  const queryClient = useQueryClient()
-  const editMutation = editMapBlockMutate(queryClient)
+  const editMapMutation = useEditMapBlockMutation()
 
   const handleSubmit = () => {
     const editBlock: EditGoogleMapBlockBody = {
@@ -25,7 +23,7 @@ export function EditMapBlock({ block }: BlockBaseWithBlockFormProps<TMap>) {
       latitude: String(center.latitude),
       longitude: String(center.longitude)
     }
-    editMutation.mutate({ pageId, editBlock })
+    editMapMutation.mutate({ pageId, editBlock })
     toast('지도가 수정되었습니다.', 'success')
     setOpenDrawer(false)
   }

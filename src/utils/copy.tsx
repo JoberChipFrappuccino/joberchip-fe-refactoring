@@ -7,5 +7,5 @@ export function clip(url: string) {
   textarea.select()
   document.execCommand('copy')
   document.body.removeChild(textarea)
-  toast('링크가 복사되었습니다.')
+  toast('링크가 복사되었습니다.', 'success')
 }

@@ -1,11 +1,10 @@
 import type { AddGoogleMapBlockBody } from '@/apis/blocks/mapBlock'
-import { useQueryClient } from '@tanstack/react-query'
 import { MAP } from '@/constants/block'
-import { addMapBlockMutate } from '@/queries/mutates/mapBlockMutate'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useAddMapBlockMutation } from '@/hooks/mutations/mapBlockMutation'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { useMapStore } from '@/store/map'
-import { getNextYOfLastBlock } from '@/utils'
+import { getNextYOfLastBlock } from '@/utils/SharePage'
 import { toast } from '@/utils/toast'
 import { useLoadGoogleMap } from '@/hooks/useGoogleMap'
 import { MapBlockForm } from './MapBlockForm'
@@ -16,8 +15,7 @@ export function AddMapBlock() {
   const { address, center } = useMapStore()
   const { sharePage, pageId } = useSharePageQuery()
   const { setOpenDrawer } = useBlockActionStore()
-  const queryClient = useQueryClient()
-  const addMutation = addMapBlockMutate(queryClient)
+  const AddMapMutation = useAddMapBlockMutation()
 
   const handleSubmit = () => {
     const createBody: AddGoogleMapBlockBody = {
@@ -30,7 +28,7 @@ export function AddMapBlock() {
       latitude: String(center.latitude),
       longitude: String(center.longitude)
     }
-    addMutation.mutate({ pageId, newBlock: createBody })
+    AddMapMutation.mutate({ pageId, newBlock: createBody })
     toast('지도가 추가되었습니다.', 'success')
     setOpenDrawer(false)
   }

@@ -1,14 +1,14 @@
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { BreadCrumbBox, Header, LeftMenu } from '@/components/Common/Menus'
 import { BlocksViewer } from '@/components/SharePage/DnDViewer/BlocksViewer'
 import { Drawer } from '@/components/SharePage/Drawer/Drawer'
 import { Profile } from '@/components/SharePage/Profile/Profile'
 import { SEO } from '@/constants'
-import { useSharePageQuery } from '@/queries/useSharePageQuery'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useSharePageModeStore } from '@/store/sharePage'
 import useServerSideProps from '@/hooks/serverSideProps'
-
+import '@/styles/reactGridLayout.scss'
 interface PageSource {
   title: string
   description: string
@@ -16,38 +16,42 @@ interface PageSource {
 }
 
 export default function SharePage() {
-  const pageSource: PageSource = useServerSideProps(SEO)
+  const { source, isServerSide } = useServerSideProps<PageSource>(SEO)
   const { pageId, isSuccess, sharePage } = useSharePageQuery()
   const { setSharePageMode } = useSharePageModeStore()
 
   useEffect(() => {
-    if (isSuccess) {
-      if (typeof sharePage.privilege === 'string') setSharePageMode(sharePage.privilege)
-      else setSharePageMode('VIEW')
-    }
+    if (!isSuccess) return
+    if (typeof sharePage.privilege === 'string') setSharePageMode(sharePage.privilege)
+    else setSharePageMode('VIEW')
   }, [pageId, isSuccess])
 
   return (
     <>
-      <Header>
-        <LeftMenu />
-        <BreadCrumbBox />
-      </Header>
       <Helmet>
-        <title>{pageSource.title ? `Jober chip | ${pageSource.title}` : 'Jober'}</title>
-        <meta name="description" content={pageSource.description} />
-        <link rel="favicon" href={pageSource.profileImageLink ?? '/favicon.ico'} />
-        <meta property="og:title" content={pageSource.title} />
-        <meta property="og:description" content={pageSource.description} />
-        <meta property="og:image" content={pageSource.profileImageLink} />
+        <title>{source.title ? `Jober chip | ${source.title}` : 'Jober'}</title>
+        <meta name="description" content={source.description ?? ''} />
+        <link rel="favicon" href={source.profileImageLink ?? '/favicon.ico'} />
+        <meta property="og:title" content={source.title ?? ''} />
+        <meta property="og:description" content={source.description ?? ''} />
+        <meta property="og:image" content={source.profileImageLink ?? '/favicon.ico'} />
       </Helmet>
-      {isSuccess && (
+      {!isServerSide && (
         <>
+          <Header>
+            <Suspense>
+              <LeftMenu />
+            </Suspense>
+            <Suspense>
+              <BreadCrumbBox />
+            </Suspense>
+          </Header>
           <Profile />
           <Drawer />
-          <BlocksViewer />
         </>
       )}
+      {/* 소스 페이지에 Block 정보를 추가합니다. */}
+      {isSuccess && <BlocksViewer />}
     </>
   )
 }

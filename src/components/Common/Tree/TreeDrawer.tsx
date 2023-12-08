@@ -46,7 +46,7 @@ export const TreeDrawer = () => {
             {breadCrumb?.parentId && <TreeLayout spaceId={breadCrumb.parentId} onSelectTreeNode={onSelectTreeNode} />}
           </form>
         </div>
-        <FormButton title={'페이지 이동하기'} event={isButtonDisabled} />
+        <FormButton title={'페이지 이동하기'} disabled={isButtonDisabled} />
       </Drawer>
     </>
   )

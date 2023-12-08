@@ -4,7 +4,7 @@ export * from './imageBlock'
 export * from './linkBlock'
 export * from './mapBlock'
 export * from './templateBlock'
-export * from './textBlock'
+export * from './draftTextBlock'
 export * from './videoBlock'
 
 /**

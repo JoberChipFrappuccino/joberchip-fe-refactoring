@@ -1,18 +1,28 @@
 @import '/src/styles/variables.scss';
+@import '/src/styles/mixin.scss';
 
 .iconCover {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex(null, center, center);
   width: 2rem;
   height: 2rem;
-  border-radius: 0.5rem;
-  background-color: $base-white;
-  border-radius: 1rem;
+  background-color: $white;
+  border-radius: $radius-lg;
   cursor: pointer;
   .icon {
     width: 2rem;
     height: 2rem;
-    fill: $base-black;
+    fill: $black;
   }
+}
+.switchBtn {
+  text-align: end;
+}
+
+.kebobBtn {
+  width: 100%;
+  text-align: start;
+  border: none;
+  background-color: transparent;
+  padding: 0px;
+  cursor: pointer;
 }

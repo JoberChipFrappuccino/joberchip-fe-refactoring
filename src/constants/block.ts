@@ -1,4 +1,5 @@
 import type { DrawerI18N } from '@/models/space'
+import { type Libraries } from '@react-google-maps/api'
 
 export const TEXT: TText = 'TEXT'
 export const IMAGE: TImage = 'IMAGE'
@@ -73,3 +74,5 @@ export const BLOCK_TO: DrawerI18N = {
     BLOCK: '블럭'
   }
 }
+
+export const libraries: Libraries = ['places']

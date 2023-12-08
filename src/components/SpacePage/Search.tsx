@@ -4,7 +4,7 @@ import styles from './Search.module.scss'
 export function Search() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    toast('아직 준비중인 기능입니다.')
+    toast('아직 준비중인 기능입니다.', 'success')
   }
   return (
     <form className={styles.conatiner} onSubmit={handleSubmit}>

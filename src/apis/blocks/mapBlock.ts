@@ -1,21 +1,6 @@
 import type { EmbedGoogleMapBlock } from '@/models/block'
 import { backAuthAPI } from '../api'
 
-interface AddGoogleMapBlockResponse {
-  response: EmbedGoogleMapBlock
-  status: number
-  success: boolean
-}
-export interface AddGoogleMapBlockBody {
-  x: EmbedGoogleMapBlock['x']
-  y: EmbedGoogleMapBlock['y']
-  w: EmbedGoogleMapBlock['w']
-  h: EmbedGoogleMapBlock['h']
-  latitude: EmbedGoogleMapBlock['latitude']
-  longitude: EmbedGoogleMapBlock['longitude']
-  address: EmbedGoogleMapBlock['address']
-  type: EmbedGoogleMapBlock['type']
-}
 /**
  * @description 지도 블럭 생성 API
  * @see https://www.notion.so/ee4e2a88bd384a2ab031fc5593fbc93a
@@ -32,19 +17,22 @@ export const addGoogleMapBlockAPI = async (pageId: string | undefined, body: Add
     message: '지도 블록을 추가했습니다.'
   }
 }
-
-interface EditGoogleMapBlockResponse {
+interface AddGoogleMapBlockResponse {
   response: EmbedGoogleMapBlock
   status: number
   success: boolean
 }
-export interface EditGoogleMapBlockBody {
-  objectId: EmbedGoogleMapBlock['objectId']
-  latitude?: EmbedGoogleMapBlock['latitude']
-  longitude?: EmbedGoogleMapBlock['longitude']
-  address?: EmbedGoogleMapBlock['address']
-  visible?: EmbedGoogleMapBlock['visible']
+export interface AddGoogleMapBlockBody {
+  x: EmbedGoogleMapBlock['x']
+  y: EmbedGoogleMapBlock['y']
+  w: EmbedGoogleMapBlock['w']
+  h: EmbedGoogleMapBlock['h']
+  latitude: EmbedGoogleMapBlock['latitude']
+  longitude: EmbedGoogleMapBlock['longitude']
+  address: EmbedGoogleMapBlock['address']
+  type: EmbedGoogleMapBlock['type']
 }
+
 /**
  * @description 지도 블럭 수정 API
  * @see https://www.notion.so/6489900f63984b38be7b8be3b55c2a35
@@ -59,6 +47,18 @@ export const editGoogleMapBlockAPI = async (pageId: string | undefined, block: E
     status: 'success',
     message: '지도 블록을 수정했습니다.'
   }
+}
+interface EditGoogleMapBlockResponse {
+  response: EmbedGoogleMapBlock
+  status: number
+  success: boolean
+}
+export interface EditGoogleMapBlockBody {
+  objectId: EmbedGoogleMapBlock['objectId']
+  latitude?: EmbedGoogleMapBlock['latitude']
+  longitude?: EmbedGoogleMapBlock['longitude']
+  address?: EmbedGoogleMapBlock['address']
+  visible?: EmbedGoogleMapBlock['visible']
 }
 
 /**
