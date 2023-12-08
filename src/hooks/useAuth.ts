@@ -1,23 +1,24 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useCallback, useContext } from 'react'
+import { useCallback, useTransition } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signInAPI, signUpAPI } from '@/apis/user'
-import AuthContext from '@/contexts/AuthContext'
-import { toast } from '@/utils'
+import { BACK_MOCK_ACCESS_TOKEN } from '@/constants'
+import { resetAccessToken, setAccessToken, toast } from '@/utils'
 import { type SignInInputs } from '@/pages/SignIn'
 
 export const useAuth = () => {
-  const authContext = useContext(AuthContext)
   const queryClient = useQueryClient()
   const navigate = useNavigate()
-  if (!authContext) throw new Error('사용자 정보를 불러올 수 없습니다.')
-  const { accessToken, setAccessToken } = authContext
+  const [, startTransition] = useTransition()
 
   const { mutate: signIn } = useMutation({
     mutationFn: (body: SignInInputs) => signInAPI(body),
     onSuccess: (res) => {
       if (!res.data?.accessToken) throw new Error('토큰이 존재하지 않습니다.')
-      setAccessToken(res.data?.accessToken)
+      const accessToken = res.data.accessToken
+      startTransition(() => {
+        setAccessToken(BACK_MOCK_ACCESS_TOKEN, accessToken)
+      })
       toast(`반갑습니다 ${res.data.username}님`, 'success')
       navigate('/')
     },
@@ -31,7 +32,10 @@ export const useAuth = () => {
     onSuccess: (res) => {
       // SignUp, SignIN API 모두 accessToken이 반환되는지 확인이 필요합니다.
       if (!res.data?.accessToken) throw new Error('토큰이 존재하지 않습니다.')
-      setAccessToken(res.data?.accessToken)
+      const accessToken = res.data.accessToken
+      startTransition(() => {
+        setAccessToken(BACK_MOCK_ACCESS_TOKEN, accessToken)
+      })
       toast('회원가입이 완료되었습니다.', 'success')
       navigate('/signIn')
     },
@@ -42,10 +46,10 @@ export const useAuth = () => {
 
   // * 로그아웃 API는 없습니다.
   const signOut = useCallback(() => {
-    setAccessToken('')
+    resetAccessToken(BACK_MOCK_ACCESS_TOKEN)
     queryClient.invalidateQueries(['user'])
     navigate('/signIn')
   }, [])
 
-  return { accessToken, signIn, signUp, signOut }
+  return { signIn, signUp, signOut }
 }

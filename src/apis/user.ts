@@ -58,8 +58,6 @@ export const loadUserInfoAPI = async (): Promise<ResponseBase<User>> => {
     method: 'GET'
   })
 
-  if (!data.success) throw new Error('사용자 정보 조회에 실패했습니다.')
-
   return {
     data: data.response,
     status: 'success',

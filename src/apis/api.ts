@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ACCESS_TOKEN, BACK_MOCK_ACCESS_TOKEN } from '@/constants'
+import { getAccessToken } from '@/utils'
 import { errorController } from './controller/error'
 
 const mockAPI = axios.create({
@@ -40,8 +41,10 @@ const api = axios.create({
 
 backAPI.interceptors.request.use(
   (config) => {
-    if (typeof window === 'undefined') return config
-    config.headers.Authorization = JSON.parse(localStorage.getItem(BACK_MOCK_ACCESS_TOKEN) ?? '')
+    const accessToken = getAccessToken(BACK_MOCK_ACCESS_TOKEN)
+    if (accessToken) {
+      config.headers.Authorization = accessToken
+    }
     return config
   },
   async (error) => {

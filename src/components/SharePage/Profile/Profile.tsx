@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { ModalPortal } from '@/components/Common/Portal/ModalPortal'
 import { ConfirmModal } from '@/components/SharePage/Modals/ConfirmModal'
-import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
-import { useSpaceListQuery } from '@/hooks/queries/useSpaceListQuery'
 import { toast } from '@/utils'
 import ConfirmModalContent from '../Modals/ConfirmModalContent'
 import styles from './Profile.module.scss'
@@ -10,14 +8,11 @@ import ProfileSwitchCase from './ProfileSwitchCase'
 
 export function Profile() {
   const [openConfirmModal, setConfirmModal] = useState(false)
-  const { pageId } = useSharePageQuery()
-  const { spaceList } = useSpaceListQuery()
-  const rootPage = spaceList?.find((page) => page.mainPageId === pageId)
 
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
-        <ProfileSwitchCase rootPage={!!rootPage?.mainPageId} />
+        <ProfileSwitchCase />
         {openConfirmModal && (
           <ModalPortal>
             <ConfirmModal

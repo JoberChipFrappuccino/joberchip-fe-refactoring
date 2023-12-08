@@ -1,4 +1,5 @@
-import { Suspense, useEffect } from 'react'
+import { useEffect } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import { Helmet } from 'react-helmet'
 import { BreadCrumbBox, Header, LeftMenu } from '@/components/Common/Menus'
 import { BlocksViewer } from '@/components/SharePage/DnDViewer/BlocksViewer'
@@ -15,6 +16,10 @@ interface PageSource {
   profileImageLink: string
 }
 
+function NullComponent() {
+  return null
+}
+
 export default function SharePage() {
   const pageSource: PageSource = useServerSideProps(SEO)
   const { pageId, isSuccess, sharePage } = useSharePageQuery()
@@ -29,7 +34,9 @@ export default function SharePage() {
   return (
     <>
       <Header>
-        <LeftMenu />
+        <ErrorBoundary fallbackRender={NullComponent}>
+          <LeftMenu />
+        </ErrorBoundary>
         <BreadCrumbBox />
       </Header>
       <Helmet>
@@ -42,9 +49,9 @@ export default function SharePage() {
       </Helmet>
       {isSuccess && (
         <>
-          <Suspense fallback={<div>로그인 시도중...</div>}>
+          <ErrorBoundary fallbackRender={NullComponent}>
             <Profile />
-          </Suspense>
+          </ErrorBoundary>
           <Drawer />
           <BlocksViewer />
         </>

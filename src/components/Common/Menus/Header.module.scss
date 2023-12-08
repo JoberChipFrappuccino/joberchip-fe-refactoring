@@ -7,7 +7,7 @@
   .cover {
     @include flex(null, null, center);
     width: 100%;
-    min-height: 4rem;
+    min-height: 6.5rem;
     border-bottom: 1px solid $gray-light-1;
   }
 }

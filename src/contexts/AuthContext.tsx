@@ -15,8 +15,11 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null)
 
+/**
+ * @deprecated 소셜 로그인 기능이 없기 떄문에 사용하지 않습니다.
+ */
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [accessToken, setAccessToken] = usePersistedState<string | null>(BACK_MOCK_ACCESS_TOKEN, null)
+  const [accessToken, setAccessToken] = usePersistedState(BACK_MOCK_ACCESS_TOKEN)
 
   const identity = useMemo(() => {
     localStorage.setItem(BACK_MOCK_ACCESS_TOKEN, accessToken ?? '')

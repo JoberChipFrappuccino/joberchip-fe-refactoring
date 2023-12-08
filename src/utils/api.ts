@@ -48,3 +48,16 @@ export function JSONToForm<T>(body: T) {
   }
   return form
 }
+
+export function getAccessToken(key: string) {
+  if (typeof window === 'undefined') return null
+  return localStorage.getItem(key)
+}
+export function setAccessToken(key: string, value: string | null) {
+  if (typeof window === 'undefined' || value === null) return
+  localStorage.setItem(key, value)
+}
+export function resetAccessToken(key: string) {
+  if (typeof window === 'undefined') return
+  localStorage.removeItem(key)
+}
