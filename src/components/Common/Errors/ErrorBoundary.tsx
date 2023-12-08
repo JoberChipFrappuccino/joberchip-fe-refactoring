@@ -4,14 +4,19 @@ export type ErrorBoundaryBaseProps<TError> = PropsWithChildren<{
   onReset?: () => void
   caught?: (error: unknown) => error is TError
 }>
-
 type ErrorBoundaryProps<TError> = ErrorBoundaryBaseProps<TError>
-
 interface ErrorBoundaryState<TError> {
   error: TError | Error | null
 }
 
-class ErrorBoundary<TError = Error> extends React.Component<ErrorBoundaryProps<TError>, ErrorBoundaryState<TError>> {
+/**
+ * @deprecated RenderToString이 Suspense를 완벽하게 지원하지 않기 떄문에 커스텀 에러 바운더리를 사용하지 않습니다.
+ * @see https://react.dev/reference/react-dom/server/renderToString#when-a-component-suspends-the-html-always-contains-a-fallback
+ */
+export class ErrorBoundary<TError = Error> extends React.Component<
+  ErrorBoundaryProps<TError>,
+  ErrorBoundaryState<TError>
+> {
   public state: ErrorBoundaryState<TError> = {
     error: null
   }
@@ -46,9 +51,3 @@ class ErrorBoundary<TError = Error> extends React.Component<ErrorBoundaryProps<T
     return this.props.children
   }
 }
-
-export default ErrorBoundary
-
-/**
- * @see https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary
- */
