@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { createSpaceAPI } from '@/apis/space'
 import { SPACE_LIST } from '@/constants/querykey'
 import { useSpaceListQuery } from '@/hooks/queries/useSpaceListQuery'
@@ -13,12 +13,12 @@ export function UserProfile() {
   const { signOut } = useAuth()
   const { spaceList } = useSpaceListQuery()
   const queryClient = useQueryClient()
+  const navigate = useNavigate()
 
   const handleOnClickCreateSpace = () => {
     createSpaceAPI()
       .then((res) => {
         toast(res.message, res.status, { autoClose: 500 })
-        // TODO : invalidate query, refetch query 등 정리
         queryClient.refetchQueries([SPACE_LIST])
       })
       .catch((err) => {
@@ -45,7 +45,7 @@ export function UserProfile() {
           type="button"
           onClick={() => {
             signOut()
-            window.location.reload()
+            navigate('/signin')
           }}
         >
           로그아웃

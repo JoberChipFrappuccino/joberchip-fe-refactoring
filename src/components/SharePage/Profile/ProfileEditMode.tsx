@@ -1,5 +1,5 @@
 import { MdKeyboardArrowRight } from '@react-icons/all-files/md/MdKeyboardArrowRight'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useSpaceListQuery } from '@/hooks/queries/useSpaceListQuery'
 import MockFollowList from './MockFollowList'
 import MockMessageList from './MockMessageList'
@@ -22,10 +22,10 @@ export default function ProfileEditMode() {
           <ProfileForm />
           {rootPage && <MockFollowList />}
           <nav className={styles.navCover}>
-            <a href="/">
+            <Link to="/">
               스페이스 홈 바로가기
               <MdKeyboardArrowRight />
-            </a>
+            </Link>
           </nav>
         </div>
       </div>

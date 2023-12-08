@@ -14,9 +14,8 @@ export async function to<T>(promise: Promise<ResponseBase<T>> | ResponseBase<T>)
   try {
     return await promise
   } catch (error) {
-    console.error(error)
+    if (process.env.NODE_ENV === 'development') console.error(error)
     if (axios.isAxiosError(error)) {
-      console.error(error)
       const message =
         error.response?.data.message ??
         error.response?.data.error.message ??

@@ -15,27 +15,20 @@ import { to, toast } from '@/utils'
 import { calculateRatio, convertLayoutToParam, getLayoutByMode, sortLayout } from '@/utils/SharePage'
 import { useDebounce } from '@/hooks/useDebounce'
 import styles from './BlocksViewer.module.scss'
-import '@/styles/reactGridLayout.scss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
 export const BlocksViewer = () => {
   const { mode } = useSharePageModeStore()
   const { sharePage, pageId } = useSharePageQuery()
-
   const { activeBlockId, setActiveBlockId } = useBlockActionStore()
   const [editModeGrid, setEditModeGrid] = useState(getLayoutByMode(sharePage.children, 'EDIT'))
   const [viewModeGrid, setViewModeGrid] = useState(getLayoutByMode(sharePage.children, 'VIEW'))
-  const [rowHeight, setRowHeight] = useState(100)
-  const [margin, setMargin] = useState(40)
+  const [rowHeight, setRowHeight] = useState(0)
+  const [margin, setMargin] = useState(0)
 
   const nextLayout = useDebounce(editModeGrid.layouts.lg, LAYOUT_DEBOUNCE_TIME)
 
-  useEffect(() => {
-    setEditModeGrid(() => getLayoutByMode(sharePage.children, 'EDIT'))
-    const visibleChildren = sharePage.children.filter((item) => item.visible)
-    setViewModeGrid(() => getLayoutByMode(visibleChildren, 'VIEW'))
-  }, [mode, pageId])
   useEffect(() => {
     if (mode === 'VIEW') return
     to(fetchLayout(pageId ?? '', convertLayoutToParam(sharePage.children, nextLayout))).then((res) => {
@@ -43,10 +36,16 @@ export const BlocksViewer = () => {
     })
   }, [nextLayout])
 
+  useEffect(() => {
+    setEditModeGrid(() => getLayoutByMode(sharePage.children, 'EDIT'))
+    const visibleChildren = sharePage.children.filter((item) => item.visible)
+    setViewModeGrid(() => getLayoutByMode(visibleChildren, 'VIEW'))
+  }, [mode, pageId])
+
   // * "EDIT" || "VIEW" 모드가 변경되면 레이아웃을 다시 그립니다.
   const handleWidthChange: ResponsiveProps['onWidthChange'] = //
     useCallback<NonNullable<ResponsiveProps['onWidthChange']>>(
-      (width, _margin, cols) => {
+      (width, _margin, cols, _padding) => {
         if (width > 768) {
           setMargin(40)
           setRowHeight(calculateRatio(width, cols, 0.7))

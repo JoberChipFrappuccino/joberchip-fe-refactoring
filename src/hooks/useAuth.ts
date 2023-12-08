@@ -47,7 +47,7 @@ export const useAuth = () => {
   // * 로그아웃 API는 없습니다.
   const signOut = useCallback(() => {
     resetAccessToken(BACK_MOCK_ACCESS_TOKEN)
-    queryClient.invalidateQueries(['user'])
+    queryClient.removeQueries(['user'])
     navigate('/signIn')
   }, [])
 

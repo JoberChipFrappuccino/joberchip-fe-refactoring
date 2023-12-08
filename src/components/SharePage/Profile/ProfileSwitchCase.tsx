@@ -13,7 +13,7 @@ export default function ProfileSwitchCase() {
     <div className={styles.container}>
       <div className={styles.profile}>{switchProfileWithMode(mode)}</div>
       {mode === 'EDIT' && (
-        <Suspense fallback={<h1>사용자 정보 불러오는 중...</h1>}>
+        <Suspense>
           <ProfileDropDownMenu />
         </Suspense>
       )}

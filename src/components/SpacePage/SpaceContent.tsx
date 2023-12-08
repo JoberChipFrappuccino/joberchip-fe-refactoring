@@ -8,7 +8,9 @@ import styles from './SpaceContent.module.scss'
 import { UserProfile } from './UserProfile'
 
 export default function SpaceContent() {
-  const { spaceList } = useSpaceListQuery()
+  const { spaceList, isSuccess } = useSpaceListQuery()
+
+  if (!isSuccess) return null
 
   return (
     <div className={styles.container}>

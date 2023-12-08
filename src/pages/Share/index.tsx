@@ -8,7 +8,7 @@ import { SEO } from '@/constants'
 import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useSharePageModeStore } from '@/store/sharePage'
 import useServerSideProps from '@/hooks/serverSideProps'
-
+import '@/styles/reactGridLayout.scss'
 interface PageSource {
   title: string
   description: string
@@ -27,19 +27,7 @@ export default function SharePage() {
   }, [pageId, isSuccess])
 
   return (
-    <>
-      <Header>
-        {!isServerSide && (
-          <>
-            <Suspense fallback={<h1>메뉴를 불러오는 중...</h1>}>
-              <LeftMenu />
-            </Suspense>
-            <Suspense fallback={<h1>사용자 권환 확인 중...</h1>}>
-              <BreadCrumbBox />
-            </Suspense>
-          </>
-        )}
-      </Header>
+    <div>
       <Helmet>
         <title>{source.title ? `Jober chip | ${source.title}` : 'Jober'}</title>
         <meta name="description" content={source.description ?? ''} />
@@ -48,13 +36,22 @@ export default function SharePage() {
         <meta property="og:description" content={source.description ?? ''} />
         <meta property="og:image" content={source.profileImageLink ?? '/favicon.ico'} />
       </Helmet>
-      {!isServerSide && isSuccess && (
+      {!isServerSide && (
         <>
+          <Header>
+            <Suspense>
+              <LeftMenu />
+            </Suspense>
+            <Suspense>
+              <BreadCrumbBox />
+            </Suspense>
+          </Header>
           <Profile />
           <Drawer />
         </>
       )}
+      {/* 소스 페이지에 Block 정보를 추가합니다. */}
       {isSuccess && <BlocksViewer />}
-    </>
+    </div>
   )
 }

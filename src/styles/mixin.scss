@@ -18,15 +18,16 @@
 }
 
 // input, button
-@mixin button($border-color: #4c61ff, $bg-color: #f2f9ff, $color: #4c61ff) {
+@mixin button($hover-border-color: #4c61ff, $bg-color: #f2f9ff, $color: #4c61ff) {
   border: solid 0.1rem transparent;
   color: $color;
   background-color: $bg-color;
   outline: none;
   transition: all 0.2s ease-in-out;
+  font-size: 1.6rem;
   cursor: pointer;
   &:hover {
-    border: solid 0.1rem $border-color;
+    border: solid 0.1rem $hover-border-color;
   }
   @content;
 }
@@ -47,6 +48,7 @@
   border: 1.5px solid $border-color;
   outline: none;
   transition: all 0.2s ease-in-out;
+  font-size: 1.6rem;
   &:hover {
     border: 1.5px solid $hover-border-color;
   }
