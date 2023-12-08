@@ -31,8 +31,14 @@ export const BlocksViewer = () => {
 
   useEffect(() => {
     if (mode === 'VIEW') return
+    if (
+      JSON.stringify(convertLayoutToParam(sharePage.children, nextLayout)) ===
+      JSON.stringify(convertLayoutToParam(sharePage.children, editModeGrid.layouts.lg))
+    ) {
+      return
+    }
     to(fetchLayout(pageId ?? '', convertLayoutToParam(sharePage.children, nextLayout))).then((res) => {
-      toast(res.message, res.status, { autoClose: 500 })
+      if (res.data) toast('레이아웃이 변경되었습니다', 'success')
     })
   }, [nextLayout])
 

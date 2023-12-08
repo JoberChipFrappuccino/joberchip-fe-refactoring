@@ -65,7 +65,7 @@ export default async function renderHome(url: string, req: Request, res: Respons
     <!DOCTYPE html>
     <html lang="en">
       <head>
-        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta name="viewport" content="width=device-width">
         <meta charSet="utf-8" />
         <link rel="stylesheet" type="text/css" href="/web/App.css">
         ${helmet.title.toString()}

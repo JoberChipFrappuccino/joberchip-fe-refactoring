@@ -27,7 +27,7 @@ export default function SharePage() {
   }, [pageId, isSuccess])
 
   return (
-    <div>
+    <>
       <Helmet>
         <title>{source.title ? `Jober chip | ${source.title}` : 'Jober'}</title>
         <meta name="description" content={source.description ?? ''} />
@@ -52,6 +52,6 @@ export default function SharePage() {
       )}
       {/* 소스 페이지에 Block 정보를 추가합니다. */}
       {isSuccess && <BlocksViewer />}
-    </div>
+    </>
   )
 }

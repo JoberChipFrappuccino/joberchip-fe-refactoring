@@ -8,7 +8,7 @@ export default function BlockLogo({ logo }: BlockLogoProps) {
   const name = findBrandName(logo)
   return (
     <div className={styles.container}>
-      <img src={`/BlockLogo/${name ?? 'default'}.png`} className={styles.logoStyle} />
+      <img src={`/BlockLogo/${name ?? 'default'}.png`} className={styles.logoStyle} alt={`${name} logo`} />
     </div>
   )
 }
