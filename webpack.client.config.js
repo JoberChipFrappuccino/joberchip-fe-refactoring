@@ -2,6 +2,8 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const LoadablePlugin = require('@loadable/webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+
 require('dotenv').config()
 
 const devMode = process.env.NODE_ENV !== 'production'
@@ -67,6 +69,7 @@ const getConfig = (target) => {
             new LoadablePlugin(),
             new MiniCssExtractPlugin(),
             new webpack.DefinePlugin({ 'process.env': JSON.stringify(process.env) })
+            // new BundleAnalyzerPlugin()
           ]
         : [new LoadablePlugin(), new MiniCssExtractPlugin()]
   }
