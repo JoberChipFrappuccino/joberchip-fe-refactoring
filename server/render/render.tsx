@@ -46,7 +46,7 @@ export default async function renderHome(url: string, req: Request, res: Respons
     <StaticRouter location={url}>
       <SSRProvider data={serverSideData}>
         <QueryContext>
-          <Router />
+          <Router></Router>
         </QueryContext>
       </SSRProvider>
     </StaticRouter>
