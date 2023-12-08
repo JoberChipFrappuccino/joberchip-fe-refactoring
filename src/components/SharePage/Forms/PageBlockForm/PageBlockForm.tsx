@@ -69,7 +69,7 @@ export function PageBlockForm({ block, onSubmit }: PageBlockFromProps) {
       </div>
       <FormButton
         title={drawerMode === 'CREATE' ? '페이지 추가하기' : '페이지 수정하기'}
-        event={!watch('title') || !watch('description')}
+        disabled={!watch('title') || !watch('description')}
       />
     </form>
   )

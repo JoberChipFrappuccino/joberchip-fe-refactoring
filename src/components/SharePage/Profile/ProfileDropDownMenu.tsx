@@ -13,8 +13,8 @@ import styles from './ProfileDropDownMenu.module.scss'
 
 export default function ProfileDropDownMenu() {
   const { sharePage, pageId } = useSharePageQuery()
-  const { mode, setSharePageMode } = useSharePageModeStore()
   const { spaceList } = useSpaceListQuery()
+  const { mode, setSharePageMode } = useSharePageModeStore()
   const rootPage = spaceList?.find((page) => page.mainPageId === pageId)
   const items = useMemo(
     () => [

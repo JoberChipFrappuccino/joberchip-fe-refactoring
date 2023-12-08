@@ -47,7 +47,7 @@ export default async function renderHome(url: string, req: Request, res: Respons
     <StaticRouter location={url}>
       <SSRProvider data={serverSideData}>
         <QueryContext>
-          <Router></Router>
+          <Router />
         </QueryContext>
       </SSRProvider>
     </StaticRouter>
@@ -70,6 +70,7 @@ export default async function renderHome(url: string, req: Request, res: Respons
         <link rel="stylesheet" type="text/css" href="/web/App.css">
         ${helmet.title.toString()}
         ${webExtractor.getLinkTags()}
+        ${webExtractor.getStyleTags()}
       </head>
       <body>
         <div id="root">${html}

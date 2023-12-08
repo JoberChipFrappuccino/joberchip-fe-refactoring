@@ -1,14 +1,22 @@
 import htmlEntitiesDecoder from 'html-entities-decoder'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ServerSideContext } from '@/contexts/SSRContext'
 
-export default function useServerSideProps(key: string) {
+export default function useServerSideProps<T>(key: string) {
+  const [isServerSide, setIsServerSide] = useState(typeof window === 'undefined')
   const ctx = useContext(ServerSideContext)
+
+  useEffect(() => {
+    setIsServerSide(typeof window === 'undefined')
+  }, [])
+
   // * This scope is only for server side rendering
   if (typeof window === 'undefined') {
-    return JSON.parse((ctx[key] as string) || '{}')
+    const source: T = JSON.parse((ctx[key] as string) || '{}')
+    return { isServerSide, source }
   }
   const serverSideData = document.getElementById('__SERVER_DATA__')?.textContent ?? '{}'
   const data = JSON.parse(htmlEntitiesDecoder(serverSideData))
-  return JSON.parse(data[key]) || ''
+  const source: T = JSON.parse(data[key]) || ''
+  return { isServerSide, source }
 }

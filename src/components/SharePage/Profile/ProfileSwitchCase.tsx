@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { useSharePageModeStore } from '@/store/sharePage'
 import ProfileDropDownMenu from './ProfileDropDownMenu'
@@ -11,7 +12,11 @@ export default function ProfileSwitchCase() {
   return (
     <div className={styles.container}>
       <div className={styles.profile}>{switchProfileWithMode(mode)}</div>
-      {mode === 'EDIT' && <ProfileDropDownMenu />}
+      {mode === 'EDIT' && (
+        <Suspense fallback={<h1>사용자 정보 불러오는 중...</h1>}>
+          <ProfileDropDownMenu />
+        </Suspense>
+      )}
     </div>
   )
 }

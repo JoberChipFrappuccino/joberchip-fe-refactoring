@@ -13,7 +13,10 @@ function useSuspenseQuery<TQueryFnData, TError, TData = TQueryFnData, TQueryKey 
   arg3?: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>
 ): UseSuspenseQuery<TData, TError> {
   const parsedOptions = parseQueryArgs(arg1, arg2, arg3)
-  const queryResult = useQuery({ ...parsedOptions, suspense: true }) as unknown as UseSuspenseQuery<TData, TError>
+  const queryResult = useQuery({
+    ...parsedOptions,
+    suspense: true
+  }) as unknown as UseSuspenseQuery<TData, TError>
   return queryResult
 }
 

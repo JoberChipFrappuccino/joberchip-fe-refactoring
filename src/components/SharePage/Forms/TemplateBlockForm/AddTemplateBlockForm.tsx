@@ -16,11 +16,12 @@ import styles from './AddTemplateBlockForm.module.scss'
  * @description 템플릿 블록은 기획에 포함되지 않은 기능으로, 일부 모양만 구현되어 있습니다.
  */
 export function AddTemplateBlockForm() {
-  const { user } = useUser()
+  const { user, isSuccess } = useUser()
   const { sharePage, pageId } = useSharePageQuery()
+  const { templates } = useTemplateQuery(user?.userId)
   const { setOpenDrawer } = useBlockActionStore()
-  const { templates } = useTemplateQuery(user.userId)
   const addTemplateMutation = useAddTemplateBlockMutation()
+
   const [templateId, setTemplateId] = useState('')
 
   const handleOnClick = (block: BlockWith<TTemplate>) => {
@@ -47,6 +48,10 @@ export function AddTemplateBlockForm() {
     setOpenDrawer(false)
   }
 
+  if (!isSuccess) {
+    throw new Error('사용할 수 없는 기능입니다.')
+  }
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <TemplateSearchBox />
@@ -68,7 +73,7 @@ export function AddTemplateBlockForm() {
           )
         })}
       </div>
-      <FormButton title="템플릿 추가하기" event={!templateId} additionalStyle={styles.formBtn} />
+      <FormButton title="템플릿 추가하기" disabled={!templateId} additionalStyle={styles.formBtn} />
     </form>
   )
 }

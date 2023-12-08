@@ -1,6 +1,5 @@
-import { ErrorBoundary } from 'react-error-boundary'
+import { Suspense } from 'react'
 import { Helmet } from 'react-helmet'
-import { Navigate } from 'react-router-dom'
 import { Header, LeftMenu, HomeLogo } from '@/components/Common/Menus'
 import SpaceContent from '@/components/SpacePage/SpaceContent'
 import styles from './Space.module.scss'
@@ -9,9 +8,7 @@ export default function Space() {
   return (
     <>
       <Header>
-        <ErrorBoundary fallback={<Navigate to="/signin" />}>
-          <LeftMenu />
-        </ErrorBoundary>
+        <LeftMenu />
         <HomeLogo />
       </Header>
       <div className={styles.container}>
@@ -19,9 +16,9 @@ export default function Space() {
           <title>Jober Chip</title>
           <meta name="description" content="Jober Chip Home Page" />
         </Helmet>
-        <ErrorBoundary fallback={<Navigate to="/signin" />}>
+        <Suspense fallback={<h1>사용자 정보 불러오는 중...</h1>}>
           <SpaceContent />
-        </ErrorBoundary>
+        </Suspense>
       </div>
     </>
   )

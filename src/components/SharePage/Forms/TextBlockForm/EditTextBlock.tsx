@@ -17,5 +17,6 @@ export default function EditTextBlock({ block }: BlockBaseWithBlockFormProps<TTe
     setOpenDrawer(false)
     editTextMutation.mutate({ pageId, block: data })
   }
+
   return <TextBlockForm block={block} onSubmit={handleSubmit} />
 }

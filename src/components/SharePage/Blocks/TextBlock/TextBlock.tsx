@@ -1,8 +1,10 @@
 import classNames from 'classnames'
-import { Editor, EditorState, convertFromRaw, type ContentBlock } from 'draft-js'
-import { useState } from 'react'
+import { Editor, EditorState, convertFromRaw, type ContentBlock, type RawDraftContentState } from 'draft-js'
+import { useEffect, useState } from 'react'
 import { type BlockBaseWithBlockProps } from '@/components/Common/SwitchCases/ViewerBox'
+import { SEO } from '@/constants'
 import { StyleMap } from '@/constants/textEditorOptions'
+import useServerSideProps from '@/hooks/serverSideProps'
 import styles from './TextBlock.module.scss'
 
 function blockStyleFn(contentBlock: ContentBlock) {
@@ -19,11 +21,14 @@ function blockStyleFn(contentBlock: ContentBlock) {
 }
 
 export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty())
+  const { isServerSide } = useServerSideProps(SEO)
+  const [source, setSource] = useState<unknown>('')
 
-  const onchange = () => {
-    setEditorState(editorState)
-  }
+  // * Draft.js에서 componentDidMount시 blokc.src의 불변성이 유지되지 않으면 에러가 발생하기 떄문애, serverSide에서 렌더링하지 않습니다.
+  useEffect(() => {
+    if (isServerSide || !block.src) return
+    setSource(JSON.parse(block.src))
+  }, [block.src])
 
   return (
     <div className={styles.container}>
@@ -32,12 +37,12 @@ export function TextBlock({ block, mode }: BlockBaseWithBlockProps<TText>) {
         <div className={styles.editorContainer}>
           <Editor
             editorState={
-              block.src
-                ? EditorState.createWithContent(convertFromRaw(JSON.parse(block.src)))
+              source
+                ? EditorState.createWithContent(convertFromRaw(source as RawDraftContentState))
                 : EditorState.createEmpty()
             }
             readOnly={true}
-            onChange={onchange}
+            onChange={() => {}}
             customStyleMap={StyleMap}
             blockStyleFn={blockStyleFn}
           />

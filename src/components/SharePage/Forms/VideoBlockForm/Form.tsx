@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { type AddVideoBlockBody, type EditVideoBlockBody } from '@/apis/blocks'
 import { type BlockBaseWithBlockFormProps } from '@/components/Common/SwitchCases/DrawerEditForm'
 import FormButton from '@/components/Common/Ui/Button'
 import { type onSubmitAddFormParam } from '@/components/SharePage/Forms/VideoBlockForm/AddVideoBlock'
@@ -15,29 +16,36 @@ interface VideoInputs {
   url: string
   file: FileList
 }
-
+interface VideoBody {
+  videoLink?: AddVideoBlockBody['videoLink'] | EditVideoBlockBody['videoLink']
+  attachedVideo?: AddVideoBlockBody['attachedVideo'] | EditVideoBlockBody['attachedVideo']
+}
 type VideoBlockFormProps = BlockBaseWithBlockFormProps<TVideo> & {
   onSubmit: (data: onSubmitAddFormParam | onSubmitEditFormParam) => void
 }
 export default function Form({ block, onSubmit: onSubmitForm }: VideoBlockFormProps) {
   const { openDrawer, drawerMode } = useBlockActionStore()
   const fileRef = useRef<HTMLInputElement | null>(null)
-  const [activeRadio, setActiveRadio] = useState('')
+  const [activeRadio, setActiveRadio] = useState('radio1')
+
   const { register, handleSubmit, watch, reset } = useForm<VideoInputs>({ mode: 'onBlur' })
   const { ref, ...rest } = register('file')
 
   useEffect(() => {
     if (typeof block?.src !== 'string') {
       setActiveRadio('radio1')
+      return
+    }
+
+    if (block?.src.includes('joberchip-s3')) {
+      setActiveRadio('radio2')
     } else if (block?.src.includes('http')) {
       setActiveRadio('radio1')
-    } else {
-      setActiveRadio('radio2')
     }
   }, [openDrawer])
 
   const onSubmit = async (data: VideoInputs) => {
-    const body: { videoLink?: string; attachedVideo?: Blob } = {}
+    const body: VideoBody = {}
     if (activeRadio === 'radio1') body.videoLink = `https://www.youtube.com/embed/${extractVideoId(data.url)}`
     else {
       const buf = await extractFileUrl(data.file)
@@ -66,6 +74,7 @@ export default function Form({ block, onSubmit: onSubmitForm }: VideoBlockFormPr
               [styles.inactive]: activeRadio === 'radio2',
               [styles.active]: activeRadio !== 'radio2'
             })}
+            defaultValue={block?.src.includes('http') && !block?.src.includes('joberchip-s3') ? block?.src : ''}
             placeholder="유튜브 주소를 입력하세요."
             disabled={activeRadio === 'radio2'}
             {...register('url')}
@@ -108,12 +117,12 @@ export default function Form({ block, onSubmit: onSubmitForm }: VideoBlockFormPr
               setActiveRadio('radio1')
             }}
           >
-            <Preview radio={activeRadio} url={watch('url')} videoSrc={watch('file')} />
+            <Preview radio={activeRadio} youtubeLink={watch('url')} videoFileOrURL={watch('file')} />
           </div>
         </div>
         <FormButton
           title={drawerMode === 'CREATE' ? '동영상 추가하기' : '동영상 수정하기'}
-          event={!watch('url') || watch('file').length === 0}
+          disabled={activeRadio === 'radio1' ? !watch('url') : !watch('file')?.length}
         />
       </form>
     </div>

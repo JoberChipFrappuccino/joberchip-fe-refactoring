@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { BLOCK, TEXT } from '@/constants/block'
+import { BLOCK, LINK } from '@/constants/block'
 import { type BlockType } from '@/models/block'
 
 interface FormTypeState {
@@ -17,7 +17,7 @@ interface FormTypeState {
 
 export const useBlockActionStore = create<FormTypeState>((set) => ({
   formType: BLOCK,
-  blockType: TEXT,
+  blockType: LINK,
   openDrawer: false,
   drawerMode: 'CREATE',
   activeBlockId: '',

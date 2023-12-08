@@ -61,7 +61,7 @@ export function LinkBlockForm({ block, onSubmit: onSubmitForm }: LinkBlockFormPr
         </div>
         <FormButton
           title={drawerMode === 'CREATE' ? '링크 추가하기' : '링크 수정하기'}
-          event={!watch('link') || !watch('title')}
+          disabled={!watch('link') || !watch('title')}
         />
       </form>
     </div>

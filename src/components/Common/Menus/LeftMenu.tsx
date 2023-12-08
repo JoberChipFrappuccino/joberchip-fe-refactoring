@@ -8,7 +8,10 @@ import styles from './LeftMenu.module.scss'
 
 export const LeftMenu = () => {
   const [open, setOpen] = useState(false)
-  const { user } = useUser()
+  const { user, isSuccess } = useUser()
+
+  if (!isSuccess) return null
+
   return (
     <>
       <Button
@@ -46,7 +49,7 @@ export const LeftMenu = () => {
                   <img src="/sideBar/user.svg" alt="user" />
                 </div>
               </Space>
-              <h2 style={{ margin: '1rem' }}>{user.username}</h2>
+              <h2 style={{ margin: '1rem' }}>{user?.username}</h2>
               <Button
                 style={{
                   backgroundColor: '#4C61FF',

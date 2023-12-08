@@ -11,7 +11,7 @@ export const EditPageBlock = ({ block }: BlockBaseWithBlockFormProps<TPage>) => 
     const { parentPageId, title, description } = data
     if (parentPageId === block?.objectId) {
       // TODO : 같은 페이지 이동 선택이 불가능하도록 수정하기
-      alert('같은 페이지로 이동할 수 없습니다. (차후 선택이 불가능하도록 수정 예정)')
+      alert('동일한 페이지로 이동할 수 없습니다.')
       return
     }
     const body: EditPageBlockBody = {

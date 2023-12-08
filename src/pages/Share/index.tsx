@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { ErrorBoundary } from 'react-error-boundary'
+import { Suspense, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { BreadCrumbBox, Header, LeftMenu } from '@/components/Common/Menus'
 import { BlocksViewer } from '@/components/SharePage/DnDViewer/BlocksViewer'
@@ -16,12 +15,8 @@ interface PageSource {
   profileImageLink: string
 }
 
-function NullComponent() {
-  return null
-}
-
 export default function SharePage() {
-  const pageSource: PageSource = useServerSideProps(SEO)
+  const { source, isServerSide } = useServerSideProps<PageSource>(SEO)
   const { pageId, isSuccess, sharePage } = useSharePageQuery()
   const { setSharePageMode } = useSharePageModeStore()
 
@@ -34,28 +29,32 @@ export default function SharePage() {
   return (
     <>
       <Header>
-        <ErrorBoundary fallbackRender={NullComponent}>
-          <LeftMenu />
-        </ErrorBoundary>
-        <BreadCrumbBox />
+        {!isServerSide && (
+          <>
+            <Suspense fallback={<h1>메뉴를 불러오는 중...</h1>}>
+              <LeftMenu />
+            </Suspense>
+            <Suspense fallback={<h1>사용자 권환 확인 중...</h1>}>
+              <BreadCrumbBox />
+            </Suspense>
+          </>
+        )}
       </Header>
       <Helmet>
-        <title>{pageSource.title ? `Jober chip | ${pageSource.title}` : 'Jober'}</title>
-        <meta name="description" content={pageSource.description} />
-        <link rel="favicon" href={pageSource.profileImageLink ?? '/favicon.ico'} />
-        <meta property="og:title" content={pageSource.title} />
-        <meta property="og:description" content={pageSource.description} />
-        <meta property="og:image" content={pageSource.profileImageLink} />
+        <title>{source.title ? `Jober chip | ${source.title}` : 'Jober'}</title>
+        <meta name="description" content={source.description ?? ''} />
+        <link rel="favicon" href={source.profileImageLink ?? '/favicon.ico'} />
+        <meta property="og:title" content={source.title ?? ''} />
+        <meta property="og:description" content={source.description ?? ''} />
+        <meta property="og:image" content={source.profileImageLink ?? '/favicon.ico'} />
       </Helmet>
-      {isSuccess && (
+      {!isServerSide && isSuccess && (
         <>
-          <ErrorBoundary fallbackRender={NullComponent}>
-            <Profile />
-          </ErrorBoundary>
+          <Profile />
           <Drawer />
-          <BlocksViewer />
         </>
       )}
+      {isSuccess && <BlocksViewer />}
     </>
   )
 }

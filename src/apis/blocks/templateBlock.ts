@@ -1,7 +1,8 @@
 import { type BlockWith, type TemplateBlock } from '@/models/block'
 import { authAPI, backAuthAPI } from '../api'
 
-export const getTemplatesAPI = async (userId: string): Promise<Array<BlockWith<TTemplate>>> => {
+export const getTemplatesAPI = async (userId: string | undefined): Promise<Array<BlockWith<TTemplate>>> => {
+  if (!userId) throw new Error('userId가 없습니다.')
   const { data } = await authAPI<Array<BlockWith<TTemplate>>>('/api/template', {
     method: 'GET',
     params: {

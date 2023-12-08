@@ -42,7 +42,7 @@ export function ImageBlockForm({ block, onSubmit }: ImageBlockFormProps) {
         <h3 className={styles.thumbnailTitle}>사진 첨부*</h3>
         <ImgThumbnail img={thumbnail} imgData={setThumbnail} />
       </div>
-      <FormButton title={drawerMode === 'CREATE' ? '사진 추가하기' : '사진 수정하기'} event={!title || !thumbnail} />
+      <FormButton title={drawerMode === 'CREATE' ? '사진 추가하기' : '사진 수정하기'} disabled={!title || !thumbnail} />
     </form>
   )
 }

@@ -6,7 +6,7 @@ export default function ProfileViewMode() {
   return (
     <div className={styles.container}>
       <div className={styles.profileImageCover}>
-        <img src={sharePage.profileImageLink} alt={`${sharePage.title} thumbnail`} />
+        <img src={sharePage?.profileImageLink} alt={`${sharePage.title} thumbnail`} />
       </div>
       <div className={styles.profileCover}>
         <h2>{sharePage.title}</h2>

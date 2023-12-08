@@ -25,7 +25,8 @@ export default function SpaceContent() {
   )
 }
 
-function GetGroupItemsByParticipationType(type: ParticipationType, spaceList: SpaceList | null) {
+function GetGroupItemsByParticipationType(type: ParticipationType, spaceList?: SpaceList) {
+  if (!spaceList) return null
   return spaceList
     ?.filter((space) => space.participationType === type)
     .map((space, i, spaces) => {

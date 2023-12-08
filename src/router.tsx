@@ -1,9 +1,7 @@
 import loadable from '@loadable/component'
-import { useEffect, useState } from 'react'
-import { Route, Routes, Outlet, useNavigate } from 'react-router-dom'
-import { loadUserInfoAPI } from './apis/user'
+import { Route, Routes, Outlet, Navigate } from 'react-router-dom'
 
-import { to } from './utils'
+import { useUser } from './hooks/useUserQuery'
 
 const App = loadable(() => import('./App'))
 const Space = loadable(() => import('./pages/Space'))
@@ -16,10 +14,12 @@ export const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="/" element={<Space />} />
-        <Route element={<RedirectRouter />}>
+        <Route element={<RedirectToSignIn />}>
+          <Route path="/" element={<Space />} />
+        </Route>
+        <Route element={<RedirectToSpace />}>
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp />} />R
         </Route>
         <Route path="/space/:pageId" element={<SharePage />} />
       </Route>
@@ -28,24 +28,23 @@ export const Router = () => {
   )
 }
 
-/**
- * @description renderToString이 Suspense를 지원하지 않기 때문에 Effect 내에서 redirect처리 합니다.
- */
-function RedirectRouter() {
-  const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    to(loadUserInfoAPI()).then((res) => {
-      if (res.data) navigate('/')
-      else setIsLoading(false)
-    })
-  }, [])
-
+function RedirectToSpace() {
+  const { isSuccess, isLoading } = useUser()
   if (isLoading) return <div>로그인 여부 확인 중...</div>
+  if (isSuccess) return <Navigate to="/" />
   return <Outlet />
 }
 
+function RedirectToSignIn() {
+  const { isSuccess, isLoading } = useUser()
+  if (isLoading) return <div>로그인 여부 확인 중...</div>
+  if (!isSuccess) return <Navigate to="/signIn" />
+  return <Outlet />
+}
+
+/**
+ * @deprecated renderToString이 Suspense를 지원하지 않기 때문에 createBrowserRouter와 loader를 사용할 수 없습니다.
+ */
 // export const routes: RouteObject[] = [
 //   {
 //     path: '/',

@@ -9,10 +9,9 @@ import { useUser } from '@/hooks/useUserQuery'
 import styles from './UserProfile.module.scss'
 
 export function UserProfile() {
-  const { user } = useUser()
+  const { user, isSuccess } = useUser()
   const { signOut } = useAuth()
   const { spaceList } = useSpaceListQuery()
-
   const queryClient = useQueryClient()
 
   const handleOnClickCreateSpace = () => {
@@ -27,11 +26,12 @@ export function UserProfile() {
         toast(err.message, 'failure', { autoClose: 500 })
       })
   }
-
   /**
    * @description myPersonalSpace는 사용자의 최상위 공유 페이지 정보로 유저마다 단 하나만 존재합니다.
    */
   const myPersonalSpace = spaceList?.find((space) => space.participationType === 'DEFAULT')
+
+  if (!isSuccess) return null
 
   return (
     <div className={styles.container}>

@@ -4,9 +4,7 @@ import { type BreadCrumbItems } from '@/apis/page'
 import { useBreadCrumb } from '@/hooks/useBreadCrumb'
 
 export function BreadCrumbBox() {
-  const { breadCrumb, isLoading, pageId } = useBreadCrumb()
-
-  if (isLoading || !breadCrumb) return <div>loading...</div>
+  const { breadCrumb, pageId } = useBreadCrumb()
 
   return <Breadcrumb style={{ paddingLeft: '1rem' }} separator=">" items={convertItem(pageId, breadCrumb, [])} />
 }

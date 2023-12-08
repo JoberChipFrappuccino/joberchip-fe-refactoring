@@ -79,7 +79,7 @@ export function EditTemplateBlockForm({ block }: BlockBaseWithBlockFormProps<TTe
           </div>
         </div>
       </div>
-      <FormButton title="수정하기" event={false} />
+      <FormButton title="수정하기" disabled={false} />
     </form>
   )
 }
