@@ -12,13 +12,9 @@ export function LinkBlock({ block, mode }: BlockBaseWithBlockProps<TLink>) {
           <BlockLogo logo={block.src} />
           <div className={styles.titleUrl}>
             <span>{block.title}</span>
-            {block.w === 1 ? (
-              <a style={{ display: 'none' }} href={block.src}>
-                {block.src}
-              </a>
-            ) : (
-              <a href={block.src}>{block.src}</a>
-            )}
+            <a style={{ display: block.w === 1 ? 'none' : 'inline' }} href={block.src}>
+              {block.src}
+            </a>
           </div>
         </div>
       </div>

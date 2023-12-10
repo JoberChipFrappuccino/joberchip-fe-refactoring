@@ -83,11 +83,3 @@ export default function SignUp() {
     </>
   )
 }
-
-/**
- * reference
- * 1. react-hook-form 사용 방법
- * * onBlur 또한 아래 주소를 참고
- * https://velog.io/@sweetpumpkin/React-hook-form%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-Form-Validation
- * https://github.com/danimkim/pinned/blob/develop/src/components/AuthForm.tsx
- */
