@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { ACCESS_TOKEN, BACK_MOCK_ACCESS_TOKEN } from '@/constants'
 import { getAccessToken } from '@/utils'
-import { errorController } from './controller/error'
 
 const mockAPI = axios.create({
   baseURL:
@@ -19,14 +18,6 @@ mockAPI.interceptors.request.use(
   async (error) => {
     if (process.env.NODE_ENV === 'development') console.error(error)
     return await Promise.reject(error)
-  }
-)
-
-mockAPI.interceptors.response.use(
-  (res) => res,
-  async (error) => {
-    if (process.env.NODE_ENV === 'development') console.error(error)
-    await errorController(error)
   }
 )
 
