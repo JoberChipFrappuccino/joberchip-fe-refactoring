@@ -1,6 +1,6 @@
 import { loadUserInfoAPI } from '@/apis/user'
 import { to } from '@/utils'
-import useSuspenseQuery from './queries/useSuspenseQuery'
+import { useSuspenseQuery } from './queries/useSuspenseQuery'
 import { useServerSideProps } from './serverSideProps'
 
 /**

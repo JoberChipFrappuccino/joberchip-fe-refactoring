@@ -7,11 +7,11 @@ type UseSuspenseQuery<TData, TError> = Omit<UseQueryResult<TData, TError>, 'data
 /**
  * @description Suspense를 사용할 경우 TData가 undefined가 아님을 보장합니다.
  */
-function useSuspenseQuery<TQueryFnData, TError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
+export const useSuspenseQuery = <TQueryFnData, TError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
   arg1: TQueryKey | UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
   arg2?: QueryFunction<TQueryFnData, TQueryKey> | UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
   arg3?: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>
-): UseSuspenseQuery<TData, TError> {
+): UseSuspenseQuery<TData, TError> => {
   const parsedOptions = parseQueryArgs(arg1, arg2, arg3)
   const queryResult = useQuery({
     ...parsedOptions,
@@ -19,5 +19,3 @@ function useSuspenseQuery<TQueryFnData, TError, TData = TQueryFnData, TQueryKey 
   }) as unknown as UseSuspenseQuery<TData, TError>
   return queryResult
 }
-
-export default useSuspenseQuery
