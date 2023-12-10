@@ -1,12 +1,11 @@
 <div align=center>
 
 # [자버칩프라푸치노 사이트](http://ec2-34-228-10-85.compute-1.amazonaws.com/)
-**``` 임시 로그아웃 버튼을 누르면 새로운 User로 작성이 가능합니다 ```** <br>
 
 <img height="300" src="https://github.com/atsunsetree/joberchip-be/assets/128345842/02fd1980-6e18-4863-b148-b053bfc101ef"></img>
 
 **[🏠 자버칩프라푸치노 Organization](https://github.com/JoberChipFrappuccino)** <br>
-**[👨‍👨‍👧‍👧 Front-End Repository](https://github.com/JoberChipFrappuccino/joberchip-fe)** <br></br>
+**[👨‍👨‍👧‍👧 Front-End Repository 커밋 히스토리는 이곳에서 확인할 수 있습니다.](https://github.com/JoberChipFrappuccino/joberchip-fe)** <br></br>
 
 ## 🎞️ 프로젝트 시연 영상
 
