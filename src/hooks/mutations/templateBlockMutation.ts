@@ -16,10 +16,6 @@ export const useAddTemplateBlockMutation = () => {
         if (!oldData) throw new Error('oldData is undefined')
         return { ...oldData, children: [...oldData.children, block] }
       })
-    },
-
-    onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData(['todos'], context)
     }
   })
   return mutation
