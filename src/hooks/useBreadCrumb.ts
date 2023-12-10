@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { type BreadCrumbItems, getBreadCrumb } from '@/apis/page'
+import { getBreadCrumb } from '@/apis/page'
 import { SEO } from '@/constants'
 import { BREAD_CRUMB } from '@/constants/querykey'
 import useSuspenseQuery from './queries/useSuspenseQuery'
@@ -12,7 +12,7 @@ export const useBreadCrumb = () => {
     enabled: !!pageId && !isServerSide
   })
   return {
-    breadCrumb: data?.data as BreadCrumbItems,
+    breadCrumb: data?.data,
     pageId,
     isLoading
   }

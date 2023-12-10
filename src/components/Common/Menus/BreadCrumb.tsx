@@ -6,6 +6,8 @@ import { useBreadCrumb } from '@/hooks/useBreadCrumb'
 export function BreadCrumbBox() {
   const { breadCrumb, pageId } = useBreadCrumb()
 
+  if (!breadCrumb) return null
+
   return <Breadcrumb style={{ paddingLeft: '1rem' }} separator=">" items={convertItem(pageId, breadCrumb, [])} />
 }
 
