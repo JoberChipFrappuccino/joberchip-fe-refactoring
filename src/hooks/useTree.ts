@@ -13,7 +13,7 @@ export interface ITree {
   children: ITree[]
 }
 
-export function useTree(spaceId: string): ResponseBase<ITree> {
+export const useTree = (spaceId: string): ResponseBase<ITree> => {
   const { isServerSide } = useServerSideProps()
   const { data: res } = useQuery([TREE, spaceId], () => getTreeAPI(spaceId), {
     staleTime: 1000 * 60 * 60,

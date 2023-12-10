@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { getBreadCrumb } from '@/apis/page'
 import { BREAD_CRUMB } from '@/constants/querykey'
-import useSuspenseQuery from './queries/useSuspenseQuery'
+import { useSuspenseQuery } from './queries/useSuspenseQuery'
 import { useServerSideProps } from './serverSideProps'
 
 export const useBreadCrumb = () => {

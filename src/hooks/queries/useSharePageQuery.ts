@@ -4,7 +4,7 @@ import { SPACE } from '@/constants'
 import { SHARE_PAGE } from '@/constants/querykey'
 import { type SharePage } from '@/models/space'
 import { useServerSideProps } from '../serverSideProps'
-import useSuspenseQuery from './useSuspenseQuery'
+import { useSuspenseQuery } from './useSuspenseQuery'
 
 type SharePageHook = () => {
   sharePage: SharePage
