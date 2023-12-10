@@ -7,7 +7,7 @@ import { Profile } from '@/components/SharePage/Profile/Profile'
 import { SEO } from '@/constants'
 import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useSharePageModeStore } from '@/store/sharePage'
-import useServerSideProps from '@/hooks/serverSideProps'
+import { useServerSideProps } from '@/hooks/serverSideProps'
 import '@/styles/reactGridLayout.scss'
 interface PageSource {
   title: string

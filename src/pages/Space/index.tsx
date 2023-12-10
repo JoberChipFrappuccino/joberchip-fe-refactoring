@@ -2,12 +2,11 @@ import { Suspense } from 'react'
 import { Helmet } from 'react-helmet'
 import { Header, LeftMenu, HomeLogo } from '@/components/Common/Menus'
 import SpaceContent from '@/components/SpacePage/SpaceContent'
-import { SEO } from '@/constants'
-import useServerSideProps from '@/hooks/serverSideProps'
+import { useServerSideProps } from '@/hooks/serverSideProps'
 import styles from './Space.module.scss'
 
 export default function Space() {
-  const { isServerSide } = useServerSideProps(SEO)
+  const { isServerSide } = useServerSideProps()
   return (
     <>
       <Helmet>
