@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { isAxiosError } from 'axios'
 import { useCallback, useTransition } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signInAPI, signUpAPI } from '@/apis/user'
@@ -24,6 +25,13 @@ export const useAuth = () => {
     },
     onSettled: () => {
       queryClient.invalidateQueries(['user'])
+    },
+    onError: (err) => {
+      if (isAxiosError(err)) {
+        toast(err.response?.data.error.message ?? '로그인에 실패하였습니다.', 'error')
+      } else {
+        toast('로그인에 실패하였습니다.', 'error')
+      }
     }
   })
 
@@ -41,6 +49,14 @@ export const useAuth = () => {
     },
     onSettled: () => {
       queryClient.invalidateQueries(['user'])
+      resetAccessToken(BACK_MOCK_ACCESS_TOKEN)
+    },
+    onError: (err) => {
+      if (isAxiosError(err)) {
+        toast(err.response?.data.error.message ?? '회원가입에 실패하였습니다.', 'error')
+      } else {
+        toast('회원가입에 실패하였습니다.', 'error')
+      }
     }
   })
 
