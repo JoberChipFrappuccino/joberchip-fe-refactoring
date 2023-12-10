@@ -1,8 +1,8 @@
 import { fetchSpaceListAPI } from '@/apis/space'
 import { SEO } from '@/constants'
 import { SPACE_LIST } from '@/constants/querykey'
-import useServerSideProps from '../serverSideProps'
-import useSuspenseQuery from './useSuspenseQuery'
+import { useServerSideProps } from '../serverSideProps'
+import { useSuspenseQuery } from './useSuspenseQuery'
 
 export function useSpaceListQuery() {
   const { isServerSide } = useServerSideProps(SEO)

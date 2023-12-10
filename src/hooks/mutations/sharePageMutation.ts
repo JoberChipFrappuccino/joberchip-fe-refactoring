@@ -36,9 +36,6 @@ export const useDeleteBlockMutation = () => {
         const newChildren = oldData.children.filter((item) => item.objectId !== block.objectId)
         return { ...oldData, children: [...newChildren] }
       })
-    },
-    onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation

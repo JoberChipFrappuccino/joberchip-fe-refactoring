@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
-export function useDebounce<T extends object | string>(
+export const useDebounce = <T extends object | string>(
   value: T,
   delay: number = 2000,
   onChaged: (value: T) => void = () => {}
-) {
+) => {
   const [debouncedValue, setDebouncedValue] = useState(value)
 
   useEffect(() => {

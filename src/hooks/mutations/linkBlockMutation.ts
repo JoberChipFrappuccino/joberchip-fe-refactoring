@@ -17,10 +17,6 @@ export const useAddLinkBlockMutate = () => {
         if (!oldData) throw new Error('해당 페이지에 대한 정보가 없습니다.')
         return { ...oldData, children: [...oldData.children, block] }
       })
-    },
-
-    onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData(['todos'], context)
     }
   })
   return mutation
@@ -42,9 +38,6 @@ export const useEditLinkBlockMutate = () => {
         })
         return { ...oldData, children: [...newChildren] }
       })
-    },
-    onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation

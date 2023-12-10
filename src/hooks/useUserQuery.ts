@@ -1,8 +1,7 @@
 import { loadUserInfoAPI } from '@/apis/user'
-import { SEO } from '@/constants'
 import { to } from '@/utils'
-import useSuspenseQuery from './queries/useSuspenseQuery'
-import useServerSideProps from './serverSideProps'
+import { useSuspenseQuery } from './queries/useSuspenseQuery'
+import { useServerSideProps } from './serverSideProps'
 
 /**
  * 사용자 정보를 조회할 떈 api가 throw를 던지지 않습니다.
@@ -12,7 +11,7 @@ import useServerSideProps from './serverSideProps'
  * 2. 한 페이지에서 회원, 비회원을 모두 처리
  */
 export const useUser = () => {
-  const { isServerSide } = useServerSideProps(SEO)
+  const { isServerSide } = useServerSideProps()
   const { data, isLoading } = useSuspenseQuery(['user'], () => to(loadUserInfoAPI()), {
     enabled: !isServerSide
   })

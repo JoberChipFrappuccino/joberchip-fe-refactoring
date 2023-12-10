@@ -17,10 +17,6 @@ export const useAddVideoBlockMutation = () => {
         if (!oldData) throw new Error('oldData is undefined')
         return { ...oldData, children: [...oldData.children, block] }
       })
-    },
-
-    onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData(['todos'], context)
     }
   })
   return mutation
@@ -42,9 +38,6 @@ export const useEditVideoBlockMutation = () => {
         })
         return { ...oldData, children: [...newChildren] }
       })
-    },
-    onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation

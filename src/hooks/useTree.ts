@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { getTreeAPI } from '@/apis/page'
-import { SEO } from '@/constants'
 import { TREE } from '@/constants/querykey'
 import { type ResponseBase } from '@/utils/api'
-import useServerSideProps from './serverSideProps'
+import { useServerSideProps } from './serverSideProps'
 
 export interface ITree {
   key: string
@@ -14,8 +13,8 @@ export interface ITree {
   children: ITree[]
 }
 
-export function useTree(spaceId: string): ResponseBase<ITree> {
-  const { isServerSide } = useServerSideProps(SEO)
+export const useTree = (spaceId: string): ResponseBase<ITree> => {
+  const { isServerSide } = useServerSideProps()
   const { data: res } = useQuery([TREE, spaceId], () => getTreeAPI(spaceId), {
     staleTime: 1000 * 60 * 60,
     enabled: !!spaceId && !isServerSide

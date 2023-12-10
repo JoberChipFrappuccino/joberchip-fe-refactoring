@@ -11,17 +11,12 @@ export const useAddImageBlockMutation = () => {
     mutationFn: ({ pageId, body }: { pageId: string | undefined; body: AddImageBlockBody }) => {
       return addImageBlockAPI(pageId, body)
     },
-
     onSuccess: (data, { pageId }) => {
       const { data: block } = data
       queryClient.setQueryData<SharePage>([SHARE_PAGE, pageId], (oldData) => {
         if (!oldData) throw new Error('oldData is undefined')
         return { ...oldData, children: [...oldData.children, block] }
       })
-    },
-
-    onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData(['todos'], context)
     }
   })
   return mutation
@@ -43,9 +38,6 @@ export const useEditImageBlockMutation = () => {
         })
         return { ...oldData, children: [...newChildren] }
       })
-    },
-    onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation
@@ -62,9 +54,6 @@ export const deleteImageBlockMutate = (queryClient: QueryClient) => {
         const newChildren = oldData.children.filter((item) => item.objectId !== objectId)
         return { ...oldData, children: [...newChildren] }
       })
-    },
-    onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation

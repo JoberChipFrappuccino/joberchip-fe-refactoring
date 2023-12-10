@@ -18,11 +18,6 @@ export const useAddMapBlockMutation = () => {
         if (!oldData) throw new Error('oldData is undefined')
         return { ...oldData, children: [...oldData.children, block] }
       })
-    },
-
-    onError: (_err, newBlock, context) => {
-      // queryClient.resetQueries([SHARE_PAGE])
-      // queryClient.setQueryData(['todos'], context)
     }
   })
   return mutation
@@ -44,9 +39,6 @@ export const useEditMapBlockMutation = () => {
         })
         return { ...oldData, children: [...newChildren] }
       })
-    },
-    onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation
@@ -67,9 +59,6 @@ export const deleteMapBlockMutate = (queryClient: QueryClient) => {
         const newChildren = oldData.children.filter((item) => item.objectId !== objectId)
         return { ...oldData, children: [...newChildren] }
       })
-    },
-    onError: (_err, _newBlock, context) => {
-      // queryClient.setQueryData([SHARE_PAGE, _newBlock], context)
     }
   })
   return mutation
