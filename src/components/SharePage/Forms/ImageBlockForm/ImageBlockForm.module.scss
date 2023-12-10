@@ -30,7 +30,7 @@
       height: 4rem;
     }
     .delTitle {
-      @include position;
+      @include position(absolute, 0, null, 0, 0);
       @include flex(row, null, center);
       width: 3rem;
       cursor: pointer;
