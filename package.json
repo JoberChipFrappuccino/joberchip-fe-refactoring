@@ -13,6 +13,7 @@
     "dev:server:watch": "cross-env NODE_ENV=development nodemon --watch \"./dist/index.js\" --exec \"npm run dev\"",
     "start": "cross-env NODE_ENV=production node ./dist/index.js",
     "start:pm2": "pm2 start ./ecosystem.config.js --only prod-server --env production",
+    "restart:pm2": "pm2 restart ./ecosystem.config.js --only prod-server --env production",
     "del": "pm2 del all"
   },
   "dependencies": {

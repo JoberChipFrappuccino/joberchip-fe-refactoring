@@ -52,7 +52,7 @@ jobs:
         run: npm run build:prod
 
       - name: 📦 빌드한 코드를 압축합니다.
-        run: zip -r build.zip ./dist ./server ./scripts ./src ./package.json ./package-lock.json ./.env ./appspec.yml ./ecosystem.config.js ./public
+        run: zip -r build.zip ./dist ./server ./scripts ./src ./package.json ./package-lock.json ./.env ./appspec.yml ./public
 
       - name: 🌎 AWS에 접속
         uses: aws-actions/configure-aws-credentials@v1
@@ -66,7 +66,7 @@ jobs:
 
       - name: 🚀 AWS codeDeploy로 배포를 시작
         run: aws deploy create-deployment
-          --application-name joberchip-code-deploy
+          --application-name joberchip-code-deploy2
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name production
           --s3-location bucket=joberchip-bucket,bundleType=zip,key=deploy/build.zip

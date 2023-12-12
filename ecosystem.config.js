@@ -31,18 +31,18 @@ module.exports = {
       output: './logs/pm2/console.log', // 로그 출력 경로 재설정
       error: './logs/pm2/onsoleError.log' // 에러 로그 출력 경로 재설정
     }
-  ],
+  ]
   /* deploy는 원격 서버와 git을 연동해서 배포하는 방식 */
-  deploy: {
-    production: {
-      user: 'SSH_USERNAME',
-      host: 'SSH_HOSTMACHINE',
-      ref: 'origin/master',
-      repo: 'GIT_REPOSITORY',
-      path: 'DESTINATION_PATH',
-      'pre-deploy-local': '',
-      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': ''
-    }
-  }
+  // deploy: {
+  //   production: {
+  //     user: 'SSH_USERNAME',
+  //     host: 'SSH_HOSTMACHINE',
+  //     ref: 'origin/master',
+  //     repo: 'GIT_REPOSITORY',
+  //     path: 'DESTINATION_PATH',
+  //     'pre-deploy-local': '',
+  //     'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production',
+  //     'pre-setup': ''
+  //   }
+  // }
 }
