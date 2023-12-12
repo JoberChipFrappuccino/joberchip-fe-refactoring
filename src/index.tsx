@@ -6,6 +6,10 @@ import QueryContext from './contexts/QueryContext'
 import { SSRProvider } from './contexts/SSRContext'
 import { Router } from './router'
 
+// deploy 확인용 주석, 변경되었는지 확인합시다.
+// deploy 확인용 주석, 변경되었는지 확인합시다.
+// deploy 확인용 주석, 변경되었는지 확인합시다.
+// deploy 확인용 주석, 변경되었는지 확인합시다.
 void loadableReady(() => {
   hydrateRoot(
     document.getElementById('root') as HTMLDivElement,

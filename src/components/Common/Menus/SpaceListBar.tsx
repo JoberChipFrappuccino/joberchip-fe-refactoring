@@ -1,5 +1,5 @@
 import { ConfigProvider, Layout } from 'antd'
-import styles from './SpaceListBar.module.scss'
+import styles from './SpaceList.module.scss'
 
 const { Sider } = Layout
 
@@ -27,8 +27,8 @@ export function SpaceListBar() {
             </div>
             <div className={`${styles.tabButton} ${styles.ownerButton}`}>김자버</div>
           </div>
-          {USER.map((user, i) => (
-            <div key={i} className={`${styles.tabButton} ${styles.userButton}`}>
+          {USER.map((user) => (
+            <div key={user} className={`${styles.tabButton} ${styles.userButton}`}>
               {user}
             </div>
           ))}
