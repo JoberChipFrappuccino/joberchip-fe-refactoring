@@ -1,5 +1,4 @@
 import { Layout } from 'antd'
-import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import styles from './App.module.scss'
@@ -16,9 +15,7 @@ export default function App() {
       <ToastContainer />
       <Layout>
         <Layout.Content className={styles.layout}>
-          <Suspense>
-            <Outlet />
-          </Suspense>
+          <Outlet />
         </Layout.Content>
       </Layout>
     </div>

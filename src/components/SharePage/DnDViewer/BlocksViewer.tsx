@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { useCallback, useEffect, useState } from 'react'
-import { Responsive, WidthProvider, type ResponsiveProps } from 'react-grid-layout'
+import { type ResponsiveProps } from 'react-grid-layout'
 import { fetchLayout } from '@/apis/page'
 import { ViewerBox } from '@/components/Common/SwitchCases/ViewerBox'
 import { MainBlockInfo } from '@/components/Common/Ui/MainBlockInfo'
@@ -15,8 +15,7 @@ import { to, toast } from '@/utils'
 import { calculateRatio, convertLayoutToParam, getLayoutByMode, sortLayout } from '@/utils/SharePage'
 import { useDebounce } from '@/hooks/useDebounce'
 import styles from './BlocksViewer.module.scss'
-
-const ResponsiveGridLayout = WidthProvider(Responsive)
+import { ResponsiveGridLayout } from './ResponsiveGridLayout'
 
 export const BlocksViewer = () => {
   const { mode } = useSharePageModeStore()
