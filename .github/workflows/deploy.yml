@@ -1,0 +1,70 @@
+name: deploy
+
+on:
+  push:
+    branches: [main, deploy]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [18.16.0]
+    steps:
+      - name: ✅ 체크아웃 source code.
+        uses: actions/checkout@v3
+
+      - name: ⚙️ ${{ matrix.node-version }} 버전의 노드로 세팅합니다.
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: ⚙️ 환경변수를 설정합니다.
+        working-directory: ./
+        run: |
+          pwd
+          touch .env
+          echo BACK_SERVER_BASE_URL=${{ secrets.BACK_SERVER_BASE_URL }} >> .env
+          echo FRONT_SERVER_BASE_URL=${{ secrets.FRONT_SERVER_BASE_URL }} >> .env
+          echo PORT=${{ secrets.PORT }} >> .env
+          echo BACK_MOCK_TOKEN_1=${{ secrets.BACK_MOCK_TOKEN_1 }} >> .env
+          echo BACK_MOCK_TOKEN_2=${{ secrets.BACK_MOCK_TOKEN_2 }} >> .env
+          echo BACK_MOCK_TOKEN_3=${{ secrets.BACK_MOCK_TOKEN_3 }} >> .env
+          echo BACK_MOCK_TOKEN_4=${{ secrets.BACK_MOCK_TOKEN_4 }} >> .env
+          echo BACK_MOCK_TOKEN_5=${{ secrets.BACK_MOCK_TOKEN_5 }} >> .env
+          echo FRONT_MOCK_TOKEN_1=${{ secrets.FRONT_MOCK_TOKEN_1 }} >> .env
+          echo FRONT_MOCK_TOKEN_2=${{ secrets.FRONT_MOCK_TOKEN_2 }} >> .env
+          echo FRONT_MOCK_TOKEN_3=${{ secrets.FRONT_MOCK_TOKEN_3 }} >> .env
+          echo FRONT_MOCK_TOKEN_4=${{ secrets.FRONT_MOCK_TOKEN_4 }} >> .env
+          echo FRONT_MOCK_TOKEN_5=${{ secrets.FRONT_MOCK_TOKEN_5 }} >> .env
+          echo REACT_APP_GOOGLE_MAPS_API=${{ secrets.REACT_APP_GOOGLE_MAPS_API }} >> .env
+          cat .env
+
+      - name: ✨ 패키지를 설치합니다.
+        working-directory: ./
+        run: npm install
+
+      - name: ✨ 빌드합니다.
+        working-directory: ./
+        run: npm run build:prod
+
+      - name: 📦 빌드한 코드를 압축합니다.
+        run: zip -r build.zip ./dist ./server ./scripts ./src ./package.json ./package-lock.json ./.env ./appspec.yml ./public ./ecosystem.config.js
+
+      - name: 🌎 AWS에 접속
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: 🦖 S3에 압축된 서버 코드를 업로드
+        run: aws s3 cp --region ap-northeast-1 ./build.zip s3://joberchip-bucket/deploy/
+
+      - name: 🚀 AWS codeDeploy로 배포를 시작
+        run: aws deploy create-deployment
+          --application-name joberchip-code-deploy-2
+          --deployment-config-name CodeDeployDefault.OneAtATime
+          --deployment-group-name production
+          --s3-location bucket=joberchip-bucket,bundleType=zip,key=deploy/build.zip

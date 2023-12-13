@@ -8,7 +8,7 @@ const siderStyle: React.CSSProperties = {
   backgroundColor: '#292D32'
 }
 
-const USER = ['김PM', '신UI', '박FE', '신BE']
+const USER = ['김PM', '신UI', '정FE', '신BE']
 
 export function SpaceListBar() {
   return (
@@ -27,8 +27,8 @@ export function SpaceListBar() {
             </div>
             <div className={`${styles.tabButton} ${styles.ownerButton}`}>김자버</div>
           </div>
-          {USER.map((user, i) => (
-            <div key={i} className={`${styles.tabButton} ${styles.userButton}`}>
+          {USER.map((user) => (
+            <div key={user} className={`${styles.tabButton} ${styles.userButton}`}>
               {user}
             </div>
           ))}

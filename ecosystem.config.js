@@ -20,8 +20,8 @@ module.exports = {
       name: 'prod-server',
       script: './dist/index.js',
       exec_mode: 'cluster',
-      instances: 'max', // 0이면 CPU 코어 수 만큼 인스턴스를 실행한다.
-      max_memory_restart: '500M', // 프로세스의 메모리가 300MB에 도달하면 reload 실행
+      instances: 1, // 0이면 CPU 코어 수 만큼 인스턴스를 실행한다.
+      max_memory_restart: '300M', // 프로세스의 메모리가 300MB에 도달하면 reload 실행
       watch: false, //bin폴더, routes폴더를 감시해서 변경사항 실행
       env: {
         // 환경 변수 설정
@@ -31,18 +31,18 @@ module.exports = {
       output: './logs/pm2/console.log', // 로그 출력 경로 재설정
       error: './logs/pm2/onsoleError.log' // 에러 로그 출력 경로 재설정
     }
-  ],
+  ]
   /* deploy는 원격 서버와 git을 연동해서 배포하는 방식 */
-  deploy: {
-    production: {
-      user: 'SSH_USERNAME',
-      host: 'SSH_HOSTMACHINE',
-      ref: 'origin/master',
-      repo: 'GIT_REPOSITORY',
-      path: 'DESTINATION_PATH',
-      'pre-deploy-local': '',
-      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': ''
-    }
-  }
+  // deploy: {
+  //   production: {
+  //     user: 'SSH_USERNAME',
+  //     host: 'SSH_HOSTMACHINE',
+  //     ref: 'origin/master',
+  //     repo: 'GIT_REPOSITORY',
+  //     path: 'DESTINATION_PATH',
+  //     'pre-deploy-local': '',
+  //     'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production',
+  //     'pre-setup': ''
+  //   }
+  // }
 }
