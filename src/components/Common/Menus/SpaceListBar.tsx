@@ -8,7 +8,7 @@ const siderStyle: React.CSSProperties = {
   backgroundColor: '#292D32'
 }
 
-const USER = ['김PM', '신UI', '박FE', '신BE']
+const USER = ['김PM', '신UI', '정FE', '신BE']
 
 export function SpaceListBar() {
   return (
