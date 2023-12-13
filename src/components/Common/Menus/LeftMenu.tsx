@@ -2,7 +2,7 @@ import type { MenuProps } from 'antd'
 import { CloseOutlined, RightOutlined } from '@ant-design/icons'
 import { Button, Drawer, Menu, Space } from 'antd'
 import { useState } from 'react'
-import { SpaceActionBar } from '@/components/SharePage/ActionBar/SpaceActionBar'
+import { SpaceListBar } from '@/components/Common/Menus/SpaceListBar'
 import { useUser } from '@/hooks/useUserQuery'
 import styles from './LeftMenu.module.scss'
 
@@ -32,7 +32,7 @@ export const LeftMenu = () => {
             type="text"
             style={{ position: 'absolute', top: 0, right: 0 }}
           />
-          <SpaceActionBar />
+          <SpaceListBar />
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <div
               style={{
