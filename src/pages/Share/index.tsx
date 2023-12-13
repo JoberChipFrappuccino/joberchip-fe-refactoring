@@ -1,7 +1,9 @@
-import { Suspense, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { BreadCrumbBox, Header, LeftMenu } from '@/components/Common/Menus'
+import { SSRSuspense } from '@/components/Common/SSRSuspense'
 import { BlocksViewer } from '@/components/SharePage/DnDViewer/BlocksViewer'
+import BlocksViewerSkeleton from '@/components/SharePage/DnDViewer/BlocksViewerSkeleton'
 import { Drawer } from '@/components/SharePage/Drawer/Drawer'
 import { Profile } from '@/components/SharePage/Profile/Profile'
 import { SEO } from '@/constants'
@@ -16,7 +18,7 @@ interface PageSource {
 }
 
 export default function SharePage() {
-  const { source, isServerSide } = useServerSideProps<PageSource>(SEO)
+  const { source } = useServerSideProps<PageSource>(SEO)
   const { pageId, isSuccess, sharePage } = useSharePageQuery()
   const { setSharePageMode } = useSharePageModeStore()
 
@@ -36,22 +38,15 @@ export default function SharePage() {
         <meta property="og:description" content={source.description ?? ''} />
         <meta property="og:image" content={source.profileImageLink ?? '/favicon.ico'} />
       </Helmet>
-      {!isServerSide && (
-        <>
-          <Header>
-            <Suspense>
-              <LeftMenu />
-            </Suspense>
-            <Suspense>
-              <BreadCrumbBox />
-            </Suspense>
-          </Header>
-          <Profile />
-          <Drawer />
-        </>
-      )}
-      {/* 소스 페이지에 Block 정보를 추가합니다. */}
-      {isSuccess && <BlocksViewer />}
+      <SSRSuspense fallback={<BlocksViewerSkeleton />}>
+        <Header>
+          <LeftMenu />
+          <BreadCrumbBox />
+        </Header>
+        <Profile />
+        <Drawer />
+        <BlocksViewer />
+      </SSRSuspense>
     </>
   )
 }

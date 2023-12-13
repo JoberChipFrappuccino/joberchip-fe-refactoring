@@ -7,6 +7,7 @@ import { TextBlock } from '@/components/SharePage/Blocks/TextBlock/TextBlock'
 import { VideoBlock } from '@/components/SharePage/Blocks/VideoBlock/VideoBlock'
 import { IMAGE, LINK, MAP, PAGE, TEMPLATE, TEXT, VIDEO } from '@/constants/block'
 import { type BlockType, type BlockWith } from '@/models/block'
+import { SSRSuspense } from '../SSRSuspense'
 
 export interface BlockBaseWithBlockProps<T extends BlockType> {
   block: BlockWith<T>
@@ -26,7 +27,11 @@ function getViewerComponent<T extends BlockType>({ block, mode }: BlockBaseWithB
     case VIDEO:
       return <VideoBlock mode={mode} block={block} />
     case MAP:
-      return <GoogleMapBlock mode={mode} block={block} />
+      return (
+        <SSRSuspense>
+          <GoogleMapBlock mode={mode} block={block} />
+        </SSRSuspense>
+      )
     case TEMPLATE:
       return <TemplateBlock mode={mode} block={block} />
     default: {

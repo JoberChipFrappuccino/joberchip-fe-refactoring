@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query'
 import { loadUserInfoAPI } from '@/apis/user'
 import { to } from '@/utils'
-import { useSuspenseQuery } from './queries/useSuspenseQuery'
 import { useServerSideProps } from './serverSideProps'
 
 /**
@@ -12,9 +12,9 @@ import { useServerSideProps } from './serverSideProps'
  */
 export const useUser = () => {
   const { isServerSide } = useServerSideProps()
-  const { data, isLoading } = useSuspenseQuery(['user'], () => to(loadUserInfoAPI()), {
+  const { data, isLoading } = useQuery(['user'], () => to(loadUserInfoAPI()), {
     enabled: !isServerSide
   })
-  const user = data.data
-  return { user, isSuccess: data.status !== 'failure', isLoading }
+  const user = data?.data
+  return { user, isSuccess: data?.status !== 'failure', isLoading }
 }

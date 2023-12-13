@@ -53,7 +53,14 @@ export default async function renderHome(url: string, req: Request, res: Respons
     </StaticRouter>
   )
 
-  const html = renderToString(jsx)
+  // html 문자열을 출력하지 못하면 서버에서 빈 html을 렌더링합니다.
+  let html = ''
+  try {
+    html = renderToString(jsx)
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') console.error(error)
+  }
+
   const helmet = Helmet.renderStatic()
 
   /**

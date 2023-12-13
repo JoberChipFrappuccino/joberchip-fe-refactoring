@@ -18,5 +18,6 @@ export const useSharePageQuery: SharePageHook = () => {
     if (isServerSide) return { ...source, privilege: source.privilege ?? 'VIEW' }
     return getSpaceFromBackAPI(pageId ?? '')
   })
+
   return { sharePage: data, pageId, ...rest }
 }

@@ -1,6 +1,5 @@
 import loadable from '@loadable/component'
 import { Route, Routes, Outlet, Navigate } from 'react-router-dom'
-
 import { useUser } from './hooks/useUserQuery'
 
 const App = loadable(() => import('./App'))
