@@ -52,7 +52,7 @@ jobs:
         run: npm run build:prod
 
       - name: 📦 빌드한 코드를 압축합니다.
-        run: zip -r build.zip ./dist ./server ./scripts ./src ./package.json ./package-lock.json ./.env ./appspec.yml ./public
+        run: zip -r build.zip ./dist ./server ./scripts ./src ./package.json ./package-lock.json ./.env ./appspec.yml ./public ./ecosystem.config.js
 
       - name: 🌎 AWS에 접속
         uses: aws-actions/configure-aws-credentials@v1

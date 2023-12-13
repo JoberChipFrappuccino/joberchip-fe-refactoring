@@ -20,8 +20,8 @@ module.exports = {
       name: 'prod-server',
       script: './dist/index.js',
       exec_mode: 'cluster',
-      instances: 'max', // 0이면 CPU 코어 수 만큼 인스턴스를 실행한다.
-      max_memory_restart: '500M', // 프로세스의 메모리가 300MB에 도달하면 reload 실행
+      instances: 1, // 0이면 CPU 코어 수 만큼 인스턴스를 실행한다.
+      max_memory_restart: '300M', // 프로세스의 메모리가 300MB에 도달하면 reload 실행
       watch: false, //bin폴더, routes폴더를 감시해서 변경사항 실행
       env: {
         // 환경 변수 설정
