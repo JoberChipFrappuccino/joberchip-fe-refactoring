@@ -18,7 +18,7 @@ export const Router = () => {
         </Route>
         <Route element={<RedirectToSpace />}>
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />R
+          <Route path="/signup" element={<SignUp />} />
         </Route>
         <Route path="/space/:pageId" element={<SharePage />} />
       </Route>
