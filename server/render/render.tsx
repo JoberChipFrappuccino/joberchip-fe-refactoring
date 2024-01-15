@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express'
 import path from 'path'
 import { ChunkExtractor } from '@loadable/server'
+import { isAxiosError } from 'axios'
 import { renderToString } from 'react-dom/server'
 import { Helmet } from 'react-helmet'
 import { StaticRouter } from 'react-router-dom/server'
@@ -31,7 +32,13 @@ export default async function renderHome(url: string, req: Request, res: Respons
       })
     } catch (error) {
       console.error(error)
-      return res.status(404).send('<h1>NOT FOUND</h1>')
+      if (isAxiosError(error)) {
+        if (error.response?.status !== 400) {
+          return res.status(404).send('<h1>NOT FOUND</h1>')
+        }
+      } else {
+        return res.status(500).send('<h1>INTERNAL SERVER ERROR</h1>')
+      }
     }
   }
 
