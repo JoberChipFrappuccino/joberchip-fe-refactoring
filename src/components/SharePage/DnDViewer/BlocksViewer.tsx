@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 import { useCallback, useEffect, useState } from 'react'
 import { type ResponsiveProps } from 'react-grid-layout'
-import { fetchLayout } from '@/apis/page'
 import { ViewerBox } from '@/components/Common/SwitchCases/ViewerBox'
 import { MainBlockInfo } from '@/components/Common/Ui/MainBlockInfo'
 import { SpaceActionBar } from '@/components/SharePage/ActionBar/SpaceActionBar'
@@ -11,7 +10,6 @@ import { BREAKPOINTS, LAYOUT_DEBOUNCE_TIME } from '@/constants/space'
 import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useBlockActionStore } from '@/store/blockAction'
 import { useSharePageModeStore } from '@/store/sharePage'
-import { to, toast } from '@/utils'
 import { calculateRatio, convertLayoutToParam, getLayoutByMode, sortLayout } from '@/utils/SharePage'
 import { useDebounce } from '@/hooks/useDebounce'
 import styles from './BlocksViewer.module.scss'
@@ -19,7 +17,7 @@ import { ResponsiveGridLayout } from './ResponsiveGridLayout'
 
 export const BlocksViewer = () => {
   const { mode } = useSharePageModeStore()
-  const { sharePage, pageId } = useSharePageQuery()
+  const { sharePage, pageId, fetchLayout } = useSharePageQuery()
   const { activeBlockId, setActiveBlockId } = useBlockActionStore()
   const [editModeGrid, setEditModeGrid] = useState(getLayoutByMode(sharePage.children, 'EDIT'))
   const [viewModeGrid, setViewModeGrid] = useState(getLayoutByMode(sharePage.children, 'VIEW'))
@@ -30,15 +28,7 @@ export const BlocksViewer = () => {
 
   useEffect(() => {
     if (mode === 'VIEW') return
-    if (
-      JSON.stringify(convertLayoutToParam(sharePage.children, nextLayout)) ===
-      JSON.stringify(convertLayoutToParam(sharePage.children, editModeGrid.layouts.lg))
-    ) {
-      return
-    }
-    to(fetchLayout(pageId ?? '', convertLayoutToParam(sharePage.children, nextLayout))).then((res) => {
-      if (res.data) toast('레이아웃이 변경되었습니다', 'success')
-    })
+    fetchLayout(pageId, convertLayoutToParam(sharePage.children, nextLayout))
   }, [nextLayout])
 
   useEffect(() => {
