@@ -184,26 +184,33 @@ npm run start:pm2
 
 <br></br>
 
-## 아키텍쳐
+## 서비스 요청 흐름도
 
-<img width="1173" alt="joberchip-architecture" src="https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/c36783a2-2ef7-4405-bc0b-99e90536f5d7">
+![architecture_2st](https://github.com/JoberChipFrappuccino/joberchip-fe-refactoring/assets/73880776/a6f7abe8-f640-4bfe-9682-e334cb2ece95)
 
+
+## CI/CD 파이프라인
+
+프론트엔드 CI/CD 파이프라인 입니다.
+
+![architecture_2st](https://github.com/JoberChipFrappuccino/joberchip-fe-refactoring/assets/73880776/878ac171-4079-4de4-9a05-3f5f786ae013)
 
 ## 공유 페이지 접근 시퀀스 다이어그램
 
-공유 페이지 접근시 `react-dom/server`의 `renderToString`을 사용하거나 `react-router-dom`의 `useNavigate`, `Link`에 따라 
-
-SSR, CSR로 나뉘어 동작합니다.
+공유 페이지는 CSR, SSR을 같이 사용하는 [universial rendering](https://nuxt.com/docs/guide/concepts/rendering#universal-rendering)방식으로 렌더링 됩니다.
 
 ### 브라우저 주소창에 URL을 입력하여 접속했을 경우
 
-브라우저 주소창에 URL을 입력하여 접속했을 경우 `react-dom/server`의 `renderToString`를 사용하여 SSR로 동작합니다.
+- SSR에 해당합니다.
+- `react-dom/server`의 `renderToString`를 사용하여 정적인 HTML을 생성합니다.
+  
+![SSR_sequence](https://github.com/JoberChipFrappuccino/joberchip-fe-refactoring/assets/73880776/d7ecd013-9f18-417e-b3c8-8f8a15412c33)
 
-![ssr_sequnce](https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/afacda3b-211e-4ea2-aef6-ed57231ed0b5)
 
 ### 웹 애플리케이션 안에서 주소를 이동했을 경우
 
-`react-router-dom`의 `useNavigate`, `Link`를 사용하여 이동한 경우에 해당됩니다. CSR로 동작합니다.
+- CSR에 해당합니다.
+- `react-router-dom`의 `useRouter`, `Link`, `Navigation` 등을 사용하여 이동한 경우에 해당됩니다. 
 
-![csr_sequence](https://github.com/JoberChipFrappuccino/joberchip-fe/assets/73880776/a403df9c-0e42-49ef-aae9-571434cf799f)
+![CSR_sequence](https://github.com/JoberChipFrappuccino/joberchip-fe-refactoring/assets/73880776/a847c0ec-e75c-4e6b-ad77-386f1bc0d7f7)
 
