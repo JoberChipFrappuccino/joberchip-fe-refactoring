@@ -4,7 +4,6 @@ import { ServerSideContext } from '@/contexts/SSRContext'
 
 function useServerSideProps(): { isServerSide: boolean }
 function useServerSideProps<T>(key: string): { isServerSide: boolean; source: T }
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 function useServerSideProps<T>(key?: string) {
   const [isServerSide, setIsServerSide] = useState(typeof window === 'undefined')
   const ctx = useContext(ServerSideContext)

@@ -156,7 +156,7 @@ export interface EditPageBlockBody {
  * @description 페이지 내 블록 위치 / 형태 수정
  * @see https://www.notion.so/954491d9c292452c8fb13fe95280c3d7
  */
-export async function fetchLayout(
+export async function fetchLayoutAPI(
   pageId: string,
   blocks: FetchLayoutBlocksParam[]
 ): Promise<ResponseBase<FetchLayoutResponse>> {
