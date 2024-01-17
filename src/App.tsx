@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import styles from './App.module.scss'
+import { NotFoundErrorBoundary } from './components/Common/Errors/NotFoundErrorBoundary'
 
 // import '@/styles/reset.scss'
 import '@/styles/toast.scss'
@@ -16,9 +17,11 @@ export default function App() {
       <ToastContainer />
       <Layout>
         <Layout.Content className={styles.layout}>
-          <Suspense>
-            <Outlet />
-          </Suspense>
+          <NotFoundErrorBoundary>
+            <Suspense>
+              <Outlet />
+            </Suspense>
+          </NotFoundErrorBoundary>
         </Layout.Content>
       </Layout>
     </div>
