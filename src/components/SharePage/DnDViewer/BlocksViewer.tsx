@@ -23,11 +23,13 @@ export const BlocksViewer = () => {
   const [viewModeGrid, setViewModeGrid] = useState(getLayoutByMode(sharePage.children, 'VIEW'))
   const [rowHeight, setRowHeight] = useState(0)
   const [margin, setMargin] = useState(0)
+  const [isChangeLayout, setIsChangeLayout] = useState(false)
 
   const nextLayout = useDebounce(editModeGrid.layouts.lg, LAYOUT_DEBOUNCE_TIME)
 
   useEffect(() => {
     if (mode === 'VIEW') return
+    if (!isChangeLayout) return
     fetchLayout(pageId, convertLayoutToParam(sharePage.children, nextLayout))
   }, [nextLayout])
 
@@ -53,29 +55,26 @@ export const BlocksViewer = () => {
     )
 
   const handleChangeLayout: ResponsiveProps['onLayoutChange'] = //
-    useCallback<NonNullable<ResponsiveProps['onLayoutChange']>>(
-      (layout, _layouts) => {
-        if (mode === 'VIEW') return
-        const changedLayout = sortLayout(layout)
-        if (JSON.stringify(sortLayout(changedLayout)) === JSON.stringify(editModeGrid.layouts.lg)) return // TODO : 비교로직 수정 필요
-        setEditModeGrid(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
-      },
-      [activeBlockId]
-    )
+    (layout, _layouts) => {
+      if (mode === 'VIEW') return
+      const changedLayout = sortLayout(layout)
+      if (JSON.stringify(sortLayout(changedLayout)) === JSON.stringify(editModeGrid.layouts.lg)) {
+        setIsChangeLayout(false)
+        return
+      }
+      setIsChangeLayout(true)
+      setEditModeGrid(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
+    }
 
-  const handleOnDragStart: ResponsiveProps['onDragStart'] = //
-    useCallback<NonNullable<ResponsiveProps['onDragStart']>>(
-      (_layout, _oldItem, _newItem, _placeholder, e, el) => {
-        setActiveBlockId(el.id)
-        if (e.type === 'mousedown') return
-        const targetElement = e.target as HTMLElement
-        if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) {
-          // 컨텍스트가 비워졌을 떄 클릭 이벤트를 실행합니다.
-          setTimeout(() => targetElement.closest('button')?.click())
-        }
-      },
-      [activeBlockId]
-    )
+  const handleOnDragStart: ResponsiveProps['onDragStart'] = (_layout, _oldItem, _newItem, _placeholder, e, el) => {
+    setActiveBlockId(el.id)
+    if (e.type === 'mousedown') return
+    const targetElement = e.target as HTMLElement
+    if (targetElement.id === DROPDOWN_TRIGGER_ICON_ID) {
+      // 컨텍스트가 비워졌을 떄 클릭 이벤트를 실행합니다.
+      setTimeout(() => targetElement.closest('button')?.click())
+    }
+  }
 
   return (
     <div className={styles.layout}>
