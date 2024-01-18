@@ -193,7 +193,8 @@ npm run start:pm2
 
 프론트엔드 CI/CD 파이프라인 입니다.
 
-![architecture_2st](https://github.com/JoberChipFrappuccino/joberchip-fe-refactoring/assets/73880776/878ac171-4079-4de4-9a05-3f5f786ae013)
+![architecture_2st](https://github.com/JoberChipFrappuccino/joberchip-fe-refactoring/assets/73880776/37e73893-1c57-4781-ac65-a9f2df1d071b)
+
 
 ## 공유 페이지 접근 시퀀스 다이어그램
 
@@ -204,7 +205,7 @@ npm run start:pm2
 - SSR에 해당합니다.
 - `react-dom/server`의 `renderToString`를 사용하여 정적인 HTML을 생성합니다.
   
-![SSR_sequence](https://github.com/JoberChipFrappuccino/joberchip-fe-refactoring/assets/73880776/d7ecd013-9f18-417e-b3c8-8f8a15412c33)
+![발표자료](https://github.com/JoberChipFrappuccino/joberchip-fe-refactoring/assets/73880776/700883c5-f867-4fc9-a57e-2077093e647d)
 
 
 ### 웹 애플리케이션 안에서 주소를 이동했을 경우
@@ -212,5 +213,5 @@ npm run start:pm2
 - CSR에 해당합니다.
 - `react-router-dom`의 `useRouter`, `Link`, `Navigation` 등을 사용하여 이동한 경우에 해당됩니다. 
 
-![CSR_sequence](https://github.com/JoberChipFrappuccino/joberchip-fe-refactoring/assets/73880776/a847c0ec-e75c-4e6b-ad77-386f1bc0d7f7)
+![발표자료](https://github.com/JoberChipFrappuccino/joberchip-fe-refactoring/assets/73880776/ffe89caf-196c-4ff0-b63f-e21407dba560)
 
