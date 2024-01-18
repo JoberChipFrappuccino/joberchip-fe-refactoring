@@ -23,13 +23,11 @@ export const BlocksViewer = () => {
   const [viewModeGrid, setViewModeGrid] = useState(getLayoutByMode(sharePage.children, 'VIEW'))
   const [rowHeight, setRowHeight] = useState(0)
   const [margin, setMargin] = useState(0)
-  const [isChangeLayout, setIsChangeLayout] = useState(false)
 
   const nextLayout = useDebounce(editModeGrid.layouts.lg, LAYOUT_DEBOUNCE_TIME)
 
   useEffect(() => {
     if (mode === 'VIEW') return
-    if (!isChangeLayout) return
     fetchLayout(pageId, convertLayoutToParam(sharePage.children, nextLayout))
   }, [nextLayout])
 
@@ -59,10 +57,8 @@ export const BlocksViewer = () => {
       if (mode === 'VIEW') return
       const changedLayout = sortLayout(layout)
       if (JSON.stringify(sortLayout(changedLayout)) === JSON.stringify(editModeGrid.layouts.lg)) {
-        setIsChangeLayout(false)
         return
       }
-      setIsChangeLayout(true)
       setEditModeGrid(() => ({ breakpoints: 'lg', layouts: { lg: changedLayout } }))
     }
 

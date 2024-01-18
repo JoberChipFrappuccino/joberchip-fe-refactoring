@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { createSpaceAPI } from '@/apis/space'
 import { SPACE_LIST } from '@/constants/querykey'
 import { useSpaceListQuery } from '@/hooks/queries/useSpaceListQuery'
@@ -13,7 +13,6 @@ export function UserProfile() {
   const { signOut } = useAuth()
   const { spaceList } = useSpaceListQuery()
   const queryClient = useQueryClient()
-  const navigate = useNavigate()
 
   const handleOnClickCreateSpace = () => {
     createSpaceAPI()
@@ -45,7 +44,7 @@ export function UserProfile() {
           type="button"
           onClick={() => {
             signOut()
-            navigate('/signin')
+            location.reload()
           }}
         >
           로그아웃
