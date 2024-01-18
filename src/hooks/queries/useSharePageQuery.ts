@@ -26,12 +26,11 @@ export const useSharePageQuery: SharePageHook = () => {
   const fetchLayout = async (pageId: string | undefined, layout: FetchLayoutBlocksParam[]) => {
     if (!pageId) return toast('잘못된 접근입니다.', 'error')
     const res = await to(fetchLayoutAPI(pageId, layout))
-    if (res.status === 'success') {
-      toast(res.message, res.status)
-    } else {
+    if (res.status !== 'success') {
       toast(res.message, res.status)
       queryClient.fetchQuery([SHARE_PAGE, pageId], () => getSpaceFromBackAPI(pageId))
     }
   }
+
   return { sharePage: data, pageId, fetchLayout, ...rest }
 }
