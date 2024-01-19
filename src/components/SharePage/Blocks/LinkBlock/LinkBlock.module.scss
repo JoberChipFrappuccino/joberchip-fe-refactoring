@@ -18,19 +18,24 @@
       padding: 1rem;
       .titleUrl {
         display: flex;
-        max-width: 12.5rem;
         overflow: hidden;
         padding-top: 0.1875rem;
         margin-left: 1.25rem;
         flex-direction: column;
         span {
-          display: flex;
+          display: inline-block;
           font-weight: 700;
           font-size: 1.6rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         a {
           color: #c9c9c9;
           font-size: 1.3rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
           &:hover {
             color: #4c61ff;
           }
@@ -50,10 +55,9 @@
   outline: none;
   display: flex;
   cursor: pointer;
-  height: 3.125rem;
+  min-height: 3.125rem;
   background-color: black;
   justify-content: space-between;
-
   .footerLeft {
     height: 100%;
     display: flex;
