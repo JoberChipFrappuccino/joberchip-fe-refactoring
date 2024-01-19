@@ -1,5 +1,4 @@
-import { Suspense } from 'react'
-import { ErrorBoundary } from 'react-error-boundary'
+import { useSharePageQuery } from '@/hooks/queries/useSharePageQuery'
 import { useSharePageModeStore } from '@/store/sharePage'
 import ProfileDropDownMenu from './ProfileDropDownMenu'
 import ProfileEditMode from './ProfileEditMode'
@@ -8,21 +7,13 @@ import ProfileViewMode from './ProfileViewMode'
 
 export default function ProfileSwitchCase() {
   const { mode } = useSharePageModeStore()
-
+  const { sharePage } = useSharePageQuery()
   return (
     <div className={styles.container}>
       <div className={styles.profile}>{switchProfileWithMode(mode)}</div>
-      {mode === 'EDIT' && (
-        <Suspense>
-          <ProfileDropDownMenu />
-        </Suspense>
-      )}
+      {sharePage.privilege === 'EDIT' && <ProfileDropDownMenu />}
     </div>
   )
-}
-
-function NullComponent() {
-  return null
 }
 
 function switchProfileWithMode(mode: string) {
@@ -30,11 +21,7 @@ function switchProfileWithMode(mode: string) {
     case 'VIEW':
       return <ProfileViewMode />
     case 'EDIT':
-      return (
-        <ErrorBoundary fallback={<NullComponent />}>
-          <ProfileEditMode />
-        </ErrorBoundary>
-      )
+      return <ProfileEditMode />
     default:
       if (process.env.NODE_ENV === 'development') throw new Error("ProfileSwitchCase: mode is not 'VIEW' or 'EDIT'")
       return null

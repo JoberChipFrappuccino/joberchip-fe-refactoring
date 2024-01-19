@@ -9,8 +9,8 @@ export default function ProfileViewMode() {
         <img src={sharePage?.profileImageLink} alt={`${sharePage.title} thumbnail`} />
       </div>
       <div className={styles.profileCover}>
-        <h2>{sharePage.title}</h2>
-        <p>{sharePage.description}</p>
+        <h2 className={styles.title}>{sharePage.title}</h2>
+        <p className={styles.description}>{sharePage.description}</p>
       </div>
     </div>
   )
